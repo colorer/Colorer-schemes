@@ -778,6 +778,10 @@
     <location link="rare/cup.hrc"/>
     <filename>/\.cup$/i</filename>
   </prototype>
+  <prototype name="diet" group="rare" description="Vibe.d Diet Templates">
+    <location link="rare/diet.hrc"/>
+    <filename>/\.dt$/i</filename>
+  </prototype>
   <prototype name="eiffel" group="rare" description="Eiffel">
     <location link="rare/eiffel.hrc"/>
     <filename>/\.e$/i</filename>
