@@ -127,13 +127,13 @@
 
 <scheme name='ddoc'>
 	<regexp match='/~\s*ditto\b/' region='ddoc.keyword'/>
-	<regexp match='/%ddoc.lead;\m\w+:/' region='ddoc:sectiontitle'/>
+	<regexp match='/%ddoc.lead;\m\w+:($|\s)/' region='ddoc:sectiontitle'/>
 	<inherit scheme='ddoc.content'/>
 </scheme>
 
 <scheme name='comment.rec.block'>
 	<block scheme='ddoc.rec' region='ddoc'>
-		<start match='/(\/\+{2,})/' region0='ddoc.delim' region1='def:PairStart'/>
+		<start match='/(\/\++\M\+)/' region0='ddoc.delim' region1='def:PairStart'/>
 		<end   match='/(\++\/)/' region0='ddoc.delim' region1='def:PairEnd'/>
 	</block>
 	<block scheme='comment.rec' region='comment'>
@@ -152,7 +152,7 @@
 		scheme='ddoc' region='ddoc' region00='ddoc.delim' 
 	/>
 	<block scheme='ddoc' region='ddoc'>
-		<start match='/(\/\*{2,})/' region0='ddoc.delim' region1='def:PairStart'/>
+		<start match='/(\/\*+\M\*)/' region0='ddoc.delim' region1='def:PairStart'/>
 		<end   match='/(\*+\/)/' region0='ddoc.delim' region1='def:PairEnd'/>
 	</block>
 	<inherit scheme='comment.rec.block'/>
@@ -485,6 +485,7 @@
 		<symb name='~'/>
 		<symb name='~='/>
 		<symb name='~~'/>
+		<symb name='@'/>
 		<word name='is'/>
 	</keywords>
 	<regexp match='/\!/' region='symb.op'/>
@@ -938,7 +939,7 @@
 <entity name='nestedparens2' value='(?:%noparens;(?:\(%nestedparens3;\)%noparens;)*)' />
 <entity name='nestedparens'  value='(?:%noparens;(?:\(%nestedparens2;\)%noparens;)*)' />
 
-<entity name='argument'      value='%nestedparens;\s+\w+(\s*=\s*%nestedparens;)?' />
+<entity name='argument'      value='\w%nestedparens;\s+\w+\s*(=\s*%nestedparens;)?' />
 
 <scheme name='decl.fun'>
 	<!-- bug: this doesn't work correctly with delegates -->
@@ -974,8 +975,8 @@
 				(\.\.\.)?
 				(\)|$)
 			)
-			[^;?:\{,()]*
-			($|\{)
+			[^;?:\{,()\/]*
+			($|\{|\/[\/\*\+])
 		/x
 	</regexp>
 	
@@ -1210,6 +1211,10 @@
 	<inherit scheme='error'/>
 </scheme>
 
+<scheme name='d.pre'>
+	<block start='/#/' end='/$/'  scheme='tokens.spec.pre' region='c:Preproc'/>
+</scheme>
+
 <scheme name='tokens.spec'>
 	<keywords region='key.spec'>
 		<!-- http://dlang.org/traits.html#specialkeywords -->
@@ -1227,7 +1232,7 @@
 		<word name='__VENDOR__'/>
 		<word name='__VERSION__'/>
 	</keywords>
-	<block start='/#/' end='/$/'  scheme='tokens.spec.pre' region='c:Preproc'/>
+	<inherit scheme='d.pre'/>
 </scheme>
 
 
@@ -1294,6 +1299,7 @@
 		<virtual scheme='tpl.tpl'            subst-scheme='symb.flat' />
 		<virtual scheme='d.statement'        subst-scheme='def:empty' />
 		<virtual scheme='literal.error'      subst-scheme='def:DecNumber' />
+		<virtual scheme='d.pre'              subst-scheme='def:empty' />
 	</inherit>
 
 </scheme>
@@ -1325,7 +1331,6 @@
 		<word name='print'/>
 		<word name='toString'/>
 		<word name='toHash'/>
-		<word name='factory'/>
 	</keywords>
 	
 	<inherit scheme='key.phobos'/>
