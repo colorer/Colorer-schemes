@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project name="src.sh" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/sh" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+<!-- bracket -->
+
+<target name="bkt.check">
+ <dependset>
+  <srcfilelist dir="${src}" files = "sh.bkt"/>
+  <srcfilelist dir="${src}/.." files = "build.xml"/>
+  <targetfilelist dir="${bin}" files="sh-brackets.ent.hrc"/>
+ </dependset>
+</target>
+
+<target name="bkt" depends="bkt.check">
+ <ant antfile="${util}" target="bracket">
+  <property name="util.input" value="${src}/sh.bkt"/>
+  <property name="util.output" value="${bin}/sh-brackets.ent.hrc"/>
+ </ant>
+</target>
+
+<!-- final -->
+
+<target name="all" depends="bkt"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${bin}" includes="sh-brackets.ent.hrc"/>
+ </delete>
+</target>
+
+</project>

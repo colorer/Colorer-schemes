@@ -1,0 +1,1038 @@
+declaration:    
+	#include "itfzzzcommon"
+	#include "itfzzyerrors"
+	#include "itfzzzoasis"
+	#include "itfzzttest"
+	#include "itfzzydomains"
+
+	#pragma used dll otfzzzdll000m01
+	#pragma used dll otfzzzdll003m01
+	#pragma used dll otfzzzdll007m00
+	#pragma used dll otfzzzdll007m01
+	#pragma used dll otfzzzdll009
+	#pragma used dll otfzzzdll021m01
+	#pragma used dll otfzzzdll021m01
+	#pragma used dll otfzzzdll039m01
+	#pragma used dll otfzzzdll064m01
+	#pragma used dll otfzzzdll154
+	#pragma used dll otfzzzdll171
+	#pragma used dll otfzzzdll259
+	#pragma used dll otfzzzdllbw
+	#pragma used dll otfzzzdllefiltr
+	#pragma used dll otfzzzdllperiod
+	#pragma used dll otfzzzdllprofil
+	#pragma used dll otfzzzdlltable
+
+	extern domain tfzzz.str200 fileName
+	extern domain tfzzz.str20 oasis.ver
+	extern domain tfzzz.pftvs doc.type
+	extern domain tfzzz.pftf form.type
+	extern domain tfzzz.id efilter.group
+	
+	extern domain tfzzz.pfper period
+	extern domain tfzzz.year year
+	extern domain tfzzz.id assur.part
+	extern domain tfzzz.str200 assur.part.desc
+	extern domain tfzzz.id cumul.part
+	extern domain tfzzz.str200 cumul.part.desc
+	extern domain tfzzz.str200 efilter.group.dsc
+
+	table	ttfzzz003	| Работники
+	table	ttfzzz024	| Условия труда
+	table	ttfzzz026
+	table	ttfzzz040	| Адреса работников
+	table	ttfzzz087	| Инвалидность работников	
+	table	ttfzzz095	| Виды стажей
+
+before.program:
+|	execute(get.defaults)
+	efilter.setDefault()
+form.all:
+	init.form:
+		get.screen.defaults()
+|		execute(cont.process) | !!!!!!!
+field.efilter.group:
+	after.input:
+		display("efilter.group.dsc")
+field.efilter.group.dsc:
+	before.display:	
+		efilter.group.dsc=grp.desc.byID(efilter.group)	
+field.assur.part:
+	after.input:
+		display("assur.part.desc")
+field.assur.part.desc:
+	before.display:
+		assur.part.desc=nalc.name(assur.part)
+
+field.cumul.part:
+	after.input:
+		display("cumul.part.desc")
+field.cumul.part.desc:
+	before.display:
+		cumul.part.desc=nalc.name(cumul.part)
+choice.cont.process:
+	on.choice:
+		tab.setLevelParams(true,true, false,true)
+		if doc.type<>tfzzz.pftvs.inds then
+			message("Поле Тип документа: для текущей версии допустимо только значение ИНДС")
+			choice.again()
+		endif
+		if etol(period)=0 then
+			message("Поле Период: должно быть указано значение")
+			choice.again()
+		endif
+		if not year then
+			message("Поле Год: должно быть указано значение")
+			choice.again()
+		endif
+        long startTime
+        startTime=time.num()
+		writeOasisFile()
+		showCurrentError()
+		alert(time.num()-startTime)
+		stop() | !!!!!!!!!
+functions:
+
+
+tdate 	work.date
+tdate 	lBdate, lEdate
+long 	curr1, curr2
+domain 	tfzzz.str15 strahnum
+bool 	isNotOtm
+
+
+function writeOasisFile(){
+	prof.init(true)
+	long all all=grp.size.byID(efilter.group)
+	work.date = get.work.date()
+	get.zzz.pfper.dates(year, period,lBdate, lEdate)
+
+	OAS_FILE("oasis.txt")
+	OAS_REC(O.S("ЗГЛВ"), O.S("04.00"))
+	OAS_REC(O.S("РБТД"), O.S("РБТД"), O.S(get.pf.reg.num(),14), O.S(get.comp.name(1),100))
+	OAS_REC(O.S("ПАЧК"), O.N(0), O.D(work.date), O.N(1))
+	OAS_REC(O.S("ТИПД"), O.S(enum.descr$("tfzzz.pftvs",doc.type),4), O.N(doc.count(doc.type, work.date)))
+	curr1 = 1
+	long count
+	count=0
+    select tfzzz003.* from tfzzz011, tfzzz003 where
+    	tfzzz011._index1={:efilter.group}	
+    	and
+    	tfzzz003._index1={tfzzz011.entrempl}
+    selectdo
+    	if empl.in.group(tfzzz003.emplid, efilter.group) then
+    		inc(count) 
+    		set.sb.msg(str$(count)&" из "&str$(all))
+    		isNotOtm = ( convertTypeCorr(form.type) <> tfzzz.pftf.otm )
+    		strahnum = get.empl.pfin(tfzzz003.emplid,true)
+    		strahnum(12;1)=" "
+    		| огранизация перебора в функции ProcessInterval всех инвалидностей и неинвалидностей.
+    	    tdate left
+            left  = DR_MIN_DATE
+
+            if tfzzz003.emplid = 13 then
+	            tfzzz003.emplid = tfzzz003.emplid
+            endif
+
+            repeat | этот цикл - по комкам инвалидностей. 
+            	   | комок инвалидностей - это период времени, не содержащий неинавалидностей.
+            	bool found
+            	found=false
+	    		select * from tfzzz087
+    			where _index2  | целиком правее точки left
+    			  inrange {:tfzzz003.emplid, :left}
+    			  and	  {:tfzzz003.emplid, DR_MAX_DATE}
+    			  order by _index2
+    			as set with 1 rows
+    			selectdo 
+    				| нашли один некий интервал целиком справа от точки left
+    				found=1 
+
+    				| т.к изначально left=0 то леввее этого интервала точно неинавлид
+    				| => в диапазоне [left;	tfzzz087.invafrom] - НЕИНВАЛИД
+    				tdate lStart 
+    				lStart = tfzzz087.invafrom
+   					ProcessInterval(false,left,lStart-1) | период где НЕИНВАЛИД
+
+    				| надо найти правый край (lStop)
+    				| это сложнее т.к. может быть несколько индвалидностей налеплено вместе.
+    				| ищем правый край, отодвигая вправо переменную lStop
+    				tdate lStop
+					lStop =  tfzzz087.invato
+					repeat
+						long cont
+						cont = 0	
+						long xxx
+						xxx = lStop + 1
+		    			select * from tfzzz087
+    					where _index2  | перекрывает точку lStop
+    				  	inrange {:tfzzz003.emplid, :lStart, :xxx}
+    				  	  and	{:tfzzz003.emplid, :lStop , DR_MAX_DATE}
+	    			  	order by _index2
+    					as set with 1 rows
+    					selectdo
+    						lStop = tfzzz087.invato
+    					selectempty
+    						cont=1 | всё, не нашли, правее двигать некуда, выходим.
+    					endselect
+    				until cont=1
+    			selectempty
+    				found=0
+    			endselect
+    			if found then 
+   					ProcessInterval(true,lStart,lStop) | период где ИНВАЛИД
+   					left = lStop + 1 | вот так! дальше будем искать следующий комок 
+   				else     				
+    				break | выход из repeat
+    			endif
+			until left>lEdate
+			| тут надо вызвать еще раз, для остатка оси времени и типа=неинвалид
+			ProcessInterval(false,left,DR_MAX_DATE) | период где НЕИНВАЛИД
+
+			inc(curr1) 
+
+    	endif
+    endselect
+	OAS_FILE_END
+	server2client("oasis.txt", fileName, true)
+	prof.toFile("oasis.profile.csv")
+}
+
+function long doc.count(domain tfzzz.pftvs dType, tdate work.date){
+	long count
+	count = 0
+    select tfzzz003.emplid 
+    from	tfzzz003
+    selectdo
+    	if efilter.matches(tfzzz003.emplid, work.date) then
+    		inc(count)
+    	endif
+    endselect
+	return(count)
+}
+
+| когда оттестирую, заменю тут всё на дефайны
+function void get.zzz.pfper.dates(long yr, domain tfzzz.pfper period, ref tdate lBdate, ref tdate lEdate){
+  on case period                                                           
+	case tfzzz.pfper.jnsp: lBdate=date.to.num(yr,01,01) lEdate=date.to.num(yr,09,30) break |01.01-30.09
+	case tfzzz.pfper.apsp: lBdate=date.to.num(yr,04,01) lEdate=date.to.num(yr,09,30) break |01.04-30.09
+	case tfzzz.pfper.apdc: lBdate=date.to.num(yr,04,01) lEdate=date.to.num(yr,12,31) break |01.04-31.12
+
+	case tfzzz.pfper.jnmc: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,1),false,lBdate,lEdate) break |1 квартал
+	case tfzzz.pfper.apju: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,2),false,lBdate,lEdate) break |2 квартал
+	case tfzzz.pfper.jlsp: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,3),false,lBdate,lEdate) break |3 квартал
+	case tfzzz.pfper.okdc: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,4),false,lBdate,lEdate) break |4 квартал
+
+	case tfzzz.pfper.jnju: get.period.dates(getTypedPeriodId(tfzzz.pert.halfyear,yr,1),false,lBdate,lEdate) break |1 полугодие
+	case tfzzz.pfper.jldc: get.period.dates(getTypedPeriodId(tfzzz.pert.halfyear,yr,2),false,lBdate,lEdate) break |2 полугодие
+
+	case tfzzz.pfper.jndc: get.period.dates(getTypedPeriodId(tfzzz.pert.year    ,yr,1),false,lBdate,lEdate) break |весь год
+  endcase           
+}
+
+function long getTypedPeriodId(domain tfzzz.pert eKind, long lYear, long lPerNo){
+    long type 
+    type = calc.period.type(eKind,0,false)
+    type = calc.period.id(type,lYear, lPerNo)
+	return(type)
+}
+                                          
+function String convertTypeFormStr(domain tfzzz.pftf form.type){
+	on case form.type
+	 case tfzzz.pftf.isx  : return(convertStr(tfzzz.pftf.isx))
+	 case tfzzz.pftf.pens :	
+	 case tfzzz.pftf.pkorr:
+	 case tfzzz.pftf.potm : return(convertStr(tfzzz.pftf.pens))
+	endcase
+	return(convertStr(empty))
+}
+
+function domain tfzzz.pftf ConvertTypeCorr(domain tfzzz.pftf form.type){
+	on case form.type
+	 case tfzzz.pftf.korr  :	
+	 case tfzzz.pftf.pkorr : return(tfzzz.pftf.korr)
+	 case tfzzz.pftf.otm   :
+	 case tfzzz.pftf.potm  : return(tfzzz.pftf.otm)
+	endcase
+	return(empty)
+}
+
+
+function String convertStr(domain tfzzz.pftf type){
+	return(etol(type) ? enum.descr$("tfzzz.pftf",type) : "")
+}
+
+function String ConvertKTZL(bool invalid){
+	return(trim$(tfzzz003.emplpfct) & (invalid? "ИВ":""))
+}
+
+function String ConvertAddr(){
+	select	tfzzz040.*
+	from	tfzzz040
+	where	tfzzz040._index2 inrange {:tfzzz003.emplid, DR_MIN_LONG, DR_MIN_DATE, :work.date}
+							 and     {:tfzzz003.emplid, DR_MAX_LONG, :work.date,  DR_MAX_DATE}
+	and tfzzz040.addrtype in ( tfzzz.addrtype.mpr , tfzzz.addrtype.mprog )
+	order by tfzzz040.addrtype desc
+	as set with 1 rows
+	selectdo
+	 return(sprintf$("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
+	 	trim$(cvtCntry()),
+	 	trim$(tfzzz040.addrindx),
+	 	trim$(cvtRegion()),
+	 	trim$(tfzzz040.addrrion),
+	 	trim$(cvtCity()),
+	 	trim$(tfzzz040.addrnapu),
+	 	trim$(tfzzz040.addrstrt),
+	 	trim$(tfzzz040.addrhous),
+	 	trim$(tfzzz040.addrkrps),
+	 	trim$(tfzzz040.addrflat)))
+	selectempty
+  	 	return(sprintf$(",,,,,,,,,"))
+	endselect
+	return("")
+}
+
+function String cvtRegion(){
+	if tfzzz040.addrregn="077" then
+		return("МОСКВА Г")
+	endif
+	if tfzzz040.addrregn="078" then
+		return("САНКТ-ПЕТЕРБУРГ Г")
+	endif
+	return(tfzzz040.addrregn)
+}
+
+function String cvtCity(){
+	if tfzzz040.addrregn="077" then
+		return("")
+	endif
+	if tfzzz040.addrregn="078" then
+		return("")
+	endif
+	return(tfzzz040.addrrion)
+}
+
+function String cvtCntry(){
+	domain tcccty country
+	country = get.empl.citizenship.country(tfzzz003.emplid, work.date)
+	return ( country="RUS" ? "" : country )
+}
+
+
+function void processInterval(Bool inv, TDate date.f, TDate date.t){
+	TDate	d1, d2
+
+	if date.f >= date.t then
+		return | прочь, неправильные интервалы!
+	endif
+
+	intersect.ranges(date.f,date.t, lBdate, lEdate, d1, d2)
+	if d1=0 and d2=0 then
+		return | нет пересечения с отчетным периодом, прочь!
+	endif
+
+	OAS_REC(
+	  O.S("ИНДС"), | 1
+	  O.N(curr1),   | 2
+	  O.S(convertTypeFormStr(form.type),4), | 3
+	  O.S(convertStr(ConvertTypeCorr(form.type)),4), | 4		  
+	  O.S(strahnum,14), | 5
+	  O.S(str$(get.table.number(tfzzz003.emplid, work.date))), | 6
+	  O.S(get.employee.fio(tfzzz003.emplid, 11, work.date,1),40), | 7
+	  O.S(get.employee.fio(tfzzz003.emplid, 12, work.date,1),40), | 8
+	  O.S(get.employee.fio(tfzzz003.emplid, 13, work.date,1),40), | 9
+	  O.S(convertGender(),1), | 10
+	  O.D(get.empl.bdate(tfzzz003.emplid,true)), | 11
+	  O.N(year),                       | 12
+	  O.S((isNotOtm ? ConvertKTZL(inv):""),   4),| 13
+	  O.S((isNotOtm ? "0"             :""),   4),| 14
+	  O.S((isNotOtm ? ConvertAddr()   :""), 200) | 15
+	)
+
+	if isNotOtm then 
+		curr2 = 1
+		payings (tfzzz003.emplid, lBDate, lEdate, d1, d2, assur.part, cumul.part)
+|		variant1 (tfzzz003.emplid, d1, d2)
+|		variant23(tfzzz003.emplid, d1, d2)
+		variantMaxa(tfzzz003.emplid, d1, d2)
+	endif
+}
+
+function String convertGender(){
+	String gstr(1)
+	gstr = enum.descr$("tfzzz.gender",get.employee.gender(tfzzz003.emplid, work.date))
+	if gstr="Н" then
+|		message("Сообщение: для работника с кодом "&str$(tfzzz003.emplid)&" нет данных о поле") !!!!!!! @@@@@@@@@@@
+		gstr=" "
+	endif
+	return(gstr)
+}
+
+table ttfzzz007
+table ttfzzz006
+|@params
+|  rep.* - отчетный период
+|  pfis.* - период формирования индивидуальных сведений
+|  assurPart - страховая часть
+|  cumulPart - накопительная часть
+|@created 
+| by Max Belugin 10.12.2002 16:33:20
+function payings(long empl, TDate rep.first, TDate rep.last, TDate pfis.first, TDate pfis.last, long assurPart, long cumulPart){
+	double days 
+	days=temporaryIllnessDays(empl, assurPart, rep.first, rep.last)	
+	double allLeaveDays 
+	allLeaveDays=leaveDays(empl, rep.first, rep.last)
+	
+	OAS_REC(
+		|<ТПЗП6>	Тип записи	Строка	4
+		O.S("НЧСЛ"), 
+		|<БНЧСЛ>	База для начислений страховых взносов	Действительное число	15.2
+		O.N(0), 
+		|<СЧПФ>	Сумма начисленного взноса на страховую часть пенсии	Действительное число	15.2
+		O.N(ChPF(empl, pfis.first, pfis.last, assurPart)),
+		|<НЧПФ>	Сумма начисленного взноса на накопительную часть пенсии	Действительное число	15.2
+	    O.N(ChPF(empl, pfis.first, pfis.last, cumulPart)),
+	    |<ДВЗПФ>	Сумма начисленного взноса по дополнительному тарифу	Действительное число	15.2
+	    O.N(0),
+	    |<ВНДН>	Период работы по временной нетрудоспособности - месяцев	Целое число	2
+	    O.N(round(days\30,0,2)),
+		|<ВНМСЦ>	Период работы по временной нетрудоспособности - дней	Целое число	2
+		O.N(round(days/30,0,0)),
+		|<АОДН>	Отпуск без сохранения содержания - месяцев	Целое число	2
+		O.N(round(allLeaveDays\30,0,2)),
+		|<АОМСЦ>	Отпуск без сохранения содержания - дней	Целое число	2	)
+		O.N(round(allLeaveDays/30,0,0))
+     )
+}
+|<СЧПФ> - сумма по полям <Сумма> таблицы tfzzz022, по работнику, для 
+|  которого формируется данная запись индивидуальных сведений, периодам 
+|  непрерывной работы, попадающим в период формирования индивидуальных 
+|  сведений, периодам выплат, попадающим в период формирования индивидуальных 
+|  сведений, и коду налога, соответствующего значению параметра запроса 
+|  <Страховая часть>.
+|@created 
+| by Max Belugin 10.12.2002 16:17:58
+function double ChPF(long empl, TDate first, TDate last, long tax){
+	double result, cur
+	result=0
+	table ttfzzz022
+	long curPeriod
+	select tfzzz022.summ:cur, tfzzz022.pern:curPeriod from tfzzz022, tfzzz027 where
+		| по работнику, для которого формируется данная запись 
+		| индивидуальных сведений,
+		tfzzz022._index1={:empl, tfzzz027.pwpwbdat}
+		and
+		| периодам 
+		|  непрерывной работы, попадающим в период формирования 
+		| индивидуальных сведений
+		tfzzz027._index2 inrange 
+			{:empl, DR_MIN_DATE, :first}
+			and
+			{:empl, :last, DR_MAX_DATE}
+		and
+		| коду налога, соответствующего значению параметра запроса 
+		|  <Страховая часть>
+		tfzzz022.nalc=:tax
+	selectdo
+		| периодам выплат, попадающим в период формирования индивидуальных 
+		| сведений
+		TDate curBeg, curEnd
+		get.period.dates(curPeriod, false, curBeg, curEnd)
+		if curEnd>=first and curBeg<=last then
+			inc(result, cur)
+		endif
+	endselect
+	return(result)
+}
+
+|
+|@created 
+| by Max Belugin 10.12.2002 17:05:22
+function long illnessDays(long empl, long period){
+	TDate first 
+	TDate last
+	get.period.dates(period, false, first, last)
+	long result
+	result=0
+	long was
+	|количество записей в непрерывном по датам наборе записей 
+	|(периоде больничного) в таблице tfzzz007 по основному рабочему 
+	|месту работника, виду времени, соответствующему значениям, 
+	|указанным в полях <Вид времени> записей таблицы tfzzz259, 
+	|имеющих значение поля <Тип отпуска> - <Временная нетрудоспособность>, 
+	|с признаком <Верхний уровень> и датой, попадающей в отчетный период. 
+	|Начало периода суммирования календарных дней определяется 
+	|как максимальная из дат:
+	|		дата начала периода <ПЕРИОД_ПУСТ>,
+	|		первая дата периода больничного;
+	|	Окончание периода суммирования календарных дней по одному документу определяется как минимальная из дат:
+	|		дата окончания периода <ПЕРИОД_ПУСТ>,
+	|		последняя дата периода больничного.
+	long skipDate
+	skipDate=0
+	TBool prevWasIllness
+	prevWasIllness=false
+	long prevDate
+	prevDate=0
+	TBool hasIllness
+	hasIllness=false
+	long wpID, dummy
+	select 
+		tfzzz026.wp_id:wpID,tfzzz026.wp_vid:dummy, tfzzz026.wp_crdat:dummy,
+		tfzzz026.wp_andat:dummy
+	from tfzzz026 where
+		tfzzz026._index2={:empl}
+		and
+		tfzzz026._index4 inrange 
+			{CB_TRUE, DR_MIN_DATE, :first}
+			and
+			{CB_TRUE, :last, DR_MAX_DATE}
+	order by tfzzz026._index4
+	selectdo
+		select tfzzz006.* from tfzzz006 where  
+			tfzzz006._index1={:wpid,:period}
+		selectdo
+			select tfzzz007.* from tfzzz007  where 	
+				tfzzz007._index2 inrange 
+					{:tfzzz006.id_tab, :first} 
+					and
+					{:tfzzz006.id_tab, :last} 
+			order by tfzzz007._index2
+			selectdo
+				if cb2b(tfzzz007.tb_high) then
+
+				if prevDate<>tfzzz007.tb_data then
+					prevDate=tfzzz007.tb_data
+					prevWasIllness=hasIllness
+					hasIllness=false
+				endif
+				if tfzzz007.tb_data<>skipDate then
+					hasIllness=isIllnessDay(tfzzz007.tb_v_cod) or
+						(isVyhodnoj(wpid, tfzzz007.tb_data) and  prevWasIllness)
+					if hasIllness then
+						skipDate=tfzzz007.tb_data
+						inc(result)
+					endif
+				endif
+				
+				endif
+			endselect	
+		endselect
+	endselect
+	return(result)	
+}
+|
+|@created 
+| by Max Belugin 10.12.2002 18:01:12
+function TBool isIllnessDay(domain tfzzz.str.id.8 timeKind){
+	domain tfzzz.pfvr dummy
+	select tfzzz259.pfvidvr:dummy from tfzzz259 where
+		tfzzz259._index1 = {tfzzz.pfvr.boln, :timeKind}
+	selectdo
+		return(true)
+	endselect
+	return(false)
+}
+|
+|@created 
+| by Max Belugin 10.12.2002 18:10:47
+function long temporaryIllnessDays(long empl, long assurPart, TDate first, TDate last){
+	long result result=0
+	forPeriodsBetween.begin(periodByDate(first), periodByDate(last))
+	while not ForPeriodsBetween.isEnd() 
+		TDate curFirst, curLast
+		get.period.dates(prd.id(), false, curFirst, curLast)
+		if hasNoHrens(empl, curFirst, curLast, assurPart) then
+			inc(result, illnessDays(empl, prd.id()))
+		endif
+		ForPeriodsBetween.next()
+	endwhile
+	ForPeriodsBetween.end()
+	return(result)
+}
+
+|
+|@created 
+| by Max Belugin 11.12.2002 12:34:38
+function TBool hasNoHrens(long empl, TDate first, TDate last, long tax){
+	return is0(ChPF(empl, first, last, tax))
+}
+
+function long leaveDays(long empl, long first, long last){
+	long result
+	result=0
+	long skipDate
+	skipDate=0
+	long wpID, dummy
+	long firstPeriod firstPeriod=periodByDate(first)
+	long lastPeriod lastPeriod=periodByDate(last)
+	select 
+		tfzzz026.wp_id:wpID,tfzzz026.wp_vid:dummy, tfzzz026.wp_crdat:dummy,
+		tfzzz026.wp_andat:dummy
+	from tfzzz026 where
+		tfzzz026._index2={:empl}
+		and
+		tfzzz026._index4 inrange 
+			{CB_TRUE, DR_MIN_DATE, :first}
+			and
+			{CB_TRUE, :last, DR_MAX_DATE}
+	order by tfzzz026._index4
+	selectdo
+		select tfzzz006.* from tfzzz006 where
+			tfzzz006._index1 inrange 
+				{:wpid, :firstPeriod}
+				and
+				{:wpid, :lastPeriod}
+		order by tfzzz006._index1
+		selectdo
+			select tfzzz007.* from tfzzz007  where 	
+				tfzzz007._index2 inrange 
+					{:tfzzz006.id_tab, :first} 
+					and
+					{:tfzzz006.id_tab, :last} 
+				and
+				tfzzz007.tb_high=CB_TRUE
+			order by tfzzz007._index2
+			selectdo
+				|if cb2b(tfzzz007.tb_high) then
+					if tfzzz007.tb_data<>skipDate then
+						if isLeaveDay(tfzzz007.tb_v_cod) then
+							skipDate=tfzzz007.tb_data
+							inc(result)
+						endif
+					endif
+				|endif
+			endselect
+		endselect
+	endselect
+	return(result)		
+}
+function TBool isLeaveDay(domain tfzzz.str.id.8 timeKind){
+	domain tfzzz.pfvr dummy
+	select tfzzz259.pfvidvr:dummy from tfzzz259 where
+		tfzzz259._index1 = {tfzzz.pfvr.adm, :timeKind}
+	selectdo
+		return(true)
+	endselect
+	return(false)
+}
+
+|
+|@created 
+| by Max Belugin 12.12.2002 15:34:04
+function TBool isVyhodnoj(long wp, TDate aDate){
+	prof.begPiece("isVyhodnoj")
+	long days
+	double hours
+	ghis.fundForDate(wp, aDate, days, hours)
+	prof.endPiece("isVyhodnoj")
+	return(days=0 and is0(hours))
+}
+
+|
+|@created 
+| by Max Belugin 12.12.2002 16:48:57
+function variantMaxa(long empl, TDate first, TDate last){
+	prof.begPiece("variantMaxa")
+	select tfzzz026.* from tfzzz026 where
+		tfzzz026._index2={:empl}
+		and
+		tfzzz026._index4 inrange 
+			{CB_TRUE, DR_MIN_DATE, :first}
+			and
+			{CB_TRUE, :last, DR_MAX_DATE}
+	order by tfzzz026._index4
+	selectdo
+		variantByWP(empl, _max(first, tfzzz026.wp_crdat), _min(last, tfzzz026.wp_andat))
+	endselect	
+	prof.endPiece("variantMaxa")
+}
+|
+| вызывает handlePeriod(wp,begDate, endDate, leaveKind, false)
+|@created 
+| by Max Belugin 12.12.2002 15:55:34
+function extern variantByWP(long empl, TDate first, TDate last){
+	prof.begPiece("variant4_byWP")	
+	long firstPeriod firstPeriod=periodByDate(first)
+	long lastPeriod lastPeriod=periodByDate(last)	
+	TDate currentRange.start
+	domain tfzzz.pfvr currentRange.leaveKind
+	domain tfzzz.pfvr currentDay.leaveKind
+	currentDay.leaveKind=empty
+	currentRange.start=0
+	TDate skipDate skipDate=0
+	TDate prevDate prevDate=0	
+	TBool prevWasLeave
+	prevWasLeave=false
+	TBool wasLeaves
+	select tfzzz007.* from tfzzz026,tfzzz006, tfzzz007  where 	
+		tfzzz026._index2={:empl}
+		and
+		tfzzz006._index1={tfzzz026.wp_id}
+|		and
+|		tfzzz006._index1 inrange
+|			{tfzzz026.wp_id,:firstPeriod}
+|			and
+|			{tfzzz026.wp_id,:lastPeriod}
+		and
+		tfzzz007._index2 inrange 
+			{tfzzz006.id_tab, :first} 
+			and
+			{tfzzz006.id_tab, :last} 
+		and
+		tfzzz007.tb_high=CB_TRUE
+	|@todo:index12
+	order by tfzzz007.tb_data | tfzzz007._index12 | tfzzz007.tb_data
+	selectdo
+		prof.begPiece("v4_body")
+		domain tfzzz.pfvr curLeaveKind
+		curLeaveKind=leaveKindByTimeKind(tfzzz007.tb_v_cod)
+		if curLeaveKind=tfzzz.pfvr.boln then
+			curLeaveKind=empty
+		endif
+		if tfzzz007.tb_data<>prevDate then
+			TBool isHoliday 			
+			isHoliday=isVyhodnoj(tfzzz026.wp_id, tfzzz007.tb_data)
+			if currentRange.start=0 then
+				currentRange.start=tfzzz007.tb_data
+			else
+				if currentDay.leaveKind<>currentRange.leaveKind then
+					handlePeriod(empl, currentRange.start, prevDate-1, 
+						currentRange.leaveKind)
+					currentrange.start=0
+					currentRange.leaveKind = currentDay.leaveKind
+					currentRange.start=prevDate
+				endif
+			endif
+			if not isHoliday then
+				currentDay.leaveKind=curLeaveKind
+			endif
+		else
+			if curLeaveKind<>currentDay.leaveKind and not isHoliday then
+				currentDay.leaveKind=empty
+			endif
+		endif				
+		prof.endPiece("v4_body")
+		prevDate=tfzzz007.tb_data
+		wasLeaves=wasLeaves or currentRange.leaveKind<>empty
+	endselect
+	
+	if currentRange.start<>0 then | if currentRange.start<>0 and wasLeaves then
+		handlePeriod(empl, currentRange.start, prevDate, 
+			currentRange.leaveKind)
+	endif
+	prof.endPiece("variant4_byWP")	
+}
+
+
+#define FLAG1
+^ (  OIVL="САМОЛЕТ" 
+^ or OIVL="СПЕЦАВ" 
+^ or OIVL="ИТСИСП" 
+^ or OIVL="ИТСМАВ" 
+^ or OIVL="ИНСПЕКТ" 
+^ or OIVL="ЛЕТИСП")
+
+#define FLAG2
+^    OIVL="ЗП80РК"
+
+#define FLAG3
+^ ( OIVL="ЗП81СМ"
+^ or OIVL="ЗП81ГД"
+^ or OIVL="ХИРУРГСМ"
+^ or OIVL="ХИРУРГД"
+^ or OIVL="ЗП80ПД")
+
+
+function handlePeriod(long empl, TDate first, TDate last, domain tfzzz.pfvr leaveKind){
+
+	if leaveKind=tfzzz.pfvr.adm then
+		return
+	endif	
+	
+	tbool was1 
+	tbool was2 
+	tbool was3
+
+	select * from tfzzz026 where
+	_index6 = {:empl} 
+	and
+	tfzzz026.wp_crdat <= :last
+	and
+	tfzzz026.wp_andat >= :first
+	selectdo
+		was1 = (tfzzz026.wp_vid = CB_TRUE)
+		was2 = false		
+		was3 = false		
+
+		| 2я часть недержания - 1
+		select  tfzzz024.* from	tfzzz058, tfzzz024
+		where 	tfzzz058._index1= {:tfzzz026.wp_staff, :tfzzz026.wp_prid1}
+			and tfzzz058.pnplwcnd refers to tfzzz024 | линк на 024
+			and tfzzz024.c_lb_pfc <> ""
+		selectdo
+		   was2=true	
+		endselect
+	
+		| 2я часть недержания - 2
+		select tfzzz095.* from tfzzz095, tfzzz156 where 
+		  tfzzz156._index1 inrange {:tfzzz026.wp_staff, :tfzzz026.wp_id, DR_MIN_LONG, :first}
+							  and  {:tfzzz026.wp_staff, :tfzzz026.wp_id, DR_MAX_LONG, :last}
+			and tfzzz156.smagstzh refers to tfzzz095	| Виды стажей
+			and tfzzz095.rctpvsbs <> ""
+		as set with 1 rows
+		selectdo
+		   was3=true
+		endselect
+
+		if was1 or was2 or was3 then 
+			handlePeriodOld(_max(first, tfzzz026.wp_crdat), _min(last, tfzzz026.wp_andat), leaveKind, was1, was2, was3)
+		endif
+
+		| по просьбам Маш
+		if leaveKind=tfzzz.pfvr.deti or leaveKind=tfzzz.pfvr.dekr then
+			break
+		endif
+
+	endselect
+
+}
+
+|
+|@created 
+| by Max Belugin 12.12.2002 16:52:24
+function handlePeriodOld(TDate first, TDate last, domain tfzzz.pfvr leaveKind, tbool was1, tbool was2, tbool was3){
+	prof.begPiece("handlePeriod")
+	TDate  NCPR     
+	TDate  KNPR      
+	String TOOS(40)  
+	String OUUS(40)  
+	String OITS(40)
+	long   DCC1
+	long   DCC2
+	String DCC3(40)
+	String OIVL(40)
+	long   DSV1
+	long   DSV2
+	double DSV3
+	String KPSP(40) 
+	| 3
+	NCPR = max(tfzzz026.wp_crdat, first) 
+	| 4
+	KNPR = min(tfzzz026.wp_andat, last ) 
+	| 5
+	TOOS = was2 ? tfzzz024.terusl   : ""
+	| 6
+	OUUS=  was2 ? tfzzz024.c_lb_pfc : ""
+	| 7
+	OITS=  was3 ? tfzzz095.pfoist   : ""
+	| 8,9
+	double kdst, klwc, kdstDiv30
+	kdst = getKDST(tfzzz026.wp_staff, tfzzz026.wp_id, NCPR, KNPR) 
+	long years ,months, days
+	PFSeniority(first, last, years ,months, days)
+
+	klwc = KLWCh(tfzzz026.wp_staff, tfzzz026.wp_id,NCPR, KNPR) | можно ли тут так передавать empl и wp ?
+	DCC1=0
+	DCC2=0
+	#define notVodolaz  (trim$(OITS)<>"ВОДОЛАЗ")
+	if (was2 or was3) and not isSpace(OUUS) then
+		DCC1 = min(months, round(notVodolaz ? (kdst/30) : klwc,0,0))
+	endif
+	if (was2 or was3) and not isSpace(OUUS) then
+		DCC2 = min(days  , round(notVodolaz ? (kdst\30) : frac(klwc)*60.0, 0, 2))
+	endif
+	| 10
+	DCC3=""
+	if leaveKind=tfzzz.pfvr.dekr then
+		DCC3="ДЕКРЕТ"
+|		alert(dcc3)
+	endif
+	if leaveKind=tfzzz.pfvr.deti then
+		DCC3="ДЕТИ"
+	|	alert(dcc3)
+	endif
+	| 11
+	OIVL = getOIVL(first,last)
+	| 12,13
+	if FLAG1 or FLAG2 then
+		double klwc1
+		klwc1 = KLWCh1(tfzzz026.wp_staff, tfzzz026.wp_id,NCPR, KNPR)
+		if FLAG1 or FLAG2 then 
+			DSV1 = round(klwc1,0,0) 
+		endif
+		if FLAG1 then 
+			DSV2 = round(0.6*(klwc1-round(klwc1,0,0)) ,0,2) 
+		endif
+	endif
+	| 14
+	KPSP = string.value.byID("tfzzz019", "pos_kslp", tfzzz026.wp_dp_ps)
+	| 15
+	DSV3=0.0
+	if FLAG3 then 
+		select tfzzz058.pnplstav:DSV3 from	tfzzz058
+		where 	tfzzz058._index1= {:tfzzz026.wp_staff, :tfzzz026.wp_prid1}
+		as set with 1 rows
+		selectdo
+		endselect
+	endif
+
+	OAS_REC(
+		O.S("СТАЖ"), | 1
+		O.N(curr2),  | 2
+		O.D(NCPR),   | 3
+		O.D(KNPR),   | 4		  
+		O.S(TOOS,3), | 5
+		O.S(OUUS,6), | 6
+		O.S(OITS,7), | 7
+		O.N(DCC1),   | 8
+		O.N(DCC2),   | 9
+		O.S(DCC3,9), | 10
+		O.S(OIVL,8), | 11
+		O.N(DSV1),   | 12
+		O.N(DSV2),   | 13
+		O.S(KPSP,20),| 14
+		O.N(DSV3)    | 15
+	)
+	inc(curr2)
+	prof.endPiece("handlePeriod")
+}
+
+
+|
+|@created 
+| by Max Belugin 12.12.2002 17:38:10
+function PFSeniority(TDate first, TDate last, ref long y,ref long m, ref long d){
+	|?	Гн Мн Дн - дата начала периода,
+	long first.y, first.m, first.d
+	num.to.date(first, first.y, first.m, first.d)
+	|?	Гк Мк Дк - дата конца периода,
+	long last.y, last.m, last.d
+	num.to.date(last, last.y, last.m, last.d)
+|	|?	Г М Д - календарно отработанное время.
+|	long y, m, d
+	|?	Д=Дк-Дн
+	d=last.d-first.d
+	| если Д<0 
+	if d<0 then
+		| то Д=Д+30 
+		inc(d, 30)
+		| Мк=Мк-1
+		dec(last.m)
+	endif
+	|?	М= Мк-Мн
+	m=last.m-first.m
+	|если М<0
+	if m<0 then
+		|то М=М+12
+		inc(m, 12)
+		|Гк=Гк-1
+		dec(last.y)
+	endif
+	|?	Г=Гк-Гн
+	y=last.y-first.y
+	|?	Д=Д+1
+	inc(d)
+	|	если Д>=30
+	if d>=30 then
+		|	то Д=0
+		d=0
+		|	М=М+1
+		inc(m)
+	endif	
+}
+
+
+|?	<КЛВЧ> - сумма по полям <Время> tfzzz156, для записей по 
+|текущему коду работника, рабочего места, виду стажа, в записи 
+|о котором в поле tfzzz095.pfst стоит значение <ДА>, и датам с 
+|<НЧПР> по <КНПР>.
+|@created 
+| by Max Belugin 12.12.2002 17:57:02
+function double KLWCh(long empl, long wp, TDate first, TDate last){
+	prof.begPiece("KLWCh")
+	double result result=0
+	select SUM(tfzzz156.smagtime):result from tfzzz095, tfzzz156 where
+		tfzzz095.pfst=CB_TRUE
+		and
+		tfzzz156._index1 inrange 
+			{:empl, :wp, tfzzz095.rctpid, :first}
+			and
+			{:empl, :wp, tfzzz095.rctpid, :last}
+	selectdo
+	endselect		 
+	prof.endPiece("KLWCh")
+	return(result)	
+}
+
+
+
+|?	<КЛВЧ1> - сумма по полям <Время> tfzzz156, для записей по 
+|текущему коду работника, рабочего места, виду стажа, в записи 
+|о котором в поле tfzzz095.rctpinvs стоит значение <ДА>, и датам с 
+|<НЧПР> по <КНПР>.
+|@created 
+| by Max Belugin 12.12.2002 17:57:02
+function double KLWCh1(long empl, long wp, TDate first, TDate last){
+	double result result=0
+	select SUM(tfzzz156.smagtime):result from tfzzz095, tfzzz156 where
+		tfzzz095.rctpinvs=CB_TRUE
+		and
+		tfzzz156._index1 inrange 
+			{:empl, :wp, tfzzz095.rctpid, :first}
+			and
+			{:empl, :wp, tfzzz095.rctpid, :last}
+	selectdo
+	endselect		 
+	return(result)
+}
+
+
+|?  <ОИВЛ> - значение поля tfzzz095.rctpvsbs для записи о виде стажа, 
+|по которому у работника по текущему рабочему месту существуют данные 
+| в таблице tfzzz156 на период с <НЧПР> по <КНПР>, и в записи о котором 
+| в поле "Входит в выслугу" стоит значение "ДА".
+function String getOIVL(tdate first, tdate last){
+
+	select tfzzz095.* from tfzzz095, tfzzz156 where 
+	  tfzzz156._index1 inrange {:tfzzz026.wp_staff, :tfzzz026.wp_id, DR_MIN_LONG, :first}
+						  and  {:tfzzz026.wp_staff, :tfzzz026.wp_id, DR_MAX_LONG, :last}
+		and tfzzz156.smagstzh refers to tfzzz095	| Виды стажей
+		and tfzzz095.rctpinvs = CB_TRUE
+	as set with 1 rows
+	selectdo
+		return(tfzzz095.rctpvsbs)
+	endselect
+	return("")
+}
+
+|
+|@created 
+| by Max Belugin 13.12.2002 13:05:27
+function double getKDST(long empl, long wp, TDate first, TDate last){
+	prof.begPiece("getKDST")
+	|	<ФРВ> - фонд рабочего времени в днях по табелю за период с 
+	|<НЧПР> по <КНПР>.
+	long FRV 
+	FRV=tb.workingDaysByDates(wp, "", first, last, 0, 0, false, true)
+	|	<КВЧ> - сумма по полям <Время> tfzzz156, для записей по текущему 
+	|коду работника, рабочего места, виду стажа, в записи о котором в поле 
+	|tfzzz095.pfst стоит значение <ДА>, и датам с <НЧПР> по <КНПР>.
+	double KVCh 
+	KVCh=KLWCh(empl, wp, first, last)	
+	if is0(KVCh) then
+		return(0)
+	endif
+	|	<КДПР> - количество календарных дней периода с <НЧПР> по <КНПР>.
+	long KDPR	
+	KDPR=last-first+1
+	| ?	<КДСТ> - равно КДПР - (ФРВ - КВЧ/24), если (ФРВ - КВЧ/24) > 0, в 
+	|противном случае КДСТ равно КДПР, где
+	if (FRV-KVCh/24)>0 then
+		return(KDPR - (FRV - KVCh/24))
+	endif
+	prof.endPiece("getKDST")
+	return(KDPR)
+}
+
+

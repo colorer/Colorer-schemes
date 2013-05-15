@@ -1,0 +1,233 @@
+  0: <span class='forth-forComment def-Comment def-Syntax'>\ @(#) misc2.fth 98/01/26 1.2</span>
+  1: <span class='forth-forComment def-Comment def-Syntax'>\ Utilities for PForth extracted from HMSL</span>
+  2: <span class='forth-forComment def-Comment def-Syntax'>\</span>
+  3: <span class='forth-forComment def-Comment def-Syntax'>\ Author: Phil Burk</span>
+  4: <span class='forth-forComment def-Comment def-Syntax'>\ Copyright 1994 3DO, Phil Burk, Larry Polansky, Devid Rosenboom</span>
+  5: <span class='forth-forComment def-Comment def-Syntax'>\</span>
+  6: <span class='forth-forComment def-Comment def-Syntax'>\ The pForth software code is dedicated to the public domain,</span>
+  7: <span class='forth-forComment def-Comment def-Syntax'>\ and any third party may reproduce, distribute and modify</span>
+  8: <span class='forth-forComment def-Comment def-Syntax'>\ the pForth software code or any derivative works thereof</span>
+  9: <span class='forth-forComment def-Comment def-Syntax'>\ without any compensation or license.  The pForth software</span>
+ 10: <span class='forth-forComment def-Comment def-Syntax'>\ code is provided on an "as is" basis without any warranty</span>
+ 11: <span class='forth-forComment def-Comment def-Syntax'>\ of any kind, including, without limitation, the implied</span>
+ 12: <span class='forth-forComment def-Comment def-Syntax'>\ warranties of merchantability and fitness for a particular</span>
+ 13: <span class='forth-forComment def-Comment def-Syntax'>\ purpose and their equivalents under the laws of any jurisdiction.</span>
+ 14: <span class='forth-forComment def-Comment def-Syntax'>\</span>
+ 15: <span class='forth-forComment def-Comment def-Syntax'>\ 00001 9/14/92 Added call, 'c w->s</span>
+ 16: <span class='forth-forComment def-Comment def-Syntax'>\ 00002 11/23/92 Moved redef of : to loadcom.fth</span>
+ 17: 
+ 18: anew task-misc2.fth
+ 19: 
+ 20: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>'N</span> <span class='forth-forComment def-Comment def-Syntax'> ( &lt;name> -- , make 'n state smart )</span>
+ 21:     <span class='forth-forWord def-Keyword'>bl</span> <span class='forth-forWord def-Keyword'>word</span> <span class='forth-forWord def-Keyword'>find</span>
+ 22:     <span class='forth-forResWord def-Label'>IF</span>
+ 23:         <span class='forth-forWord def-Keyword'>state</span> <span class='forth-forWord def-Keyword'>@</span>
+ 24:         <span class='forth-forResWord def-Label'>IF</span>    <span class='forth-forExtWords def-VarStrong def-Var'>namebase</span> <span class='forth-forWord def-Keyword'>-</span><span class='forth-forComment def-Comment def-Syntax'> ( make nfa relocatable )</span>
+ 25:             <span class='forth-forResWord def-Label'>[compile]</span> <span class='forth-forWord def-Keyword'>literal</span>   <span class='forth-forComment def-Comment def-Syntax'> ( store nfa of word to be compiled )</span>
+ 26:             <span class='forth-forWord def-Keyword'>compile</span> namebase+
+ 27:         <span class='forth-forResWord def-Label'>THEN</span>
+ 28:     <span class='forth-forResWord def-Label'>THEN</span>
+ 29: <span class='forth-forWord def-Keyword'>;</span> <span class='forth-forWord def-Keyword'>IMMEDIATE</span>
+ 30: 
+ 31: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>?LITERAL</span> <span class='forth-forComment def-Comment def-Syntax'> ( n -- , do literal if compiling )</span>
+ 32:      <span class='forth-forWord def-Keyword'>state</span> <span class='forth-forWord def-Keyword'>@</span>
+ 33:      <span class='forth-forResWord def-Label'>IF</span> <span class='forth-forResWord def-Label'>[compile]</span> <span class='forth-forWord def-Keyword'>literal</span>
+ 34:      <span class='forth-forResWord def-Label'>THEN</span>
+ 35: <span class='forth-forWord def-Keyword'>;</span>
+ 36: 
+ 37: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>'c</span><span class='forth-forComment def-Comment def-Syntax'> ( &lt;name> -- xt , state sensitive ' )</span>
+ 38:     <span class='forth-forWord def-Keyword'>'</span> ?literal
+ 39: <span class='forth-forWord def-Keyword'>;</span> <span class='forth-forWord def-Keyword'>immediate</span>
+ 40: 
+ 41: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>if-debug</span>
+ 42: 
+ 43: <span class='forth-forWord def-Keyword'>decimal</span>
+ 44: <span class='forth-forWord def-Keyword'>create</span> <span class='forth-forWordDefinition def-Keyword'>msec-delay</span> <span class='forth-forNumb def-Number'>1000</span> <span class='forth-forWord def-Keyword'>,</span> <span class='forth-forComment def-Comment def-Syntax'> ( default for SUN )</span>
+ 45: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>msec</span><span class='forth-forComment def-Comment def-Syntax'> ( #msecs -- )</span>
+ 46:     <span class='forth-forNumb def-Number'>0</span>
+ 47:     <span class='forth-forResWord def-Label'>do</span>  msec-delay <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forNumb def-Number'>0</span>
+ 48:         <span class='forth-forResWord def-Label'>do</span> <span class='forth-forResWord def-Label'>loop</span>
+ 49:     <span class='forth-forResWord def-Label'>loop</span>
+ 50: <span class='forth-forWord def-Keyword'>;</span>
+ 51: 
+ 52: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>SHIFT</span><span class='forth-forComment def-Comment def-Syntax'> ( val n -- val&lt;&lt;n )</span>
+ 53:     <span class='forth-forWord def-Keyword'>dup</span> 0&lt;
+ 54:     <span class='forth-forResWord def-Label'>IF</span> <span class='forth-forWord def-Keyword'>negate</span> arshift
+ 55:     <span class='forth-forResWord def-Label'>ELSE</span> <span class='forth-forWord def-Keyword'>lshift</span>
+ 56:     <span class='forth-forResWord def-Label'>THEN</span>
+ 57: <span class='forth-forWord def-Keyword'>;</span>
+ 58: 
+ 59: 
+ 60: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>rand-seed</span> <span class='forth-forWord def-Keyword'>here</span> rand-seed <span class='forth-forWord def-Keyword'>!</span>
+ 61: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>random</span><span class='forth-forComment def-Comment def-Syntax'> ( -- random_number )</span>
+ 62:     rand-seed <span class='forth-forWord def-Keyword'>@</span>
+ 63:     <span class='forth-forNumb def-Number'>31421</span> <span class='forth-forWord def-Keyword'>*</span> <span class='forth-forNumb def-Number'>6927</span> <span class='forth-forWord def-Keyword'>+</span> 
+ 64:     <span class='forth-forNumb def-Number'>65535</span> <span class='forth-forWord def-Keyword'>and</span> <span class='forth-forWord def-Keyword'>dup</span> rand-seed <span class='forth-forWord def-Keyword'>!</span>
+ 65: <span class='forth-forWord def-Keyword'>;</span>
+ 66: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>choose</span> <span class='forth-forComment def-Comment def-Syntax'> ( range -- random_number , in range )</span>
+ 67:     random <span class='forth-forWord def-Keyword'>*</span> <span class='forth-forNumb def-Number'>-16</span> shift
+ 68: <span class='forth-forWord def-Keyword'>;</span>
+ 69: 
+ 70: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>wchoose</span><span class='forth-forComment def-Comment def-Syntax'> ( hi lo -- random_number )</span>
+ 71:     <span class='forth-forWord def-Keyword'>tuck</span> <span class='forth-forWord def-Keyword'>-</span> choose <span class='forth-forWord def-Keyword'>+</span>
+ 72: <span class='forth-forWord def-Keyword'>;</span>
+ 73: 
+ 74: 
+ 75: <span class='forth-forComment def-Comment def-Syntax'>\ sort top two items on stack.</span>
+ 76: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>2sort</span><span class='forth-forComment def-Comment def-Syntax'> ( a b -- a&lt;b | b&lt;a , largest on top of stack)</span>
+ 77:     <span class='forth-forWord def-Keyword'>2dup</span> <span class='forth-forWord def-Keyword'>></span>
+ 78:     <span class='forth-forResWord def-Label'>if</span> <span class='forth-forWord def-Keyword'>swap</span>
+ 79:     <span class='forth-forResWord def-Label'>then</span>
+ 80: <span class='forth-forWord def-Keyword'>;</span>
+ 81: 
+ 82: <span class='forth-forComment def-Comment def-Syntax'>\ sort top two items on stack.</span>
+ 83: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>-2sort</span><span class='forth-forComment def-Comment def-Syntax'> ( a b -- a>b | b>a , smallest on top of stack)</span>
+ 84:     <span class='forth-forWord def-Keyword'>2dup</span> <span class='forth-forWord def-Keyword'>&lt;</span>
+ 85:     <span class='forth-forResWord def-Label'>if</span> <span class='forth-forWord def-Keyword'>swap</span>
+ 86:     <span class='forth-forResWord def-Label'>then</span>
+ 87: <span class='forth-forWord def-Keyword'>;</span>
+ 88: 
+ 89: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>barray</span> <span class='forth-forComment def-Comment def-Syntax'> ( #bytes -- )</span><span class='forth-forComment def-Comment def-Syntax'> ( index -- addr )</span>
+ 90:     <span class='forth-forWord def-Keyword'>create</span> <span class='forth-forWord def-Keyword'>allot</span>
+ 91:     <span class='forth-forResWord def-Label'>does></span>  <span class='forth-forWord def-Keyword'>+</span>
+ 92: <span class='forth-forWord def-Keyword'>;</span>
+ 93: 
+ 94: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>warray</span> <span class='forth-forComment def-Comment def-Syntax'> ( #words -- )</span><span class='forth-forComment def-Comment def-Syntax'> ( index -- addr )</span>
+ 95:     <span class='forth-forWord def-Keyword'>create</span> 2* <span class='forth-forWord def-Keyword'>allot</span>
+ 96:     <span class='forth-forResWord def-Label'>does></span> <span class='forth-forWord def-Keyword'>swap</span> 2* <span class='forth-forWord def-Keyword'>+</span>
+ 97: <span class='forth-forWord def-Keyword'>;</span>
+ 98: 
+ 99: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>array</span> <span class='forth-forComment def-Comment def-Syntax'> ( #cells -- )</span><span class='forth-forComment def-Comment def-Syntax'> ( index -- addr )</span>
+100:     <span class='forth-forWord def-Keyword'>create</span> cell* <span class='forth-forWord def-Keyword'>allot</span>
+101:     <span class='forth-forResWord def-Label'>does></span> <span class='forth-forWord def-Keyword'>swap</span> cell* <span class='forth-forWord def-Keyword'>+</span>
+102: <span class='forth-forWord def-Keyword'>;</span>
+103: 
+104: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>.bin</span> <span class='forth-forComment def-Comment def-Syntax'> ( n -- , print in binary )</span>
+105:     <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>@</span> binary <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>!</span>
+106: <span class='forth-forWord def-Keyword'>;</span>
+107: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>.dec</span> <span class='forth-forComment def-Comment def-Syntax'> ( n -- )</span>
+108:     <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>decimal</span> <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>!</span>
+109: <span class='forth-forWord def-Keyword'>;</span>
+110: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>.hex</span> <span class='forth-forComment def-Comment def-Syntax'> ( n -- )</span>
+111:     <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>hex</span> <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>!</span>
+112: <span class='forth-forWord def-Keyword'>;</span>
+113: 
+114: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>B->S</span><span class='forth-forComment def-Comment def-Syntax'> ( c -- c' , sign extend byte )</span>
+115:     <span class='forth-forWord def-Keyword'>dup</span> $ <span class='forth-forNumb def-Number'>80</span> <span class='forth-forWord def-Keyword'>and</span> 
+116:     <span class='forth-forResWord def-Label'>IF</span>
+117:         $ FFFFFF00 <span class='forth-forWord def-Keyword'>or</span>
+118:     <span class='forth-forResWord def-Label'>ELSE</span>
+119:         $ 000000FF <span class='forth-forWord def-Keyword'>and</span>
+120:     <span class='forth-forResWord def-Label'>THEN</span>
+121: <span class='forth-forWord def-Keyword'>;</span>
+122: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>W->S</span><span class='forth-forComment def-Comment def-Syntax'> ( 16bit-signed -- 32bit-signed )</span>
+123:     <span class='forth-forWord def-Keyword'>dup</span> $ <span class='forth-forNumb def-Number'>8000</span> <span class='forth-forWord def-Keyword'>and</span>
+124:     <span class='forth-forResWord def-Label'>if</span>
+125:         $ FFFF0000 <span class='forth-forWord def-Keyword'>or</span>
+126:     <span class='forth-forResWord def-Label'>ELSE</span>
+127:         $ 0000FFFF <span class='forth-forWord def-Keyword'>and</span>
+128:     <span class='forth-forResWord def-Label'>then</span>
+129: <span class='forth-forWord def-Keyword'>;</span>
+130: 
+131: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>WITHIN</span> <span class='forth-forWord def-Keyword'>{</span> n1 n2 n3 <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'> flag</span><span class='forth-forWord def-Keyword'> }</span>
+132:     n2 n3 &lt;=
+133:     <span class='forth-forResWord def-Label'>IF</span>
+134:         n2 n1 &lt;=
+135:         n1 n3 <span class='forth-forWord def-Keyword'>&lt;</span>  <span class='forth-forWord def-Keyword'>AND</span>
+136:     <span class='forth-forResWord def-Label'>ELSE</span>
+137:         n2 n1 &lt;=
+138:         n1 n3 <span class='forth-forWord def-Keyword'>&lt;</span>  <span class='forth-forWord def-Keyword'>OR</span>
+139:     <span class='forth-forResWord def-Label'>THEN</span>
+140: <span class='forth-forWord def-Keyword'>;</span>
+141: 
+142: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>MOVE</span><span class='forth-forComment def-Comment def-Syntax'> ( src dst num -- )</span>
+143:     <span class='forth-forWord def-Keyword'>>r</span> <span class='forth-forWord def-Keyword'>2dup</span> <span class='forth-forWord def-Keyword'>-</span> 0&lt;
+144:     <span class='forth-forResWord def-Label'>IF</span>
+145:         <span class='forth-forWord def-Keyword'>r></span> <span class='forth-forWord def-Keyword'>CMOVE></span>
+146:     <span class='forth-forResWord def-Label'>ELSE</span>
+147:         <span class='forth-forWord def-Keyword'>r></span> <span class='forth-forWord def-Keyword'>CMOVE</span>
+148:     <span class='forth-forResWord def-Label'>THEN</span>
+149: <span class='forth-forWord def-Keyword'>;</span>
+150: 
+151: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>ERASE</span><span class='forth-forComment def-Comment def-Syntax'> ( caddr num -- )</span>
+152:     <span class='forth-forWord def-Keyword'>dup</span> 0>
+153:     <span class='forth-forResWord def-Label'>IF</span>
+154:         <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>fill</span>
+155:     <span class='forth-forResWord def-Label'>ELSE</span>
+156:         <span class='forth-forWord def-Keyword'>2drop</span>
+157:     <span class='forth-forResWord def-Label'>THEN</span>
+158: <span class='forth-forWord def-Keyword'>;</span>
+159: 
+160: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>BLANK</span><span class='forth-forComment def-Comment def-Syntax'> ( addr u -- , set memory to blank )</span>
+161:     <span class='forth-forWord def-Keyword'>DUP</span> 0>
+162:     <span class='forth-forResWord def-Label'>IF</span>
+163:         <span class='forth-forWord def-Keyword'>BL</span> <span class='forth-forWord def-Keyword'>FILL</span> 
+164:     <span class='forth-forResWord def-Label'>ELSE</span> 
+165:         <span class='forth-forWord def-Keyword'>2DROP</span> 
+166:     <span class='forth-forResWord def-Label'>THEN</span> 
+167: <span class='forth-forWord def-Keyword'>;</span>
+168: 
+169: <span class='forth-forComment def-Comment def-Syntax'>\ Obsolete but included for CORE EXT word set.</span>
+170: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>QUERY</span> <span class='forth-forWord def-Keyword'>REFILL</span> <span class='forth-forWord def-Keyword'>DROP</span><span class='forth-forWord def-Keyword'> ;</span>
+171: <span class='forth-forWord def-Keyword'>VARIABLE</span> <span class='forth-forWordDefinition def-Keyword'>SPAN</span>
+172: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>EXPECT</span> <span class='forth-forWord def-Keyword'>accept</span> span <span class='forth-forWord def-Keyword'>!</span><span class='forth-forWord def-Keyword'> ;</span>
+173: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TIB</span> <span class='forth-forWord def-Keyword'>source</span> <span class='forth-forWord def-Keyword'>drop</span><span class='forth-forWord def-Keyword'> ;</span>
+174: 
+175: 
+176: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>UNUSED</span><span class='forth-forComment def-Comment def-Syntax'> ( -- unused , dictionary space )</span>
+177:     CODELIMIT <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forWord def-Keyword'>-</span>
+178: <span class='forth-forWord def-Keyword'>;</span>
+179: 
+180: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>MAP</span> <span class='forth-forComment def-Comment def-Syntax'> ( -- , dump interesting dictionary info )</span>
+181:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>Code Segment</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+182:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   CODEBASE           = </span><span class='forth-forWord def-Keyword'>"</span> codebase .hex <span class='forth-forWord def-Keyword'>cr</span>
+183:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   HERE               = </span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>here</span> .hex <span class='forth-forWord def-Keyword'>cr</span>
+184:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   CODELIMIT          = </span><span class='forth-forWord def-Keyword'>"</span> codelimit .hex <span class='forth-forWord def-Keyword'>cr</span>
+185:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   Compiled Code Size = </span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>here</span> codebase <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>cr</span>
+186:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   CODE-SIZE          = </span><span class='forth-forWord def-Keyword'>"</span> code-size <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>cr</span>
+187:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   Code Room UNUSED   = </span><span class='forth-forWord def-Keyword'>"</span> UNUSED <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>cr</span>
+188:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>Name Segment</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+189:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   NAMEBASE           = </span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forExtWords def-VarStrong def-Var'>namebase</span> .hex <span class='forth-forWord def-Keyword'>cr</span>
+190:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   HEADERS-PTR @      = </span><span class='forth-forWord def-Keyword'>"</span> headers-ptr <span class='forth-forWord def-Keyword'>@</span> .hex <span class='forth-forWord def-Keyword'>cr</span>
+191:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   NAMELIMIT          = </span><span class='forth-forWord def-Keyword'>"</span> namelimit .hex <span class='forth-forWord def-Keyword'>cr</span>
+192:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   CONTEXT @          = </span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>context</span> <span class='forth-forWord def-Keyword'>@</span> .hex <span class='forth-forWord def-Keyword'>cr</span>
+193:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   LATEST             = </span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>latest</span> .hex  <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'> = </span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>latest</span> id. <span class='forth-forWord def-Keyword'>cr</span>
+194:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   Compiled Name size = </span><span class='forth-forWord def-Keyword'>"</span> headers-ptr <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forExtWords def-VarStrong def-Var'>namebase</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>cr</span>
+195:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   HEADERS-SIZE       = </span><span class='forth-forWord def-Keyword'>"</span> headers-size <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>cr</span>
+196:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>   Name Room Left     = </span><span class='forth-forWord def-Keyword'>"</span> namelimit headers-ptr <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>cr</span>
+197: <span class='forth-forWord def-Keyword'>;</span>
+198: 
+199: 
+200: <span class='forth-forComment def-Comment def-Syntax'>\ Search for substring S2 in S1</span>
+201: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>SEARCH</span> <span class='forth-forWord def-Keyword'>{</span> addr1 cnt1 addr2 cnt2 <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> addr3 cnt3 flag</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'>  addr3 cnt3 flag</span><span class='forth-forWord def-Keyword'> }</span>
+202: <span class='forth-forComment def-Comment def-Syntax'>\ ." Search for " addr2 cnt2 type  ."  in "  addr1 cnt1 type cr</span>
+203: <span class='forth-forComment def-Comment def-Syntax'>\ if true, s1 contains s2 at addr3 with cnt3 chars remaining</span>
+204: <span class='forth-forComment def-Comment def-Syntax'>\ if false, s3 = s1    </span>
+205:     addr1 <span class='forth-forWord def-Keyword'>-></span> addr3
+206:     cnt1 <span class='forth-forWord def-Keyword'>-></span> cnt3
+207:     cnt1 cnt2 <span class='forth-forWord def-Keyword'>&lt;</span> <span class='forth-forWord def-Keyword'>not</span>
+208:     <span class='forth-forResWord def-Label'>IF</span>
+209:         cnt1 cnt2 <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>1+</span> <span class='forth-forNumb def-Number'>0</span>
+210:         <span class='forth-forResWord def-Label'>DO</span>
+211:             <span class='forth-forWord def-Keyword'>true</span> <span class='forth-forWord def-Keyword'>-></span> flag
+212:             cnt2 <span class='forth-forNumb def-Number'>0</span>
+213:             <span class='forth-forResWord def-Label'>?DO</span>
+214:                 addr2 <span class='forth-forResWord def-Label'>i</span> <span class='forth-forWord def-Keyword'>chars</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>c@</span>
+215:                 addr1 <span class='forth-forResWord def-Label'>i</span> <span class='forth-forResWord def-Label'>j</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>chars</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>c@</span> <span class='forth-forWord def-Keyword'>&lt;></span><span class='forth-forComment def-Comment def-Syntax'> \ mismatch?</span>
+216:                 <span class='forth-forResWord def-Label'>IF</span>
+217:                     <span class='forth-forWord def-Keyword'>false</span> <span class='forth-forWord def-Keyword'>-></span> flag
+218:                     <span class='forth-forWord def-Keyword'>LEAVE</span>
+219:                 <span class='forth-forResWord def-Label'>THEN</span>
+220:             <span class='forth-forResWord def-Label'>LOOP</span>
+221:             flag
+222:             <span class='forth-forResWord def-Label'>IF</span>
+223:                 addr1 <span class='forth-forResWord def-Label'>i</span> <span class='forth-forWord def-Keyword'>chars</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> addr3
+224:                 cnt1 <span class='forth-forResWord def-Label'>i</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>-></span> cnt3
+225:                 <span class='forth-forWord def-Keyword'>LEAVE</span>
+226:             <span class='forth-forResWord def-Label'>THEN</span>
+227:         <span class='forth-forResWord def-Label'>LOOP</span>
+228:     <span class='forth-forResWord def-Label'>THEN</span>
+229:     addr3 cnt3 flag
+230: <span class='forth-forWord def-Keyword'>;</span>
+231: 
+232: 

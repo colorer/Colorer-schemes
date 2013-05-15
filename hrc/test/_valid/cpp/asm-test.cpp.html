@@ -1,0 +1,38 @@
+ 0: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>if</span><span class='c-Preproc def-DirectiveContent def-Directive'> </span><span class='c-PreprocWord def-Directive'>defined</span><span class='c-Symbol def-Symbol'>(</span><span class='c-Preproc def-DirectiveContent def-Directive'>__GNUC__</span><span class='c-Symbol def-Symbol'>)</span>
+ 1:     <span class='c-AsmCode def-Directive'>asm</span>("pushfl<span class='asm-asmSymbol def-Symbol'>;</span> \
+ 2:         popl    <span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>;</span> \
+ 3:         movl    <span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>ecx</span><span class='asm-asmSymbol def-Symbol'>;</span> \
+ 4:         xorl    $<span class='def-NumberHex def-Number'>0x0200000</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>;</span> \
+ 5:         pushl   <span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>;</span> \
+ 6:         popfl<span class='asm-asmSymbol def-Symbol'>;</span> \
+ 7:         pushfl<span class='asm-asmSymbol def-Symbol'>;</span> \
+ 8:         popl    <span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>;</span> \
+ 9:         xorl    <span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>ecx</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>;</span> \
+10:         movl    <span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>%</span><span class='asm-asmNumDec def-NumberDec def-Number'>0</span><span class='asm-asmSymbol def-Symbol'>;</span>"
+11:         <span class='asm-asmSymbol def-Symbol'>:</span><span class='c-String def-String'>"=m"</span>(temp)
+12:         <span class='asm-asmSymbol def-Symbol'>:</span>
+13:         <span class='asm-asmSymbol def-Symbol'>:</span><span class='c-String def-String'>"%eax"</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='c-String def-String'>"%ecx"</span>)<span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+14: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>endif</span>
+15:     <span class='c-KeywordANSI def-Keyword'>if</span><span class='c-Symbol def-Symbol'>(</span>temp <span class='c-Symbol def-Symbol'>=</span><span class='c-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span><span class='c-Symbol def-Symbol'>)</span>
+16:     <span class='def-SymbolStrong def-Symbol'>{</span>
+17:         <span class='c-KeywordANSI def-Keyword'>return</span><span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+18:     <span class='def-SymbolStrong def-Symbol'>}</span>
+19: 
+20: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>if</span><span class='c-Preproc def-DirectiveContent def-Directive'> </span><span class='c-PreprocWord def-Directive'>defined</span><span class='c-Symbol def-Symbol'>(</span><span class='c-Preproc def-DirectiveContent def-Directive'>_WIN32</span><span class='c-Symbol def-Symbol'>)</span>
+21:     <span class='c-LineComment def-LineComment def-Comment def-Syntax'>// Save CPU feature flags</span>
+22:     <span class='c-AsmCode def-Directive'>_asm</span>
+23:     <span class='asm-asmSymbol def-Symbol'>{</span>
+24:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>ebx</span>
+25:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>edx</span>
+26:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>xor</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>eax</span>
+27:         _emit   <span class='asm-asmNumHex def-NumberHex def-Number'>0fh</span>
+28:         _emit   <span class='asm-asmNumHex def-NumberHex def-Number'>0a2h</span>
+29:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>cmp</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmNumDec def-NumberDec def-Number'>1</span>
+30:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>jb</span>      <span class='asm-asmLabel def-Label'>detect_cpu1</span>
+31:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmNumDec def-NumberDec def-Number'>1</span>
+32:         _emit   <span class='asm-asmNumHex def-NumberHex def-Number'>0fh</span>
+33:         _emit   <span class='asm-asmNumHex def-NumberHex def-Number'>0a2h</span>
+34:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span>     g_icdGlobal.CPU.dwCaps<span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>edx</span>
+35: <span class='asm-asmLabel def-Label'>    detect_cpu1:</span>
+36: #endif
+37: 

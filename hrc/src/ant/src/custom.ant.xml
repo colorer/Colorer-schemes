@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+ <custom-type targetNamespace="http://jakarta.apache.org/ant/">
+
+  <top-level>
+   <element>project</element>
+  </top-level>
+  
+  <prefix>ant</prefix>
+  <empty-prefix/>
+  <contributors>Cail Lomecb, Eugene Efremov</contributors>
+
+  <outline>
+   <element name='target' extract='withAttribute' description='Target'/>
+   <element name='property' extract='withAttribute' description='Property'/>
+   <element name='taskdef' extract='withAttribute' description='Task Definition'/>
+   <element name='typedef' extract='withAttribute' description='Type Definition'/>
+  </outline>
+
+  <type xmlns="http://colorer.sf.net/2003/hrc">
+      
+   <region name="PropertyRef"   parent="def:VarStrong"/>
+   <region name="PropertyRefBr"   parent="def:StringContent"/>
+   <region name="PathPattern" parent="regexp:MetaSymb"/>
+   <region name="PathItems" parent="def:Symbol"/>
+
+   <scheme name="PropertyRefContent">
+    <keywords region="PathItems">
+      <symb name="."/>
+      <symb name="/"/>
+    </keywords>
+    <regexp match="/[^\w\-_]/" region="def:Error" priority="low"/>
+   </scheme>
+   
+   <scheme name="PropertyRef">
+     <block start="/(\$\{)\M[^\s&quot;&apos;}]+\}/" end="/~.+?\m(\})/"
+      scheme="PropertyRefContent" region="PropertyRef"
+      region00='PropertyRefBr' region01="def:PairStart"
+      region10='PropertyRefBr' region11="def:PairEnd"
+     />
+     <!--regexp match="/(\$\{)([\w\.\-\d]+)(\})/" 
+      region0='PropertyRefBr' region1="def:PairStart"
+      region2='PropertyRef' region3="def:PairEnd"
+     /-->
+   </scheme>
+   <scheme name="Paths">
+    <regexp match="/(\/)?#1\*\*/" region0="PathPattern"/>
+    <regexp match="/\*\*\M[\/&quot;&apos;,\s]/" region0="PathPattern"/>
+    <regexp match="/\*\M[^*]/" region0="PathPattern"/>
+    <keywords region="PathItems">
+     <symb name="?" region="PathPattern"/>
+     <symb name=":"/>
+     <symb name="/"/>
+     <symb name="."/>
+     <symb name="," region="def:Symbol"/>
+    </keywords>
+   </scheme>
+   
+   <scheme name="boolean-values">
+     <keywords region="Enumeration" worddiv="[&apos;&quot;]">
+      <word name="true"/>
+      <word name="false"/>
+      <word name="on"/>
+      <word name="off"/>
+      <word name="yes"/>
+      <word name="no"/>
+     </keywords>
+   </scheme>
+   
+   <scheme name="string-content">
+    <inherit scheme='PropertyRef'/>
+    <inherit scheme="Paths"/>
+    <inherit scheme="boolean-values"/>     
+    <inherit scheme='string-content-old'/>
+   </scheme>
+   
+   <scheme name='FPI-content'>
+    <!-- http://ant.apache.org/manual/CoreTypes/xmlcatalog.html -->
+    <inherit scheme='uri:FPI'/>
+    <inherit scheme='string-content-old'/>
+   </scheme>
+
+   <scheme name="boolean-content">
+    <inherit scheme='PropertyRef'/>
+    <inherit scheme='boolean-values'/>
+    <!--inherit scheme='boolean-content-old'/-->
+   </scheme>
+   <scheme name="restring-content">
+    <inherit scheme="xmlschema:REstring-content"/>
+    <inherit scheme='string-content'/>
+   </scheme>
+   <scheme name="rplstring-content">
+    <regexp match="/\\\d+/" region="regexp:SpecOperator"/>
+    <inherit scheme='string-content'/>
+   </scheme>
+
+  </type>
+
+ </custom-type>
+
+</custom>

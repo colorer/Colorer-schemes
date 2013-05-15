@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+ <custom-type targetNamespace="http://www.w3.org/2000/01/rdf-schema#">
+  <prefix>rdfs</prefix>
+  <contributors>Eugene Efremov</contributors>
+  <top-level/> <!-- package. May not toplevel -->
+  <outline>
+   <element name='Class' extract='withAttribute' description='RDF class description'/>
+  </outline>
+ </custom-type>
+
+ <custom-type targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  
+  <!-- allow-unknown-root-elements=yes. Any toplevel.
+  <top-level>
+   <element>RDF</element>
+  </top-level>-->
+ 
+  <prefix>rdf</prefix>
+  <prefix>RDF</prefix>
+  
+  <contributors>Eugene Efremov</contributors>
+  
+  <type xmlns="http://colorer.sf.net/2003/hrc">
+
+   <region description="subject" name="subjectOutlined" parent="def:Outlined"/>
+   
+   <entity name="coreSyntaxTerms" value="RDF|ID|about|parseType|resource|nodeID|datatype"/>
+   <entity name="oldTerms" value="aboutEach|aboutEachPrefix|bagID"/>
+   <entity name="nodeElementURIs" value="(?{}%coreSyntaxTerms;|li|%oldTerms;)\b"/>
+   <entity name="propertyElementURIs" value="(?{}%coreSyntaxTerms;|Description|%oldTerms;)\b"/>
+   <entity name="propertyAttributeURIs" value="(?{}%coreSyntaxTerms;|li|Description|%oldTerms;)\b"/>
+
+<!-- 
+  - 
+  - !!! nodeElement 
+  -
+  -
+  --> 
+
+
+   <scheme name="nodeElementURIs-group">
+    
+    <regexp region5="subjectOutlined" match="/\M (&lt; (%xml:NCName;:)?%xml:Name;\b\s*.*?%nsprefix;about\s*=\s*(([\x22\x27])(.*?)(\4)) )/x"/>
+    <inherit scheme="nodeElementURIs-group-old"/>
+    <inherit scheme="rdfs:nodeElementURIs-group"/>
+    <!-- todo: rdfs -->
+    
+    <regexp region="def:Error" match="/ &lt; (%ns-real-prefix;%nodeElementURIs; ([\s\/&gt;]|$) )/x"/>
+    
+    <block end="/ &gt; /x" start="/\M &lt; ((%xml:NCName;:)?%xml:Name;\b ([\s\/&gt;]|$) )/x" scheme="nodeElement-mixedContent"/>
+    <!--
+     <regexp region="def:Error" match="/ &lt; (%ns-real-prefix;%xml:NCName; ([\s\/&gt;]|$) )/x"/>
+     <inherit scheme="xml:element"/>
+    -->
+   </scheme>
+   
+   <scheme name="nodeElement-mixedContent">
+    <inherit scheme="xml:elementContent">
+     <virtual subst-scheme="nodeElement-content" scheme="xml:element"/>
+     <virtual subst-scheme="xml:badChar" scheme="xml:content.cdata"/>
+     <virtual subst-scheme="nodeElement-Attributes" scheme="xml:Attribute.any"/>
+    </inherit>
+   </scheme>
+      
+
+<!-- 
+  - 
+  - !!! propertyElt
+  -
+  -
+  --> 
+  
+   
+   <scheme name="propertyElementURIs-group">
+    
+    <!-- parseType choice -->
+
+    <block end="/ &gt; /x" 
+     start="/\M &lt; ((%xml:NCName;:)?%xml:Name;\b [^&gt;]+ 
+      %nsprefix;parseType\s*=\s*[&apos;&quot;]Literal\b [^&gt;]+ 
+      ([\s\/&gt;]|$) )/x" 
+     scheme="parseTypeLiteralPropertyElt-mixedContent"
+    />
+    <block end="/ &gt; /x" 
+     start="/\M &lt; ((%xml:NCName;:)?%xml:Name;\b [^&gt;]+ 
+      %nsprefix;parseType\s*=\s*[&apos;&quot;]Resource\b [^&gt;]+ 
+      ([\s\/&gt;]|$) )/x" 
+     scheme="parseTypeResourcePropertyElt-mixedContent"
+    />
+    <block end="/ &gt; /x" 
+     start="/\M &lt; ((%xml:NCName;:)?%xml:Name;\b [^&gt;]+ 
+      %nsprefix;parseType\s*=\s*[&apos;&quot;]Collection\b [^&gt;]+ 
+      ([\s\/&gt;]|$) )/x" 
+     scheme="parseTypeCollectionPropertyElt-mixedContent"
+    />
+    <block end="/ &gt; /x" 
+     start="/\M &lt; ((%xml:NCName;:)?%xml:Name;\b [^&gt;]+ 
+      %nsprefix;parseType\s*= [^&gt;]*
+      ([\s\/&gt;]|$) )/x" 
+     scheme="parseTypeOtherPropertyElt-mixedContent"
+    />
+    
+    <!-- defined items and errors -->
+    <inherit scheme="propertyElementURIs-group-old"/>
+    <inherit scheme="rdfs:propertyElementURIs-group"/>
+    <!-- todo: rdfs -->
+    
+    <regexp region="def:Error" match="/ &lt; (%ns-real-prefix;%propertyElementURIs; ([\s\/&gt;]|$) )/x"/>
+        
+    <!-- other -->
+    
+    <block end="/ &gt; /x" start="/\M &lt; ((%xml:NCName;:)?%xml:Name;\b ([\s\/&gt;]|$) )/x" scheme="propertyElt-mixedContent"/>
+
+   </scheme>
+   
+   <scheme name="propertyElt-mixedContent">
+    <inherit scheme="xml:elementContent">
+     <virtual subst-scheme="propertyElt-content" scheme="xml:element"/>
+     <virtual subst-scheme="xml:badChar" scheme="xml:content.cdata"/>
+     <virtual subst-scheme="propertyElt-Attributes" scheme="xml:Attribute.any"/>
+    </inherit>
+   </scheme>   
+   
+   
+   <scheme name="propertyElt-content">
+    <inherit scheme="resourcePropertyElt-content"/>
+    <inherit scheme="literalPropertyElt-content"/>
+    <inherit scheme="emptyPropertyElt-content"/>
+   </scheme>
+   <scheme name="literalPropertyElt-content">
+    <inherit scheme="xml:content">
+     <virtual subst-scheme="def:empty" scheme="xml:element"/>
+    </inherit>
+    <inherit scheme="xmlschema:string-content"/>
+   </scheme>
+   <!-- Зря я эту фигню приделал. 
+        Все равно оно работает как mixed="true"...  -->
+
+   
+   
+   <entity name="_hack_rdf" value="Seq|Bag|Alt|Statement|Property|XMLLiteral|List|subject|predicate|object|type|value|first|rest|li|_\d+"/>
+   <entity name="_hack_rdfs" value="subClassOf|subPropertyOf|domain|range|label|comment|member|seeAlso|isDefinedBy"/>
+   
+   <scheme name="_hack_elementContent">
+    <block scheme="xml:elementContent2" 
+      region19="element.start.gt" region18="element.end.gt" 
+      region17="element.end.name" region16="element.nscolon" 
+      region15="element.nsprefix" region12="element.end.lt"  region11="PairEnd" 
+     
+      region07="element.start.name" region06="element.nscolon" 
+      region05="element.nsprefix" region02="element.start.lt" region01="PairStart" 
+      
+      start="/~( (&lt;) (  ((RDF|rdfs?) (:) ) 
+       (%_hack_rdf;|%_hack_rdfs;)\b 
+       ) \M &gt;? )/x"
+     
+      end="/( (&lt;\/) (\y3\b)?= 
+       ( (%xml:NCName;) (:) )? (%xml:Name;) \b \M \s* (&gt;?)                   
+       | (\/ \M &gt;) )/x" 
+    />
+    <!--
+    <regexp region="def:Error" match="/~&lt; (%ns-real-prefix;%propertyElementURIs; ([\s\/&gt;]|$) )/x"/>-->
+    <inherit scheme="xml:elementContent"/>
+   </scheme>
+   
+   
+   <scheme name="parseTypeLiteralPropertyElt-content">
+    <inherit scheme="xml:element"/>
+   </scheme>
+   <scheme name="parseTypeOtherPropertyElt-content">
+    <inherit scheme="parseTypeLiteralPropertyElt-content"/>   
+   </scheme>
+   
+   
+   <scheme name="parseTypeLiteralPropertyElt-mixedContent">
+    <inherit scheme="_hack_elementContent">
+     <virtual subst-scheme="parseTypeLiteralPropertyElt-content" scheme="xml:element"/>
+     <virtual subst-scheme="parseTypeLiteralPropertyElt-Attributes" scheme="xml:Attribute.any"/>
+    </inherit>
+   </scheme>
+   <scheme name="parseTypeResourcePropertyElt-mixedContent">
+    <inherit scheme="_hack_elementContent">
+     <virtual subst-scheme="parseTypeResourcePropertyElt-content" scheme="xml:element"/>
+     <virtual subst-scheme="xml:badChar" scheme="xml:content.cdata"/>
+     <virtual subst-scheme="parseTypeResourcePropertyElt-Attributes" scheme="xml:Attribute.any"/>
+    </inherit>
+   </scheme>
+   <scheme name="parseTypeCollectionPropertyElt-mixedContent">
+    <inherit scheme="_hack_elementContent">
+     <virtual subst-scheme="parseTypeCollectionPropertyElt-content" scheme="xml:element"/>
+     <virtual subst-scheme="xml:badChar" scheme="xml:content.cdata"/>
+     <virtual subst-scheme="parseTypeCollectionPropertyElt-Attributes" scheme="xml:Attribute.any"/>
+    </inherit>
+   </scheme>
+   <scheme name="parseTypeOtherPropertyElt-mixedContent">
+    <inherit scheme="_hack_elementContent">
+     <virtual subst-scheme="parseTypeOtherPropertyElt-content" scheme="xml:element"/>
+     <virtual subst-scheme="parseTypeOtherPropertyElt-Attributes" scheme="xml:Attribute.any"/>
+    </inherit>
+   </scheme>
+
+
+
+<!--
+   -
+   - !!! attributes 
+   -
+   -->
+   
+
+   <scheme name="propertyAttr-attributeGroup">
+    <inherit scheme="rdfOtherAttr-attributeGroup"/>
+    <inherit scheme="rdfs:propertyAttributeURIs-attributeGroup"/>
+    <regexp match="/(\s?#1|^)%nsprefix;%propertyAttributeURIs;([\s\=]|$)/x" region="def:Error"/>
+    <inherit scheme="xml:Attribute.any"/>
+   </scheme>
+   
+   <scheme name="parseTypeAttr-content">
+    <regexp region="Enumeration" match="/\b(Resource|Literal|Collection)\b/"/>
+    <inherit scheme="xmlschema:QName-content"/>
+    <inherit scheme="xmlschema:string-content"/>
+   </scheme>   
+   
+<!-- 
+  -
+  - !!! other attributes and elements
+  -
+  -->
+
+   <scheme name="containerElements-prop-group">
+    <block end="/ &gt; /x" start="/\M &lt; (%nsprefix;_\d+ ([\s\/&gt;]|$) )/x" scheme="propertyElt-elementContent"/>
+   </scheme>
+   <scheme name="containerElements-node-group">
+    <block end="/ &gt; /x" start="/\M &lt; (%nsprefix;_\d+ ([\s\/&gt;]|$) )/x" scheme="nodeElement-elementContent"/>
+   </scheme>   
+   <scheme name="containerAttr-attributeGroup">
+    <block region02="Attribute.name" end="/[&quot;']?#1/" start="/(\s?#1|^)(?{Attribute.nsprefix}%nsprefix;)(_\d+)\M([\s\=]|$)/x" scheme="xmlschema:string-AttributeContent"/>
+   </scheme>
+   
+   
+  </type>
+  
+ </custom-type>
+</custom>

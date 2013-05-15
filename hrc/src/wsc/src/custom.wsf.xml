@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace="uri:wsf">
+	<prefix>wsf</prefix>
+	<empty-prefix/>
+	
+	<!--top-level>
+		<element>package</element>
+	</top-level-->
+	
+	<contributors>Cail Lomecb, Max Belugin, Eugene Efremov</contributors>
+	
+	<outline>
+		<element name='job' extract='withAttribute' description='WSH job'/>
+	</outline>
+	
+	<processing-instruction name="job">
+		<xs:complexType xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:attribute name="error" type="xs:boolean"/>
+			<xs:attribute name="debug" type="xs:boolean"/>
+		</xs:complexType>
+	</processing-instruction>
+	
+</custom-type>
+
+</custom>

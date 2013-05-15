@@ -1,0 +1,32 @@
+
+select | Начинается встроенный SQL со своим синтаксисом
+   tfzzz086.*
+   from tfzzz086
+selectdo | Кончился встроенный SQL начинает обычный синтаксис
+   | делаем следующий оператор для каждой записи
+   test(tfzzz086.id)
+endselect
+
+select | Начинается встроенный SQL со своим синтаксисом
+   tfzzz086.*
+   from tfzzz086
+selectempty | Кончился встроенный SQL начинает обычный синтаксис
+   | делаем если не нашли ничего
+   test1(tfzzz086.id)
+endselect
+
+
+select | Начинается встроенный SQL со своим синтаксисом
+   tfzzz086.*
+   from tfzzz086
+selectdo | Кончился встроенный SQL начинает обычный синтаксис
+   | делаем следующий оператор для каждой записи
+   test(tfzzz086.id)
+selectempty
+   | делаем если не нашли ничего
+   test1(tfzzz086.id)
+endselect
+
+sasfdsafd
+|asfdasdfsafasf
+

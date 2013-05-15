@@ -1,0 +1,23 @@
+ 0: 
+ 1: <span class='Batch-ntCmd def-Keyword'>rem </span><span class='Batch-ntComment def-Comment def-Syntax'>Another issue I won't dare fixing on my own is that in a line like this:</span>
+ 2: 
+ 3:  <span class='Batch-ntCmd def-Keyword'>SET</span> GenerateDate<span class='Batch-ntSpec def-Symbol'>=</span><span class='Batch-ntCmd def-Keyword'>FOR</span> <span class='Batch-ntSpec def-Symbol'>/</span>F <span class='Batch-ntStr def-String'>"usebackq tokens=2"</span> <span class='Batch-ntVarEnv def-Var'>%%</span>a <span class='Batch-ntCmd def-Keyword'>IN</span> <span class='def-Symbol'>(</span>`<span class='Batch-ntCmd def-Keyword'>ECHO</span><span class='Batch-ntStr def-String'> %DATE%</span>'<span class='def-Symbol'>)</span> <span class='Batch-ntCmd def-Keyword'>DO</span> <span class='Batch-ntCmd def-Keyword'>SET</span> CurDate<span class='Batch-ntSpec def-Symbol'>=</span><span class='Batch-ntVarEnv def-Var'>%%</span>a
+ 4: 
+ 5: <span class='Batch-ntCmd def-Keyword'>rem </span><span class='Batch-ntComment def-Comment def-Syntax'>the highlighting started from behind echo spans until the end of the line,</span>
+ 6: <span class='Batch-ntCmd def-Keyword'>rem </span><span class='Batch-ntComment def-Comment def-Syntax'>though it should terminate in this context at the closing `.</span>
+ 7: <span class='Batch-ntCmd def-Keyword'>rem </span><span class='Batch-ntComment def-Comment def-Syntax'>(And since you can use for /f (without the option usebackq) with ' instead of ` with</span>
+ 8: <span class='Batch-ntCmd def-Keyword'>rem </span><span class='Batch-ntComment def-Comment def-Syntax'>the same effect this might require another rule as well.</span>
+ 9: 
+10: <span class='Batch-ntCmd def-Keyword'>rem </span><span class='Batch-ntComment def-Comment def-Syntax'>Another issue are calls to subroutines. Those are written like this:</span>
+11: 
+12: <span class='Batch-ntLabel def-Label'>:mySub</span>
+13: <span class='Batch-ntCmd def-Keyword'>echo</span><span class='Batch-ntStr def-String'> Hey, I got a param: %1</span>
+14: <span class='Batch-ntCmd def-Keyword'>goto</span> <span class='Batch-ntSpec def-Symbol'>:</span><span class='Batch-ntCmd def-Keyword'>EOF</span>
+15: 
+16: <span class='Batch-ntCmd def-Keyword'>rem </span><span class='Batch-ntComment def-Comment def-Syntax'>and can be called via</span>
+17: 
+18: <span class='Batch-ntCmd def-Keyword'>call</span> <span class='Batch-ntLabel def-Label'>:mySub</span> param1 param2 ...
+19: 
+20: <span class='Batch-ntCmd def-Keyword'>rem </span><span class='Batch-ntComment def-Comment def-Syntax'>In this case the :mySub is not being highlighted as it would be the case with</span>
+21:     
+22: <span class='Batch-ntCmd def-Keyword'>goto </span><span class='Batch-ntLabel def-Label'>mySub</span>

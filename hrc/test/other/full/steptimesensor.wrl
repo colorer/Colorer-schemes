@@ -1,0 +1,116 @@
+#VRML V2.0 utf8
+
+# Prototyp: stepTimeSensor, krokovatelny casovac
+
+PROTO stepTimeSensor [
+  field SFFloat startTime 0.0
+  eventIn SFFloat set_startTime
+  field SFFloat stopTime 1.0
+  eventIn SFFloat set_stopTime
+  field SFFloat timeScale 1.0
+  eventIn SFFloat set_timeScale
+  field SFBool loopEnabled FALSE
+  eventIn SFBool set_loopEnabled
+  field SFFloat stepTime 1.0
+  eventIn SFFloat set_stepTime
+  eventIn SFFloat set_time
+  eventOut SFFloat time_changed
+  field SFBool running FALSE
+  eventIn SFBool set_running
+  eventIn SFInt32 addStep ]
+{
+  DEF stepTimerScr Script {
+    field SFFloat startTime IS startTime
+    eventIn SFFloat set_startTime IS set_startTime
+    field SFFloat stopTime IS stopTime
+    eventIn SFFloat set_stopTime IS set_stopTime
+    field SFFloat timeScale IS timeScale
+    eventIn SFFloat set_timeScale IS set_timeScale
+    field SFBool loopEnabled IS loopEnabled
+    eventIn SFBool set_loopEnabled IS set_loopEnabled
+    field SFFloat stepTime IS stepTime
+    eventIn SFFloat set_stepTime IS set_stepTime
+    field SFFloat time IS startTime
+    eventIn SFFloat set_time IS set_time
+    eventOut SFFloat time_changed IS time_changed
+    field SFBool running IS running
+    eventIn SFBool set_running IS set_running
+    eventIn SFInt32 addStep IS addStep
+# private
+    eventOut SFBool enableInternalTimer
+    eventIn SFTime internalTime
+    field SFTime oldEventTime -1.0
+    url ["javascript:
+// Skript pro krokovatelny casovac, pro JavaScript
+// scStepTimeSensor
+
+function setNewTime(newTime) {
+  if (stopTime > startTime) { // lze cyklit
+    if (newTime < startTime) newTime = startTime;
+    while (newTime > stopTime) { // cas pretekl
+      if (loopEnabled) {
+	newTime -= stopTime;
+      } else { // neloopujeme, stop
+        newTime = startTime; 
+	if (running) {
+	  enableInternalTimer = false;
+	  running = false;
+	}
+      }
+    }
+  }
+  time = newTime;
+  time_changed = newTime; // posli event
+}
+
+function set_startTime(eventValue) {
+  startTime = eventValue;
+}
+
+function set_stopTime(eventValue) {
+  stopTime = eventValue;
+}
+
+function set_timeScale(eventValue) {
+  timeScale = eventValue;
+}
+
+function set_loopEnabled(eventValue) {
+  loopEnabled = eventValue;
+}
+
+function set_stepTime(eventValue) {
+  stepTime = eventValue;
+}
+
+function set_running(eventValue) {
+  if (running != eventValue) {
+    running = eventValue;
+    if (running) { // zapnout casovac
+      enableInternalTimer = true;
+      oldEventTime = -1.0;
+    } else // vypnout, prepnout do krokovaciho rezimu
+      enableInternalTimer = false;
+  }
+}
+
+function addStep(eventValue) {
+  if (!running) {
+    if (eventValue != 0) setNewTime(time + eventValue * stepTime);
+    else setNewTime(startTime);
+  }
+}
+
+function internalTime(eventValue) {
+  if (running) {
+    if (oldEventTime > 0) {
+      time += timeScale * (eventValue - oldEventTime); 
+      setNewTime(time);
+    }
+    oldEventTime = eventValue;
+  }
+}
+
+function set_time(eventValue) {
+  setNewTime(eventValue);
+}

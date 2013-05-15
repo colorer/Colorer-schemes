@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<custom xmlns="uri:colorer:custom">
+
+  <custom-type targetNamespace="http://www.mozilla.org/xbl">
+    <prefix>xbl</prefix>
+    <empty-prefix/>
+    
+    <contributors>Eugene Efremov</contributors>
+    
+    <top-level>
+      <element>bindings</element>
+    </top-level>
+    
+    <outline>
+     <element name='binding' extract='withAttribute' description='binding section'/>
+     <element name='method' extract='withAttribute'  description='function'/>
+     <element name='property' extract='withAttribute'  description='get/set'/>
+     <!-- conflict witch xmlss
+     <element name='constructor' extract='fullElement'  description='constructor'/>
+     <element name='destructor' extract='fullElement'  description='destructor'/>
+     -->
+    </outline>
+    
+    <script-n-style>
+     <element name="script">
+      <language name="jScript" expr="(ecma|j(ava)?)script"/>
+      <default name="jScript"/>
+     </element>
+     <element name="body">
+      <default name="jScript"/>
+     </element>
+     <element name="getter">
+      <default name="jScript"/>
+     </element>
+     <element name="setter">
+      <default name="jScript"/>
+     </element>
+     <element name="handler">
+      <default name="jScript"/>
+     </element>   
+     <element name="constructor">
+      <default name="jScript"/>
+     </element>   
+     <element name="destructor">
+      <default name="jScript"/>
+     </element>   
+     <element name="field">
+      <default name="jScript"/>
+     </element>   
+     <attribute language="jScript" scheme-suffix="Script" region="def:default"/>
+    </script-n-style>
+
+      
+    <type xmlns="http://colorer.sf.net/2003/hrc">
+    
+     <!-- xmlss support -->
+
+     <scheme name="Script-content">
+      <inherit scheme="xmlss-jScript-Script-attr"/>
+     </scheme>
+     
+     <!-- BindingContent hack -->
+     
+     <scheme name="BindingContent-content">
+      <inherit scheme="children-element"/>
+      <inherit scheme="element-element"/>
+      <regexp region="def:Error" match="/ &lt; (%ns-real-prefix;%xml:NCName; ([\s\/&gt;]|$) )/x"/>
+      <inherit scheme="xml:element">
+       <virtual scheme="xml:element" subst-scheme="BindingContent-content"/>
+       <virtual scheme="xml:Attribute.any" subst-scheme="bc.attribute.any"/>
+      </inherit>
+     </scheme>
+     
+     <scheme name="ChildrenContent-content">
+      <regexp region="def:Error" match="/ &lt; (%ns-real-prefix;%xml:NCName; ([\s\/&gt;]|$) )/x"/>
+      <inherit scheme="xml:element">
+       <virtual scheme="xml:Attribute.any" subst-scheme="bc.attribute.any"/>
+      </inherit>
+     </scheme>
+
+     <scheme name="BEContent-content">
+      <regexp region="def:Error" match="/ &lt; (%ns-real-prefix;%xml:NCName; ([\s\/&gt;]|$) )/x"/>
+      <inherit scheme="xml:element">
+       <virtual scheme="xml:Attribute.any" subst-scheme="bc.attribute.any"/>
+      </inherit>
+     </scheme>
+
+     <scheme name="bc.attribute.any">
+      <inherit scheme="inherits-attribute"/>
+      <inherit scheme="xml:Attribute.any">
+       <virtual scheme="xml:Attribute.any" subst-scheme="bc.attribute.any"/>
+      </inherit>
+     </scheme>
+     
+     
+     <!-- Types -->
+     
+     <scheme name="KeyModifier-content">
+      <keywords region="Enumeration">
+       <word name="shift"/>
+       <word name="alt"/>
+       <word name="control"/>
+       <word name="meta"/>
+       <word name="accel"/>
+       <word name="access"/>
+      </keywords>
+      <inherit scheme="xmlschema:string-content"/>
+     </scheme>
+     
+     <scheme name="IncludesElemens-content">
+      <regexp match="/\w?#1\|\M\w/" region="def:Symbol"/>
+      <inherit scheme="xmlschema:string-content"/>
+     </scheme>
+
+     <scheme name="EventName-content">
+      <keywords region="Enumeration">
+       <word name='mousedown'/>
+       <word name='mouseup'/>
+       <word name='click'/>
+       <word name='dblclick'/>
+       <word name='mouseover'/>
+       <word name='mouseout'/>
+       <word name='mousemove'/>
+       <word name='contextmenu'/>
+       <word name='keydown'/>
+       <word name='keyup'/>
+       <word name='keypress'/>
+       <word name='focus'/>
+       <word name='blur'/>
+       <word name='load'/>
+       <word name='unload'/>
+       <word name='abort'/>
+       <word name='error'/>
+       <word name='submit'/>
+       <word name='reset'/>
+       <word name='change'/>
+       <word name='select'/>
+       <word name='input'/>
+       <word name='paint'/>
+       <word name='text'/>
+       <word name='popupShowing'/>
+       <word name='popupShown'/>
+       <word name='popupHiding'/>
+       <word name='popupHidden'/>
+       <word name='close'/>
+       <word name='command'/>
+       <word name='broadcast'/>
+       <word name='commandupdate'/>
+       <word name='dragenter'/>
+       <word name='dragover'/>
+       <word name='dragexit'/>
+       <word name='dragdrop'/>
+       <word name='draggesture'/>
+       <word name='resize'/>
+       <word name='scroll'/>
+       <word name='underflow'/>
+       <word name='overflowchanged'/>
+       <word name='subtreemodified'/>
+       <word name='nodeinserted'/>
+       <word name='noderemoved'/>
+       <word name='noderemovedfromdocument'/>
+       <word name='nodeinsertedintodocument'/>
+       <word name='attrmodified'/>
+       <word name='characterdatamodified'/>
+      </keywords>
+      <inherit scheme="xmlschema:string-content"/>
+     </scheme>
+     
+    </type>
+    
+  </custom-type>
+</custom>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the HRC scheme for 
+   - mozilla XML Binding language (XBL).
+   -
+   - The Initial Developer of the Original Code is
+   - Eugene Efremov <4mirror@mail.ru>
+   - Portions created by the Initial Developer are Copyright (C) 2004
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

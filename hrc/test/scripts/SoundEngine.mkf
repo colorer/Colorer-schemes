@@ -1,0 +1,74 @@
+if {{defined IW_DEBUG}}
+{
+	define IW_SOUND_IMPORTER
+}
+
+includepath h
+includepath source
+
+defines
+{
+	IW_SOUND
+	IW_SOUND_ADPCM
+	IW_SOUND_PCM
+}
+
+#common IwSound code
+files
+{
+	(h)
+	IwResHandlerWAV.h
+	IwSound.h
+	IwSoundManager.h
+	IwSoundData.h
+	IwSoundGroup.h
+	IwSoundInst.h
+	IwSoundParams.h
+	IwSoundSpec.h
+
+	(source)
+	IwResHandlerWAV.cpp
+	IwSoundManager.cpp
+	IwSoundData.cpp
+	IwSoundGroup.cpp
+	IwSoundInst.cpp
+	IwSoundParams.cpp
+	IwSoundSpec.cpp
+
+	[Docs]
+	(docs)
+	iwsound.defines.txt
+	iwsound.config.txt
+}
+
+if {{ defined IW_SOUND_ADPCM }}
+{
+	files
+	{
+		[]
+		(h)
+		IwSoundADPCM.h
+		(source)
+		IwSoundADPCM.cpp
+	}
+}
+
+if {{ defined IW_SOUND_PCM }}
+{
+	files
+	{
+		[]
+		(h)
+		IwSoundPCM.h
+		(source)
+		IwSoundPCM.cpp
+	}
+}
+
+subprojects
+{
+	iwutil
+}
+
+
+

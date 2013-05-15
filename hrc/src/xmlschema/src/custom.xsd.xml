@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- XML Schema magic simple types definition -->
+
+  <custom-type targetNamespace="http://www.w3.org/2001/XMLSchema">
+
+    <prefix>s</prefix>
+    <prefix>xs</prefix>
+    <prefix>xsd</prefix>
+    <prefix>wxs</prefix>
+    <empty-prefix/>
+
+    <contributors><![CDATA[
+     Cail Lomecb <cail@nm.ru>,
+     Eugene Efremov <4mirror@mail.ru>
+    ]]></contributors>
+
+    <top-level>
+      <element>schema</element>
+    </top-level>
+
+    <outline>
+      <element name='schema' extract='withAttribute' description='Schema root'/>
+      <element name='import' extract='withAttribute' description='Schema import'/>
+      <element name='include' extract='withAttribute' description='Schema include'/>
+      <element name='element' extract='withAttribute' description='Global element'/>
+      <element name='group' extract='withAttribute' description='Global group'/>
+      <element name='attribute' extract='withAttribute' description='Global attribute'/>
+      <element name='attributeGroup' extract='withAttribute' description='Schema global attribute group'/>
+      <element name='complexType' extract='withAttribute' description='Global complex type'/>
+      <element name='simpleType' extract='withAttribute' description='Global simple type'/>
+      <element name='annotation' extract='withAttribute' description='Annotation definition'/>
+    </outline>
+
+    <xsd-typedefs>
+    	<xs:simpleType name="xpath-type"/>
+    	<xs:simpleType name="xpath-type-attr"/>
+    	<xs:simpleType name="REstring"/>
+    </xsd-typedefs>
+
+    <script-n-style>
+    	<element-attributes name="selector">
+    		<xs:attribute name="xpath" type="xs:xpath-type"/>
+    	</element-attributes>
+    	<element-attributes name="field">
+    		<xs:attribute name="xpath" type="xs:xpath-type-attr"/>
+    	</element-attributes>
+    	<element-attributes name="pattern">
+    		<xs:attribute name="value" type="xs:REstring"/>
+    	</element-attributes>
+    	
+    	<attribute language="xpath" scheme-suffix="XML.Pattern" region="def:default"/>
+    </script-n-style>
+
+    <type xmlns="http://colorer.sf.net/2003/hrc">
+
+    <!-- EE begin -->
+      <region name="Scheme.nsprefix" parent="xml:QName.nsprefix"/>
+      <region name="Scheme.nscolon"  parent="xml:QName.nscolon"/>
+      <region name="Scheme.name"     parent="xml:QName.name"/>
+      
+      <region name='ns.spec'      parent='xml:nsprefix'/>
+      <region name='ns.spec.mark' parent='uri:delit'/>
+
+
+      <!-- QName -->
+
+      <scheme name="QName-content"><!-- fix for lists... -->
+        <regexp match="/(?{}~|\s?#1)((%xml:NCName;)(\:))?(%xml:NCName;) \b/ix"
+         region2="Scheme.nsprefix" region3="Scheme.nscolon"
+         region4="Scheme.name"/>
+      </scheme>
+
+
+      <!-- xpath -->
+
+      <scheme name="xpath-type-content">
+      	<regexp match="/[\[\]]|\.{2}/" region="def:Error"/>
+      	<inherit scheme="xmlss-xpath-XML.Pattern-attr"><!-- @ deny -->
+      		<virtual scheme="xpath:Pattern" subst-scheme="PatternNoAttr"/>
+      	</inherit>
+      </scheme>
+      <scheme name="xpath-type-attr-content">
+      	<inherit scheme="xmlss-xpath-XML.Pattern-attr"><!-- @ allow -->
+      		<virtual scheme="xpath:Pattern" subst-scheme="Pattern"/>
+      	</inherit>
+      </scheme>
+
+      <scheme name="Pattern">
+      	<regexp match="/[\[\]]/" region="def:Error"/>
+      	<inherit scheme="xpath:Pattern"/>
+      </scheme>
+      <scheme name="PatternNoAttr">
+      	<regexp match="/\battribute::|\@/" region="def:Error"/>
+      	<inherit scheme="Pattern"/>
+      </scheme>
+      
+      <!-- FPI -->
+      <scheme name='public-content'>
+      	<inherit scheme='uri:FPI'/>
+      	<inherit scheme='public-content-old'/>
+      </scheme>
+
+
+      <!-- Regexp -->
+
+      <scheme name="RE-String">
+       <annotation><documentation>
+        Regexp string. Using package regexp.hrc.
+       </documentation></annotation>
+       <inherit scheme="regexp:xsd.regexp">
+        <!--virtual scheme="regexp:code" subst-scheme="QName-content"/-->
+        <virtual scheme="regexp:string" subst-scheme="xml:Reference"/>
+        <virtual scheme="regexp:xsd.regexp" subst-scheme="RE-String"/>
+       </inherit>
+      </scheme>
+
+      <scheme name="REstring-content">
+       <inherit scheme="RE-String"/>
+       <inherit scheme="string-content"/>
+      </scheme>
+
+
+      <!-- URI -->
+
+      <scheme name="anyURI-content">
+      	<inherit scheme='uri:uri'/>
+      </scheme>
+      
+      <scheme name='namespaceList-list'>
+      	<keywords region='ns.spec' worddiv='[\s#&apos;&quot;]'>
+      		<word name='any'/>
+      		<word name='other'/>
+      		<word name='local'/>
+      		<word name='targetNamespace'/>
+      	</keywords>
+      	<inherit scheme="xml:badChar"/>
+      </scheme>
+      
+      <scheme name="namespaceList-content">
+      	<block start='/(~|\s?#1)(##)\M\w+\b/' end='/~\w+\b\m/'
+      		scheme='namespaceList-list' region02='ns.spec.mark'
+      	/>
+      	<inherit scheme='anyURI-content'/>
+      </scheme>
+
+    <!-- EE end -->
+
+      <scheme name="anyType-content"/>
+      <scheme name="anySimpleType-content"/>
+      <scheme name="anySimpleType-AttributeContent">
+        <inherit scheme="AttributeContent">
+          <virtual scheme="xml:AttValue.content.stream" subst-scheme="anySimpleType-content"/>
+        </inherit>
+      </scheme>
+
+      <scheme name="string-content">
+        <regexp match="/[%xml:Char;]/" priority="low"/>
+      </scheme>
+      <scheme name="boolean-content">
+        <regexp match="/\b(true|1)\b/" region="BooleanConstant"/>
+        <regexp match="/\b(false|0)\b/" region="BooleanConstant"/>
+      </scheme>
+      <scheme name="decimal-content">
+        <regexp match="/ [\-+]? (\d+\.?\d* | \.\d+\b) /ix" region="Number"/>
+      </scheme>
+      <scheme name="float-content">
+        <inherit scheme="FloatNumber"/>
+        <regexp match="/ INF|-INF|NaN /x" region="Number"/>
+      </scheme>
+      <scheme name="double-content">
+        <inherit scheme="float-content"/>
+      </scheme>
+
+      <scheme name="duration-content">
+        <regexp match="/[\-+]? P \d+Y \d+M \d+D (T \d+H \d+M (\d+(\.\d*)?)S)? /x" region="Date"/>
+      </scheme>
+      <scheme name="dateTime-content">
+        <regexp match="/[\-+]? \d{4,} - \d\d - \d\d T \d\d:\d\d:(\d\d(\.\d+)?) (Z|[+-]\d\d:\d\d)?/x" region="Date"/>
+      </scheme>
+      <scheme name="time-content">
+        <regexp match="/[\-+]? \d\d:\d\d:(\d\d(\.\d+)?) (Z|[+-]\d\d:\d\d)?/x" region="Date"/>
+      </scheme>
+      <scheme name="date-content">
+        <regexp match="/[\-+]? \d{4,} - \d\d - \d\d/x" region="Date"/>
+      </scheme>
+      <scheme name="gYearMonth-content">
+        <regexp match="/[\-+]? \d{4,} - \d\d/x" region="Date"/>
+      </scheme>
+      <scheme name="gYear-content">
+        <regexp match="/[\-+]? \d{4,}/x" region="Date"/>
+      </scheme>
+      <scheme name="gMonthDay-content">
+        <regexp match="/\-\- \d\d - \d\d/x" region="Date"/>
+      </scheme>
+      <scheme name="gDay-content">
+        <regexp match="/\-\-\- \d\d/x" region="Date"/>
+      </scheme>
+      <scheme name="gMonth-content">
+        <regexp match="/\-\- \d\d \-\-/x" region="Date"/>
+      </scheme>
+
+      <scheme name="hexBinary-content">
+        <regexp match="/[0-9a-fA-F]+/ix"/>
+      </scheme>
+      <scheme name="base64Binary-content">
+        <regexp match="/[\x3D-\x7A]+/ix"/>
+      </scheme>
+
+      <!--
+      <scheme name="QName-content">
+        <regexp match="/\b (?{}%xml:NCName;(\:))?%xml:NCName; \b/ix" region1="Attribute.nsprefix"/>
+      </scheme>-->
+      <scheme name="NOTATION-content">
+        <!-- It is an ·error· for NOTATION to be used directly in a schema. Only datatypes that are ·derived· from NOTATION by specifying a value for ·enumeration· can be used in a schema. -->
+      </scheme>
+
+
+  <!-- derived datatypes -->
+
+      <scheme name="normalizedString-content">
+        <regexp match="/\t+/" region="xml:badChar"/>
+        <inherit scheme="string-content"/>
+      </scheme>
+
+      <scheme name="token-content">
+        <!--<regexp match="/\S\s/" priority="low"/>
+        <regexp match="/.$|^./" region="xml:badChar"/>
+        <regexp match="/\s+/" region="xml:badChar"/>-->
+        <inherit scheme="normalizedString-content"/>
+      </scheme>
+      <scheme name="language-content">
+      	<inherit scheme='uri:lang'/>
+        <!--regexp match="/\b([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{1,8})*\b/ix"/-->
+      </scheme>
+      <scheme name="NMTOKEN-content">
+        <regexp match="/\b %xml:Nmtoken; \b/ix"/>
+      </scheme>
+      <scheme name="NMTOKENS-content">
+        <regexp match="/\b %xml:Nmtoken; \b /ix"/>
+      </scheme>
+      <scheme name="Name-content">
+        <regexp match="/\b %xml:Name; \b/ix"/>
+      </scheme>
+      <scheme name="NCName-content">
+        <regexp match="/\b %xml:NCName; \b/ix"/>
+      </scheme>
+      <scheme name="ID-content">
+        <inherit scheme="NCName-content"/>
+      </scheme>
+      <scheme name="IDREF-content">
+        <inherit scheme="NCName-content"/>
+      </scheme>
+      <scheme name="IDREFS-content">
+        <inherit scheme="NCName-content"/>
+      </scheme>
+      <scheme name="ENTITY-content">
+        <inherit scheme="NCName-content"/>
+      </scheme>
+      <scheme name="ENTITIES-content">
+        <inherit scheme="NCName-content"/>
+      </scheme>
+      <scheme name="integer-content">
+        <regexp match="/[-+]?\d+ \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="nonPositiveInteger-content">
+        <regexp match="/0 | -\d+ \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="negativeInteger-content">
+        <regexp match="/ \- \d+ \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="nonNegativeInteger-content">
+        <regexp match="/\+? \d+ \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="positiveInteger-content">
+        <regexp match="/\+? \d+ \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="long-content">
+        <regexp match="/[\-+]? \d{1,19} \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="int-content">
+        <regexp match="/[\-+]? \d{1,10} \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="short-content">
+        <regexp match="/[\-+]? \d{1,5} \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="byte-content">
+        <regexp match="/[\-+]? \d{1,3} \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="unsignedLong-content">
+        <regexp match="/\d{1,19} \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="unsignedInt-content">
+        <regexp match="/\d{1,10} \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="unsignedShort-content">
+        <regexp match="/\d{1,5} \b/x" region="NumberDec"/>
+      </scheme>
+      <scheme name="unsignedByte-content">
+        <regexp match="/\d{1,3} \b/x" region="NumberDec"/>
+      </scheme>
+    </type>
+  </custom-type>
+  
+  <custom-type targetNamespace="http://www.w3.org/2001/XMLSchema-instance">
+    <prefix>xsi</prefix>
+    <top-level/><!-- package -->
+    <contributors>Eugene Efremov</contributors>
+  </custom-type>
+  
+</custom>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the Colorer Library.
+   -
+   - The Initial Developer of the Original Code is
+   - Cail Lomecb <cail@nm.ru>.
+   - Portions created by the Initial Developer are Copyright (C) 1999-2005
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -  Eugene Efremov <4mirror@mail.ru>
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

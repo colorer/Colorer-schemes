@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<project name="src.ant" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/ant" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+<!-- generate dtd -->
+
+<target name="dtd-gen.check">
+ <uptodate property="dtd-gen.check" srcfile="build.xml" targetfile="${obj}/ant-gen.dtd"/>
+</target>
+
+<target name="dtd-gen" depends="dtd-gen.check" unless="dtd-gen.check">
+ <echo level="info" message="Autocreate dtd"/>
+ <antstructure output='${obj}/ant-gen.dtd'/>
+</target>
+
+
+<target name="dtd.check">
+ <uptodate property="dtd.check"  targetfile="${obj}/ant.dtd">
+  <srcfiles dir="." includes="${src}/antdtd.pl, ${obj}/ant-gen.dtd"/>
+ </uptodate>
+</target>
+
+<target name="dtd" depends="dtd-gen, dtd.check" unless="dtd.check">
+ <echo level="info" message="Fix bugs in dtd"/>
+ <exec executable="perl" output="${obj}/ant.dtd">
+  <arg line='${src}/antdtd.pl ${obj}/ant-gen.dtd'/>
+ </exec>
+</target>
+
+<!-- generate xsd from dtd -->
+
+<target name="xsd.check">
+ <uptodate property="xsd.check"  targetfile="${obj}/ant.xsd">
+  <srcfiles dir="." includes="${src}/ant.map, ${obj}/ant.dtd"/>
+ </uptodate>
+</target>
+
+<target name="xsd" depends="dtd, xsd.check"  unless="xsd.check">
+ <ant antfile="${util}" target="dtd2xsd">
+  <property name="util.input" value="${obj}/ant.dtd"/>
+  <property name="util.output" value="${obj}/ant.xsd"/>
+  <property name="dtd2xsd.map" value="${src}/ant.map"/>
+  <property name="dtd2xsd.pre" value="ant"/>
+  <property name="dtd2xsd.ns" value="http://jakarta.apache.org/ant/"/>
+ </ant>
+</target>
+
+<!-- generate hrc from xsd -->
+
+<target name="hrc.check">
+ <dependset>
+  <srcfilelist dir="${src}" files = "custom.ant.xml"/>
+  <srcfilelist dir="${obj}" files = "ant.xsd"/>
+  <targetfilelist dir="${bin}" files="ant.hrc"/>
+ </dependset>
+</target>
+
+<target name="hrc" depends="xsd, hrc.check">
+ <ant antfile="${util}" target="xsd2hrc">
+  <property name="util.input" value="${obj}/ant.xsd"/>
+  <property name="util.output" value="${bin}/ant.hrc"/>
+  <property name='xsd2hrc.hrctype' value='ant'/>
+  <property name='xsd2hrc.allow-any-attr' value='yes'/>
+  <property name='xsd2hrc.allow-unknown-elements' value='yes'/>
+  <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.ant.xml'/>
+ </ant>
+</target>
+
+<!-- final -->
+
+<target name="all" depends="hrc"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${obj}" includes="*.*" excludes='.empty'/>
+  <fileset dir="${bin}" includes="ant.hrc"/>
+ </delete>
+</target>
+
+</project>

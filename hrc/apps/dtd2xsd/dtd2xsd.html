@@ -1,0 +1,479 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>DTD2Schema</title>
+<style type="text/css">
+BODY {
+    margin: 2em 1em 2em 30px;
+    font-family: 'Arial', sans-serif;
+    font-size: 11pt;
+    color: black;
+    background: white;
+    background-position: top left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+A:hover {
+    background: #FFFF90
+} 
+
+H1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 24pt;
+    font-weight: normal;
+}
+
+H2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 18pt;
+    font-weight: normal;
+}
+
+H3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 14pt;
+    font-weight: normal;
+}
+
+H4{
+    font-family: 'Arial', sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+}
+
+DL DT {
+    font-weight: bold;
+}
+
+DL DD {
+    margin-bottom: 0.7em;
+}
+
+TT {
+    font-family: "Courier New", "Courier";
+    color: brown;
+}
+
+PRE {
+    font-family: "Courier New", "Courier";
+}
+
+.GUI {
+    font-family: "Arial";
+    font-size: 15px;
+}
+
+.title {
+    text-align: center;
+}
+
+Table.intro {
+    margin-left: 40px;
+    border-width: 0;
+}
+
+Table.intro TD {
+    font-size: 12pt;
+    text-align: left;
+    vertical-align: text-top;
+}
+
+Table.intro TH {
+    font-size: 12pt;
+    text-align: left;
+    vertical-align: text-top;
+}
+
+OL.toc LI {
+    font-size: 12pt;
+}
+
+P.caption {
+    font-size: 9pt;
+    text-align: center;
+    margin-top: 2pt;
+}
+
+Table TR TD {
+    font-size: 9pt;
+}
+
+Table TR TH {
+    font-size: 10pt;
+}
+</style>
+
+<!-- $Id$ -->
+</head>
+<body>
+<h2>A Conversion Tool from DTD to XML Schema</h2>
+
+<ul>
+<li><a href="#dow">Download</a></li>
+
+<li><a href="#usa">Usage</a></li>
+
+<li><a href="#sam">Samples</a></li>
+
+<li><a href="#how">How does it work?</a></li>
+
+<li><a href="#his">History</a></li>
+</ul>
+
+<hr />
+<h2><a id="dow" name="dow">Download</a></h2>
+<p> <a
+href="dtd2xsd.pl">dtd2xsd.pl</a></p>
+
+<p><strong>Note:</strong> the documentation below doesn't reflec the
+changes by MH; see <a
+href="http://lists.xml.org/archives/xml-dev/200101/msg00481.html">her
+announcement</a> of 11 Jan 2001 to xml-dev.</p>
+
+<h2><a id="usa" name="usa">Usage:</a></h2>
+
+<blockquote>
+<table border="1">
+<tr>
+<td style="font-size:11pt">
+<pre>
+perl dtd2xsd.pl [-alias] [-prefix p] [-ns n] [file]
+  -alias
+    enables special aliases (default <b>off</b>)
+  -prefix t
+    specify namespace prefix
+  -ns http://www.w3.org/namespace/
+    specify namespace URI
+  -simpletype pattern base
+    treat parameter entities whose name match this pattern
+    as simple datatypes derived from this base type
+  -attrgroup pattern
+    treat parameter entities whose name match this pattern
+    as attribute groups
+  -modelgroup pattern
+    treat parameter entities whose name match this pattern
+    as model groups
+</pre>
+</td>
+</tr>
+</table>
+
+If no <b>file</b> is specified, STDIN will be used.</blockquote>
+
+<p><a id="sam" name="sam"><big><b>Samples:</b></big></a></p>
+
+<ul>
+<li>Simple sample: <a href="sample.dtd">DTD</a> -&gt; <a
+href="sample.xml">XML Schema</a></li>
+
+<li><a href="http://www.w3.org/TR/2000/WD-P3P-20000404/#DTD">P3P
+DTD</a> -&gt; <a href="p3p.xml">XML Schema</a></li>
+
+<li><a href="http://www.w3.org/TR/1998/REC-smil-19980615/#dtd">SMIL
+DTD</a> -&gt; <a href="smil.xml">XML Schema</a></li>
+
+<li><a
+href="http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+XHTML Strict DTD</a> -&gt; <a href="xhtml.xml">XML Schema</a></li>
+
+<li><a
+href="http://www.w3.org/TR/MathML2/appendixa.html#parsing:dtd">
+MathML 2.0 DTD</a> -&gt; <a href="math.xml">XML Schema</a></li>
+</ul>
+
+<h2><a id="how" name="how">How does it
+work?</a></h2>
+
+<h3>1. Encoding elements</h3>
+
+<table border="1" bgcolor="#eeffff">
+<tr>
+<th bgcolor="#cceeee">DTD</th>
+<th bgcolor="#cceeee">XML Schema</th>
+</tr>
+
+<tr>
+<td valign="top">
+<pre>
+&lt;!ELEMENT ROOT (A,B) &gt;
+</pre>
+</td>
+<td valign="top">
+<pre>
+&lt;element name="ROOT"&gt;
+ &lt;complexType content="elementOnly"&gt;
+  &lt;element ref="t:A"&gt;
+  &lt;element ref="t:B"&gt;
+ &lt;/complexType&gt;
+&lt;element&gt;
+</pre>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<pre>
+&lt;!ELEMENT ROOT (A|B) &gt;
+</pre>
+</td>
+<td valign="top">
+<pre>
+&lt;element name="ROOT"&gt;
+ &lt;complexType content="elementOnly"&gt;
+  &lt;choice&gt;
+   &lt;element ref="t:A"&gt;
+   &lt;element ref="t:B"&gt;
+  &lt;/choice&gt;
+ &lt;/complexType&gt;
+&lt;element&gt;
+</pre>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<pre>
+&lt;!ELEMENT ROOT (A|(B,C)) &gt;
+</pre>
+</td>
+<td valign="top">
+<pre>
+&lt;element name="ROOT"&gt;
+ &lt;complexType content="elementOnly"&gt;
+  &lt;choice&gt;
+   &lt;element ref="t:A"&gt;
+   &lt;sequence&gt;
+    &lt;element ref="t:B"&gt;
+    &lt;element ref="t:C"&gt;
+   &lt;/sequence&gt;
+  &lt;/choice&gt;
+ &lt;/complexType&gt;
+&lt;element&gt;
+</pre>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<pre>
+&lt;!ELEMENT ROOT (A?,B+,C*) &gt;
+</pre>
+</td>
+<td valign="top">
+<pre>
+&lt;element name="ROOT"&gt;
+ &lt;complexType content="elementOnly"&gt;
+  &lt;element ref="t:A" minOccurs="0"&gt;
+  &lt;element ref="t:B" maxOccurs="unbounded"&gt;
+  &lt;element ref="t:C" minOccurs="0" maxOccurs="unbounded"&gt;
+ &lt;/complexType&gt;
+&lt;element&gt;
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>2. Encoding attributes</h3>
+
+<table border="1" bgcolor="#eeffff">
+<tr>
+<th bgcolor="#cceeee">DTD</th>
+<th bgcolor="#cceeee">XML Schema</th>
+</tr>
+
+<tr>
+<td valign="top">
+<pre>
+&lt;!ATTLIST ROOT
+    a CDATA #REQUIRED&gt;
+</pre>
+</td>
+<td valign="top">
+<pre>
+&lt;element name="ROOT"&gt;
+ &lt;complexType content="elementOnly"&gt;
+  &lt;attribute name="a" type="string" use="required"/&gt;
+ &lt;/complexType&gt;
+&lt;element&gt;
+</pre>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<pre>
+&lt;!ATTLIST ROOT
+    a CDATA #IMPLIED&gt;
+</pre>
+</td>
+<td valign="top">
+<pre>
+&lt;element name="ROOT"&gt;
+ &lt;complexType content="elementOnly"&gt;
+  &lt;attribute name="a" type="string" use="optional"/&gt;
+ &lt;/complexType&gt;
+&lt;element&gt;
+</pre>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<pre>
+&lt;!ATTLIST ROOT
+    a (x|y|z) #REQUIRED;&gt;
+</pre>
+</td>
+<td valign="top">
+<pre>
+&lt;element name="ROOT"&gt;
+ &lt;complexType content="elementOnly"&gt;
+  &lt;attribute name="a"&gt;
+   &lt;simpleType base="string"&gt;
+    &lt;enumeration value="x"/&gt;
+    &lt;enumeration value="y"/&gt;
+    &lt;enumeration value="z"/&gt;
+   &lt;/simpleType&gt;
+  &lt;/attribute&gt;
+ &lt;/complexType&gt;
+&lt;element&gt;
+</pre>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<pre>
+&lt;!ATTLIST ROOT
+    a CDATA #FIXED "x"&gt;
+</pre>
+</td>
+<td valign="top">
+<pre>
+&lt;element name="ROOT"&gt;
+ &lt;complexType content="elementOnly"&gt;
+  &lt;attribute name="a" type="string" use="fixed" value="x"/&gt;
+ &lt;/complexType&gt;
+&lt;element&gt;
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>3. Simple Types, Attribute Groups, and Model Groups</h3>
+
+<p>Use <tt>dtd2xsd.pl -simpleType ContentType string</tt>
+to turn</p>
+
+<pre>
+&lt;!ENTITY % ContentType "CDATA">
+    &lt;!-- media type, as per [RFC2045] -->
+</pre>
+
+<p>into</p>
+
+<pre>
+  &lt;simpleType name='ContentType' base='string'>
+  &lt;/simpleType>
+
+</pre>
+
+<p>@@along with references to %ContentType;</p>
+
+<p>Use <tt>dtd2xsd.pl -simpleType Number nonNegativeInteger</tt>
+to turn</p>
+
+<pre>
+&lt;!ENTITY % Number "CDATA">
+</pre>
+
+<p>into</p>
+
+<pre>
+  &lt;simpleType name='Number' base='nonNegativeInteger'>
+  &lt;/simpleType>
+</pre>
+
+<p>@@more on model groups, attribute groups. Meanwhile, see <a
+href="Makefile">the makefile</a> for examples.</p>
+
+
+<h2><a id="his" name="his">History:</a></h2>
+
+<dl>
+<dt>April 20 2000</dt>
+
+<dd>
+<ul class="noindent">
+<li>Use <tt>use</tt> attribute instead of <tt>minOccurs</tt>
+attribute in <tt>&lt;attribute&gt;</tt> element.</li>
+
+<li style="list-style: none">
+<dl>
+<dt>April 12 2000</dt>
+
+<dd>
+<ul class="noindent">
+<li>Understand <tt>#FIXED</tt> attribute.</li>
+
+<li>Treat external entities. <b>Limitation:</b> External files must
+be in the current directory.</li>
+
+<li>Treat conditional sections.</li>
+</ul>
+</dd>
+
+<dt>April 11 2000</dt>
+
+<dd>
+<ul class="noindent">
+<li>The output is compliant with XML schema last call draft (change
+<tt>&lt;literal&gt;</tt></li>
+
+<li style="list-style: none">to <tt>&lt;enumerate
+value='...'&gt;</tt>).</li>
+
+<li>Added P3P special feature.</li>
+</ul>
+</dd>
+
+<dt>April 10 2000</dt>
+
+<dd>
+<ul class="noindent">
+<li>Understand such patterns as <tt>ELEM1?</tt>, <tt>ELEM2*</tt>,
+<tt>ELEM3+</tt>, <tt>#REQUIRED</tt>, and <tt>#IMPLIED</tt>, and
+correctly procude <tt>minOccurs</tt> and <tt>maxOccurs</tt>
+attributes.</li>
+
+<li>Understand <tt>(ELEM1|ELEM2|ELEM3)</tt> pattern, and produce
+<tt>&lt;choice&gt;</tt> element.</li>
+
+<li>Understand <tt>(attr1|attr2|attr3)</tt> pattern, and produce
+<tt>&lt;literal&gt;</tt> element.</li>
+
+<li>Correctly understand nested bracket, and produce <tt>
+&lt;sequence&gt;</tt> element.</li>
+</ul>
+</dd>
+
+<dt>April 03 2000</dt>
+
+<dd>Dan connoly modified it, so that it can produce XML
+schema.</dd>
+
+<dt>March 17 1998</dt>
+
+<dd>Bert Bos originally created a conversion tool from DTD to
+BNF.</dd>
+</dl>
+
+<hr />
+<p><em>Yuichi Koike ($Date$)</em></p>
+</li>
+</ul>
+</dd>
+</dl>
+</body>
+</html>
+

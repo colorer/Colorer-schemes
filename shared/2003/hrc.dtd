@@ -1,0 +1,232 @@
+<!--   DTD description of colorer-take5 HRC Language  -->
+
+<!ENTITY % regionX '
+  region  NMTOKEN #IMPLIED
+  region0 NMTOKEN #IMPLIED
+  region1 NMTOKEN #IMPLIED
+  region2 NMTOKEN #IMPLIED
+  region3 NMTOKEN #IMPLIED
+  region4 NMTOKEN #IMPLIED
+  region5 NMTOKEN #IMPLIED
+  region6 NMTOKEN #IMPLIED
+  region7 NMTOKEN #IMPLIED
+  region8 NMTOKEN #IMPLIED
+  region9 NMTOKEN #IMPLIED
+  regiona NMTOKEN #IMPLIED
+  regionb NMTOKEN #IMPLIED
+  regionc NMTOKEN #IMPLIED
+  regiond NMTOKEN #IMPLIED
+  regione NMTOKEN #IMPLIED
+  regionf NMTOKEN #IMPLIED
+'
+>
+<!ENTITY % regionXX  '
+  region   NMTOKEN #IMPLIED
+  region00 NMTOKEN #IMPLIED
+  region01 NMTOKEN #IMPLIED
+  region02 NMTOKEN #IMPLIED
+  region03 NMTOKEN #IMPLIED
+  region04 NMTOKEN #IMPLIED
+  region05 NMTOKEN #IMPLIED
+  region06 NMTOKEN #IMPLIED
+  region07 NMTOKEN #IMPLIED
+  region08 NMTOKEN #IMPLIED
+  region09 NMTOKEN #IMPLIED
+  region0a NMTOKEN #IMPLIED
+  region0b NMTOKEN #IMPLIED
+  region0c NMTOKEN #IMPLIED
+  region0d NMTOKEN #IMPLIED
+  region0e NMTOKEN #IMPLIED
+  region0f NMTOKEN #IMPLIED
+
+  region10 NMTOKEN #IMPLIED
+  region11 NMTOKEN #IMPLIED
+  region12 NMTOKEN #IMPLIED
+  region13 NMTOKEN #IMPLIED
+  region14 NMTOKEN #IMPLIED
+  region15 NMTOKEN #IMPLIED
+  region16 NMTOKEN #IMPLIED
+  region17 NMTOKEN #IMPLIED
+  region18 NMTOKEN #IMPLIED
+  region19 NMTOKEN #IMPLIED
+  region1a NMTOKEN #IMPLIED
+  region1b NMTOKEN #IMPLIED
+  region1c NMTOKEN #IMPLIED
+  region1d NMTOKEN #IMPLIED
+  region1e NMTOKEN #IMPLIED
+  region1f NMTOKEN #IMPLIED
+'
+>
+
+
+<!ELEMENT annotation (appinfo | documentation)*>
+
+<!ELEMENT appinfo ANY>
+<!ELEMENT documentation ANY>
+
+
+<!ELEMENT hrc (annotation?, (prototype|package|type)*)>
+<!ATTLIST hrc
+  version NMTOKEN #REQUIRED>
+
+
+<!ELEMENT prototype (annotation?, location?, filename*, firstline*, parameters)>
+<!ATTLIST prototype
+  name            NMTOKEN #REQUIRED
+  group           CDATA   #IMPLIED
+  description     CDATA   #REQUIRED
+  targetNamespace CDATA   #IMPLIED>
+
+<!ELEMENT location EMPTY>
+<!ATTLIST location
+  link CDATA #REQUIRED>
+
+<!ELEMENT filename (#PCDATA)>
+<!ATTLIST filename
+  weight CDATA "2">
+
+<!ELEMENT firstline (#PCDATA)>
+<!ATTLIST firstline
+  weight CDATA "1">
+
+<!ELEMENT parameters (param+)>
+<!ELEMENT param EMPTY>
+<!ATTLIST param
+  name  CDATA #REQUIRED
+  value CDATA #REQUIRED
+  description CDATA #IMPLIED>
+
+
+<!ELEMENT package (annotation?, location?)>
+<!ATTLIST package
+  name            NMTOKEN #REQUIRED
+  description     CDATA   #REQUIRED
+  targetNamespace CDATA   #IMPLIED>
+
+
+
+<!ELEMENT type (annotation | import | define | entity | scheme)* >
+<!ATTLIST type
+  name NMTOKEN #REQUIRED>
+
+
+<!ELEMENT define EMPTY>
+<!ATTLIST define
+  region       NMTOKEN #REQUIRED
+  value        NMTOKEN #IMPLIED
+  description  CDATA #IMPLIED>
+
+<!ELEMENT entity EMPTY>
+<!ATTLIST entity
+  name  NMTOKEN #REQUIRED
+  value CDATA   #REQUIRED>
+
+<!ELEMENT import EMPTY>
+<!ATTLIST import
+  type  NMTOKEN #REQUIRED>
+
+<!ELEMENT scheme (annotation?, (inherit | regexp | block | keywords)*)>
+<!ATTLIST scheme
+  name   NMTOKEN #REQUIRED
+  if     NMTOKEN #IMPLIED
+  unless NMTOKEN #IMPLIED>
+
+
+<!ELEMENT inherit (virtual*)>
+<!ATTLIST inherit
+  scheme NMTOKEN #REQUIRED>
+
+<!ELEMENT virtual EMPTY>
+<!ATTLIST virtual
+  scheme       NMTOKEN #REQUIRED
+  subst-scheme  NMTOKEN #REQUIRED>
+
+
+
+<!ELEMENT regexp (#PCDATA)>
+<!ATTLIST regexp
+  region  NMTOKEN #IMPLIED
+  match    CDATA #IMPLIED
+  priority (low|normal) "normal"
+
+  %regionX;
+>
+
+<!ELEMENT block (start, end)?>
+<!ATTLIST block
+  start  CDATA   #IMPLIED
+  end    CDATA   #IMPLIED
+  scheme NMTOKEN #REQUIRED
+  priority (low|normal) "normal"
+  content-priority (low|normal) "normal"
+
+  %regionXX;
+>
+
+<!ELEMENT start (#PCDATA)>
+<!ATTLIST start
+  match    CDATA #IMPLIED
+  
+  %regionX;
+>
+
+<!ELEMENT end (#PCDATA)>
+<!ATTLIST end
+  match    CDATA #IMPLIED
+  
+  %regionX;
+>
+
+
+<!ELEMENT keywords (word | symb)*>
+<!ATTLIST keywords
+  ignorecase (yes|no) "yes"
+  priority (low|normal) "low"
+  region  NMTOKEN #IMPLIED
+  worddiv CDATA   #IMPLIED>
+
+<!ELEMENT word EMPTY>
+<!ATTLIST word
+  name   CDATA   #REQUIRED
+  region NMTOKEN #IMPLIED>
+
+<!ELEMENT symb EMPTY>
+<!ATTLIST symb
+  name   CDATA   #REQUIRED
+  region NMTOKEN #IMPLIED>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the Colorer Library.
+   -
+   - The Initial Developer of the Original Code is
+   - Cail Lomecb <cail@nm.ru>.
+   - Portions created by the Initial Developer are Copyright (C) 1999-2005
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

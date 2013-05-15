@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!--
+
+   xml schema for colorer-take5 custom.xml
+
+-->
+<xs:schema
+  xmlns='uri:colorer:custom'
+  targetNamespace='uri:colorer:custom'
+  xmlns:xs='http://www.w3.org/2001/XMLSchema'
+  xmlns:hrc="http://colorer.sf.net/2003/hrc">
+
+ <xs:annotation>
+  <xs:documentation>
+    This is the XML Schema for custom description format
+    of xsd2hrc.xsl transformer. It simply defines few elements and
+    imports Colorer HRC language namespace to make life better
+    Cail Lomecb (cail@nm.ru)
+  </xs:documentation>
+ </xs:annotation>
+
+  <xs:import namespace="http://colorer.sf.net/2003/hrc" schemaLocation="../../../doc/2003/hrc.xsd"/>
+  
+  <xs:group name='prefs'>
+    <xs:sequence>
+      <xs:element name="prefix" type="xs:NCName" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="empty-prefix" minOccurs="0">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="any-prefix" minOccurs="0">
+        <xs:complexType/>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+
+  
+  <xs:element name="custom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="custom-type" type="custom-type-Type" minOccurs="0" maxOccurs="unbounded"/>
+<!--        <xs:element name="re-patterns" type="patterns-Type"/>
+        <xs:element name="enum-patterns" type="patterns-Type"/>-->
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  
+  <xs:complexType name='prefs-Type'>
+    <xs:sequence>
+      <xs:element name="element" minOccurs="1" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:NCName" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:group ref="prefs"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="custom-type-Type">
+    <xs:sequence>
+      <xs:group ref="prefs"/>
+      <!--xs:element name="prefix" type="xs:NCName" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="empty-prefix" minOccurs="0">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="any-prefix" minOccurs="0">
+        <xs:complexType/>
+      </xs:element-->
+      <xs:element name='force-prefix' type='prefs-Type' minOccurs="0" maxOccurs="unbounded"/>
+      
+      <xs:element name="contributors" type="xs:string"/>
+      <xs:element name="top-level" minOccurs="0">
+        <xs:complexType>
+          <xs:choice maxOccurs="unbounded">
+            <xs:element name="element" type="xs:NCName"/>
+            <xs:element name="group" type="xs:NCName"/>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="outline" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence maxOccurs="unbounded">
+            <xs:element name="element">
+              <xs:complexType>
+                <xs:attribute name='name' type='xs:NCName'/>
+                <xs:attribute name='extract'>
+                  <xs:simpleType>
+                    <xs:restriction base='xs:string'>
+                      <xs:enumeration value='attributeValue'/>
+                      <xs:enumeration value='withAttribute'/>
+                      <xs:enumeration value='fullElement'/>
+                      <xs:enumeration value='tillNext'/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name='parent' type='xs:QName'/>
+                <xs:attribute name='description' type='xs:string'/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <!-- EE: add scripting support -->
+      <xs:element name="script-n-style">
+       <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+         <xs:element name="element">
+          <xs:complexType>
+           <xs:attribute name="name" type="xs:NCName" use="required"/>
+           <xs:choice maxOccurs="unbounded">
+            <xs:element name="language">
+             <xs:complexType>
+              <xs:attribute name="name" type="xs:NCName" use="required"/>
+              <xs:attribute name="expr" type="hrc:REentity" use="required"/>
+              <xs:attribute name="scheme" type="xs:NCName" use="optional"/>
+             </xs:complexType>
+            </xs:element>
+            <xs:element name="default">
+             <xs:complexType>
+              <xs:attribute name="name" type="xs:NCName" use="required"/>
+             </xs:complexType>
+            </xs:element>
+           </xs:choice>
+          </xs:complexType>
+         </xs:element>
+         <xs:element name="attribute">
+          <xs:complexType>
+           <xs:attribute name="language" type="xs:NCName" use="required"/>
+           <xs:attribute name="scheme-suffix" type="xs:string" use="required"/>
+           <xs:attribute name="region" type="hrc:QName" use="optional"/>
+          </xs:complexType>
+         </xs:element>
+         <xs:element name="element-attributes" type="scriptdef-attr"/>
+         <xs:element name="type-attributes" type="scriptdef-attr"/>         
+        </xs:choice>
+       </xs:complexType>
+      </xs:element>
+
+      
+      <xs:element name="processing-instruction">
+       <xs:complexType>
+        <xs:attribute name="name" type="xs:NCName" use="required"/>
+        <xs:attribute name="scheme" type="hrc:QName" use="optional"/>
+        <xs:sequence minOccurs="0" maxOccurs="1">
+         <!-- note!! This xs:complexType cannot have @name -->
+         <xs:element ref="xs:complexType"/>
+        </xs:sequence>
+       </xs:complexType>
+      </xs:element>
+      
+      <xs:element name="xsd-typedefs">
+       <xs:complexType>
+         <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:element ref="xs:simpleType"/>
+          <xs:element ref="xs:complexType"/>
+         </xs:sequence>
+       </xs:complexType>
+      </xs:element>
+      
+      <xs:element name="references" type="hrc:QName"/>
+
+      <xs:element name="type" type="hrc:type"/>
+    </xs:sequence>
+    <xs:attribute name="targetNamespace" type="xs:anyURI"/>
+  </xs:complexType>
+  
+  <xs:complexType name="scriptdef-attr">
+    <xs:attribute name="name" type="xs:NCName" use="required"/>
+    <xs:sequence minOccurs="1">
+      <xs:element ref="xs:attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the Colorer Library.
+   -
+   - The Initial Developer of the Original Code is
+   - Cail Lomecb <cail@nm.ru>.
+   - Portions created by the Initial Developer are Copyright (C) 1999-2003
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   - Eugene Efremov <4mirror@mail.ru>
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

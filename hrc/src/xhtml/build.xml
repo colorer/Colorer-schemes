@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project name="src.xhtml" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/xhtml" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+
+<!-- strict -->
+
+<target name="strict.check">
+ <dependset>
+  <srcfilelist dir="." files = "build.xml"/>
+  <srcfilelist dir="${src}" files = "xhtml1-strict.xsd, custom.xhtml.xml"/>
+  <targetfilelist dir="${bin}" files="xhtml-strict.hrc"/>
+ </dependset>
+</target>
+
+<target name="strict" depends="strict.check">
+ <ant antfile="${util}" target="xsd2hrc">
+  <property name="util.input" value="${src}/xhtml1-strict.xsd"/>
+  <property name="util.output" value="${bin}/xhtml-strict.hrc"/>
+  <property name='xsd2hrc.hrctype' value='xhtml-strict'/>
+  <property name="xsd2hrc.add-new-references" value="html-entity:html-addref"/>
+  <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.xhtml.xml'/>
+ </ant> 
+</target>
+
+<!-- trans -->
+
+<target name="trans.check">
+ <dependset>
+  <srcfilelist dir="." files = "build.xml"/>
+  <srcfilelist dir="${src}" files = "xhtml1-transitional.xsd, custom.xhtml.xml"/>
+  <targetfilelist dir="${bin}" files="xhtml-trans.hrc"/>
+ </dependset>
+</target>
+
+<target name="trans" depends="trans.check">
+ <ant antfile="${util}" target="xsd2hrc">
+  <property name="util.input" value="${src}/xhtml1-transitional.xsd"/>
+  <property name="util.output" value="${bin}/xhtml-trans.hrc"/>
+  <property name='xsd2hrc.hrctype' value='xhtml-trans'/>
+  <property name="xsd2hrc.add-new-references" value="html-entity:html-addref"/>
+  <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.xhtml.xml'/>
+ </ant> 
+</target>
+
+<!-- frameset -->
+
+<target name="frameset.check">
+ <dependset>
+  <srcfilelist dir="." files = "build.xml"/>
+  <srcfilelist dir="${src}" files = "xhtml-frameset-reduced.xsd, custom.fhtml.xml"/>
+  <targetfilelist dir="${bin}" files="xhtml-frameset.hrc"/>
+ </dependset>
+</target>
+
+<target name="frameset" depends="frameset.check">
+ <ant antfile="${util}" target="xsd2hrc">
+  <property name="util.input" value="${src}/xhtml-frameset-reduced.xsd"/>
+  <property name="util.output" value="${bin}/xhtml-frameset.hrc"/>
+  <property name='xsd2hrc.hrctype' value='xhtml-frameset'/>
+  <property name="xsd2hrc.add-new-references" value="html-entity:html-addref"/>
+  <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.fhtml.xml'/>
+ </ant> 
+</target>
+
+<!-- final -->
+
+<target name="all" depends="strict, trans, frameset"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${bin}" includes="xhtml-*.hrc"/>
+ </delete>
+</target>
+
+</project>

@@ -1,0 +1,333 @@
+''Italic''
+''Italic'
+''Italic
+
+''' aoeu '' aoeu '' aoeu '''
+
+'''Bold'''
+'''Bold''
+'''Bold'
+'''Bold
+
+'''''Both'''''
+'''''Both''''
+'''''Both'''
+'''''Both''
+'''''Both'
+'''''Both
+
+Plain'''''Both'''''Plain
+Plain'''''Both''Bold'''Plain
+Plain'''''Both'''Italic''Plain
+Plain'''Bold''Both'''''Plain
+Plain''Italic'''Both'''''Plain
+Plain''Italic'''Both'''Italic''Plain
+Plain'''Bold''Both''Bold'''Plain
+Plain''Italic'''Both''Bold'''Plain
+Plain'''Bold''Both'''Italic''Plain
+Plain''Italic'''Both'''Italic'''Both'''Italic''Plain
+Plain'''Bold''Both''Bold''Both''Bold'''Plain
+
+<p> Markup ''allowed'' </p>
+<nowiki> no ''markup'' </nowiki>
+<foo> Arbitrary tag </foo>
+
+= Level 1 Heading =
+== Level 2 Heading ==
+=== Level 3 Heading ===
+==== Level 4 Heading ====
+===== Level 5 Heading =====
+====== Level 6 Heading ======
+
+== Horizontal rule ==
+
+Text before
+----
+Text after
+
+== Preformatted text ==
+
+ Start each line with a space.
+ Text is '''preformatted''' and
+ ''markups'' '''''can''''' be done.
+
+== Preformatted text blocks ==
+
+ <nowiki>Start with a space in the first column,
+(before the nowiki tag).
+
+Then your block format will be
+    maintained.
+ 
+This is good for copying in code blocks:
+
+def function():
+    """documentation string"""
+
+    if True:
+        print True
+    else:
+        print False</nowiki>
+
+== HTML tags ==
+
+<ins>Inserted</ins> or <u>Underline</u>
+
+<!-- This is a comment -->
+
+<pre style="color: red"> Text is '''preformatted''' and 
+''markups'' '''''cannot''''' be done</pre>
+
+&copy;
+
+<<nowiki />pre>
+
+== Links ==
+
+Link to the [[Main Page]].
+
+Link with a [[Main Page|different text]].
+
+Go to the [[Help:Contents|]].
+
+Link [[Suffix]]es.
+
+#REDIRECT [[Main Page]]
+
+[[#See also]]
+
+http://mediawiki.org
+
+[http://mediawiki.org]
+
+[http://mediawiki.org MediaWiki]
+
+[not a link]
+
+[/resource Relative link]
+
+<!-- FIXME: http://{{SERVERNAME}}/pagename -->
+
+[mailto:info@example.org email me]
+
+[{{foo}} Edit this page]
+
+[{{fullurl:{{FULLPAGENAME}}|action=edit}} Edit this page]
+
+<span class="plainlinks">[http://www.mediawiki.org/w/index.php?title=Help:Links&action=edit Edit this page]</span>
+
+<nowiki>http://mediawiki.org</nowiki>
+
+== Images ==
+
+[[File:example.jpg]]
+[[File:example.jpg|caption]]
+
+http://url.for/some/image.png
+
+== Templates ==
+
+{{Welcome}}
+
+{{subst:Name}}
+
+{{safesubst:Name}}
+
+{{msgnw:Name}}
+
+{{Template:Pagename}}
+{{Foo:Pagename}}
+{{:Pagename}}
+{{-}} {{!}} {{=}}
+{{subst::Pagename}}
+{{subst:Foo:Pagename}}
+
+'''A little thank you...'''
+for {{{1}}}.
+hugs, {{{2}}}
+
+{{Thankyou|all your effort|Me}}
+{{Thankyou|2=Me|1=your friendship}}
+
+'''A little thank you...'''
+for {{{reason}}}.
+hugs, {{{signature}}}
+
+{{Thankyou|signature=Me|reason=being who you are}}
+
+{{{reason|everything}}}
+{{{signature|Me}}}
+
+== Bullet list ==
+
+* Start each line
+* with an [[Wikipedia:asterisk|asterisk]] (*).
+** More asterisks give deeper
+*** and deeper levels.
+* Line breaks <br />don't break levels.
+*** But jumping levels creates empty space.
+Any other start ends the list.
+
+* List'''Bold''Both'''Italic''List
+
+== Numbered list ==
+
+# Start each line
+# with a [[Wikipedia:Number_sign|number sign]] (#).
+## More number signs give deeper
+### and deeper
+### levels.
+# Line breaks <br />don't break levels.
+### But jumping levels creates empty space.
+# Blank lines
+
+# end the list and start another.
+Any other start also
+ends the list.
+
+== Definition list ==
+
+;item 1
+: definition 1
+;item 2
+: definition 2-1
+: definition 2-2
+
+== Indent text ==
+
+: Single indent
+:: Double indent
+::::: Multiple indent
+
+== Mixture of different types of list ==
+
+# one
+# two
+#* two point one
+#* two point two
+# three
+#; three item one
+#: three def one
+# four
+#: four def one
+#: this looks like a continuation
+#: and is often used
+#: instead <br />of <nowiki><br /></nowiki>
+# five
+## five sub 1
+### five sub 1 sub 1
+## five sub 2
+
+== Tables ==
+
+{|
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+
+{| {{Prettytable}}
+|Orange||Apple||more
+|-
+|Bread||Pie||more
+|-
+|Butter||Ice<br/>cream||and<br/>more
+|}
+
+{|
+|Lorem ipsum dolor sit amet, 
+consetetur sadipscing elitr, 
+sed diam nonumy eirmod tempor invidunt
+ut labore et dolore magna aliquyam erat, 
+sed diam voluptua. 
+
+At vero eos et accusam et justo duo dolores
+et ea rebum. Stet clita kasd gubergren,
+no sea takimata sanctus est Lorem ipsum
+dolor sit amet. 
+|
+* Lorem ipsum dolor sit amet
+* consetetur sadipscing elitr
+* sed diam nonumy eirmod tempor invidunt
+|}
+
+{|
+! align="left"| Item
+! Amount !! Cost
+|-
+|Orange
+|10
+|7.00
+|-
+|Bread
+|4
+|3.00
+|-
+|Butter
+|1
+|5.00
+|-
+!Total
+|
+|15.00
+|}
+
+{| class="wikitable"
+   style="text-align: center; color: green;"
+|+Food complements
+|-
+|Orange
+|Apple
+|-
+|Bread
+|Pie
+|-
+|Butter
+|Ice cream 
+|}
+
+
+{| style="color: black; background-color: #ffffcc;" width="85%"
+| colspan="2" | This column width is 85% of the screen width (and has a background color)
+|-
+| style="width: 30%; background-color: white;"|
+'''This column is 30% counted from 85% of the screen width'''
+| style="width: 70%; background-color: orange;"|
+'''This column is 70% counted from 85% of the screen width (and has a background color)'''
+|}
+
+== Programming languages ==
+
+=== PHP ===
+
+<syntaxhighlight lang="php" foo="bar">
+<?php
+    $v = "string";    // sample initialization
+?>
+html text
+<?
+    echo $v;         // end of php code
+?>
+</syntaxhighlight>
+
+=== D ===
+
+<syntaxhighlight lang="d">
+import std.stdio;
+void main()
+{
+    writeln("Hello, world!");
+}
+</syntaxhighlight>
+
+== Math ==
+
+<math>2x \times 4y \div 6z + 8
+   - \frac {y}{z^2} = 0</math>
+<math>\sin 2\pi x + \ln e\,\!</math>
+<math>\sin 2\pi x + \ln e</math>

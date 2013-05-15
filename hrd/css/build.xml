@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="hrd2css" default="all" basedir=".">
+
+<!-- all properties -->
+<property name="xslt-classpath" value=""/>
+<property name='input' value='../hrd/rgb' />
+<property name='output' value='.' />
+
+<property file='../../path.properties'/>
+<property name='shemes' value="../../${path.shared}" description='path to dtd, xsd, etc.'/>
+
+<!-- hrd2css  -->
+
+<target name="hrd2css.prop">
+	<xmlcatalog id="xsd2hrcdtd">
+		<catalogpath>
+			<fileset dir='${shemes}' includes='colorer.cat'/>
+		</catalogpath>
+	</xmlcatalog>
+</target>
+
+
+<target name="hrd2css" depends="hrd2css.prop">
+	<xslt basedir='${input}' destdir='${output}' style="../apps/hrd2css/hrd2css.xsl" classpath="${xslt-classpath}">
+		<xmlcatalog refid="xsd2hrcdtd"/>
+		<mapper type='glob'  from="*.hrd" to="*.css"/>
+	</xslt>  
+</target>
+
+<target name='all' depends="hrd2css"/>
+
+<target name="clean">
+	<delete failonerror='false'>
+		<fileset dir="${output}" includes="**/*.css"/>
+	</delete>
+</target>
+
+
+<property name='copy-path' value='../../${path.colorer}/hrd/css'/>
+
+<target name='copy'>
+	<copy todir='${copy-path}'>
+		<fileset dir='.' includes='**/*.css'/>
+	</copy>
+</target>
+
+<target name="copy.clean">
+	<delete failonerror='false' dir='${copy-path}'/>
+</target>
+
+
+
+</project>

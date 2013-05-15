@@ -1,0 +1,117 @@
+  0: 
+  1: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- this is a comment</span>
+  2: <span class='ahdl-ahdlComment def-Comment def-Syntax'>% this is a comment too %</span> but_this_is_not
+  3: 
+  4: some_neutral_text
+  5: 
+  6: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- some keywords</span>
+  7: <span class='ahdl-ahdlKeyword def-Keyword'>if</span>
+  8: <span class='ahdl-ahdlKeyword def-Keyword'>then</span>
+  9: <span class='ahdl-ahdlKeyword def-Keyword'>when</span>
+ 10: <span class='ahdl-ahdlKeyword def-Keyword'>begin</span>
+ 11: <span class='ahdl-ahdlKeyword def-Keyword'>machine</span>
+ 12: <span class='ahdl-ahdlKeyword def-Keyword'>table</span>
+ 13: 
+ 14: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- some types</span>
+ 15: e : <span class='ahdl-ahdlTypeKeyword def-TypeKeyword def-Keyword'>node</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 16: a2 : <span class='ahdl-ahdlTypeKeyword def-TypeKeyword def-Keyword'>input</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 17: a2 : <span class='ahdl-ahdlTypeKeyword def-TypeKeyword def-Keyword'>output</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 18: a2 : <span class='ahdl-ahdlTypeKeyword def-TypeKeyword def-Keyword'>bidir</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 19: 
+ 20: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- some build-in primitives</span>
+ 21: <span class='ahdl-ahdlPrimitive def-String'>soft</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 22: <span class='ahdl-ahdlPrimitive def-String'>latch</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 23: <span class='ahdl-ahdlPrimitive def-String'>lcell</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 24: a<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlPrimitive def-String'>dff</span><span class='ahdl-ahdlSymbol def-Symbol'>(</span>d,clk<span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 25: <span class='ahdl-ahdlPrimitive def-String'>dffe</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 26: <span class='ahdl-ahdlPrimitive def-String'>global</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 27: 
+ 28: 
+ 29: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- expressions</span>
+ 30: a<span class='ahdl-ahdlSymbol def-Symbol'>=</span>b+c<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 31: e<span class='ahdl-ahdlSymbol def-Symbol'>=</span>!<span class='ahdl-ahdlSymbol def-Symbol'>(</span>!<span class='ahdl-ahdlSymbol def-Symbol'>(</span>f <span class='ahdl-ahdlSymbol def-Symbol'>&amp;</span> c<span class='ahdl-ahdlSymbol def-Symbol'>)</span> <span class='ahdl-ahdlSymbol def-Symbol'>#</span> <span class='ahdl-ahdlSymbol def-Symbol'>(</span>e<span class='ahdl-ahdlSymbol def-Symbol'>&amp;</span>v<span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> <span class='ahdl-ahdlComment def-Comment def-Syntax'>--fixme: "!" not works as operator</span>
+ 32: a<span class='ahdl-ahdlSymbol def-Symbol'>=</span>b<span class='ahdl-ahdlSymbol def-Symbol'>$</span>f<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 33: s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlSymbol def-Symbol'>(</span>r<span class='ahdl-ahdlSymbol def-Symbol'>!=</span><span class='def-NumberDec def-Number'>4</span><span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 34: w<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlSymbol def-Symbol'>(</span>c<span class='ahdl-ahdlSymbol def-Symbol'>>=</span>q<span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 35: e<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlSymbol def-Symbol'>(</span>w<span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlKeyword def-Keyword'>?</span> <span class='def-NumberDec def-Number'>1</span> : <span class='ahdl-ahdlNumber def-Number'>B"x"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 36: s<span class='ahdl-ahdlSymbol def-Symbol'>=</span>x<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 37: 
+ 38: 
+ 39: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- groups (никак особо не выдел€ютс€, и да ладно)</span>
+ 40: a<span class='ahdl-ahdlSymbol def-Symbol'>[</span><span class='def-NumberDec def-Number'>7</span><span class='ahdl-ahdlSymbol def-Symbol'>..</span><span class='def-NumberDec def-Number'>0</span><span class='ahdl-ahdlSymbol def-Symbol'>]</span><span class='ahdl-ahdlSymbol def-Symbol'>=</span>w.b<span class='ahdl-ahdlSymbol def-Symbol'>[</span><span class='def-NumberDec def-Number'>7</span><span class='ahdl-ahdlSymbol def-Symbol'>..</span><span class='def-NumberDec def-Number'>0</span><span class='ahdl-ahdlSymbol def-Symbol'>]</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 41:  q<span class='ahdl-ahdlSymbol def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='ahdl-ahdlSymbol def-Symbol'>..</span><span class='def-NumberDec def-Number'>2</span><span class='ahdl-ahdlSymbol def-Symbol'>]</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 42:   usedw<span class='ahdl-ahdlSymbol def-Symbol'>[</span>WIDTHAD-<span class='def-NumberDec def-Number'>1</span><span class='ahdl-ahdlSymbol def-Symbol'>..</span><span class='def-NumberDec def-Number'>0</span><span class='ahdl-ahdlSymbol def-Symbol'>]</span>     : <span class='ahdl-ahdlTypeKeyword def-TypeKeyword def-Keyword'>output</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>   <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- # of words in the FIFO</span>
+ 43:   usedw<span class='ahdl-ahdlSymbol def-Symbol'>[</span><span class='def-NumberDec def-Number'>7</span><span class='ahdl-ahdlSymbol def-Symbol'>..</span>ABC_DEF<span class='ahdl-ahdlSymbol def-Symbol'>]</span>     : <span class='ahdl-ahdlTypeKeyword def-TypeKeyword def-Keyword'>output</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>   <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- # of words in the FIFO</span>
+ 44: 
+ 45: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- identidiers</span>
+ 46:   QDF4<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 47:   name_3<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 48:   name1<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 49: 
+ 50:   <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- strings</span>
+ 51:   <span class='ahdl-ahdlKeyword def-Keyword'>title</span> <span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>string1</span><span class='def-StringEdge def-String'>"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 52: <span class='ahdl-ahdlKeyword def-Keyword'>  if</span> PARAM<span class='ahdl-ahdlSymbol def-Symbol'>==</span><span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>string with quotes  </span><span class='def-StringEdge def-String'>"</span><span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>here</span><span class='def-StringEdge def-String'>"</span><span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>   </span><span class='def-StringEdge def-String'>"</span> <span class='ahdl-ahdlKeyword def-Keyword'>generate</span>
+ 53: 
+ 54:   <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- Numbers, decimal</span>
+ 55:   a1<span class='ahdl-ahdlSymbol def-Symbol'>=</span>-<span class='def-NumberDec def-Number'>20</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 56:   a1<span class='ahdl-ahdlSymbol def-Symbol'>=</span>+<span class='def-NumberDec def-Number'>20</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 57:   b<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='def-NumberDec def-Number'>3</span>+f<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 58: 
+ 59:   <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- Numbers, binary</span>
+ 60:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>B"1001_0101"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- ok</span>
+ 61:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>B"11111"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 62:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>b"0000"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 63:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>B"1Xx"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 64:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>B"xx"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 65:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlError def-ErrorText def-Error'>B"x12"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- bad</span>
+ 66:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlError def-ErrorText def-Error'>B"xs0"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- bad</span>
+ 67: 
+ 68:   <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- Numbers, hex</span>
+ 69:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>H"abd340x"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 70:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>h"3ABD_340X"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 71:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlError def-ErrorText def-Error'>H"aRd34"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- bad</span>
+ 72: 
+ 73:   <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- Numbers, octal</span>
+ 74:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>o"1234567"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 75:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlError def-ErrorText def-Error'>o"12345678"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>  <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- bad</span>
+ 76: 
+ 77:   <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- Numbers, quaternary</span>
+ 78:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlNumber def-Number'>q"0123"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 79:   s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlError def-ErrorText def-Error'>q"01234"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- bad</span>
+ 80: 
+ 81: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- some structures</span>
+ 82: 
+ 83:     <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- case &amp; if/then/else/endif</span>
+ 84: <span class='ahdl-ahdlKeyword def-Keyword'>    case</span> SS <span class='ahdl-ahdlKeyword def-Keyword'>is</span>
+ 85:       <span class='ahdl-ahdlKeyword def-Keyword'>when</span> S1 <span class='ahdl-ahdlSymbol def-Symbol'>=></span> Y2 <span class='ahdl-ahdlSymbol def-Symbol'>=</span> <span class='ahdl-ahdlKeyword def-Keyword'>Vcc</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> Y1 <span class='ahdl-ahdlSymbol def-Symbol'>=</span> <span class='ahdl-ahdlKeyword def-Keyword'>Vcc</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> Q<span class='ahdl-ahdlSymbol def-Symbol'>[</span><span class='ahdl-ahdlSymbol def-Symbol'>]</span> <span class='ahdl-ahdlSymbol def-Symbol'>=</span> <span class='ahdl-ahdlNumber def-Number'>b"01"</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 86: <span class='ahdl-ahdlKeyword def-Keyword'>        if</span> <span class='ahdl-ahdlSymbol def-Symbol'>(</span> <span class='ahdl-ahdlSymbol def-Symbol'>(</span> inp2 <span class='ahdl-ahdlSymbol def-Symbol'>==</span> <span class='def-NumberDec def-Number'>0</span> <span class='ahdl-ahdlSymbol def-Symbol'>)</span> <span class='ahdl-ahdlSymbol def-Symbol'>&amp;</span> <span class='ahdl-ahdlSymbol def-Symbol'>(</span> inp1 <span class='ahdl-ahdlSymbol def-Symbol'>==</span> <span class='def-NumberDec def-Number'>0</span> <span class='ahdl-ahdlSymbol def-Symbol'>)</span> <span class='ahdl-ahdlSymbol def-Symbol'>)</span> <span class='ahdl-ahdlKeyword def-Keyword'>then</span>
+ 87:           SS <span class='ahdl-ahdlSymbol def-Symbol'>=</span> S0<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 88:         <span class='ahdl-ahdlKeyword def-Keyword'>else</span>
+ 89:           SS <span class='ahdl-ahdlSymbol def-Symbol'>=</span> <span class='ahdl-ahdlKeyword def-Keyword'>gnd</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 90: <span class='ahdl-ahdlKeyword def-Keyword'>        end if</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 91: <span class='ahdl-ahdlKeyword def-Keyword'>    end case</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 92: 
+ 93:     <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- table</span>
+ 94: <span class='ahdl-ahdlKeyword def-Keyword'>    table</span>
+ 95:         SS, inp2, inp1 <span class='ahdl-ahdlSymbol def-Symbol'>=></span> Y2, Y1, SS, Q2, Q1<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 96:         S0,    <span class='def-NumberDec def-Number'>0</span>,    <span class='def-NumberDec def-Number'>0</span> <span class='ahdl-ahdlSymbol def-Symbol'>=></span>  <span class='def-NumberDec def-Number'>1</span>,  <span class='def-NumberDec def-Number'>0</span>, S2,  <span class='def-NumberDec def-Number'>0</span>,  <span class='def-NumberDec def-Number'>0</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 97:         S0,    <span class='def-NumberDec def-Number'>0</span>,    <span class='def-NumberDec def-Number'>1</span> <span class='ahdl-ahdlSymbol def-Symbol'>=></span>  <span class='def-NumberDec def-Number'>1</span>,  <span class='def-NumberDec def-Number'>0</span>, S1,  <span class='def-NumberDec def-Number'>0</span>,  <span class='def-NumberDec def-Number'>0</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 98:         S0,    <span class='def-NumberDec def-Number'>1</span>,    <span class='def-NumberDec def-Number'>0</span> <span class='ahdl-ahdlSymbol def-Symbol'>=></span>  <span class='def-NumberDec def-Number'>1</span>,  <span class='def-NumberDec def-Number'>0</span>, S3,  <span class='def-NumberDec def-Number'>0</span>,  <span class='def-NumberDec def-Number'>0</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+ 99:         S0,    <span class='def-NumberDec def-Number'>1</span>,    <span class='def-NumberDec def-Number'>1</span> <span class='ahdl-ahdlSymbol def-Symbol'>=></span>  <span class='def-NumberDec def-Number'>1</span>,  <span class='def-NumberDec def-Number'>0</span>, S1,  <span class='def-NumberDec def-Number'>0</span>,  <span class='def-NumberDec def-Number'>0</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+100: <span class='ahdl-ahdlKeyword def-Keyword'>    end table</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+101: 
+102:     <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- defaults</span>
+103: <span class='ahdl-ahdlKeyword def-Keyword'>    DEFAULTS</span>
+104:       /local_grant  <span class='ahdl-ahdlSymbol def-Symbol'>=</span> <span class='ahdl-ahdlKeyword def-Keyword'>VCC</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>    <span class='ahdl-ahdlComment def-Comment def-Syntax'>% active-low output   %</span>
+105:       /request_out  <span class='ahdl-ahdlSymbol def-Symbol'>=</span> <span class='ahdl-ahdlKeyword def-Keyword'>VCC</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>    <span class='ahdl-ahdlComment def-Comment def-Syntax'>% signals should default  %</span>
+106:       /grant_out    <span class='ahdl-ahdlSymbol def-Symbol'>=</span> <span class='ahdl-ahdlKeyword def-Keyword'>VCC</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>    <span class='ahdl-ahdlComment def-Comment def-Syntax'>% to VCC          %</span>
+107:     <span class='ahdl-ahdlKeyword def-Keyword'>END</span> <span class='ahdl-ahdlKeyword def-Keyword'>DEFAULTS</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+108: 
+109:     <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- if/generate</span>
+110: <span class='ahdl-ahdlKeyword def-Keyword'>    if</span> UNDERFLOW_CHECKING<span class='ahdl-ahdlSymbol def-Symbol'>==</span><span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>OFF</span><span class='def-StringEdge def-String'>"</span> <span class='ahdl-ahdlKeyword def-Keyword'>generate</span>
+111:       valid_rreq <span class='ahdl-ahdlSymbol def-Symbol'>=</span> rreq<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+112:     <span class='ahdl-ahdlKeyword def-Keyword'>else</span> <span class='ahdl-ahdlKeyword def-Keyword'>generate</span>
+113:       valid_rreq <span class='ahdl-ahdlSymbol def-Symbol'>=</span> rreq <span class='ahdl-ahdlKeyword def-Keyword'>and</span> !empty<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+114:     <span class='ahdl-ahdlKeyword def-Keyword'>end</span> <span class='ahdl-ahdlKeyword def-Keyword'>generate</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> 
+115: 
+116: 

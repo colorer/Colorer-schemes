@@ -1,0 +1,964 @@
+  0: <span class='verilog-verComment def-Comment def-Syntax'>/* ***********************************************************************</span>
+  1: <span class='verilog-verComment def-Comment def-Syntax'>  The Free IP Project</span>
+  2: <span class='verilog-verComment def-Comment def-Syntax'>  Free-RISC8 -- Verilog 8-bit Microcontroller</span>
+  3: <span class='verilog-verComment def-Comment def-Syntax'>  (c) 1999, The Free IP Project and Thomas Coonan</span>
+  4: <span class='verilog-verComment def-Comment def-Syntax'></span>
+  5: <span class='verilog-verComment def-Comment def-Syntax'></span>
+  6: <span class='verilog-verComment def-Comment def-Syntax'>  FREE IP GENERAL PUBLIC LICENSE</span>
+  7: <span class='verilog-verComment def-Comment def-Syntax'>  TERMS AND CONDITIONS FOR USE, COPYING, DISTRIBUTION, AND MODIFICATION</span>
+  8: <span class='verilog-verComment def-Comment def-Syntax'></span>
+  9: <span class='verilog-verComment def-Comment def-Syntax'>  1.  You may copy and distribute verbatim copies of this core, as long</span>
+ 10: <span class='verilog-verComment def-Comment def-Syntax'>      as this file, and the other associated files, remain intact and</span>
+ 11: <span class='verilog-verComment def-Comment def-Syntax'>      unmodified.  Modifications are outlined below.  </span>
+ 12: <span class='verilog-verComment def-Comment def-Syntax'>  2.  You may use this core in any way, be it academic, commercial, or</span>
+ 13: <span class='verilog-verComment def-Comment def-Syntax'>      military.  Modified or not.  </span>
+ 14: <span class='verilog-verComment def-Comment def-Syntax'>  3.  Distribution of this core must be free of charge.  Charging is</span>
+ 15: <span class='verilog-verComment def-Comment def-Syntax'>      allowed only for value added services.  Value added services</span>
+ 16: <span class='verilog-verComment def-Comment def-Syntax'>      would include copying fees, modifications, customizations, and</span>
+ 17: <span class='verilog-verComment def-Comment def-Syntax'>      inclusion in other products.</span>
+ 18: <span class='verilog-verComment def-Comment def-Syntax'>  4.  If a modified source code is distributed, the original unmodified</span>
+ 19: <span class='verilog-verComment def-Comment def-Syntax'>      source code must also be included (or a link to the Free IP web</span>
+ 20: <span class='verilog-verComment def-Comment def-Syntax'>      site).  In the modified source code there must be clear</span>
+ 21: <span class='verilog-verComment def-Comment def-Syntax'>      identification of the modified version.</span>
+ 22: <span class='verilog-verComment def-Comment def-Syntax'>  5.  Visit the Free IP web site for additional information.</span>
+ 23: <span class='verilog-verComment def-Comment def-Syntax'>      </span><span class='def-URL def-URI'>http://www.free-ip.com</span><span class='verilog-verComment def-Comment def-Syntax'></span>
+ 24: <span class='verilog-verComment def-Comment def-Syntax'></span>
+ 25: <span class='verilog-verComment def-Comment def-Syntax'>*********************************************************************** */</span>
+ 26: 
+ 27: <span class='verilog-verWord def-Keyword'>module cpu</span> <span class='def-Symbol'>(</span>
+ 28:    clk<span class='verilog-verSymb def-Symbol'>,</span>
+ 29:    reset<span class='verilog-verSymb def-Symbol'>,</span>
+ 30:    
+ 31:    paddr<span class='verilog-verSymb def-Symbol'>,</span>
+ 32:    pdata<span class='verilog-verSymb def-Symbol'>,</span>
+ 33:    portain<span class='verilog-verSymb def-Symbol'>,</span>
+ 34:    portbout<span class='verilog-verSymb def-Symbol'>,</span>
+ 35:    portcout<span class='verilog-verSymb def-Symbol'>,</span>
+ 36:    
+ 37:    expdin<span class='verilog-verSymb def-Symbol'>,</span>
+ 38:    expdout<span class='verilog-verSymb def-Symbol'>,</span>
+ 39:    expaddr<span class='verilog-verSymb def-Symbol'>,</span>
+ 40:    expread<span class='verilog-verSymb def-Symbol'>,</span>
+ 41:    expwrite<span class='verilog-verSymb def-Symbol'>,</span>
+ 42:    
+ 43:    debugw<span class='verilog-verSymb def-Symbol'>,</span>
+ 44:    debugpc<span class='verilog-verSymb def-Symbol'>,</span>
+ 45:    debuginst<span class='verilog-verSymb def-Symbol'>,</span>
+ 46:    debugstatus
+ 47: <span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+ 48: 
+ 49: <span class='def-Comment def-Syntax'>// Basic Core I/O.</span>
+ 50: <span class='def-Keyword'>input</span>        clk<span class='def-Keyword'>;</span>
+ 51: <span class='def-Keyword'>input</span>        reset<span class='def-Keyword'>;</span>
+ 52: 
+ 53: <span class='def-Comment def-Syntax'>// Program memory interface</span>
+ 54: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>10</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    paddr<span class='def-Keyword'>;</span>
+ 55: <span class='def-Keyword'>input</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>11</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    pdata<span class='def-Keyword'>;</span>
+ 56: 
+ 57: <span class='def-Comment def-Syntax'>// Basic I/O Ports</span>
+ 58: <span class='def-Keyword'>input</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    portain<span class='def-Keyword'>;</span>
+ 59: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    portbout<span class='def-Keyword'>;</span>
+ 60: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    portcout<span class='def-Keyword'>;</span>
+ 61: 
+ 62: <span class='def-Comment def-Syntax'>// Expansion Interface</span>
+ 63: <span class='def-Keyword'>input</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    expdin<span class='def-Keyword'>;</span>        <span class='def-Comment def-Syntax'>// Data from expansion circuits TO the PIC Core</span>
+ 64: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    expdout<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Data to the expansion circuits FROM the PIC Core</span>
+ 65: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    expaddr<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// File address</span>
+ 66: <span class='def-Keyword'>output</span>        expread<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Active high read signal (read FROM expansion circuit)</span>
+ 67: <span class='def-Keyword'>output</span>        expwrite<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Active high write signal (write TO expansion circuit)</span>
+ 68: 
+ 69: <span class='def-Comment def-Syntax'>// Debugging</span>
+ 70: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    debugw<span class='def-Keyword'>;</span>
+ 71: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>10</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    debugpc<span class='def-Keyword'>;</span>
+ 72: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>11</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    debuginst<span class='def-Keyword'>;</span>
+ 73: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    debugstatus<span class='def-Keyword'>;</span>
+ 74: 
+ 75: <span class='def-Comment def-Syntax'>// Register declarations for outputs</span>
+ 76: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>10</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    paddr<span class='def-Keyword'>;</span>
+ 77: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    portbout<span class='def-Keyword'>;</span>
+ 78: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    portcout<span class='def-Keyword'>;</span>
+ 79: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    expdout<span class='def-Keyword'>;</span>
+ 80: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    expaddr<span class='def-Keyword'>;</span>
+ 81: <span class='def-Keyword'>reg</span>        expread<span class='def-Keyword'>;</span>
+ 82: <span class='def-Keyword'>reg</span>        expwrite<span class='def-Keyword'>;</span>
+ 83: 
+ 84: <span class='def-Comment def-Syntax'>// This should be set to the ROM location where our restart vector is.</span>
+ 85: <span class='def-Comment def-Syntax'>// As set here, we have 512 words of program space.</span>
+ 86: <span class='def-Comment def-Syntax'>//</span>
+ 87: <span class='def-Keyword'>parameter</span> RESET_VECTOR <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>11'h7FF</span><span class='def-Keyword'>;</span>
+ 88: 
+ 89: <span class='def-Keyword'>parameter</span>    INDF_ADDRESS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>3'h0</span><span class='verilog-verSymb def-Symbol'>,</span>
+ 90:         TMR0_ADDRESS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>3'h1</span><span class='verilog-verSymb def-Symbol'>,</span>
+ 91:         PCL_ADDRESS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>3'h2</span><span class='verilog-verSymb def-Symbol'>,</span>
+ 92:         STATUS_ADDRESS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>3'h3</span><span class='verilog-verSymb def-Symbol'>,</span>
+ 93:         FSR_ADDRESS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>3'h4</span><span class='verilog-verSymb def-Symbol'>,</span>
+ 94:         PORTA_ADDRESS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>3'h5</span><span class='verilog-verSymb def-Symbol'>,</span>
+ 95:         PORTB_ADDRESS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>3'h6</span><span class='verilog-verSymb def-Symbol'>,</span>
+ 96:         PORTC_ADDRESS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>3'h7</span><span class='def-Keyword'>;</span>
+ 97: 
+ 98: <span class='def-Comment def-Syntax'>// *********  Special internal registers</span>
+ 99: 
+100: <span class='def-Comment def-Syntax'>// Instruction Register</span>
+101: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>11</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    inst<span class='def-Keyword'>;</span>
+102: 
+103: <span class='def-Comment def-Syntax'>// Program Counter</span>
+104: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>10</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    pc<span class='verilog-verSymb def-Symbol'>,</span> pc_in<span class='def-Keyword'>;</span>
+105: 
+106: <span class='def-Comment def-Syntax'>// Stack Registers and Stack "levels" register.</span>
+107: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    stacklevel<span class='def-Keyword'>;</span>
+108: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>10</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    stack1<span class='def-Keyword'>;</span>
+109: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>10</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    stack2<span class='def-Keyword'>;</span>
+110: 
+111: <span class='def-Comment def-Syntax'>// W Register</span>
+112: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    w<span class='def-Keyword'>;</span>
+113: 
+114: <span class='def-Comment def-Syntax'>// The STATUS register (#3) is 8 bits wide, however, we only currently use 2 bits</span>
+115: <span class='def-Comment def-Syntax'>// of it; the C and Z bit.</span>
+116: <span class='def-Comment def-Syntax'>//</span>
+117: <span class='def-Comment def-Syntax'>// bit 0  -  C</span>
+118: <span class='def-Comment def-Syntax'>// bit 2  -  Z</span>
+119: <span class='def-Comment def-Syntax'>//</span>
+120: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    status<span class='def-Keyword'>;</span>
+121: 
+122: <span class='def-Comment def-Syntax'>// The FSR register is the pointer register used for Indirect addressing (e.g. using INDF).</span>
+123: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    fsr<span class='def-Keyword'>;</span>
+124: 
+125: <span class='def-Comment def-Syntax'>// Timer 0</span>
+126: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    tmr0<span class='def-Keyword'>;</span>
+127: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    prescaler<span class='def-Keyword'>;</span>
+128: 
+129: <span class='def-Comment def-Syntax'>// Option Register</span>
+130: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    option<span class='def-Keyword'>;</span>
+131: 
+132: <span class='def-Comment def-Syntax'>// Tristate Control registers. We do not neccessarily support bidirectional ports, but</span>
+133: <span class='def-Comment def-Syntax'>//    will save a place for these registers and the TRIS instruction.  Use for debug.</span>
+134: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    trisa<span class='def-Keyword'>;</span>
+135: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    trisb<span class='def-Keyword'>;</span>
+136: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    trisc<span class='def-Keyword'>;</span>
+137: 
+138: <span class='def-Comment def-Syntax'>// I/O Port registers</span>
+139: <span class='def-Comment def-Syntax'>//</span>
+140: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    porta<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Input PORT</span>
+141: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    portb<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Output PORT</span>
+142: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    portc<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Output PORT</span>
+143: 
+144: <span class='def-Comment def-Syntax'>// ********** Instruction Related signals ******</span>
+145: 
+146: <span class='def-Keyword'>reg</span>         skip<span class='def-Keyword'>;</span>  <span class='def-Comment def-Syntax'>// When HI force a NOP (all zeros) into inst</span>
+147: 
+148: <span class='def-Comment def-Syntax'>// Derive special sub signals from inst register</span>
+149: <span class='def-Keyword'>wire</span> <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    k<span class='def-Keyword'>;</span>
+150: <span class='def-Keyword'>wire</span> <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>4</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    fsel<span class='def-Keyword'>;</span>
+151: <span class='def-Keyword'>wire</span>        d<span class='def-Keyword'>;</span>
+152: <span class='def-Keyword'>wire</span> <span class='def-Symbol'>[</span> <span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    b<span class='def-Keyword'>;</span>
+153: 
+154: <span class='def-Comment def-Syntax'>// ********** File Address ************</span>
+155: <span class='def-Comment def-Syntax'>//</span>
+156: <span class='def-Comment def-Syntax'>// This is the 7-bit Data Address that includes the lower 5-bit fsel, the</span>
+157: <span class='def-Comment def-Syntax'>// FSR bits and any indirect addressing.</span>
+158: <span class='def-Comment def-Syntax'>// Use this bus to address the Register File as well as all special registers, etc.</span>
+159: <span class='def-Comment def-Syntax'>//</span>
+160: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    fileaddr<span class='def-Keyword'>;</span>
+161: 
+162: <span class='def-Comment def-Syntax'>// Address Selects</span>
+163: <span class='def-Keyword'>reg</span>        specialsel<span class='def-Keyword'>;</span>
+164: <span class='def-Keyword'>reg</span>        regfilesel<span class='def-Keyword'>;</span>
+165: <span class='def-Keyword'>reg</span>        expsel<span class='def-Keyword'>;</span>
+166: 
+167: <span class='def-Comment def-Syntax'>// ******  Instruction Decoder Outputs **************</span>
+168: 
+169: <span class='def-Comment def-Syntax'>// Write enable for the actual ZERO and CARRY bits within the status register.</span>
+170: <span class='def-Comment def-Syntax'>// Generated by the Instruction Decoder.</span>
+171: <span class='def-Comment def-Syntax'>//</span>
+172: <span class='def-Keyword'>wire</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    aluasel<span class='def-Keyword'>;</span>
+173: <span class='def-Keyword'>wire</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    alubsel<span class='def-Keyword'>;</span>
+174: <span class='def-Keyword'>wire</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    aluop<span class='def-Keyword'>;</span>
+175: 
+176: <span class='def-Keyword'>wire</span>        zwe<span class='def-Keyword'>;</span>
+177: <span class='def-Keyword'>wire</span>        cwe<span class='def-Keyword'>;</span>
+178: 
+179: <span class='def-Keyword'>wire</span>        isoption<span class='def-Keyword'>;</span>
+180: <span class='def-Keyword'>wire</span>        istris<span class='def-Keyword'>;</span>
+181: 
+182: <span class='def-Keyword'>wire</span>        fwe<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// High if any "register" is being written to at all.</span>
+183: <span class='def-Keyword'>wire</span>        wwe<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Write Enable for the W register.  Produced by Instruction Decoder.</span>
+184: 
+185: <span class='def-Comment def-Syntax'>// *************  Internal Busses, mux connections, etc.  ********************</span>
+186: 
+187: <span class='def-Comment def-Syntax'>// Bit decoder bits.  </span>
+188: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    bd<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Final decoder value after any polarity inversion.</span>
+189: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    bdec<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// e.g. "Bit Decoded"</span>
+190: <span class='def-Keyword'>wire</span>        bdpol<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Polarity bit for the bit test operations.</span>
+191: 
+192: <span class='def-Comment def-Syntax'>// Data in and out of the and out of the register file</span>
+193: <span class='def-Comment def-Syntax'>//</span>
+194: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    regfilein<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Input into Register File, is connected to the dbus.</span>
+195: <span class='def-Keyword'>wire</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    regfileout<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Path leaving the register file, goes to SBUS Mux</span>
+196: <span class='def-Keyword'>reg</span>        regfilewe<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Write Enable</span>
+197: <span class='def-Keyword'>reg</span>        regfilere<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// Read Enable</span>
+198: 
+199: <span class='def-Comment def-Syntax'>//</span>
+200: <span class='def-Comment def-Syntax'>// The dbus (Destination Bus) comes out of the ALU.  It is available to all</span>
+201: <span class='def-Comment def-Syntax'>// writable registers.</span>
+202: <span class='def-Comment def-Syntax'>//</span>
+203: <span class='def-Comment def-Syntax'>// The sbus (Source Bus) comes from all readable registers as well as the output</span>
+204: <span class='def-Comment def-Syntax'>// of the Register File.  It is one of the primary inputs into the ALU muxes.</span>
+205: <span class='def-Comment def-Syntax'>//</span>
+206: <span class='def-Comment def-Syntax'>// The (Expansion Bus) is another potential source.  See the 'exp' signals.</span>
+207: <span class='def-Comment def-Syntax'>//</span>
+208: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    dbus<span class='def-Keyword'>;</span>
+209: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    sbus<span class='def-Keyword'>;</span>
+210: 
+211: 
+212: <span class='def-Comment def-Syntax'>// ALU Signals</span>
+213: <span class='def-Comment def-Syntax'>//</span>
+214: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    alua<span class='def-Keyword'>;</span>
+215: <span class='def-Keyword'>reg</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    alub<span class='def-Keyword'>;</span>
+216: <span class='def-Keyword'>wire</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    aluout<span class='def-Keyword'>;</span>
+217: <span class='def-Keyword'>wire</span>        alucout<span class='def-Keyword'>;</span>
+218: <span class='def-Keyword'>wire</span>           aluz<span class='def-Keyword'>;</span>
+219: 
+220: <span class='def-Comment def-Syntax'>// ALU A and B mux selects.</span>
+221: <span class='def-Comment def-Syntax'>//</span>
+222: <span class='def-Keyword'>parameter</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    ALUASEL_W    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verSymb def-Symbol'>,</span>
+223:         ALUASEL_SBUS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b01</span><span class='verilog-verSymb def-Symbol'>,</span>
+224:         ALUASEL_K    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b10</span><span class='verilog-verSymb def-Symbol'>,</span>
+225:         ALUASEL_BD    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b11</span><span class='def-Keyword'>;</span>
+226:         
+227: <span class='def-Keyword'>parameter</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    ALUBSEL_W    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verSymb def-Symbol'>,</span>
+228:         ALUBSEL_SBUS    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b01</span><span class='verilog-verSymb def-Symbol'>,</span>
+229:         ALUBSEL_K    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b10</span><span class='verilog-verSymb def-Symbol'>,</span>
+230:         ALUBSEL_1    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b11</span><span class='def-Keyword'>;</span>
+231: 
+232: <span class='def-Comment def-Syntax'>// ALU Operation codes.</span>
+233: <span class='def-Comment def-Syntax'>//        </span>
+234: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_ADD  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0000</span><span class='def-Keyword'>;</span>
+235: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_SUB  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b1000</span><span class='def-Keyword'>;</span>
+236: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_AND  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0001</span><span class='def-Keyword'>;</span>
+237: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_OR   <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0010</span><span class='def-Keyword'>;</span>
+238: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_XOR  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0011</span><span class='def-Keyword'>;</span>
+239: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_COM  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0100</span><span class='def-Keyword'>;</span>
+240: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_ROR  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0101</span><span class='def-Keyword'>;</span>
+241: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_ROL  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0110</span><span class='def-Keyword'>;</span>
+242: <span class='def-Keyword'>parameter</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> ALUOP_SWAP <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0111</span><span class='def-Keyword'>;</span>
+243: 
+244: 
+245: <span class='def-Comment def-Syntax'>// Instantiate each of our subcomponents</span>
+246: <span class='def-Comment def-Syntax'>//</span>
+247: <span class='def-Keyword'>reg</span>s  regs <span class='def-Symbol'>(</span>
+248:    <span class='verilog-verSymb def-Symbol'>.</span>clk        <span class='def-Symbol'>(</span>clk<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span> 
+249:    <span class='verilog-verSymb def-Symbol'>.</span>reset    <span class='def-Symbol'>(</span>reset<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+250:    <span class='verilog-verSymb def-Symbol'>.</span>we      <span class='def-Symbol'>(</span>regfilewe<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+251:    <span class='verilog-verSymb def-Symbol'>.</span>re        <span class='def-Symbol'>(</span>regfilere<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+252:    <span class='verilog-verSymb def-Symbol'>.</span>bank    <span class='def-Symbol'>(</span>fileaddr<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>5</span><span class='def-Symbol'>]</span><span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span> 
+253:    <span class='verilog-verSymb def-Symbol'>.</span>location    <span class='def-Symbol'>(</span>fileaddr<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>4</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span><span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+254:    <span class='verilog-verSymb def-Symbol'>.</span>din        <span class='def-Symbol'>(</span>regfilein<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span> 
+255:    <span class='verilog-verSymb def-Symbol'>.</span>dout    <span class='def-Symbol'>(</span>regfileout<span class='def-Symbol'>)</span>
+256: <span class='def-Symbol'>)</span><span class='def-Keyword'>;</span>
+257: 
+258: <span class='def-Comment def-Syntax'>// Instatiate the ALU.</span>
+259: <span class='def-Comment def-Syntax'>//</span>
+260: alu alu  <span class='def-Symbol'>(</span>
+261:    <span class='verilog-verSymb def-Symbol'>.</span>op         <span class='def-Symbol'>(</span>aluop<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span> 
+262:    <span class='verilog-verSymb def-Symbol'>.</span>a          <span class='def-Symbol'>(</span>alua<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span> 
+263:    <span class='verilog-verSymb def-Symbol'>.</span>b          <span class='def-Symbol'>(</span>alub<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+264:    <span class='verilog-verSymb def-Symbol'>.</span>y          <span class='def-Symbol'>(</span>aluout<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+265:    <span class='verilog-verSymb def-Symbol'>.</span>cin        <span class='def-Symbol'>(</span>status<span class='verilog-verNumb def-Number'>[0]</span><span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span> 
+266:    <span class='verilog-verSymb def-Symbol'>.</span>cout       <span class='def-Symbol'>(</span>alucout<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span> 
+267:    <span class='verilog-verSymb def-Symbol'>.</span>zout       <span class='def-Symbol'>(</span>aluz<span class='def-Symbol'>)</span>
+268: <span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+269: 
+270: <span class='def-Comment def-Syntax'>// Instantiate the Instruction Decoder.  This is really just a lookup table.</span>
+271: <span class='def-Comment def-Syntax'>// Given the instruction, generate all the signals we need.  </span>
+272: <span class='def-Comment def-Syntax'>//</span>
+273: <span class='def-Comment def-Syntax'>// For example, each instruction implies a specific ALU operation.  Some of</span>
+274: <span class='def-Comment def-Syntax'>// these are obvious such as the ADDW uses an ADD alu op.  Less obvious is</span>
+275: <span class='def-Comment def-Syntax'>// that a mov instruction uses an OR op which lets us do a simple copy.</span>
+276: <span class='def-Comment def-Syntax'>// </span>
+277: <span class='def-Comment def-Syntax'>// Data has to funnel through the ALU, which sometimes makes for contrived</span>
+278: <span class='def-Comment def-Syntax'>// ALU ops.</span>
+279: <span class='def-Comment def-Syntax'>//</span>
+280: <span class='def-Keyword'>wire</span>        idecwwe<span class='def-Keyword'>;</span>
+281: <span class='def-Keyword'>wire</span>        idecfwe<span class='def-Keyword'>;</span>
+282: <span class='def-Keyword'>wire</span>        ideczwe<span class='def-Keyword'>;</span>
+283: <span class='def-Keyword'>wire</span>        ideccwe<span class='def-Keyword'>;</span>
+284: 
+285: idec idec <span class='def-Symbol'>(</span>
+286:    <span class='verilog-verSymb def-Symbol'>.</span>inst     <span class='def-Symbol'>(</span>inst<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+287:    <span class='verilog-verSymb def-Symbol'>.</span>aluasel  <span class='def-Symbol'>(</span>aluasel<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+288:    <span class='verilog-verSymb def-Symbol'>.</span>alubsel  <span class='def-Symbol'>(</span>alubsel<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+289:    <span class='verilog-verSymb def-Symbol'>.</span>aluop    <span class='def-Symbol'>(</span>aluop<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+290:    <span class='verilog-verSymb def-Symbol'>.</span>wwe      <span class='def-Symbol'>(</span>idecwwe<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+291:    <span class='verilog-verSymb def-Symbol'>.</span>fwe      <span class='def-Symbol'>(</span>idecfwe<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+292:    <span class='verilog-verSymb def-Symbol'>.</span>zwe      <span class='def-Symbol'>(</span>ideczwe<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+293:    <span class='verilog-verSymb def-Symbol'>.</span>cwe      <span class='def-Symbol'>(</span>ideccwe<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+294:    <span class='verilog-verSymb def-Symbol'>.</span>bdpol    <span class='def-Symbol'>(</span>bdpol<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+295:    <span class='verilog-verSymb def-Symbol'>.</span>option   <span class='def-Symbol'>(</span>isoption<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span>
+296:    <span class='verilog-verSymb def-Symbol'>.</span>tris     <span class='def-Symbol'>(</span>istris<span class='def-Symbol'>)</span>
+297: <span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+298: 
+299: <span class='def-Comment def-Syntax'>// Wire decoder enables to enables in at this module.  I did this because at</span>
+300: <span class='def-Comment def-Syntax'>// one time I had another global 'enable' that was ANDed in, but I removed that.</span>
+301: <span class='def-Comment def-Syntax'>//</span>
+302: <span class='def-Keyword'>assign</span> wwe <span class='verilog-verSymb def-Symbol'>=</span> idecwwe<span class='def-Keyword'>;</span>
+303: <span class='def-Keyword'>assign</span> fwe <span class='verilog-verSymb def-Symbol'>=</span> idecfwe<span class='def-Keyword'>;</span>
+304: <span class='def-Keyword'>assign</span> zwe <span class='verilog-verSymb def-Symbol'>=</span> ideczwe<span class='def-Keyword'>;</span>
+305: <span class='def-Keyword'>assign</span> cwe <span class='verilog-verSymb def-Symbol'>=</span> ideccwe<span class='def-Keyword'>;</span>
+306: 
+307: <span class='def-Comment def-Syntax'>// *********** Debug ****************</span>
+308: <span class='def-Keyword'>assign</span>    debugw <span class='verilog-verSymb def-Symbol'>=</span> w<span class='def-Keyword'>;</span>
+309: <span class='def-Keyword'>assign</span>    debugpc <span class='verilog-verSymb def-Symbol'>=</span> pc<span class='def-Keyword'>;</span>
+310: <span class='def-Keyword'>assign</span>    debuginst <span class='verilog-verSymb def-Symbol'>=</span> inst<span class='def-Keyword'>;</span>
+311: <span class='def-Keyword'>assign</span>    debugstatus <span class='verilog-verSymb def-Symbol'>=</span> status<span class='def-Keyword'>;</span>
+312: 
+313: <span class='def-Comment def-Syntax'>// *********** REGISTER FILE Addressing ****************</span>
+314: <span class='def-Comment def-Syntax'>//</span>
+315: <span class='def-Comment def-Syntax'>// We implement the following:</span>
+316: <span class='def-Comment def-Syntax'>//    - The 5-bit fsel address is within a "BANK" which is 32 bytes.</span>
+317: <span class='def-Comment def-Syntax'>//    - The FSR bits 6:5 are the BANK select, so there are 4 BANKS, a </span>
+318: <span class='def-Comment def-Syntax'>//      total of 128 bytes.  Minus the 8 special registers, that's </span>
+319: <span class='def-Comment def-Syntax'>//      really 120 bytes.</span>
+320: <span class='def-Comment def-Syntax'>//    - The INDF register is for indirect addressing.  Referencing INDF</span>
+321: <span class='def-Comment def-Syntax'>//      uses FSR as the pointer.  Therefore, using INDF/FSR you address</span>
+322: <span class='def-Comment def-Syntax'>//      7-bits of memory.</span>
+323: <span class='def-Comment def-Syntax'>// We DO NOT currently implement the PAGE for program (e.g. STATUS register</span>
+324: <span class='def-Comment def-Syntax'>// bits 6:5)</span>
+325: <span class='def-Comment def-Syntax'>//</span>
+326: <span class='def-Comment def-Syntax'>// The fsel address *may* be zero in which case, we are to do indirect</span>
+327: <span class='def-Comment def-Syntax'>// addressing, using FSR register as the 8-bit pointer.</span>
+328: <span class='def-Comment def-Syntax'>//</span>
+329: <span class='def-Comment def-Syntax'>// Otherwise, use the 5-bits of FSEL (from the Instruction itself) and </span>
+330: <span class='def-Comment def-Syntax'>// 2 bank bits from the FSR register (bits 6:5).</span>
+331: <span class='def-Comment def-Syntax'>//</span>
+332: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>fsel or fsr or status</span>) <span class='def-Keyword'>begin</span>
+333:    <span class='verilog-verWord def-Keyword'>if</span> (fsel <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> INDF_ADDRESS) <span class='def-Keyword'>begin</span>
+334:       <span class='def-Comment def-Syntax'>// The INDEX register is addressed.  There really is no INDEX register.</span>
+335:       <span class='def-Comment def-Syntax'>// Use the FSR as an index, e.g. the FSR contents are the fsel.</span>
+336:       <span class='def-Comment def-Syntax'>//</span>
+337:       fileaddr <span class='verilog-verSymb def-Symbol'>=</span> fsr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>;</span>
+338:    <span class='def-Keyword'>end</span>
+339:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+340:       <span class='def-Comment def-Syntax'>// Use FSEL field and status bank select bits</span>
+341:       <span class='def-Comment def-Syntax'>//</span>
+342:       fileaddr <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verSymb def-Symbol'>{</span>status<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>5</span><span class='verilog-verSymb def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>,</span> fsel<span class='verilog-verSymb def-Symbol'>}</span><span class='verilog-verSymb def-Symbol'>;</span>
+343:    <span class='def-Keyword'>end</span>
+344: <span class='def-Keyword'>end</span>
+345: 
+346: <span class='def-Comment def-Syntax'>// Write Enable to Register File.  </span>
+347: <span class='def-Comment def-Syntax'>// Assert this when the general fwe (write enable to *any* register) is true AND Register File</span>
+348: <span class='def-Comment def-Syntax'>//    address range is specified.</span>
+349: <span class='def-Comment def-Syntax'>//  </span>
+350: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>regfilesel or fwe</span>)
+351:    <span class='def-Keyword'>reg</span>filewe <span class='verilog-verSymb def-Symbol'>=</span> regfilesel <span class='verilog-verSymb def-Symbol'>&amp;</span> fwe<span class='def-Keyword'>;</span>
+352: 
+353: <span class='def-Comment def-Syntax'>// Read Enable (this if nothing else, helps in debug.)</span>
+354: <span class='def-Comment def-Syntax'>// Assert if Register File address range is specified AND the ALU is actually using some</span>
+355: <span class='def-Comment def-Syntax'>//    data off the SBUS.</span>
+356: <span class='def-Comment def-Syntax'>//   </span>
+357: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>regfilesel or aluasel or alubsel</span>)
+358:    <span class='def-Keyword'>reg</span>filere <span class='verilog-verSymb def-Symbol'>=</span> regfilesel <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>aluasel <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> ALUASEL_SBUS<span class='def-Symbol'>)</span> <span class='verilog-verSymb def-Symbol'>|</span> <span class='def-Symbol'>(</span>alubsel <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> ALUBSEL_SBUS<span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Keyword'>;</span>
+359: 
+360: <span class='def-Comment def-Syntax'>// *********** Address Decodes **************</span>
+361: <span class='def-Comment def-Syntax'>//</span>
+362: <span class='def-Comment def-Syntax'>// Generate 3 selects: specialsel, regfilesel and expsel</span>
+363: <span class='def-Comment def-Syntax'>//</span>
+364: <span class='def-Comment def-Syntax'>// ** NOTE:    Must change this whenever more or few expansion addresses are</span>
+365: <span class='def-Comment def-Syntax'>//        added or removed from the memory map.  Otherwise, the dbus mux</span>
+366: <span class='def-Comment def-Syntax'>//         won't be controlled properly!</span>
+367: <span class='def-Comment def-Syntax'>//</span>
+368: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>fileaddr</span>) <span class='def-Keyword'>begin</span>
+369:    casex (fileaddr) <span class='def-Comment def-Syntax'>// synopsys full_case parallel_case</span>
+370:       <span class='def-Comment def-Syntax'>// This shouldn't really change.</span>
+371:       <span class='def-Comment def-Syntax'>//</span>
+372:       <span class='verilog-verNumb def-Number'>7</span>'bXX00XXX<span class='verilog-verSymb def-Symbol'>:</span> <span class='def-Comment def-Syntax'>// The SPECIAL Registers are lower 8 addresses, in ALL BANKS</span>
+373:          <span class='def-Keyword'>begin</span>
+374:             specialsel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span><span class='verilog-verSymb def-Symbol'>;</span>
+375:             regfilesel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verSymb def-Symbol'>;</span>
+376:             expsel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verSymb def-Symbol'>;</span>
+377:          <span class='def-Keyword'>end</span>
+378:          
+379:       <span class='def-Comment def-Syntax'>// Adjust this case as EXPANSION locations change!</span>
+380:       <span class='def-Comment def-Syntax'>//</span>
+381:       <span class='verilog-verNumb def-Number'>7</span>'b11111XX<span class='verilog-verSymb def-Symbol'>:</span> <span class='def-Comment def-Syntax'>// EXPANSION Registers are the top (4) addresses</span>
+382:          <span class='def-Keyword'>begin</span>
+383:             specialsel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verSymb def-Symbol'>;</span>
+384:             regfilesel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verSymb def-Symbol'>;</span>
+385:             expsel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span><span class='verilog-verSymb def-Symbol'>;</span>
+386:          <span class='def-Keyword'>end</span>
+387:          
+388:       <span class='def-Comment def-Syntax'>// Assume everything else must be the Register File..</span>
+389:       <span class='def-Comment def-Syntax'>//</span>
+390:       default<span class='verilog-verSymb def-Symbol'>:</span>
+391:          <span class='def-Keyword'>begin</span>
+392:             specialsel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verSymb def-Symbol'>;</span>
+393:             regfilesel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span><span class='verilog-verSymb def-Symbol'>;</span>
+394:             expsel    <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verSymb def-Symbol'>;</span>
+395:          <span class='def-Keyword'>end</span>
+396:    endcase
+397: <span class='def-Keyword'>end</span>
+398:   
+399: 
+400: <span class='def-Comment def-Syntax'>// *********** Expansion Interface **************</span>
+401: 
+402: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>dbus</span>)
+403:    expdout <span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+404:    
+405: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>fileaddr</span>)
+406:    expaddr <span class='verilog-verSymb def-Symbol'>=</span> fileaddr<span class='verilog-verSymb def-Symbol'>;</span>
+407: 
+408: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>expsel or aluasel or alubsel</span>)
+409:    expread <span class='verilog-verSymb def-Symbol'>=</span> expsel <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>aluasel <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> ALUASEL_SBUS<span class='def-Symbol'>)</span> <span class='verilog-verSymb def-Symbol'>|</span> <span class='def-Symbol'>(</span>alubsel <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> ALUBSEL_SBUS<span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+410: 
+411: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>expsel or fwe</span>)
+412:    expwrite <span class='verilog-verSymb def-Symbol'>=</span> expsel <span class='verilog-verSymb def-Symbol'>&amp;</span> fwe<span class='verilog-verSymb def-Symbol'>;</span>
+413: 
+414: 
+415: <span class='def-Comment def-Syntax'>//</span>
+416: <span class='def-Comment def-Syntax'>// *********** SBUS **************</span>
+417: <span class='def-Comment def-Syntax'>// The sbus (Source Bus) is the output of a multiplexor that takes</span>
+418: <span class='def-Comment def-Syntax'>// inputs from the Register File, and all other special registers</span>
+419: <span class='def-Comment def-Syntax'>// and input ports.  The Source Bus then, one of the inputs to the ALU</span>
+420: 
+421: 
+422: <span class='def-Comment def-Syntax'>// First MUX selects from all the special regsiters</span>
+423: <span class='def-Comment def-Syntax'>//</span>
+424: always @<span class='def-Symbol'>(</span>fsel or fsr or tmr0 or pc or status
+425:          or porta or portb or portc or <span class='def-Keyword'>reg</span>fileout or expdin
+426:          or specialsel or regfilesel or expsel) begin
+427:          
+428:    <span class='def-Comment def-Syntax'>// For our current mix of registers and peripherals, only the first 8 addresses</span>
+429:    <span class='def-Comment def-Syntax'>// are "special" registers (e.g. not in the Register File).  As more peripheral</span>
+430:    <span class='def-Comment def-Syntax'>// registers are added, they must be muxed into this MUX as well.</span>
+431:    <span class='def-Comment def-Syntax'>//</span>
+432:    <span class='def-Comment def-Syntax'>// We currently prohibit tristates.</span>
+433:    <span class='def-Comment def-Syntax'>//</span>
+434:    <span class='def-Comment def-Syntax'>//</span>
+435:    if <span class='def-Symbol'>(</span>specialsel<span class='def-Symbol'>)</span> begin
+436:       <span class='def-Comment def-Syntax'>// Special register</span>
+437:       case <span class='def-Symbol'>(</span>fsel<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span><span class='def-Symbol'>)</span> <span class='def-Comment def-Syntax'>// synopsys parallel_case full_case</span>
+438:          <span class='verilog-verNumb def-Number'>3'h0</span><span class='verilog-verSymb def-Symbol'>:</span>    sbus <span class='verilog-verSymb def-Symbol'>=</span> fsr<span class='def-Keyword'>;</span>
+439:          <span class='verilog-verNumb def-Number'>3'h1</span><span class='verilog-verSymb def-Symbol'>:</span>    sbus <span class='verilog-verSymb def-Symbol'>=</span> tmr0<span class='verilog-verSymb def-Symbol'>;</span>
+440:          <span class='verilog-verNumb def-Number'>3'h2</span><span class='verilog-verSymb def-Symbol'>:</span>    sbus <span class='verilog-verSymb def-Symbol'>=</span> pc<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>;</span>
+441:          <span class='verilog-verNumb def-Number'>3'h3</span><span class='verilog-verSymb def-Symbol'>:</span>    sbus <span class='verilog-verSymb def-Symbol'>=</span> status<span class='verilog-verSymb def-Symbol'>;</span>
+442:          <span class='verilog-verNumb def-Number'>3'h4</span><span class='verilog-verSymb def-Symbol'>:</span>    sbus <span class='verilog-verSymb def-Symbol'>=</span> fsr<span class='verilog-verSymb def-Symbol'>;</span>
+443:          <span class='verilog-verNumb def-Number'>3'h5</span><span class='verilog-verSymb def-Symbol'>:</span>    sbus <span class='verilog-verSymb def-Symbol'>=</span> porta<span class='verilog-verSymb def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// PORTA is an input-only port</span>
+444:          <span class='verilog-verNumb def-Number'>3'h6</span><span class='verilog-verSymb def-Symbol'>:</span>    sbus <span class='verilog-verSymb def-Symbol'>=</span> portb<span class='verilog-verSymb def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// PORTB is an output-only port</span>
+445:          <span class='verilog-verNumb def-Number'>3'h7</span><span class='verilog-verSymb def-Symbol'>:</span>    sbus <span class='verilog-verSymb def-Symbol'>=</span> portc<span class='verilog-verSymb def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// PORTC is an output-only port</span>
+446:       endcase
+447:    end
+448:    else <span class='def-Keyword'>begin</span>
+449:       <span class='def-Comment def-Syntax'>//</span>
+450:       <span class='def-Comment def-Syntax'>// Put whatever address equation is neccessary here.  Remember to remove unnecessary</span>
+451:       <span class='def-Comment def-Syntax'>// memory elements from Register File (regs.v).  It'll still work, but they'd be</span>
+452:       <span class='def-Comment def-Syntax'>// wasted flip-flops.</span>
+453:       <span class='def-Comment def-Syntax'>//</span>
+454:       <span class='verilog-verWord def-Keyword'>if</span> (expsel) <span class='def-Keyword'>begin</span>
+455:          sbus <span class='verilog-verSymb def-Symbol'>=</span> expdin<span class='verilog-verSymb def-Symbol'>;</span>
+456:       <span class='def-Keyword'>end</span>
+457:       <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+458:          <span class='verilog-verWord def-Keyword'>if</span> (regfilesel) <span class='def-Keyword'>begin</span>
+459:             <span class='def-Comment def-Syntax'>// Final Priority is Choose the register file</span>
+460:             sbus <span class='verilog-verSymb def-Symbol'>=</span> regfileout<span class='verilog-verSymb def-Symbol'>;</span>
+461:          <span class='def-Keyword'>end</span>
+462:          <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+463:             sbus <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verSymb def-Symbol'>;</span>
+464:          <span class='def-Keyword'>end</span>
+465:       <span class='def-Keyword'>end</span>
+466:    <span class='def-Keyword'>end</span>
+467: end
+468: 
+469: <span class='def-Comment def-Syntax'>// ************** DBUS ******</span>
+470: <span class='def-Comment def-Syntax'>//  The Destination bus is just the output of the ALU.</span>
+471: <span class='def-Comment def-Syntax'>//</span>
+472: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>aluout</span>)
+473:    dbus <span class='verilog-verSymb def-Symbol'>=</span> aluout<span class='verilog-verSymb def-Symbol'>;</span>
+474: 
+475: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>dbus</span>)
+476:    <span class='def-Keyword'>reg</span>filein <span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='def-Keyword'>;</span>
+477:    
+478: <span class='def-Comment def-Syntax'>// Drive the ROM address bus straight from the PC_IN bus</span>
+479: <span class='def-Comment def-Syntax'>//</span>
+480: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>pc_in</span>)
+481:    paddr <span class='verilog-verSymb def-Symbol'>=</span> pc_in<span class='verilog-verSymb def-Symbol'>;</span>
+482: 
+483: 
+484: <span class='def-Comment def-Syntax'>// Define sub-signals out of inst</span>
+485: <span class='def-Comment def-Syntax'>//</span>
+486: <span class='def-Keyword'>assign</span> k <span class='verilog-verSymb def-Symbol'>=</span>     inst<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span><span class='def-Keyword'>;</span>
+487: <span class='def-Keyword'>assign</span> fsel  <span class='verilog-verSymb def-Symbol'>=</span> inst<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>4</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span><span class='def-Keyword'>;</span>
+488: <span class='def-Keyword'>assign</span> d     <span class='verilog-verSymb def-Symbol'>=</span> inst<span class='verilog-verNumb def-Number'>[5]</span><span class='def-Keyword'>;</span>
+489: <span class='def-Keyword'>assign</span> b     <span class='verilog-verSymb def-Symbol'>=</span> inst<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>5</span><span class='def-Symbol'>]</span><span class='def-Keyword'>;</span>
+490: 
+491: <span class='def-Comment def-Syntax'>// Bit Decoder.</span>
+492: <span class='def-Comment def-Syntax'>//</span>
+493: <span class='def-Comment def-Syntax'>// Simply take the 3-bit b field in the PIC instruction and create the</span>
+494: <span class='def-Comment def-Syntax'>// expanded 8-bit decoder field, which is used as a mask.</span>
+495: <span class='def-Comment def-Syntax'>//</span>
+496: 
+497: 
+498: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>b</span>) <span class='def-Keyword'>begin</span>
+499:    <span class='def-Keyword'>case</span> <span class='verilog-verWord def-Keyword'>(</span>b<span class='verilog-verWord def-Keyword'>)</span> <span class='def-Comment def-Syntax'>// synopsys parallel_case</span>
+500:       <span class='verilog-verNumb def-Number'>3'b000</span><span class='verilog-verWord def-Keyword'>:</span> bdec = <span class='verilog-verNumb def-Number'>8'b00000001</span><span class='verilog-verWord def-Keyword'>;</span>
+501:       <span class='verilog-verNumb def-Number'>3'b001</span><span class='verilog-verWord def-Keyword'>:</span> bdec = <span class='verilog-verNumb def-Number'>8'b00000010</span><span class='verilog-verWord def-Keyword'>;</span>
+502:       <span class='verilog-verNumb def-Number'>3'b010</span><span class='verilog-verWord def-Keyword'>:</span> bdec = <span class='verilog-verNumb def-Number'>8'b00000100</span><span class='verilog-verWord def-Keyword'>;</span>
+503:       <span class='verilog-verNumb def-Number'>3'b011</span><span class='verilog-verWord def-Keyword'>:</span> bdec = <span class='verilog-verNumb def-Number'>8'b00001000</span><span class='verilog-verWord def-Keyword'>;</span>
+504:       <span class='verilog-verNumb def-Number'>3'b100</span><span class='verilog-verWord def-Keyword'>:</span> bdec = <span class='verilog-verNumb def-Number'>8'b00010000</span><span class='verilog-verWord def-Keyword'>;</span>
+505:       <span class='verilog-verNumb def-Number'>3'b101</span><span class='verilog-verWord def-Keyword'>:</span> bdec = <span class='verilog-verNumb def-Number'>8'b00100000</span><span class='verilog-verWord def-Keyword'>;</span>
+506:       <span class='verilog-verNumb def-Number'>3'b110</span><span class='verilog-verWord def-Keyword'>:</span> bdec = <span class='verilog-verNumb def-Number'>8'b01000000</span><span class='verilog-verWord def-Keyword'>;</span>
+507:       <span class='verilog-verNumb def-Number'>3'b111</span><span class='verilog-verWord def-Keyword'>:</span> bdec = <span class='verilog-verNumb def-Number'>8'b10000000</span><span class='verilog-verWord def-Keyword'>;</span>
+508:    <span class='def-Keyword'>endcase</span>
+509: <span class='def-Keyword'>end</span>
+510: 
+511: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>bdec or bdpol</span>)
+512:    bd <span class='verilog-verSymb def-Symbol'>=</span> <span class='def-Symbol'>(</span>bdpol<span class='def-Symbol'>)</span> <span class='verilog-verSymb def-Symbol'>?</span> <span class='verilog-verSymb def-Symbol'>~</span>bdec <span class='verilog-verSymb def-Symbol'>:</span> bdec<span class='verilog-verSymb def-Symbol'>;</span>
+513: 
+514: <span class='def-Comment def-Syntax'>// Instruction regsiter usually get the ROM data as its input, but</span>
+515: <span class='def-Comment def-Syntax'>// sometimes for branching, the skip signal must cause a NOP.</span>
+516: <span class='def-Comment def-Syntax'>//</span>
+517: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+518:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+519:       inst <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>12'h000</span><span class='verilog-verSymb def-Symbol'>;</span>
+520:    <span class='def-Keyword'>end</span>
+521:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+522:       <span class='verilog-verWord def-Keyword'>if</span> (skip <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span>) <span class='def-Keyword'>begin</span>
+523:          inst <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>12'b000000000000</span><span class='verilog-verSymb def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// FORCE NOP</span>
+524:       <span class='def-Keyword'>end</span>
+525:       <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+526:          inst <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> pdata<span class='verilog-verSymb def-Symbol'>;</span>
+527:       <span class='def-Keyword'>end</span>
+528:    <span class='def-Keyword'>end</span>
+529: <span class='def-Keyword'>end</span>
+530: 
+531: <span class='def-Comment def-Syntax'>// SKIP signal.</span>
+532: <span class='def-Comment def-Syntax'>//</span>
+533: <span class='def-Comment def-Syntax'>// We want to insert the NOP instruction for the following conditions:</span>
+534: <span class='def-Comment def-Syntax'>//    GOTO,CALL and RETLW instructions (All have inst[11:10] = 2'b10</span>
+535: <span class='def-Comment def-Syntax'>//    BTFSS instruction when aluz is HI  (</span>
+536: <span class='def-Comment def-Syntax'>//    BTFSC instruction when aluz is LO</span>
+537: <span class='def-Comment def-Syntax'>//</span>
+538: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>inst or aluz</span>) <span class='def-Keyword'>begin</span>
+539:    casex (<span class='verilog-verSymb def-Symbol'>{</span>inst<span class='verilog-verSymb def-Symbol'>,</span> aluz<span class='verilog-verSymb def-Symbol'>}</span>) <span class='def-Comment def-Syntax'>// synopsys parallel_case</span>
+540:       <span class='verilog-verNumb def-Number'>13'b10??</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>:</span>    <span class='def-Comment def-Syntax'>// A GOTO, CALL or RETLW instructions</span>
+541:          skip <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span><span class='verilog-verSymb def-Symbol'>;</span>
+542:          
+543:       <span class='verilog-verNumb def-Number'>13</span>'b0110_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_1<span class='verilog-verSymb def-Symbol'>:</span>    <span class='def-Comment def-Syntax'>// BTFSC instruction and aluz == 1</span>
+544:          skip <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span><span class='verilog-verSymb def-Symbol'>;</span>
+545:     
+546:       <span class='verilog-verNumb def-Number'>13</span>'b0111_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_0<span class='verilog-verSymb def-Symbol'>:</span>    <span class='def-Comment def-Syntax'>// BTFSS instruction and aluz == 0</span>
+547:          skip <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span><span class='verilog-verSymb def-Symbol'>;</span>
+548:       
+549:       <span class='verilog-verNumb def-Number'>13</span>'b0010_11<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_1<span class='verilog-verSymb def-Symbol'>:</span>    <span class='def-Comment def-Syntax'>// DECFSZ instruction and aluz == 1</span>
+550:          skip <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span><span class='verilog-verSymb def-Symbol'>;</span>
+551:     
+552:       <span class='verilog-verNumb def-Number'>13</span>'b0011_11<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_1<span class='verilog-verSymb def-Symbol'>:</span>    <span class='def-Comment def-Syntax'>// INCFSZ instruction and aluz == 1</span>
+553:          skip <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span><span class='verilog-verSymb def-Symbol'>;</span>
+554:     
+555:       default<span class='verilog-verSymb def-Symbol'>:</span>
+556:          skip <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verSymb def-Symbol'>;</span>
+557:    endcase
+558: <span class='def-Keyword'>end</span>
+559: 
+560: <span class='def-Comment def-Syntax'>// 4:1 Data MUX into alua</span>
+561: <span class='def-Comment def-Syntax'>//</span>
+562: <span class='def-Comment def-Syntax'>//</span>
+563: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>aluasel or w or sbus or k or bd</span>) <span class='def-Keyword'>begin</span>
+564:    <span class='def-Keyword'>case</span> <span class='verilog-verWord def-Keyword'>(</span>aluasel<span class='verilog-verWord def-Keyword'>)</span> <span class='def-Comment def-Syntax'>// synopsys parallel_case</span>
+565:       <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verWord def-Keyword'>:</span> alua = w<span class='verilog-verWord def-Keyword'>;</span>
+566:       <span class='verilog-verNumb def-Number'>2'b01</span><span class='verilog-verWord def-Keyword'>:</span> alua = sbus<span class='verilog-verWord def-Keyword'>;</span>
+567:       <span class='verilog-verNumb def-Number'>2'b10</span><span class='verilog-verWord def-Keyword'>:</span> alua = k<span class='verilog-verWord def-Keyword'>;</span>
+568:       <span class='verilog-verNumb def-Number'>2'b11</span><span class='verilog-verWord def-Keyword'>:</span> alua = bd<span class='verilog-verWord def-Keyword'>;</span>
+569:    <span class='def-Keyword'>endcase</span>
+570: <span class='def-Keyword'>end</span>
+571: 
+572: <span class='def-Comment def-Syntax'>// 4:1 Data MUX into alub</span>
+573: <span class='def-Comment def-Syntax'>//</span>
+574: <span class='def-Comment def-Syntax'>//</span>
+575: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>alubsel or w or sbus or k</span>) <span class='def-Keyword'>begin</span>
+576:    <span class='def-Keyword'>case</span> <span class='verilog-verWord def-Keyword'>(</span>alubsel<span class='verilog-verWord def-Keyword'>)</span> <span class='def-Comment def-Syntax'>// synopsys parallel_case</span>
+577:       <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verWord def-Keyword'>:</span> alub = w<span class='verilog-verWord def-Keyword'>;</span>
+578:       <span class='verilog-verNumb def-Number'>2'b01</span><span class='verilog-verWord def-Keyword'>:</span> alub = sbus<span class='verilog-verWord def-Keyword'>;</span>
+579:       <span class='verilog-verNumb def-Number'>2'b10</span><span class='verilog-verWord def-Keyword'>:</span> alub = k<span class='verilog-verWord def-Keyword'>;</span>
+580:       <span class='verilog-verNumb def-Number'>2'b11</span><span class='verilog-verWord def-Keyword'>:</span> alub = <span class='verilog-verNumb def-Number'>8'b00000001</span><span class='verilog-verWord def-Keyword'>;</span>
+581:    <span class='def-Keyword'>endcase</span>
+582: <span class='def-Keyword'>end</span>
+583: 
+584: <span class='def-Comment def-Syntax'>// W Register</span>
+585: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+586:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+587:       w <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verSymb def-Symbol'>;</span>
+588:    <span class='def-Keyword'>end</span>
+589:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+590:       <span class='verilog-verWord def-Keyword'>if</span> (wwe) <span class='def-Keyword'>begin</span>
+591:          w <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+592:       <span class='def-Keyword'>end</span>
+593:    <span class='def-Keyword'>end</span>   
+594: <span class='def-Keyword'>end</span>
+595: 
+596: <span class='def-Comment def-Syntax'>// ************ Writes to various Special Registers (fsel between 0 and 7)</span>
+597: 
+598: <span class='def-Comment def-Syntax'>// INDF Register (Register #0)</span>
+599: <span class='def-Comment def-Syntax'>//</span>
+600: <span class='def-Comment def-Syntax'>//    Not a real register.  This is the Indirect Addressing mode register.</span>
+601: <span class='def-Comment def-Syntax'>//    See the regfileaddr logic.</span>
+602: 
+603: <span class='def-Comment def-Syntax'>// TMR0 Register (Register #1)</span>
+604: <span class='def-Comment def-Syntax'>//</span>
+605: <span class='def-Comment def-Syntax'>//    Timer0 is currently only a free-running timer clocked by the main system clock.</span>
+606: <span class='def-Comment def-Syntax'>//</span>
+607: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+608:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+609:       tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verSymb def-Symbol'>;</span>
+610:    <span class='def-Keyword'>end</span>
+611:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+612:       <span class='def-Comment def-Syntax'>// See if the status register is actually being written to</span>
+613:       <span class='verilog-verWord def-Keyword'>if</span> (fwe <span class='verilog-verSymb def-Symbol'>&amp;</span> specialsel <span class='verilog-verSymb def-Symbol'>&amp;</span> (fileaddr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> TMR0_ADDRESS)) <span class='def-Keyword'>begin</span>
+614:          <span class='def-Comment def-Syntax'>// Yes, so just update the register from the dbus</span>
+615:          tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+616:       <span class='def-Keyword'>end</span>
+617:       <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+618:          <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span>option<span class='verilog-verNumb def-Number'>[5]</span>) <span class='def-Keyword'>begin</span>
+619:             <span class='def-Comment def-Syntax'>// OPTION[3]  -  Assigns prescaler to either WDT or TIMER0.  We don't implement WDT.</span>
+620:             <span class='def-Comment def-Syntax'>//               If this bit is 0, then use the prescaler.  If 1 then increment.</span>
+621:             <span class='def-Comment def-Syntax'>//</span>
+622:             <span class='def-Comment def-Syntax'>// Mask off the prescaler value based on desired divide ratio.</span>
+623:             <span class='def-Comment def-Syntax'>// Whenever this is zero, then that is our divided pulse.  Increment</span>
+624:             <span class='def-Comment def-Syntax'>// the final timer value when it's zero.</span>
+625:             <span class='def-Comment def-Syntax'>//</span>
+626:             casex (option<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span>) <span class='def-Comment def-Syntax'>// synopsys parallel_case full_case</span>
+627:                <span class='verilog-verNumb def-Number'>4</span>'b1XXX<span class='verilog-verSymb def-Symbol'>:</span> tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+628:                <span class='verilog-verNumb def-Number'>4'b0000</span><span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span><span class='verilog-verSymb def-Symbol'>|</span>(prescaler <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verNumb def-Number'>8'b00000001</span>)) tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+629:                <span class='verilog-verNumb def-Number'>4'b0001</span><span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span><span class='verilog-verSymb def-Symbol'>|</span>(prescaler <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verNumb def-Number'>8'b00000011</span>)) tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+630:                <span class='verilog-verNumb def-Number'>4'b0010</span><span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span><span class='verilog-verSymb def-Symbol'>|</span>(prescaler <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verNumb def-Number'>8'b00000111</span>)) tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+631:                <span class='verilog-verNumb def-Number'>4'b0011</span><span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span><span class='verilog-verSymb def-Symbol'>|</span>(prescaler <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verNumb def-Number'>8'b00001111</span>)) tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+632:                <span class='verilog-verNumb def-Number'>4'b0100</span><span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span><span class='verilog-verSymb def-Symbol'>|</span>(prescaler <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verNumb def-Number'>8'b00011111</span>)) tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+633:                <span class='verilog-verNumb def-Number'>4'b0101</span><span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span><span class='verilog-verSymb def-Symbol'>|</span>(prescaler <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verNumb def-Number'>8'b00111111</span>)) tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+634:                <span class='verilog-verNumb def-Number'>4'b0110</span><span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span><span class='verilog-verSymb def-Symbol'>|</span>(prescaler <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verNumb def-Number'>8'b01111111</span>)) tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+635:                <span class='verilog-verNumb def-Number'>4'b0111</span><span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span><span class='verilog-verSymb def-Symbol'>|</span>(prescaler <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verNumb def-Number'>8'b11111111</span>)) tmr0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> tmr0 <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+636:             endcase            
+637:          <span class='def-Keyword'>end</span>
+638:       <span class='def-Keyword'>end</span>
+639:    <span class='def-Keyword'>end</span>
+640: <span class='def-Keyword'>end</span>
+641: 
+642: <span class='def-Comment def-Syntax'>// The prescaler is always counting from 00 to FF whenever OPTION[5] is cleared (e.g. T0CS)</span>
+643: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+644:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+645:       prescaler <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verSymb def-Symbol'>;</span>
+646:    <span class='def-Keyword'>end</span>
+647:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+648:       <span class='verilog-verWord def-Keyword'>if</span> (<span class='verilog-verSymb def-Symbol'>~</span>option<span class='verilog-verNumb def-Number'>[5]</span>) <span class='def-Keyword'>begin</span>
+649:          prescaler <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> prescaler <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+650:       <span class='def-Keyword'>end</span>
+651:    <span class='def-Keyword'>end</span>
+652: <span class='def-Keyword'>end</span>
+653: 
+654: <span class='def-Comment def-Syntax'>// PCL Register (Register #2)</span>
+655: <span class='def-Comment def-Syntax'>//</span>
+656: <span class='def-Comment def-Syntax'>//    PC Lower 8 bits.  This is handled in the PC section below...</span>
+657: 
+658: 
+659: <span class='def-Comment def-Syntax'>// STATUS Register (Register #3)</span>
+660: <span class='def-Comment def-Syntax'>//</span>
+661: <span class='def-Keyword'>parameter</span> STATUS_RESET_VALUE <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h18</span><span class='def-Keyword'>;</span>
+662: 
+663: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+664:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+665:       status <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> STATUS_RESET_VALUE<span class='verilog-verSymb def-Symbol'>;</span>
+666:    <span class='def-Keyword'>end</span>
+667:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+668:       <span class='def-Comment def-Syntax'>// See if the status register is actually being written to</span>
+669:       <span class='verilog-verWord def-Keyword'>if</span> (fwe <span class='verilog-verSymb def-Symbol'>&amp;</span> specialsel <span class='verilog-verSymb def-Symbol'>&amp;</span> (fileaddr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> STATUS_ADDRESS)) <span class='def-Keyword'>begin</span>
+670:          <span class='def-Comment def-Syntax'>// Yes, so just update the register from the dbus</span>
+671:          status <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+672:       <span class='def-Keyword'>end</span>
+673:       <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+674:          <span class='def-Comment def-Syntax'>// Update status register on a bit-by-bit basis.</span>
+675:          <span class='def-Comment def-Syntax'>//</span>
+676:          <span class='def-Comment def-Syntax'>// For the carry and zero flags, each instruction has its own rule as</span>
+677:          <span class='def-Comment def-Syntax'>// to whether to update this flag or not.  The instruction decoder is</span>
+678:          <span class='def-Comment def-Syntax'>// providing us with an enable for C and Z.  Use this to decide whether</span>
+679:          <span class='def-Comment def-Syntax'>// to retain the existing value, or update with the new alu status output.</span>
+680:          <span class='def-Comment def-Syntax'>//</span>
+681:          status <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verSymb def-Symbol'>{</span>
+682:             status<span class='verilog-verNumb def-Number'>[7]</span><span class='verilog-verSymb def-Symbol'>,</span>            <span class='def-Comment def-Syntax'>// BIT 7: Undefined.. (maybe use for debugging)</span>
+683:             status<span class='verilog-verNumb def-Number'>[6]</span><span class='verilog-verSymb def-Symbol'>,</span>            <span class='def-Comment def-Syntax'>// BIT 6: Program Page, HI bit</span>
+684:             status<span class='verilog-verNumb def-Number'>[5]</span><span class='verilog-verSymb def-Symbol'>,</span>            <span class='def-Comment def-Syntax'>// BIT 5: Program Page, LO bit</span>
+685:             status<span class='verilog-verNumb def-Number'>[4]</span><span class='verilog-verSymb def-Symbol'>,</span>            <span class='def-Comment def-Syntax'>// BIT 4: Time Out bit (not implemented at this time)</span>
+686:             status<span class='verilog-verNumb def-Number'>[3]</span><span class='verilog-verSymb def-Symbol'>,</span>            <span class='def-Comment def-Syntax'>// BIT 3: Power Down bit (not implemented at this time)</span>
+687:             (zwe) <span class='verilog-verSymb def-Symbol'>?</span> aluz <span class='verilog-verSymb def-Symbol'>:</span> status<span class='verilog-verNumb def-Number'>[2]</span><span class='verilog-verSymb def-Symbol'>,</span>    <span class='def-Comment def-Syntax'>// BIT 2: Z</span>
+688:             status<span class='verilog-verNumb def-Number'>[1]</span><span class='verilog-verSymb def-Symbol'>,</span>            <span class='def-Comment def-Syntax'>// BIT 1: DC</span>
+689:             (cwe) <span class='verilog-verSymb def-Symbol'>?</span> alucout <span class='verilog-verSymb def-Symbol'>:</span> status<span class='verilog-verNumb def-Number'>[0]</span>    <span class='def-Comment def-Syntax'>// BIT 0: C</span>
+690:          <span class='verilog-verSymb def-Symbol'>}</span><span class='verilog-verSymb def-Symbol'>;</span>
+691:       <span class='def-Keyword'>end</span>
+692:    <span class='def-Keyword'>end</span>
+693: <span class='def-Keyword'>end</span>
+694: 
+695: <span class='def-Comment def-Syntax'>// FSR Register  (Register #4)</span>
+696: <span class='def-Comment def-Syntax'>//            </span>
+697: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+698:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+699:       fsr <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verSymb def-Symbol'>;</span>
+700:    <span class='def-Keyword'>end</span>
+701:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+702:       <span class='def-Comment def-Syntax'>// See if the status register is actually being written to</span>
+703:       <span class='verilog-verWord def-Keyword'>if</span> (fwe <span class='verilog-verSymb def-Symbol'>&amp;</span> specialsel <span class='verilog-verSymb def-Symbol'>&amp;</span> (fileaddr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> FSR_ADDRESS)) <span class='def-Keyword'>begin</span>
+704:          fsr <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+705:       <span class='def-Keyword'>end</span>
+706:    <span class='def-Keyword'>end</span>
+707: <span class='def-Keyword'>end</span>
+708: 
+709: <span class='def-Comment def-Syntax'>// OPTION Register</span>
+710: <span class='def-Comment def-Syntax'>//</span>
+711: <span class='def-Comment def-Syntax'>// The special OPTION instruction should move W into the OPTION register.</span>
+712: <span class='def-Comment def-Syntax'>//</span>
+713: <span class='def-Keyword'>parameter</span> OPTION_RESET_VALUE <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h3F</span><span class='def-Keyword'>;</span>
+714: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+715:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+716:       option <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> OPTION_RESET_VALUE<span class='verilog-verSymb def-Symbol'>;</span>
+717:    <span class='def-Keyword'>end</span>
+718:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+719:       <span class='verilog-verWord def-Keyword'>if</span> (isoption)
+720:          option <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+721:    <span class='def-Keyword'>end</span>   
+722: <span class='def-Keyword'>end</span>
+723: 
+724: <span class='def-Comment def-Syntax'>// PORTA Input Port   (Register #5)</span>
+725: <span class='def-Comment def-Syntax'>//</span>
+726: <span class='def-Comment def-Syntax'>// Register anything on the module's porta input on every single clock.</span>
+727: <span class='def-Comment def-Syntax'>//</span>
+728: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>)
+729:    if <span class='def-Symbol'>(</span>reset<span class='def-Symbol'>)</span> porta <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verSymb def-Symbol'>;</span>
+730:    else       porta <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> portain<span class='verilog-verSymb def-Symbol'>;</span>
+731: 
+732: <span class='def-Comment def-Syntax'>// PORTB Output Port  (Register #6)</span>
+733: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+734:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+735:       portb <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verSymb def-Symbol'>;</span>
+736:    <span class='def-Keyword'>end</span>
+737:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+738:       <span class='verilog-verWord def-Keyword'>if</span> (fwe <span class='verilog-verSymb def-Symbol'>&amp;</span> specialsel <span class='verilog-verSymb def-Symbol'>&amp;</span> (fileaddr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> PORTB_ADDRESS) <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verSymb def-Symbol'>~</span>istris) <span class='def-Keyword'>begin</span>
+739:          portb <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+740:       <span class='def-Keyword'>end</span>
+741:    <span class='def-Keyword'>end</span>   
+742: <span class='def-Keyword'>end</span>
+743: 
+744: <span class='def-Comment def-Syntax'>// Connect the output ports to the register output.</span>
+745: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>portb</span>)
+746:    portbout <span class='verilog-verSymb def-Symbol'>=</span> portb<span class='verilog-verSymb def-Symbol'>;</span>
+747:    
+748: <span class='def-Comment def-Syntax'>// PORTC Output Port  (Register #7)</span>
+749: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+750:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+751:       portc <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verSymb def-Symbol'>;</span>
+752:    <span class='def-Keyword'>end</span>
+753:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+754:       <span class='verilog-verWord def-Keyword'>if</span> (fwe <span class='verilog-verSymb def-Symbol'>&amp;</span> specialsel <span class='verilog-verSymb def-Symbol'>&amp;</span> (fileaddr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> PORTC_ADDRESS) <span class='verilog-verSymb def-Symbol'>&amp;</span> <span class='verilog-verSymb def-Symbol'>~</span>istris) <span class='def-Keyword'>begin</span>
+755:          portc <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+756:       <span class='def-Keyword'>end</span>
+757:    <span class='def-Keyword'>end</span>   
+758: <span class='def-Keyword'>end</span>
+759: 
+760: <span class='def-Comment def-Syntax'>// Connect the output ports to the register output.</span>
+761: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>portc</span>)
+762:    portcout <span class='verilog-verSymb def-Symbol'>=</span> portc<span class='verilog-verSymb def-Symbol'>;</span>
+763:  
+764: <span class='def-Comment def-Syntax'>// TRIS Registers</span>
+765: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+766:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+767:       trisa <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'hff</span><span class='verilog-verSymb def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// Default is to tristate them</span>
+768:    <span class='def-Keyword'>end</span>
+769:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+770:       <span class='verilog-verWord def-Keyword'>if</span> (fwe <span class='verilog-verSymb def-Symbol'>&amp;</span> specialsel <span class='verilog-verSymb def-Symbol'>&amp;</span> (fileaddr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> PORTA_ADDRESS) <span class='verilog-verSymb def-Symbol'>&amp;</span> istris) <span class='def-Keyword'>begin</span>
+771:          trisa <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+772:       <span class='def-Keyword'>end</span>
+773:    <span class='def-Keyword'>end</span>   
+774: <span class='def-Keyword'>end</span>
+775: 
+776: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+777:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+778:       trisb <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'hff</span><span class='verilog-verSymb def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// Default is to tristate them</span>
+779:    <span class='def-Keyword'>end</span>
+780:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+781:       <span class='verilog-verWord def-Keyword'>if</span> (fwe <span class='verilog-verSymb def-Symbol'>&amp;</span> specialsel <span class='verilog-verSymb def-Symbol'>&amp;</span> (fileaddr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> PORTB_ADDRESS) <span class='verilog-verSymb def-Symbol'>&amp;</span> istris) <span class='def-Keyword'>begin</span>
+782:          trisb <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+783:       <span class='def-Keyword'>end</span>
+784:    <span class='def-Keyword'>end</span>   
+785: <span class='def-Keyword'>end</span>
+786: 
+787: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+788:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+789:       trisc <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'hff</span><span class='verilog-verSymb def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// Default is to tristate them</span>
+790:    <span class='def-Keyword'>end</span>
+791:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+792:       <span class='verilog-verWord def-Keyword'>if</span> (fwe <span class='verilog-verSymb def-Symbol'>&amp;</span> specialsel <span class='verilog-verSymb def-Symbol'>&amp;</span> (fileaddr<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>2</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> PORTC_ADDRESS) <span class='verilog-verSymb def-Symbol'>&amp;</span> istris) <span class='def-Keyword'>begin</span>
+793:          trisc <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> dbus<span class='verilog-verSymb def-Symbol'>;</span>
+794:       <span class='def-Keyword'>end</span>
+795:    <span class='def-Keyword'>end</span>   
+796: <span class='def-Keyword'>end</span>
+797:   
+798: 
+799: <span class='def-Comment def-Syntax'>// ********** PC AND STACK *************************</span>
+800: <span class='def-Comment def-Syntax'>//</span>
+801: <span class='def-Comment def-Syntax'>// There are 4 ways to change the PC.  They are:</span>
+802: <span class='def-Comment def-Syntax'>//    GOTO  101k_kkkk_kkkk</span>
+803: <span class='def-Comment def-Syntax'>//    CALL  1001_kkkk_kkkk</span>
+804: <span class='def-Comment def-Syntax'>//    RETLW 1000_kkkk_kkkk</span>
+805: <span class='def-Comment def-Syntax'>//    MOVF  0010_0010_0010  (e.g. a write to reg #2)</span>
+806: <span class='def-Comment def-Syntax'>//    MOVWF 0000_0010_0010  (write from W to reg #2)</span>
+807: <span class='def-Comment def-Syntax'>//</span>
+808: <span class='def-Comment def-Syntax'>// Remember that the skip instructions work by inserting</span>
+809: <span class='def-Comment def-Syntax'>// a NOP instruction or not into program stream and don't</span>
+810: <span class='def-Comment def-Syntax'>// change the PC.</span>
+811: <span class='def-Comment def-Syntax'>//</span>
+812: 
+813: 
+814: <span class='def-Comment def-Syntax'>// Implmenent PC</span>
+815: <span class='def-Comment def-Syntax'>//</span>
+816: <span class='def-Comment def-Syntax'>// Seperate the PC_IN input bus into PC from the sequential register so that we</span>
+817: <span class='def-Comment def-Syntax'>// can feed the PC_IN bus into the PRAM address input.</span>
+818: 
+819: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>)
+820:    if <span class='def-Symbol'>(</span>reset<span class='def-Symbol'>)</span> pc <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> RESET_VECTOR<span class='verilog-verSymb def-Symbol'>;</span>
+821:    else       pc <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> pc_in<span class='verilog-verSymb def-Symbol'>;</span>
+822: 
+823: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>inst or stacklevel or status or stack1 or stack2 or pc or dbus</span>) <span class='def-Keyword'>begin</span>
+824:    casex (<span class='verilog-verSymb def-Symbol'>{</span>inst<span class='verilog-verSymb def-Symbol'>,</span> stacklevel<span class='verilog-verSymb def-Symbol'>}</span>) <span class='def-Comment def-Syntax'>// synopsys parallel_case</span>
+825:       <span class='verilog-verNumb def-Number'>14'b101?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>:</span> pc_in <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verSymb def-Symbol'>{</span>status<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>5</span><span class='verilog-verSymb def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>,</span>       inst<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>8</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>}</span><span class='verilog-verSymb def-Symbol'>;</span>    <span class='def-Comment def-Syntax'>// GOTO</span>
+826:       <span class='verilog-verNumb def-Number'>14</span>'b1001_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>:</span> pc_in <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verSymb def-Symbol'>{</span>status<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>5</span><span class='verilog-verSymb def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>,</span> <span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verSymb def-Symbol'>,</span> inst<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>}</span><span class='verilog-verSymb def-Symbol'>;</span>    <span class='def-Comment def-Syntax'>// CALL</span>
+827:       <span class='verilog-verNumb def-Number'>14</span>'b1000_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_00<span class='verilog-verSymb def-Symbol'>:</span> pc_in <span class='verilog-verSymb def-Symbol'>=</span> stack1<span class='verilog-verSymb def-Symbol'>;</span>                <span class='def-Comment def-Syntax'>// RETLW</span>
+828:       <span class='verilog-verNumb def-Number'>14</span>'b1000_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_01<span class='verilog-verSymb def-Symbol'>:</span> pc_in <span class='verilog-verSymb def-Symbol'>=</span> stack1<span class='verilog-verSymb def-Symbol'>;</span>                <span class='def-Comment def-Syntax'>// RETLW</span>
+829:       <span class='verilog-verNumb def-Number'>14</span>'b1000_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_10<span class='verilog-verSymb def-Symbol'>:</span> pc_in <span class='verilog-verSymb def-Symbol'>=</span> stack2<span class='verilog-verSymb def-Symbol'>;</span>                <span class='def-Comment def-Syntax'>// RETLW</span>
+830:       <span class='verilog-verNumb def-Number'>14</span>'b1000_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_11<span class='verilog-verSymb def-Symbol'>:</span> pc_in <span class='verilog-verSymb def-Symbol'>=</span> stack2<span class='verilog-verSymb def-Symbol'>;</span>                <span class='def-Comment def-Syntax'>// RETLW</span>
+831:       <span class='verilog-verNumb def-Number'>14'b00?</span>0_0010_0010_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>:</span> pc_in <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verSymb def-Symbol'>{</span>pc<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>10</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>8</span><span class='verilog-verSymb def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>,</span> dbus<span class='verilog-verSymb def-Symbol'>}</span><span class='verilog-verSymb def-Symbol'>;</span>        <span class='def-Comment def-Syntax'>// MOVF or MOVWF where f=PC</span>
+832:       default<span class='verilog-verSymb def-Symbol'>:</span>
+833:          pc_in <span class='verilog-verSymb def-Symbol'>=</span> pc <span class='verilog-verSymb def-Symbol'>+</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+834:    endcase
+835: <span class='def-Keyword'>end</span>
+836: 
+837: 
+838: <span class='def-Comment def-Syntax'>// Implement STACK1 and STACK2 registers</span>
+839: <span class='def-Comment def-Syntax'>//</span>
+840: <span class='def-Comment def-Syntax'>// The Stack registers are only fed from the PC itself!</span>
+841: <span class='def-Comment def-Syntax'>//</span>
+842: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+843:    <span class='verilog-verWord def-Keyword'>if</span> (reset) <span class='def-Keyword'>begin</span>
+844:       stack1 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>9'h000</span><span class='verilog-verSymb def-Symbol'>;</span>
+845:    <span class='def-Keyword'>end</span>
+846:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+847:       <span class='def-Comment def-Syntax'>// CALL instruction</span>
+848:       <span class='verilog-verWord def-Keyword'>if</span> (inst<span class='verilog-verSymb def-Symbol'>[</span><span class='verilog-verNumb def-Number'>11</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>8</span><span class='verilog-verSymb def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b1001</span>) <span class='def-Keyword'>begin</span>
+849:          <span class='def-Keyword'>case</span> <span class='verilog-verWord def-Keyword'>(</span>stacklevel<span class='verilog-verWord def-Keyword'>)</span> <span class='def-Comment def-Syntax'>// synopsys parallel_case</span>
+850:             <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verWord def-Keyword'>:</span>
+851:                <span class='def-Comment def-Syntax'>// No previous CALLs </span>
+852:                begin
+853:                   stack1 <span class='verilog-verWord def-Keyword'>&lt;=</span> pc<span class='verilog-verWord def-Keyword'>;</span>
+854:                end
+855:             <span class='verilog-verNumb def-Number'>2'b01</span><span class='verilog-verWord def-Keyword'>:</span>
+856:                <span class='def-Comment def-Syntax'>// ONE previous CALL </span>
+857:                begin
+858:                   stack2 <span class='verilog-verWord def-Keyword'>&lt;=</span> pc<span class='verilog-verWord def-Keyword'>;</span>
+859:                end
+860:             <span class='verilog-verNumb def-Number'>2'b10</span><span class='verilog-verWord def-Keyword'>:</span>
+861:                <span class='def-Comment def-Syntax'>// TWO previous CALLs -- This is illegal on the 16C5X! </span>
+862:                begin
+863:                   $display <span class='verilog-verWord def-Keyword'>(</span>"Too many CALLs!!"<span class='verilog-verWord def-Keyword'>)</span><span class='verilog-verWord def-Keyword'>;</span>
+864:                end
+865:             <span class='verilog-verNumb def-Number'>2'b11</span><span class='verilog-verWord def-Keyword'>:</span> 
+866:                begin
+867:                   $display <span class='verilog-verWord def-Keyword'>(</span>"Too many CALLs!!"<span class='verilog-verWord def-Keyword'>)</span><span class='verilog-verWord def-Keyword'>;</span>
+868:                end
+869:          <span class='def-Keyword'>endcase</span>
+870:       <span class='def-Keyword'>end</span>
+871:    <span class='def-Keyword'>end</span>
+872: <span class='def-Keyword'>end</span>
+873: 
+874: <span class='def-Comment def-Syntax'>// Write to stacklevel</span>
+875: <span class='def-Comment def-Syntax'>//</span>
+876: <span class='def-Comment def-Syntax'>// The stacklevel register keeps track of the current stack depth.  On this</span>
+877: <span class='def-Comment def-Syntax'>// puny processor, there are only 2 levels (you could fiddle with this and</span>
+878: <span class='def-Comment def-Syntax'>// increase the stack depth).  There are two stack registers, stack1 and stack2.</span>
+879: <span class='def-Comment def-Syntax'>// The stack1 register is used first (e.g. the first time a call is performed),</span>
+880: <span class='def-Comment def-Syntax'>// then stack2.  As CALLs are done, stacklevel increments.  Conversely, as</span>
+881: <span class='def-Comment def-Syntax'>// RETs are done, stacklevel goes down. </span>
+882: 
+883: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>) <span class='def-Keyword'>begin</span>
+884:    <span class='verilog-verWord def-Keyword'>if</span> (reset <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1'b1</span>) <span class='def-Keyword'>begin</span>
+885:       stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// On reset, there should be no CALLs in progress</span>
+886:    <span class='def-Keyword'>end</span>
+887:    <span class='verilog-verWord def-Keyword'>else</span> <span class='def-Keyword'>begin</span>
+888:       casex (<span class='verilog-verSymb def-Symbol'>{</span>inst<span class='verilog-verSymb def-Symbol'>,</span> stacklevel<span class='verilog-verSymb def-Symbol'>}</span>) <span class='def-Comment def-Syntax'>// synopsys parallel_case</span>
+889:          <span class='def-Comment def-Syntax'>// Call instructions</span>
+890:          <span class='verilog-verNumb def-Number'>14</span>'b1001_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_00<span class='verilog-verSymb def-Symbol'>:</span> stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b01</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// Record 1st CALL</span>
+891:          <span class='verilog-verNumb def-Number'>14</span>'b1001_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_01<span class='verilog-verSymb def-Symbol'>:</span> stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b10</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// Record 2nd CALL</span>
+892:          <span class='verilog-verNumb def-Number'>14</span>'b1001_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_10<span class='verilog-verSymb def-Symbol'>:</span> stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b10</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// Already 2! Ignore</span>
+893:          <span class='verilog-verNumb def-Number'>14</span>'b1001_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_11<span class='verilog-verSymb def-Symbol'>:</span> stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// {shouldn't happen}</span>
+894: 
+895:          <span class='def-Comment def-Syntax'>// Return instructions</span>
+896:          <span class='verilog-verNumb def-Number'>14</span>'b1000_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_00<span class='verilog-verSymb def-Symbol'>:</span> stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// {shouldn't happen}</span>
+897:          <span class='verilog-verNumb def-Number'>14</span>'b1000_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_01<span class='verilog-verSymb def-Symbol'>:</span> stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b00</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// Go back to no CALL in progress</span>
+898:          <span class='verilog-verNumb def-Number'>14</span>'b1000_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_10<span class='verilog-verSymb def-Symbol'>:</span> stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b01</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// Go back to 1 CALL in progress</span>
+899:          <span class='verilog-verNumb def-Number'>14</span>'b1000_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_<span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span><span class='verilog-verSymb def-Symbol'>?</span>_11<span class='verilog-verSymb def-Symbol'>:</span> stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>2'b10</span><span class='verilog-verSymb def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>// {shouldn't happen} sort of like, Go back to 2 calls in progress</span>
+900:          default<span class='verilog-verSymb def-Symbol'>:</span>
+901:             stacklevel <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> stacklevel<span class='verilog-verSymb def-Symbol'>;</span>
+902:       endcase
+903:    <span class='def-Keyword'>end</span>
+904: <span class='def-Keyword'>end</span>
+905: 
+906: <span class='def-Comment def-Syntax'>// *******  Debug Stuff  ******** //</span>
+907: <span class='def-Comment def-Syntax'>//</span>
+908: <span class='def-Comment def-Syntax'>// The following is NOT synthesizable.  This code simply allows you to see the ASCII name</span>
+909: <span class='def-Comment def-Syntax'>// for the instruction in the INST register while in a waveform viewer.</span>
+910: <span class='def-Comment def-Syntax'>//</span>
+911: <span class='def-Comment def-Syntax'>// synopsys translate_off</span>
+912: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>8</span>*<span class='verilog-verNumb def-Number'>8</span><span class='verilog-verSymb def-Symbol'>-</span><span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> inst_string<span class='def-Keyword'>;</span>
+913: 
+914: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>inst</span>) <span class='def-Keyword'>begin</span>
+915:    casex (inst)
+916:       <span class='verilog-verNumb def-Number'>12</span>'b0000_0000_0000<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "NOP     "<span class='verilog-verSymb def-Symbol'>;</span>
+917:       <span class='verilog-verNumb def-Number'>12</span>'b0000_001X_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "MOVWF   "<span class='verilog-verSymb def-Symbol'>;</span>
+918:       <span class='verilog-verNumb def-Number'>12</span>'b0000_0100_0000<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "CLRW    "<span class='verilog-verSymb def-Symbol'>;</span>
+919:       <span class='verilog-verNumb def-Number'>12</span>'b0000_011X_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "CLRF    "<span class='verilog-verSymb def-Symbol'>;</span>
+920:       <span class='verilog-verNumb def-Number'>12</span>'b0000_10XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "SUBWF   "<span class='verilog-verSymb def-Symbol'>;</span>
+921:       <span class='verilog-verNumb def-Number'>12</span>'b0000_11XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "DECF    "<span class='verilog-verSymb def-Symbol'>;</span>
+922:       <span class='verilog-verNumb def-Number'>12</span>'b0001_00XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "IORWF   "<span class='verilog-verSymb def-Symbol'>;</span>
+923:       <span class='verilog-verNumb def-Number'>12</span>'b0001_01XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "ANDWF   "<span class='verilog-verSymb def-Symbol'>;</span>
+924:       <span class='verilog-verNumb def-Number'>12</span>'b0001_10XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "XORWF   "<span class='verilog-verSymb def-Symbol'>;</span>
+925:       <span class='verilog-verNumb def-Number'>12</span>'b0001_11XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "ADDWF   "<span class='verilog-verSymb def-Symbol'>;</span>
+926:       <span class='verilog-verNumb def-Number'>12</span>'b0010_00XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "MOVF    "<span class='verilog-verSymb def-Symbol'>;</span>
+927:       <span class='verilog-verNumb def-Number'>12</span>'b0010_01XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "COMF    "<span class='verilog-verSymb def-Symbol'>;</span>
+928:       <span class='verilog-verNumb def-Number'>12</span>'b0010_10XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "INCF    "<span class='verilog-verSymb def-Symbol'>;</span>
+929:       <span class='verilog-verNumb def-Number'>12</span>'b0010_11XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "DECFSZ  "<span class='verilog-verSymb def-Symbol'>;</span>
+930:       <span class='verilog-verNumb def-Number'>12</span>'b0011_00XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "RRF     "<span class='verilog-verSymb def-Symbol'>;</span>
+931:       <span class='verilog-verNumb def-Number'>12</span>'b0011_01XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "RLF     "<span class='verilog-verSymb def-Symbol'>;</span>
+932:       <span class='verilog-verNumb def-Number'>12</span>'b0011_10XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "SWAPF   "<span class='verilog-verSymb def-Symbol'>;</span>
+933:       <span class='verilog-verNumb def-Number'>12</span>'b0011_11XX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "INCFSZ  "<span class='verilog-verSymb def-Symbol'>;</span>
+934: 
+935:       <span class='def-Comment def-Syntax'>// *** Bit-Oriented File Register Operations</span>
+936:       <span class='verilog-verNumb def-Number'>12</span>'b0100_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "BCF     "<span class='verilog-verSymb def-Symbol'>;</span>
+937:       <span class='verilog-verNumb def-Number'>12</span>'b0101_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "BSF     "<span class='verilog-verSymb def-Symbol'>;</span>
+938:       <span class='verilog-verNumb def-Number'>12</span>'b0110_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "BTFSC   "<span class='verilog-verSymb def-Symbol'>;</span>
+939:       <span class='verilog-verNumb def-Number'>12</span>'b0111_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "BTFSS   "<span class='verilog-verSymb def-Symbol'>;</span>
+940: 
+941:       <span class='def-Comment def-Syntax'>// *** Literal and Control Operations</span>
+942:       <span class='verilog-verNumb def-Number'>12</span>'b0000_0000_0010<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "OPTION  "<span class='verilog-verSymb def-Symbol'>;</span>
+943:       <span class='verilog-verNumb def-Number'>12</span>'b0000_0000_0011<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "SLEEP   "<span class='verilog-verSymb def-Symbol'>;</span>
+944:       <span class='verilog-verNumb def-Number'>12</span>'b0000_0000_0100<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "CLRWDT  "<span class='verilog-verSymb def-Symbol'>;</span>
+945:       <span class='verilog-verNumb def-Number'>12</span>'b0000_0000_0101<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "TRIS    "<span class='verilog-verSymb def-Symbol'>;</span>
+946:       <span class='verilog-verNumb def-Number'>12</span>'b0000_0000_0110<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "TRIS    "<span class='verilog-verSymb def-Symbol'>;</span>
+947:       <span class='verilog-verNumb def-Number'>12</span>'b0000_0000_0111<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "TRIS    "<span class='verilog-verSymb def-Symbol'>;</span>
+948:       <span class='verilog-verNumb def-Number'>12</span>'b1000_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "RETLW   "<span class='verilog-verSymb def-Symbol'>;</span>
+949:       <span class='verilog-verNumb def-Number'>12</span>'b1001_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "CALL    "<span class='verilog-verSymb def-Symbol'>;</span>
+950:       <span class='verilog-verNumb def-Number'>12</span>'b101X_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "GOTO    "<span class='verilog-verSymb def-Symbol'>;</span>
+951:       <span class='verilog-verNumb def-Number'>12</span>'b1100_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "MOVLW   "<span class='verilog-verSymb def-Symbol'>;</span>
+952:       <span class='verilog-verNumb def-Number'>12</span>'b1101_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "IORLW   "<span class='verilog-verSymb def-Symbol'>;</span>
+953:       <span class='verilog-verNumb def-Number'>12</span>'b1110_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "ANDLW   "<span class='verilog-verSymb def-Symbol'>;</span>
+954:       <span class='verilog-verNumb def-Number'>12</span>'b1111_XXXX_XXXX<span class='verilog-verSymb def-Symbol'>:</span> inst_string <span class='verilog-verSymb def-Symbol'>=</span> "XORLW   "<span class='verilog-verSymb def-Symbol'>;</span>
+955: 
+956:       default<span class='verilog-verSymb def-Symbol'>:</span>            inst_string <span class='verilog-verSymb def-Symbol'>=</span> "<span class='verilog-verSymb def-Symbol'>-</span>XXXXXX<span class='verilog-verSymb def-Symbol'>-</span>"<span class='verilog-verSymb def-Symbol'>;</span>
+957:    endcase
+958: <span class='def-Keyword'>end</span>
+959:    
+960: <span class='def-Comment def-Syntax'>// synopsys translate_on</span>
+961: 
+962: endmodule
+963: 

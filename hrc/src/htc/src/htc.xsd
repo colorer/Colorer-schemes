@@ -1,0 +1,183 @@
+<xs:schema
+  xmlns:public='urn:HTMLComponent'
+  targetNamespace='urn:HTMLComponent'
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:annotation>
+ <xs:documentation>
+  Simple fictive scheme for support HTML components in colorer HRC
+  
+  Note! This is NOT VALID SCHEME for html componetnts!
+  Use it ONLY for xsd2hrc!
+ </xs:documentation>
+</xs:annotation>
+
+<xs:simpleType name="Script">
+  <xs:annotation>
+    <xs:documentation>
+     script expression
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:string"/>
+</xs:simpleType>
+
+<xs:simpleType name='style'>
+ <xs:restriction base='xs:string'>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name='bool-ext'>
+ <xs:restriction base='xs:string'>
+    <xs:enumeration value='true'/>
+    <xs:enumeration value='false'/>
+    <xs:enumeration value='inherit'/>
+ </xs:restriction>
+</xs:simpleType>
+<xs:simpleType name='bool-nest'>
+ <xs:restriction base='xs:string'>
+    <xs:enumeration value='true'/>
+    <xs:enumeration value='false'/>
+    <xs:enumeration value='nested'/>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name='evlist'>
+ <xs:restriction base='xs:string'>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name='foratt'>
+ <xs:restriction base='xs:string'>
+    <xs:enumeration value='document'/>
+    <xs:enumeration value='element'/>
+    <xs:enumeration value='window'/>
+ </xs:restriction>
+</xs:simpleType>
+
+
+<xs:element name="script" type="public:script-fictive">
+ <xs:annotation>
+  <xs:documentation>
+   Note! In real, it's 
+   html script element. 
+   NOT use it as public:script!
+  </xs:documentation>
+ </xs:annotation>
+</xs:element>
+<xs:complexType name="script-fictive">
+ <xs:attribute name="id" type="xs:ID"/>
+ <xs:attribute name="type" type="xs:string"/>
+ <xs:attribute name="language" type="xs:string"/>
+ <xs:attribute name="src" type="xs:anyURI"/>
+ <xs:attribute name="defer">
+   <xs:simpleType>
+     <xs:restriction base="xs:token">
+       <xs:enumeration value="defer"/>
+     </xs:restriction>
+   </xs:simpleType>
+ </xs:attribute>
+</xs:complexType>
+
+
+<xs:element name="component">
+ <xs:complexType>
+  <xs:attribute name="name" type="xs:string"/>
+  <xs:attribute name="id" type="xs:ID"/>
+  <xs:attribute name="lightWeight" type="xs:boolean"/>
+  <xs:attribute name="literalContent" type="public:bool-nest"/>
+  <xs:attribute name="tagName" type="xs:string"/>
+  <xs:attribute name="urn" type="xs:anyURI"/> <!--its ONE attribute! -->
+  <xs:sequence>
+   <xs:element ref="public:script"/>
+   <xs:element ref="public:attach"/>   
+   <xs:element ref="public:defaults"/>
+   <xs:element ref="public:event"/>
+   <xs:element ref="public:method"/>
+   <xs:element ref="public:property"/>
+  </xs:sequence>
+ </xs:complexType>
+</xs:element>
+
+<xs:element name="attach" type="public:attach"/>
+<xs:complexType name="attach">
+ <xs:attribute name="id" type="xs:ID"/> 
+ <xs:attribute name="for" type="public:foratt"/> 
+ <xs:attribute name="event" type="public:evlist"/> 
+ <xs:attribute name="onevent" type="public:Script"/> 
+</xs:complexType>
+
+<xs:element name="defaults" type="public:defaults"/>
+<xs:complexType name="defaults">
+ <xs:attribute name="id" type="xs:ID"/> 
+ <xs:attribute name="style" type="public:style"/> 
+ <xs:attribute name="canHaveHTML" type="xs:boolean"/> 
+ <xs:attribute name="contentEditable" type="public:bool-ext"/> 
+ <xs:attribute name="tabStop" type="xs:boolean"/> 
+ <xs:attribute name="viewInheritStyle" type="xs:boolean"/> 
+ <xs:attribute name="viewLinkContent" type="xs:boolean"/> 
+ <xs:attribute name="viewMasterTab" type="xs:boolean"/> 
+</xs:complexType>
+
+<xs:element name="event">
+ <xs:complexType>
+  <xs:attribute name="id" type="xs:ID"/> 
+  <xs:attribute name="name" type="xs:string"/>
+ </xs:complexType>
+</xs:element>
+
+<xs:element name="method">
+ <xs:complexType>
+  <xs:attribute name="id" type="xs:ID"/> 
+  <xs:attribute name="name" type="xs:string"/>
+  <xs:attribute name="internalname" type="xs:string"/>
+ </xs:complexType>
+</xs:element>
+
+<xs:element name="property">
+ <xs:complexType>
+  <xs:attribute name="id" type="xs:ID"/> 
+  <xs:attribute name="name" type="xs:string"/>
+  <xs:attribute name="internalname" type="xs:string"/>
+  <xs:attribute name="presist" type="xs:boolean"/>
+  <xs:attribute name="put" type="xs:string"/>
+  <xs:attribute name="get" type="xs:string"/>
+  <xs:attribute name="value" type="xs:string"/>
+ </xs:complexType>
+</xs:element>
+
+</xs:schema>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the HRC scheme for html components (HTC).
+   -
+   - The Initial Developer of the Original Code is
+   - Eugene Efremov <4mirror@mail.ru>
+   - Portions created by the Initial Developer are Copyright (C) 2004
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

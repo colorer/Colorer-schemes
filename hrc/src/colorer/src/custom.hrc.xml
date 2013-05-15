@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+<!-- Colorer HRC schema extension. Parse RE content -->
+<custom-type targetNamespace="http://colorer.sf.net/2003/hrc">
+
+<prefix>hrc</prefix>
+<empty-prefix/>
+<contributors>Cail Lomecb, Eugene Efremov</contributors>
+
+<outline>
+	<element name='type' extract='withAttribute' description='Type definition'/>
+	<element name='package' extract='withAttribute' description='Package definition'/>
+	<element name='prototype' extract='withAttribute' description='Prototype definition'/>
+	<element name='import' extract='withAttribute' description='Type Import'/>
+	<element name='region' extract='withAttribute' description='Region definition'/>
+	<element name='entity' extract='withAttribute' description='Entity definition'/>
+	<element name='scheme' extract='withAttribute' description='Scheme declaration'/>
+	<element name='keywords' extract='withAttribute' description='Keywords list'/>
+</outline>
+
+
+<type xmlns="http://colorer.sf.net/2003/hrc">
+	
+	<region name="BracketStart" parent="StringEdge"/>
+	<region name="BracketEnd"   parent="StringEdge"/>
+	<region name="Scheme.nsprefix" parent="xml:QName.nsprefix"/>
+	<region name="Scheme.nscolon"  parent="xml:QName.nscolon"/>
+	<region name="Scheme.name"     parent="xml:QName.name"/>
+	<region name="Scheme.keyword" parent="def:StringContent"/>
+	
+	
+	<scheme name="QName-content">
+		<regexp match="/~(%xml:NCName;)(\:)\M%xml:NCName;/"
+			region1="Scheme.nsprefix" region2="Scheme.nscolon"
+		/>
+		<regexp match="/(~|\:?#1)(default|empty)[&quot;&apos;]?=/" region="Scheme.keyword"/>
+		<regexp match="/(~|\:?#1)%xml:NCName;\b/" region="Scheme.name"/>
+	</scheme>
+	
+	
+	
+	<scheme name="HRC-String">
+		<inherit scheme="xml:Reference"/>
+		<regexp match="/\%%xml:Name;\;/" region="xml:EntityRef"/>
+		<inherit scheme="xml:badLiter"/>
+	</scheme>
+	
+	
+	<scheme name="RE-String">
+		<annotation><documentation>
+			Regexp string. Using package regexp.hrc. 
+		</documentation></annotation>
+		
+		<inherit scheme="regexp:hrc.regexp">
+			<virtual scheme="regexp:code" subst-scheme="QName-content"/>
+			<virtual scheme="regexp:string" subst-scheme="HRC-String"/>
+			<virtual scheme="regexp:hrc.regexp" subst-scheme="RE-String"/>        
+		</inherit>
+	</scheme>
+	
+	<scheme name="RE-Class">
+		<inherit scheme="regexp:hrc.class">
+			<virtual scheme="regexp:code" subst-scheme="QName-content"/>
+			<virtual scheme="regexp:string" subst-scheme="HRC-String"/>
+		</inherit>
+	</scheme>
+	
+	
+	<scheme name="REworddiv-content">
+		<regexp match="/\%%xml:Name;\;/" region="xml:EntityRef"/>
+		<block start="/(\[)/" end="/(\])/" scheme="RE-Class" 
+			region00="BracketStart" region01="def:PairStart"
+			region10="BracketEnd" region11="def:PairEnd"  
+		/>
+	</scheme>
+	
+	<scheme name="REentity-content">
+		<inherit scheme="RE-String"/>
+		<inherit scheme="RE-Class"/>
+	</scheme>
+	
+	<scheme name="REentity-content-error">
+		<inherit scheme="REentity-content"/>
+	</scheme>      
+	
+	
+	<scheme name="REstring-content">
+		<block start="/(~|^\s*)(\/)/" end="/(\/([igsxm]*))/" scheme="RE-String"
+			region00="BracketStart" region02="PairStart"
+			region10="BracketEnd" region11="PairEnd" 
+			region12="regexp:SpecArea"
+		/>
+	</scheme>
+	
+	
+	
+	<!--
+	<scheme name="REstring-content-cdata">
+		<inherit scheme="REstring-content">
+			<virtual scheme="RE-String" subst-scheme="RE-String-null"/>
+		</inherit>
+		<inherit scheme="xml:badChar"/>
+	</scheme>
+	
+	<scheme name="REstring-or-null-content">
+		<inherit scheme="REstring-content">
+			<virtual scheme="RE-String" subst-scheme="RE-String-null"/>
+		</inherit>
+	</scheme>
+	
+	<scheme name="REstring-or-null-elementContent">
+		<inherit scheme="_hrc_int_elementContent">
+			<virtual subst-scheme="REstring-content" scheme="xml:CDSect.content.stream"/>
+			<virtual subst-scheme="REstring-or-null-content" scheme="xml:content.cdata.stream"/>
+			<virtual subst-scheme="def:empty" scheme="xml:element"/>
+			<virtual subst-scheme="REstring-or-null-Attributes" scheme="xml:Attribute.any"/>
+		</inherit>
+	</scheme>
+	
+	<scheme name="blockInner-elementContent">
+		<inherit scheme="REstring-or-null-elementContent">
+			<virtual subst-scheme="blockInner-Attributes" scheme="REstring-or-null-Attributes"/>
+		</inherit>
+	</scheme>-->
+</type>
+</custom-type>
+</custom>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+  <custom-type targetNamespace="http://www.w3.org/1999/XSL/Format">
+    <prefix>fo</prefix>
+    <prefix>f</prefix>
+    <empty-prefix/>
+  </custom-type>
+
+  <custom-type targetNamespace="http://www.w3.org/XML/1998/namespace">
+    <prefix>xml</prefix>
+  </custom-type>
+
+  <custom-type targetNamespace="http://www.w3.org/2000/10/XMLSchema-instance">
+    <prefix>xsi</prefix>
+    <prefix>xi</prefix>
+  </custom-type>
+
+  <custom-type targetNamespace="http://www.w3.org/2000/10/XMLSchema-datatypes">
+    <prefix>xsd</prefix>
+    <prefix>xd</prefix>
+  </custom-type>
+
+  <custom-type targetNamespace="http://www.w3.org/2001/XInclude">
+    <prefix>xi</prefix>
+    <prefix>xinc</prefix>
+    <prefix>xinclude</prefix>
+  </custom-type>
+
+  <custom-type targetNamespace="http://www.w3.org/1999/xlink">
+    <prefix>xlink</prefix>
+    <prefix>xl</prefix>
+  </custom-type>
+
+  <custom-type targetNamespace="http://www.w3.org/2000/svg">
+    <prefix>svg</prefix>
+    <prefix>s</prefix>
+    <empty-prefix/>
+  </custom-type>
+
+</custom>

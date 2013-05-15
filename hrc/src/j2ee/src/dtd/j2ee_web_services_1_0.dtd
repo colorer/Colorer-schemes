@@ -1,0 +1,296 @@
+<!-- Last updated: 05/06/2003 12:49
+Copyright 2002 IBM Corporation
+All web service deployment descriptors must use the following declaration:
+
+<!DOCTYPE webservices PUBLIC "-//IBM Corporation, Inc.//DTD J2EE Web services 1.0//EN" "http://www.ibm.com/webservices/dtd/j2ee_web_services_1_0.dtd">
+-->
+
+<!--
+The webservices element is the root element for the web services
+deployment descriptor.  It specifies the set of Web service descriptions
+that are to be deployed into the J2EE Application Server and the 
+dependencies they have on container resources and services.
+
+Used in: webservices.xml
+-->
+<!ELEMENT webservices (description?, display-name?, small-icon?, 
+        large-icon?, webservice-description+) >
+
+<!--
+The description element is used by the module producer to provide
+text describing the parent element.
+
+The description element should include any information that the
+module producer wants to provide to the consumer of the module 
+(i.e. to the Deployer). Typically, the tools used by the module 
+consumer will display the description when processing the parent 
+element that contains the description.
+
+Used in: port-component, webservice-description, webservices
+-->
+<!ELEMENT description (#PCDATA)>
+
+<!--
+The display-name element contains a short name that is intended to be
+displayed by tools. The display name need not be unique.
+
+Used in: port-component, webservice-description and webservices
+
+Example:
+        <display-name>Employee Self Service</display-name>
+-->
+<!ELEMENT display-name (#PCDATA)>
+
+<!--
+The ejb-link element is used in the service-impl-bean element
+to specify that a Service Implementation Bean is defined as a Web
+Service Endpoint.
+
+The value of the ejb-link element must be the ejb-name of an enterprise
+bean in the same ejb-jar file.
+
+Used in: service-impl-bean
+
+Examples:
+        <ejb-link>EmployeeRecord</ejb-link>
+        <ejb-link>../products/product.jar#ProductEJB</ejb-link>
+-->
+<!ELEMENT ejb-link (#PCDATA)>
+
+<!--
+Declares the handler for a port-component. Handlers can access the
+init-param name/value pairs using the HandlerInfo interface.
+
+Used in: port-component
+-->
+<!ELEMENT handler (description?, display-name?, small-icon?, 
+        large-icon?, handler-name, handler-class, init-param*, 
+        soap-header*, soap-role*)>
+
+<!--
+Defines the name of the handler. The name must be unique within the
+module.
+-->
+<!ELEMENT handler-name (#PCDATA)>
+
+<!--
+Defines a fully qualified class name for the handler implementation.
+-->
+<!ELEMENT handler-class (#PCDATA)>
+
+<!--
+The init-param element contains a name/value pair as an
+initialization param of the servlet
+Used in: filter, servlet
+-->
+<!ELEMENT init-param (param-name, param-value, 
+        description?)>
+
+<!--
+The jaxrpc-mapping-file element contains the name of a file that
+describes the JAX-RPC mapping between the Java interaces used by
+the application and the WSDL description in the wsdl-file.  The 
+file name is a relative path within the module.
+
+Used in: webservice-description
+-->
+<!ELEMENT jaxrpc-mapping-file (#PCDATA)>
+
+<!--
+The localpart element indicates the local part of a QNAME.
+
+Used in: soap-header, wsdl-port
+-->
+<!ELEMENT localpart (#PCDATA)>
+
+<!--
+The namespaceURI element indicates a URI.
+
+Used in: soap-header, wsdl-port
+-->
+<!ELEMENT namespaceURI (#PCDATA)>
+
+<!--
+The param-name element contains the name of a parameter. Each
+parameter name must be unique in the web application.
+Used in: context-param, init-param
+-->
+<!ELEMENT param-name (#PCDATA)>
+
+<!--
+The param-value element contains the value of a parameter.
+Used in: context-param, init-param
+-->
+<!ELEMENT param-value (#PCDATA)>
+
+<!--
+The large-icon element contains the name of a file containing a large
+(32 x 32) icon image. The file name is relative path within the
+ejb-jar file.
+
+The image must be either in the JPEG or GIF format.
+The icon can be used by tools.
+
+Example:
+        <large-icon>employee-service-icon32x32.jpg</large-icon>
+-->
+<!ELEMENT large-icon (#PCDATA)>
+
+<!--
+The port-component element associates a WSDL port with a Web service
+interface and implementation.  It defines the name of
+the port as a component, optional description, optional display 
+name, optional iconic representations, WSDL port QName, Service 
+Endpoint Interface, Service Implementation Bean.
+
+Used in: webservices
+-->
+<!ELEMENT port-component (description?, display-name?, small-icon?, 
+        large-icon?, port-component-name, wsdl-port, 
+        service-endpoint-interface, service-impl-bean, handler*)>
+
+<!--
+The port-component-name element specifies a port component's name. 
+This name is assigned by the module producer to name the service 
+implementation bean in the module's deployment descriptor. The name 
+must be unique among the port component names defined in the same 
+module.
+
+Used in: port-component
+
+Example:
+        <port-component-name>EmployeeService</port-component-name>
+-->
+<!ELEMENT port-component-name (#PCDATA)>
+
+<!--
+The service-endpoint-interface element contains the fully-qualified 
+name of the port component's Service Endpoint Interface.
+
+Used in: port-component
+
+Example:
+        <service-endpoint-interface>com.wombat.empl.EmployeeService</service-endpoint-interface>
+-->
+<!ELEMENT service-endpoint-interface (#PCDATA)>
+
+<!--
+The service-impl-bean element defines the Web service implementation.
+A service implementation can be an EJB bean class or JAX-RPC web 
+component.  Existing EJB implementations are exposed as a Web service
+using an ejb-link.
+
+Used in: port-component
+-->
+<!ELEMENT service-impl-bean (ejb-link | servlet-link)>
+
+<!--
+The servlet-link element is used in the service-impl-bean element
+to specify that a Service Implementation Bean is defined as a 
+JAX-RPC Service Endpoint.
+
+The value of the servlet-link element must be the servlet-name of 
+a JAX-RPC Service Endpoint in the same WAR file.
+
+Used in: service-impl-bean
+
+Example:
+        <servlet-link>StockQuoteService</servlet-link>
+-->
+<!ELEMENT servlet-link (#PCDATA)>
+
+<!--
+The small-icon element contains the name of a file containing a small
+(16 x 16) icon image. The file name is relative path within the
+ejb-jar file.
+
+The image must be either in the JPEG or GIF format.
+The icon can be used by tools.
+
+Example:
+        <small-icon>employee-service-icon16x16.jpg</small-icon>
+-->
+<!ELEMENT small-icon (#PCDATA)>
+
+<!--
+Defines the QName of a SOAP header that will be processed by the
+handler.
+-->
+<!ELEMENT soap-header (namespaceURI, localpart)>
+
+<!--
+The soap-role element contains a SOAP actor definition that the
+Handler will play as a role.
+-->
+<!ELEMENT soap-role (#PCDATA)>
+
+<!--
+The webservice-description element defines a WSDL document file 
+and the set of Port components associated with the WSDL ports 
+defined in the WSDL document.  There may be multiple 
+webservice-descriptions defined within a module.
+
+All WSDL file ports must have a corresponding port-component element
+defined.
+
+Used in: webservices
+-->
+<!ELEMENT webservice-description (description?, display-name?, 
+        small-icon?, large-icon?, webservice-description-name, wsdl-file, 
+        jaxrpc-mapping-file, port-component+)>
+
+<!--
+The webservice-description-name identifies the collection of 
+port-components associated with a WSDL file and JAX-RPC mapping. The
+name must be unique within the deployment descriptor.
+
+Used in: webservice-description
+-->
+<!ELEMENT webservice-description-name (#PCDATA)>
+
+<!--
+The wsdl-file element contains the name of a WSDL file in the module.
+The file name is a relative path within the module.
+-->
+<!ELEMENT wsdl-file (#PCDATA)>
+
+<!--
+Defines the name space and local name part of the WSDL port QName.
+-->
+<!ELEMENT wsdl-port (namespaceURI, localpart)>
+
+<!--
+The ID mechanism is to allow tools that produce additional deployment
+information (i.e., information beyond the standard EJB deployment
+descriptor information) to store the non-standard information in a
+separate file, and easily refer from these tools-specific files to the
+information in the standard deployment descriptor.
+The EJB architecture does not allow the tools to add the non-standard
+information into the EJB deployment descriptor.
+-->
+<!ATTLIST description id ID #IMPLIED>
+<!ATTLIST display-name id ID #IMPLIED>
+<!ATTLIST ejb-link id ID #IMPLIED>
+<!ATTLIST handler id ID #IMPLIED>
+<!ATTLIST handler-class id ID #IMPLIED>
+<!ATTLIST handler-name id ID #IMPLIED>
+<!ATTLIST init-param id ID #IMPLIED>
+<!ATTLIST jaxrpc-mapping-file id ID #IMPLIED>
+<!ATTLIST large-icon id ID #IMPLIED>
+<!ATTLIST localpart id ID #IMPLIED>
+<!ATTLIST namespaceURI id ID #IMPLIED>
+<!ATTLIST param-name id ID #IMPLIED>
+<!ATTLIST param-value id ID #IMPLIED>
+<!ATTLIST port-component id ID #IMPLIED>
+<!ATTLIST port-component-name id ID #IMPLIED>
+<!ATTLIST service-endpoint-interface id ID #IMPLIED>
+<!ATTLIST service-impl-bean id ID #IMPLIED>
+<!ATTLIST servlet-link id ID #IMPLIED>
+<!ATTLIST small-icon id ID #IMPLIED>
+<!ATTLIST soap-header id ID #IMPLIED>
+<!ATTLIST soap-role id ID #IMPLIED>
+<!ATTLIST webservices id ID #IMPLIED>
+<!ATTLIST webservice-description id ID #IMPLIED>
+<!ATTLIST webservice-description-name id ID #IMPLIED>
+<!ATTLIST wsdl-file id ID #IMPLIED>
+<!ATTLIST wsdl-port id ID #IMPLIED>

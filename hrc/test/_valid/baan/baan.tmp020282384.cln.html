@@ -1,0 +1,143 @@
+  0: <span class='def-Comment def-Syntax'>|******************************************************************************</span>
+  1: <span class='def-Comment def-Syntax'>|* tfzzz0458m002s  0  VRC B402 c4 land</span>
+  2: <span class='def-Comment def-Syntax'>|* Печать формы № Т-1а</span>
+  3: <span class='def-Comment def-Syntax'>|* Белугин Максим                </span>
+  4: <span class='def-Comment def-Syntax'>|* 2001-08-13</span>
+  5: <span class='def-Comment def-Syntax'>|******************************************************************************</span>
+  6: <span class='def-Comment def-Syntax'>|* Main table tfzzz058 Движение работников, Form Type 4</span>
+  7: <span class='def-Comment def-Syntax'>|******************************************************************************</span>
+  8:                                                                                 
+  9: <span class='def-Comment def-Syntax'>|****************************** declaration section ***************************</span>
+ 10: <span class='Baan-baanSection def-KeywordStrong def-Keyword'>declaration</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 11:     <span class='Baan-baanDirective def-Directive'>#include</span> <span class='Baan-baanString def-String'>"itfzzzcommon"</span>
+ 12:     <span class='Baan-baanDirective def-Directive'>#include</span> <span class='Baan-baanString def-String'>"itfzzydomains"</span>
+ 13:     <span class='Baan-baanDirective def-Directive'>#include</span> <span class='Baan-baanString def-String'>"itfzzyerrors"</span>
+ 14:     
+ 15:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll064m01
+ 16:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll003m01
+ 17:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll193
+ 18:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll056m01
+ 19:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll058m01
+ 20:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll058m00
+ 21:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll021m01
+ 22:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll017m01
+ 23:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll019m01
+ 24:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll192
+ 25:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdllt8
+ 26:     
+ 27:     <span class='Baan-baanDirective def-Directive'>#define</span> CR_REP_NAME <span class='Baan-baanString def-String'>"rtfzzz045811004.rpt"</span>
+ 28: 
+ 29:     <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otudlldllreport
+ 30:     <span class='Baan-baanDirective def-Directive'>#include</span>    <span class='Baan-baanString def-String'>"itudllreports"</span>
+ 31: 
+ 32:     <span class='Baan-baanKeyword def-Keyword'>table</span>    ttfzzz058    <span class='def-Comment def-Syntax'>| Движение работников</span>
+ 33: 
+ 34:     <span class='Baan-baanKeyword def-Keyword'>extern</span> <span class='Baan-baanKeyword def-Keyword'>domain</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>str10 number
+ 35:     <span class='Baan-baanKeyword def-Keyword'>extern</span> TDate date<span class='Baan-baanNumber def-Number'>.</span>from<span class='Baan-baanSymbol def-Symbol'>,</span> date<span class='Baan-baanNumber def-Number'>.</span>to<span class='Baan-baanSymbol def-Symbol'>,</span> pr<span class='Baan-baanNumber def-Number'>.</span>date
+ 36:     <span class='Baan-baanKeyword def-Keyword'>extern</span> TCheck only<span class='Baan-baanNumber def-Number'>.</span>done
+ 37:     
+ 38: <span class='Baan-baanDirective def-Directive'>#define</span> kind tfzzz<span class='Baan-baanNumber def-Number'>.</span>pnp<span class='Baan-baanNumber def-Number'>.</span>type<span class='Baan-baanNumber def-Number'>.</span>dismission
+ 39:     
+ 40: <span class='Baan-baanSection def-KeywordStrong def-Keyword'>before.program</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 41:     date<span class='Baan-baanNumber def-Number'>.</span>from<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 42:     date<span class='Baan-baanNumber def-Number'>.</span>to<span class='Baan-baanSymbol def-Symbol'>=</span>DR_MAX_DATE
+ 43: 
+ 44: <span class='Baan-baanSection def-KeywordStrong def-Keyword'>form.1</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 45:     <span class='Baan-baanSection def-KeywordStrong def-Keyword'>init.form</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 46:         <span class='Baan-baanProcedure def-Symbol'>get.screen.defaults</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 47: 
+ 48: <span class='def-Comment def-Syntax'>|****************************** choice section ********************************</span>
+ 49: 
+ 50: <span class='Baan-baanSection def-KeywordStrong def-Keyword'>choice.cont.process</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 51:     <span class='Baan-baanSection def-KeywordStrong def-Keyword'>on.choice</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 52:         <span class='Baan-baanProcedure def-Symbol'>execute</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanConstant def-Constant def-Keyword'>print.data</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 53: 
+ 54: <span class='Baan-baanSection def-KeywordStrong def-Keyword'>choice.print.data</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 55:     <span class='Baan-baanSection def-KeywordStrong def-Keyword'>on.choice</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 56:         read<span class='Baan-baanNumber def-Number'>.</span>main<span class='Baan-baanNumber def-Number'>.</span>table<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 57:         <span class='Baan-baanUserProcedure def-Identifier'>showCurrentError</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 58: 
+ 59: <span class='Baan-baanSection def-KeywordStrong def-Keyword'>field.number:</span>
+ 60:     <span class='Baan-baanSection def-KeywordStrong def-Keyword'>before.zoom</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 61:         <span class='Baan-baanProcedure def-Symbol'>set.enum.values</span><span class='Baan-baanSymbol def-Symbol'>(</span>kind<span class='Baan-baanSymbol def-Symbol'>)</span> 
+ 62: 
+ 63:     <span class='Baan-baanSection def-KeywordStrong def-Keyword'>after.input</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 64:         DetectDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>true</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 65: 
+ 66: <span class='Baan-baanSection def-KeywordStrong def-Keyword'>field.pr.date:</span>
+ 67:     <span class='Baan-baanSection def-KeywordStrong def-Keyword'>before.zoom</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 68:         <span class='Baan-baanProcedure def-Symbol'>set.enum.values</span><span class='Baan-baanSymbol def-Symbol'>(</span>kind<span class='Baan-baanSymbol def-Symbol'>)</span> 
+ 69: 
+ 70:     <span class='Baan-baanSection def-KeywordStrong def-Keyword'>before.input</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 71:         DetectDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>false</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 72: 
+ 73: <span class='def-Comment def-Syntax'>|****************************** function section ******************************</span>
+ 74: 
+ 75: <span class='Baan-baanSection def-KeywordStrong def-Keyword'>functions</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 76: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>String</span> dat<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>long</span> X<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 77:    <span class='Baan-baanKeyword def-Keyword'> if</span> <span class='Baan-baanSymbol def-Symbol'>(</span>X<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>or</span> <span class='Baan-baanSymbol def-Symbol'>(</span>X<span class='Baan-baanSymbol def-Symbol'>=</span>DR_MAX_DATE<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 78:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanString def-String'>""</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 79:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 80:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>cr.date</span><span class='Baan-baanSymbol def-Symbol'>(</span>X<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 81: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 82: 
+ 83: <span class='Baan-baanKeyword def-Keyword'>function</span> read<span class='Baan-baanNumber def-Number'>.</span>main<span class='Baan-baanNumber def-Number'>.</span>table<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 84:     DECLARE_ROWSET<span class='Baan-baanSymbol def-Symbol'>(</span>rsReport<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 85:     <span class='Baan-baanKeyword def-Keyword'>String</span> rsFile<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>128</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 86:     assert<span class='Baan-baanNumber def-Number'>.</span>v<span class='Baan-baanSymbol def-Symbol'>(</span>
+ 87:         <span class='Baan-baanUserProcedure def-Identifier'>open.xml.rowset</span><span class='Baan-baanSymbol def-Symbol'>(</span>spool<span class='Baan-baanNumber def-Number'>.</span>report<span class='Baan-baanSymbol def-Symbol'>,</span> rsFile<span class='Baan-baanSymbol def-Symbol'>,</span> USE_ROWSET<span class='Baan-baanSymbol def-Symbol'>(</span>rsReport<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>></span> <span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>,</span> 
+ 88:         <span class='Baan-baanString def-String'>"Проблема при генерации отчета"</span>
+ 89:     <span class='Baan-baanSymbol def-Symbol'>)</span>
+ 90:     <span class='Baan-baanVariable def-Var'>Date</span> docDate
+ 91:     docDate<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 92:     <span class='Baan-baanSQL def-Directive'>select</span>    tfzzz058.<span class='Baan-baanSymbol def-Symbol'>*</span>
+ 93:     <span class='Baan-baanSQL def-Directive'>from</span>    tfzzz058<span class='Baan-baanSymbol def-Symbol'>,</span> tfzzz100
+ 94:     <span class='Baan-baanSQL def-Directive'>where</span> 
+ 95:         <span class='Baan-baanSymbol def-Symbol'>(</span>
+ 96:                tfzzz058._index4 <span class='Baan-baanSQL def-Directive'>inrange</span> 
+ 97:             <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz.checkbox.true<span class='Baan-baanSymbol def-Symbol'>,</span>  :<span class='Baan-baanSQLParam def-Identifier'>date.from</span><span class='Baan-baanSymbol def-Symbol'>}</span> <span class='Baan-baanSQL def-Directive'>and</span> 
+ 98:             <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz.checkbox.true<span class='Baan-baanSymbol def-Symbol'>,</span> :<span class='Baan-baanSQLParam def-Identifier'>date.to</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 99:             <span class='Baan-baanSQL def-Directive'>or</span>
+100:             <span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz058._index4 <span class='Baan-baanSQL def-Directive'>inrange</span> 
+101:               <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz.checkbox.false<span class='Baan-baanSymbol def-Symbol'>,</span>  :<span class='Baan-baanSQLParam def-Identifier'>date.from</span><span class='Baan-baanSymbol def-Symbol'>}</span> <span class='Baan-baanSQL def-Directive'>and</span> 
+102:               <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz.checkbox.false<span class='Baan-baanSymbol def-Symbol'>,</span> :<span class='Baan-baanSQLParam def-Identifier'>date.to</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+103:               <span class='Baan-baanSQL def-Directive'>and</span>
+104:               :<span class='Baan-baanSQLParam def-Identifier'>only.done</span><span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz.checkbox.false
+105:             <span class='Baan-baanSymbol def-Symbol'>)</span>
+106:         <span class='Baan-baanSymbol def-Symbol'>)</span>        
+107:         <span class='Baan-baanSQL def-Directive'>and</span>
+108:         tfzzz058._index5<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>number</span><span class='Baan-baanSymbol def-Symbol'>,</span> :<span class='Baan-baanSQLParam def-Identifier'>pr.date</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+109:         <span class='Baan-baanSQL def-Directive'>and</span>
+110:         tfzzz058.pnplopty <span class='Baan-baanSQL def-Directive'>refers</span> <span class='Baan-baanSQL def-Directive'>to</span> tfzzz100
+111:         <span class='Baan-baanSQL def-Directive'>and</span>
+112:         tfzzz100.opertype<span class='Baan-baanSymbol def-Symbol'>=</span>kind
+113:     <span class='Baan-baanSQL def-Directive'>selectdo</span>
+114:        <span class='Baan-baanKeyword def-Keyword'> if</span> docDate<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+115:             docDate<span class='Baan-baanSymbol def-Symbol'>=</span>pr<span class='Baan-baanNumber def-Number'>.</span>date
+116:        <span class='Baan-baanKeyword def-Keyword'> endif</span>
+117:         <span class='Baan-baanUserProcedure def-Identifier'>fire.setProps</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>true</span><span class='Baan-baanSymbol def-Symbol'>,</span> <span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+118:             HERR<span class='Baan-baanNumber def-Number'>.</span>V
+119:         <span class='Baan-baanUserProcedure def-Identifier'>write.xml.row</span> <span class='Baan-baanSymbol def-Symbol'>(</span> USE_ROWSET<span class='Baan-baanSymbol def-Symbol'>(</span>rsReport<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanSymbol def-Symbol'>)</span>
+120:     <span class='Baan-baanSQL def-Directive'>endselect</span>
+121:     
+122:     <span class='Baan-baanKeyword def-Keyword'>long</span> dummy
+123:     dummy<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>close.xml.rowset</span><span class='Baan-baanSymbol def-Symbol'>(</span>USE_ROWSET<span class='Baan-baanSymbol def-Symbol'>(</span>rsReport<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+124:     
+125:     <span class='Baan-baanKeyword def-Keyword'>long</span>    activ<span class='Baan-baanNumber def-Number'>.</span>record
+126:     <span class='Baan-baanKeyword def-Keyword'>string</span>  server<span class='Baan-baanNumber def-Number'>.</span>file<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>128</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+127:     activ<span class='Baan-baanNumber def-Number'>.</span>record <span class='Baan-baanSymbol def-Symbol'>=</span> <span class='Baan-baanUserProcedure def-Identifier'>crystal.request.open</span><span class='Baan-baanSymbol def-Symbol'>(</span>CR_REP_NAME<span class='Baan-baanSymbol def-Symbol'>,</span> PLAIN_ROWSET<span class='Baan-baanSymbol def-Symbol'>,</span> rsFile<span class='Baan-baanSymbol def-Symbol'>,</span> server<span class='Baan-baanNumber def-Number'>.</span>file<span class='Baan-baanSymbol def-Symbol'>)</span>
+128:      assert<span class='Baan-baanNumber def-Number'>.</span>v<span class='Baan-baanSymbol def-Symbol'>(</span>activ<span class='Baan-baanNumber def-Number'>.</span>record<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span><span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanString def-String'>"Запись активации не создана"</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+129: 
+130:    <span class='Baan-baanKeyword def-Keyword'> if</span> <span class='Baan-baanUserProcedure def-Identifier'>crystal.close.request</span><span class='Baan-baanSymbol def-Symbol'>(</span>activ<span class='Baan-baanNumber def-Number'>.</span>record<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span><span class='Baan-baanKeyword def-Keyword'> endif</span>
+131:    <span class='Baan-baanKeyword def-Keyword'> if</span> <span class='Baan-baanUserProcedure def-Identifier'>launch.rview</span><span class='Baan-baanSymbol def-Symbol'>(</span>server<span class='Baan-baanNumber def-Number'>.</span>file<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span><span class='Baan-baanKeyword def-Keyword'> endif</span>
+132: <span class='Baan-baanSymbol def-Symbol'>}</span>
+133: 
+134: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>void</span> detectDate<span class='Baan-baanSymbol def-Symbol'>(</span>TBOOL lMode<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+135:    <span class='Baan-baanKeyword def-Keyword'> if</span> <span class='Baan-baanSymbol def-Symbol'>(</span>pr<span class='Baan-baanNumber def-Number'>.</span>date<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>or</span> lMode <span class='Baan-baanKeyword def-Keyword'>then</span>
+136:         <span class='Baan-baanSQL def-Directive'>select</span>    tfzzz058.pnplprdt:<span class='Baan-baanSQLParam def-Identifier'>pr.date</span> <span class='Baan-baanSQL def-Directive'>from</span> tfzzz058 <span class='Baan-baanSQL def-Directive'>where</span>    tfzzz058._index5 <span class='Baan-baanSymbol def-Symbol'>=</span> <span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>number</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+137:         <span class='Baan-baanSQL def-Directive'>as</span> <span class='Baan-baanSQL def-Directive'>set</span> <span class='Baan-baanSQL def-Directive'>with</span> 1 <span class='Baan-baanSQL def-Directive'>rows</span>
+138:         <span class='Baan-baanSQL def-Directive'>selectdo</span>
+139:         <span class='Baan-baanSQL def-Directive'>endselect</span>
+140:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+141: <span class='Baan-baanSymbol def-Symbol'>}</span>
+142: 

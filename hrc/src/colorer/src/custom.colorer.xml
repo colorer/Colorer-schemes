@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+ 
+ <custom-type targetNamespace="uri:colorer:custom">
+  <empty-prefix/>
+  <prefix>c</prefix>
+  <contributors>Cail Lomecb, Eugene Efremov</contributors>
+  <outline>
+   <element name='custom-type' extract='withAttribute' description='custom type declaration'/>
+  </outline>
+  
+ </custom-type>
+
+ <!-- Colorer HRD -->
+
+ <custom-type targetNamespace="http://colorer.sf.net/2003/hrd">
+
+  <empty-prefix/>
+  <contributors>Cail Lomecb, Eugene Efremov</contributors>
+    
+  <type xmlns="http://colorer.sf.net/2003/hrc">
+
+   <scheme name="region-name-content">
+    <regexp match="/~(%xml:NCName;)(\:)(%xml:NCName;) \b/ix" 
+     region1="xmlschema:Scheme.nsprefix" region2="xmlschema:Scheme.nscolon"
+     region3="xmlschema:Scheme.name"
+    />
+   </scheme>
+   <scheme name="color-content">
+    <regexp match="/(\#)([\dA-Fa-f]{6}|[\dA-Fa-f])/"
+     region1="def:NumberPrefix" region2="def:NumberHex"
+    />
+   </scheme>
+   <scheme name="style-content">
+    <regexp match="/\d/" region="def:Number"/>
+   </scheme>
+   
+  </type>
+    
+ </custom-type>
+
+ 
+ <!-- bkt -->
+ 
+ <custom-type targetNamespace="colorer://namespace.xml/2004/bracket">
+  <prefix>bkt</prefix>
+  <empty-prefix/>
+  <contributors>Eugene Efremov</contributors>
+
+  <outline>
+   <element name='block' extract='withAttribute' description='block'/>
+   <element name='name-block' extract='withAttribute' description='named block'/>
+  </outline>
+    
+  <type xmlns="http://colorer.sf.net/2003/hrc">
+   <!-- new contents was here... -->
+   
+   <scheme name="re-string-content">
+    <inherit scheme="hrc:RE-String"/>
+   </scheme>
+   <scheme name="re-string-content-error">
+    <inherit scheme="re-string-content"/>
+   </scheme><!--
+   <scheme name="QName-content">
+    <inherit scheme="hrc:QName-content"/>
+   </scheme>-->
+  
+  </type>
+ </custom-type>
+</custom>

@@ -1,0 +1,7 @@
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\ConEmu]
+"ExtendFonts"=hex:01
+"ExtendFontBoldIdx"=hex:0c
+"ExtendFontItalicIdx"=hex:0e
+"ExtendFontNormalIdx"=hex:01

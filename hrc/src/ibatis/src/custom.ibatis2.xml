@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace='http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+	<!--prefix>ibatis2-sql-map</prefix-->
+	<empty-prefix/>
+	<top-level>
+		<element>sqlMap</element>
+	</top-level>
+</custom-type>
+
+<custom-type targetNamespace='http://ibatis.apache.org/dtd/sql-map-config-2.dtd'>
+	<!--prefix>ibatis2-sql-map-config</prefix-->
+	<empty-prefix/>
+	<top-level>
+		<element>sqlMapConfig</element>
+	</top-level>
+</custom-type>
+
+</custom>

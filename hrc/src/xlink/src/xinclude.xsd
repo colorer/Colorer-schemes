@@ -1,0 +1,78 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xi="http://www.w3.org/2001/XInclude"
+           targetNamespace="http://www.w3.org/2001/XInclude"
+           finalDefault="extension">
+
+<xs:element name="include" type="xi:includeType" />
+
+<xs:complexType name="includeType" mixed="true">
+  <xs:choice minOccurs='0' maxOccurs='unbounded' >
+    <xs:element ref='xi:fallback' />
+    <xs:any namespace='##other' processContents='lax' />
+    <xs:any namespace='##local' processContents='lax' />
+  </xs:choice>
+  <xs:attribute name="href" type="xs:anyURI" use="required"/>
+  <xs:attribute name="parse" use="optional" default="xml"
+                type="xi:parseType" />
+  <xs:attribute name="encoding" type="xs:string" use="optional"/>
+  <xs:anyAttribute namespace="##other" processContents="lax"/>
+</xs:complexType>
+
+<xs:simpleType name="parseType">
+  <xs:restriction base="xs:token">
+    <xs:enumeration value="xml"/>
+    <xs:enumeration value="text"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:element name="fallback" type="xi:fallbackType" />
+
+<xs:complexType name="fallbackType" mixed="true">
+  <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:element ref="xi:include"/>
+    <xs:any namespace="##other" processContents="lax"/>
+    <xs:any namespace="##local" processContents="lax"/>
+  </xs:choice>
+  <xs:anyAttribute namespace="##other" processContents="lax" />
+</xs:complexType>
+
+</xs:schema>
+<!--
+This way I could write a schema that would define the xi:include
+elements that I could process with an XSLT stylesheet, for example:
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xi="http://www.w3.org/2001/XInclude"
+           targetNamespace="http://www.w3.org/2001/XInclude"
+           finalDefault="extension">
+
+<xs:simpleType name="anyURINoFragment">
+  <xs:restriction base="xs:anyURI">
+    <xs:pattern value="[^#]+" />
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:redefine schemaLocation="xinclude.xsd">
+
+<xs:complexType name="includeType">
+  <xs:complexContent mixed="true">
+    <xs:restriction base="xi:includeType">
+      <xs:choice minOccurs='0' maxOccurs='unbounded' >
+        <xs:element ref='xi:fallback' />
+        <xs:any namespace='##other' processContents='lax' />
+        <xs:any namespace='##local' processContents='lax' />
+      </xs:choice>
+      <xs:attribute name="href" type="xs:anyURINoFragment"
+                    use="required"/>
+      <xs:attribute name="parse" use="optional" fixed="xml"
+                    type="xi:parseType" />
+      <xs:attribute name="encoding" use="prohibited"/>
+      <xs:anyAttribute namespace="##other" processContents="lax"/>
+    </xs:restriction>
+  </xs:complexContent>
+</xs:complexType>
+
+</xs:redefine>
+
+</xs:schema>
+-->

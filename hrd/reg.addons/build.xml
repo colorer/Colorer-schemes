@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="reg" default="all" basedir=".">
+
+<property name="target" value="all" description="default subproject target"/>
+
+<target name='hcd2reg'>
+	<ant dir="../apps/hcd2reg" antfile="build.xml" target="${target}">
+		<property name="output" value="console"/>
+		<property name="regpath" value="Console"/>
+	</ant>
+	<ant dir="../apps/hcd2reg" antfile="build.xml" target="${target}">
+		<property name="output" value="conemu"/>
+		<property name="regpath" value="Software\ConEmu"/>
+	</ant>
+</target>
+
+<target name='all' depends="hcd2reg"/>
+
+<target name="clean">
+	<antcall target='all'>
+		<param name='target' value='clean'/>
+	</antcall>
+</target>
+
+<!-- no copy anything by default -->
+<target name='copy'/>
+<target name='copy.clean'/>
+
+
+</project>

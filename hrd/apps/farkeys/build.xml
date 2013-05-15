@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<project name="farkeys" default="farkeys" basedir=".">
+
+<property file='farkeys.properties'/>
+
+<target name="farkeys">
+	<xslt in="${input}" out="${outdir}/${output}" style="farkeys.xsl" classpath="${xslt-classpath}"/>
+</target>
+
+
+<target name="clean">
+	<delete failonerror='false'>
+		<fileset dir="${outdir}" includes="${output}"/>
+	</delete>
+</target>
+
+
+<target name='all' depends="farkeys"/>
+
+</project>

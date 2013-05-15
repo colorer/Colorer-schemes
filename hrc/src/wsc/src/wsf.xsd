@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="uri:wsf" xmlns:wsc="uri:wsc" 
+    targetNamespace="uri:wsf" elementFormDefault="qualified">
+<xs:import namespace="uri:wsc" schemaLocation="wsc.xsd"/>
+
+<xs:annotation><xs:documentation><![CDATA[
+    Windows Script Host (*.wsf) schema. 
+    Written for colorer.take5.
+    File version 1.1
+    
+    (c) Eugene Efremov <4mirror@mail.ru>, 2005
+        techtonik <techtonik@php.net>
+]]></xs:documentation></xs:annotation>
+
+<xs:complexType name="scriptType">
+  <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="language" type="xs:string" use="required" />
+        <xs:attribute name="src" type="xs:anyURI" use="optional" />
+      </xs:extension>
+  </xs:simpleContent>
+</xs:complexType>
+
+
+<xs:complexType name="objectType">
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="classid" type="wsc:classid"/>
+    <xs:attribute name="progid" type="wsc:progid"/>
+</xs:complexType>
+
+
+<xs:complexType name="unnamedType">
+    <xs:attribute name="name" type="xs:token" use="required"/>
+    <xs:attribute name="helpstring" type="xs:string" use="required"/>
+    <xs:attribute name="many" type="xs:boolean" use="optional"/>
+    <xs:attribute name="required" type="xs:boolean" use="optional"/>
+</xs:complexType>
+
+
+<xs:complexType name="namedType">
+    <xs:attribute name="name" type="xs:token" use="required"/>
+    <xs:attribute name="helpstring" type="xs:string" use="required"/>
+    <xs:attribute name="type">
+        <xs:simpleType>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="string"/>
+            <xs:enumeration value="boolean"/>
+            <xs:enumeration value="simple"/>
+        </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="required" type="xs:boolean" use="optional"/>
+</xs:complexType>
+
+
+<xs:element name="runtime">
+    <xs:complexType>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="named" type="namedType" minOccurs="0"/>
+            <xs:element name="unnamed" type="unnamedType" minOccurs="0"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="example" type="xs:string" minOccurs="0"/>
+            <xs:element name="usage" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="job">
+    <xs:complexType>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:sequence maxOccurs="unbounded">
+            <xs:element ref="runtime" minOccurs="0"/>
+            <xs:element name="script" type="scriptType" minOccurs="0"/>
+            <xs:element name="object" type="objectType" minOccurs="0"/>
+            <xs:element ref="wsc:resource" minOccurs="0"/>
+            <xs:element ref="wsc:reference" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="package">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="job" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+</xs:schema>

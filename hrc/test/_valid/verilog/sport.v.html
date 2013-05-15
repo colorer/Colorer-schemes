@@ -1,0 +1,53 @@
+ 0: <span class='verilog-verComment def-Comment def-Syntax'>/*  Synhronous Serial port module for AD733xx chip interfecing  */</span>
+ 1: <span class='verilog-verWord def-Keyword'>module sport</span><span class='def-Symbol'>(</span>
+ 2:     clk<span class='verilog-verSymb def-Symbol'>,</span> rst<span class='verilog-verSymb def-Symbol'>,</span> twt<span class='verilog-verSymb def-Symbol'>,</span> wr0<span class='verilog-verSymb def-Symbol'>,</span> wr1<span class='verilog-verSymb def-Symbol'>,</span> t<span class='verilog-verSymb def-Symbol'>,</span> int<span class='verilog-verSymb def-Symbol'>,</span> s0<span class='verilog-verSymb def-Symbol'>,</span> s1<span class='verilog-verSymb def-Symbol'>,</span>    <span class='def-Comment def-Syntax'>// to core</span>
+ 3:     sclk<span class='verilog-verSymb def-Symbol'>,</span> rx<span class='verilog-verSymb def-Symbol'>,</span> rxfs<span class='verilog-verSymb def-Symbol'>,</span> tx<span class='verilog-verSymb def-Symbol'>,</span> txfs<span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>                    <span class='def-Comment def-Syntax'>// external</span>
+ 4: 
+ 5:     <span class='def-Keyword'>input</span>            clk<span class='verilog-verSymb def-Symbol'>,</span> rst<span class='verilog-verSymb def-Symbol'>,</span> twt<span class='def-Keyword'>;</span>
+ 6:     <span class='def-Keyword'>input</span>            wr0<span class='verilog-verSymb def-Symbol'>,</span> wr1<span class='def-Keyword'>;</span>
+ 7:     <span class='def-Keyword'>input</span>    <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>15</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    t<span class='def-Keyword'>;</span>
+ 8:     <span class='def-Keyword'>output</span>            int<span class='def-Keyword'>;</span>
+ 9:     <span class='def-Keyword'>output</span>    <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>15</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    s0<span class='verilog-verSymb def-Symbol'>,</span> s1<span class='def-Keyword'>;</span>
+10:     <span class='def-Keyword'>input</span>            sclk<span class='verilog-verSymb def-Symbol'>,</span> rx<span class='verilog-verSymb def-Symbol'>,</span> rxfs<span class='def-Keyword'>;</span>
+11:     <span class='def-Keyword'>output</span>            tx<span class='verilog-verSymb def-Symbol'>,</span> txfs<span class='def-Keyword'>;</span>
+12: 
+13:     <span class='def-Comment def-Syntax'>// locals</span>
+14:     <span class='def-Keyword'>reg</span>        <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>15</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    s0<span class='verilog-verSymb def-Symbol'>,</span> s1<span class='def-Keyword'>;</span>
+15:     <span class='def-Keyword'>reg</span>        <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>4</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    count<span class='def-Keyword'>;</span>
+16: 
+17: <span class='def-Comment def-Syntax'>//    wire xclk = twt &amp; clk;</span>
+18: 
+19:     <span class='def-Keyword'>assign</span>    int            <span class='verilog-verSymb def-Symbol'>=</span> count<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span> <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0000</span><span class='def-Keyword'>;</span>
+20:     <span class='def-Keyword'>wire</span>    shift_clock    <span class='verilog-verSymb def-Symbol'>=</span> sclk <span class='verilog-verSymb def-Symbol'>|</span> <span class='verilog-verSymb def-Symbol'>~</span>count<span class='verilog-verNumb def-Number'>[4]</span><span class='def-Keyword'>;</span>
+21: 
+22:     <span class='def-Keyword'>reg</span> w0<span class='verilog-verSymb def-Symbol'>,</span> w1<span class='def-Keyword'>;</span>        <span class='def-Comment def-Syntax'>// write strobe</span>
+23:     <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk) // xclk or negedge rst</span>)
+24: <span class='def-Comment def-Syntax'>//        if(rst==0)    begin w0 &lt;= 0;   w1 &lt;= 0;   end</span>
+25:         if<span class='def-Symbol'>(</span>twt<span class='def-Symbol'>)</span>    <span class='def-Keyword'>begin</span>
+26:             w0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> wr0 <span class='verilog-verSymb def-Symbol'>?</span> <span class='verilog-verNumb def-Number'>1</span> <span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>;</span>
+27:             w1 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> wr1 <span class='verilog-verSymb def-Symbol'>?</span> <span class='verilog-verNumb def-Number'>1</span> <span class='verilog-verSymb def-Symbol'>:</span> <span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>;</span>
+28:         <span class='def-Keyword'>end</span>
+29: 
+30:     <span class='def-Keyword'>reg</span> start<span class='def-Keyword'>;</span>
+31:     <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>negedge rxfs or negedge sclk</span>)
+32:         if <span class='def-Symbol'>(</span><span class='verilog-verSymb def-Symbol'>~</span>sclk<span class='def-Symbol'>)</span>    start <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>;</span>
+33:         else        start <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+34: 
+35:     <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge shift_clock or posedge start</span>)
+36:         if <span class='def-Symbol'>(</span>start<span class='def-Symbol'>)</span>    count <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>5'b11111</span><span class='verilog-verSymb def-Symbol'>;</span>
+37:         else        count <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> count <span class='verilog-verSymb def-Symbol'>-</span> <span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>;</span>
+38: 
+39:     <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge shift_clock or posedge w0</span>)
+40:         if <span class='def-Symbol'>(</span>w0<span class='def-Symbol'>)</span>            s0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> t<span class='verilog-verSymb def-Symbol'>;</span>
+41:         else     if<span class='def-Symbol'>(</span>int<span class='def-Symbol'>)</span>    s0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> s1<span class='verilog-verSymb def-Symbol'>;</span>
+42:                 else    s0 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span>s0<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>14</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>,</span> rx<span class='def-SymbolStrong def-Symbol'>}</span><span class='verilog-verSymb def-Symbol'>;</span>
+43: 
+44:     <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge shift_clock or posedge w1</span>)
+45:         if <span class='def-Symbol'>(</span>w1<span class='def-Symbol'>)</span>            s1 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> t<span class='verilog-verSymb def-Symbol'>;</span>
+46:         else    if<span class='def-Symbol'>(</span>int<span class='def-Symbol'>)</span>    s1 <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span>s0<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>14</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span><span class='verilog-verSymb def-Symbol'>,</span> rx<span class='def-SymbolStrong def-Symbol'>}</span><span class='verilog-verSymb def-Symbol'>;</span>
+47: 
+48:     <span class='def-Keyword'>assign</span> txfs <span class='verilog-verSymb def-Symbol'>=</span> rxfs<span class='def-Keyword'>;</span>
+49:     <span class='def-Keyword'>assign</span> tx <span class='verilog-verSymb def-Symbol'>=</span> s0<span class='verilog-verNumb def-Number'>[15]</span><span class='def-Keyword'>;</span>
+50: 
+51: <span class='verilog-verWord def-Keyword'>endmodule</span>
+52: 

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<project name="util" default="info" basedir=".">
+
+<!-- paths properties -->
+<property file='${root}/../path.properties'/>
+
+<property name="dtd2xsd" value="${root}/apps/dtd2xsd" description="dtd2xsd location"/>
+<property name="xsd2hrc" value="${root}/apps/xsd2hrc" description="xsd2hrc location"/>
+<property name="ent2hrc" value="${root}/apps/ent2hrc" description="ent2hrc location"/>
+<property name="bracket" value="${root}/apps/bracket" description="bracket location"/>
+
+<property name='shemes' value="${root}/../${path.shared}" description='path to dtd, xsd, etc.'/>
+
+
+<!-- all properties -->
+
+<property name="util.input" value="define me!"/>
+<property name="util.output" value="define me!"/>
+<property name="xslt-classpath" value=""/>
+
+<!-- dtd2xsd  -->
+
+<target name="dtd2xsd.prop">
+ <property name="dtd2xsd.map" value="${dtd2xsd}/empty.map"/>
+ <property name="dtd2xsd.pre" value="define me!"/>
+ <property name="dtd2xsd.ns"  value="http://www.w3.org/XML/1998/namespace"/>
+</target>
+
+<target name="dtd2xsd" depends="dtd2xsd.prop">
+ <echo level="info" message="Transform dtd to xsd"/>
+ <exec executable="perl" output="${util.output}">
+  <arg line='${dtd2xsd}/dtd2xsd.pl -mapfile ${dtd2xsd.map} -prefix ${dtd2xsd.pre} -ns "${dtd2xsd.ns}"  ${util.input}'/>
+ </exec> 
+ <delete>
+  <fileset dir="." includes="*.out"/>
+ </delete>
+</target>
+
+<!-- xsd2hrc  -->
+
+<target name="xsd2hrc.prop">
+	<property file="${xsd2hrc}/xsd2hrc.properties"/>
+	<xmlcatalog id="xsd2hrcdtd">
+		<catalogpath>
+			<!--fileset dir='${shemes}' includes='colorer-cat.xml'/-->
+			<fileset dir='${shemes}' includes='colorer.cat'/>
+		</catalogpath>
+	</xmlcatalog>
+</target>
+ 
+<target name="xsd2hrc" depends="xsd2hrc.prop">
+ <xslt in="${util.input}" out="${util.output}" style="${xsd2hrc}/xsd2hrc.xsl" classpath="${xslt-classpath}">
+  <xmlcatalog refid="xsd2hrcdtd"/>
+  <param name="hrctype" expression="${xsd2hrc.hrctype}"/>
+  <!--param name="add-new-references" expression="${xsd2hrc.add-new-references}"/-->
+  <param name="allow-common-attr" expression="${xsd2hrc.allow-common-attr}"/>
+  <param name="allow-any-attr" expression="${xsd2hrc.allow-any-attr}"/>
+  <param name="allow-unknown-elements" expression="${xsd2hrc.allow-unknown-elements}"/>
+  <param name="allow-unknown-root-elements" expression="${xsd2hrc.allow-unknown-root-elements}"/>
+  <param name="force-single-root" expression="${xsd2hrc.force-single-root}"/>
+  <param name="include-prototype" expression="${xsd2hrc.include-prototype}"/>
+  <param name="drop-annotations" expression="${xsd2hrc.drop-annotations}"/>
+  <param name="catalog-path" expression="${xsd2hrc.catalog-path}"/>
+  <param name="custom-defines" expression="${xsd2hrc.custom-defines}"/>
+  <param name="ignore-case-sgml" expression="${xsd2hrc.ignore-case-sgml}"/>
+</xslt>  
+</target>
+
+
+<!-- bracket -->
+
+<target name="bracket">
+ <xslt in="${util.input}" out="${util.output}" style="${bracket}/bracket.xsl" classpath="${xslt-classpath}"/>
+</target>
+
+<!-- ent2hrc -->
+
+<target name="ent2hrc.prop">
+ <property name="ent2hrc.scheme" value=""/>
+</target>
+
+<target name="ent2hrc" depends="ent2hrc.prop">
+ <echo level="info" message="Transform ent to hrc"/>
+ <exec executable="perl" output="${util.output}">
+  <arg line='${ent2hrc}/ent2hrc.pl ${util.input} ${ent2hrc.scheme}'/>
+ </exec> 
+</target>
+
+<!-- final -->
+
+<target name="info">
+ <echo level="info">
+  This ant build file support utilities for colorer-take5:
+   dtd2xsd (perl required)
+   xsd2hrc (xslt required)
+   ent2hrc (perl required)
+   bracket (xslt required)
+ </echo>
+</target>
+
+</project>

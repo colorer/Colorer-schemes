@@ -1,0 +1,116 @@
+
+-- this is a comment
+% this is a comment too % but_this_is_not
+
+some_neutral_text
+
+-- some keywords
+if
+then
+when
+begin
+machine
+table
+
+-- some types
+e : node;
+a2 : input;
+a2 : output;
+a2 : bidir;
+
+-- some build-in primitives
+soft;
+latch;
+lcell;
+a=dff(d,clk);
+dffe;
+global;
+
+
+-- expressions
+a=b+c;
+e=!(!(f & c) # (e&v)); --fixme: "!" not works as operator
+a=b$f;
+s=(r!=4);
+w=(c>=q);
+e=(w)? 1 : B"x";
+s=x;
+
+
+-- groups (никак особо не выдел€ютс€, и да ладно)
+a[7..0]=w.b[7..0];
+ q[1..2];
+  usedw[WIDTHAD-1..0]     : output;   -- # of words in the FIFO
+  usedw[7..ABC_DEF]     : output;   -- # of words in the FIFO
+
+-- identidiers
+  QDF4;
+  name_3;
+  name1;
+
+  -- strings
+  title "string1";
+  if PARAM=="string with quotes  ""here""   " generate
+
+  -- Numbers, decimal
+  a1=-20;
+  a1=+20;
+  b=3+f;
+
+  -- Numbers, binary
+  s=B"1001_0101"; -- ok
+  s=B"11111";
+  s=b"0000";
+  s=B"1Xx";
+  s=B"xx";
+  s=B"x12"; -- bad
+  s=B"xs0"; -- bad
+
+  -- Numbers, hex
+  s=H"abd340x";
+  s=h"3ABD_340X";
+  s=H"aRd34"; -- bad
+
+  -- Numbers, octal
+  s=o"1234567";
+  s=o"12345678";  -- bad
+
+  -- Numbers, quaternary
+  s=q"0123";
+  s=q"01234"; -- bad
+
+-- some structures
+
+    -- case & if/then/else/endif
+    case SS is
+      when S1 => Y2 = Vcc; Y1 = Vcc; Q[] = b"01";
+        if ( ( inp2 == 0 ) & ( inp1 == 0 ) ) then
+          SS = S0;
+        else
+          SS = gnd;
+        end if;
+    end case;
+
+    -- table
+    table
+        SS, inp2, inp1 => Y2, Y1, SS, Q2, Q1;
+        S0,    0,    0 =>  1,  0, S2,  0,  0;
+        S0,    0,    1 =>  1,  0, S1,  0,  0;
+        S0,    1,    0 =>  1,  0, S3,  0,  0;
+        S0,    1,    1 =>  1,  0, S1,  0,  0;
+    end table;
+
+    -- defaults
+    DEFAULTS
+      /local_grant  = VCC;    % active-low output   %
+      /request_out  = VCC;    % signals should default  %
+      /grant_out    = VCC;    % to VCC          %
+    END DEFAULTS;
+
+    -- if/generate
+    if UNDERFLOW_CHECKING=="OFF" generate
+      valid_rreq = rreq;
+    else generate
+      valid_rreq = rreq and !empty;
+    end generate; 
+

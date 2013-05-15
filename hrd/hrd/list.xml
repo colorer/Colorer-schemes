@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<target-list>
+	<group target='con2rgb'>
+		<target in='mirror.hrd' out='mirice.hrd' palette='mirice.xml'/>
+		<target in='mirror.hrd' out='mirror.hrd' palette='mirror.xml'/>
+	</group>
+	<group target='conemu'>
+		<target in='mirror.hrd' out='mirror.hrd'/>
+	</group>
+</target-list>

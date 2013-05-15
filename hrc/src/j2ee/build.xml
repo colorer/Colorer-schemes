@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<project name="src.web-app" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/j2ee" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+
+<!-- hrc util -->
+
+<target name="hrc.prop">
+  <property name="jsrc" value="define me!"/>
+  <property name="hrcname" value="define me!"/>
+  <property name="rootname" value="define me!"/>
+  <property name="allow-unknown-elements" value="no"/>
+</target>
+
+<target name="hrc.check" depends="hrc.prop">
+  <uptodate property="hrc.check" targetfile="${bin}/${hrcname}.xsd">
+    <srcfiles dir="." includes="build.xml"/>
+    <srcfiles dir="${src}"  includes="custom.*.xml,entity.*.xml,entity.*.hrc"/>
+    <srcfiles dir="${jsrc}" includes="*.xsd"/>
+  </uptodate>
+</target>
+
+<target name="hrc" depends="hrc.check, hrc.prop" unless="hrc.check">
+  <ant antfile="${util}" target="xsd2hrc">
+    <property name="util.input" value="${jsrc}/${hrcname}.xsd"/>
+    <property name="util.output" value="${bin}/${hrcname}.hrc"/>
+    <property name='xsd2hrc.hrctype' value='${hrcname}'/>
+    <property name='xsd2hrc.top-level-element' value='${rootname}'/>
+    <property name='xsd2hrc.allow-unknown-elements' value='${allow-unknown-elements}'/>
+    <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.${rootname}.xml'/>
+  </ant>
+</target>
+
+
+<!-- xsd util -->
+
+<target name="xsd.prop">
+  <property name="xname" value="define me!"/>
+  <property name="space" value="http://java.sun.com/j2ee/dtds/${xname}.dtd"/>
+</target>
+
+<target name="xsd.check" depends="xsd.prop">
+  <uptodate property="xsd.check" targetfile="${obj}/${xname}.xsd">
+    <srcfiles dir="." includes="build.xml"/>
+    <srcfiles dir="${src}/dtd" includes="${xname}.dtd"/>
+  </uptodate>
+</target>
+
+<target name="xsd" depends="xsd.check, xsd.prop" unless="xsd.check">
+  <ant antfile="${util}" target="dtd2xsd">
+    <property name="util.input" value="${src}/dtd/${xname}.dtd"/>
+    <property name="util.output" value="${obj}/${xname}.xsd"/>
+    <property name="dtd2xsd.alias" value="yes"/>
+    <property name="dtd2xsd.skipxmlattr" value="yes"/>
+    <property name="dtd2xsd.pre" value="${xname}"/>
+    <property name="dtd2xsd.ns" value="${space}"/>
+  </ant>
+</target>
+
+
+
+<!-- j2ee version 1.2 - 1.3 -->
+<!-- generate xsd from dtd -->
+
+<target name="13.xsd"> 
+  <ant target="xsd">
+    <property name="xname" value="application_1_2"/>
+    <property name="space" value="http://java.sun.com/j2ee/dtds/application_1_2.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="application_1_3"/>
+	<property name="space" value="http://java.sun.com/dtd/application_1_3.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="connector_1_0"/>
+	<property name="space" value="http://java.sun.com/dtd/connector_1_0.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="ejb-jar_1_1"/>
+    <property name="space" value="http://java.sun.com/j2ee/dtds/ejb-jar_1_1.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="ejb-jar_2_0"/>
+	<property name="space" value="http://java.sun.com/dtd/ejb-jar_2_0.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="web-facesconfig_1_0"/>
+	<property name="space" value="http://java.sun.com/dtd/web-facesconfig_1_0.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="web-facesconfig_1_1"/>
+	<property name="space" value="http://java.sun.com/dtd/web-facesconfig_1_1.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="web-app_2_3"/>
+	<property name="space" value="http://java.sun.com/dtd/web-app_2_3.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="web-jsptaglibrary_1_1"/>
+    <property name="space" value="http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="web-jsptaglibrary_1_2"/>
+	<property name="space" value="http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd"/>
+  </ant>
+  <ant target="xsd">
+    <property name="xname" value="j2ee_web_services_1_0"/>
+	<property name="space" value="http://www.ibm.com/webservices/dtd/j2ee_web_services_1_0.dtd"/>
+  </ant>
+</target>
+
+<!-- j2ee version 1.2 - 1.3 -->
+<!-- generate hrc from xsd -->
+
+<target name="13.hrc" depends="13.xsd">
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="application_1_2"/>
+    <property name="rootname" value="application"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="application_1_3"/>
+    <property name="rootname" value="application"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="connector_1_0"/>
+    <property name="rootname" value="connector"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="ejb-jar_1_1"/>
+    <property name="rootname" value="ejb-jar"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="ejb-jar_2_0"/>
+    <property name="rootname" value="ejb-jar"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="web-facesconfig_1_0"/>
+    <property name="rootname" value="faces-config"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="web-facesconfig_1_1"/>
+    <property name="rootname" value="faces-config"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="web-app_2_3"/>
+    <property name="rootname" value="web-app"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="web-jsptaglibrary_1_1"/>
+    <!--<property name="allow-unknown-elements" value="yes"/>-->
+    <property name="rootname" value="taglib"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="web-jsptaglibrary_1_2"/>
+    <!--<property name="allow-unknown-elements" value="yes"/>-->
+    <property name="rootname" value="taglib"/>
+  </ant>  
+  <ant target="hrc">
+    <property name="jsrc" value="${obj}"/>
+    <property name="hrcname" value="j2ee_web_services_1_0"/>
+    <property name="rootname" value="webservices"/>
+  </ant>  
+</target>
+
+
+<!-- j2ee version 1.4 -->
+<target name="14.hrc">
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/j2ee"/>
+    <property name="hrcname" value="application_1_4"/>
+    <property name="rootname" value="application"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/j2ee"/>
+    <property name="hrcname" value="application-client_1_4"/>
+    <property name="rootname" value="application-client"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/j2ee"/>
+    <property name="hrcname" value="connector_1_5"/>
+    <property name="rootname" value="connector"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/j2ee"/>
+    <property name="hrcname" value="ejb-jar_2_1"/>
+    <property name="rootname" value="ejb-jar"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/j2ee"/>
+    <property name="hrcname" value="j2ee_jaxrpc_mapping_1_1"/>
+    <property name="rootname" value="java-wsdl-mapping"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/j2ee"/>
+    <property name="hrcname" value="web-app_2_4"/>
+    <property name="rootname" value="web-app"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/j2ee"/>
+    <property name="hrcname" value="web-jsptaglibrary_2_0"/>
+    <property name="rootname" value="taglib"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/j2ee"/>
+    <property name="hrcname" value="j2ee_web_services_1_1"/>
+    <property name="rootname" value="webservices"/>
+  </ant>
+</target>
+
+<!-- j2ee version 5.0 -->
+<target name="50.hrc">
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/javaee"/>
+    <property name="hrcname" value="application_5"/>
+    <property name="rootname" value="application"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/javaee"/>
+    <property name="hrcname" value="application-client_5"/>
+    <property name="rootname" value="application-client"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/javaee"/>
+    <property name="hrcname" value="ejb-jar_3_0"/>
+    <property name="rootname" value="ejb-jar"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/javaee"/>
+    <property name="hrcname" value="web-facesconfig_1_2"/>
+    <property name="rootname" value="faces-config"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/javaee"/>
+    <property name="hrcname" value="javaee_web_services_metadata_handler_2_0"/>
+    <property name="rootname" value="handler-chains"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/javaee"/>
+    <property name="hrcname" value="web-app_2_5"/>
+    <property name="rootname" value="web-app"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/javaee"/>
+    <property name="hrcname" value="web-jsptaglibrary_2_1"/>
+    <property name="rootname" value="taglib"/>
+  </ant>
+  <ant target="hrc">
+    <property name="jsrc" value="${src}/javaee"/>
+    <property name="hrcname" value="javaee_web_services_1_2"/>
+    <property name="rootname" value="webservices"/>
+  </ant>
+</target>
+
+
+<!-- final -->
+<target name="all" depends="13.hrc,14.hrc,50.hrc"/>
+
+<target name="clean">
+  <delete failonerror='false'>
+    <fileset dir="${obj}" includes="*.*" excludes='.empty'/>
+    <fileset dir="${bin}" includes="application*.hrc, connector*.hrc, ejb-jar*.hrc, web*.hrc, j2ee*.hrc, javaee*.hrc"/>
+  </delete>
+</target>
+
+</project>

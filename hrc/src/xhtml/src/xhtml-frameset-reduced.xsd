@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0" xml:lang="en"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.w3.org/1999/xhtml-frm"
+    xmlns:xhtml-trans="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml-frm"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    elementFormDefault="qualified">
+
+  <xs:annotation>
+    <xs:documentation>
+     NOTE!
+     This is NOT valid scheme for frameset xhtml.
+     Namespace "http://www.w3.org/1999/xhtml1-transitional"
+     is NOT a real namspace.
+     Use this scheme ONLY for colorer xsd2hrc.
+
+     Written by Eugene Efremov (4mirror@mail.ru)
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:import namespace="http://www.w3.org/1999/xhtml"
+    schemaLocation="uri:xhtml.xsd"/>
+    <!-- not real namespace, not real location...-->
+
+  <xs:simpleType name="MultiLengths">
+    <xs:annotation>
+      <xs:documentation>
+      comma-separated list of MultiLength
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern
+          value="[-+]?(\d+|\d+(\.\d+)?%)|[1-9]?(\d+)?\*(,\s*[-+]?(\d+|\d+(\.\d+)?%)|[1-9]?(\d+)?\*)*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+  <xs:element name="html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xhtml-trans:head"/>
+        <xs:element ref="frameset"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="xhtml-trans:i18n"/>
+      <xs:attribute name="id" type="xs:ID"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="frameset">
+    <xs:annotation>
+      <xs:documentation>
+      only one noframes element permitted per document
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="frameset"/>
+        <xs:element ref="frame"/>
+        <xs:element ref="noframes"/>
+      </xs:choice>
+      <xs:attributeGroup ref="xhtml-trans:coreattrs"/>
+      <xs:attribute name="rows" type="MultiLengths"/>
+      <xs:attribute name="cols" type="MultiLengths"/>
+      <xs:attribute name="onload" type="xhtml-trans:Script"/>
+      <xs:attribute name="onunload" type="xhtml-trans:Script"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:annotation>
+    <xs:documentation>
+    reserved frame names start with "_" otherwise starts with letter
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="frame">
+    <xs:annotation>
+      <xs:documentation>
+      tiled window within frameset
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="xhtml-trans:coreattrs"/>
+      <xs:attribute name="longdesc" type="xhtml-trans:URI"/>
+      <xs:attribute name="name" type="xs:NMTOKEN"/>
+      <xs:attribute name="src" type="xhtml-trans:URI"/>
+      <xs:attribute name="frameborder" default="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="marginwidth" type="xhtml-trans:Pixels"/>
+      <xs:attribute name="marginheight" type="xhtml-trans:Pixels"/>
+      <xs:attribute name="noresize">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="noresize"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="scrolling" default="auto">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="yes"/>
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="auto"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="noframes">
+    <xs:annotation>
+      <xs:documentation>
+      alternate content container for non frame-based rendering
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xhtml-trans:body"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="xhtml-trans:attrs"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

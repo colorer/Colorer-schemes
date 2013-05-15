@@ -1,0 +1,129 @@
+//  Source File Name: Openftch.sqlj  %I%
+//
+//  Licensed Materials -- Property of IBM
+//
+//  (c) Copyright International Business Machines Corporation, 1999.
+//      All Rights Reserved.
+//
+//  US Government Users Restricted Rights -
+//  Use, duplication or disclosure restricted by
+//  GSA ADP Schedule Contract with IBM Corp.
+
+//  This sample program shows how to execute 
+//  SQLJ positioned update/delete statements.
+
+// For more information about this sample, refer to the README file.
+
+// For more information on programming in Java, refer to the 
+// "Programming in Java" section of the Application Development Guide.
+
+// For more information on building and running Java programs for DB2,
+// refer to the "Building Java Applets and Applications" section of the 
+// Application Building Guide.
+
+// For more information on the SQL language, refer to the SQL Reference.
+
+import java.sql.*;
+import sqlj.runtime.*;
+import sqlj.runtime.ref.*;
+
+class Openftch 
+{   static
+    {   try
+        {   Class.forName ("COM.ibm.db2.jdbc.app.DB2Driver").newInstance ();
+        } 
+        catch (Exception e)
+        {   System.out.println ("\n  Error loading DB2 Driver...\n");
+            System.out.println (e);
+            System.exit(1);
+        }
+    }
+
+    public static void main(String argv[])
+    {   try 
+        {   System.out.println ("  Java Openftch Sample");
+
+            String url = "jdbc:db2:sample";       // URL is jdbc:db2:dbname
+            Connection con = null;          
+
+            // Set the connection
+            if (argv.length == 0) 
+            {   // connect with default id/password
+                con = DriverManager.getConnection(url);  
+            }
+            else if (argv.length == 2)
+            {   String userid = argv[0];
+                String passwd = argv[1];
+
+                // connect with user-provided username and password
+                con = DriverManager.getConnection(url, userid, passwd); 
+            }
+            else 
+            {   throw new Exception(
+                       "\nUsage: java Openftch [username password]\n");
+            } // if - else if - else 
+
+            // Set the default context
+            DefaultContext ctx = new DefaultContext(con);            
+            DefaultContext.setDefaultContext(ctx);
+
+            // Enable transactions
+            con.setAutoCommit(false);
+
+            // Executing SQLJ positioned update/delete statements.
+            try
+            {   OpF_Curs forUpdateCursor;
+
+                String name = null;
+                short  dept=0;
+ 
+ 
+                #sql forUpdateCursor = 
+                {   SELECT name, dept 
+                        FROM staff
+                        WHERE job='Mgr' 
+                }; // #sql            /* :rk.1:erk. *//* :rk.2:erk. */
+ 
+                while (true) 
+                {   #sql 
+                    {   FETCH :forUpdateCursor
+                            INTO :name, :dept
+                    }; // #sql                        /* :rk.3:erk. */
+                    if (forUpdateCursor.endFetch()) break;
+
+                    if (dept > 40)
+                    {   System.out.println (
+                            name + " in dept. " 
+                            + dept + " will be demoted to Clerk");
+                        #sql
+                        {   UPDATE staff SET job = 'Clerk'
+                            WHERE CURRENT OF :forUpdateCursor
+                        }; // #sql                    /* :rk.4:erk. */
+                    }
+                    else
+                    {   System.out.println (
+                            name + " in dept. " + dept
+                            + " will be DELETED!");
+                        #sql
+                        {   DELETE FROM staff
+                            WHERE CURRENT OF :forUpdateCursor
+                        }; // #sql
+                    } // if - else
+                }
+                forUpdateCursor.close();  /* :rk.5:erk. */
+            }
+            catch( Exception e )
+            {   throw e; 
+            } 
+            finally
+            {   // Rollback the transaction
+                System.out.println("\nRollback the transaction...");
+                #sql { ROLLBACK };
+                System.out.println("Rollback done.");
+            } // try - catch - finally
+        }
+        catch( Exception e )
+        {   System.out.println (e);
+        } // try - catch
+    } // main
+} // class Openftch

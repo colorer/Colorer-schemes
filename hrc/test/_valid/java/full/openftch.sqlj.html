@@ -1,0 +1,130 @@
+  0: <span class='def-LineComment def-Comment def-Syntax'>//  Source File Name: Openftch.sqlj  %I%</span>
+  1: <span class='def-LineComment def-Comment def-Syntax'>//</span>
+  2: <span class='def-LineComment def-Comment def-Syntax'>//  Licensed Materials -- Property of IBM</span>
+  3: <span class='def-LineComment def-Comment def-Syntax'>//</span>
+  4: <span class='def-LineComment def-Comment def-Syntax'>//  (c) Copyright International Business Machines Corporation, 1999.</span>
+  5: <span class='def-LineComment def-Comment def-Syntax'>//      All Rights Reserved.</span>
+  6: <span class='def-LineComment def-Comment def-Syntax'>//</span>
+  7: <span class='def-LineComment def-Comment def-Syntax'>//  US Government Users Restricted Rights -</span>
+  8: <span class='def-LineComment def-Comment def-Syntax'>//  Use, duplication or disclosure restricted by</span>
+  9: <span class='def-LineComment def-Comment def-Syntax'>//  GSA ADP Schedule Contract with IBM Corp.</span>
+ 10: 
+ 11: <span class='def-LineComment def-Comment def-Syntax'>//  This sample program shows how to execute </span>
+ 12: <span class='def-LineComment def-Comment def-Syntax'>//  SQLJ positioned update/delete statements.</span>
+ 13: 
+ 14: <span class='def-LineComment def-Comment def-Syntax'>// For more information about this sample, refer to the README file.</span>
+ 15: 
+ 16: <span class='def-LineComment def-Comment def-Syntax'>// For more information on programming in Java, refer to the </span>
+ 17: <span class='def-LineComment def-Comment def-Syntax'>// "Programming in Java" section of the Application Development Guide.</span>
+ 18: 
+ 19: <span class='def-LineComment def-Comment def-Syntax'>// For more information on building and running Java programs for DB2,</span>
+ 20: <span class='def-LineComment def-Comment def-Syntax'>// refer to the "Building Java Applets and Applications" section of the </span>
+ 21: <span class='def-LineComment def-Comment def-Syntax'>// Application Building Guide.</span>
+ 22: 
+ 23: <span class='def-LineComment def-Comment def-Syntax'>// For more information on the SQL language, refer to the SQL Reference.</span>
+ 24: 
+ 25: <span class='def-Keyword'>import</span><span class='def-Directive'> java</span><span class='def-Symbol'>.</span><span class='def-Directive'>sql</span><span class='def-Symbol'>.</span><span class='def-Keyword'>*</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 26: <span class='def-Keyword'>import</span><span class='def-Directive'> sqlj</span><span class='def-Symbol'>.</span><span class='def-Directive'>runtime</span><span class='def-Symbol'>.</span><span class='def-Keyword'>*</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 27: <span class='def-Keyword'>import</span><span class='def-Directive'> sqlj</span><span class='def-Symbol'>.</span><span class='def-Directive'>runtime</span><span class='def-Symbol'>.</span><span class='def-Directive'>ref</span><span class='def-Symbol'>.</span><span class='def-Keyword'>*</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 28: 
+ 29: <span class='def-Keyword'>class</span> Openftch 
+ 30: <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='java-KeywordModifier def-Keyword'>static</span>
+ 31:     <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-Keyword'>try</span>
+ 32:         <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-ClassKeyword def-Keyword'>Class</span><span class='def-Symbol'>.</span>forName <span class='def-Symbol'>(</span><span class='def-String'>"COM.ibm.db2.jdbc.app.DB2Driver"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>.</span>newInstance <span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 33:         <span class='def-SymbolStrong def-Symbol'>}</span> 
+ 34:         <span class='def-Keyword'>catch</span> <span class='def-Symbol'>(</span><span class='def-ClassKeyword def-Keyword'>Exception</span> e<span class='def-Symbol'>)</span>
+ 35:         <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println <span class='def-Symbol'>(</span><span class='def-String'>"</span><span class='java-StringEscape def-StringContent def-String'>\n</span><span class='def-String'>  Error loading DB2 Driver...</span><span class='java-StringEscape def-StringContent def-String'>\n</span><span class='def-String'>"</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 36:             <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println <span class='def-Symbol'>(</span>e<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 37:             <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>exit<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 38:         <span class='def-SymbolStrong def-Symbol'>}</span>
+ 39:     <span class='def-SymbolStrong def-Symbol'>}</span>
+ 40: 
+ 41:     <span class='java-KeywordModifier def-Keyword'>public</span> <span class='java-KeywordModifier def-Keyword'>static</span> <span class='def-TypeKeyword def-Keyword'>void</span> main<span class='def-Symbol'>(</span><span class='def-ClassKeyword def-Keyword'>String</span> argv<span class='def-Symbol'>[</span><span class='def-Symbol'>]</span><span class='def-Symbol'>)</span>
+ 42:     <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-Keyword'>try</span> 
+ 43:         <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println <span class='def-Symbol'>(</span><span class='def-String'>"  Java Openftch Sample"</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 44: 
+ 45:             <span class='def-ClassKeyword def-Keyword'>String</span> url <span class='def-Symbol'>=</span> <span class='def-String'>"jdbc:db2:sample"</span><span class='def-SymbolStrong def-Symbol'>;</span>       <span class='def-LineComment def-Comment def-Syntax'>// URL is jdbc:db2:dbname</span>
+ 46:             <span class='def-ClassKeyword def-Keyword'>Connection</span> con <span class='def-Symbol'>=</span> <span class='def-Keyword'>null</span><span class='def-SymbolStrong def-Symbol'>;</span>          
+ 47: 
+ 48:             <span class='def-LineComment def-Comment def-Syntax'>// Set the connection</span>
+ 49:             <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>argv<span class='def-Symbol'>.</span>length <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> 
+ 50:             <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-LineComment def-Comment def-Syntax'>// connect with default id/password</span>
+ 51:                 con <span class='def-Symbol'>=</span> <span class='def-ClassKeyword def-Keyword'>DriverManager</span><span class='def-Symbol'>.</span>getConnection<span class='def-Symbol'>(</span>url<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>  
+ 52:             <span class='def-SymbolStrong def-Symbol'>}</span>
+ 53:             <span class='def-Keyword'>else</span> <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>argv<span class='def-Symbol'>.</span>length <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>)</span>
+ 54:             <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-ClassKeyword def-Keyword'>String</span> userid <span class='def-Symbol'>=</span> argv<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>]</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 55:                 <span class='def-ClassKeyword def-Keyword'>String</span> passwd <span class='def-Symbol'>=</span> argv<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>]</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 56: 
+ 57:                 <span class='def-LineComment def-Comment def-Syntax'>// connect with user-provided username and password</span>
+ 58:                 con <span class='def-Symbol'>=</span> <span class='def-ClassKeyword def-Keyword'>DriverManager</span><span class='def-Symbol'>.</span>getConnection<span class='def-Symbol'>(</span>url<span class='def-Symbol'>,</span> userid<span class='def-Symbol'>,</span> passwd<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span> 
+ 59:             <span class='def-SymbolStrong def-Symbol'>}</span>
+ 60:             <span class='def-Keyword'>else</span> 
+ 61:             <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-Keyword'>throw</span> <span class='def-Keyword'>new</span> <span class='def-ClassKeyword def-Keyword'>Exception</span><span class='def-Symbol'>(</span>
+ 62:                        <span class='def-String'>"</span><span class='java-StringEscape def-StringContent def-String'>\n</span><span class='def-String'>Usage: java Openftch [username password]</span><span class='java-StringEscape def-StringContent def-String'>\n</span><span class='def-String'>"</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 63:             <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-LineComment def-Comment def-Syntax'>// if - else if - else </span>
+ 64: 
+ 65:             <span class='def-LineComment def-Comment def-Syntax'>// Set the default context</span>
+ 66:             DefaultContext ctx <span class='def-Symbol'>=</span> <span class='def-Keyword'>new</span> DefaultContext<span class='def-Symbol'>(</span>con<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>            
+ 67:             DefaultContext<span class='def-Symbol'>.</span>setDefaultContext<span class='def-Symbol'>(</span>ctx<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 68: 
+ 69:             <span class='def-LineComment def-Comment def-Syntax'>// Enable transactions</span>
+ 70:             con<span class='def-Symbol'>.</span>setAutoCommit<span class='def-Symbol'>(</span><span class='def-Keyword'>false</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 71: 
+ 72:             <span class='def-LineComment def-Comment def-Syntax'>// Executing SQLJ positioned update/delete statements.</span>
+ 73:             <span class='def-Keyword'>try</span>
+ 74:             <span class='def-SymbolStrong def-Symbol'>{</span>   OpF_Curs forUpdateCursor<span class='def-SymbolStrong def-Symbol'>;</span>
+ 75: 
+ 76:                 <span class='def-ClassKeyword def-Keyword'>String</span> name <span class='def-Symbol'>=</span> <span class='def-Keyword'>null</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 77:                 <span class='def-TypeKeyword def-Keyword'>short</span>  dept<span class='def-Symbol'>=</span><span class='def-NumberDec def-Number'>0</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 78:  
+ 79:  
+ 80:                 <span class='def-Directive'>#sql forUpdateCursor </span><span class='sql-sqlSymb def-Symbol'>=</span><span class='def-Directive'> </span>
+ 81: <span class='def-Directive'>                </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'>   </span><span class='sql-tsqlWord def-Keyword'>SELECT</span><span class='def-Directive'> name</span><span class='sql-sqlSymb def-Symbol'>,</span><span class='def-Directive'> dept </span>
+ 82: <span class='def-Directive'>                        </span><span class='sql-tsqlWord def-Keyword'>FROM</span><span class='def-Directive'> staff</span>
+ 83: <span class='def-Directive'>                        </span><span class='sql-tsqlWord def-Keyword'>WHERE</span><span class='def-Directive'> job</span><span class='sql-sqlSymb def-Symbol'>=</span><span class='sql-sqlString def-String'>'Mgr'</span><span class='def-Directive'> </span>
+ 84: <span class='def-Directive'>                </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql            /* :rk.1:erk. *//* :rk.2:erk. */</span>
+ 85:  
+ 86:                 <span class='def-Keyword'>while</span> <span class='def-Symbol'>(</span><span class='def-Keyword'>true</span><span class='def-Symbol'>)</span> 
+ 87:                 <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-Directive'>#sql </span>
+ 88: <span class='def-Directive'>                    </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'>   </span><span class='sql-tsqlWord def-Keyword'>FETCH</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>forUpdateCursor</span><span class='def-Directive'></span>
+ 89: <span class='def-Directive'>                            </span><span class='sql-tsqlWord def-Keyword'>INTO</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>name</span><span class='sql-sqlSymb def-Symbol'>,</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>dept</span><span class='def-Directive'></span>
+ 90: <span class='def-Directive'>                    </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql                        /* :rk.3:erk. */</span>
+ 91:                     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>forUpdateCursor<span class='def-Symbol'>.</span>endFetch<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>break</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 92: 
+ 93:                     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>dept <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>40</span><span class='def-Symbol'>)</span>
+ 94:                     <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println <span class='def-Symbol'>(</span>
+ 95:                             name <span class='def-Symbol'>+</span> <span class='def-String'>" in dept. "</span> 
+ 96:                             <span class='def-Symbol'>+</span> dept <span class='def-Symbol'>+</span> <span class='def-String'>" will be demoted to Clerk"</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 97:                         <span class='def-Directive'>#sql</span>
+ 98: <span class='def-Directive'>                        </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'>   </span><span class='sql-tsqlWord def-Keyword'>UPDATE</span><span class='def-Directive'> staff </span><span class='sql-tsqlWord def-Keyword'>SET</span><span class='def-Directive'> job </span><span class='sql-sqlSymb def-Symbol'>=</span><span class='def-Directive'> </span><span class='sql-sqlString def-String'>'Clerk'</span><span class='def-Directive'></span>
+ 99: <span class='def-Directive'>                            </span><span class='sql-tsqlWord def-Keyword'>WHERE</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>CURRENT</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>OF</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>forUpdateCursor</span><span class='def-Directive'></span>
+100: <span class='def-Directive'>                        </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql                    /* :rk.4:erk. */</span>
+101:                     <span class='def-SymbolStrong def-Symbol'>}</span>
+102:                     <span class='def-Keyword'>else</span>
+103:                     <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println <span class='def-Symbol'>(</span>
+104:                             name <span class='def-Symbol'>+</span> <span class='def-String'>" in dept. "</span> <span class='def-Symbol'>+</span> dept
+105:                             <span class='def-Symbol'>+</span> <span class='def-String'>" will be DELETED!"</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+106:                         <span class='def-Directive'>#sql</span>
+107: <span class='def-Directive'>                        </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'>   </span><span class='sql-tsqlWord def-Keyword'>DELETE</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>FROM</span><span class='def-Directive'> staff</span>
+108: <span class='def-Directive'>                            </span><span class='sql-tsqlWord def-Keyword'>WHERE</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>CURRENT</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>OF</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>forUpdateCursor</span><span class='def-Directive'></span>
+109: <span class='def-Directive'>                        </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql</span>
+110:                     <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-LineComment def-Comment def-Syntax'>// if - else</span>
+111:                 <span class='def-SymbolStrong def-Symbol'>}</span>
+112:                 forUpdateCursor<span class='def-Symbol'>.</span>close<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>/* :rk.5:erk. */</span>
+113:             <span class='def-SymbolStrong def-Symbol'>}</span>
+114:             <span class='def-Keyword'>catch</span><span class='def-Symbol'>(</span> <span class='def-ClassKeyword def-Keyword'>Exception</span> e <span class='def-Symbol'>)</span>
+115:             <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-Keyword'>throw</span> e<span class='def-SymbolStrong def-Symbol'>;</span> 
+116:             <span class='def-SymbolStrong def-Symbol'>}</span> 
+117:             <span class='def-Keyword'>finally</span>
+118:             <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-LineComment def-Comment def-Syntax'>// Rollback the transaction</span>
+119:                 <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println<span class='def-Symbol'>(</span><span class='def-String'>"</span><span class='java-StringEscape def-StringContent def-String'>\n</span><span class='def-String'>Rollback the transaction..."</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+120:                 <span class='def-Directive'>#sql </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>ROLLBACK</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span>
+121:                 <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println<span class='def-Symbol'>(</span><span class='def-String'>"Rollback done."</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+122:             <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-LineComment def-Comment def-Syntax'>// try - catch - finally</span>
+123:         <span class='def-SymbolStrong def-Symbol'>}</span>
+124:         <span class='def-Keyword'>catch</span><span class='def-Symbol'>(</span> <span class='def-ClassKeyword def-Keyword'>Exception</span> e <span class='def-Symbol'>)</span>
+125:         <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println <span class='def-Symbol'>(</span>e<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+126:         <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-LineComment def-Comment def-Syntax'>// try - catch</span>
+127:     <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-LineComment def-Comment def-Syntax'>// main</span>
+128: <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-LineComment def-Comment def-Syntax'>// class Openftch</span>
+129: 

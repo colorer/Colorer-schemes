@@ -1,0 +1,410 @@
+  0: <span class='forth-forComment def-Comment def-Syntax'>\ @(#) trace.fth 98/01/28 1.2</span>
+  1: <span class='forth-forComment def-Comment def-Syntax'>\ TRACE ( &lt;name> -- , trace pForth word )</span>
+  2: <span class='forth-forComment def-Comment def-Syntax'>\</span>
+  3: <span class='forth-forComment def-Comment def-Syntax'>\ Single step debugger.</span>
+  4: <span class='forth-forComment def-Comment def-Syntax'>\   TRACE  ( i*x &lt;name> -- , setup trace for Forth word )</span>
+  5: <span class='forth-forComment def-Comment def-Syntax'>\   S      ( -- , step over )</span>
+  6: <span class='forth-forComment def-Comment def-Syntax'>\   SM     ( many -- , step over many times )</span>
+  7: <span class='forth-forComment def-Comment def-Syntax'>\   SD     ( -- , step down )</span>
+  8: <span class='forth-forComment def-Comment def-Syntax'>\   G      ( -- , go to end of word )</span>
+  9: <span class='forth-forComment def-Comment def-Syntax'>\   GD     ( n -- , go down N levels from current level, stop at end of this level )</span>
+ 10: <span class='forth-forComment def-Comment def-Syntax'>\</span>
+ 11: <span class='forth-forComment def-Comment def-Syntax'>\ This debugger works by emulating the inner interpreter of pForth.</span>
+ 12: <span class='forth-forComment def-Comment def-Syntax'>\ It executes code and maintains a separate return stack for the</span>
+ 13: <span class='forth-forComment def-Comment def-Syntax'>\ program under test.  Thus all primitives that operate on the return</span>
+ 14: <span class='forth-forComment def-Comment def-Syntax'>\ stack, such as DO and R> must be trapped.  Local variables must</span>
+ 15: <span class='forth-forComment def-Comment def-Syntax'>\ also be handled specially.  Several state variables are also</span>
+ 16: <span class='forth-forComment def-Comment def-Syntax'>\ saved and restored to establish the context for the program being</span>
+ 17: <span class='forth-forComment def-Comment def-Syntax'>\ tested.</span>
+ 18: <span class='forth-forComment def-Comment def-Syntax'>\    </span>
+ 19: <span class='forth-forComment def-Comment def-Syntax'>\ Copyright 1997 Phil Burk</span>
+ 20: 
+ 21: anew task-trace.fth
+ 22: 
+ 23: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>SPACE.TO.COLUMN</span> <span class='forth-forComment def-Comment def-Syntax'> ( col -- )</span> out <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>spaces</span><span class='forth-forWord def-Keyword'> ;</span>
+ 24: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>IS.PRIMITIVE?</span><span class='forth-forComment def-Comment def-Syntax'> ( xt -- flag , true if kernel primitive )</span>
+ 25:     <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>first_colon</span> <span class='forth-forWord def-Keyword'>&lt;</span><span class='forth-forWord def-Keyword'> ;</span>
+ 26: 
+ 27: <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>value</span> <span class='forth-forWordDefinition def-Keyword'>TRACE-BEGWORD_IP</span><span class='forth-forComment def-Comment def-Syntax'> \ Instruction pointer begining of words</span>
+ 28: <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>value</span> <span class='forth-forWordDefinition def-Keyword'>TRACE_IP</span>        <span class='forth-forComment def-Comment def-Syntax'> \ instruction pointer</span>
+ 29: <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>value</span> <span class='forth-forWordDefinition def-Keyword'>TRACE_LEVEL</span>     <span class='forth-forComment def-Comment def-Syntax'> \ level of descent for inner interpreter</span>
+ 30: <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>value</span> <span class='forth-forWordDefinition def-Keyword'>TRACE_LEVEL_MAX</span> <span class='forth-forComment def-Comment def-Syntax'> \ maximum level of descent</span>
+ 31: 
+ 32: private{
+ 33: 
+ 34: <span class='forth-forComment def-Comment def-Syntax'>\ use fake return stack</span>
+ 35: <span class='forth-forNumb def-Number'>128</span> <span class='forth-forWord def-Keyword'>cells</span> <span class='forth-forWord def-Keyword'>constant</span> <span class='forth-forWordDefinition def-Keyword'>TRACE_RETURN_SIZE</span><span class='forth-forComment def-Comment def-Syntax'> \ size of return stack in bytes</span>
+ 36: <span class='forth-forWord def-Keyword'>create</span> <span class='forth-forWordDefinition def-Keyword'>TRACE-RETURN-STACK</span> TRACE_RETURN_SIZE <span class='forth-forNumb def-Number'>16</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>allot</span>
+ 37: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>TRACE-RSP</span>
+ 38: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.>R</span>    <span class='forth-forComment def-Comment def-Syntax'> ( n -- )</span> trace-rsp <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>cell-</span> <span class='forth-forWord def-Keyword'>dup</span> trace-rsp <span class='forth-forWord def-Keyword'>!</span> <span class='forth-forWord def-Keyword'>!</span><span class='forth-forWord def-Keyword'> ;</span> <span class='forth-forComment def-Comment def-Syntax'> \ *(--rsp) = n</span>
+ 39: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.R></span>    <span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> trace-rsp <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>cell+</span> trace-rsp <span class='forth-forWord def-Keyword'>!</span><span class='forth-forWord def-Keyword'> ;</span> <span class='forth-forComment def-Comment def-Syntax'> \ n = *rsp++</span>
+ 40: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.R@</span>    <span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> trace-rsp <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>@</span><span class='forth-forWord def-Keyword'> ;</span><span class='forth-forComment def-Comment def-Syntax'> \ n = *rsp</span>
+ 41: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.RPICK</span> <span class='forth-forComment def-Comment def-Syntax'> ( index -- n )</span> <span class='forth-forWord def-Keyword'>cells</span> trace-rsp <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>@</span><span class='forth-forWord def-Keyword'> ;</span><span class='forth-forComment def-Comment def-Syntax'> \ n = rsp[index]</span>
+ 42: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.0RP</span>   <span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> trace-return-stack trace_return_size <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forNumb def-Number'>8</span> <span class='forth-forWord def-Keyword'>+</span> trace-rsp <span class='forth-forWord def-Keyword'>!</span><span class='forth-forWord def-Keyword'> ;</span>
+ 43: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.RDROP</span> <span class='forth-forComment def-Comment def-Syntax'> ( --  )</span> <span class='forth-forWord def-Keyword'>cell</span> trace-rsp <span class='forth-forWord def-Keyword'>+!</span><span class='forth-forWord def-Keyword'> ;</span>
+ 44: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.RCHECK</span><span class='forth-forComment def-Comment def-Syntax'> ( -- , abort if return stack out of range )</span>
+ 45:     trace-rsp <span class='forth-forWord def-Keyword'>@</span> trace-return-stack <span class='forth-forWord def-Keyword'>u&lt;</span>
+ 46:     <span class='forth-forWord def-Keyword'>abort" </span><span class='forth-forString def-String'>TRACE return stack OVERFLOW!</span><span class='forth-forWord def-Keyword'>"</span>
+ 47:     trace-rsp <span class='forth-forWord def-Keyword'>@</span> trace-return-stack trace_return_size <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forNumb def-Number'>12</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>u></span>
+ 48:     <span class='forth-forWord def-Keyword'>abort" </span><span class='forth-forString def-String'>TRACE return stack UNDERFLOW!</span><span class='forth-forWord def-Keyword'>"</span><span class='forth-forWord def-Keyword'> ;</span>
+ 49: 
+ 50: <span class='forth-forComment def-Comment def-Syntax'>\ save and restore several state variables</span>
+ 51: <span class='forth-forNumb def-Number'>10</span> <span class='forth-forWord def-Keyword'>cells</span> <span class='forth-forWord def-Keyword'>constant</span> <span class='forth-forWordDefinition def-Keyword'>TRACE_STATE_SIZE</span>
+ 52: <span class='forth-forWord def-Keyword'>create</span> <span class='forth-forWordDefinition def-Keyword'>TRACE-STATE-1</span> TRACE_STATE_SIZE <span class='forth-forWord def-Keyword'>allot</span>
+ 53: <span class='forth-forWord def-Keyword'>create</span> <span class='forth-forWordDefinition def-Keyword'>TRACE-STATE-2</span> TRACE_STATE_SIZE <span class='forth-forWord def-Keyword'>allot</span>
+ 54: 
+ 55: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>TRACE-STATE-PTR</span>
+ 56: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.SAVE++</span><span class='forth-forComment def-Comment def-Syntax'> ( addr -- , save next thing )</span>
+ 57:     <span class='forth-forWord def-Keyword'>@</span> trace-state-ptr <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>!</span>
+ 58:     <span class='forth-forWord def-Keyword'>cell</span> trace-state-ptr <span class='forth-forWord def-Keyword'>+!</span><span class='forth-forWord def-Keyword'> ;</span>
+ 59: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.SAVE.STATE</span> <span class='forth-forComment def-Comment def-Syntax'> ( -- )</span>
+ 60:     <span class='forth-forWord def-Keyword'>state</span> trace.save++
+ 61:     <span class='forth-forWord def-Keyword'>hld</span>   trace.save++
+ 62:     <span class='forth-forWord def-Keyword'>base</span>  trace.save++<span class='forth-forWord def-Keyword'> ;</span>
+ 63: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.SAVE.STATE1</span> <span class='forth-forComment def-Comment def-Syntax'> ( -- , save normal state )</span>
+ 64:     trace-state-1 trace-state-ptr <span class='forth-forWord def-Keyword'>!</span>
+ 65:     trace.save.state<span class='forth-forWord def-Keyword'> ;</span>
+ 66: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.SAVE.STATE2</span> <span class='forth-forComment def-Comment def-Syntax'> ( -- , save state of word being debugged )</span>
+ 67:     trace-state-2 trace-state-ptr <span class='forth-forWord def-Keyword'>!</span>
+ 68:     trace.save.state<span class='forth-forWord def-Keyword'> ;</span>
+ 69: 
+ 70: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.RESTORE++</span><span class='forth-forComment def-Comment def-Syntax'> ( addr -- , restore next thing )</span>
+ 71:     trace-state-ptr <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>!</span>
+ 72:     <span class='forth-forWord def-Keyword'>cell</span> trace-state-ptr <span class='forth-forWord def-Keyword'>+!</span><span class='forth-forWord def-Keyword'> ;</span>
+ 73: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.RESTORE.STATE</span> <span class='forth-forComment def-Comment def-Syntax'> ( -- )</span>
+ 74:     <span class='forth-forWord def-Keyword'>state</span> trace.restore++
+ 75:     <span class='forth-forWord def-Keyword'>hld</span>   trace.restore++
+ 76:     <span class='forth-forWord def-Keyword'>base</span>  trace.restore++<span class='forth-forWord def-Keyword'> ;</span>
+ 77: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.RESTORE.STATE1</span> <span class='forth-forComment def-Comment def-Syntax'> ( -- )</span>
+ 78:     trace-state-1 trace-state-ptr <span class='forth-forWord def-Keyword'>!</span>
+ 79:     trace.restore.state<span class='forth-forWord def-Keyword'> ;</span>
+ 80: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.RESTORE.STATE2</span> <span class='forth-forComment def-Comment def-Syntax'> ( -- )</span>
+ 81:     trace-state-2 trace-state-ptr <span class='forth-forWord def-Keyword'>!</span>
+ 82:     trace.restore.state<span class='forth-forWord def-Keyword'> ;</span>
+ 83: 
+ 84: <span class='forth-forComment def-Comment def-Syntax'>\ The implementation of these pForth primitives is specific to pForth.</span>
+ 85: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>TRACE-LOCALS-PTR</span> <span class='forth-forComment def-Comment def-Syntax'> \ point to top of local frame</span>
+ 86: 
+ 87: <span class='forth-forComment def-Comment def-Syntax'>\ create a return stack frame for NUM local variables</span>
+ 88: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(LOCAL.ENTRY)</span> <span class='forth-forComment def-Comment def-Syntax'> ( x0 x1 ... xn n -- )</span>  <span class='forth-forWord def-Keyword'>{</span> num <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> lp</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'> nothink</span><span class='forth-forWord def-Keyword'> }</span>
+ 89:     trace-locals-ptr <span class='forth-forWord def-Keyword'>@</span> trace.>r
+ 90:     trace-rsp <span class='forth-forWord def-Keyword'>@</span> trace-locals-ptr <span class='forth-forWord def-Keyword'>!</span>
+ 91:     trace-rsp <span class='forth-forWord def-Keyword'>@</span>  num <span class='forth-forWord def-Keyword'>cells</span> <span class='forth-forWord def-Keyword'>-</span> trace-rsp <span class='forth-forWord def-Keyword'>!</span> <span class='forth-forComment def-Comment def-Syntax'> \ make room for locals</span>
+ 92:     trace-rsp <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> lp
+ 93:     num <span class='forth-forNumb def-Number'>0</span>
+ 94:     <span class='forth-forResWord def-Label'>DO</span> lp <span class='forth-forWord def-Keyword'>!</span> <span class='forth-forWord def-Keyword'>cell</span> +-> lp <span class='forth-forComment def-Comment def-Syntax'> \ move data into locals frame on return stack</span>
+ 95:     <span class='forth-forResWord def-Label'>LOOP</span><span class='forth-forWord def-Keyword'> ;</span>
+ 96:     
+ 97: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(LOCAL.EXIT)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- )</span>
+ 98:     trace-locals-ptr <span class='forth-forWord def-Keyword'>@</span>  trace-rsp <span class='forth-forWord def-Keyword'>!</span>
+ 99:     trace.r> trace-locals-ptr <span class='forth-forWord def-Keyword'>!</span><span class='forth-forWord def-Keyword'> ;</span>
+100: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( l# -- n , fetch from local frame )</span>
+101:     trace-locals-ptr <span class='forth-forWord def-Keyword'>@</span>  <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>cells</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>@</span><span class='forth-forWord def-Keyword'> ;</span>
+102: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(1_LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>1</span> trace.(local@)<span class='forth-forWord def-Keyword'> ;</span>
+103: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(2_LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>2</span> trace.(local@)<span class='forth-forWord def-Keyword'> ;</span>
+104: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(3_LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>3</span> trace.(local@)<span class='forth-forWord def-Keyword'> ;</span>
+105: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(4_LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>4</span> trace.(local@)<span class='forth-forWord def-Keyword'> ;</span>
+106: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(5_LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>5</span> trace.(local@)<span class='forth-forWord def-Keyword'> ;</span>
+107: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(6_LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>6</span> trace.(local@)<span class='forth-forWord def-Keyword'> ;</span>
+108: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(7_LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>7</span> trace.(local@)<span class='forth-forWord def-Keyword'> ;</span>
+109: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(8_LOCAL@)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>8</span> trace.(local@)<span class='forth-forWord def-Keyword'> ;</span>
+110: 
+111: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( n l# -- , store into local frame )</span>
+112:     trace-locals-ptr <span class='forth-forWord def-Keyword'>@</span>  <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>cells</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>!</span><span class='forth-forWord def-Keyword'> ;</span>
+113: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(1_LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>1</span> trace.(local!)<span class='forth-forWord def-Keyword'> ;</span>
+114: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(2_LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>2</span> trace.(local!)<span class='forth-forWord def-Keyword'> ;</span>
+115: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(3_LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>3</span> trace.(local!)<span class='forth-forWord def-Keyword'> ;</span>
+116: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(4_LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>4</span> trace.(local!)<span class='forth-forWord def-Keyword'> ;</span>
+117: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(5_LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>5</span> trace.(local!)<span class='forth-forWord def-Keyword'> ;</span>
+118: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(6_LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>6</span> trace.(local!)<span class='forth-forWord def-Keyword'> ;</span>
+119: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(7_LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>7</span> trace.(local!)<span class='forth-forWord def-Keyword'> ;</span>
+120: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(8_LOCAL!)</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span> <span class='forth-forNumb def-Number'>8</span> trace.(local!)<span class='forth-forWord def-Keyword'> ;</span>
+121: 
+122: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(LOCAL+!)</span><span class='forth-forComment def-Comment def-Syntax'> ( n l# -- , store into local frame )</span>
+123:     trace-locals-ptr <span class='forth-forWord def-Keyword'>@</span>  <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>cells</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>+!</span><span class='forth-forWord def-Keyword'> ;</span>
+124: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(?DO)</span>  <span class='forth-forWord def-Keyword'>{</span> limit start ip <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'> ip'</span><span class='forth-forWord def-Keyword'> }</span>
+125:     limit start <span class='forth-forWord def-Keyword'>=</span>
+126:     <span class='forth-forResWord def-Label'>IF</span>  ip <span class='forth-forWord def-Keyword'>@</span> +-> ip<span class='forth-forComment def-Comment def-Syntax'> \ BRANCH</span>
+127:     <span class='forth-forResWord def-Label'>ELSE</span>
+128:         start trace.>r
+129:         limit trace.>r
+130:         <span class='forth-forWord def-Keyword'>cell</span> +-> ip
+131:     <span class='forth-forResWord def-Label'>THEN</span> ip<span class='forth-forWord def-Keyword'> ;</span>
+132: 
+133: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(LOOP)</span>  <span class='forth-forWord def-Keyword'>{</span> ip <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> limit indx</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'> ip'</span><span class='forth-forWord def-Keyword'> }</span>
+134:     trace.r> <span class='forth-forWord def-Keyword'>-></span> limit
+135:     trace.r> <span class='forth-forWord def-Keyword'>1+</span> <span class='forth-forWord def-Keyword'>-></span> indx
+136:     limit indx <span class='forth-forWord def-Keyword'>=</span>
+137:     <span class='forth-forResWord def-Label'>IF</span>
+138:         <span class='forth-forWord def-Keyword'>cell</span> +-> ip
+139:     <span class='forth-forResWord def-Label'>ELSE</span>
+140:         indx trace.>r
+141:         limit trace.>r
+142:         ip <span class='forth-forWord def-Keyword'>@</span> +-> ip
+143:     <span class='forth-forResWord def-Label'>THEN</span>
+144:     ip<span class='forth-forWord def-Keyword'> ;</span>
+145: 
+146: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.(+LOOP)</span>  <span class='forth-forWord def-Keyword'>{</span> delta ip <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> limit indx oldindx</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'> ip'</span><span class='forth-forWord def-Keyword'> }</span>
+147:     trace.r> <span class='forth-forWord def-Keyword'>-></span> limit
+148:     trace.r> <span class='forth-forWord def-Keyword'>-></span> oldindx
+149:     oldindx delta <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> indx
+150: <span class='forth-forComment def-Comment def-Syntax'>\ /* Do indices cross boundary between LIMIT-1 and LIMIT ? */</span>
+151: <span class='forth-forComment def-Comment def-Syntax'>\  if( ( (OldIndex - Limit) &amp; ((Limit-1) - NewIndex) &amp; 0x80000000 ) ||</span>
+152: <span class='forth-forComment def-Comment def-Syntax'>\    ( (NewIndex - Limit) &amp; ((Limit-1) - OldIndex) &amp; 0x80000000 ) )</span>
+153:     oldindx limit <span class='forth-forWord def-Keyword'>-</span>    limit <span class='forth-forWord def-Keyword'>1-</span>    indx <span class='forth-forWord def-Keyword'>-</span>  <span class='forth-forWord def-Keyword'>AND</span> $ <span class='forth-forNumb def-Number'>80000000</span> <span class='forth-forWord def-Keyword'>AND</span>
+154:        indx limit <span class='forth-forWord def-Keyword'>-</span>    limit <span class='forth-forWord def-Keyword'>1-</span> oldindx <span class='forth-forWord def-Keyword'>-</span>  <span class='forth-forWord def-Keyword'>AND</span> $ <span class='forth-forNumb def-Number'>80000000</span> <span class='forth-forWord def-Keyword'>AND</span> <span class='forth-forWord def-Keyword'>OR</span>
+155:     <span class='forth-forResWord def-Label'>IF</span>
+156:         <span class='forth-forWord def-Keyword'>cell</span> +-> ip
+157:     <span class='forth-forResWord def-Label'>ELSE</span>
+158:         indx trace.>r
+159:         limit trace.>r
+160:         ip <span class='forth-forWord def-Keyword'>@</span> +-> ip
+161:     <span class='forth-forResWord def-Label'>THEN</span> ip<span class='forth-forWord def-Keyword'> ;</span>
+162: 
+163: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.CHECK.IP</span>  <span class='forth-forWord def-Keyword'>{</span>  ip <span class='forth-forWord def-Keyword'>--</span><span class='forth-forWord def-Keyword'> }</span>
+164:     ip <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>first_colon</span> <span class='forth-forWord def-Keyword'>u&lt;</span>
+165:     ip <span class='forth-forWord def-Keyword'>here</span> <span class='forth-forWord def-Keyword'>u></span> <span class='forth-forWord def-Keyword'>OR</span>
+166:     <span class='forth-forResWord def-Label'>IF</span>
+167:         <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>TRACE - IP out of range = </span><span class='forth-forWord def-Keyword'>"</span> ip .hex <span class='forth-forWord def-Keyword'>cr</span> <span class='forth-forWord def-Keyword'>abort</span>
+168:     <span class='forth-forResWord def-Label'>THEN</span><span class='forth-forWord def-Keyword'> ;</span>
+169: 
+170: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.SHOW.IP</span> <span class='forth-forWord def-Keyword'>{</span> ip <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'> , print name and offset</span><span class='forth-forWord def-Keyword'> }</span>
+171:     ip<span class='forth-forComment def-Comment def-Syntax'> ( >code code> )</span><span class='forth-forComment def-Comment def-Syntax'> ( code@ )</span> <span class='forth-forWord def-Keyword'>name></span> >name <span class='forth-forWord def-Keyword'>dup</span> id.
+172:     <span class='forth-forWord def-Keyword'>name></span> ip code> <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forNumb def-Number'>4</span> / <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'> +</span><span class='forth-forWord def-Keyword'>"</span> .dec <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>'s words</span><span class='forth-forWord def-Keyword'>"</span><span class='forth-forWord def-Keyword'> ;</span>
+173: 
+174: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.SHOW.STACK</span> <span class='forth-forWord def-Keyword'>{</span> <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> mdepth</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forWord def-Keyword'> }</span>
+175:     <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>>r</span>
+176:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>&lt;</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>decimal</span> <span class='forth-forNumb def-Number'>1</span> .r <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>:</span><span class='forth-forWord def-Keyword'>"</span>
+177:     <span class='forth-forWord def-Keyword'>depth</span> <span class='forth-forNumb def-Number'>1</span> .r <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>> </span><span class='forth-forWord def-Keyword'>"</span>
+178:     <span class='forth-forWord def-Keyword'>r></span> <span class='forth-forWord def-Keyword'>base</span> <span class='forth-forWord def-Keyword'>!</span>
+179:     <span class='forth-forWord def-Keyword'>depth</span> <span class='forth-forNumb def-Number'>5</span> <span class='forth-forWord def-Keyword'>min</span> <span class='forth-forWord def-Keyword'>-></span> mdepth
+180:     <span class='forth-forWord def-Keyword'>depth</span> mdepth  <span class='forth-forWord def-Keyword'>-</span>
+181:     <span class='forth-forResWord def-Label'>IF</span>
+182:         <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>... </span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forComment def-Comment def-Syntax'> \ if we don't show entire stack</span>
+183:     <span class='forth-forResWord def-Label'>THEN</span>
+184:     mdepth <span class='forth-forNumb def-Number'>0</span>
+185:     <span class='forth-forResWord def-Label'>?DO</span>
+186:         mdepth <span class='forth-forResWord def-Label'>i</span> <span class='forth-forWord def-Keyword'>1+</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>pick</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forComment def-Comment def-Syntax'> \ show numbers in current base</span>
+187:     <span class='forth-forResWord def-Label'>LOOP</span><span class='forth-forWord def-Keyword'> ;</span>
+188: 
+189: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.SHOW.NEXT</span> <span class='forth-forWord def-Keyword'>{</span> ip <span class='forth-forWord def-Keyword'>--</span><span class='forth-forWord def-Keyword'> }</span>
+190:     >newline
+191:     ip trace.check.ip
+192: <span class='forth-forComment def-Comment def-Syntax'>\ show word name and offset</span>
+193:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>&lt;&lt;  </span><span class='forth-forWord def-Keyword'>"</span>
+194:     trace_ip trace.show.ip
+195:     <span class='forth-forNumb def-Number'>30</span> space.to.column
+196: <span class='forth-forComment def-Comment def-Syntax'>\ show data stack</span>
+197:     trace.show.stack
+198:     <span class='forth-forNumb def-Number'>80</span> space.to.column <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>||   Next word - </span><span class='forth-forWord def-Keyword'>"</span>
+199:     trace_level 2* <span class='forth-forWord def-Keyword'>spaces</span>
+200:     ip code@
+201:     <span class='forth-forWord def-Keyword'>cell</span> +-> ip
+202: <span class='forth-forComment def-Comment def-Syntax'>\ show primitive about to be executed</span>
+203:     <span class='forth-forWord def-Keyword'>dup</span> .xt <span class='forth-forWord def-Keyword'>space</span>
+204: <span class='forth-forComment def-Comment def-Syntax'>\ trap any primitives that are followed by inline data</span>
+205:     <span class='forth-forResWord def-Label'>CASE</span>
+206:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LITERAL)</span>  <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>space</span> <span class='forth-forNumb def-Number'>255</span> <span class='forth-forWord def-Keyword'>and</span> <span class='forth-forWord def-Keyword'>emit</span> <span class='forth-forResWord def-Label'>ENDOF</span>
+207:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(ALITERAL)</span> <span class='forth-forResWord def-Label'>OF</span> ip a@ <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>space</span> <span class='forth-forNumb def-Number'>255</span> <span class='forth-forWord def-Keyword'>and</span> <span class='forth-forWord def-Keyword'>emit</span>  <span class='forth-forResWord def-Label'>ENDOF</span>
+208: <span class='forth-forResWord def-Label'>[</span><span class='def-Insertion'> exists? (FLITERAL) [IF]</span><span class='forth-forResWord def-Label'> ]</span>
+209:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(FLITERAL)</span> <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>f@</span> <span class='forth-forWord def-Keyword'>f.</span> <span class='forth-forResWord def-Label'>ENDOF</span>
+210: <span class='forth-forResWord def-Label'>[</span><span class='def-Insertion'> [THEN]</span><span class='forth-forResWord def-Label'> ]</span>
+211:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>BRANCH</span>     <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forNumb def-Number'>4</span> / <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forResWord def-Label'>ENDOF</span>
+212:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>0BRANCH</span>    <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forNumb def-Number'>4</span> / <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forResWord def-Label'>ENDOF</span>
+213:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(.")</span>       <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>count</span> <span class='forth-forWord def-Keyword'>type</span> .' "' <span class='forth-forResWord def-Label'>ENDOF</span>
+214:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(C")</span>       <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>count</span> <span class='forth-forWord def-Keyword'>type</span> .' "' <span class='forth-forResWord def-Label'>ENDOF</span>
+215:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(S")</span>       <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>count</span> <span class='forth-forWord def-Keyword'>type</span> .' "' <span class='forth-forResWord def-Label'>ENDOF</span>
+216:     <span class='forth-forResWord def-Label'>ENDCASE</span>
+217:     <span class='forth-forNumb def-Number'>100</span> space.to.column <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'> >> </span><span class='forth-forWord def-Keyword'>"</span><span class='forth-forWord def-Keyword'> ;</span>
+218: 
+219: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.DO.PRIMITIVE</span>  <span class='forth-forWord def-Keyword'>{</span> ip xt <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> oldhere</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'>  ip' , perform code at ip</span><span class='forth-forWord def-Keyword'> }</span>
+220:     xt
+221:     <span class='forth-forResWord def-Label'>CASE</span>
+222:         <span class='forth-forNumb def-Number'>0</span> <span class='forth-forResWord def-Label'>OF</span> <span class='forth-forNumb def-Number'>-1</span> +-> trace_level  trace.r> <span class='forth-forWord def-Keyword'>-></span> ip <span class='forth-forResWord def-Label'>ENDOF</span><span class='forth-forComment def-Comment def-Syntax'> \ EXIT</span>
+223:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(CREATE)</span>   <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>cell-</span> body_offset <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forResWord def-Label'>ENDOF</span>
+224:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LITERAL)</span>  <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>cell</span> +-> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+225:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(ALITERAL)</span> <span class='forth-forResWord def-Label'>OF</span> ip a@ <span class='forth-forWord def-Keyword'>cell</span> +-> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+226: <span class='forth-forResWord def-Label'>[</span><span class='def-Insertion'> exists? (FLITERAL) [IF]</span><span class='forth-forResWord def-Label'> ]</span>
+227:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(FLITERAL)</span> <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>f@</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>floats</span> +-> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+228: <span class='forth-forResWord def-Label'>[</span><span class='def-Insertion'> [THEN]</span><span class='forth-forResWord def-Label'> ]</span>
+229:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>BRANCH</span>     <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>@</span> +-> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+230:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>0BRANCH</span>    <span class='forth-forResWord def-Label'>OF</span> <span class='forth-forWord def-Keyword'>0=</span> <span class='forth-forResWord def-Label'>IF</span> ip <span class='forth-forWord def-Keyword'>@</span> +-> ip <span class='forth-forResWord def-Label'>ELSE</span> <span class='forth-forWord def-Keyword'>cell</span> +-> ip <span class='forth-forResWord def-Label'>THEN</span> <span class='forth-forResWord def-Label'>ENDOF</span>
+231:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>>R</span>         <span class='forth-forResWord def-Label'>OF</span> trace.>r <span class='forth-forResWord def-Label'>ENDOF</span>
+232:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>R></span>         <span class='forth-forResWord def-Label'>OF</span> trace.r> <span class='forth-forResWord def-Label'>ENDOF</span>
+233:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>R@</span>         <span class='forth-forResWord def-Label'>OF</span> trace.r@ <span class='forth-forResWord def-Label'>ENDOF</span>
+234:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>RDROP</span>      <span class='forth-forResWord def-Label'>OF</span> trace.rdrop <span class='forth-forResWord def-Label'>ENDOF</span>
+235:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>2>R</span>        <span class='forth-forResWord def-Label'>OF</span> trace.>r trace.>r <span class='forth-forResWord def-Label'>ENDOF</span>
+236:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>2R></span>        <span class='forth-forResWord def-Label'>OF</span> trace.r> trace.r> <span class='forth-forResWord def-Label'>ENDOF</span>
+237:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>2R@</span>        <span class='forth-forResWord def-Label'>OF</span> trace.r@ <span class='forth-forNumb def-Number'>1</span> trace.rpick <span class='forth-forResWord def-Label'>ENDOF</span>
+238:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>i</span>          <span class='forth-forResWord def-Label'>OF</span> <span class='forth-forNumb def-Number'>1</span> trace.rpick <span class='forth-forResWord def-Label'>ENDOF</span>
+239:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>j</span>          <span class='forth-forResWord def-Label'>OF</span> <span class='forth-forNumb def-Number'>3</span> trace.rpick <span class='forth-forResWord def-Label'>ENDOF</span>
+240:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LEAVE)</span>    <span class='forth-forResWord def-Label'>OF</span> trace.rdrop trace.rdrop  ip <span class='forth-forWord def-Keyword'>@</span> +-> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+241:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LOOP)</span>     <span class='forth-forResWord def-Label'>OF</span> ip trace.(loop) <span class='forth-forWord def-Keyword'>-></span> ip  <span class='forth-forResWord def-Label'>ENDOF</span>
+242:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(+LOOP)</span>    <span class='forth-forResWord def-Label'>OF</span> ip trace.(+loop) <span class='forth-forWord def-Keyword'>-></span> ip  <span class='forth-forResWord def-Label'>ENDOF</span>
+243:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(DO)</span>       <span class='forth-forResWord def-Label'>OF</span> trace.>r trace.>r <span class='forth-forResWord def-Label'>ENDOF</span>
+244:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(?DO)</span>      <span class='forth-forResWord def-Label'>OF</span> ip trace.(?do) <span class='forth-forWord def-Keyword'>-></span> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+245:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(.")</span>       <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>count</span> <span class='forth-forWord def-Keyword'>type</span>  ip <span class='forth-forWord def-Keyword'>count</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>aligned</span> <span class='forth-forWord def-Keyword'>-></span> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+246:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(C")</span>       <span class='forth-forResWord def-Label'>OF</span> ip  ip <span class='forth-forWord def-Keyword'>count</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>aligned</span> <span class='forth-forWord def-Keyword'>-></span> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+247:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(S")</span>       <span class='forth-forResWord def-Label'>OF</span> ip <span class='forth-forWord def-Keyword'>count</span>  ip <span class='forth-forWord def-Keyword'>count</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>aligned</span> <span class='forth-forWord def-Keyword'>-></span> ip <span class='forth-forResWord def-Label'>ENDOF</span>
+248:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LOCAL.ENTRY)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(local.entry) <span class='forth-forResWord def-Label'>ENDOF</span>
+249:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LOCAL.EXIT)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(local.exit) <span class='forth-forResWord def-Label'>ENDOF</span>
+250:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LOCAL@)</span>   <span class='forth-forResWord def-Label'>OF</span> trace.(local@)   <span class='forth-forResWord def-Label'>ENDOF</span>
+251:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(1_LOCAL@)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(1_local@) <span class='forth-forResWord def-Label'>ENDOF</span>
+252:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(2_LOCAL@)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(2_local@) <span class='forth-forResWord def-Label'>ENDOF</span>
+253:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(3_LOCAL@)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(3_local@) <span class='forth-forResWord def-Label'>ENDOF</span>
+254:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(4_LOCAL@)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(4_local@) <span class='forth-forResWord def-Label'>ENDOF</span>
+255:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(5_LOCAL@)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(5_local@) <span class='forth-forResWord def-Label'>ENDOF</span>
+256:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(6_LOCAL@)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(6_local@) <span class='forth-forResWord def-Label'>ENDOF</span>
+257:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(7_LOCAL@)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(7_local@) <span class='forth-forResWord def-Label'>ENDOF</span>
+258:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(8_LOCAL@)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(8_local@) <span class='forth-forResWord def-Label'>ENDOF</span>
+259:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LOCAL!)</span>   <span class='forth-forResWord def-Label'>OF</span> trace.(local!)   <span class='forth-forResWord def-Label'>ENDOF</span>
+260:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(1_LOCAL!)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(1_local!) <span class='forth-forResWord def-Label'>ENDOF</span>
+261:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(2_LOCAL!)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(2_local!) <span class='forth-forResWord def-Label'>ENDOF</span>
+262:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(3_LOCAL!)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(3_local!) <span class='forth-forResWord def-Label'>ENDOF</span>
+263:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(4_LOCAL!)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(4_local!) <span class='forth-forResWord def-Label'>ENDOF</span>
+264:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(5_LOCAL!)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(5_local!) <span class='forth-forResWord def-Label'>ENDOF</span>
+265:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(6_LOCAL!)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(6_local!) <span class='forth-forResWord def-Label'>ENDOF</span>
+266:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(7_LOCAL!)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(7_local!) <span class='forth-forResWord def-Label'>ENDOF</span>
+267:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(8_LOCAL!)</span> <span class='forth-forResWord def-Label'>OF</span> trace.(8_local!) <span class='forth-forResWord def-Label'>ENDOF</span>
+268:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>(LOCAL+!)</span>  <span class='forth-forResWord def-Label'>OF</span> trace.(local+!)  <span class='forth-forResWord def-Label'>ENDOF</span>
+269:         <span class='forth-forWord def-Keyword'>>r</span> xt <span class='forth-forWord def-Keyword'>EXECUTE</span> <span class='forth-forWord def-Keyword'>r></span>
+270:     <span class='forth-forResWord def-Label'>ENDCASE</span>
+271:     ip<span class='forth-forWord def-Keyword'> ;</span>
+272: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.DO.NEXT</span>  <span class='forth-forWord def-Keyword'>{</span> ip <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> xt oldhere</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'>  ip' , perform code at ip</span><span class='forth-forWord def-Keyword'> }</span>
+273:     ip trace.check.ip
+274: <span class='forth-forComment def-Comment def-Syntax'>\ set context for word under test</span>
+275:     trace.save.state1
+276:     <span class='forth-forWord def-Keyword'>here</span> <span class='forth-forWord def-Keyword'>-></span> oldhere
+277:     trace.restore.state2
+278:     oldhere <span class='forth-forNumb def-Number'>256</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>dp</span> <span class='forth-forWord def-Keyword'>!</span>
+279: <span class='forth-forComment def-Comment def-Syntax'>\ get execution token</span>
+280:     ip code@ <span class='forth-forWord def-Keyword'>-></span> xt
+281:     <span class='forth-forWord def-Keyword'>cell</span> +-> ip
+282: <span class='forth-forComment def-Comment def-Syntax'>\ execute token</span>
+283:     xt is.primitive?
+284:     <span class='forth-forResWord def-Label'>IF</span> <span class='forth-forComment def-Comment def-Syntax'> \ primitive</span>
+285:         ip xt trace.do.primitive <span class='forth-forWord def-Keyword'>-></span> ip
+286:     <span class='forth-forResWord def-Label'>ELSE</span><span class='forth-forComment def-Comment def-Syntax'> \ secondary</span>
+287:         trace_level trace_level_max <span class='forth-forWord def-Keyword'>&lt;</span>
+288:         <span class='forth-forResWord def-Label'>IF</span>
+289:             ip trace.>r        <span class='forth-forComment def-Comment def-Syntax'> \ threaded execution</span>
+290:             <span class='forth-forNumb def-Number'>1</span> +-> trace_level
+291:             xt codebase <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> ip
+292:         <span class='forth-forResWord def-Label'>ELSE</span>
+293:            <span class='forth-forComment def-Comment def-Syntax'> \ treat it as a primitive</span>
+294:             ip xt trace.do.primitive <span class='forth-forWord def-Keyword'>-></span> ip
+295:         <span class='forth-forResWord def-Label'>THEN</span>        
+296:     <span class='forth-forResWord def-Label'>THEN</span>
+297: <span class='forth-forComment def-Comment def-Syntax'>\ restore original context</span>
+298:     trace.rcheck
+299:     trace.save.state2
+300:     trace.restore.state1
+301:     oldhere <span class='forth-forWord def-Keyword'>dp</span> <span class='forth-forWord def-Keyword'>!</span>
+302:     ip<span class='forth-forWord def-Keyword'> ;</span>
+303: 
+304: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.NEXT</span> <span class='forth-forWord def-Keyword'>{</span> ip <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> xt</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forComment def-Comment def-Syntax'> ip'</span><span class='forth-forWord def-Keyword'> }</span>
+305:     trace_level 0>
+306:     <span class='forth-forResWord def-Label'>IF</span>
+307:         ip trace.do.next <span class='forth-forWord def-Keyword'>-></span> ip
+308:     <span class='forth-forResWord def-Label'>THEN</span>
+309: 
+310:     trace_level 0>  
+311:     <span class='forth-forResWord def-Label'>IF</span>
+312:         ip trace.show.next
+313:     <span class='forth-forResWord def-Label'>ELSE</span>
+314:         <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>Finished.</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+315:     <span class='forth-forResWord def-Label'>THEN</span>
+316:     ip
+317: <span class='forth-forWord def-Keyword'>;</span>
+318: 
+319: }private
+320: 
+321: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE</span><span class='forth-forComment def-Comment def-Syntax'> ( i*x &lt;name> -- i*x , setup trace environment )</span>
+322:     <span class='forth-forWord def-Keyword'>'</span> <span class='forth-forWord def-Keyword'>dup</span> is.primitive?
+323:     <span class='forth-forResWord def-Label'>IF</span>
+324:         <span class='forth-forWord def-Keyword'>drop</span> <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>Sorry. You can't trace a primitive.</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+325:     <span class='forth-forResWord def-Label'>ELSE</span>
+326:         <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>-></span> trace_level
+327:         trace_level <span class='forth-forWord def-Keyword'>-></span> trace_level_max
+328:         trace.0rp
+329:         <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>-></span> TRACE-BEGWORD_IP
+330:         >code <span class='forth-forWord def-Keyword'>-></span> trace_ip
+331:         trace_ip trace.show.next
+332:         trace-stack off
+333:         trace.save.state2
+334:     <span class='forth-forResWord def-Label'>THEN</span><span class='forth-forWord def-Keyword'> ;</span>
+335: 
+336: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>s</span><span class='forth-forComment def-Comment def-Syntax'> ( -- , step over )</span>
+337:     trace_level <span class='forth-forWord def-Keyword'>-></span> trace_level_max
+338:     trace_ip trace.next <span class='forth-forWord def-Keyword'>-></span> trace_ip<span class='forth-forWord def-Keyword'> ;</span>
+339: 
+340: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>sd</span><span class='forth-forComment def-Comment def-Syntax'> ( -- , step down )</span>
+341:     trace_level <span class='forth-forWord def-Keyword'>1+</span> <span class='forth-forWord def-Keyword'>-></span> trace_level_max
+342:     trace_ip trace.next <span class='forth-forWord def-Keyword'>-></span> trace_ip<span class='forth-forWord def-Keyword'> ;</span>
+343: 
+344: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>sm</span><span class='forth-forComment def-Comment def-Syntax'> ( many -- , step many times )</span>
+345:     trace_level <span class='forth-forWord def-Keyword'>-></span> trace_level_max
+346:     <span class='forth-forNumb def-Number'>0</span>
+347:     <span class='forth-forResWord def-Label'>?DO</span>
+348:         trace_ip trace.next <span class='forth-forWord def-Keyword'>-></span> trace_ip
+349:     <span class='forth-forResWord def-Label'>LOOP</span><span class='forth-forWord def-Keyword'> ;</span>
+350: 
+351: <span class='forth-forWord def-Keyword'>defer</span> trace.user  <span class='forth-forComment def-Comment def-Syntax'> ( IP -- stop?  )</span>
+352: <span class='forth-forResWord def-Label'>'</span> <span class='forth-forWord def-Keyword'>0=</span> <span class='forth-forWord def-Keyword'>is</span> trace.user
+353: 
+354: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>gd</span> <span class='forth-forWord def-Keyword'>{</span> more_levels <span class='forth-forWord def-Keyword'>|</span><span class='forth-forNumb def-Number'> stop_level userflag</span> <span class='forth-forWord def-Keyword'>--</span><span class='forth-forWord def-Keyword'> }</span>
+355:     <span class='forth-forWord def-Keyword'>here</span> what's trace.user <span class='forth-forWord def-Keyword'>u&lt;</span> <span class='forth-forComment def-Comment def-Syntax'> \ has it been forgotten?</span>
+356:     <span class='forth-forResWord def-Label'>IF</span>
+357:         <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>Resetting TRACE.USER !!!</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+358:         <span class='forth-forResWord def-Label'>[']</span> <span class='forth-forWord def-Keyword'>0=</span> <span class='forth-forWord def-Keyword'>is</span> trace.user
+359:     <span class='forth-forResWord def-Label'>THEN</span>
+360:     more_levels 0&lt;
+361:     more_levels <span class='forth-forNumb def-Number'>10</span> <span class='forth-forWord def-Keyword'>></span>
+362:     <span class='forth-forResWord def-Label'>IF</span>
+363:         <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>GD level out of range (0-10), = </span><span class='forth-forWord def-Keyword'>"</span> more_levels <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>cr</span>
+364:     <span class='forth-forResWord def-Label'>ELSE</span>
+365:         trace_level more_levels <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> trace_level_max
+366:         trace_level <span class='forth-forWord def-Keyword'>1-</span> <span class='forth-forWord def-Keyword'>-></span> stop_level
+367:         <span class='forth-forResWord def-Label'>BEGIN</span>
+368:             trace_ip trace.user<span class='forth-forComment def-Comment def-Syntax'> \ call deferred user word</span>
+369:             <span class='forth-forWord def-Keyword'>dup</span><span class='forth-forComment def-Comment def-Syntax'> \ leave flag for UNTIL</span>
+370:             <span class='forth-forResWord def-Label'>IF</span>
+371:                 <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>TRACE.USER returned </span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>.</span> <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>so stopping execution.</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+372:             <span class='forth-forResWord def-Label'>ELSE</span>
+373:                 <span class='forth-forWord def-Keyword'>-></span> userflag <span class='forth-forWord def-Keyword'>drop</span>
+374: <span class='forth-forComment def-Comment def-Syntax'>\                cr ." before=" .s</span>
+375:                 trace_ip 
+376:                 trace.next
+377:                 <span class='forth-forWord def-Keyword'>-></span> trace_ip
+378: <span class='forth-forComment def-Comment def-Syntax'>\                   ." after="  .s key drop</span>
+379:                    userflag
+380:                 trace_level stop_level <span class='forth-forWord def-Keyword'>></span> <span class='forth-forWord def-Keyword'>not</span>
+381:             <span class='forth-forResWord def-Label'>THEN</span>
+382:         <span class='forth-forResWord def-Label'>UNTIL</span>
+383:         <span class='forth-forWord def-Keyword'>drop</span>
+384:     <span class='forth-forResWord def-Label'>THEN</span><span class='forth-forWord def-Keyword'> ;</span>
+385: 
+386: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>g</span><span class='forth-forComment def-Comment def-Syntax'> ( -- , execute until end of word )</span> <span class='forth-forNumb def-Number'>0</span> gd<span class='forth-forWord def-Keyword'> ;</span>
+387: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>TRACE.HELP</span><span class='forth-forComment def-Comment def-Syntax'> ( -- )</span>
+388:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>  TRACE  ( i*x &lt;name> -- , setup trace for Forth word )</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+389:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>  S      ( -- , step over )</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+390:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>  SM     ( many -- , step over many times )</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+391:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>  SD     ( -- , step down )</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+392:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>  G      ( -- , go to end of word )</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+393:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>  GD     ( n -- , go down N levels from current level,</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span>
+394:     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>                  stop at end of this level )</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>cr</span><span class='forth-forWord def-Keyword'> ;</span>
+395: privatize
+396: 
+397: <span class='forth-forComment def-Comment def-Syntax'>0 [IF]</span>
+398: <span class='forth-forComment def-Comment def-Syntax'>variable var1 100 var1 !</span>
+399: <span class='forth-forComment def-Comment def-Syntax'>: FOO  dup IF 1 + . THEN 77 var1 @ + . ;</span>
+400: <span class='forth-forComment def-Comment def-Syntax'>: ZOO 29 foo 99 22 + . ;</span>
+401: <span class='forth-forComment def-Comment def-Syntax'>: ROO 92 >r 1 r@ + . r> . ;</span>
+402: <span class='forth-forComment def-Comment def-Syntax'>: MOO c" hello" count type ." This is a message." cr s" another message" type cr ;</span>
+403: <span class='forth-forComment def-Comment def-Syntax'>: KOO 7 FOO ." DONE" ;</span>
+404: <span class='forth-forComment def-Comment def-Syntax'>: TR.DO  4 0 DO i . LOOP ;</span>
+405: <span class='forth-forComment def-Comment def-Syntax'>: TR.?DO  0 ?DO i . LOOP ;</span>
+406: <span class='forth-forComment def-Comment def-Syntax'>: TR.LOC1 { aa bb } aa bb + . ;</span>
+407: <span class='forth-forComment def-Comment def-Syntax'>: TR.LOC2 789 >r 4 5 tr.loc1 r> . ;</span>
+408: <span class='forth-forComment def-Comment def-Syntax'>[THEN]</span>
+409: 

@@ -1,0 +1,144 @@
+#GNU
+
+include tstfile
+!include <tstfile>
+
+objects := $(patsubst %.c,%.o,$(wildcard *.c))
+
+foo : $(objects)
+	cc -o foo $(objects)
+
+bigoutput littleoutput : text.g
+	generate text.g -$(subst output,,$@) > $@
+
+
+$(objects): %.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+prog : CFLAGS = -g
+prog : prog.o foo.o bar.o
+
+
+test: all
+	@LD_LIBRARY_PATH=.:$(LD_LIBRARY_PATH) ; export LD_LIBRARY_PATH; \
+	echo hello world | ./minigzip | ./minigzip -d || \
+	  echo '		*** minigzip test FAILED ***' ; \
+	if ./example; then \
+	  echo '		*** zlib test OK ***'; \
+	else \
+	  echo '		*** zlib test FAILED ***'; \
+	fi
+
+ifdef bletch
+	ifeq "$(origin bletch)" "environment"
+		bletch = barf, gag, etc $(if foo, bar, baz).
+	endif
+endif
+
+foo: $(objects)
+ifeq ($(CC),gcc)
+	$(CC) -o foo $(objects) $(libs_for_gcc)
+else
+	$(CC) -o foo $(objects) $(normal_libs)
+endif
+	foo $** $$@ $? $<
+
+
+define PROGRAM_template
+	$(1): $$($(1)_OBJS) $$($(1)_LIBS:%=-l%)
+		ALL_OBJS   += $$($(1)_OBJS)
+endef
+
+
+$(foreach prog,$(PROGRAMS),$(eval $(call PROGRAM_template,$(prog))))
+
+foo := a.o b.o c.o
+bar := $(foo:.o=.c)
+
+
+override define two-lines
+	foo
+	$(bar)
+endef
+
+
+enable sep inclib 8bit 8to7 newjis xabcx dollar noeol bkslashes \
+appquit fasts uniq manis linecnt khadafy allsub flipcase space modulo \
+y-bracket y-newline insert::
+	$(SEDENV) $(SED) -f $(srcdir)/$@.sed
+#MS
+# its coment
+^# its not comment
+    
+aa: bb
+	cc
+    dd
+	xx
+
+{dbi\}.cpp{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $(YUDBI) $<
+        -[1]tst
+
+{ilstore\}.cpp{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $<
+
+{misc\}.cpp{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $(YUPDB) $<
+
+{misc\}.c{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $<
+
+{msf\}.cpp{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $<
+
+{bsc\}.cpp{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $(YUPDB) $<
+
+{mre\}.cpp{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $(YUPDB) $<
+
+{namesrvr\}.cpp{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $(YUPDB) $<
+
+{src\cvr\}.cpp{$(ODIR)}.obj::
+        $(CC) $(CFLAGS) $<
+
+O = .
+S = .
+Objs = $O/foo1.obj $O/foo2.obj $O/foo2.obj $O/foo3.obj $O/foo4.obj
+CFLAGS = -nologo
+
+all : $(Objs)
+
+xx: yy
+!ifdef Batch
+	foo
+!elseif NOBatch
+	bar
+!else
+	baz
+!endif
+	zab
+
+
+
+!ifdef NOBatch
+{$S}.cpp{$O}.obj:
+!else
+{$S}.cpp{$O}.obj::
+!endif
+   $(CC) $(CFLAGS) -Fd$O\ -c $< #fail
+
+$(Objs) :
+
+!if exist(make_vc_defs)
+!include make_vc_defs
+!endif
+!if !defined(INSTALL) && defined(DEFINSTALL)
+INSTALL=$(DEFINSTALL)
+!endif
+
+!include ./makefile_vc_getmode
+
+
+#end of makefile

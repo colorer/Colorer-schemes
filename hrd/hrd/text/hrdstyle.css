@@ -1,0 +1,111 @@
+/*
+ * @(#) hrdstyle.css -- The style sheet for HTML files produced by Colorer.
+ * (c) 2004-2005 Ivan Maidanski <ivmai@mail.ru>
+ * This file is free. No warranties. All rights reserved.
+ */
+
+/*
+ * This cascading style sheet (CSS) file defines the exact look (the
+ * syntax highlighting style) of the documents (viewed in a browser
+ * or printed) produced by the "Colorer HTML generator" with the
+ * "htmlcss" HRD rules ("HTML with CSS" schema) selected.
+ **
+ * You may freely modify this file (but, do not change its name) to
+ * customize this "default" highlighting style to tailor Your own
+ * needs and feeling.
+ **
+ * Do not forget to place (copy) this file (or Your own "customized"
+ * version of this file) into every directory (folder) where at
+ * least one such produced HTML document is placed.
+ */
+
+BODY.hrdBody { color: #000; background: #FFFFFF; }
+PRE.hrdText {
+ font-family: Courier, monospace; font-size: 80%;
+ font-weight: normal; font-style: normal; text-decoration: none; }
+
+SPAN.hrdNumber { color: #080; }
+SPAN.hrdNumberDec { color: #082; }
+SPAN.hrdNumberHex { color: #0A2; }
+SPAN.hrdNumberBin { color: #280; }
+SPAN.hrdNumberOct { color: #282; }
+SPAN.hrdNumberFloat { color: #2A0; }
+SPAN.hrdNumberSuffix { color: #0F0; font-weight: bold; }
+SPAN.hrdNumberPrefix { color: #0F4; font-weight: bold; }
+
+SPAN.hrdString { color: #008; font-family: sans-serif; }
+SPAN.hrdStringContent { color: #00C; font-family: sans-serif; }
+SPAN.hrdStringEdge { color: #C00; }
+SPAN.hrdStringContentEdge { color: #440; }
+SPAN.hrdCharacter { color: #048; font-style: italic; }
+SPAN.hrdCharacterContent { color: #04C; }
+
+SPAN.hrdComment { color: #088; font-style: italic; }
+SPAN.hrdCommentContent { color: #C88; font-style: italic; }
+SPAN.hrdCommentDocContent { color: #08C; font-family: serif; }
+SPAN.hrdLineComment {
+ color: #086; font-family: serif; font-style: italic; }
+SPAN.hrdCommentDoc { color: #88C; font-family: sans-serif; }
+SPAN.hrdCommentEdge { color: #0CC; font-style: italic; }
+SPAN.hrdCommentDocEdge { color: #0CF; }
+
+SPAN.hrdSymbol { color: #028; font-weight: bold; }
+SPAN.hrdSymbolStrong { color: #444; font-size: small; }
+SPAN.hrdPrefix { color: #208; }
+
+SPAN.hrdOperator { color: #028; font-weight: bold; }
+
+SPAN.hrdKeyword { color: #466; font-weight: bold; }
+SPAN.hrdKeywordStrong {
+ color: #800; font-size: small; font-weight: bold; }
+SPAN.hrdTypeKeyword {
+ color: #88A; font-weight: bold; text-decoration: underline; }
+SPAN.hrdClassKeyword { color: #842; font-weight: bold; }
+SPAN.hrdStructKeyword { color: #824; font-weight: bold; }
+SPAN.hrdFunctionKeyword { color: #A40; font-weight: bold; }
+SPAN.hrdInterfaceKeyword { color: #A04; font-weight: bold; }
+SPAN.hrdDeprecatedKeyword { color: #C04; font-weight: bold; }
+
+SPAN.hrdRegister {
+ color: #804; font-weight: bold; text-decoration: underline; }
+SPAN.hrdConstant { color: #688; font-weight: bold; }
+SPAN.hrdBooleanConstant {
+ color: #668; font-weight: bold; text-decoration: underline; }
+
+SPAN.hrdVar { color: #044; text-decoration: underline; }
+SPAN.hrdVarStrong { color: #808; text-decoration: underline; }
+SPAN.hrdIdentifier { color: #0C0; }
+
+SPAN.hrdDirective { color: #00F; font-weight: bold; }
+SPAN.hrdDirectiveContent { color: #40F; }
+
+SPAN.hrdParameter { color: #0C4; font-style: italic; }
+SPAN.hrdParameterStrong { color: #844; font-style: italic; }
+SPAN.hrdParameterUnknown { color: #80C; }
+
+SPAN.hrdTag { color: #464; font-size: small; }
+SPAN.hrdOpenTag { color: #884; font-size: small; }
+SPAN.hrdCloseTag { color: #886; font-size: small; }
+
+SPAN.hrdLabel { color: #880; font-weight: bold; }
+SPAN.hrdLabelStrong { color: #CFC; background: #AAA; }
+
+SPAN.hrdInsertion { color: #44C; background: #FF0; }
+SPAN.hrdInsertionStart { color: #442; background: #FF0; }
+SPAN.hrdInsertionEnd { color: #440; background: #FF0; }
+
+SPAN.hrdError { color: #FF2; background: #802; font-weight: bold; }
+SPAN.hrdErrorText { color: #F0F; font-style: italic; }
+SPAN.hrdTODO { color: #F00; background: #882; }
+SPAN.hrdDebug { color: #F0C; background: #860; font-weight: bold; }
+
+SPAN.hrdPath { color: #802; }
+SPAN.hrdURL { color: #820; text-decoration: underline; }
+SPAN.hrdEMail {
+ color: #828; font-style: italic; text-decoration: underline; }
+SPAN.hrdURI { color: #822; text-decoration: underline; }
+
+SPAN.hrdDate { color: #484; font-weight: bold; }
+SPAN.hrdTime { color: #448; font-weight: bold; }
+
+/* End of css file */

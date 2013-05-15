@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+ <custom-type targetNamespace="http://purl.org/rss/1.0/">
+  
+  <prefix>rss</prefix>
+  <empty-prefix/>
+  <contributors>Eugene Efremov</contributors>
+
+  <outline>
+   <element name='title' extract='tillNext' description='Header title'/>
+  </outline>
+      
+ </custom-type>
+</custom>

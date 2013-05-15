@@ -1,0 +1,402 @@
+<schema
+  xmlns='http://www.w3.org/2001/XMLSchema'
+  targetNamespace='http://www.mozilla.org/xbl'
+  xmlns:xbl='http://www.mozilla.org/xbl'>
+  
+  <annotation>
+   <documentation>
+    Schema for support mozilla XBL in colorer HRC
+   </documentation>
+  </annotation>
+
+  <simpleType name='ContentType'>
+   <restriction base='string'>
+   </restriction>
+  </simpleType>
+
+  <simpleType name='Script'>
+   <restriction base='string'>
+   </restriction>
+  </simpleType>
+
+  <simpleType name='EventName'>
+   <restriction base='string'><!-- NMTOKEN?? -->
+   </restriction>
+  </simpleType>
+
+  <simpleType name='KeyModifier'>
+   <restriction base='string'>
+   </restriction>
+  </simpleType>
+
+  <simpleType name='IncludesElemens'>
+   <restriction base='string'>
+     <whiteSpace value="collapse"/>
+     <pattern value="\w+(\|\w+)*"/>
+   </restriction>
+  </simpleType>
+  
+
+ <!-- inherits used in BindingContent -->
+ <attribute name="inherits" type="string"/><!-- form="qualified" -->
+
+  
+ <element name='bindings'>
+  <complexType>
+   <choice minOccurs='0' maxOccurs='unbounded'>
+    <element ref='xbl:binding'/>
+    <element ref='xbl:script'/>
+    <element ref='xbl:stylesheet'/>
+   </choice>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='type' type='xbl:ContentType' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='binding'>
+  <complexType>
+   <sequence>
+    <element name='content' type="xbl:BindingContent" minOccurs='0' maxOccurs='1'/>
+    <element ref='xbl:implementation' minOccurs='0' maxOccurs='1'/>
+    <element ref='xbl:handlers' minOccurs='0' maxOccurs='1'/>
+    <element ref='xbl:resources' minOccurs='0' maxOccurs='1'/>
+   </sequence>
+   <attribute name='id' type='ID' use='required'/>
+   <attribute name='extends' type='string' use='optional'/>
+   <attribute name='display' type='string' use='optional'/>
+   <attribute name='applyauthorstyles' type='boolean' use='optional' default="false"/>
+   <attribute name='styleexplicitcontent' type='boolean' use='optional' default="false"/>
+   <!-- non-standart -->
+   <attribute name="inherits" type="string"/> 
+   <attribute name='inheritstyle' type="boolean"/>
+  </complexType>
+ </element>
+
+ 
+ <!-- x-binging content. We need 'children' element into this -->
+ 
+ <complexType name="BindingContent">
+  <sequence minOccurs="0" maxOccurs="unbounded">
+    <element ref='xbl:children'/>
+    <element ref='xbl:element'/>
+    <any namespace="##other" processContents="lax"/>
+  </sequence>
+  <attribute name='id' type='ID' use='optional'/>
+  <attribute name='applyauthorsheets' type='string' use='optional'/>
+
+  <anyAttribute namespace="##other" processContents="skip"/> 
+ </complexType>
+
+ 
+ <element name='children' type="xbl:ChildrenContent"/>
+ <complexType name="ChildrenContent">
+   <attribute name='id' type='ID' use='optional'/>
+   
+   <!--   defined in xulplanet.com xul tutorial. 
+     In _standart_ in this case need xbl:element, 
+         but they uses xbl:children...
+    -->
+   <sequence minOccurs="0" maxOccurs="unbounded">
+    <any namespace="##other" processContents="lax"/>
+   </sequence>
+   
+   <attribute name='includes' type='xbl:IncludesElemens' use='optional'/>
+   <attribute name='type' default='explicit'>
+    <simpleType>
+     <restriction base='string'>
+      <enumeration value='explicit'/>
+      <enumeration value='inherited'/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name='applybindingsheets' type='string' use='optional'/>
+ </complexType>
+ 
+
+ <element name='element' type="xbl:BEContent"/>
+ <complexType name="BEContent">
+   <sequence>
+    <any namespace="##other" processContents="lax"/>
+   </sequence>
+   <attribute name='id' type='ID' use='optional'/>
+ </complexType>
+ 
+ <!-- x-binding content finished -->
+
+ 
+ <element name='implementation'>
+  <complexType>
+   <choice minOccurs='0' maxOccurs='unbounded'>
+    <element ref='xbl:method'/>
+    <element ref='xbl:property'/>
+    <element ref='xbl:field'/>
+    <element ref='xbl:constructor'/>
+    <element ref='xbl:destructor'/>
+   </choice>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='name' type='string' use='optional'/>
+   <attribute name='implements' type='string' use='optional'/>
+   <attribute name='type' type='xbl:ContentType' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='method'>
+  <complexType>
+   <sequence>
+    <element ref='xbl:parameter' minOccurs='0' maxOccurs='unbounded'/>
+    <element ref='xbl:body' minOccurs='0' maxOccurs='1'/>
+   </sequence>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='name' type='string' use='required'/>
+   <attribute name='type' type='xbl:ContentType' use='optional'/>
+   
+   <!-- non-standart -->
+   <attribute name='readonly' type="boolean" use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='parameter'>
+  <complexType>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='name' type='string' use='required'/>
+  </complexType>
+ </element>
+
+ <element name='body'>
+  <complexType mixed='true'>
+   <attribute name='id' type='ID' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='property'>
+  <complexType mixed='true'>
+   <choice>
+    <element ref='xbl:getter' minOccurs='0' maxOccurs='1'/>
+    <element ref='xbl:setter' minOccurs='0' maxOccurs='1'/>
+   </choice>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='name' type='string' use='required'/>
+   <attribute name='readonly' type="boolean" use='optional'/>
+   <attribute name='onget' type='xbl:Script' use='optional'/>
+   <attribute name='onset' type='xbl:Script' use='optional'/>
+   <attribute name='element' type='IDREF' use='optional'/>
+   <attribute name='attribute' type='string' use='optional'/>
+   <attribute name='property' type='string' use='optional'/>
+   <attribute name='type' type='xbl:ContentType' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='getter'>
+  <complexType mixed='true'>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='type' type='xbl:ContentType' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='setter'>
+  <complexType mixed='true'>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='type' type='xbl:ContentType' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='constructor'>
+  <complexType mixed='true'>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='action' type='xbl:Script' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='destructor'>
+  <complexType mixed='true'>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='action' type='xbl:Script' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='field'>
+  <complexType mixed='true'>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='name' type='string' use='required'/>
+   <attribute name='readonly' type="boolean" use='optional'/>
+  </complexType>
+ </element>
+
+ 
+ <element name='handlers'>
+  <complexType>
+   <sequence>
+    <element ref='xbl:handler' minOccurs='0' maxOccurs='unbounded'/>
+   </sequence>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='type' type='xbl:ContentType' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='handler'>
+  <complexType mixed='true'>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name='event' type='xbl:EventName' use='required'/>
+   <attribute name='action' type='xbl:Script' use='optional'/>
+   <attribute name='phase' use='optional'>
+    <simpleType>
+     <restriction base='string'>
+      <enumeration value='capturing'/>
+      <enumeration value='bubbling'/>
+      <enumeration value='target'/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name='attachto' default='element'>
+    <simpleType>
+     <restriction base='string'>
+      <enumeration value='element'/>
+      <enumeration value='document'/>
+      <enumeration value='window'/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name='button' use='optional'>
+    <simpleType>
+     <restriction base='string'>
+      <enumeration value='0'/> <!-- !!!! -->
+      <enumeration value='1'/> <!-- xulplanet.com referense: 0|1|2 -->
+      <enumeration value='2'/> <!-- mozilla.org referense: 1|2|3  :-/  -->
+      <enumeration value='3'/> 
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name='modifiers' type='xbl:KeyModifier' use='optional'/>
+   <attribute name='keycode' type='string' use='optional'/>
+   <attribute name='charcode' type='string' use='optional'/>
+   <attribute name='type' type='xbl:ContentType' use='optional'/>
+   
+   <!-- attributes defined in xulplanet.com: -->
+   <attribute name="preventdefault" type="boolean" use='optional'/>
+   <attribute name="command" type="string" use='optional'/>
+   <attribute name="clickcount" type="integer" use='optional'/>
+   <!-- defined only in xulplanet.com xul tutorial :-E -->
+   <attribute name="key" type="string" use='optional'/>
+   
+  </complexType>
+ </element>
+
+ 
+ 
+ <!-- Adding s&s -->
+
+ 
+ <element name="script">
+    <annotation>
+      <documentation>
+      script statements, which may include CDATA sections
+      
+      Note: in %mozilla%res/builtin/htmlBindings.xml:
+      "Can't yet put script tags in XBL (hyatt has the bug)" :-E~~
+      </documentation>
+    </annotation>
+
+  <complexType  mixed="true">
+    <attribute name="id" type="ID"/>
+    <attribute name="charset" type="string"/>
+    <attribute name="type" type="xbl:ContentType"/>
+    <attribute name="src" type="anyURI"/>
+    <attribute name="defer">
+      <simpleType>
+        <restriction base="token">
+          <enumeration value="defer"/>
+        </restriction>
+      </simpleType>
+    </attribute>
+    <!--attribute ref="xml:space" fixed="preserve"/-->
+  </complexType>
+ </element> 
+
+ <!-- it's not work too... -->
+ <element name="stylesheet">
+  <complexType>
+   <attribute name='id' type='ID' use='optional'/>
+   <attribute name="href" use="required"  type="anyURI"/>
+   <attribute name="type" use="required" type="xbl:ContentType"/>
+   <attribute name="title" type="string"/>
+   <attribute name="charset" type="string"/>
+   <attribute name="media" type="string"/>
+   <attribute name='alternate' default='no'>
+    <simpleType>
+     <restriction base='string'>
+      <enumeration value='yes'/>
+      <enumeration value='no'/>
+     </restriction>
+    </simpleType>
+   </attribute>
+  </complexType>
+ </element>
+ 
+ 
+ <!-- But work binging/resourse (defined at xulplanet.com) -->
+ 
+ <element name="resources">
+  <annotation>
+    <documentation>
+     "script" and "stylesheet" elements
+        don't work now.
+     
+      but you can use this non-standart "binding/resources" element.
+    </documentation>
+  </annotation>
+  <complexType>
+   <sequence>
+    <element name="stylesheet">
+     <complexType>
+       <attribute name='id' type='ID' use='optional'/>
+       <attribute name="src" use="required"  type="anyURI"/>
+     </complexType>
+    </element>
+    <element name="image">
+     <complexType>
+       <attribute name='id' type='ID' use='optional'/>
+       <attribute name="src" use="required"  type="anyURI"/>
+     </complexType>
+    </element>
+   </sequence>
+   <attribute name='id' type='ID' use='optional'/>
+  </complexType>  
+ </element>
+
+</schema>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the HRC scheme for 
+   - mozilla XML Binding language (XBL).
+   -
+   - The Initial Developer of the Original Code is
+   - Eugene Efremov <4mirror@mail.ru>
+   - Portions created by the Initial Developer are Copyright (C) 2004-05
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

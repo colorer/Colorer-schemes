@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace="http://schemas.xmlsoap.org/wsdl/">
+	<prefix>wsdl</prefix>
+	<empty-prefix/>
+	<contributors>Eugene Efremov</contributors>
+	
+	<top-level>
+		<element>definitions</element>
+	</top-level>
+</custom-type>
+
+<custom-type targetNamespace="http://schemas.xmlsoap.org/wsdl/soap/">
+	<prefix>soap</prefix>
+	<contributors>Eugene Efremov</contributors>
+	
+	<top-level/>
+</custom-type>
+
+<!-- TODO
+<custom-type targetNamespace="http://schemas.xmlsoap.org/wsdl/http/">
+	<prefix>http</prefix>
+	<contributors>Eugene Efremov</contributors>
+	
+	<top-level/>
+</custom-type>
+
+<custom-type targetNamespace="http://schemas.xmlsoap.org/wsdl/mime/">
+	<prefix>mime</prefix>
+	<contributors>Eugene Efremov</contributors>
+	
+	<top-level/>
+</custom-type>
+-->
+
+</custom>

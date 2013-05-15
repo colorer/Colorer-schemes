@@ -1,0 +1,19 @@
+<script type="text/javascript">
+<%
+  chartname_f = src.gsub('-','_')
+%>
+var chartname = "<%=src%>";
+var flashvars = {"get-data" : "get_data_def",
+                 'id': chartname, "loading":"<%=t 'charts.Loading'%>" };
+
+swfobject.embedSWF("/open-flash-chart.swf", chartname,
+    "100%", "300", "9.0.0", "/expressInstall.swf", flashvars);
+
+function reload_<%=chartname_f%>(url)
+{
+  if (url == null){
+    url = get_<%=chartname_f%>().url { }
+  }
+}
+
+</script>

@@ -1,0 +1,96 @@
+ 0: <span class='icon-iconComment def-Comment def-Syntax'>############################################################################</span>
+ 1: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+ 2: <span class='icon-iconComment def-Comment def-Syntax'>#    File:     colormap.icn</span>
+ 3: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+ 4: <span class='icon-iconComment def-Comment def-Syntax'>#    Subject:  Program to display palette from color list</span>
+ 5: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+ 6: <span class='icon-iconComment def-Comment def-Syntax'>#    Author:   Ralph E. Griswold</span>
+ 7: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+ 8: <span class='icon-iconComment def-Comment def-Syntax'>#    Date:     November 5, 1997</span>
+ 9: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+10: <span class='icon-iconComment def-Comment def-Syntax'>############################################################################</span>
+11: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+12: <span class='icon-iconComment def-Comment def-Syntax'>#   This file is in the public domain.</span>
+13: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+14: <span class='icon-iconComment def-Comment def-Syntax'>############################################################################</span>
+15: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+16: <span class='icon-iconComment def-Comment def-Syntax'>#  This program shows the colors given color list files given on the</span>
+17: <span class='icon-iconComment def-Comment def-Syntax'>#  command line.</span>
+18: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+19: <span class='icon-iconComment def-Comment def-Syntax'>#  The following options are supported:</span>
+20: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+21: <span class='icon-iconComment def-Comment def-Syntax'>#    -c i    number of color cells in a row, default 16</span>
+22: <span class='icon-iconComment def-Comment def-Syntax'>#    -w i    width of color cell, default 20</span>
+23: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+24: <span class='icon-iconComment def-Comment def-Syntax'>#  colormap will display color lists with more than 256 entries but,</span>
+25: <span class='icon-iconComment def-Comment def-Syntax'>#  of course, it cannot display more than 256 different colors (if that</span>
+26: <span class='icon-iconComment def-Comment def-Syntax'>#  many).</span>
+27: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+28: <span class='icon-iconComment def-Comment def-Syntax'>############################################################################</span>
+29: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+30: <span class='icon-iconComment def-Comment def-Syntax'>#  Requires:  Version 9 graphics</span>
+31: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+32: <span class='icon-iconComment def-Comment def-Syntax'>############################################################################</span>
+33: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+34: <span class='icon-iconComment def-Comment def-Syntax'>#  Links:  colrlist, interact, io, options, wopen</span>
+35: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+36: <span class='icon-iconComment def-Comment def-Syntax'>############################################################################</span>
+37: 
+38: <span class='icon-iconPreProc def-Directive'>$define CellWidth 20</span>
+39: <span class='icon-iconPreProc def-Directive'>$define Cells 16</span>
+40: 
+41: <span class='icon-iconWord def-Keyword'>link</span> colrlist
+42: <span class='icon-iconWord def-Keyword'>link</span> interact
+43: <span class='icon-iconWord def-Keyword'>link</span> io
+44: <span class='icon-iconWord def-Keyword'>link</span> options
+45: <span class='icon-iconWord def-Keyword'>link</span> wopen
+46: 
+47: <span class='icon-iconWord def-Keyword'>procedure</span> main<span class='def-Symbol'>(</span>args<span class='def-Symbol'>)</span>
+48:    <span class='icon-iconWord def-Keyword'>local</span> i<span class='icon-iconSymb def-Symbol'>,</span> j<span class='icon-iconSymb def-Symbol'>,</span> k<span class='icon-iconSymb def-Symbol'>,</span> clist<span class='icon-iconSymb def-Symbol'>,</span> depth<span class='icon-iconSymb def-Symbol'>,</span> opts<span class='icon-iconSymb def-Symbol'>,</span> width<span class='icon-iconSymb def-Symbol'>,</span> cells<span class='icon-iconSymb def-Symbol'>,</span> <span class='icon-iconWord def-Keyword'>file</span><span class='icon-iconSymb def-Symbol'>,</span> color
+49: 
+50:    opts <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> options<span class='def-Symbol'>(</span>args<span class='icon-iconSymb def-Symbol'>,</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>c+w+</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+51:    width <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconSymb def-Symbol'>\</span>opts<span class='def-Symbol'>[</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>w</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>]</span> <span class='icon-iconSymb def-Symbol'>|</span> CellWidth
+52:    cells <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconSymb def-Symbol'>\</span>opts<span class='def-Symbol'>[</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>c</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>]</span> <span class='icon-iconSymb def-Symbol'>|</span> Cells
+53: 
+54:    <span class='icon-iconWord def-Keyword'>every</span> <span class='icon-iconWord def-Keyword'>file</span> <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconSymb def-Symbol'>!</span>args <span class='icon-iconWord def-Keyword'>do</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+55:       clist <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> colrlist<span class='def-Symbol'>(</span><span class='icon-iconWord def-Keyword'>file</span><span class='def-Symbol'>)</span> <span class='icon-iconSymb def-Symbol'>|</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+56:          Notice<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>Cannot open window for </span><span class='def-StringEdge def-String'>"</span> <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span> image<span class='def-Symbol'>(</span><span class='icon-iconWord def-Keyword'>file</span><span class='def-Symbol'>)</span> <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>.</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+57:          exit<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+58:          <span class='def-SymbolStrong def-Symbol'>}</span>
+59:       depth <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconSymb def-Symbol'>*</span>clist <span class='icon-iconSymb def-Symbol'>/</span> cells
+60:       <span class='icon-iconWord def-Keyword'>if</span> <span class='icon-iconSymb def-Symbol'>*</span>clist <span class='icon-iconSymb def-Symbol'>%</span> cells <span class='icon-iconSymb def-Symbol'>~</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>0</span> <span class='icon-iconWord def-Keyword'>then</span> depth <span class='icon-iconSymb def-Symbol'>+</span><span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>1</span>
+61:       WOpen<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>size=</span><span class='def-StringEdge def-String'>"</span> <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span> cells <span class='icon-iconSymb def-Symbol'>*</span> width <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>,</span><span class='def-StringEdge def-String'>"</span> <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span> depth <span class='icon-iconSymb def-Symbol'>*</span> width<span class='icon-iconSymb def-Symbol'>,</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>bg=black</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span> <span class='icon-iconSymb def-Symbol'>|</span>
+62:          stop<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>*** cannot open window for </span><span class='def-StringEdge def-String'>"</span><span class='icon-iconSymb def-Symbol'>,</span> image<span class='def-Symbol'>(</span><span class='icon-iconWord def-Keyword'>file</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span>
+63:       <span class='icon-iconWord def-Keyword'>every</span> j <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>0</span> to depth <span class='icon-iconSymb def-Symbol'>-</span> <span class='icon-iconNumb def-Number'>1</span> <span class='icon-iconWord def-Keyword'>do</span>
+64:          <span class='icon-iconWord def-Keyword'>every</span> i <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>0</span> to Cells <span class='icon-iconSymb def-Symbol'>-</span> <span class='icon-iconNumb def-Number'>1</span> <span class='icon-iconWord def-Keyword'>do</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+65:             color <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> get<span class='def-Symbol'>(</span>clist<span class='def-Symbol'>)</span> <span class='icon-iconSymb def-Symbol'>|</span> <span class='icon-iconWord def-Keyword'>break</span> <span class='icon-iconWord def-Keyword'>break</span>
+66:             Fg<span class='def-Symbol'>(</span>color<span class='def-Symbol'>)</span> <span class='icon-iconSymb def-Symbol'>|</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+67:                Notice<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>Cannot set foreground to </span><span class='def-StringEdge def-String'>"</span> <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span> image<span class='def-Symbol'>(</span>color<span class='def-Symbol'>)</span> <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>.</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+68:                exit<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+69:                <span class='def-SymbolStrong def-Symbol'>}</span>
+70:             FillRectangle<span class='def-Symbol'>(</span>i <span class='icon-iconSymb def-Symbol'>*</span> width <span class='icon-iconSymb def-Symbol'>+</span> <span class='icon-iconNumb def-Number'>1</span><span class='icon-iconSymb def-Symbol'>,</span> j <span class='icon-iconSymb def-Symbol'>*</span> width <span class='icon-iconSymb def-Symbol'>+</span> <span class='icon-iconNumb def-Number'>1</span><span class='icon-iconSymb def-Symbol'>,</span> width <span class='icon-iconSymb def-Symbol'>-</span> <span class='icon-iconNumb def-Number'>1</span><span class='icon-iconSymb def-Symbol'>,</span> width <span class='icon-iconSymb def-Symbol'>-</span> <span class='icon-iconNumb def-Number'>1</span><span class='def-Symbol'>)</span>
+71:             <span class='def-SymbolStrong def-Symbol'>}</span>
+72: 
+73:       <span class='icon-iconComment def-Comment def-Syntax'># Fill out rest of window with patterned boxes.</span>
+74: 
+75:       Bg<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>dark gray</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+76:       Fg<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>black</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+77:       WAttrib<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>fillstyle=textured</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+78:       WAttrib<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>pattern=checkers</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+79: 
+80:       <span class='icon-iconWord def-Keyword'>every</span> k <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> i to width <span class='icon-iconSymb def-Symbol'>-</span> <span class='icon-iconNumb def-Number'>1</span> <span class='icon-iconWord def-Keyword'>do</span>
+81:          FillRectangle<span class='def-Symbol'>(</span>k <span class='icon-iconSymb def-Symbol'>*</span> width <span class='icon-iconSymb def-Symbol'>+</span> <span class='icon-iconNumb def-Number'>1</span><span class='icon-iconSymb def-Symbol'>,</span> j <span class='icon-iconSymb def-Symbol'>*</span> width <span class='icon-iconSymb def-Symbol'>+</span> <span class='icon-iconNumb def-Number'>1</span><span class='icon-iconSymb def-Symbol'>,</span> width <span class='icon-iconSymb def-Symbol'>-</span> <span class='icon-iconNumb def-Number'>1</span><span class='icon-iconSymb def-Symbol'>,</span> width <span class='icon-iconSymb def-Symbol'>-</span> <span class='icon-iconNumb def-Number'>1</span><span class='def-Symbol'>)</span>
+82: 
+83:       <span class='icon-iconWord def-Keyword'>repeat</span> <span class='icon-iconWord def-Keyword'>case</span> Event<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='icon-iconWord def-Keyword'>of</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+84:          <span class='def-StringEdge def-String'>"</span><span class='def-String'>n</span><span class='def-StringEdge def-String'>"</span><span class='icon-iconSymb def-Symbol'>:</span>  <span class='icon-iconWord def-Keyword'>break</span>
+85:          <span class='def-StringEdge def-String'>"</span><span class='def-String'>q</span><span class='def-StringEdge def-String'>"</span><span class='icon-iconSymb def-Symbol'>:</span>  exit<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+86:          <span class='def-StringEdge def-String'>"</span><span class='def-String'>s</span><span class='def-StringEdge def-String'>"</span><span class='icon-iconSymb def-Symbol'>:</span>  <span class='def-SymbolStrong def-Symbol'>{</span>
+87:             Fg<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>black</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+88:             Bg<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>light gray</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+89:             snapshot<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+90:             <span class='def-SymbolStrong def-Symbol'>}</span>
+91:          <span class='def-SymbolStrong def-Symbol'>}</span>
+92:       WClose<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+93:       <span class='def-SymbolStrong def-Symbol'>}</span>
+94: <span class='icon-iconWord def-Keyword'>end</span>
+95: 

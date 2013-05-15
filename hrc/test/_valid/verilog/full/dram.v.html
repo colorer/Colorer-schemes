@@ -1,0 +1,90 @@
+ 0: <span class='verilog-verComment def-Comment def-Syntax'>/* ***********************************************************************</span>
+ 1: <span class='verilog-verComment def-Comment def-Syntax'>  The Free IP Project</span>
+ 2: <span class='verilog-verComment def-Comment def-Syntax'>  Free-RISC8 -- Verilog 8-bit Microcontroller</span>
+ 3: <span class='verilog-verComment def-Comment def-Syntax'>  (c) 1999, The Free IP Project and Thomas Coonan</span>
+ 4: <span class='verilog-verComment def-Comment def-Syntax'></span>
+ 5: <span class='verilog-verComment def-Comment def-Syntax'></span>
+ 6: <span class='verilog-verComment def-Comment def-Syntax'>  FREE IP GENERAL PUBLIC LICENSE</span>
+ 7: <span class='verilog-verComment def-Comment def-Syntax'>  TERMS AND CONDITIONS FOR USE, COPYING, DISTRIBUTION, AND MODIFICATION</span>
+ 8: <span class='verilog-verComment def-Comment def-Syntax'></span>
+ 9: <span class='verilog-verComment def-Comment def-Syntax'>  1.  You may copy and distribute verbatim copies of this core, as long</span>
+10: <span class='verilog-verComment def-Comment def-Syntax'>      as this file, and the other associated files, remain intact and</span>
+11: <span class='verilog-verComment def-Comment def-Syntax'>      unmodified.  Modifications are outlined below.  </span>
+12: <span class='verilog-verComment def-Comment def-Syntax'>  2.  You may use this core in any way, be it academic, commercial, or</span>
+13: <span class='verilog-verComment def-Comment def-Syntax'>      military.  Modified or not.  </span>
+14: <span class='verilog-verComment def-Comment def-Syntax'>  3.  Distribution of this core must be free of charge.  Charging is</span>
+15: <span class='verilog-verComment def-Comment def-Syntax'>      allowed only for value added services.  Value added services</span>
+16: <span class='verilog-verComment def-Comment def-Syntax'>      would include copying fees, modifications, customizations, and</span>
+17: <span class='verilog-verComment def-Comment def-Syntax'>      inclusion in other products.</span>
+18: <span class='verilog-verComment def-Comment def-Syntax'>  4.  If a modified source code is distributed, the original unmodified</span>
+19: <span class='verilog-verComment def-Comment def-Syntax'>      source code must also be included (or a link to the Free IP web</span>
+20: <span class='verilog-verComment def-Comment def-Syntax'>      site).  In the modified source code there must be clear</span>
+21: <span class='verilog-verComment def-Comment def-Syntax'>      identification of the modified version.</span>
+22: <span class='verilog-verComment def-Comment def-Syntax'>  5.  Visit the Free IP web site for additional information.</span>
+23: <span class='verilog-verComment def-Comment def-Syntax'>      </span><span class='def-URL def-URI'>http://www.free-ip.com</span><span class='verilog-verComment def-Comment def-Syntax'></span>
+24: <span class='verilog-verComment def-Comment def-Syntax'></span>
+25: <span class='verilog-verComment def-Comment def-Syntax'>*********************************************************************** */</span>
+26: 
+27: <span class='def-Comment def-Syntax'>// picdram stands for PIC "Data" RAM.</span>
+28: <span class='def-Comment def-Syntax'>//</span>
+29: <span class='def-Comment def-Syntax'>//</span>
+30: <span class='def-Comment def-Syntax'>// Synchronous Data RAM, 8 bits wide, N words deep.</span>
+31: <span class='def-Comment def-Syntax'>//</span>
+32: <span class='def-Comment def-Syntax'>// ** Must support SYNCHRONOUS WRITEs and ASYNCHRONOUS READs **</span>
+33: <span class='def-Comment def-Syntax'>//    This is so that we can do a Read/Modify/Write in one cycle which</span>
+34: <span class='def-Comment def-Syntax'>//    is required to do something like this:</span>
+35: <span class='def-Comment def-Syntax'>//</span>
+36: <span class='def-Comment def-Syntax'>//       incf 0x20, f   // M[20] &lt;= M[20] + 1</span>
+37: <span class='def-Comment def-Syntax'>//       incf 0x22, f   // M[22] &lt;= M[22] + 1</span>
+38: <span class='def-Comment def-Syntax'>//       incf 0x18, f   // M[18] &lt;= M[18] + 1</span>
+39: <span class='def-Comment def-Syntax'>//</span>
+40: <span class='def-Comment def-Syntax'>// Replace with your actual memory model..</span>
+41: <span class='def-Comment def-Syntax'>//</span>
+42: <span class='verilog-verWord def-Keyword'>module dram</span> <span class='def-Symbol'>(</span>
+43:    clk<span class='verilog-verSymb def-Symbol'>,</span>
+44:    address<span class='verilog-verSymb def-Symbol'>,</span>
+45:    we<span class='verilog-verSymb def-Symbol'>,</span>
+46:    din<span class='verilog-verSymb def-Symbol'>,</span>
+47:    dout
+48: <span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+49: 
+50: <span class='def-Keyword'>input</span>        clk<span class='def-Keyword'>;</span>
+51: <span class='def-Keyword'>input</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>6</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    address<span class='def-Keyword'>;</span>
+52: <span class='def-Keyword'>input</span>        we<span class='def-Keyword'>;</span>
+53: <span class='def-Keyword'>input</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    din<span class='def-Keyword'>;</span>
+54: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    dout<span class='def-Keyword'>;</span>
+55: 
+56: <span class='def-Comment def-Syntax'>// Number of data memory words.  This is somewhat tricky, since remember</span>
+57: <span class='def-Comment def-Syntax'>// that lowest registers (e.g. special registers) are not really in this</span>
+58: <span class='def-Comment def-Syntax'>// data memory at all, but are explicit registers at the top-level.  Also,</span>
+59: <span class='def-Comment def-Syntax'>// the banking scheme has some of the other registers in each bank being</span>
+60: <span class='def-Comment def-Syntax'>// mapped to the same physical registers.  The bottom line is that for</span>
+61: <span class='def-Comment def-Syntax'>// the 16C57, you at most need to set this to 72.  Note we are reserving</span>
+62: <span class='def-Comment def-Syntax'>// the last 2 words for our little "expansion circuit" so we really want</span>
+63: <span class='def-Comment def-Syntax'>// only 70.</span>
+64: <span class='def-Comment def-Syntax'>//</span>
+65: 
+66: <span class='def-Keyword'>parameter</span> word_depth <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>70</span><span class='def-Keyword'>;</span> <span class='def-Comment def-Syntax'>// Maximum minus 2 words for expansion circuit demo</span>
+67: <span class='def-Comment def-Syntax'>//parameter word_depth = 24;  // This would be like a 16C54 </span>
+68: 
+69: <span class='def-Comment def-Syntax'>// reg [6:0]    address_latched; &lt;--- NO!  We need ASYNCHRONOUS READs</span>
+70: 
+71: <span class='def-Comment def-Syntax'>// Instantiate the memory array itself.</span>
+72: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    mem<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>0</span><span class='verilog-verSymb def-Symbol'>:</span>word_depth<span class='verilog-verSymb def-Symbol'>-</span><span class='verilog-verNumb def-Number'>1</span><span class='def-Symbol'>]</span><span class='def-Keyword'>;</span>
+73: 
+74: <span class='def-Comment def-Syntax'>// Latch address &lt;--- NO! </span>
+75: <span class='def-Comment def-Syntax'>//always @(posedge clk)</span>
+76: <span class='def-Comment def-Syntax'>//   address_latched &lt;= address;</span>
+77:    
+78: <span class='def-Comment def-Syntax'>// READ</span>
+79: <span class='def-Comment def-Syntax'>//assign dout = mem[address_latched];</span>
+80: 
+81: <span class='def-Comment def-Syntax'>// ASYNCHRONOUS READ</span>
+82: <span class='def-Keyword'>assign</span> dout <span class='verilog-verSymb def-Symbol'>=</span> mem<span class='verilog-verNumb def-Number'>[address]</span><span class='def-Keyword'>;</span>
+83: 
+84: <span class='def-Comment def-Syntax'>// SYNCHRONOUS WRITE</span>
+85: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>posedge clk</span>)
+86:    if <span class='def-Symbol'>(</span>we<span class='def-Symbol'>)</span> mem<span class='verilog-verNumb def-Number'>[address]</span> <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> din<span class='verilog-verSymb def-Symbol'>;</span>
+87: 
+88: <span class='verilog-verWord def-Keyword'>endmodule</span>
+89: 

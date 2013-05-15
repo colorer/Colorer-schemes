@@ -1,0 +1,90 @@
+SimpleType BaselineShiftValue = svg:Length
+SimpleType Boolean = boolean
+SimpleType ClipValue = string
+SimpleType ClipPathValue = svg:MaskValue
+SimpleType Color = string
+SimpleType Coordinate = svg:Length
+SimpleType Coordinates = svg:Lengths
+SimpleType EnableBackgroundValue = string
+SimpleType FilterValue = svg:MaskValue
+SimpleType FontSizeValue = string
+SimpleType FontSizeAdjustValue = string
+SimpleType GlyphOrientationHorizontalValue = string
+SimpleType GlyphOrientationVerticalValue = svg:GlyphOrientationHorizontalValue
+SimpleType Integer = nonNegativeInteger
+SimpleType KerningValue = string
+SimpleType SpacingValue = string
+SimpleType Length = string
+SimpleType Lengths = svg:Length
+SimpleType LinkTarget = QName
+SimpleType MaskValue = string
+SimpleType MarkerValue = svg:MaskValue
+SimpleType Number = decimal
+SimpleType NumberOptionalNumber = svg:Number
+SimpleType NumberOrPercentage = svg:Number
+SimpleType Numbers = svg:Number
+SimpleType OpacityValue = svg:Number
+SimpleType Paint = svg:Color
+SimpleType PreserveAspectRatioSpec = string
+SimpleType Points = string
+SimpleType PathData = string
+SimpleType Script = string
+SimpleType StyleSheet = string
+SimpleType StrokeDashArrayValue = string
+SimpleType StrokeDashOffsetValue = svg:StrokeWidthValue
+SimpleType StrokeMiterLimitValue = string
+SimpleType StrokeWidthValue = string
+SimpleType SVGColor = svg:Color
+SimpleType TransformList = string
+SimpleType URI = anyURI
+SimpleType ViewBoxSpec = string
+
+SimpleType ClassList = string
+SimpleType ClipFillRule = string
+SimpleType ContentType = string
+SimpleType CursorValue = string
+SimpleType ExtensionList = string
+SimpleType FeatureList = string
+SimpleType FontFamilyValue = string
+SimpleType LanguageCode = language
+SimpleType LanguageCodes = string
+SimpleType MediaDesc = string
+SimpleType Text = string
+SimpleType TextDecorationValue = string
+
+AttrGroup StructuredText
+
+AttrGroup stdAttrs 
+AttrGroup langSpaceAttrs 
+AttrGroup testAttrs 
+AttrGroup xlinkRefAttrs 
+AttrGroup xlinkRefAttrsEmbed 
+AttrGroup graphicsElementEvents 
+AttrGroup documentEvents 
+AttrGroup animationEvents 
+
+AttrGroup PresentationAttributes-Color 
+AttrGroup PresentationAttributes-Containers 
+AttrGroup PresentationAttributes-feFlood 
+AttrGroup PresentationAttributes-FillStroke 
+AttrGroup PresentationAttributes-FilterPrimitives 
+AttrGroup PresentationAttributes-FontSpecification 
+AttrGroup PresentationAttributes-Gradients 
+AttrGroup PresentationAttributes-Graphics 
+AttrGroup PresentationAttributes-Images 
+AttrGroup PresentationAttributes-LightingEffects 
+AttrGroup PresentationAttributes-Markers 
+AttrGroup PresentationAttributes-TextContentElements 
+AttrGroup PresentationAttributes-TextElements 
+AttrGroup PresentationAttributes-Viewports 
+AttrGroup PresentationAttributes-All 
+
+AttrGroup animElementAttrs 
+AttrGroup animAttributeAttrs 
+AttrGroup animTimingAttrs 
+AttrGroup animValueAttrs 
+
+AttrGroup component_transfer_function_attributes
+
+ModelGroup descTitleMetadata 
+

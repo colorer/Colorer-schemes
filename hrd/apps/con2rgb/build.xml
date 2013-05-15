@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+	Rules for convert concole HRD to RGB.
+-->
+
+<project name="con2rgb" default="con2rgb" basedir=".">
+
+<property name="hrd-path" value="../../hrd" description="hrd location"/>
+<property name="hcd-path" value="../../palette" description="palette location"/>
+
+<property file='../../../path.properties'/>
+<property name='shemes' value="../../../${path.shared}" description='path to dtd, xsd, etc.'/>
+
+<!-- con2rgb -->
+
+<target name="con2rgb.prop">
+	<property file="con2rgb.properties"/>
+	<xmlcatalog id="xsd2hrcdtd">
+		<catalogpath>
+			<fileset dir='${shemes}' includes='colorer.cat'/>
+		</catalogpath>
+	</xmlcatalog>
+</target>
+
+
+<target name="con2rgb" depends="con2rgb.prop">
+	<xslt in="${hrd-path}/console/${input}" out="${hrd-path}/rgb/${output}" style="con2rgb.xsl" classpath="${xslt-classpath}">
+		<xmlcatalog refid="xsd2hrcdtd"/>
+		<param name="hcd" expression="${hcd-path}/${hcd}"/>
+	</xslt>  
+</target>
+
+
+<target name="clean" depends="con2rgb.prop">
+    <delete failonerror='false'>
+        <fileset dir="${hrd-path}/rgb" includes="${output}"/>
+    </delete>
+</target>
+
+
+<target name='all' depends="con2rgb"/>
+
+</project>

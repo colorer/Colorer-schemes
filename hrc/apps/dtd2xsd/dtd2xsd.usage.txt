@@ -1,0 +1,49 @@
+perl dtd2xsd.pl [option...] [file]
+  -alias
+    enables special type aliases (default <b>off</b>)
+  -prefix p
+    specify namespace prefix
+  -ns http://www.w3.org/namespace/
+    specify namespace URI
+  -pcdata
+    treat content models of just (#PCDATA) as string, not mixed content
+  -simpletype pattern base
+    treat parameter entities whose name match this pattern
+    as simple datatypes derived from this base type
+  -attrgroup pattern
+    treat parameter entities whose name match this pattern
+    as attribute groups
+  -modelgroup pattern
+    treat parameter entities whose name match this pattern
+    as model groups
+  -substgroup pattern
+    treat parameter entities whose name match this pattern
+    as substitution groups (must be a | group, therefore)
+  -mapfile file
+    read the given file and process its contents for mappings
+
+The mapping file consists of a series of lines with directives that are 
+interpreted just like the corresponding command line arguments. Handy if you
+have a set of related DTDs to convert.
+
+Alias pattern typeAlias
+SimpleType pattern typeName
+ModelGroup pattern
+AttrGroup pattern
+SubstGroup pattern
+PCDATA typeAlias
+
+The PCDATA directive gives the type alias to use instead of string for content
+models of just (#PCDATA), provided the -pcdata flag is enabled.
+
+The difference between aliases and simple types is that a simple type
+declaration will be created for the latter, and references with include the
+proper namespace prefix, whereas aliases will just be substituted as is.
+
+Example:
+Alias NUMBER nonNegativeInteger
+Alias Date date
+Alias Float float
+SimpleType SKU string
+SimpleType AddressLine string
+

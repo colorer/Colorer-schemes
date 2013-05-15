@@ -1,0 +1,40 @@
+#!/usr/bin/env mkb
+files
+{
+	(source)
+	IwAnimOffset.cpp
+
+	# Provide access to resource objects via IDE
+	[Resources]
+	(data)
+	IwAnimOffset.group
+
+	(data/combatEva/models)
+	combatEva.geo
+	combatEva_rig.skel
+	combatEva.skin
+
+	(data/fixed)
+	SingleBone.skel
+
+	(data/combatEva/anims)
+	offset_LfStance.anim
+	offset_LfStance_offset.anim
+}
+
+assets
+{
+	(data)
+	IwAnimOffset.group.bin
+	logo.raw
+ 	splash.jpg
+}
+
+subprojects
+{
+	iwgx
+	iwgeom
+	iwgraphics
+	iwanim
+	../ExamplesCore
+}

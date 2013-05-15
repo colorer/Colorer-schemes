@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<!DOCTYPE hrc PUBLIC "-//Cail Lomecb//DTD Colorer HRC take5//EN"
+  "http://colorer.sf.net/2003/hrc.dtd">
+<hrc version="take5" xmlns="http://colorer.sf.net/2003/hrc"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hrc.xsd">
+   <type name="jScript">
+
+    <annotation><documentation>
+       JScript scheme
+    </documentation><contributors><![CDATA[
+       Evgeny Stepanischev <se@e-kazan.ru>
+       Eugene Efremov <4mirror@mail.ru>
+    ]]></contributors></annotation>
+
+      <!-- TODO: support ECMA-262 ... 357 -->
+      
+      <import type="def"/>
+
+      <scheme name="jComment">
+         <keywords region="CommentContent">
+            <word name="@cc_on"/>
+            <word name="@cc_off"/>
+            <word name="@set"/>
+            <word name="@if"/>
+            <word name="@_alpha"/>
+            <word name="@_jscript"/>
+            <word name="@_jscript_build"/>
+            <word name="@_jscript_version"/>
+            <word name="@_mac"/>
+            <word name="@_mc680x0"/>
+            <word name="@_PowerPC"/>
+            <word name="@_win16"/>
+            <word name="@_win32"/>
+            <word name="@_x86"/>
+            <word name="@_microsoft"/>
+         </keywords>
+      </scheme>
+      
+      <scheme name='jsQuote'>
+      	<regexp match="/\\u[\dA-Fa-f]{4}/" region0="StringContent"/>
+      	<regexp match="/\\x[\dA-Fa-f]{2}/" region0="StringContent"/>
+      	<regexp match="/\\[\\bfnrtv]/" region0="StringContent"/>
+      </scheme>
+
+      <scheme name="jsMETA">
+      	<inherit scheme='jsQuote'/>
+      	<regexp match="/\\[&quot;&apos;]/" region0="StringContent"/>
+      </scheme>
+
+      <!-- EE: add regexp support -->
+      <scheme name="String">
+         <inherit scheme="jsMETA"/>
+      </scheme>
+      
+            
+      <scheme name="RE">
+       <inherit scheme="regexp:pcre.regexp">
+        <virtual scheme="regexp:string" subst-scheme="jsMETA"/>
+        <virtual scheme="regexp:pcre.regexp" subst-scheme="RE"/>        
+       </inherit>
+      </scheme>
+      
+      <!-- EE: support js in attr -->
+      <!-- TODO: mark apos/quots in attr as error -->
+      <scheme name="AposString">
+         <block start="/(')/" end="/(')/" 
+           scheme="String" region="String"
+           region00='StringEdge' region01='PairStart'
+           region10='StringEdge' region11='PairEnd'
+         />
+      </scheme>
+      <scheme name="QuotString">
+         <block start='/(")/' end='/(")/'
+           scheme="String" region="String"
+           region00='StringEdge' region01='PairStart'
+           region10='StringEdge' region11='PairEnd'
+         />
+      </scheme>
+      
+      <scheme name="jString">
+       <inherit scheme="AposString"/>
+       <inherit scheme="QuotString"/>
+      </scheme>
+      
+      <scheme name="AposScript">
+       <inherit scheme="jScript">
+        <virtual scheme="jString" subst-scheme="AposString"/>
+       </inherit>
+      </scheme>
+      <scheme name="QuotScript">
+       <inherit scheme="jScript">
+        <virtual scheme="jString" subst-scheme="QuotString"/>
+       </inherit>
+      </scheme>
+
+      <scheme name="jScript">
+<!-- just ignore html comments -->
+         <regexp match="/^\s* &lt;!--/x" region0="Comment"/>
+         <regexp match="/^\s* --&gt;/x" region0="Comment"/>
+<!-- Linear Comments-->
+         <block start="/\/\//" end="/\M(&lt;\/scr|$)/i" scheme="jComment" region="Comment"/>
+         <block start="/\/\*/" end="/\*\//" scheme="jComment" region="Comment" region00="PairStart" region10="PairEnd"/>
+         <regexp match="/^\M\s* function \s+ ([\w_]+) /x" region1="Function"/>
+         <regexp match="/\b ([\w_]+) \M\s* [=:] \s* function\b /x" region1="Function"/>
+         <inherit scheme="PairedBrackets">
+            <virtual scheme="PairedBrackets" subst-scheme="jScript"/>
+         </inherit>
+<!-- Numbers -->
+         <inherit scheme="def:Number"/>
+<!-- Strings -->
+         <inherit scheme="jString"/>
+
+      <!-- EE: add regexp support -->
+         <block scheme="RE" region="String">
+           <start region1="Symbol" region2="StringEdge" region3="PairStart">
+            <![CDATA[
+             /
+             ( [\=\!]\~ | && | \|\| |
+             [^<\]\}\)\+\-\w\s\/\;] |
+             \bif | ~ | ^)
+             \s* ((\/))\M[^\/\*>] /x
+            ]]>
+           </start>
+           <end region0="StringEdge" region1="PairEnd" region2="regexp:SpecArea">
+            <![CDATA[
+             /(\y2([cmiogxes]*))/x
+            ]]>
+           </end>
+         </block>
+
+<!-- faults with var1/var2 :(
+   <regexp match='/ \/ ( \\. | [^\\\/] )*? \/ /x' region="String"/>
+   -->
+         <regexp match="/\$[\d_*&amp;+`']/" region="Var"/>
+         <keywords region="Keyword">
+            <word name="break"/>
+            <word name="case"/>
+            <word name="catch"/>
+            <word name="const"/>
+            <word name="continue"/>
+            <word name="default"/>
+            <word name="do"/>
+            <word name="else"/>
+            <word name="finally"/>
+            <word name="for"/>
+            <word name="function"/>
+            <word name="if"/>
+            <word name="in"/>
+            <word name="instanceof"/>
+            <word name="new"/>
+            <word name="return"/>
+            <word name="switch"/>
+            <word name="this"/>
+            <word name="throw"/>
+            <word name="try"/>
+            <word name="typeof"/>
+            <word name="var"/>
+            <word name="while"/>
+            <word name="with"/>
+         </keywords>
+         <keywords region="Symbol">
+<!-- Properties -->
+            <word name=".E"/>
+            <word name=".length"/>
+            <word name=".LN2"/>
+            <word name=".LN10"/>
+            <word name=".LOG2E"/>
+            <word name=".LOG10E"/>
+            <word name=".PI"/>
+            <word name=".SQRT1_2"/>
+            <word name=".SQRT2"/>
+         </keywords>
+         <regexp match="/!\M\w/" region="Symbol"/>
+         <keywords region="Symbol">
+<!-- Operators Computational  -->
+            <symb name="++"/>
+            <symb name="--"/>
+            <symb name="*"/>
+            <symb name="/"/>
+            <symb name="%"/>
+            <symb name="+"/>
+            <symb name="-"/>
+<!-- Operators Logical -->
+            <symb name="!"/>
+            <symb name="&lt;"/>
+            <symb name="&gt;"/>
+            <symb name="&lt;="/>
+            <symb name="&gt;="/>
+            <symb name="=="/>
+            <symb name="!="/>
+            <symb name="&amp;&amp;"/>
+            <symb name="||"/>
+            <symb name="?" region="SymbolStrong"/> <!-- EE: strong -->
+<!-- Operators Bitwise -->
+            <symb name="~"/>
+            <symb name="&lt;&lt;"/>
+            <symb name="/&gt;&gt;"/>
+            <symb name="&gt;&gt;&gt;"/>
+            <symb name="&amp;"/>
+            <symb name="^"/>
+            <symb name="|"/>
+<!-- Operators Assignment -->
+            <symb name="==="/>
+            <symb name="!=="/>
+            <symb name="="/>
+            <symb name="+="/>
+            <symb name="-+"/>
+            <symb name="*="/>
+            <symb name="/="/>
+            <symb name="%="/>
+            <symb name="&lt;&lt;="/>
+            <symb name="/&gt;&gt;="/>
+            <symb name="&gt;&gt;&gt;="/>
+            <symb name="&amp;="/>
+            <symb name="|="/>
+            <symb name="^="/>
+<!-- Operators other?  -->
+            <!-- EE: this operators cannot used in this plase...
+            <symb name="["/>
+            <symb name="]"/>
+            <symb name="{"/>
+            <symb name="}"/>
+            <symb name="("/>
+            <symb name=")"/>-->
+            <symb name=","/>
+            <symb name="."/>
+            <symb name=":" region="SymbolStrong"/> <!-- EE: strong -->
+            <symb name=";" region="SymbolStrong"/> <!-- EE: strong -->
+         </keywords>
+         <!-- EE: copy from c.hrc -->
+         <keywords region="def:Error">
+            <symb name="["/><symb name="]"/>
+            <symb name="{"/><symb name="}"/>
+            <symb name="("/><symb name=")"/>
+            <symb name="*/"/>
+         </keywords>
+
+         <keywords region="BooleanConstant">
+            <word name="true"/>
+            <word name="false"/>
+            <word name="null"/>
+            <word name="undefined"/>
+         </keywords>
+         <keywords region="Var">
+<!-- Objects -->
+            <word name="ActiveXObject"/>
+            <word name="arguments"/>
+            <word name="Arguments"/>
+            <word name="Array"/>
+            <word name="BooleanConstant"/>
+            <word name="Call"/>
+            <word name="caller"/>
+            <word name="Closure"/>
+            <word name="constructor"/>
+            <word name="Date"/>
+            <word name="Dictionary"/>
+            <word name="Enumerator"/>
+            <word name="FileSystemObject"/>
+            <word name="Function"/>
+            <word name="global"/>
+            <word name="Global"/>
+            <word name="ignoreCase"/>
+            <word name="Image"/>
+            <word name="index"/>
+            <word name="Infinity"/>
+            <word name="input"/>
+            <word name="input"/>
+            <word name="lastIndex"/>
+            <word name="lastMatch"/>
+            <word name="lastParen"/>
+            <word name="leftContext"/>
+            <word name="Math"/>
+            <word name="MAX_VALUE"/>
+            <word name="MIN_VALUE"/>
+            <word name="multiline"/>
+            <word name="NaN"/>
+            <word name="NEGATIVE_INFINITY"/>
+            <word name="Number"/>
+            <word name="Object"/>
+            <word name="POSITIVE_INFINITY"/>
+            <word name="prototype"/>
+            <word name="RegExp"/>
+            <word name="rightContext"/>
+            <word name="Script"/>
+            <word name="source"/>
+            <word name="TextStream"/>
+            <word name="VBArray"/>
+            <word name="With"/>
+         </keywords>
+         <keywords region="Keyword">
+<!-- Methods -->
+            <word name="abs"/>
+            <word name="acos"/>
+            <word name="alert"/>
+            <word name="anchor"/>
+            <word name="asin"/>
+            <word name="atan"/>
+            <word name="atan2"/>
+            <word name="AtEnd"/>
+            <word name="big"/>
+            <word name="blink"/>
+            <word name="bold"/>
+            <word name="ceil"/>
+            <word name="charAt"/>
+            <word name="charCodeAt"/>
+            <word name="clearTimeout"/>
+            <word name="clearInterval"/>
+            <word name="CollectGarbage"/>
+            <word name="compile"/>
+            <word name="concat"/>
+            <word name="confirm"/>
+            <word name="cos"/>
+            <word name="decodeURIComponent"/>
+            <word name="dimensions"/>
+            <word name="encodeURIComponent"/>
+            <word name="escape"/>
+            <word name="eval"/>
+            <word name="exec"/>
+            <word name="exp"/>
+            <word name="fixed"/>
+            <word name="floor"/>
+            <word name="fontcolor"/>
+            <word name="fontsize"/>
+            <word name="fromCharCode"/>
+            <word name="getDate"/>
+            <word name="getDay"/>
+            <word name="getFullYear"/>
+            <word name="getHours"/>
+            <word name="getItem"/>
+            <word name="getMilliseconds"/>
+            <word name="getMinutes"/>
+            <word name="getMonth"/>
+            <word name="getSeconds"/>
+            <word name="getTime"/>
+            <word name="getTimezoneOffset"/>
+            <word name="getUTCDate"/>
+            <word name="getUTCDay"/>
+            <word name="getUTCFullYear"/>
+            <word name="getUTCHour"/>
+            <word name="getUTCMilliseconds"/>
+            <word name="getUTCMinutes"/>
+            <word name="getUTCMonth"/>
+            <word name="getUTCSeconds"/>
+            <word name="getVarDate"/>
+            <word name="getYear"/>
+            <word name="indexOf"/>
+            <word name="isFinite"/>
+            <word name="isNaN"/>
+            <word name="italic"/>
+            <word name="item"/>
+            <word name="join"/>
+            <word name="lastIndexOf"/>
+            <word name="lbound"/>
+            <word name="length"/>
+            <word name="link"/>
+            <word name="log"/>
+            <word name="match"/>
+            <word name="max"/>
+            <word name="min"/>
+            <word name="moveFirst"/>
+            <word name="moveNext"/>
+            <word name="parse"/>
+            <word name="parseFloat"/>
+            <word name="parseInt"/>
+            <word name="pow"/>
+            <word name="prompt"/>
+            <word name="random"/>
+            <word name="replace"/>
+            <word name="reserve"/>
+            <word name="round"/>
+            <word name="search"/>
+            <word name="setDate"/>
+            <word name="setFullYear"/>
+            <word name="setHours"/>
+            <word name="setInterval"/>
+            <word name="setMilliseconds"/>
+            <word name="setMinutes"/>
+            <word name="setMonth"/>
+            <word name="setSeconds"/>
+            <word name="setTime"/>
+            <word name="setTimeout"/>
+            <word name="setUTCDate"/>
+            <word name="setUTCFullYear"/>
+            <word name="setUTCHour"/>
+            <word name="setUTCMilliseconds"/>
+            <word name="setUTCMinutes"/>
+            <word name="setUTCMonth"/>
+            <word name="setUTCSeconds"/>
+            <word name="sin"/>
+            <word name="slice"/>
+            <word name="small"/>
+            <word name="sort"/>
+            <word name="split"/>
+            <word name="sqrt"/>
+            <word name="strike"/>
+            <word name="sub"/>
+            <word name="substr"/>
+            <word name="substring"/>
+            <word name="sup"/>
+            <word name="tan"/>
+            <word name="test"/>
+            <word name="toArray"/>
+            <word name="toGMTString"/>
+            <word name="toLocaleString"/>
+            <word name="toLowerCase"/>
+            <word name="toString"/>
+            <word name="toUpperCase"/>
+            <word name="toUTCString"/>
+            <word name="ubound"/>
+            <word name="unescape"/>
+            <word name="UTC"/>
+            <word name="valueOf"/>
+            <word name="toExponential"/>
+            <word name="toFixed"/>
+            <word name="toPrecision"/>
+         </keywords>
+      </scheme>
+
+   </type>
+</hrc>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the Colorer Library.
+   -
+   - The Initial Developer of the Original Code is
+   - Cail Lomecb <cail@nm.ru>.
+   - Portions created by the Initial Developer are Copyright (C) 1999-2005
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -  Eugene Efremov <4mirror@mail.ru>
+   -  Evgeny Stepanischev <se@e-kazan.ru>
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

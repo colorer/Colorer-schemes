@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<farkeys>
+<defs href="defs.xml"/>
+
+<group ref="hidden">
+	<type ref="sys" n='4' attr="06"><!-- sys,hi -->
+		<file/>
+	</type>
+	<type ref="hidden" n='6' attr="02">
+		<file/>
+	</type>
+</group>
+
+
+<group ref="sys">
+	<type ref="sys" n='8' attr="04">
+		<file/>
+	</type>
+
+	<type ref="sgml" n="30">
+		<file>*htaccess</file>
+	</type>
+	<type ref="sgml" n="45">
+		<file>*.conf,vhost*.*</file>
+	</type>
+	<type ref="err" n="45">
+		<file>*.key</file>
+	</type>
+	
+	<type ref="ini" n="1"><!-- красим его независимо от -->
+		<file>msdos.sys</file>
+	</type>
+	<type ref="ini" n="20">
+		<file>config.sys,win.ini,system.ini</file>
+	</type>
+
+	<type ref="src" n="20">
+		<file>FarMenu.Ini</file>
+	</type>
+	
+</group>
+
+
+
+<group ref="dir">
+	<type n='10' attr="10">
+		<file/>
+	</type>
+	
+	<type ref="plg" n="40">
+		<file>*.xpi</file>
+	</type>
+	<type ref="java" n="40">
+		<file>*.jar</file>
+	</type>
+	<type ref="msa" n="40">
+		<file>*.cab,*.msi</file>
+	</type>
+	<type ref="arc" n='41'>
+		<file>*.rar,*.zip,*.[zj],*.[bg7]z,*.[bg]zip,*.tar,*.t[ag]z,*.ar[cj],*.bz2,*.lha,*.lzh,*.ha,*.ac[bei],*.pa[ck],*.rk,*.cpio,*.rpm,*.zoo,*.hqx,*.sit,*.ice,*.uc2,*.ain,*.imp,*.777,*.ufa,*.boa,*.bs[2a],*.sea,*.hpk,*.ddi,*.x2,*.rkv,*.[lw]sz,*.h[ay]p,*.lim,*.sqz,*.chz</file>
+		<file>*.lzma</file>
+		<!--file>*.rar,*.arj,*.zip,*.lzh,*.ha,*.lzma</file>
+		<file>*.bz2,*.tar,*.tgz,*.gz,*.7z,*.zoo,*.z</file-->
+	</type>
+	<type ref="arc" n='70'>
+		<file>*.r[0-9][0-9],*.a[0-9][0-9]</file>
+	</type>
+</group>
+
+
+
+<group ref="exe">	
+	<type n="40">
+		<file>*.exe,*.com</file>
+	</type>
+	<type ref="lnk" n="40">
+		<file>*.pif,*.lnk</file>
+	</type>
+	
+	<type ref="sys" n="20">
+		<file>autoexec.bat</file>
+	</type>
+	
+	<type ref="src" n="40">
+		<file>*.bat,*.cmd</file>
+		<file>*.js,*.jse,*.pls,*.vb[se],*.pyw,*.py</file>
+	</type>
+	
+	<type ref="ini" n="40">
+		<file>*.reg</file>
+	</type>
+	
+	<type ref="msa" n="40">
+		<file>*.scf</file>
+	</type>
+	
+	<type ref="xml" n="40">
+		<file>*.ws[cf]</file>
+	</type>
+	
+	<type ref="java" n="40">
+		<file>*.class</file>
+	</type>
+</group>
+
+
+
+<group ref="src">
+	<type ref="xml" n="39">
+		<file>*.xul,*.hr[cd],*.xtpl</file>
+		<file>*.xqx</file>
+		<file>*.bkt,custom.*.xml</file>
+	</type>
+	
+	<type ref="src" n="40">
+		<file>*.pl,*.pys</file>
+		<file>*.sh</file>
+	</type>
+	
+	<type ref="sgml" n="40">
+		<file>*.php,*.asp,*.jsp</file>
+		<file>*.xq</file>
+	</type>
+	
+	<type ref="inc" n="38">
+		<file>*.ent.hrc</file>
+	</type>
+	<type ref="inc" n="40">
+		<file>*.h,*.hpp</file>
+		<file>*.inc</file>
+		<file>*.pm</file>
+	</type>
+	
+	<type ref="hlp" n="40">
+		<file>*.pod</file>
+	</type>
+	
+	<type ref="res" n="40">
+		<file>*.rc,*.rh</file>
+	</type>
+	
+	<type ref="src" n="40">
+		<file>*.cpp,*.c,*.C,*.cc,*.asm,*.pas,*.sql,*.d,*.m4,*.y,*.l,*.f,*.for</file>
+	</type>
+	
+	<type ref="java" n="40">
+		<file>*.java,*.cs,*.idl</file>
+	</type>
+</group>
+
+
+
+<group ref="net">
+	<type ref="sgml" n="40">
+		<file>*.htm,*.html,*.[sd]html</file>
+	</type>
+	
+	<type ref="xml" n="39">
+		<file>*.xhtml,*.wml</file>
+		<!-- for x-temple ... -->
+		<file>*.xslt</file>
+	</type>
+	<type ref="lst" n="90">
+		<file>*rss*</file>
+	</type>
+	
+	<type ref="ini" n="40">
+		<file>*.url</file>
+	</type>
+	<type ref="msa" n="40">
+		<file>*.chm</file>
+	</type>
+	<type ref="plg" n="20">
+		<file>binding.xml</file>
+	</type>
+	<type ref="plg" n="41">
+		<file>*.ht[tac]</file>
+	</type>
+	<type n="50">
+		<file>*.?html</file>
+	</type>
+	<type n="80">
+		<file>*.ht*</file>
+	</type>
+	
+	<type ref="res" n="40">
+		<file>*.mht</file>
+	</type>
+	<type ref="arc" n="40">
+		<file>*.uue</file>
+	</type>
+	
+	<type n="40">
+		<file>*.eml,*.msg,*.nsw</file>
+	</type>
+	
+	<type ref="video" n="40">
+		<file>*.svf</file>
+	</type>
+</group>
+
+
+
+<group ref="cfg">
+	
+	<type ref="java" n="40">
+		<file>*.properties,*.prop</file>
+	</type>
+	
+	<type ref="xml" n="40">
+		<file>*.xsl,*.sch,*.qrc</file>
+	</type>
+	
+	<type ref="sgml" n="40">
+		<file>*.[cq]ss</file>
+	</type>
+	
+	<type ref="hlp" n="40">
+		<file>*.hlf,*.lng</file>
+	</type>
+	
+	<type ref="src" n="40">
+		<file>*.ext,*.mnu</file>
+	</type>
+	
+	
+	<type n="41">
+		<file>*.cfg</file>
+	</type>
+</group>
+	
+
+
+<group ref="mak">
+	<type ref="xml" n="20">
+		<file>build.xml</file>
+	</type>
+	<type n="20">
+		<file>makefile</file>
+	</type>
+	<type ref="ini" n="20">
+		<file>autoload.ini</file>
+	</type>
+	<type ref="bak" n="45">
+		<file>makefile.*</file>
+	</type>
+	<type n="40">
+		<file>*.mak,*.pro,make</file>
+	</type>	
+	<type ref="ico" n="40">
+		<file>*.def</file>
+	</type>
+	<type ref="plg" n="40">
+		<file>*.dif,*.diff</file>
+	</type>
+</group>
+
+
+
+<group ref="meta">
+	<type ref="1st" n="20">
+		<file>dirinfo,file-id.diz,file_id.diz,Descript.ion</file>
+	</type>
+	
+	
+	<type ref="ini" n="40"><!-- Пусть лежит здесь -->
+		<file>*.inf</file>
+	</type>
+	
+	<type ref="sgml" n="40">
+		<file>*.dtd,*.ent,*.mod</file>
+	</type>
+	
+	<type ref="video" n="40">
+		<file>*.ssa,*.ass,*.sub,*.srt</file>
+	</type>
+	
+	<type ref="xml" n="40">
+		<file>*.xsd,*.rdf,*.rng</file>
+	</type>
+	
+	<type n="42">
+		<file>*.mtf,*.mt</file>
+	</type>
+	
+	<type ref="bak" n="42">
+		<file>*.map</file>
+	</type>
+</group>
+
+
+
+<group ref="txt">
+	<type ref="1st" n="20">
+		<file>read.me,readme,readme.txt,readme.1st</file>
+	</type>
+	<type ref="1st" n="30">
+		<file>readme.*</file>
+	</type>
+	<type ref="1st" n="40">
+		<file>*.1st,*.diz,*.ion</file>
+	</type>
+	
+	<type n="40" ref="lst">
+		<file>*.lst,*.csv,*.log</file>
+	</type>
+	<type ref="src" n="40">
+		<file>*.tex</file>
+	</type>
+	<type n="40">
+		<file>*.txt,*.rus,*.lex</file>
+	</type>
+	
+	<type ref="err" n="42">
+		<file>*.frm</file>
+	</type>
+	
+	<type n="80">
+		<file>*.</file>
+	</type>
+	
+	<type ref="hlp" n="40">
+		<file>*.hlp</file>
+	</type>
+	
+	<type ref="msa" n="50">
+		<file>*.doc,*.rtf,*.pp?,*.xl?,*.gra,*.wri,*.nmf,*.wnt,*.ofn,*.wrk,*.pwz,*.wiz,*.obz,*.dot,*.obt</file>
+	</type>
+	
+	<type ref="img" n="40">
+		<file>*.pdf</file>
+	</type>
+
+	<type ref="xml" n="40">
+		<file>*.docbook,*.fo,*.od[ts]</file>
+	</type>
+	<type ref="xml" n="70">
+		<file>*.od?</file>
+	</type>
+	
+	<type ref="data" n="40">
+		<file>*.tbl</file>
+	</type>
+</group>
+
+
+
+<group ref="img">
+	<type ref="img" n="40">
+		<file>*.bmp,*.gif,*.png,*.jpg,*.jpeg,*.tif,*.tiff,*.pcx,*.tga,*.psd,*.pic,*.fit</file>
+	</type>
+	<type ref="xml" n="40">
+		<file>*.svg,*.vmrl</file>
+	</type>
+	<type ref="src" n="40">
+		<file>*.ps,*.eps,*.xpm</file>
+	</type>
+	
+	<type ref="video" n="40">
+		<file>*.avi,*.mov,*.mkv,*.ogm,*.wmv</file>
+	</type>
+	<type ref="audio" n="40">
+		<file>*.mp3,*.wav,*.mid,*.ogg</file>
+	</type>
+	<type ref="video" n="80">
+		<file>*.mp*</file>
+	</type>
+	
+	<type ref="ico" n="40">
+		<file>*.ico,*.cur</file>
+	</type>
+	
+	
+	<type n="40" ref="fnt">
+		<file>*.fon,*.[to]tf,*.fnt,*.fog</file>
+		<file>*.pf[ab]</file>
+	</type>
+</group>
+
+
+
+<group ref="lib">
+	<type ref="img" n="40">
+		<file>*.vga,*.pal,*.rgb</file>
+	</type>
+	<type ref="fnt" n="40">
+		<file>*.kbd</file>
+	</type>
+	<type ref="lnk" n="40">
+		<file>*.res,*.obj,*.lib</file>
+		<file>*.o,*.a,*.l[ao]</file>
+	</type>
+	<type ref="xml" n="40">
+		<file>*.ui</file>
+	</type>
+
+	<type ref="res" n="40">
+		<file>*.dat,*.bin,*.res</file>   
+	</type>
+	
+	<type ref="arc" n="80">
+		<file>*.??_</file>
+	</type>
+	
+	<type ref="lst" n="40">
+		<file>*.grp,*.cnt,*.dfm</file>
+	</type>
+	
+	<type ref="sys" n="40">
+		<file>*.sys,*.386,*.vxd,*.drv</file>
+	</type>
+	
+	<type ref="plg" n="40">
+		<file>*.dll,*.ovl</file>
+	</type>
+	<type ref="plg" n="50">
+		<file>*.so.*</file>
+	</type>
+	
+	<type ref="msa" n="60">
+		<file>*.ov?,*.ocx,*.c?l,*.acv,*.csp,*.mpd,*.pdr,*.ocm</file>
+	</type>
+</group>
+
+
+
+<group ref="bak">
+	<type ref="err" n="40">
+		<file>*.err</file>
+	</type>
+	<type ref="bak" n="40">
+		<file>*.bak,*.old</file>
+	</type>
+	<type ref="res" n="41">
+		<file>*.$$$,*.swp</file>
+	</type>
+	<type n="41">
+		<file>*.tmp,file*._dd</file>
+	</type>
+</group>
+
+
+
+<group>
+	<type ref="xml" n="40"><!-- Пусть лежит здесь ?? -->
+		<file>*.xml</file>
+	</type>
+	<type ref="ini" n="40"><!-- Пусть лежит здесь ?? -->
+		<file>*.ini</file>
+	</type>
+	
+
+	<type ref="src" n="60">
+		<file>*.src</file>
+	</type>
+	<type ref="img" n="60">
+		<file>*.img</file>
+	</type>
+	<type n="100">
+		<file/>
+	</type>
+</group>
+
+
+<!-- plugins -->
+<group ref='plg-err'>
+	<type ref='plg-inf' n='15'>
+		<file>[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].err.info</file>
+		<file>[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].auf.info</file>
+	</type>
+</group>
+<group ref='plg-war'>
+	<type ref='plg-inf' n='15'>
+		<file>[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].war.info</file>
+	</type>
+</group>
+<group ref='plg-txt'>
+	<type ref='plg-inf' n='15'>
+		<file>[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].inf.info</file>
+		<file>[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9].aus.info</file>
+	</type>
+</group>
+
+</farkeys>

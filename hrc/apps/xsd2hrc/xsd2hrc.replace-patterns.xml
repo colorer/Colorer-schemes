@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+
+<patterns>
+
+  <re-patterns>
+    <match token="\\"     subst="\\"/>
+    <match token="/"      subst="\/"/>
+    <match token="%"      subst="\%"/>
+    <match token="#"      subst="\#"/>
+    <match token="~"      subst="\~"/>
+    <match token="="      subst="\="/>
+    <match token="\i"     subst="[%xml:NCNameStartChar;]"/>
+    <match token="\I"     subst="[^%xml:NCNameStartChar;]"/>
+    <match token="\c"     subst="[%xml:NCNameChar;]"/>
+    <match token="\C"     subst="[^%xml:NCNameChar;]"/>
+
+    <match token="\p{Lu}" subst="{Lu}"/>
+    <match token="\P{Lu}" subst="[^{Lu}]"/>
+    <match token="\p{L}"  subst="{L}"/>
+    <match token="\P{L}"  subst="[^{L}]"/>
+
+    <match token="\p{Ll}" subst="{Ll}"/>
+    <match token="\P{Ll}" subst="[^{Ll}]"/>
+
+    <match token="\p{Lt}" subst="{Lt}"/>
+    <match token="\P{Lt}" subst="[^{Lt}]"/>
+
+    <match token="\p{Lm}" subst="{Lm}"/>
+    <match token="\P{Lm}" subst="[^{Lm}]"/>
+
+    <match token="\p{Lo}" subst="{Lo}"/>
+    <match token="\P{Lo}" subst="[^{Lo}]"/>
+
+    <match token="\p{Mn}" subst="{Mn}"/>
+    <match token="\P{Mn}" subst="[^{Mn}]"/>
+    <match token="\p{M}"  subst="{M}"/>
+    <match token="\P{M}"  subst="[^{M}]"/>
+
+    <match token="\p{Mc}" subst="{Mc}"/>
+    <match token="\P{Mc}" subst="[^{Mc}]"/>
+
+    <match token="\p{Me}" subst="{Me}"/>
+    <match token="\P{Me}" subst="[^{Me}]"/>
+
+    <match token="\p{Nd}" subst="{Nd}"/>
+    <match token="\P{Nd}" subst="[^{Nd}]"/>
+    <match token="\p{N}"  subst="{N}"/>
+    <match token="\P{N}"  subst="[^{N}]"/>
+
+    <match token="\p{Nl}" subst="{Nl}"/>
+    <match token="\P{Nl}" subst="[^{Nl}]"/>
+
+    <match token="\p{No}" subst="{No}"/>
+    <match token="\P{No}" subst="[^{No}]"/>
+
+    <match token="\p{Pc}" subst="{Pc}"/>
+    <match token="\P{Pc}" subst="[^{Pc}]"/>
+    <match token="\p{P}"  subst="{P}"/>
+    <match token="\P{P}"  subst="[^{P}]"/>
+
+    <match token="\p{Pd}" subst="{Pd}"/>
+    <match token="\P{Pd}" subst="[^{Pd}]"/>
+
+    <match token="\p{Ps}" subst="{Ps}"/>
+    <match token="\P{Ps}" subst="[^{Ps}]"/>
+
+    <match token="\p{Pe}" subst="{Pe}"/>
+    <match token="\P{Pe}" subst="[^{Pe}]"/>
+
+    <match token="\p{Pi}" subst="{Pi}"/>
+    <match token="\P{Pi}" subst="[^{Pi}]"/>
+
+    <match token="\p{Pf}" subst="{Pf}"/>
+    <match token="\P{Pf}" subst="[^{Pf}]"/>
+
+    <match token="\p{Po}" subst="{Po}"/>
+    <match token="\P{Po}" subst="[^{Po}]"/>
+
+    <match token="\p{Sm}" subst="{Sm}"/>
+    <match token="\P{Sm}" subst="[^{Sm}]"/>
+    <match token="\p{S}"  subst="{S}"/>
+    <match token="\P{S}"  subst="[^{S}]"/>
+
+    <match token="\p{Sc}" subst="{Sc}"/>
+    <match token="\P{Sc}" subst="[^{Sc}]"/>
+
+    <match token="\p{Sk}" subst="{Sk}"/>
+    <match token="\P{Sk}" subst="[^{Sk}]"/>
+
+    <match token="\p{So}" subst="{So}"/>
+    <match token="\P{So}" subst="[^{So}]"/>
+
+    <match token="\p{Zs}" subst="{Zs}"/>
+    <match token="\P{Zs}" subst="[^{Zs}]"/>
+    <match token="\p{Z}"  subst="{Z}"/>
+    <match token="\P{Z}"  subst="[^{Z}]"/>
+
+    <match token="\p{Zl}" subst="{Zl}"/>
+    <match token="\P{Zl}" subst="[^{Zl}]"/>
+
+    <match token="\p{Zp}" subst="{Zp}"/>
+    <match token="\P{Zp}" subst="[^{Zp}]"/>
+
+    <match token="\p{Cc}" subst="{Cc}"/>
+    <match token="\P{Cc}" subst="[^{Cc}]"/>
+    <match token="\p{C}"  subst="{C}"/>
+    <match token="\P{C}"  subst="[^{C}]"/>
+
+    <match token="\p{Cf}" subst="{Cf}"/>
+    <match token="\P{Cf}" subst="[^{Cf}]"/>
+
+    <!-- surrogates
+    <match token="\p{Cs}" subst="{Cs}"/>
+    <match token="\P{Cs}" subst="[^{Cs}]"/> -->
+
+    <match token="\p{Co}" subst="{Co}"/>
+    <match token="\P{Co}" subst="[^{Co}]"/>
+
+    <match token="\p{Cn}" subst="{Cn}"/>
+    <match token="\P{Cn}" subst="[^{Cn}]"/>
+
+  </re-patterns>
+
+  <enum-patterns>
+    <match token="\" subst="\\"/>
+    <match token="%" subst="\%"/>
+    <match token="*" subst="\*"/>
+    <match token="/" subst="\/"/>
+    <match token="+" subst="\+"/>
+    <match token="?" subst="\?"/>
+    <match token="{" subst="\{"/>
+    <match token="}" subst="\}"/>
+    <match token="(" subst="\("/>
+    <match token=")" subst="\)"/>
+    <match token="[" subst="\["/>
+    <match token="]" subst="\]"/>
+    <match token="$" subst="\$"/>
+    <match token="^" subst="\^"/>
+    <match token="|" subst="\|"/>
+    <match token="." subst="\."/>
+  </enum-patterns>
+
+</patterns>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the Colorer Library xsd2hrc module.
+   -
+   - The Initial Developer of the Original Code is
+   - Cail Lomecb <cail@nm.ru>.
+   - Portions created by the Initial Developer are Copyright (C) 1999-2003
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

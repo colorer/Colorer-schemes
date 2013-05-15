@@ -1,0 +1,471 @@
+<!-- Vignette StoryServer 4 Sun Jan 07 13:48:39 2001 -->
+
+
+
+
+<html>
+<head>
+<title>CNET.com - Downloads - PC - Utilities - File & Disk Management - Total Copy</title>
+
+
+<script language="JavaScript" src="http://home.cnet.com/Includes/mini_form.js"></script>
+<script language="JavaScript">
+<!--
+// beginDownload() determines what URL is used for the download that is initiated when this page is loaded
+function beginDownload() {
+  // backupURL used for download if no URLs have a reliability rating > 64 and no URLs are in the U.S.
+  // (backupURL is set to the last URL looped through when setting the URL arrays)
+  if ( allUrls.length == 0 )  {
+    newlocation = backupURL;
+  } else {
+    // allUrls contains URLs having a reliability rating > 64, or URLs in the U.S. (if there aren't any with a rating > 64)
+    x = Math.ceil(Math.random()*allUrls.length);
+    newlocation = allUrls[x-1] ;
+  }
+
+  // Bizarre logic because JavaScript won't behave
+  idl = 1;
+  if (location.search) { // for NN2
+    idl = -location.search.indexOf("idl=n");
+  }
+  if (idl > 0) {
+    window.location = newlocation;
+  }
+}
+
+	timeFlag = 0;
+	blurFlag = 0;
+	popWinFlag = 0;
+
+	window.name="mainWin";
+
+	function initFocus() {
+		self.focus();
+	}
+
+	function waitForFocus() {
+		blurFlag=1;
+	}
+
+	function resetBlurFlag() {
+		blurFlag=0;
+		checkFlags();
+	}
+
+	function checkFlags() {
+		if (blurFlag == 0 && timeFlag == 1) {
+			createWin();
+		} else {
+			if (timeFlag == 1) {
+				waitForFocus();
+			}
+		}
+	}
+
+	function createWin() {
+		if (popWinFlag == 0) {
+			newWin=window.open('/downloads/0-10096-109-2167436.html?tag=st.dl.10096.','postpopWin', 'toolbar=no,width=170,height=400,location=no,status=no,scrollbars=yes,resize=yes,menubar=yes');
+
+			if ( (navigator.appName != "Microsoft Internet Explorer") && (navigator.appVersion.substring(0,1) == "3") ) {
+				newWin.focus();
+			}
+
+			popWinFlag = 1;
+		}
+	}
+
+	window.onload = initFocus;
+
+	window.setTimeout("timeFlag=1; checkFlags();",90000);
+
+	window.onblur = waitForFocus;
+
+	window.onfocus = resetBlurFlag;
+// -->
+</script>
+
+
+<script language="JavaScript" src="/Includes/dl_xdrive.js"></script>
+
+</head>
+<body onLoad="beginDownload();"; bgcolor=#ffffff>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Vignette StoryServer 4 Thu Nov 16 13:05:27 2000 -->
+ <!-- Vignette StoryServer 4 Tue Dec 12 15:36:45 2000 -->
+
+		<table width="100%" border=0 cellspacing=0 cellpadding=0 bgcolor="#000000">
+	    <tr><td width="1" height="25" nowrap class="f5">
+
+	<SCRIPT LANGUAGE="JavaScript1.1">
+    <!--
+	today=new Date();
+	ref = 'http://gserv-cnet.zdnet.com/clear/10096-0/' + 'TM=' + today.getTime() + '/Cnet.gif';
+	    url =  '<IMG SRC="' + ref + '" BORDER="0" WIDTH="1" HEIGHT="1">';
+	    document.write(url);
+	    //-->
+	    </SCRIPT><NOSCRIPT>
+	    <img src="http://gserv-cnet.zdnet.com/clear/noscript/Cnet.gif" border="0"
+	    height="1" width="1">
+	    </NOSCRIPT>
+	     </td><td height="25" align="left" nowrap class="f5">
+		<font face="Geneva, MS Sans Serif, Helvetica" size="-2" color="#FFCC00"> &nbsp;&nbsp; <span style="color:#FFCC00"><a href="/frontdoor/0-1.html?tag=sb"><font color='#FFCC00'><b>CNET</b></font></a>
+			|
+		<a href="/news/0-1002.html?tag=sb"><font color='#FFCC00'><b>News</b></font></a>
+			|
+		<a href="/hardware/0-1016.html?tag=sb"><font color='#FFCC00'><b>Hardware</b></font></a>
+			|
+		<a href="/downloads/0-10000.html?tag=sb"><font color='#FFCC00'><b>Downloads</b></font></a>
+			|
+		<a href="/webbuilding/0-3880.html?tag=sb"><font color='#FFCC00'><b>Builder</b></font></a>
+			|
+		<a href="http://www.gamecenter.com/?tag=st.cn.10096-ron.sb.gc"><font color='#FFCC00'><b>Games</b></font></a>
+			|
+		<a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.10096-ron.sb.7067&destURL=http%3A%2F%2Fjobs%2Ecnet%2Ecom%2F"><font color='#FFCC00'><b>Jobs</b></font></a>
+			|
+		<a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.10096-ron.sb.au&destURL=http%3A%2F%2Fauctions%2Ecnet%2Ecom%2F"><font color='#FFCC00'><b>Auctions</b></font></a>
+			|
+		<a href="/shopping/0-1257.html?tag=sb"><font color='#FFCC00'><b>Prices</b></font></a>
+			|
+		<a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.10096-ron.sb.hp&destURL=http%3A%2F%2Fwww%2Ehelp%2Ecom%2F"><font color='#FFCC00'><b>Tech Help</b></font></a>
+		</span></font></td><td align="right" nowrap class="f5"><span style="color:#FFCC00">
+<a href="/go/to?tag=ex.cn.1.sb.email&destURL=http://www.email.com/%3Fsr=st.cn.sb" onMouseOver="status='http://www.email.com/'; return true;" onMouseOut="status=''"><font face="MS Sans Serif, Geneva, Helvetica" size="-2" color="#FFCC00"><b>Free Email</b></font></a></span><font face="MS Sans Serif, Geneva, Helvetica" size="-2">&nbsp;&nbsp;</font></td></tr></table>
+	<map name="redball">
+<area shape="circle" coords="28, 27, 25" href="/frontdoor/0-1.html?st.10096.10096-ron.yhed.1">
+<area shape="default" nohref>
+			</map>
+
+			<table width="100%" border=0 cellspacing=0 cellpadding=0 bgcolor="#FFCC00">
+			<tr>
+			<td><img src="http://a.r.tv.com/cnet.1d/Images/Headers/cnet-10000-title-sm.gif" width=370 height=55 alt="File " border=0 usemap="#redball"><br></td>
+			<td align=right>
+<!-- Vignette StoryServer 4 Thu Nov 16 11:14:17 2000 -->
+<table border=0 cellspacing=0 cellpadding=1 bgcolor="#FFCC00"><form method="GET" action="/search/redirector/1,10207,0-0,00.html"><tr><td align=right valign=middle><font face="Arial, Helvetica" size="-1"><b>Search</b>&nbsp;</font></td><td><input name="qt" value="" size="13" maxlength="255">&nbsp;<input type="submit" name="formbutton" value="Go!">&nbsp;</td></tr>
+                <tr><td><font face="Arial, Helvetica" size="-2"><a href="/downloads/search/advanced/0,10311,,00.html?tag=st.cn.10096-ron.srchsrch_adv">Advanced</a>&nbsp;&#149;&nbsp;<a href="/search/tips/0,10066,0-0,00.html?tag=st.cn.10096-ron.usbstp">Tips</a>&nbsp;</font></td><td align="left" valign="middle"><font face="Arial, Helvetica" size="-1"><select name="tg"><option value="dl-10014">In Utilities<option value="dl-10001" selected>In PC<option value="dl-10000">In Downloads<option value="nw">All CNET&nbsp;&nbsp;&nbsp;&nbsp;
+            <option value="wb">The Web
+            </select>
+
+            <input type="hidden" name="cn" value="Utilities"><input type="hidden" name="tt" value="st.cn.10096-ron.sbsr"></td></tr></form></table>
+
+			</td>
+			</tr>
+			</table>
+
+		<table width=100% border=0 cellspacing=0 cellpadding=0>
+		<tr>
+		<td width=100% height=1 bgcolor=#CC9900><img src="/b.gif" width=1 height=1 alt="" border=0></td>
+		</tr>
+		<tr>
+		<td height=1 bgcolor=#996600><img src="/b.gif" width=1 height=1 alt="" border=0></td>
+		</tr>
+		<tr>
+		<td height=1 bgcolor=#663300><img src="/b.gif" width=1 height=1 alt="" border=0></td>
+		</tr>
+		</table>
+	<table border=0 cellpadding=7 cellspacing=0 bgcolor=#FFFFFF width=100%><tr><td align=center valign=middle><A HREF="http://download.cnet.com/cgi-acc/clickthru.acc?clickid=0000d25acc9d2c4e00000000&edition=cnet&adt=001:00:100&category=1:10000:10001:10014:&site=CN&url=http%3A%2F%2Fwww%2Ecnet%2Ecom%2Fdownloads%2F0%2D10000%2D50%2D4152343%2Ehtml"><IMG SRC="http://home.cnet.com/Ads/Media/Images/Banners/10.24.Neoplanet.Banner.holographic-peelaway.gif" ALT="Click Here!" WIDTH=468 HEIGHT=60 border=0><BR><FONT FACE="Verdana, Arial, Helvetica" SIZE="-2">Click Here!</FONT></A></td></tr></table><!-- Vignette StoryServer 4 Mon Jan 08 12:47:43 2001 -->
+
+
+
+<!-- Breadcrumb -->
+<table border=0 cellpadding=0 cellspacing=0 width="100%">
+        <tr bgcolor="#006633"><td height=20><font face="Arial, Helvetica" size="2" color="#FFCC00">&nbsp;&nbsp;<a href="/frontdoor/0-1.html?tag=bc"><font color='#FFCC00'><span style='color:#FFCC00'>CNET</span></font></a> : <span style="color:#FFCC00"><a href="/downloads/0-10000.html?tag=stbc"><font color='#FFCC00'>Downloads</font></a></span> : <span style="color:#FFCC00"><a href="/downloads/0-10001.html?tag=stbc"><font color='#FFCC00'>PC</font></a></span> : <span style="color:#FFCC00"><a href="/downloads/0-10014.html?tag=stbc"><font color='#FFCC00'>Utilities</font></a></span> : <span style="color:#FFCC00"><a href="/downloads/0,10151,0-10096-106-0-1-0,00.html?tag=stbc"><font color='#FFCC00'>File & Disk Management</font></a></span> : <font size="2" color="#FFFFFF"><b></b><font size=2 color=#FFCC00><a href=/downloads/0-10096-100-2167436.html?st.dl.10096-101-2167436.bc.10096-100-2167436><span style=color:#FFCC00>Total Copy</span></a> :</font> <b>Downloading</b></b></font></font></td><td align=right> <font size="2" color="#FFFFFF"><b>&nbsp;</b></font></td>
+			</tr>
+</table>
+<!-- /Breadcrumb -->
+
+
+
+
+<p>
+
+
+
+<p><table cellpadding=0 cellspacing=0 border=0 width="100%">
+<tr valign=top>
+<td width=*><font face="arial, helvetica"><font color="#333333"><b>Contacting download site...please wait.</b></font> If your download does not start, <A href="#moreOptions">click here</A>.
+</FONT></B>
+<p>
+<table cellpadding=0 cellspacing=0 border=0 width="100%">
+<tr valign=top>
+<td><img src="/b.gif" width=10 height=1 alt="" border=0></td>
+<td width="100%"><font face="arial, helvetica" size="+2" color=#333333><b>Total Copy</b></font></td>
+</tr>
+<tr>
+<td colspan=2 bgcolor="#cccccc"><IMG src="/b.gif" width=1 height=1 alt="" border=0></td>
+</tr>
+<tr valign=top>
+<td></td>
+<td>
+
+<table width=100% cellpadding=0 cellspacing=0 border=0>
+<tr valign=top>
+<td width=50%><font face="Arial, helvetica" size=-1><b>
+<ul>
+<li><a href="/go/to?destUrl=http%3A%2F%2Fwww%2Eranvik%2Enet%2Ftotalcopy&tag=ex.dl.10096-101-2167436.dir.manu">Publisher's Site</a><li><a href="/downloads/0-10096-107-2167436.html?tag=st.dl.10096.dir.10096-107-2167436">All Download Sites</a><li><a href="/downloads/0-10096-100-2167436.html?tag=st.dl.10096.dir.10096-100-2167436">Product Info</a></ul>
+</td>
+<td width=50%><font face="Arial, helvetica" size=-1><b>
+<ul>
+
+
+
+
+
+
+		<li><a href="/downloads/0-10096-601-2167436-1.html?tag=st.dl.10096.&tag=st.dl.10096-101-2167436.dir.10096-601-2167436">Read User Opinions</a><img src="/images/global/new.gif" width=28 height=11 alt="" border=0>
+		<li><a href="/category/member/entry/1,10475,0-10096-602-2167436,00.html?tag=st.dl.10096-101-2167436.dir.10096-602-2167436">Submit Your Opinion</a><img src="/images/global/new.gif" width=28 height=11 alt="" border=0>
+</td>
+</tr>
+</table></td>
+</tr>
+</table>
+<br>
+
+
+
+
+<p>
+
+
+<!-- Vignette StoryServer 4 Thu Dec 21 18:32:15 2000 -->
+
+
+
+
+<!-- Begin Catchup promo box here -->
+<table width="90%" cellpadding="5" cellspacing="0" border="1" bgcolor="#ffffef">
+  <tr>
+    <td>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td><a href="http://home.cnet.com/go/to?tag=ex.dl.postdl.cu_gif.cu_nu&DestURL=http://www.catchup.com/setup.asp"><img src="http://www.cnet.com/Images/Promos/cu_0630_CATCHUP_pg.gif" width="104" height="90" border="" alt="CNET CatchUp" align="top"></a></td>
+        <td><img src="/b.gif" alt="" width="10" height="1" border="0"></td>
+        <td><font face="Arial, Helvetica" size="-1">
+        <p><font color=#006633 face="arial, helvetica" size="+1"><b>Update Your Software!</b></font><br>
+          Tired of searching for software updates and patches? Try the new CNET CatchUp service and automatically scan your PC for out-of-date software. CatchUp supports the most popular software applications and drivers, and will help you easily find the downloads your system needs to stay healthy. Plus it's fast, simple, and FREE!
+<p>
+
+<script language="JavaScript">
+
+    function validateForm() {
+
+        var emailexpr = new RegExp("^[A-Za-z_0-9.-]+@[A-Za-z_0-9.-]+.[a-zA-Z]{2,3}$")
+        var emailStr = document.download_form.EmailAddr.value
+
+        if (emailStr.match(emailexpr)==null) {
+            alert("Invalid email address!")
+            return false
+        }
+
+
+
+        return true
+    }
+
+</script>
+   <table width="100%" cellpadding=0 cellspacing=0 border=0>
+    <tr valign=top>
+     <td>  </td>
+     <td nowrap>
+      <div align="center">
+      <img src="http://www.cnet.com/Images/dload-bn.gif" width=30 height=30><br>
+      </div>
+       <br>
+     </td>
+     <td>  </td>
+     <td>	<form NAME="download_form" Action="http://catchup.cnet.com/download.asp" method="POST" onSubmit="return validateForm()">
+      <font face="arial, helvetica" size="-1">
+      <b>Download CatchUp 1.3 for Windows 95/98/NT/2000</b> (cnetcup13.exe, 772K)
+      <br>
+      <font size="+0">
+      <input type="text" name="EmailAddr" value="Your email here (Required)" size="23" maxlength=127></font><br>
+      <input type="checkbox" name="SignUp" value="True" CHECKED>Send me the free CatchUp.com Dispatch newsletter with important news and update reminders.<br>
+      <input type="submit" value="Download Now"><br>
+      <INPUT type="hidden" name="Referer" value="http://download.cnet.com/postdownload.html">
+	<font face="ms sans serif, geneva" size="-2">Privacy guaranteed: Read our <a href="/aboutcnet/0-13611-7-811039.html?tag=st.dl.postdl.cu_nu.13611-7-811039">Privacy Policy</a>.</font>
+      </font>
+     </td>
+    </tr>
+   </table>
+        </font>
+      </td>
+    </tr>
+    </table>
+    <p>
+
+ <font face="ms sans serif, geneva" size="-2"><b>Note:</b> Go ahead and check out CNET CatchUp; your other download will continue uninterrupted in the background.</font><br></p>
+
+        </td>
+      </tr>
+    </table>
+<!-- End Catchup promo box here -->	<p>&nbsp;<br>
+<table width=100% cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td><img src="/b.gif" width=10 height=1 alt="" border=0></td>
+<td width=100%>
+<a name="moreOptions"></a>
+<font face="arial, helvetica" size="-1">
+<font size=+1 color="#333333"><b>All download sites:</b></font><br>
+Having trouble downloading? Click <a href="/downloads/0-10000-7-1525887.html?st.dl.10096-101-2167436.adls.10000-7-1525887">here</a> for help downloading.
+<br><a href=mailto:support@download.com><font face=arial,helvetica size=-2>Give us feedback</font></a>
+</font>
+
+
+
+<p>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr><td colspan=2><font face='arial,helvetica' size=-1 color=#333333>Reliability</td><td>&nbsp;&nbsp;&nbsp;</td><td><font face='arial,helvetica' size=-1 color=#006633><b>United States</b></font><br></td></tr>
+	<tr><td><font size=+1 color=#009933><b>&#149;&#149;&#149;</b></font></td><td>&nbsp;<font face=arial,helvetica size=-2>best</font><br></td>
+	<td>&nbsp;&nbsp;&nbsp;</td>
+	<td><font face="arial,helvetica" size=-1><a href="http://www.ranvik.net/totalcopy/tc11.zip" onMouseOver="status='http://www.ranvik.net/totalcopy/tc11.zip'; return true;" onMouseOut="status=''">www.ranvik.net</a></font><br></td>
+	<td>&nbsp;&nbsp;&nbsp;</td>
+	<td><font face=arial,helvetica size=-1><a href="JAVASCRIPT:xd_skip('http://www.ranvik.net/totalcopy/tc11.zip','','','10096','63507','2167436')" onMouseOver="status='Save to online drive'; return true;" onMouseOut="status=''">Save to online drive</a></font><br></td></tr></table></td>
+</tr>
+</table>
+<p>
+</font>
+<p>
+<script>
+
+var backupURL = "http://www.ranvik.net/totalcopy/tc11.zip";
+
+
+
+	allUrls = new Array(1);
+	allUrls[0] = 'http://www.ranvik.net/totalcopy/tc11.zip'  ; </script>
+
+<font size=-2><br></font>
+
+
+
+<font size=-2>&nbsp;</font><br>
+
+
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=996600><tr><td><table width=100% cellpadding=9 cellspacing=0 border=0 bgcolor=ffffff><tr><td><center><font face='arial, helvetica' size=-1><b>Go Shopping!</b> <font size=-3>Online offers from our sponsors</font>&nbsp;<br><table width=100% cellpadding=1 border=0 cellpadding=0 bgcolor=ffffff><tr align=center><td><a href="http://download.cnet.com/cgi-acc/clickthru.acc?clickid=0000dabfe9fc040700000000&adt=006:00:100&edt=cnet&cat=1:10000:10001:10014:&site=CN" target="_top"><font face="arial, helvetica" size="1">Click Here!</font><br><img src="http://a.r.tv.com/cnet.12h/Ads/Media/Images/Buttons/bn.new88x31.button.gif" border="0" alt="Click Here!"  VSPACE="2" height="31" width="88"></a></td><td>&nbsp;&nbsp;</td><td><A HREF="http://download.cnet.com/cgi-acc/clickthru.acc?clickid=0000e5b0b20a66f700000000&edition=cnet&adt=006:00:200&category=1:10000:10001:10014:&site=CN&url=http%3A%2F%2Fwww%2Ecnet%2Ecom%2Fdownloads%2F0%2D10000%2D50%2D4152343%2Ehtml"><FONT FACE="Verdana, Arial, Helvetica" SIZE="-2">Click Here!</FONT><BR><IMG SRC="http://home.cnet.com/Ads/Media/Images/Buttons/10.24.Neoplanet.Button.88x31_static.gif" ALT="Click Here!" WIDTH=88 HEIGHT=31 border=0></A>
+</td></tr></table><table width=100% cellpadding=0 cellspacing=0 border=0 align=center><tr><td colspan=2></td></tr></table></center></td></tr></table></td></tr></table>
+<td width=10>&nbsp;</td>
+
+
+<td width=160><p>
+
+
+<table border=0 cellpadding=8 cellspacing=0 width=100%>
+<tr valign=middle align=center><td><img src='/Ads/Media/Images/CNET.002header.gif'><br><a href="http://download.cnet.com/cgi-acc/clickthru.acc?clickid=0000e42432dd3c8b00000000&adt=002:30:100&edt=cnet&cat=1:10000:10001:10014:&site=CN" target="_top"><img src="http://a.r.tv.com/cnet.12h/Ads/Media/Images/SponsorWindows/chaseinternal.continental_002v2_120X90.gif" border="0" alt="Chase Platinum Credit Card"  height="90" width="120"></a></td></tr>
+</table>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<a href="http://auctions.cnet.com/cgi-bin/dl_go"><img src="http://auctions.cnet.com/images/techauct_160.gif" width=160 height=42 border=0 alt="Tech Auctions"></a><br>
+<table border="0" cellpadding="1" cellspacing="0" width="100%">
+
+<tr valign=top>
+<td>
+<font face="arial, helvetica, geneva" size="-1"><a href="http://auctions.cnet.com/cgi-bin/dl_go?745085"><b>Iomega Clik! PC Card</b></a><br><sup>
+</font><font face="ms sans serif, geneva" size="-2">Starting bid: $1 <sub> </sub></font>
+</td>
+</tr>
+
+<tr valign=top>
+<td>
+<font face="arial, helvetica, geneva" size="-1"><a href="http://auctions.cnet.com/cgi-bin/dl_go?746514"><b>Maxtor 40GB IDE HDD</b></a><br><sup>
+</font><font face="ms sans serif, geneva" size="-2">Starting bid: $1 <sub> </sub></font>
+</td>
+</tr>
+
+<tr valign=top>
+<td>
+<font face="arial, helvetica, geneva" size="-1"><a href="http://auctions.cnet.com/cgi-bin/dl_go?745086"><b>Iomega Digicam Clik!</b></a><br><sup>
+</font><font face="ms sans serif, geneva" size="-2">Starting bid: $1 <sub> </sub></font>
+</td>
+</tr>
+
+<tr valign=top>
+<td>
+<font face="arial, helvetica, geneva" size="-1"><a href="http://auctions.cnet.com/cgi-bin/dl_go?746333"><b>Cumetrix 12X DVD-ROM</b></a><br><sup>
+</font><font face="ms sans serif, geneva" size="-2">Starting bid: $10 <sub> </sub></font>
+</td>
+</tr>
+
+<tr valign=top>
+<td>
+<font face="arial, helvetica, geneva" size="-1"><a href="http://auctions.cnet.com/cgi-bin/dl_go?745993"><b>52X CD-ROM Drive</b></a></br><sup>
+</font><font face="ms sans serif, geneva" size="-2">Starting bid: $1.96 <sub> </sub></font>
+</td>
+</tr>
+
+<tr valign=top>
+<td>
+<font face="arial, helvetica, geneva" size="-1"><b><a href="http://auctions.cnet.com/cgi-bin/dl_go?285">More Storage Auctions</a></b></font><br>
+</td>
+</tr>
+</table>
+<br>
+
+
+
+
+</td>
+</tr>
+
+</table>
+<p>
+<table border=0 cellpadding=0 cellspacing=0 width=100%>
+	<tr valign=top><td width=80%><span class=f><font face='arial,helvetica' size=-1><a href="/downloads/0-10000-7-1525887.html?tag=st.dl.10096.subnav.dl_hlp">Help</a>&nbsp;|&nbsp;<a href="/downloads/0-10000-7-1532857.html?tag=st.dl.10096.subnav.dl_feedback">Feedback</a>&nbsp;|&nbsp;<a href="/downloads/0-1582081-7-1525939.html?tag=st.dl.10096.subnav.dl_submit"><b>Submit a file</b></a>&nbsp;|&nbsp;<a href="/downloads/0-1582081-7-4229130.html?tag=st.dl.10096.subnav.dl_premier">Premier Listing Service</a>&nbsp;|&nbsp;<a href="/downloads/allcats/0,10322,0-10001,00.html?tag=st.dl.10096.subnav.dl_map">All Categories</a></font></span><br></td></tr><tr><td height=30 valign=bottom>
+	<font face="ms sans serif, geneva, helvetica" size=-2>Downloads for</font><font size=-1 face="arial, helvetica">&nbsp;<b>PC</b>&nbsp;|&nbsp;<a href="/downloads/0-10005.html?tag=st.dl.10096.subnav.10005">Mac</a>&nbsp;|&nbsp;<a href="/downloads/0-10004.html?tag=st.dl.10096.subnav.10004">Linux</a>&nbsp;|&nbsp;<a href="/downloads/0-1726360.html?tag=st.dl.10096.subnav.1726360">Handhelds</a> </font>
+	</td></tr></table><br><span class=f><!-- Vignette StoryServer 4 Wed Jan 03 11:06:35 2001 -->
+
+<table border=0 cellpadding=7 cellspacing=0 bgcolor=#FFFFFF width=100%><tr><td align=center valign=middle><A HREF="http://download.cnet.com/cgi-acc/clickthru.acc?clickid=0000d25acc9d2c4e00000000&edition=cnet&adt=001:00:100&category=1:10000:10001:10014:&site=CN&url=http%3A%2F%2Fwww%2Ecnet%2Ecom%2Fdownloads%2F0%2D10000%2D50%2D4152343%2Ehtml"><IMG SRC="http://home.cnet.com/Ads/Media/Images/Banners/10.24.Neoplanet.Banner.holographic-peelaway.gif" ALT="Click Here!" WIDTH=468 HEIGHT=60 border=0><BR><FONT FACE="Verdana, Arial, Helvetica" SIZE="-2">Click Here!</FONT></A></td></tr></table><table border=0 cellpadding=0 cellspacing=0 width="100%" bgcolor="#FFCC00"><tr><td width=75><a href="/frontdoor/0-1.html?tag=st.cn.ros.ft.1"><img src="http://a.r.tv.com/cnet.1d/Images/Global/cnet-redball-small.gif"
+	width=75 height=55 border=0></a></td><td width="97%" valign=middle><font face="Arial, Geneva, Helvetica" size="-1" color="#000000"><b>CNET Services:</b> <span style="color:#000000"><a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.au&destURL=http%3A%2F%2Fauctions%2Ecnet%2Ecom%2F"><font color="#000000">Auctions</font></a> &#183; <a href="/shopping/0-1257.html?tag=st.cn.ros.ft.1257"><font color="#000000">Check&nbsp;Latest&nbsp;Prices</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.ds&destURL=http%3A%2F%2Fwww%2Ecnetdata%2Ecom"><font color="#000000">Data&nbsp;Services</font></a> &#183; <a href="/downloads/?tag=st.cn.ros.ft.10000"><font color="#000000">Downloads</font></a> &#183; <a href="/enterprise/0-9500.html?tag=st.cn.ros.ft.9500"><font color="#000000">Enterprise&nbsp;Business</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.ws_host&destURL=http%3A%2F%2Fwebservices%2Ecnet%2Ecom%2Fhtml%2Faisles%2FWeb%5FHosting%2Easp"><font color="#000000">Find&nbsp;a&nbsp;Web&nbsp;Host</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.ws_isp&destURL=http%3A%2F%2Fwebservices%2Ecnet%2Ecom%2Fhtml%2Faisles%2FInternet%5FAccess%2Easp"><font color="#000000">Find&nbsp;an&nbsp;ISP</font></a> &#183; <a href="/subscription/0-16335.html?tag=st.cn.ros.ft.16335"><font color="#000000">Free&nbsp;Newsletters</font></a> &#183; <a href="/consumerelectronics/0-3622.html?tag=st.cn.ros.ft.3622"><font color="#000000">Gadgets</font></a> &#183; <a href="http://www.gamecenter.com/?tag=st.cn.ros.ft.gc"><font color="#000000">Games</font></a> &#183; <a href="/hardware/0-1016.html?tag=st.cn.ros.ft.1016"><font color="#000000">Hardware</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.hp&destURL=http%3A%2F%2Fwww%2Ehelp%2Ecom%2F"><font color="#000000">Help&nbsp;&&nbsp;How-Tos</font></a> &#183; <a href="/hardware/0-1017.html?tag=st.cn.ros.ft.1017"><font color="#000000">Latest&nbsp;PCs</font></a> &#183; <a href="/aboutcnet/0-1422296.html?tag=st.cn.ros.ft.1422296"><font color="#000000">Media&nbsp;Productions</font></a> &#183; <a href="/news/0-1002.html?tag=st.cn.ros.ft.1002"><font color="#000000">News</font></a> &#183; <a href="/shopping/0-1427343-7-2455784.html?tag=st.cn.ros.ft.1427343-7-2455784"><font color="#000000">Publish&nbsp;Your&nbsp;Opinion</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.se&destURL=http%3A%2F%2Fwww%2Esearch%2Ecom%2F"><font color="#000000">Search</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.ne_invidx&destURL=http%3A%2F%2Finvestor%2Ecnet%2Ecom%2F"><font color="#000000">Stock&nbsp;Quotes</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.jo&destURL=http%3A%2F%2Fjobs%2Ecnet%2Ecom%2F"><font color="#000000">Tech&nbsp;Jobs</font></a> &#183; <a href="/webbuilding/0-3880.html?tag=st.cn.ros.ft.3880"><font color="#000000">Web&nbsp;Building</font></a> &#183; <a href="/sitemap/0-2253447.html?tag=st.cn.ros.ft.2253447"><font color="#000000"><b>All&nbsp;Services</b></font></a>
+</span><font size="+1"><br></font></font></td><td>&nbsp;&nbsp;</td><td valign=middle><img src="/b.gif" width=1 height=70></td></tr></table>
+<table width="100%" border=0 cellspacing=0 cellpadding=0 bgcolor="#000000"><tr><td height=25 align=left nowrap class="f5"><font face="Geneva, MS Sans Serif, Helvetica" size="-2" color="#FFCC00"> &nbsp;&nbsp; <span style="color:#FFCC00"><a href="/aboutcnet/0-13616.html?tag=st.cn.ros.ft.13616"><font color="#FFCC00"><b>CNET Jobs</b></font></a> | <a href="/corrections/0-850372.html?tag=st.cn.ros.ft.850372"><font color="#FFCC00"><b>Corrections</b></font></a> | <a href="/aboutcnet/0-13618.html?tag=st.cn.ros.ft.13618"><font color="#FFCC00"><b>How to Advertise</b></font></a> | <a href="http://www.cnet.com/Affiliates/?tag=st.cn.ros.ft.www_affil"><font color="#FFCC00"><b>Join CNET's Affiliate Program</b></font></a> | <a href="/cnetsupport/0-3945.html?tag=st.cn.ros.ft.3945"><font color="#FFCC00"><b>Support</b></font></a>
+
+</span></font></td><td align=right nowrap class="f5"><font face="Geneva, MS Sans Serif, Helvetica" size="-2" color="#FFCC00"> &nbsp;&nbsp; <span style="color:#FFCC00"><a href="/aboutcnet/0-13611.html?tag=st.cn.ros.ft.13611"><font color='#FFCC00'>About CNET</font></a>&nbsp;&nbsp;</span></font></td></tr></table>
+<table width="100%" border=0 cellpadding=3 cellspacing=0><tr><td><font face="Arial, Geneva, Helvetica" size="-1"><a href="#top">Back to Top</a></font></td><td align=right><font face="Arial, Geneva, Helvetica" size="-1"><b><a href="/aboutcnet/0-13616.html?tag=st.cn.ros.ft.13616">Join CNET, we're hiring</a></b></font></td></tr></table><br>
+<font face="Geneva, MS Sans Serif, Helvetica" size="-2">
+<p>The products referenced in this site are provided by parties other than CNET. CNET makes no representations regarding either the products or any information about the products. Any questions, complaints, or claims regarding the products must be directed to the appropriate manufacturer or vendor. <a href="/downloads/0-10000-7-1538078.html?tag=st.dl.fd.tbbot.disclm">Click here</a> for usage terms and conditions.</p>
+ &nbsp;<a href="/aboutcnet/0-13611-7-811029.html?tag=st13611-7-811029">Copyright</a> &copy;1995-2001 CNET Networks, Inc. All rights reserved. <a href="/aboutcnet/0-13611-7-811039.html?tag=st.cn.ros.ft.13611-7-811039">Privacy policy</a>.</font>
+</span></body></html>
+
+<table border=0 cellpadding=7 cellspacing=0 bgcolor=#FFFFFF width=100%><tr><td align=center valign=middle><A HREF="http://download.cnet.com/cgi-acc/clickthru.acc?clickid=0000d25acc9d2c4e00000000&edition=cnet&adt=001:00:100&category=1:10000:10001:10014:&site=CN&url=http%3A%2F%2Fwww%2Ecnet%2Ecom%2Fdownloads%2F0%2D10000%2D50%2D4152343%2Ehtml"><IMG SRC="http://home.cnet.com/Ads/Media/Images/Banners/10.24.Neoplanet.Banner.holographic-peelaway.gif" ALT="Click Here!" WIDTH=468 HEIGHT=60 border=0><BR><FONT FACE="Verdana, Arial, Helvetica" SIZE="-2">Click Here!</FONT></A></td></tr></table><table border=0 cellpadding=0 cellspacing=0 width="100%" bgcolor="#FFCC00"><tr><td width=75><a href="/frontdoor/0-1.html?tag=st.cn.ros.ft.1"><img src="http://a.r.tv.com/cnet.1d/Images/Global/cnet-redball-small.gif"
+	width=75 height=55 border=0></a></td><td width="97%" valign=middle><font face="Arial, Geneva, Helvetica" size="-1" color="#000000"><b>CNET Services:</b> <span style="color:#000000"><a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.au&destURL=http%3A%2F%2Fauctions%2Ecnet%2Ecom%2F"><font color="#000000">Auctions</font></a> &#183; <a href="/shopping/0-1257.html?tag=st.cn.ros.ft.1257"><font color="#000000">Check&nbsp;Latest&nbsp;Prices</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.ds&destURL=http%3A%2F%2Fwww%2Ecnetdata%2Ecom"><font color="#000000">Data&nbsp;Services</font></a> &#183; <a href="/downloads/?tag=st.cn.ros.ft.10000"><font color="#000000">Downloads</font></a> &#183; <a href="/enterprise/0-9500.html?tag=st.cn.ros.ft.9500"><font color="#000000">Enterprise&nbsp;Business</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.ws_host&destURL=http%3A%2F%2Fwebservices%2Ecnet%2Ecom%2Fhtml%2Faisles%2FWeb%5FHosting%2Easp"><font color="#000000">Find&nbsp;a&nbsp;Web&nbsp;Host</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.ws_isp&destURL=http%3A%2F%2Fwebservices%2Ecnet%2Ecom%2Fhtml%2Faisles%2FInternet%5FAccess%2Easp"><font color="#000000">Find&nbsp;an&nbsp;ISP</font></a> &#183; <a href="/subscription/0-16335.html?tag=st.cn.ros.ft.16335"><font color="#000000">Free&nbsp;Newsletters</font></a> &#183; <a href="/consumerelectronics/0-3622.html?tag=st.cn.ros.ft.3622"><font color="#000000">Gadgets</font></a> &#183; <a href="http://www.gamecenter.com/?tag=st.cn.ros.ft.gc"><font color="#000000">Games</font></a> &#183; <a href="/hardware/0-1016.html?tag=st.cn.ros.ft.1016"><font color="#000000">Hardware</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.hp&destURL=http%3A%2F%2Fwww%2Ehelp%2Ecom%2F"><font color="#000000">Help&nbsp;&&nbsp;How-Tos</font></a> &#183; <a href="/hardware/0-1017.html?tag=st.cn.ros.ft.1017"><font color="#000000">Latest&nbsp;PCs</font></a> &#183; <a href="/aboutcnet/0-1422296.html?tag=st.cn.ros.ft.1422296"><font color="#000000">Media&nbsp;Productions</font></a> &#183; <a href="/news/0-1002.html?tag=st.cn.ros.ft.1002"><font color="#000000">News</font></a> &#183; <a href="/shopping/0-1427343-7-2455784.html?tag=st.cn.ros.ft.1427343-7-2455784"><font color="#000000">Publish&nbsp;Your&nbsp;Opinion</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.se&destURL=http%3A%2F%2Fwww%2Esearch%2Ecom%2F"><font color="#000000">Search</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.ne_invidx&destURL=http%3A%2F%2Finvestor%2Ecnet%2Ecom%2F"><font color="#000000">Stock&nbsp;Quotes</font></a> &#183; <a href="/exredirect/template/1,10048,,00.html?tag=ex.cn.ros.ft.jo&destURL=http%3A%2F%2Fjobs%2Ecnet%2Ecom%2F"><font color="#000000">Tech&nbsp;Jobs</font></a> &#183; <a href="/webbuilding/0-3880.html?tag=st.cn.ros.ft.3880"><font color="#000000">Web&nbsp;Building</font></a> &#183; <a href="/sitemap/0-2253447.html?tag=st.cn.ros.ft.2253447"><font color="#000000"><b>All&nbsp;Services</b></font></a>
+</span><font size="+1"><br></font></font></td><td>&nbsp;&nbsp;</td><td valign=middle><img src="/b.gif" width=1 height=70></td></tr></table>
+<table width="100%" border=0 cellspacing=0 cellpadding=0 bgcolor="#000000"><tr><td height=25 align=left nowrap class="f5"><font face="Geneva, MS Sans Serif, Helvetica" size="-2" color="#FFCC00"> &nbsp;&nbsp; <span style="color:#FFCC00"><a href="/aboutcnet/0-13616.html?tag=st.cn.ros.ft.13616"><font color="#FFCC00"><b>CNET Jobs</b></font></a> | <a href="/corrections/0-850372.html?tag=st.cn.ros.ft.850372"><font color="#FFCC00"><b>Corrections</b></font></a> | <a href="/aboutcnet/0-13618.html?tag=st.cn.ros.ft.13618"><font color="#FFCC00"><b>How to Advertise</b></font></a> | <a href="http://www.cnet.com/Affiliates/?tag=st.cn.ros.ft.www_affil"><font color="#FFCC00"><b>Join CNET's Affiliate Program</b></font></a> | <a href="/cnetsupport/0-3945.html?tag=st.cn.ros.ft.3945"><font color="#FFCC00"><b>Support</b></font></a>
+
+</span></font></td><td align=right nowrap class="f5"><font face="Geneva, MS Sans Serif, Helvetica" size="-2" color="#FFCC00"> &nbsp;&nbsp; <span style="color:#FFCC00"><a href="/aboutcnet/0-13611.html?tag=st.cn.ros.ft.13611"><font color='#FFCC00'>About CNET</font></a>&nbsp;&nbsp;</span></font></td></tr></table>
+<table width="100%" border=0 cellpadding=3 cellspacing=0><tr><td><font face="Arial, Geneva, Helvetica" size="-1"><a href="#top">Back to Top</a></font></td><td align=right><font face="Arial, Geneva, Helvetica" size="-1"><b><a href="/aboutcnet/0-13616.html?tag=st.cn.ros.ft.13616">Join CNET, we're hiring</a></b></font></td></tr></table><br>
+<font face="Geneva, MS Sans Serif, Helvetica" size="-2">
+<p>The products referenced in this site are provided by parties other than CNET. CNET makes no representations regarding either the products or any information about the products. Any questions, complaints, or claims regarding the products must be directed to the appropriate manufacturer or vendor. <a href="/downloads/0-10000-7-1538078.html?tag=st.dl.fd.tbbot.disclm">Click here</a> for usage terms and conditions.</p>
+ &nbsp;<a href="/aboutcnet/0-13611-7-811029.html?tag=st13611-7-811029">Copyright</a> &copy;1995-2001 CNET Networks, Inc. All rights reserved. <a href="/aboutcnet/0-13611-7-811039.html?tag=st.cn.ros.ft.13611-7-811039">Privacy policy</a>.</font>
+</span></body></html>
+
+
+
+

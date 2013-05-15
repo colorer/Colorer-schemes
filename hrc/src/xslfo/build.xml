@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<project name="src.xslfo" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/xslfo" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+<!-- generate xsd from dtd -->
+
+<target name="xsd.check">
+ <uptodate property="xsd.check" targetfile="${obj}/xslfo.xsd">
+  <srcfiles dir="${src}" includes="fo-rx.dtd"/>
+ </uptodate>
+</target>
+
+<target name="xsd" depends="xsd.check" unless="xsd.check">
+ <mkdir dir="${obj}"/>
+ <ant antfile="${util}" target="dtd2xsd">
+  <property name="util.input" value="${src}/fo-rx.dtd"/>
+  <property name="util.output" value="${obj}/xslfo.xsd"/>
+  <property name="dtd2xsd.map" value="${src}/fo.map"/>
+  <property name="dtd2xsd.pre" value="fo"/>
+  <property name="dtd2xsd.alias" value="yes"/>
+  <property name="dtd2xsd.skipxmlattr" value="yes"/>
+  <property name="dtd2xsd.ns" value="http://www.w3.org/1999/XSL/Format"/>
+ </ant>
+</target>
+
+
+<!-- hrc -->
+
+<target name="hrc.check">
+ <dependset>
+  <srcfilelist dir="${src}" files="fo-rx.dtd"/>
+  <srcfilelist dir="." files="build.xml"/>
+  <targetfilelist dir="${obj}" files="xslfo.xsd"/>
+  <targetfilelist dir="${bin}" files="xslfo.hrc"/>
+ </dependset>
+</target>
+
+<target name="hrc" depends="hrc.check, xsd">
+ <ant antfile="${util}" target="xsd2hrc">
+   <property name="util.input" value="${obj}/xslfo.xsd"/>
+   <property name="util.output" value="${bin}/xslfo.hrc"/>
+   <property name='xsd2hrc.hrctype' value='xslfo'/>
+   <property name='xsd2hrc.allow-any-attr' value='yes'/>
+   <property name='xsd2hrc.allow-unknown-elements' value='yes'/>
+ </ant>
+</target>
+
+<!-- final -->
+
+<target name="all" depends="hrc"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${obj}" includes="*.*" excludes='.empty'/>
+  <fileset dir="${bin}" includes="xslfo.hrc"/>
+ </delete>
+</target>
+
+</project>

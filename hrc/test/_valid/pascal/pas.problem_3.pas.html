@@ -1,0 +1,26 @@
+ 0: <span class='pascal-pComment def-Comment def-Syntax'>// для схемы: ...\hrc\main\pascal.hrc</span>
+ 1: <span class='pascal-pComment def-Comment def-Syntax'>//</span>
+ 2: <span class='pascal-pComment def-Comment def-Syntax'>// Проблема. Ключевое слово inherited не выделено как ключевое.</span>
+ 3: <span class='pascal-pComment def-Comment def-Syntax'>// Видно , что проблема в обрамляющих скобках...</span>
+ 4: <span class='pascal-pComment def-Comment def-Syntax'>//</span>
+ 5: <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>function</span> F<span class='pascal-pSymb def-Symbol'>(</span>x<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 6: <span class='pascal-pWord def-Keyword'>function</span> G<span class='pascal-pSymb def-Symbol'>(</span>x<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 7: <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>procedure</span> P<span class='pascal-pSymb def-Symbol'>(</span>x<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 8: <span class='pascal-pWord def-Keyword'>procedure</span> Q<span class='pascal-pSymb def-Symbol'>(</span>x<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 9: 
+10: <span class='pascal-pWord def-Keyword'>function</span> TRect<span class='pascal-pSymb def-Symbol'>.</span>LoadFromStream<span class='pascal-pSymb def-Symbol'>(</span>S<span class='pascal-pSymb def-Symbol'>:</span> IStream<span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>:</span> TBool<span class='def-SymbolStrong def-Symbol'>;</span>
+11: <span class='pascal-pWord2 def-Keyword'>begin</span>
+12:     <span class='pascal-pWord def-Keyword'>Result</span> <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pSymb def-Symbol'>(</span> <span class='pascal-pWord def-Keyword'>inherited</span> LoadFromStream<span class='pascal-pSymb def-Symbol'>(</span>S<span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>)</span> <span class='pascal-pWord def-Keyword'>and</span>  <span class='pascal-pComment def-Comment def-Syntax'>// Problem </span><span class='def-TODO def-Error'>!!!</span>
+13:               <span class='pascal-pComment def-Comment def-Syntax'>//^^^^^^^^^</span>
+14:               A<span class='pascal-pSymb def-Symbol'>.</span>LoadFromStream<span class='pascal-pSymb def-Symbol'>(</span>S<span class='pascal-pSymb def-Symbol'>)</span> <span class='pascal-pWord def-Keyword'>and</span> B<span class='pascal-pSymb def-Symbol'>.</span>LoadFromStream<span class='pascal-pSymb def-Symbol'>(</span>S<span class='pascal-pSymb def-Symbol'>)</span>
+15:     <span class='def-SymbolStrong def-Symbol'>;</span>
+16: <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+17: 
+18: 
+19: <span class='pascal-pWord def-Keyword'>function</span> TRect<span class='pascal-pSymb def-Symbol'>.</span>LoadFromStream<span class='pascal-pSymb def-Symbol'>(</span>S<span class='pascal-pSymb def-Symbol'>:</span> IStream<span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>:</span> TBool<span class='def-SymbolStrong def-Symbol'>;</span>
+20: <span class='pascal-pWord2 def-Keyword'>begin</span>
+21:     <span class='pascal-pWord def-Keyword'>Result</span> <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord def-Keyword'>inherited</span> LoadFromStream<span class='pascal-pSymb def-Symbol'>(</span>S<span class='pascal-pSymb def-Symbol'>)</span> <span class='pascal-pComment def-Comment def-Syntax'>// OK </span><span class='def-TODO def-Error'>!!!</span>
+22:     <span class='def-SymbolStrong def-Symbol'>;</span>        <span class='pascal-pComment def-Comment def-Syntax'>//^^^^^^^^</span>
+23: <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+24: 
+25: 

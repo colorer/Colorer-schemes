@@ -1,0 +1,43 @@
+ 0: USE SYSTEM USE $SCRWORK
+ 1: DEFINE? $DATTIM %IF USE $DATTIM %FI
+ 2: <span class='dssp-dsspExpr def-Directive'>PROGRAM $WATCH</span> BASE@ <span class='dssp-dsspString def-String'>."</span>
+ 3: <span class='dssp-dsspString def-String'>Процесс TIMER для выдачи времени на экран."</span>
+ 4: <span class='dssp-dsspComment def-Comment def-Syntax'>[*****************************************************************************]</span>
+ 5: <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[&lt;= КОНФИГУРАЦИЯ:  0 - часы:минуты:секунды    1 - часы:минуты  ]</span>
+ 6: <span class='dssp-dsspParam def-Parameter'>B10</span>
+ 7: 
+ 8: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR TimFon</span> <span class='def-NumberDec def-Number'>3</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimFon
+ 9: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR TimTxt</span> <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimTxt
+10: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR TimI</span>   <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimI
+11: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR TimJ</span>  <span class='def-NumberDec def-Number'>70</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimJ
+12:    <span class='dssp-dsspParam def-Parameter'>LONG</span> <span class='dssp-dsspParam def-Parameter'>VAR Btime</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[системное время в милисекундах]</span>
+13: 
+14: : PTIM <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> TIME <span class='def-NumberDec def-Number'>55</span> <span class='dssp-dsspParam def-Parameter'>*</span> Btime  +  <span class='def-NumberDec def-Number'>1000</span> <span class='dssp-dsspParam def-Parameter'>/</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[время в секундах]</span>
+15:   <span class='def-NumberDec def-Number'>60</span> <span class='dssp-dsspParam def-Parameter'>/</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[tm,s]</span> <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='def-NumberDec def-Number'>60</span> <span class='dssp-dsspParam def-Parameter'>/</span> <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[s,m,h]</span>  ShowTim  <span class='dssp-dsspParam def-Parameter'>DDD</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+16: 
+17: <span class='def-NumberDec def-Number'>20</span> <span class='def-NumberDec def-Number'>100</span> <span class='def-NumberDec def-Number'>100</span> '' PTIM :: TASK TIMER  <span class='def-NumberDec def-Number'>18</span> INTV TIMER
+18: : OUT2N <span class='dssp-dsspComment def-Comment def-Syntax'>[N,J]</span> <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='def-NumberDec def-Number'>10</span> <span class='dssp-dsspParam def-Parameter'>/</span>  <span class='dssp-dsspComment def-Comment def-Syntax'>[J,NH,NL]</span> #0 + <span class='dssp-dsspParam def-Parameter'>C3</span> <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspParam def-Parameter'>!</span> TEXTIM
+19:   <span class='dssp-dsspComment def-Comment def-Syntax'>[J,NH]</span> <span class='dssp-dsspParam def-Parameter'>C</span> NOT <span class='dssp-dsspParam def-Parameter'>C3</span> <span class='def-NumberDec def-Number'>1</span> <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspParam def-Parameter'>&amp;</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> H#SP</span>   #0 + <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='dssp-dsspParam def-Parameter'>!</span> TEXTIM <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+20:   : H#<span class='dssp-dsspParam def-Parameter'>SP</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[0]</span> <span class='dssp-dsspParam def-Parameter'>D</span> #  #0 - <span class='dssp-dsspComment def-Comment def-Syntax'>[K]</span> ;
+21: 
+22: <span class='dssp-dsspComment def-Comment def-Syntax'>[K]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> NOT %IF
+23: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='def-NumberDec def-Number'>10</span> <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>VCTR TEXTIM</span> <span class='dssp-dsspString def-String'> "   :  :   "</span> <span class='def-NumberDec def-Number'>0</span> ' TEXTIM <span class='dssp-dsspParam def-Parameter'>!SB</span>
+24: :: : ShowTim <span class='dssp-dsspComment def-Comment def-Syntax'>[S,M,H]</span>  <span class='def-NumberDec def-Number'>1</span> OUT2N <span class='def-NumberDec def-Number'>4</span> OUT2N <span class='def-NumberDec def-Number'>7</span> OUT2N
+25:      TimFon TimTxt  TimI TimJ <span class='def-NumberDec def-Number'>0</span> ' TEXTIM <span class='def-NumberDec def-Number'>10</span> OLDCLTS <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+26:            %FI
+27: 
+28: <span class='dssp-dsspComment def-Comment def-Syntax'>[K]</span> %IF
+29: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='def-NumberDec def-Number'>8</span> <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>VCTR TEXTIM</span> <span class='dssp-dsspString def-String'> "   :   "</span> <span class='def-NumberDec def-Number'>0</span> ' TEXTIM <span class='dssp-dsspParam def-Parameter'>!SB</span>
+30: :: : ShowTim <span class='dssp-dsspComment def-Comment def-Syntax'>[S,M,H]</span> <span class='def-NumberDec def-Number'>1</span> OUT2N <span class='def-NumberDec def-Number'>4</span> OUT2N <span class='dssp-dsspComment def-Comment def-Syntax'>[S]</span> <span class='dssp-dsspParam def-Parameter'>D</span> INV:  <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span>
+31:      TimFon TimTxt  TimI TimJ <span class='def-NumberDec def-Number'>0</span> ' TEXTIM <span class='def-NumberDec def-Number'>7</span> OLDCLTS <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+32:      : INV: <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='def-NumberDec def-Number'>3</span> TEXTIM #  <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> #: #</span>  <span class='def-NumberDec def-Number'>3</span> <span class='dssp-dsspParam def-Parameter'>!</span> TEXTIM <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+33:      <span class='def-NumberDec def-Number'>72</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimJ
+34:     %FI
+35: 
+36: :: : IniTim  <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> TIME <span class='dssp-dsspComment def-Comment def-Syntax'>[SS,S,M,H]</span> <span class='def-NumberDec def-Number'>60</span> <span class='dssp-dsspParam def-Parameter'>*</span> + <span class='def-NumberDec def-Number'>60</span> <span class='dssp-dsspParam def-Parameter'>*</span> + <span class='def-NumberDec def-Number'>100</span> <span class='dssp-dsspParam def-Parameter'>*</span> + <span class='def-NumberDec def-Number'>10</span> <span class='dssp-dsspParam def-Parameter'>*</span> <span class='dssp-dsspParam def-Parameter'>!</span> Btime
+37:      <span class='dssp-dsspComment def-Comment def-Syntax'>[0 ! Time []</span> ;
+38: 
+39: DEFINE? OLDCLTS NOT %IF : OLDCLTS CLTOS ; %FI
+40: 
+41: <span class='dssp-dsspParam def-Parameter'>UNDEF</span> <span class='dssp-dsspParam def-Parameter'>!</span> BASE@ <span class='dssp-dsspComment def-Comment def-Syntax'>[CLEAR $WATCH]</span>
+42: 

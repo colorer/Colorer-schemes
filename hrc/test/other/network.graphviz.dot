@@ -1,0 +1,46 @@
+digraph Option82
+  {
+  node [shape = box, width=1.2];
+  /*edge [dir = none];*/
+  edge [splines=false, weight=100];
+  compound=true;
+
+
+
+
+  "Intern\"net" -> DEG -> {DEG_SW01; DEG_SW02};
+
+  DEG_SW01 -> DEG_SW02 -> DEG_SW01 [constraint=false, weight=10000];
+  
+  < </asdfasdf> >
+  
+  
+  "adsfa    { <sdf> sdfasdf"
+
+  DEG_SW01 -> {FW01; FW02} [color=yellow];
+  DEG_SW02 -> {FW01; FW02} [color=brown];
+
+  {FW01; FW02} -> Web_SW01 [color=green];
+  {FW01; FW02} -> Web_SW02 [color=blue];
+
+  {FW01; FW02} -> App_SW01 [color=red];
+  {FW01; FW02} -> App_SW02 [color=violet];
+
+  Web_SW01 -> {Web01; Web02; MailIn01; MailIn02} [color=green];
+  Web_SW02 -> {Web01; Web02; MailIn01; MailIn02} [color=blue];
+
+  App_SW01 -> {App01; App02; App03; App04; DB01; DB02; MailOut01; MailOut02} [color=red];
+  App_SW02 -> {App01; App02; App03; App04; DB01; DB02; MailOut01; MailOut02} [color=violet];
+
+  Web01     -> Web02     -> MailIn01  -> MailIn02  [style=invis, weight=10000];
+  DB01      -> DB02      -> MailOut01 -> MailOut02 [style=invis, weight=10000];
+  App01     -> App02     -> App03     -> App04     [style=invis, weight=10000];
+
+  DEG_SW01 [style=rounded, width=1.5, height=0.3];
+  DEG_SW02 [style=rounded, width=1.5, height=0.3];
+  Web_SW01 [style=rounded, width=1.5, height=0.3];
+  Web_SW02 [style=rounded, width=1.5, height=0.3];
+  App_SW01 [style=rounded, width=1.5, height=0.3];
+  App_SW02 [style=rounded, width=1.5, height=0.3];
+
+  };

@@ -1,0 +1,4 @@
+body {
+  scrollbar-3dlight-color: #000000;  /* не все ли равно,              */
+  scrollbar-3dlight-color : #000000; /* есть пробел перед ":"или нет?  */
+}

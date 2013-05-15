@@ -1,0 +1,67 @@
+ 0: { =====================================================================
+ 1: ANS <span class='forth-forWord def-Keyword'>Forth</span> Test Suite
+ 2: 
+ 3: Copyright (c) 1998, FORTH, Incorporated
+ 4: 
+ 5: This set of tests has been taken from John Hayes' original Core.fr
+ 6: Dated Mon, <span class='forth-forNumb def-Number'>27</span> Nov <span class='forth-forNumb def-Number'>95</span> 13:10.  We retain the following statement as
+ 7: required for its use:
+ 8: 
+ 9: (C) <span class='forth-forNumb def-Number'>1995</span> JOHNS HOPKINS UNIVERSITY / APPLIED PHYSICS LABORATORY
+10: MAY BE DISTRIBUTED FREELY AS LONG AS THIS COPYRIGHT NOTICE REMAINS.
+11: 
+12: His last know update was VERSION 1.2
+13: 
+14: This program tests the core <span class='forth-forWord def-Keyword'>words</span> of an ANS <span class='forth-forWord def-Keyword'>Forth</span> system.
+15: The program assumes a two's complement implementation where
+16: the range of signed numbers <span class='forth-forWord def-Keyword'>is</span> -2^(n-1) ... 2^(n-1)-1 <span class='forth-forWord def-Keyword'>and</span>
+17: the range of unsigned numbers <span class='forth-forWord def-Keyword'>is</span> <span class='forth-forNumb def-Number'>0</span> ... 2^(n)-1.
+18: 
+19: ATHENA Contributions<span class='forth-forResWord def-Label'> </span><span class='forth-forWord def-Keyword'>to</span> Johns Hopkins test suite.  6/7/93
+20: 
+21:   Greg Bailey     |  ATHENA Programming, Inc  |  503-621-3215  |
+22: ----------------  |  <span class='forth-forNumb def-Number'>24680</span> NW Dixie Mtn Road  |  fax 621-3954  |
+23: greg@minerva.com  |  Hillsboro, <span class='forth-forWord def-Keyword'>OR</span> <span class='forth-forNumb def-Number'>97124</span>  US  |
+24: 
+25: S/M needs an advocate.
+26: 
+27: Dependencies: {> <span class='forth-forWord def-Keyword'>-></span> } { {{ TESTING MSB
+28: 
+29: Exports:
+30: 
+31: ===================================================================== }
+32: 
+33: <span class='forth-forWord def-Keyword'>HEX</span>
+34: 
+35: TESTING ALU BOUNDARY CONDITIONS
+36: 
+37: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>ALU</span><span class='forth-forComment def-Comment def-Syntax'> ( -- n )</span>
+38:    <span class='forth-forNumb def-Number'>-1</span> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>=</span> <span class='forth-forResWord def-Label'>IF</span>
+39:       <span class='forth-forNumb def-Number'>2</span>
+40:    <span class='forth-forResWord def-Label'>ELSE</span>  <span class='forth-forNumb def-Number'>1</span> <span class='forth-forNumb def-Number'>-1</span> <span class='forth-forWord def-Keyword'>XOR</span>  <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>=</span> <span class='forth-forResWord def-Label'>IF</span>
+41:       <span class='forth-forNumb def-Number'>1</span>
+42:    <span class='forth-forResWord def-Label'>ELSE</span> <span class='forth-forComment def-Comment def-Syntax'> ( s/m )</span> <span class='forth-forNumb def-Number'>0</span>
+43:    <span class='forth-forResWord def-Label'>THEN</span> <span class='forth-forResWord def-Label'>THEN</span><span class='forth-forWord def-Keyword'> ;</span>
+44: 
+45: ALU <span class='forth-forWord def-Keyword'>DUP</span> <span class='forth-forNumb def-Number'>2</span> <span class='forth-forWord def-Keyword'>=</span> <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>2'S</span> <span class='forth-forComment def-Comment def-Syntax'> ( expect full width signed numbers! )</span>
+46:     <span class='forth-forWord def-Keyword'>DUP</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>=</span> <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>1'S</span> <span class='forth-forComment def-Comment def-Syntax'> ( expect full width signed numbers! )</span>
+47:         <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>=</span> <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>S/M</span> <span class='forth-forComment def-Comment def-Syntax'> ( expect to be enlightened in future )</span>
+48: 
+49: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>if{></span><span class='forth-forComment def-Comment def-Syntax'> ( t )</span> <span class='forth-forResWord def-Label'>IF</span> {> <span class='forth-forResWord def-Label'>ELSE</span> 7D <span class='forth-forWord def-Keyword'>WORD</span> <span class='forth-forWord def-Keyword'>DROP</span> <span class='forth-forResWord def-Label'>THEN</span><span class='forth-forWord def-Keyword'> ;</span>
+50: 
+51: 2'S if{> MSB <span class='forth-forWord def-Keyword'>INVERT</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> MSB } <span class='forth-forComment def-Comment def-Syntax'> ( circular )</span>
+52: 2'S if{> MSB <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>-></span> MSB <span class='forth-forWord def-Keyword'>INVERT</span> } <span class='forth-forComment def-Comment def-Syntax'> ( circular )</span>
+53: 2'S if{> MSB <span class='forth-forWord def-Keyword'>INVERT</span>  <span class='forth-forWord def-Keyword'>DUP</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>-2</span> }  <span class='forth-forComment def-Comment def-Syntax'> ( overflow )</span>
+54: 2'S if{> MSB <span class='forth-forWord def-Keyword'>DUP</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }  <span class='forth-forComment def-Comment def-Syntax'> ( overflow )</span>
+55: 
+56: 1'S if{> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>=</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }  <span class='forth-forComment def-Comment def-Syntax'> ( -0 must test nonzero )</span>
+57: 1'S if{> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }  <span class='forth-forComment def-Comment def-Syntax'> ( clean zero from arith... )</span>
+58: 1'S if{> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+59: 1'S if{> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+60: 1'S if{> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+61: 1'S if{> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+62: 1'S if{> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+63: 1'S if{> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+64: 1'S if{> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>TRUE</span> <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+65: 
+66: 

@@ -1,0 +1,21 @@
+<bracket scheme="test">
+ 
+ <name-block name="check" start="\^" end=""
+  scheme="script" region="default" region-end="default"
+  region-start="symbol" region-middle="struct-symbol"
+  >
+  <name match="[^%nname;]+?" scheme="name" region="name"/>
+  <case type="monoblock" start="\{" end="\}"/>
+  <case type="monoblock" start="\[" end="\]"/>
+  <case type="monoblock" start="\(" end="\)" scheme="expr"/>
+ </name-block>
+
+ <block name="test" start="^\w+" end="end"
+  scheme1="String" region1="String" 
+  region-start="ReType" region-end="ReModif"  
+  region-middle="StringEdge"
+  >
+  <query start1="\(" end1="\)" start2="(?{}\))?#1\{" end2="\}" />
+ </block>
+</bracket>
+

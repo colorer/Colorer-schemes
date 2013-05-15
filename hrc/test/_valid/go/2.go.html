@@ -1,0 +1,35 @@
+ 0: <span class='go-LineComment def-LineComment def-Comment def-Syntax'>// Concurrent computation of pi.</span>
+ 1: <span class='go-LineComment def-LineComment def-Comment def-Syntax'>// See </span><span class='def-URL def-URI'>http://goo.gl/ZuTZM</span><span class='go-LineComment def-LineComment def-Comment def-Syntax'>.</span>
+ 2: <span class='go-LineComment def-LineComment def-Comment def-Syntax'>//</span>
+ 3: <span class='go-LineComment def-LineComment def-Comment def-Syntax'>// This demonstrates Go's ability to handle</span>
+ 4: <span class='go-LineComment def-LineComment def-Comment def-Syntax'>// large numbers of concurrent processes.</span>
+ 5: <span class='go-LineComment def-LineComment def-Comment def-Syntax'>// It is an unreasonable way to calculate pi.</span>
+ 6: <span class='go-Keywords def-Keyword'>package</span> main
+ 7: 
+ 8: <span class='go-Keywords def-Keyword'>import</span> <span class='go-Symbol def-Symbol'>(</span>
+ 9:     <span class='def-StringEdge def-String'>"</span><span class='go-String def-String'>fmt</span><span class='def-StringEdge def-String'>"</span>
+10:     <span class='def-StringEdge def-String'>"</span><span class='go-String def-String'>math</span><span class='def-StringEdge def-String'>"</span>
+11: <span class='go-Symbol def-Symbol'>)</span>
+12: 
+13: <span class='go-Keywords def-Keyword'>func</span> main<span class='go-Symbol def-Symbol'>(</span><span class='go-Symbol def-Symbol'>)</span> <span class='go-Symbol def-Symbol'>{</span>
+14:     fmt<span class='go-Symbol def-Symbol'>.</span>Println<span class='go-Symbol def-Symbol'>(</span>pi<span class='go-Symbol def-Symbol'>(</span><span class='def-NumberDec def-Number'>5000</span><span class='go-Symbol def-Symbol'>)</span><span class='go-Symbol def-Symbol'>)</span>
+15: <span class='go-Symbol def-Symbol'>}</span>
+16: 
+17: <span class='go-LineComment def-LineComment def-Comment def-Syntax'>// pi launches n goroutines to compute an</span>
+18: <span class='go-LineComment def-LineComment def-Comment def-Syntax'>// approximation of pi.</span>
+19: <span class='go-Keywords def-Keyword'>func</span> pi<span class='go-Symbol def-Symbol'>(</span>n int<span class='go-Symbol def-Symbol'>)</span> float64 <span class='go-Symbol def-Symbol'>{</span>
+20:     ch <span class='go-Symbol def-Symbol'>:</span><span class='go-Symbol def-Symbol'>=</span> make<span class='go-Symbol def-Symbol'>(</span><span class='go-Keywords def-Keyword'>chan</span> float64<span class='go-Symbol def-Symbol'>)</span>
+21:     <span class='go-Keywords def-Keyword'>for</span> k <span class='go-Symbol def-Symbol'>:</span><span class='go-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span><span class='go-Symbol def-Symbol'>;</span> k <span class='go-Symbol def-Symbol'>&lt;</span><span class='go-Symbol def-Symbol'>=</span> n<span class='go-Symbol def-Symbol'>;</span> k<span class='go-Symbol def-Symbol'>+</span><span class='go-Symbol def-Symbol'>+</span> <span class='go-Symbol def-Symbol'>{</span>
+22:         <span class='go-Keywords def-Keyword'>go</span> term<span class='go-Symbol def-Symbol'>(</span>ch<span class='go-Symbol def-Symbol'>,</span> float64<span class='go-Symbol def-Symbol'>(</span>k<span class='go-Symbol def-Symbol'>)</span><span class='go-Symbol def-Symbol'>)</span>
+23:     <span class='go-Symbol def-Symbol'>}</span>
+24:     f <span class='go-Symbol def-Symbol'>:</span><span class='go-Symbol def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>0.0</span>
+25:     <span class='go-Keywords def-Keyword'>for</span> k <span class='go-Symbol def-Symbol'>:</span><span class='go-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span><span class='go-Symbol def-Symbol'>;</span> k <span class='go-Symbol def-Symbol'>&lt;</span><span class='go-Symbol def-Symbol'>=</span> n<span class='go-Symbol def-Symbol'>;</span> k<span class='go-Symbol def-Symbol'>+</span><span class='go-Symbol def-Symbol'>+</span> <span class='go-Symbol def-Symbol'>{</span>
+26:         f <span class='go-Symbol def-Symbol'>+</span><span class='go-Symbol def-Symbol'>=</span> <span class='go-Symbol def-Symbol'>&lt;</span><span class='go-Symbol def-Symbol'>-</span>ch
+27:     <span class='go-Symbol def-Symbol'>}</span>
+28:     <span class='go-Keywords def-Keyword'>return</span> f
+29: <span class='go-Symbol def-Symbol'>}</span>
+30: 
+31: <span class='go-Keywords def-Keyword'>func</span> term<span class='go-Symbol def-Symbol'>(</span>ch <span class='go-Keywords def-Keyword'>chan</span> float64<span class='go-Symbol def-Symbol'>,</span> k float64<span class='go-Symbol def-Symbol'>)</span> <span class='go-Symbol def-Symbol'>{</span>
+32:     ch <span class='go-Symbol def-Symbol'>&lt;</span><span class='go-Symbol def-Symbol'>-</span> <span class='def-NumberDec def-Number'>4</span> <span class='go-Symbol def-Symbol'>*</span> math<span class='go-Symbol def-Symbol'>.</span>Pow<span class='go-Symbol def-Symbol'>(</span><span class='go-Symbol def-Symbol'>-</span><span class='def-NumberDec def-Number'>1</span><span class='go-Symbol def-Symbol'>,</span> k<span class='go-Symbol def-Symbol'>)</span> <span class='go-Symbol def-Symbol'>/</span> <span class='go-Symbol def-Symbol'>(</span><span class='def-NumberDec def-Number'>2</span><span class='go-Symbol def-Symbol'>*</span>k <span class='go-Symbol def-Symbol'>+</span> <span class='def-NumberDec def-Number'>1</span><span class='go-Symbol def-Symbol'>)</span>
+33: <span class='go-Symbol def-Symbol'>}</span>
+34: 

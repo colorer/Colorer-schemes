@@ -1,0 +1,6 @@
+ModelGroup grammarContent
+ModelGroup includeContent
+ModelGroup nameClass
+ModelGroup pattern
+
+AttrGroup commonAtts

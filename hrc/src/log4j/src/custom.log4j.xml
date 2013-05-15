@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace='http://jakarta.apache.org/log4j/'>
+	<empty-prefix/>
+	
+	<force-prefix>
+		<element name='configuration'/>
+		<element name='eventSet'/>
+		<element name='event'/>
+		<element name='message'/>
+		<element name='NDC'/>
+		<element name='throwable'/>
+		<element name='locationInfo'/>
+		<element name='properties'/>
+		<element name='data'/>
+		
+		<prefix>log4j</prefix>
+	</force-prefix>
+	
+	<top-level>
+	        <element>configuration</element>
+	</top-level>
+	
+	<contributors>Kasatkin Konstantin, Eugene Efremov</contributors>
+	
+</custom-type>
+
+</custom>

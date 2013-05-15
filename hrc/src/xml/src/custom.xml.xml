@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<custom-type targetNamespace="http://www.w3.org/XML/1998/namespace">
+	<prefix>xml</prefix>
+	<top-level/><!-- package -->
+
+	<contributors><![CDATA[
+		Eugene Efremov <4mirror@mail.ru>
+	]]></contributors>
+	<xsd-typedefs>
+		<xs:simpleType name="hVersion"/>
+		<xs:simpleType name="hYesNo"/>
+		<xs:simpleType name="hEncoding"/>
+	</xsd-typedefs>
+
+
+	<processing-instruction name="xml">
+		<xs:complexType>
+			<xs:annotation><xs:documentation><![CDATA[
+				[23]   XMLDecl       ::=   '<?xml' VersionInfo EncodingDecl? SDDecl? S? '?>'
+				[24]   VersionInfo   ::=   S 'version' Eq ("'" VersionNum "'" | '"' VersionNum '"')/* */
+				[25]   Eq            ::=   S? '=' S?
+				[26]   VersionNum    ::=   ([a-zA-Z0-9_.:] | '-')+
+				[80]   EncodingDecl  ::=   S 'encoding' Eq ('"' EncName '"' | "'" EncName "'" )
+				[81]   EncName       ::=   [A-Za-z] ([A-Za-z0-9._] | '-')*
+				[32]   SDDecl        ::=   S 'standalone' Eq (("'" ('yes' | 'no') "'") | ('"' ('yes' | 'no') '"'))
+			]]></xs:documentation></xs:annotation>
+
+			<xs:attribute name="version" use="required" type="xml:hVersion"/>
+			<xs:attribute name="encoding" default="UTF-8" type="xml:hEncoding"/>
+			<xs:attribute name="standalone" type="xml:hYesNo"/>
+		</xs:complexType>
+	</processing-instruction>
+
+
+	<processing-instruction name="xml-stylesheet">
+		<xs:complexType>
+			<xs:annotation><xs:documentation><![CDATA[
+				http://www.w3.org/TR/xml-stylesheet
+				href    CDATA     #REQUIRED
+				type    CDATA     #REQUIRED
+				title     CDATA     #IMPLIED
+				media     CDATA     #IMPLIED
+				charset   CDATA     #IMPLIED
+				alternate   (yes|no)  "no"
+			]]></xs:documentation></xs:annotation>
+
+			<xs:attribute name="href" type="xs:anyURI" use="required"/>
+			<xs:attribute name="type" type="xs:string" use="required"/>
+			<xs:attribute name="title" type="xs:string"/>
+			<xs:attribute name="media" type="xs:string"/>
+			<xs:attribute name="charset" type="xs:string"/>
+			<xs:attribute name="alternate" type="xml:hYesNo"/>
+		</xs:complexType>
+	</processing-instruction>
+
+	<type xmlns="http://colorer.sf.net/2003/hrc">
+		<!--scheme name="xml-processing-instruction"> - move to xml.hrc
+			<block start="/(&lt;\?)(?{xml:XMLDecl.name}xml)\M(\s|$)/" end="/(\?&gt;)/"
+				region11="xml:XMLDecl.end" region10="def:PairEnd"
+				region01="xml:XMLDecl.start" region00="def:PairStart"
+				region="xml:XMLDecl" scheme="xml-piContent"
+			/>
+		</scheme-->
+
+		<scheme name="hVersion-content">
+			<regexp match="/~[a-zA-Z0-9_.:\-]+/" region="def:Constant"/>
+			<inherit scheme="hBad"/>
+		</scheme>
+		<scheme name="hYesNo-content">
+			<regexp match="/~(yes|no)\b/" region="def:BooleanConstant"/>
+			<inherit scheme="hBad"/>
+		</scheme>
+		<scheme name="hEncoding-content">
+			<regexp match="/~[A-Za-z][A-Za-z0-9._\-]*/" region="def:String"/>
+			<inherit scheme="hBad"/>
+		</scheme>
+
+		<scheme name="hBad">
+			<regexp match="/~[&quot;&apos;]/" region="xml:badChar"/>
+			<regexp match="/./" region="xml:badChar" priority="low"/>
+		</scheme>
+	</type>
+
+</custom-type>
+</custom>

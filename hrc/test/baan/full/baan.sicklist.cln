@@ -1,0 +1,1027 @@
+|******************************************************************************
+|* tfzzzdllsickls  0  VRC B402 c3 land
+|* Расчет больничного
+|* bn25
+|* 05/07/99 [11:24]
+|******************************************************************************
+|* Script Type: Library
+|******************************************************************************
+#include "itfzzyerrors"   
+#include "itfzzydomains"   
+#include "itfzzzbuffer000"   
+#include "itfzzz022"   
+#pragma used dll otfzzzdll007m00
+#pragma used dll otfzzzdll094m01
+#pragma used dll otfzzzdllbizcnt
+#pragma used dll otfzzzdllperiod
+#pragma used dll otfzzzdlltable
+#pragma used dll otfzzzdllmids
+#pragma used dll otfzzzdll171
+#pragma used dll otfzzzdllclcres
+#pragma used dll otfzzzdll300
+#pragma used dll otfzzzdll027m01
+#pragma used dll otfzzzdllcalcut
+
+| Вход: (Эти переменные должны быть заполнены до вызова
+|        функций)
+extern  long AccPeriod | Текущий период
+extern  long CurrStaff | Сотрудник
+extern  long CalcCurrWorkingPlace | Текущее рабместо
+| Таблицы:
+table ttfzzz007 | День табелей рабочих мест
+table ttfzzz006 | Табель рабместа
+table ttfzzz097 | Больничный лист
+
+table ttfzzz016 | Вхождение кодов расчета
+table ttfzzz080 | Расчет
+table ttfzzz051 | Норма начисления-удержания
+
+table ttfzzz072 | Лицевые
+table ttfzzz022 | Функции
+
+table ttfzzz211 | Протокол расчета
+table ttfzzz212 | Запись протокола расчета
+
+#define TmКndCode domain tfzzz.str.id.8
+#define CalcCode  domain tfzzz.str3
+#define Period domain tfzzz.id9
+#define ContKind domain tfzzz.fl.vhogd
+
+#define sklsSuffix ""
+extern BOOL recalc
+
+| Найти больничный лист по его ключу      
+function extern ERRCODE skls.findByID(IDENT sklsempl, domain tfzzz.id aList){
+ SELECT 
+ * FROM tfzzz097 WHERE 
+	  _index1={:sklsempl,:aList}
+ SELECTDO 
+ return(errSetOk())
+	ENDSELECT
+	return(errorSet(errNotFound,"tfzzz097"))
+}
+|  Расчитать больниный
+|@params 
+|  aCode - код расчета
+|  timeKind - вид времени
+|  isTimePayed - true - повременный иначе - сдельный
+|  useList - пользоваться ли списком расчитанных больничных.
+| если да, то перед вызовом первой функции надо вызвать clcleaves.init
+|  aResult - переменная, в которую надо вернуть сумму больничного
+|  days - переменная, в которую надо вернуть количество дней, 
+|  hours - переменная, в которую надо вернуть количество часов
+function extern ERRCODE sklsclc.Calculate(CalcCode aCode,TmКndCode timeKind,BOOL isTimePayed,Bool useList,ref MONEY aResult,ref double days, ref double hours){
+  ERRCODE err                
+  MONEY Total
+  double CurDays,CurHours
+  | Начало обработки больничных
+  aResult=0
+  err=begProcess(timeKind)               
+  Days =0
+  Hours = 0
+  HANDLE.ERR              
+  TDate EndDate
+  |if recalc then
+    EndDate=endDateOfPeriod(AccPeriod)
+  |else 
+  |  EndDate=0
+  |endif
+  tab.forInterval.Begin.forLine(CalcCurrWorkingPlace,begDateOfPeriod(AccPeriod),EndDate)
+  while tab.forInterval.hasNext()
+  	| Обработать дату табеля
+  	err=processDay(aCode,isTimePayed,Total,CurDays,CurHours,useList)  
+  	HANDLE.ERR                   
+  	aResult=aResult+Total
+  	Days=Days+CurDays
+  	Hours=Hours+CurHours
+  	tab.forInterval.next()
+  endwhile                
+  tab.forInterval.end()
+  | Конец обработки больничных
+  err=handleSickListEnd(aCode,isTimePayed,Total,CurDays,CurHours,useList)
+  aResult=aResult+Total 
+  Days=Days+CurDays
+  Hours=Hours+CurHours
+  return(err)
+}              
+TmКndCode prc.TimeKind
+TmКndCode prc.OldTimeKind
+IDENT     prc.OldSickList 
+DATE      prc.SickListDate
+Ident     prc.SickList
+long      prc.SickListLength       
+double    prc.FundH
+| Начало обработки больничных
+function ERRCODE begProcess(TmКndCode timeKind){
+  prc.timeKind=timeKind           
+  prc.OldTimeKind="ХАМ"
+  prc.OldSickList=0         
+  prc.SickListDate=0
+  prc.SickListLength=0
+  prc.FundH=0.0
+  return(errSetOk())
+}
+| Текущий вид времени
+function TmКndCode currentTimeKind(){
+	return(strip$(tfzzz007.tb_v_cod))
+}                    
+| Заданный вид времени
+function TmКndCode needTimeKind(){
+	return(prc.timeKind)
+}                
+| Обработать окончание больничного     
+|@created 
+|  28.10.99 (12:44:39) by Max Belugin
+function ERRCODE handleSickListEnd (CalcCode aCode,BOOL isTimePayed,ref MONEY aResult,ref double days,ref double hours,Bool useList){	
+	ERRCODE err
+	if prc.SickListDate<>0 then
+	  if prc.SickList<>0 then
+	    clog.setSickList(get.wp.empl(CalcCurrWorkingPlace),prc.SickList)
+	  endif
+		| обработать больничный 
+		if 
+		  (useCalcedDocs or not 
+		   clog.hasSickList(get.wp.empl(CalcCurrWorkingPlace),prc.SickList,AccPeriod)
+		  )
+		  or
+		  (useList and clcleaves.haveToCalc(prc.SickList,needTimeKind())
+		  )
+		then
+		  if useList then
+		    clcleaves.add(prc.SickList,needTimeKind())
+		  endif
+		  err=sklscnt.performOne(aCode,needTimeKind(),prc.SickListDate,prc.SickListLength,prc.FundH,isTimePayed,aResult)
+	    HANDLE.ERR
+	  endif
+	  clog.setSickList(0,0)
+	endif
+	days=0 hours=0
+	prc.SickListLength=0
+	prc.FundH=0
+	prc.SickListDate=getSickListDate()
+	prc.SickList=currentSickList()
+	return(errOk)
+}
+function ERRCODE processDay(CalcCode aCode, BOOL isTimePayed,ref MONEY aResult,ref double Days,ref double Hours,Bool useList){
+	Days=0
+	Hours=0                             
+	aResult=0
+	| Если текущий вид времени = требуемому
+	if currentTimeKind()=needTimeKind() then
+		| Если начало нового больничного
+		if isSickListBegin() then
+			| Обработать конец предыдущего
+			handleSickListEnd(aCode,isTimePayed,aResult,Days,Hours,useList)
+		endif                                  
+		| Количество дней больничного++
+		prc.SickListLength=prc.SickListLength+1                         
+		long D
+		double H
+		ghis.fundForPeriod(tb.workingPlace.id(),tb.date(),tb.date(),D,H)
+		prc.FundH=prc.FundH+H
+		Days=1
+		Hours=tb.Hours()
+	endif                                   
+	| Сохранить состояние в переменных
+	saveToOld()
+	RETURN(errOk)
+}         
+| Является ли текущий день табеля началом больничного
+function BOOL isSickListBegin(){
+	| Был ли разрыв в днях:
+	|   код старого дня не равен коду текущего
+	if prc.OldTimeKind<>CurrentTimeKind() then
+		return(true)
+	endif
+	| если нет, то отличается ли
+	| связанный с днем больничный от
+	| предыдущего
+	return(currentSickList()<>prc.OldSickList)
+}
+| created 12.10.99                    
+| Возвращает двту больничного для
+| текущей даты табеля
+function DATE getSickListDate(){
+	if hasSickList() then            
+		return(curSickList.BegDate())  
+	endif
+	return(tb.date())
+}                    
+| Есть ли у текущей даты табеля 
+| соответствующий ей больничный
+function BOOL hasSickList(){ 
+ BOOL aResult
+ aResult=skls.findByID(CurrStaff, tfzzz007.tb_bolli)=errOk
+ ok()
+ return(aResult)
+}               
+| Возвращает дату начала больничного,
+| связанного с текущей датой табеля
+function DATE curSickList.BegDate(){
+	skls.findByID(CurrStaff, currentSickList())
+	  HERR.N
+	if skls.firstDate()=0 then
+	  return(tfzzz097.sklsbdat(1))
+	endif 
+	return(skls.firstDate())
+|	endif
+}                                  
+| Сохранить состояние в переменных
+function saveToOld(){                
+	| Если день не игнорируется
+	if not isIgnoredDay(CurrentTimeKind()) then
+		| Если текущий вид времени <> Требуемому
+	  if CurrentTimeKind()<>NeedTimeKind() then
+      prc.OldSickList=0	  	
+	  else               
+	  	prc.OldSickList=CurrentSickList()
+	  endif	            
+	  prc.OldTimeKind=CurrentTimeKind()
+	endif
+}
+| Тип времени не учитывается в больничном       
+function BOOL isIgnoredDay(TmКndCode TimeKind){
+	return(strip$(TimeKind)=strip$(get.leave.holiday.time()))
+}
+#define dv(a,b) b=0?0:a/b
+| расчитать больничный
+|@params
+| aCode - код расчета
+| aTimeKind - вид времени
+| begDate - дата начала
+| Length - длина 
+| aResult - переменная, в которую возвращается сумма
+function ERRCODE sklscnt.performOne(CalcCode aCode, TmКndCode aTimeKind,DATE begDate,long Length,double FundH,BOOL isTimePayed,ref MONEY aResult){   
+	ibuf.dim(ttfzzz007)
+	ibuf.store(ttfzzz007)
+	ERRCODE err            
+	
+	double PersFund,H | Личный фонд
+	double periodFundH | 
+	
+	MONEY S | Cумма месяца
+  MONEY S1 | Сумма базы
+
+ 	double T,T1
+	long f
+	TPeriod aBegPeriod
+	aBegPeriod=periodByDate(begDate)
+  | message(sprintf$("%D002",begDate)) | stub
+  Money mdBase 
+	MONEY bonuses    
+	double BonusK
+  | Если форма оплаты повременная    
+  if isTimePayed then
+ 	  |<  MaxBelugin 16/06/00 16:33:54
+ 	  | Исключительно для отчетности
+	  mids.calculateBase(aCode,CalcCurrWorkingPlace, begDate,T,T1,F,H,S1,BonusK)
+	  |  MaxBelugin 16/06/00 16:33:56>
+   
+	  | Расчитать базовую стоимость
+	  err=sklscnt.CalcBase(aCode, aTimeKind, begDate)
+	    HANDLE.ERR                      
+	  |<  MaxBelugin 03/04/00 12:55:06
+	  double rate
+	  rate=get.wp.rate(CalcCurrWorkingPlace)
+	  |  MaxBelugin 03/04/00 12:55:13>
+	  S1=sklscnt.totalBy(aCode,tfzzz.fl.vhogd.boln)*rate |  MaxBelugin 03/04/00 12:57:19 
+	  | Удалить протокол
+	  db.retry.point()
+	  err=cnlg.delete()
+	    END.ERR.TR    
+	  clog.addDef(tfzzz.clc.prop.mm.base,S1,abegPeriod)
+	else
+	  mids.calculateBase(aCode,CalcCurrWorkingPlace, begDate,T,T1,F,H,S1,BonusK)
+	  MdBase=dv(s1,t1)
+	  | Среднечасовая хрень
+	  if h=0 then
+	    S1=0
+	  else 
+	    S1=S1/H    
+	  endif
+	endif
+	| расчиать сумму премий
+  |	message("s1+2+3+4:"&str$(Schk2+Sh+Sm))
+	bonuses=processBonuses(aCode,begDate)   
+	clog.addDef(tfzzz.clc.prop.mnth.bonus,bonuses,aBegPeriod)|  MaxBelugin 16/06/00 17:18:37
+  Money mdBonus
+  mdBonus=dv(bonuses,wpc.graphDays(CalcCurrWorkingPlace,AccPeriod))
+  clog.addDef(tfzzz.clc.prop.day.bonus,mdBonus,aBegPeriod)
+  | Если форма оплаты повременная      
+  MONEY MMOTi
+  MMOTi=MMOTs(AccPeriod)
+  if isTimePayed then
+    S=S1+bonuses	 
+    PersFund=wpc.graphDays(CalcCurrWorkingPlace,AccPeriod)|  MaxBelugin 19/09/00 14:51:37 PersFund=wpc.graphDays(CalcCurrWorkingPlace,aBegPeriod)
+    mdBase=dv(S1,PersFund)
+    err=errorGet()
+    HANDLE.ERR       
+    |message("Фонд:"&str$(PersFund))
+    |message("Продолж. больничного:"&str$(Length))
+    |message("Сумма:"&str$(s))
+    S=S/PersFund
+    S=min(S,(MMOTi*85)/PersFund)
+    S=round(S*Length,2,1)
+  else
+	  long Dummy   
+	  periodFundH=wpc.graphHours(CalcCurrWorkingPlace,AccPeriod)|  MaxBelugin 20/09/00 12:05:23 periodFundH=wpc.graphHours(CalcCurrWorkingPlace,aBegPeriod)
+    S=S1+bonuses*BonusK/H
+    S=min(S,(MMOTi*85)/periodFundH)
+    S=S*FundH
+  endif        
+  clog.addDef(tfzzz.clc.prop.md.base,mdBase,aBegPeriod)
+  Money mdIncome
+  mdIncome=mdBase+mdBonus
+  clog.addDef(tfzzz.clc.prop.avd.fact.income,mdIncome,aBegPeriod)
+  Money forClc
+  forClc=min(mdIncome,dv((MMOTi*85),PersFund))
+  clog.addDef(tfzzz.clc.prop.day.for.calc,forClc,aBegPeriod)
+    | updated by Shatanov 23.03.2000 19:37
+    | but ttfzzz173 used
+    |  s=S*getPercent(CurrStaff,CalcCurrWorkingPlace, begDate,aCode)/100
+  s=S*getPercent(CurrStaff, begDate)/100
+  clog.addDef(tfzzz.clc.prop.pers.perc,getPercent(CurrStaff, begDate),aBegPeriod)
+  clog.addDef(tfzzz.clc.prop.day.pay,forClc*getPercent(CurrStaff, begDate)/100,aBegPeriod)
+  |message("Итого="&str$(S))
+  aResult=S 
+  ibuf.restore(ttfzzz007)
+	return(errSetOk())
+}                                
+
+| Расчет базовой стоимости  
+| created 14.10.99 by MaxBelugin
+function ERRCODE sklscnt.calcBase (CalcCode aCode,TmКndCode aTimeKind, DATE aDate){
+  ERRCODE err
+  | Создать временный расчетный протокол
+  db.retry.point()
+  err=cnlg.fillNew()
+  if err=errOk then
+    err=cnlg.insert()
+  endif
+  END.ERR.TR
+  | Заполнить расчетный листок
+  err=sklscnt.fillCalcLog(aCode, aTimeKind, aDate)
+  HANDLE.ERR
+  return(errOk)
+}
+
+| Заполнение расчетного листка
+| created 14.10.99 by MaxBelugin
+function ERRCODE sklscnt.fillCalcLog(CalcCode aCode,TmКndCode aTimeKind, DATE aDate){
+	ERRCODE err
+	| Для всех лицевых данных на момент 
+	| начала больничного{               
+	SELECT * FROM tfzzz016 WHERE                  
+	  ts_cd1=:aCode
+	  AND   
+	  ts_flg in ( tfzzz.fl.vhogd.boln)      
+	ORDER BY
+	  ts_no          
+	SELECTDO	
+	| расчитать лицевое данное   
+	  err=calcPersData(aDate)
+	  HANDLE.ERR
+	| }     
+	ENDSELECT                       
+	return(errOk)
+}                            
+
+| расчитать лицевое данное     
+| считатется, что протокол расчета создан 
+| и загружен в буфер
+| created 15.10.99 (01:39:00 ) by Max Belugin
+function ERRCODE calcPersData(Date aDate){
+	| Расчет = Создать расчет по его коду в лицевом счете 
+	| Расчет.ЛицевыеДанные = Срез на дату начала
+	| Расчет.Протокол = Текущий протокол
+	| Расчет.ПротоколИсточников = Текущий протокол
+	| Расчет.Расчитать
+  |message(tfzzz072.ld_code) | stub
+  clcres.save()
+  long oldAccPeriod
+  setEnvForSickList(aDate)     
+  oldAccPeriod=AccPeriod
+  AccPeriod=periodByDate(aDate)
+  String oldCode(3)
+  oldCode=tfzzz080.ras_code
+  tfzzz080.ras_code=tfzzz016.ts_cd2
+  clcres.initByPeriod(periodByDate(aDate))
+  ERRCODE err
+  Ident old.wp
+  old.wp=CalcCurrWorkingPlace
+  CalcCurrWorkingPlace=wpc.workingPlaceByDate(CalcCurrWorkingPlace,aDate)
+  err=calcCurrCode()
+  AccPeriod=oldAccPeriod
+  CalcCurrWorkingPlace=old.wp
+  cnlg.addFromCalcRes()
+	tfzzz080.ras_code=oldCode
+	clcres.retrieve()
+	return(err)
+}
+| Возврящает текущий больничный
+function IDENT currentSickList(){
+	return(tfzzz007.tb_bolli) 
+}             
+| Является ли больничный продолжением
+|function BOOL skls.isCountinue(){
+|	return(tfzzz097.sklscont=tfzzz.checkbox.true)
+|}
+| Дата начала первого больничного,
+| продолжением которого является этот
+function DATE skls.firstDate(){
+	return(tfzzz097.sklsfrst)
+}
+
+|!!! debug
+extern  long	NumberRet
+extern  double	sum(120)
+|!!! debug>
+
+  
+#define calcDllName "otfzzzdllcalc"
+| Расчет.Расчитать
+function ERRCODE calcCurrCode(){
+	long dll_id  
+	long func_id
+	STRING funcName(50)
+	ERRCODE res
+	dll_id = load_dll(calcDllName)
+	if dll_id=0 then
+	  return(errorSet(errError,"Не могу загрузить "&calcDllName))
+	endif       
+	|!!! Debug
+	String ccc(4)                    
+	ccc=tfzzz016.ts_cd2
+	|!!! Debug>
+	funcname=getSklsFunctionName(tfzzz016.ts_cd2)
+	if wasError() then
+	  return(errorGet())
+	endif
+	if funcname<>"" then
+    func_id = get_function (dll_id, funcName)
+    if func_id = 0 then
+      return(errorSet(errError,sprintf$("Не могу загрузить функцию: %s ", funcname)))
+    endif
+	  res = exec_function (dll_id, func_id)
+    | !!! Debug
+    Money CalcFuncRet
+    CalcFuncRet=0
+    CalcFuncRet=Sum(NumberRet)	  
+    CalcFuncRet=0
+    | !!! Debug>
+    if res <> 0 then
+      return(errorSet(errError,sprintf$("Не могу выполнить функцию: %s", funcName)))
+    endif      
+  endif
+  return(errSetOk())
+}
+| возвращает имя функуии, вычисляющей расчет 
+| для больничного по коду начисления/удержания
+| aCode
+|@created 
+|  18.10.99 (12:23:41 ) by Max Belugin
+function string getSklsFunctionName(CalcCode aCode){
+	SELECT * FROM tfzzz051,tfzzz022	WHERE 
+	  tfzzz051._index1={:aCode}
+	  and
+	  tfzzz022._index1={nrm_func}|fn_id=nrm_func    
+	SELECTDO 
+		return(strip$(tfzzz022.fn_nm)&sklsSuffix)
+  ENDSELECT
+  return("")
+}    
+
+| Возвращает сумму текущего расчетного протокола
+| по типу вхождения в больничный - aContKind.
+| created 19.10.99 (03:08:15 ) by Max Belugin
+function extern MONEY sklscnt.totalBy(CalcCode aCode,domain tfzzz.fl.vhogd aContKind){
+	MONEY aResult
+	aResult=0
+	SELECT * FROM tfzzz212,tfzzz016 WHERE 
+	  log=:tfzzz211.id
+	  AND
+	  kind=ts_cd2
+	  AND
+	  ts_cd1=:aCode
+	  AND
+	  ts_flg=:aContKind
+	SELECTDO
+		aResult=aResult+tfzzz212.total
+	ENDSELECT                       
+	return(aResult)
+} 
+
+| Обработка премий
+|  begDate - дата начала больничного
+| created 22.10.99 (03:40:30) by Max Belugin
+function MONEY processBonuses (CalcCode aCode,DATE begDate){
+	Period bolnPrd
+	Period prevPrd
+	Period firstYearPrd
+	CalcCode bonusCode
+	ContKind aKind
+	Date startDate | Дата с которой смотреть премии             
+	Period startPrd | Период с которого смотреть премии
+	Date firstYearDate | Дата начала первого периода года
+	MONEY Total
+	long goodPeriods
+	
+	startDate=lastAcceptanceDate()
+	bolnPrd=periodByDate(begDate)
+	prevPrd=prevPeriod(bolnPrd)  
+	firstYearPrd=firstPeriodOfYearOf(bolnPrd)
+	firstYearDate=begDateOfPeriod(firstYearPrd)
+	if firstYearDate>startDate then 
+		startDate=firstYearDate
+	endif             
+	startPrd=periodByDate(startDate)
+	Total=0
+	if startPrd<=prevPrd then 
+		SELECT ts_cd2:bonusCode,ts_flg:aKind FROM tfzzz016 WHERE  
+		  _index2={:aCode}
+		  AND
+		  ts_flg IN (
+		    tfzzz.fl.vhogd.mid.1.3.l,
+		    tfzzz.fl.vhogd.mid.1.12.l,
+		    tfzzz.fl.vhogd.mid.1,
+		    tfzzz.fl.vhogd.mid.1.3,
+		    tfzzz.fl.vhogd.mid.1.12
+		  )
+		SELECTDO     
+			Total=Total+processBonusesByCode(aKind, bonusCode,startDate,prevPrd) 
+		ENDSELECT
+		goodPeriods=includedCount(CalcCurrWorkingPlace,startPrd,prevPrd)
+	endif         	
+	|message("Всего премиий="&str$(total)&"/"&str$(goodPeriods))	
+	return(Total/periodsBetween(startPrd,prevPrd))
+}  
+  
+| Обработка премий по коду. Возвращает сумму премий
+| created 25.10.99 (12:03:24) by Max Belugin
+function MONEY processBonusesByCode(ContKind aKind,CalcCode aCode,Date aBeg, Period anEnd){
+	if contKindIsCL(aKind) then
+		return(processBonusesByCodeCL(aKind,aCode,aBeg,anEnd))
+	endif
+	return(processBonusesByCodePersDat(aKind,aCode,aBeg,anEnd))
+} 
+
+| Брать ли данные из расчетного листа для
+| типа вхождения aKind
+| created 28.10.99 (11:30:20) by Max Belugin
+function BOOL contKindIsCL (ContKind aKind){
+	return((aKind=tfzzz.fl.vhogd.mid.1)
+	       or
+		     (aKind=tfzzz.fl.vhogd.mid.1.3)
+		     or
+		     (aKind=tfzzz.fl.vhogd.mid.1.12))
+}
+| Обработка премий по коду (Из расчетного листа). Возвращает сумму премий
+| created 25.10.99 (12:03:24) by Max Belugin
+function MONEY processBonusesByCodeCL(ContKind aKind,CalcCode aCode,Date aBeg, TPeriod anEnd){
+  | Выяснить, является ли рабместо главным
+  BOOL isMain           
+  TPeriod aPeriod
+  IDENT  aWorkPlace     
+  IDENT  CurrStaff
+  MONEY CurTotal          
+  MONEY Total
+  isMain=wp.isMain(CalcCurrWorkingPlace)   
+  CurrStaff=get.wp.empl(CalcCurrWorkingPlace)
+  Date wpBeg,wpEnd
+  wpBeg=wpc.begDate(aWorkPlace)
+  wpEnd=get.wp.annihilate.date(aWorkPlace)
+  | Начало обработки                                                          
+  Total = totalBeg(CalcCurrWorkingPlace,aKind,periodByDate(aBeg),anEnd)
+  SELECT rl_id:aWorkPlace,ras_per:aPeriod,rl_summa:CurTotal 
+  FROM  tfzzz081, tfzzz076, tfzzz026 | Расчетный листок, Запись протокола расчета, рабочее место
+  WHERE
+    ( 
+      | Если рабочее место - главное, то выбирать все
+      | глaвные рабочие места данного человека
+      (:isMain<>0 
+       AND              
+        tfzzz026._index4 between 
+          {tfzzz.checkbox.true,:wpBeg}
+          AND
+          {tfzzz.checkbox.true,:wpEnd}
+       AND
+       tfzzz026._index2={:CurrStaff}
+      )
+      OR 
+      | иначе, только заданное рабочее место
+      (tfzzz026._index1={:CalcCurrWorkingPlace})
+    ) 
+    AND
+    | Условие по рабочему месту{
+    tfzzz076._index1={tfzzz026.wp_id} | rl_id    
+    AND       
+    tfzzz076._index1<={tfzzz026.wp_id,:anEnd}
+    AND
+    ras_dat>=:aBeg
+    AND
+    | Связь расчетного листка с протоколом{
+    tfzzz081._index1={tfzzz076.ras_grp,tfzzz076.ras_per}
+    AND
+    tfzzz081._index2={tfzzz076.ras_id}
+    AND                                   
+    tfzzz081._index5={:aCode}
+  ORDER BY 
+    tfzzz076._index3
+  SELECTDO 
+		| Обработать запись расчетного листка 
+ 		||message("Премия"&str$(CurTotal)&" период="&str$(aPeriod)) 		                             
+ 		Total = totalAdd(Total,aPeriod,CurTotal)
+  ENDSELECT         
+  | Конец обработки
+  Total = totalEnd(Total)
+  return(Total)
+}
+
+| Обработка премий по коду (Из лицевых данных). Возвращает сумму премий
+| created 25.10.99 (12:03:24) by Max Belugin
+function MONEY processBonusesByCodePersDat(ContKind aKind,CalcCode aCode,Date aBeg, TPeriod anEnd){
+  | Выяснить, является ли рабместо главным
+  BOOL isMain           
+  TPeriod aPeriod
+  IDENT  aWorkPlace     
+  MONEY CurTotal          
+  MONEY Total  
+  DATE aBegDate
+  DATE EndDate
+  IDENT CurrStaff
+  isMain=wp.isMain(CalcCurrWorkingPlace)   
+  CurrStaff=get.wp.empl(CalcCurrWorkingPlace)
+  EndDate=endDateOfPeriod(anEnd)
+  Date wpBeg,wpEnd
+  wpBeg=wpc.begDate(aWorkPlace)
+  wpEnd=get.wp.annihilate.date(aWorkPlace)
+  | Начало обработки
+  Total = totalBeg(CalcCurrWorkingPlace,aKind,periodByDate(aBeg),anEnd)
+  SELECT ld_beg:aBegDate,ld_id:aWorkPlace,ld_znach:CurTotal 
+  FROM  tfzzz072, tfzzz026 | Лицевые данные, Запись протокола расчета, рабочее место
+  WHERE  
+    | Условие по рабочему месту{
+    ( 
+      | Если рабочее место - главное, то выбирать все
+      | глaвные рабочие места данного человека
+      (:isMain<>0 
+       AND 
+        tfzzz026._index4 between 
+          {tfzzz.checkbox.true,:wpBeg}
+          AND
+          {tfzzz.checkbox.true,:wpEnd}
+       AND
+       tfzzz026._index2={:CurrStaff}
+      )
+      OR 
+      | иначе, только заданное рабочее место
+      (tfzzz026._index1={:CalcCurrWorkingPlace})
+    ) 
+    |}
+    AND
+    tfzzz072._index2 between 
+      {tfzzz026.wp_id,:aCode,:aBeg}
+        AND
+        {tfzzz026.wp_id,:aCode,:EndDate}
+    AND
+    ld_ed_iz=tfzzz.ed.iz.ld.summ
+  ORDER BY ld_beg
+  SELECTDO 
+  	aPeriod=periodByDate(aBegDate)
+		| Обработать запись расчетного листка  		                             
+ 		Total = totalAdd(Total,aPeriod,CurTotal)
+  ENDSELECT         
+  | Конец обработки
+  Total = totalEnd(Total)
+  return(Total)
+}
+
+| Обработка премий по коду (Из расчетного листа). Возвращает сумму премий
+| created 25.10.99 (12:03:24) by Max Belugin
+function MONEY processBonusesByCodeCL.old(ContKind aKind,CalcCode aCode,Date aBeg, Period anEnd){
+  | Выяснить, является ли рабместо главным
+  BOOL isMain           
+  Period aPeriod
+  IDENT  aWorkPlace     
+  MONEY CurTotal          
+  MONEY Total
+  isMain=wp.isMain(CalcCurrWorkingPlace)   
+  | Начало обработки
+  Total = totalBeg(CalcCurrWorkingPlace,aKind,periodByDate(aBeg),anEnd)
+  Date wpBeg,wpEnd
+  wpBeg=wpc.begDate(aWorkPlace)
+  wpEnd=get.wp.annihilate.date(aWorkPlace)
+  SELECT rl_id:aWorkPlace,rl_p_v:aPeriod,rl_summa:CurTotal 
+  FROM  tfzzz081, tfzzz076, tfzzz026 | Расчетный листок, Запись протокола расчета, рабочее место
+  WHERE
+    | Связь расчетного листка с протоколом{
+    tfzzz076._index1={rl_id,rl_p_v,rl_rasch}
+    |tfzzz076.ras_grp=rl_id | Связь с протоколом: Рабочее место
+    |AND
+    |tfzzz076.ras_per=rl_p_v | Связь с протоколом: Период
+    |AND
+    |tfzzz076.ras_id=rl_rasch  | Связь с протоколом: ID строки
+    AND                                   
+    | }                        
+    | Условие по рабочему месту{
+    tfzzz081._index4={tfzzz026.wp_id} | rl_id
+    
+    AND
+    ( 
+      | Если рабочее место - главное, то выбирать все
+      | глaвные рабочие места данного человека
+      (:isMain<>0 
+       AND 
+       tfzzz026.wp_vid=tfzzz.checkbox.true
+       AND
+       tfzzz026._index2={:CurrStaff}
+       AND
+       tfzzz026.wp_crdat BETWEEN :wpBeg AND :wpEnd
+      )
+      OR 
+      | иначе, только заданное рабочее место
+      (wp_id=:CalcCurrWorkingPlace)
+    ) 
+    |}
+    AND
+    ras_dat>=:aBeg
+    AND
+    rl_p_v<=:anEnd
+    AND
+    rl_c_n_u=:aCode
+  ORDER BY 
+    rl_p_v
+  SELECTDO 
+		| Обработать запись расчетного листка 
+ 		|message("Премия"&str$(CurTotal)&" период="&str$(aPeriod)) 		                             
+ 		Total = totalAdd(Total,aPeriod,CurTotal)
+  ENDSELECT         
+  | Конец обработки
+  Total = totalEnd(Total)
+  return(Total)
+}
+
+| Обработка премий по коду (Из лицевых данных). Возвращает сумму премий
+| created 25.10.99 (12:03:24) by Max Belugin
+function MONEY processBonusesByCodePersDat.old(ContKind aKind,CalcCode aCode,Date aBeg, Period anEnd){
+  | Выяснить, является ли рабместо главным
+  BOOL isMain           
+  Period aPeriod
+  IDENT  aWorkPlace     
+  MONEY CurTotal          
+  MONEY Total  
+  Date wpBeg,wpEnd,EndDate,aBegDAte
+  wpBeg=wpc.begDate(aWorkPlace)
+  wpEnd=get.wp.annihilate.date(aWorkPlace)
+  EndDate=endDateOfPeriod(anEnd)
+  | Начало обработки        
+
+  Total = totalBeg(CalcCurrWorkingPlace,aKind,periodByDate(aBeg),anEnd)
+  SELECT ld_beg:aBegDate,ld_id:aWorkPlace,ld_znach:CurTotal 
+  FROM  tfzzz072, tfzzz026 | Лицевые данные, Запись протокола расчета, рабочее место
+  WHERE    
+    | Условие по рабочему месту{
+    ld_id=tfzzz026.wp_id
+    AND
+    ld_code=:aCode
+    AND
+    ( 
+      | Если рабочее место - главное, то выбирать все
+      | глaвные рабочие места данного человека
+      (:isMain<>0 
+       AND 
+       tfzzz026.wp_vid=tfzzz.checkbox.true
+       AND
+       tfzzz026._index2={:CurrStaff}
+       AND
+       tfzzz026.wp_crdat BETWEEN :wpBeg AND :wpEnd
+      )
+      OR 
+      | иначе, только заданное рабочее место
+      (wp_id=:CalcCurrWorkingPlace)
+    ) 
+    |}
+    AND
+    ld_beg>=:aBeg
+    AND
+    ld_beg<=:EndDate
+    AND
+    ld_ed_iz=tfzzz.ed.iz.ld.summ
+  ORDER BY ld_beg
+  SELECTDO 
+  	aPeriod=periodByDate(aBegDate)
+		| Обработать запись расчетного листка  		                             
+ 		Total = totalAdd(Total,aPeriod,CurTotal)
+  ENDSELECT         
+  | Конец обработки
+  Total = totalEnd(Total)
+  return(Total)
+}
+
+| Возвращает дату последнего приема на работу
+| created 26.10.99 (11:54:27) by Max Belugin
+function DATE lastAcceptanceDate(){      
+	return(get.last.acceptance(CurrStaff, date.num(), 0))
+}
+           
+
+Money  perTotal
+| Длина периода, число обработанных периодов
+long   perLen,perCount                      
+| Последний обработанный период
+Period perLast,perBeg,perEnd
+
+| рабочее место
+IDENT perWorkPlace
+
+| Начинаем обработку записей с типом вхождения aKind
+| created 27.10.99 (11:48:02) by Max Belugin
+function MONEY totalBeg(IDENT aWorkPlace,ContKind aKind,Period aBeg,Period anEnd){
+	perTotal=0
+	perLen=contKindToLen(aKind)
+	perLast=0
+	perBeg=aBeg
+	perEnd=anEnd    
+	perWorkPlace=aWorkPlace
+	return(0)
+}                                 
+
+| Обработать сумму периода
+| created 26.10.99 (04:30:09) by Max Belugin
+function MONEY totalAdd(MONEY Total,Period aPeriod,MONEY CurTotal){
+  MONEY aResult
+  aResult=Total
+  if isNewPeriod(aPeriod) then
+    if isClusterBegin(aPeriod) then
+    	aResult=totalEnd(Total)
+    	perCount=goodPeriodsCount(perWorkPlace,perBeg,perEnd,aPeriod,perLen)
+    endif                   
+    perLast=aPeriod
+  endif
+  perTotal=perTotal+CurTotal
+  return(aResult)
+} 
+
+| Закончить подсчет суммы 
+| created 26.10.99 (04:30:41) by Max Belugin
+function MONEY totalEnd(MONEY Total){
+	MONEY aResult                             
+	| Новая сумма = Сумма + (Сумма кластера*Число обработанных периодов)/Число периодов в кластере
+	|message("Премия ="&str$(perTotal)&"*"&str$(perCount)&"/"&str$(perLen)&"="&str$(round((perTotal*perCount)/perLen,2,1))) 		                             
+	aResult=Total+round((perTotal*perCount)/perLen,2,1)
+	perTotal=0                        
+	perCount=0
+	return(aResult)
+} 
+
+| Является ли данный период началом периода усреднения      
+| created 27.10.99 (12:25:37) by Max Belugin
+function BOOL isClusterBegin (Period aPeriod){
+	if perLast=0 then 
+		return(true)
+	endif
+  return(clusterNoOf(aPeriod)<>clusterNoOf(perLast))
+}        
+
+| Номер отразка смежных периодов для aPeriod
+function BOOL clusterNoOf (Period aPeriod){
+  return(noOfPeriod(aPeriod-1)/perLen)	
+}
+| Приступаем ли к обработке нового периода?
+| created 27.10.99 (01:17:14) by Max Belugin
+function BOOL isNewPeriod (Period aPeriod){
+  return(perLast<>aPeriod)  
+}
+
+| Количество периодов усреднения по типу вхождения
+| created 27.10.99 (12:04:56) by Max Belugin
+function long contKindToLen(ContKind aKind){
+	on case aKind 
+	  case tfzzz.fl.vhogd.mid.1.3.l:
+	    return(3)
+	  case tfzzz.fl.vhogd.mid.1.12.l:
+	    return(12)
+	  case tfzzz.fl.vhogd.mid.1:
+	    return(1)
+	  case tfzzz.fl.vhogd.mid.1.3:
+	    return(3)
+	  case tfzzz.fl.vhogd.mid.1.12:
+	    return(12)
+	endcase   
+	return(1)
+}
+                      
+| возвращает число включенных в средние периодов
+| для рабместа aWorkPlace, 
+| в отрезке смжных периодов длиной ClusterLength
+| которому принадлежит период aPeriod
+| , рассматриваются только периоды 
+| находящиеся между aBeg и anEnd (включая их)
+| created 01.11.99 (05:00:34) by Max Belugin
+function long goodPeriodsCount (IDENT aWorkPlace, Period aBeg,Period anEnd,Period aPeriod,long ClusterLength){
+	Period aClusterBeg,aClusterEnd
+	aClusterBeg = getClusterBegOf(aPeriod,ClusterLength)
+	aClusterEnd = getClusterEndOf(aPeriod,ClusterLength)
+  if aClusterBeg<aBeg then
+  	aClusterBeg=aBeg
+  endif
+  if aClusterEnd>anEnd then
+  	aClusterEnd=anEnd
+  endif
+	return(includedCount(aWorkPlace,aClusterBeg,aClusterEnd))
+} 
+
+| Возвращает первый месяц отрезка в ClusterLen
+| смежных периодов, в который входит месяц Month
+| created 02.11.99 (11:40:43) by Max Belugin
+function long clusterBegMonthNo(long Month,long ClusterLen){
+	return(((Month-1)/ClusterLen)*ClusterLen+1)
+}            
+  
+| Возвращает последний месяц отрезка в ClusterLen
+| смежных периодов, в который входит месяц Month
+| created 02.11.99 (11:41:37) by Max Belugin
+function long clusterEndMonthNo(long Month,long ClusterLen){
+	return(clusterBegMonthNo(Month,ClusterLen)+ClusterLen-1)
+}
+
+| Возвращает первый период отрезка в ClusterLength
+| смежных периодов, в который входит aPeriod
+| created 01.11.99 (05:18:41) by Max Belugin
+function Period getClusterBegOf(Period aPeriod,long ClusterLength) {
+	long Kind,Year,Month
+	decodePeriod(aPeriod,Kind,Year,Month)
+	Month=clusterBegMonthNo(Month,ClusterLength)
+	return(encodePeriod(Kind,Year,Month))
+} 
+
+| Возвращает последний период отрезка в ClusterLength
+| смежных периодов, в который входит aPeriod
+| created 01.11.99 (05:19:00) by Max Belugin
+function Period getClusterEndOf(Period aPeriod,long ClusterLength) {
+	long Kind,Year,Month
+	decodePeriod(aPeriod,Kind,Year,Month)
+	Month=clusterEndMonthNo(Month,ClusterLength)
+	return(encodePeriod(Kind,Year,Month))
+}             
+
+#define MaxLeaveCount 2000
+long leaves(MaxLeaveCount)
+TmКndCode kinds(MaxLeaveCount)
+long leaves.count
+| Инициализировать список расчитанных больничных 
+|@created
+|  MaxBelugin 26/09/00 15:58:28 
+function extern clcleaves.init(){
+  leaves.count=0
+}               
+| Есть ли пара leave kind в списке расчитанных 
+| больничных
+|@created
+|  MaxBelugin 26/09/00 16:00:13 
+function extern Bool clcleaves.has(long leave,TmКndCode kind){
+  long i
+  for i=1 to leaves.count
+    if leaves(i)=leave and strip$(kinds(i,1))=kind then
+      return(True)
+    endif
+  endfor
+  return(false)
+}
+| Есть ли пара leave kind в списке расчитанных 
+| больничных
+|@created
+|  MaxBelugin 26/09/00 16:00:13 
+function extern Bool clcleaves.haveToCalc(long leave,TmКndCode kind){
+   return(clcleaves.hasLeave(leave) and not clcleaves.has(leave,kind))
+}
+| Есть leave расчитанных 
+| больничных
+|@created
+|  MaxBelugin 26/09/00 16:00:13 
+function extern Bool clcleaves.hasLeave(long leave){
+  long i
+  for i=1 to leaves.count
+    if leaves(i)=leave then
+      return(True)
+    endif
+  endfor
+  return(false)
+}
+| добавить пару leave, kind в список расчитанных 
+| больничных
+|@created
+|  MaxBelugin 26/09/00 16:00:13 
+function extern clcleaves.add(long leave,TmКndCode kind){
+  if not clcleaves.has(leave,kind) then
+    leaves.count=leaves.count+1
+    leaves(leaves.count)=leave
+    kinds(leaves.count,1)=kind
+  endif
+}   
+|  Зарершить работу со списком расчитанных больничных 
+|@created
+|  MaxBelugin 26/09/00 16:03:53 
+function extern clcleaves.done(){
+  leaves.count=0  
+}

@@ -1,0 +1,198 @@
+  0: <span class='def-Comment def-Syntax'>// Dies ist ein Script, um Wetterdaten im "grd" Format su lesen</span>
+  1: <span class='def-Comment def-Syntax'>// und einem Partikel Objekt zuzuweisen</span>
+  2: 
+  3: 
+  4: <span class='def-Keyword'>global</span> <span class='def-Keyword'>proc</span> <span class='def-Keyword'>int</span> getDataWord<span class='def-Symbol'>(</span> <span class='def-Keyword'>int</span> $fid<span class='def-Symbol'>)</span>
+  5: <span class='def-Symbol'>{</span>
+  6: <span class='def-Keyword'>global</span>    <span class='def-Keyword'>int</span>    $readFromOd<span class='def-Symbol'>;</span>
+  7: <span class='def-Keyword'>int</span>    $value<span class='def-Symbol'>;</span>
+  8: 
+  9:     if <span class='def-Symbol'>(</span><span class='def-Symbol'>!</span>$readFromOd<span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+ 10:         fgetword<span class='def-Symbol'>(</span> $fid<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 11:         $readFromOd <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>;</span>
+ 12:     <span class='def-Symbol'>}</span>
+ 13:     $value <span class='def-Symbol'>=</span> fgetword<span class='def-Symbol'>(</span> $fid<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 14:     $readFromOd <span class='def-Symbol'>=</span> <span class='def-Symbol'>(</span>$readFromOd<span class='def-Symbol'>=</span><span class='def-Symbol'>=</span><span class='def-NumberDec def-Number'>8</span> <span class='def-Symbol'>?</span> <span class='def-NumberDec def-Number'>0</span> <span class='def-Symbol'>:</span> $readFromOd<span class='def-Symbol'>+</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 15:     return<span class='def-Symbol'>(</span> $value<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 16: <span class='def-Symbol'>}</span>
+ 17: 
+ 18: <span class='def-Keyword'>global</span> <span class='def-Keyword'>proc</span> wetter<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+ 19: <span class='def-Symbol'>{</span>
+ 20: <span class='def-Keyword'>global</span>    <span class='def-Keyword'>int</span>    $readFromOd<span class='def-Symbol'>;</span>    <span class='def-Comment def-Syntax'>// Anzahl der Worte, die per Pipe von "od"</span>
+ 21:                 <span class='def-Comment def-Syntax'>// gelesen wurden. Jedes 9. wird uebersprungen.</span>
+ 22: 
+ 23: <span class='def-Keyword'>int</span>    $dataWordSize <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>;</span>
+ 24: <span class='def-Keyword'>int</span>    $gridResX <span class='def-Symbol'>=</span> <span class='def-String'>`intFieldGrp -q -v1 wetterRaster`</span><span class='def-Symbol'>;</span>
+ 25: <span class='def-Keyword'>int</span>    $gridResY <span class='def-Symbol'>=</span> <span class='def-String'>`intFieldGrp -q -v2 wetterRaster`</span><span class='def-Symbol'>;</span>
+ 26: <span class='def-Keyword'>int</span>    $dataSlots <span class='def-Symbol'>=</span> <span class='def-String'>`intFieldGrp -q -v1 wetterSlotAnz`</span><span class='def-Symbol'>;</span>
+ 27: <span class='def-Keyword'>int</span>    $dataGroups <span class='def-Symbol'>=</span> <span class='def-String'>`intFieldGrp -q -v1 wetterGrpAnz`</span><span class='def-Symbol'>;</span>
+ 28: 
+ 29: <span class='def-Keyword'>int</span>    $readSlot <span class='def-Symbol'>=</span> <span class='def-String'>`intSliderGrp -q -v wetterReadSlot`</span><span class='def-Symbol'>;</span>        <span class='def-Comment def-Syntax'>// welcher Slot soll gelesen werden</span>
+ 30: <span class='def-Keyword'>int</span>    $readDataGroup <span class='def-Symbol'>=</span> <span class='def-String'>`intSliderGrp -q -v wetterReadGrp`</span> <span class='def-Symbol'>-</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>;</span>    <span class='def-Comment def-Syntax'>// welche Datengruppe soll gelesen werden</span>
+ 31: 
+ 32: <span class='def-Keyword'>int</span>    $dSlotSize <span class='def-Symbol'>=</span> $dataWordSize <span class='def-Symbol'>*</span> $gridResX <span class='def-Symbol'>*</span> $gridResY<span class='def-Symbol'>;</span>
+ 33: <span class='def-Keyword'>int</span>    $dGroupSize <span class='def-Symbol'>=</span> $dSlotSize <span class='def-Symbol'>*</span> $dataSlots<span class='def-Symbol'>;</span>
+ 34: <span class='def-Keyword'>int</span>    $readOffset <span class='def-Symbol'>=</span> $readDataGroup <span class='def-Symbol'>*</span> $dGroupSize <span class='def-Symbol'>+</span> $readSlot <span class='def-Symbol'>*</span> $dSlotSize<span class='def-Symbol'>;</span>
+ 35: 
+ 36: <span class='def-Keyword'>float</span>    $pSpacing <span class='def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>.1</span><span class='def-Symbol'>;</span>        <span class='def-Comment def-Syntax'>// Spacing fuer das Partikel Objekt</span>
+ 37: 
+ 38: <span class='def-Keyword'>string</span>    $dataFile <span class='def-Symbol'>=</span> <span class='def-String'>`textFieldButtonGrp -q -text wetterDataFile`</span><span class='def-Symbol'>;</span>
+ 39: 
+ 40: <span class='def-Keyword'>string</span>    $pipeCmd <span class='def-Symbol'>=</span> <span class='def-String'>"od -v -s "</span> <span class='def-Symbol'>+</span> $dataFile <span class='def-Symbol'>+</span> <span class='def-String'>" "</span> <span class='def-Symbol'>+</span> $readOffset <span class='def-Symbol'>+</span> <span class='def-String'>"."</span><span class='def-Symbol'>;</span>
+ 41: 
+ 42: <span class='def-Keyword'>float</span>    $pLX <span class='def-Symbol'>=</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>$gridResX <span class='def-Symbol'>*</span> $pSpacing<span class='def-Symbol'>)</span> <span class='def-Symbol'>-</span> $pSpacing<span class='def-Symbol'>)</span> <span class='def-Symbol'>/</span> <span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>;</span>
+ 43: <span class='def-Keyword'>float</span>    $pLY <span class='def-Symbol'>=</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>$gridResY <span class='def-Symbol'>*</span> $pSpacing<span class='def-Symbol'>)</span> <span class='def-Symbol'>-</span> $pSpacing<span class='def-Symbol'>)</span> <span class='def-Symbol'>/</span> <span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>;</span>
+ 44: 
+ 45: <span class='def-Comment def-Syntax'>// Entsprechendes Partikel Objekt herstellen</span>
+ 46: 
+ 47: <span class='def-Keyword'>string</span> $pObjectName<span class='def-Symbol'>[</span><span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span> <span class='def-String'>`particle -grs $pSpacing -ll (-$pLX) 0 (-$pLY) -ur $pLX 0 $pLY`</span><span class='def-Symbol'>;</span>
+ 48: addAttr <span class='def-Symbol'>-</span>ln <span class='def-String'>"rgbPP"</span> <span class='def-Symbol'>-</span>dt vectorArray $pObjectName<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>]</span><span class='def-Symbol'>;</span>
+ 49: addAttr <span class='def-Symbol'>-</span>ci true <span class='def-Symbol'>-</span>ln <span class='def-String'>"rgbVPP0"</span> <span class='def-Symbol'>-</span>sn <span class='def-String'>"rgbVPP0"</span> <span class='def-Symbol'>-</span>dt <span class='def-String'>"doubleArray"</span> $pObjectName<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>]</span><span class='def-Symbol'>;</span>
+ 50: 
+ 51: <span class='def-Keyword'>string</span> $arrayMapNode <span class='def-Symbol'>=</span> <span class='def-String'>`arrayMapper -target $pObjectName[1] -destAttr rgbPP -inputV rgbVPP0 -type ramp`</span><span class='def-Symbol'>;</span>
+ 52: 
+ 53: $readFromOd <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>;</span>
+ 54: <span class='def-Keyword'>int</span> $fid <span class='def-Symbol'>=</span> popen<span class='def-Symbol'>(</span> $pipeCmd<span class='def-Symbol'>,</span> <span class='def-String'>"r"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 55: <span class='def-Keyword'>int</span> $dSlotWords <span class='def-Symbol'>=</span> $gridResX <span class='def-Symbol'>*</span> $gridResY<span class='def-Symbol'>;</span>
+ 56: <span class='def-Comment def-Syntax'>//int $dSlotWords = 1000;</span>
+ 57: <span class='def-Keyword'>float</span>    $value<span class='def-Symbol'>[</span><span class='def-Symbol'>]</span><span class='def-Symbol'>;</span>
+ 58: <span class='def-Keyword'>float</span>    $minVal <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1000</span><span class='def-Symbol'>;</span>
+ 59: <span class='def-Keyword'>float</span>    $maxVal <span class='def-Symbol'>=</span> <span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>1000</span><span class='def-Symbol'>;</span>
+ 60: <span class='def-Keyword'>float</span>    $q<span class='def-Symbol'>;</span>
+ 61: <span class='def-Keyword'>string</span> $xxx<span class='def-Symbol'>;</span>
+ 62: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span><span class='def-String'>"Anfang Lesen ... "</span> <span class='def-Symbol'>+</span> `system<span class='def-Symbol'>(</span> <span class='def-String'>"date"</span><span class='def-Symbol'>)</span>` <span class='def-Symbol'>+</span> <span class='def-String'>"\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 63: 
+ 64: for <span class='def-Symbol'>(</span> $i<span class='def-Symbol'>=</span><span class='def-NumberDec def-Number'>0</span> <span class='def-Symbol'>;</span> $i<span class='def-Symbol'>&lt;</span>$dSlotWords <span class='def-Symbol'>;</span> $i<span class='def-Symbol'>+</span><span class='def-Symbol'>+</span> <span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+ 65:     $value<span class='def-Symbol'>[</span>$i<span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span> getDataWord<span class='def-Symbol'>(</span> $fid<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 66: $maxVal <span class='def-Symbol'>=</span> max<span class='def-Symbol'>(</span> $maxVal<span class='def-Symbol'>,</span> $value<span class='def-Symbol'>[</span>$i<span class='def-Symbol'>]</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 67: $minVal <span class='def-Symbol'>=</span> min<span class='def-Symbol'>(</span> $minVal<span class='def-Symbol'>,</span> $value<span class='def-Symbol'>[</span>$i<span class='def-Symbol'>]</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 68: <span class='def-Symbol'>}</span>
+ 69: pclose<span class='def-Symbol'>(</span> $fid<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 70: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span><span class='def-String'>"Ende Lesen ... "</span> <span class='def-Symbol'>+</span> `system<span class='def-Symbol'>(</span> <span class='def-String'>"date"</span><span class='def-Symbol'>)</span>` <span class='def-Symbol'>+</span> <span class='def-String'>"\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 71: 
+ 72: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span> <span class='def-String'>"Min Temp: "</span> <span class='def-Symbol'>+</span> $minVal <span class='def-Symbol'>+</span> <span class='def-String'>"\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 73: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span> <span class='def-String'>"Max Temp: "</span> <span class='def-Symbol'>+</span> $maxVal <span class='def-Symbol'>+</span> <span class='def-String'>"\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 74: $v <span class='def-Symbol'>=</span> <span class='def-Symbol'>(</span>$maxVal<span class='def-Symbol'>-</span>$minVal<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 75: for <span class='def-Symbol'>(</span> $i<span class='def-Symbol'>=</span><span class='def-NumberDec def-Number'>0</span> <span class='def-Symbol'>;</span> $i<span class='def-Symbol'>&lt;</span>$dSlotWords <span class='def-Symbol'>;</span> $i<span class='def-Symbol'>+</span><span class='def-Symbol'>+</span> <span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+ 76: $q <span class='def-Symbol'>=</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>$value<span class='def-Symbol'>[</span>$i<span class='def-Symbol'>]</span><span class='def-Symbol'>-</span>$minVal<span class='def-Symbol'>)</span><span class='def-Symbol'>/</span>$v<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 77: $xxx <span class='def-Symbol'>+</span><span class='def-Symbol'>=</span> <span class='def-String'>" "</span> <span class='def-Symbol'>+</span> $q<span class='def-Symbol'>;</span>
+ 78: <span class='def-Symbol'>}</span>
+ 79: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span><span class='def-String'>"Ende Konvertieren ... "</span> <span class='def-Symbol'>+</span> `system<span class='def-Symbol'>(</span> <span class='def-String'>"date"</span><span class='def-Symbol'>)</span>` <span class='def-Symbol'>+</span> <span class='def-String'>"\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 80: select <span class='def-Symbol'>-</span>r $pObjectName<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>]</span><span class='def-Symbol'>;</span>
+ 81: 
+ 82: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span> $dSlotWords <span class='def-Symbol'>+</span> <span class='def-String'>" Elemente\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 83: $tmp <span class='def-Symbol'>=</span> <span class='def-String'>"setAttr \".rgbVPP0\" -type \"doubleArray\" "</span> <span class='def-Symbol'>+</span> $dSlotWords <span class='def-Symbol'>+</span> $xxx<span class='def-Symbol'>;</span>
+ 84: eval<span class='def-Symbol'>(</span> $tmp<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 85: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span><span class='def-String'>"Ende zuweisen ... "</span> <span class='def-Symbol'>+</span> `system<span class='def-Symbol'>(</span> <span class='def-String'>"date"</span><span class='def-Symbol'>)</span>` <span class='def-Symbol'>+</span> <span class='def-String'>"\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 86: 
+ 87: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span> <span class='def-String'>"Min Temp: "</span> <span class='def-Symbol'>+</span> $minVal <span class='def-Symbol'>+</span> <span class='def-String'>"\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 88: <span class='def-Keyword'>print</span><span class='def-Symbol'>(</span> <span class='def-String'>"Max Temp: "</span> <span class='def-Symbol'>+</span> $maxVal <span class='def-Symbol'>+</span> <span class='def-String'>"\n"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 89: 
+ 90: <span class='def-Symbol'>}</span>
+ 91: 
+ 92: 
+ 93: <span class='def-Keyword'>global</span> <span class='def-Keyword'>proc</span> wetterFenster<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+ 94: <span class='def-Symbol'>{</span>
+ 95: 
+ 96:     if <span class='def-Symbol'>(</span><span class='def-String'>`window -exists wFenster`</span><span class='def-Symbol'>)</span> deleteUI wFenster<span class='def-Symbol'>;</span>
+ 97: 
+ 98:     window <span class='def-Symbol'>-</span>t <span class='def-String'>"Wetter Daten"</span> wFenster<span class='def-Symbol'>;</span>
+ 99:         columnLayout<span class='def-Symbol'>;</span>
+100:             separator <span class='def-Symbol'>-</span>h <span class='def-NumberDec def-Number'>10</span><span class='def-Symbol'>;</span>
+101:             intFieldGrp <span class='def-Symbol'>-</span>numberOfFields <span class='def-NumberDec def-Number'>2</span>
+102:                 <span class='def-Symbol'>-</span>label <span class='def-String'>"Raster"</span>
+103:                 <span class='def-Symbol'>-</span>v1 <span class='def-NumberDec def-Number'>109</span>
+104:                 <span class='def-Symbol'>-</span>v2 <span class='def-NumberDec def-Number'>109</span>
+105:                 wetterRaster<span class='def-Symbol'>;</span>
+106:             intFieldGrp <span class='def-Symbol'>-</span>numberOfFields <span class='def-NumberDec def-Number'>1</span>
+107:                 <span class='def-Symbol'>-</span>label <span class='def-String'>"Anzahl Gruppen"</span>
+108:                 <span class='def-Symbol'>-</span>v1 <span class='def-NumberDec def-Number'>7</span>
+109:                 <span class='def-Symbol'>-</span>cc <span class='def-String'>"wetterUpdateEnables"</span>
+110:                 wetterGrpAnz<span class='def-Symbol'>;</span>
+111:             intFieldGrp <span class='def-Symbol'>-</span>numberOfFields <span class='def-NumberDec def-Number'>1</span>
+112:                 <span class='def-Symbol'>-</span>label <span class='def-String'>"Anzahl Slots"</span>
+113:                 <span class='def-Symbol'>-</span>v1 <span class='def-NumberDec def-Number'>49</span>
+114:                 <span class='def-Symbol'>-</span>cc <span class='def-String'>"wetterUpdateEnables"</span>
+115:                 wetterSlotAnz<span class='def-Symbol'>;</span>
+116:             textFieldButtonGrp
+117:                 <span class='def-Symbol'>-</span>label <span class='def-String'>"Daten File"</span>
+118:                 <span class='def-Symbol'>-</span>text <span class='def-String'>"WETTER/dm3mo.dat"</span>
+119:                 <span class='def-Symbol'>-</span>buttonLabel <span class='def-String'>"Browse..."</span>
+120:                 <span class='def-Symbol'>-</span>buttonCommand <span class='def-String'>"wetterFileBrowse"</span>
+121:                 wetterDataFile<span class='def-Symbol'>;</span>
+122:             separator <span class='def-Symbol'>-</span>h <span class='def-NumberDec def-Number'>20</span><span class='def-Symbol'>;</span>
+123:             intSliderGrp
+124:                 <span class='def-Symbol'>-</span>label <span class='def-String'>"Lese Gruppe .."</span>
+125:                 <span class='def-Symbol'>-</span>field true
+126:                 <span class='def-Symbol'>-</span>value <span class='def-NumberDec def-Number'>1</span>
+127:                 <span class='def-Symbol'>-</span>min <span class='def-NumberDec def-Number'>1</span>
+128:                 <span class='def-Symbol'>-</span>max <span class='def-NumberDec def-Number'>1</span>
+129:                 wetterReadGrp<span class='def-Symbol'>;</span>
+130:             intSliderGrp
+131:                 <span class='def-Symbol'>-</span>label <span class='def-String'>"Slot"</span>
+132:                 <span class='def-Symbol'>-</span>field true
+133:                 <span class='def-Symbol'>-</span>value <span class='def-NumberDec def-Number'>49</span>
+134:                 <span class='def-Symbol'>-</span>min <span class='def-NumberDec def-Number'>1</span>
+135:                 <span class='def-Symbol'>-</span>max <span class='def-NumberDec def-Number'>1</span>
+136:                 wetterReadSlot<span class='def-Symbol'>;</span>
+137:             separator <span class='def-Symbol'>-</span>h <span class='def-NumberDec def-Number'>20</span><span class='def-Symbol'>;</span>
+138:         <span class='def-Keyword'>setParent</span> <span class='def-Symbol'>.</span><span class='def-Symbol'>.</span><span class='def-Symbol'>;</span>
+139:         rowLayout <span class='def-Symbol'>-</span>numberOfColumns <span class='def-NumberDec def-Number'>2</span>
+140:             <span class='def-Symbol'>-</span>columnAttach <span class='def-NumberDec def-Number'>1</span> <span class='def-String'>"left"</span> <span class='def-NumberDec def-Number'>20</span>
+141:             <span class='def-Symbol'>-</span>columnAttach <span class='def-NumberDec def-Number'>2</span> <span class='def-String'>"left"</span> <span class='def-NumberDec def-Number'>240</span>
+142:             <span class='def-Symbol'>-</span>width <span class='def-NumberDec def-Number'>600</span><span class='def-Symbol'>;</span>
+143:             button
+144:                 <span class='def-Symbol'>-</span>align <span class='def-String'>"center"</span>
+145:                 <span class='def-Symbol'>-</span>l <span class='def-String'>"Load Data"</span>
+146:                 <span class='def-Symbol'>-</span>c <span class='def-String'>"wetter"</span>
+147:                 <span class='def-Symbol'>-</span>w <span class='def-NumberDec def-Number'>100</span>
+148:                 wetterGoButton<span class='def-Symbol'>;</span>
+149:             button
+150:                 <span class='def-Symbol'>-</span>align <span class='def-String'>"center"</span>
+151:                 <span class='def-Symbol'>-</span>l <span class='def-String'>"Cancel"</span>
+152:                 <span class='def-Symbol'>-</span>c <span class='def-String'>"wetterExit"</span>
+153:                 <span class='def-Symbol'>-</span>w <span class='def-NumberDec def-Number'>100</span>
+154:                 wetterExitButton<span class='def-Symbol'>;</span>
+155: 
+156: 
+157:     wetterUpdateEnables<span class='def-Symbol'>;</span>
+158:     showWindow<span class='def-Symbol'>;</span>
+159: <span class='def-Symbol'>}</span>
+160: 
+161: <span class='def-Keyword'>global</span> <span class='def-Keyword'>proc</span> wetterUpdateEnables<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+162: <span class='def-Symbol'>{</span>
+163: <span class='def-Keyword'>int</span>    $v<span class='def-Symbol'>;</span>
+164:     if <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>$v <span class='def-Symbol'>=</span> <span class='def-String'>`intFieldGrp -q -v1 wetterGrpAnz`</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+165:         intSliderGrp <span class='def-Symbol'>-</span>e <span class='def-Symbol'>-</span>en true <span class='def-Symbol'>-</span>max $v wetterReadGrp<span class='def-Symbol'>;</span>
+166:         if <span class='def-Symbol'>(</span>$v <span class='def-Symbol'>&lt;</span> <span class='def-String'>`intSliderGrp -q -v wetterReadGrp`</span><span class='def-Symbol'>)</span>
+167:             intSliderGrp <span class='def-Symbol'>-</span>e <span class='def-Symbol'>-</span>v $v wetterReadGrp<span class='def-Symbol'>;</span>
+168:     <span class='def-Symbol'>}</span> else
+169:         intSliderGrp <span class='def-Symbol'>-</span>e <span class='def-Symbol'>-</span>en false <span class='def-Symbol'>-</span>max <span class='def-NumberDec def-Number'>1</span> wetterReadGrp<span class='def-Symbol'>;</span>
+170: 
+171:     if <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>$v <span class='def-Symbol'>=</span> <span class='def-String'>`intFieldGrp -q -v1 wetterSlotAnz`</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+172:         intSliderGrp <span class='def-Symbol'>-</span>e <span class='def-Symbol'>-</span>en true <span class='def-Symbol'>-</span>max $v wetterReadSlot<span class='def-Symbol'>;</span>
+173:         if <span class='def-Symbol'>(</span>$v <span class='def-Symbol'>&lt;</span> <span class='def-String'>`intSliderGrp -q -v wetterReadSlot`</span><span class='def-Symbol'>)</span>
+174:             intSliderGrp <span class='def-Symbol'>-</span>e <span class='def-Symbol'>-</span>v $v wetterReadSlot<span class='def-Symbol'>;</span>
+175:     <span class='def-Symbol'>}</span> else
+176:         intSliderGrp <span class='def-Symbol'>-</span>e <span class='def-Symbol'>-</span>en false <span class='def-Symbol'>-</span>max <span class='def-NumberDec def-Number'>1</span> wetterReadSlot<span class='def-Symbol'>;</span>
+177: <span class='def-Symbol'>}</span>
+178: 
+179: <span class='def-Keyword'>global</span> <span class='def-Keyword'>proc</span> wetterFileBrowse<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+180: <span class='def-Symbol'>{</span>
+181: <span class='def-Keyword'>string</span>    $wDataName<span class='def-Symbol'>;</span>
+182:     $wDataName <span class='def-Symbol'>=</span> <span class='def-String'>`fileDialog`</span><span class='def-Symbol'>;</span>
+183:     textFieldButtonGrp <span class='def-Symbol'>-</span>e <span class='def-Symbol'>-</span>text $wDataName wetterDataFile<span class='def-Symbol'>;</span>
+184: <span class='def-Comment def-Syntax'>//    fileBrowser( "wetterSetDataFile", "Set Name", "", 0);</span>
+185: <span class='def-Symbol'>}</span>
+186: 
+187: <span class='def-Keyword'>global</span> <span class='def-Keyword'>proc</span> <span class='def-Keyword'>int</span> wetterSetDataFile<span class='def-Symbol'>(</span> <span class='def-Keyword'>string</span> $wetterDataFile<span class='def-Symbol'>,</span> <span class='def-Keyword'>string</span> $wetterMode<span class='def-Symbol'>)</span>
+188: <span class='def-Symbol'>{</span>
+189:     textFieldButtonGrp <span class='def-Symbol'>-</span>e <span class='def-Symbol'>-</span>text $wetterDataFile wetterDataFile<span class='def-Symbol'>;</span>
+190:     return true<span class='def-Symbol'>;</span>
+191: <span class='def-Symbol'>}</span>
+192: 
+193: <span class='def-Keyword'>global</span> <span class='def-Keyword'>proc</span> wetterExit<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+194: <span class='def-Symbol'>{</span>
+195:     deleteUI wFenster<span class='def-Symbol'>;</span>
+196: <span class='def-Symbol'>}</span>
+197: 

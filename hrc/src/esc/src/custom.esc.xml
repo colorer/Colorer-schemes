@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+ <custom-type targetNamespace="uri:esc">
+  <prefix>esc</prefix>
+  <empty-prefix/>
+  <contributors>Eugene Efremov</contributors>
+
+  <outline>
+   <element name='type' extract='withAttribute' description='type setting'/>
+  </outline>
+  
+  <script-n-style>
+  	<attribute language="far" scheme-suffix="Macro"/>
+  </script-n-style>
+
+  <type xmlns="http://colorer.sf.net/2003/hrc">
+
+   <!-- xmlss support -->
+   <scheme name="farmacro-content">
+    <inherit scheme="xmlss-far-Macro-attr"/>
+   </scheme>
+   
+   <!-- TODO: fix xsd for remove 'errors' schemes... -->
+   <scheme name="farmacro-content-error">
+    <inherit scheme="farmacro-content"/>
+   </scheme>
+
+   <scheme name="farmask-content">
+    <regexp match="/abstract/" region="Enumeration"/>
+    <inherit scheme="far:mask.string"/>
+    <inherit scheme="farmask-content-old"/>
+   </scheme>
+   <scheme name="farmask-content-error">
+    <inherit scheme="farmask-content"/>
+   </scheme>
+
+   <scheme name="farkey-content">
+    <inherit scheme="far:macro.keys"/>
+   </scheme>
+
+   <scheme name="include-string-content">
+    <inherit scheme="def:Path"/>
+    <inherit scheme="include-string-content-old"/>
+   </scheme>
+   <scheme name="include-string-content-error">
+    <inherit scheme="include-string-content"/>
+   </scheme>
+
+   <scheme name="nurber-pres-content"><!--
+    Warning: RE pattern used. Possible compatibility faults
+    Original RE: \d{1,3}%?-->
+    <regexp region="def:Number" region1="def:NumberSuffix"
+     match="/\d{1,3}(\%?)/"/>
+   </scheme>
+
+  </type>
+ </custom-type>
+</custom>

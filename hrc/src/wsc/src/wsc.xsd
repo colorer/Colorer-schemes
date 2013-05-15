@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="uri:wsc"
+    targetNamespace="uri:wsc" elementFormDefault="qualified">
+
+<xs:annotation><xs:documentation><![CDATA[
+    Windows Script Components (*.wsc) schema. 
+    Written for colorer.take5.
+    File version 1.1
+    
+    (c) Eugene Efremov <4mirror@mail.ru>, 2005
+]]></xs:documentation></xs:annotation>
+
+
+<!-- typedefs -->
+<xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+        <xs:whiteSpace value="collapse"/>
+        <xs:pattern value="\{[\dA-Fa-f-]+\}"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="classid">
+    <xs:restriction base="xs:string">
+        <xs:whiteSpace value="collapse"/>
+        <xs:pattern value="clsid:[\dA-Fa-f-]+"/>
+    </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="eventname">
+    <xs:restriction base="xs:string">
+        <xs:whiteSpace value="collapse"/>
+        <xs:pattern value="\w+"/>
+    </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name="progid">
+    <xs:restriction base="xs:string">
+        <xs:whiteSpace value="collapse"/>
+        <xs:pattern value="\w[\w\d._]*"/>
+    </xs:restriction>
+</xs:simpleType>
+
+
+<!-- public/*/* -->
+
+<xs:complexType name="paramContent">
+    <xs:attribute name="name" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="propContent">
+    <xs:attribute name="internalName" type="xs:string"/>
+</xs:complexType>
+
+<!-- public/* -->
+
+
+<xs:element name="event">
+    <xs:complexType>
+        <xs:attribute name="name" type="eventname" use="required"/>
+        <xs:attribute name="dispid" type="xs:integer"/>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="property">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="get" type="propContent"/>
+            <xs:element name="put" type="propContent"/>
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="internalName" type="xs:string"/>
+        <xs:attribute name="dispid" type="xs:integer"/>
+        <xs:attribute name="get" type="xs:string"/>
+        <xs:attribute name="put" type="xs:string"/>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="method">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="parameter" type="paramContent"/>
+        </xs:sequence>
+
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="internalName" type="xs:string"/>
+        <xs:attribute name="dispid" type="xs:integer"/>
+    </xs:complexType>
+</xs:element>
+
+
+
+<!-- component/* -->
+
+<xs:element name="script">
+    <xs:complexType>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="language" type="xs:string" use="required"/>
+                <xs:attribute name="src" type="xs:anyURI"/>
+                <xs:attribute name="id" type="xs:ID"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="resource">
+    <xs:complexType>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:ID" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="reference">
+    <xs:complexType>
+        <xs:attribute name="object" type="progid"/>
+        <xs:attribute name="guid" type="guid"/>
+        <xs:attribute name="version" type="xs:float"/>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="object">
+    <xs:complexType>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="progid" type="progid"/>
+        <xs:attribute name="classid" type="classid"/>
+        <xs:attribute name="events" type="xs:boolean"/>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="implements">
+    <xs:complexType>
+        <xs:sequence>
+            <!--xs:element ref="script"/-->
+            <xs:element name="layout">
+                <xs:complexType mixed="true">
+                    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                        <xs:any processContents="lax"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="attach">
+                <xs:complexType>
+                    <xs:attribute name="event" type="eventname" use="required"/>
+                    <xs:attribute name="handler" type="xs:string" use="required"/>
+                    <xs:attribute name="for" type="xs:token"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="event"/>
+            <xs:element ref="comment"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="type" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ASP"/>
+                    <xs:enumeration value="Behavior"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="public">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="method"/>
+            <xs:element ref="property"/>
+            <xs:element ref="event"/>
+            <xs:element ref="comment"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="registration">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="script"/>
+            <xs:element ref="comment"/>
+        </xs:sequence>
+
+        <xs:attribute name="progid" type="progid"/>
+        <xs:attribute name="classid" type="guid"/>
+        <xs:attribute name="description" type="xs:string"/>
+        <xs:attribute name="version" type="xs:decimal"/>
+        <xs:attribute name="remotable" type="xs:boolean"/>
+    </xs:complexType>
+</xs:element>
+
+
+<!-- first level -->
+
+<xs:element name="component">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="registration" minOccurs="0"/>
+            <xs:element ref="public"/>
+            <xs:element ref="script" maxOccurs="unbounded"/>
+            <xs:element ref="implements"/>
+            <xs:element ref="reference"/>
+            <xs:element ref="object"/>
+            <xs:element ref="resource"/>
+            <xs:element ref="comment"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+    </xs:complexType>
+</xs:element>
+
+
+<xs:element name="package">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="component" maxOccurs="unbounded"/>
+            <xs:element ref="comment"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="comment" type="xs:string"/>
+
+</xs:schema>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+  <custom-type targetNamespace="">
+
+<!--
+    <prefix>db</prefix>
+    <prefix>dbk</prefix>
+    <empty-prefix/>
+-->
+
+    <top-level>
+      <element>book</element>
+      <element>set</element>
+      <element>part</element>
+      <element>article</element>
+      <element>appendix</element>
+      <element>bibliography</element>
+      <element>glossary</element>
+      <element>chapter</element>
+      <element>toc</element>
+      <element>section</element>
+    </top-level>
+
+    <outline>
+      <element name='book' extract='withAttribute' description='Docbook book'/>
+      <element name='set' extract='withAttribute' description='Docbook set'/>
+      <element name='part' extract='withAttribute' description='Docbook part'/>
+      <element name='article' extract='withAttribute' description='Docbook article'/>
+      <element name='appendix' extract='withAttribute' description='Docbook appendix'/>
+      <element name='bibliography' extract='withAttribute' description='Docbook bibliography'/>
+      <element name='glossary' extract='withAttribute' description='Docbook glossary'/>
+      <element name='chapter' extract='withAttribute' description='Docbook chapter'/>
+      <element name='toc' extract='withAttribute' description='Docbook toc'/>
+      <element name='section' extract='withAttribute' description='Docbook section'/>
+      <element name='sect1' extract='fullElement' description='Docbook section1'/>
+      <element name='sect2' extract='fullElement' description='Docbook section2'/>
+      <element name='example' extract='fullElement' description='Docbook Example'/>
+    </outline>
+
+  </custom-type>
+
+</custom>

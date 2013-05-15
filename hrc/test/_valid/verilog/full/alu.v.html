@@ -1,0 +1,88 @@
+ 0: 
+ 1: <span class='verilog-verComment def-Comment def-Syntax'>/* ***********************************************************************</span>
+ 2: <span class='verilog-verComment def-Comment def-Syntax'>  The Free IP Project</span>
+ 3: <span class='verilog-verComment def-Comment def-Syntax'>  Free-RISC8 -- Verilog 8-bit Microcontroller</span>
+ 4: <span class='verilog-verComment def-Comment def-Syntax'>  (c) 1999, The Free IP Project and Thomas Coonan</span>
+ 5: <span class='verilog-verComment def-Comment def-Syntax'></span>
+ 6: <span class='verilog-verComment def-Comment def-Syntax'></span>
+ 7: <span class='verilog-verComment def-Comment def-Syntax'>  FREE IP GENERAL PUBLIC LICENSE</span>
+ 8: <span class='verilog-verComment def-Comment def-Syntax'>  TERMS AND CONDITIONS FOR USE, COPYING, DISTRIBUTION, AND MODIFICATION</span>
+ 9: <span class='verilog-verComment def-Comment def-Syntax'></span>
+10: <span class='verilog-verComment def-Comment def-Syntax'>  1.  You may copy and distribute verbatim copies of this core, as long</span>
+11: <span class='verilog-verComment def-Comment def-Syntax'>      as this file, and the other associated files, remain intact and</span>
+12: <span class='verilog-verComment def-Comment def-Syntax'>      unmodified.  Modifications are outlined below.  </span>
+13: <span class='verilog-verComment def-Comment def-Syntax'>  2.  You may use this core in any way, be it academic, commercial, or</span>
+14: <span class='verilog-verComment def-Comment def-Syntax'>      military.  Modified or not.  </span>
+15: <span class='verilog-verComment def-Comment def-Syntax'>  3.  Distribution of this core must be free of charge.  Charging is</span>
+16: <span class='verilog-verComment def-Comment def-Syntax'>      allowed only for value added services.  Value added services</span>
+17: <span class='verilog-verComment def-Comment def-Syntax'>      would include copying fees, modifications, customizations, and</span>
+18: <span class='verilog-verComment def-Comment def-Syntax'>      inclusion in other products.</span>
+19: <span class='verilog-verComment def-Comment def-Syntax'>  4.  If a modified source code is distributed, the original unmodified</span>
+20: <span class='verilog-verComment def-Comment def-Syntax'>      source code must also be included (or a link to the Free IP web</span>
+21: <span class='verilog-verComment def-Comment def-Syntax'>      site).  In the modified source code there must be clear</span>
+22: <span class='verilog-verComment def-Comment def-Syntax'>      identification of the modified version.</span>
+23: <span class='verilog-verComment def-Comment def-Syntax'>  5.  Visit the Free IP web site for additional information.</span>
+24: <span class='verilog-verComment def-Comment def-Syntax'>      </span><span class='def-URL def-URI'>http://www.free-ip.com</span><span class='verilog-verComment def-Comment def-Syntax'></span>
+25: <span class='verilog-verComment def-Comment def-Syntax'></span>
+26: <span class='verilog-verComment def-Comment def-Syntax'>*********************************************************************** */</span>
+27: <span class='verilog-verWord def-Keyword'>module alu</span> <span class='def-Symbol'>(</span>
+28:    op<span class='verilog-verSymb def-Symbol'>,</span>
+29:    a<span class='verilog-verSymb def-Symbol'>,</span>
+30:    b<span class='verilog-verSymb def-Symbol'>,</span>
+31:    y<span class='verilog-verSymb def-Symbol'>,</span>
+32:    cin<span class='verilog-verSymb def-Symbol'>,</span>
+33:    cout<span class='verilog-verSymb def-Symbol'>,</span>
+34:    zout
+35: <span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+36: 
+37: <span class='def-Keyword'>input</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>3</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    op<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// ALU Operation</span>
+38: <span class='def-Keyword'>input</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    a<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// 8-bit Input a</span>
+39: <span class='def-Keyword'>input</span>  <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    b<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// 8-bit Input b</span>
+40: <span class='def-Keyword'>output</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    y<span class='def-Keyword'>;</span>    <span class='def-Comment def-Syntax'>// 8-bit Output</span>
+41: <span class='def-Keyword'>input</span>        cin<span class='def-Keyword'>;</span>
+42: <span class='def-Keyword'>output</span>        cout<span class='def-Keyword'>;</span>
+43: <span class='def-Keyword'>output</span>        zout<span class='def-Keyword'>;</span>
+44: 
+45: <span class='def-Comment def-Syntax'>// Reg declarations for outputs</span>
+46: <span class='def-Keyword'>reg</span>        cout<span class='def-Keyword'>;</span>
+47: <span class='def-Keyword'>reg</span>        zout<span class='def-Keyword'>;</span>
+48: <span class='def-Keyword'>reg</span> <span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>7</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span>    y<span class='def-Keyword'>;</span>
+49: 
+50: <span class='def-Comment def-Syntax'>// Internal declarations</span>
+51: <span class='def-Keyword'>reg</span>        addercout<span class='def-Keyword'>;</span> <span class='def-Comment def-Syntax'>// Carry out straight from the adder itself.</span>
+52:  
+53: <span class='def-Keyword'>parameter</span> ALUOP_ADD  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0000</span><span class='def-Keyword'>;</span>
+54: <span class='def-Keyword'>parameter</span> ALUOP_SUB  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b1000</span><span class='def-Keyword'>;</span>
+55: <span class='def-Keyword'>parameter</span> ALUOP_AND  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0001</span><span class='def-Keyword'>;</span>
+56: <span class='def-Keyword'>parameter</span> ALUOP_OR   <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0010</span><span class='def-Keyword'>;</span>
+57: <span class='def-Keyword'>parameter</span> ALUOP_XOR  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0011</span><span class='def-Keyword'>;</span>
+58: <span class='def-Keyword'>parameter</span> ALUOP_COM  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0100</span><span class='def-Keyword'>;</span>
+59: <span class='def-Keyword'>parameter</span> ALUOP_ROR  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0101</span><span class='def-Keyword'>;</span>
+60: <span class='def-Keyword'>parameter</span> ALUOP_ROL  <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0110</span><span class='def-Keyword'>;</span>
+61: <span class='def-Keyword'>parameter</span> ALUOP_SWAP <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>4'b0111</span><span class='def-Keyword'>;</span>
+62: 
+63: 
+64: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>a or b or cin or op</span>) <span class='def-Keyword'>begin</span>
+65:    <span class='def-Keyword'>case</span> <span class='verilog-verWord def-Keyword'>(</span>op<span class='verilog-verWord def-Keyword'>)</span> <span class='def-Comment def-Syntax'>// synopsys parallel_case</span>
+66:       ALUOP_ADD<span class='verilog-verWord def-Keyword'>:</span>  <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = a + b<span class='verilog-verWord def-Keyword'>;</span>
+67:       ALUOP_SUB<span class='verilog-verWord def-Keyword'>:</span>  <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = a - b<span class='verilog-verWord def-Keyword'>;</span> <span class='def-Comment def-Syntax'>// Carry out is really "borrow"</span>
+68:       ALUOP_AND<span class='verilog-verWord def-Keyword'>:</span>  <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = <span class='verilog-verWord def-Keyword'>{</span><span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verWord def-Keyword'>,</span> a &amp; b<span class='verilog-verWord def-Keyword'>}</span><span class='verilog-verWord def-Keyword'>;</span>
+69:       ALUOP_OR<span class='verilog-verWord def-Keyword'>:</span>   <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = <span class='verilog-verWord def-Keyword'>{</span><span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verWord def-Keyword'>,</span> a | b<span class='verilog-verWord def-Keyword'>}</span><span class='verilog-verWord def-Keyword'>;</span>
+70:       ALUOP_XOR<span class='verilog-verWord def-Keyword'>:</span>  <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = <span class='verilog-verWord def-Keyword'>{</span><span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verWord def-Keyword'>,</span> a ^ b<span class='verilog-verWord def-Keyword'>}</span><span class='verilog-verWord def-Keyword'>;</span>
+71:       ALUOP_COM<span class='verilog-verWord def-Keyword'>:</span>  <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = <span class='verilog-verWord def-Keyword'>{</span><span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verWord def-Keyword'>,</span> ~a<span class='verilog-verWord def-Keyword'>}</span><span class='verilog-verWord def-Keyword'>;</span>
+72:       ALUOP_ROR<span class='verilog-verWord def-Keyword'>:</span>  <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = <span class='verilog-verWord def-Keyword'>{</span>a<span class='verilog-verNumb def-Number'>[0]</span><span class='verilog-verWord def-Keyword'>,</span> cin<span class='verilog-verWord def-Keyword'>,</span> a[<span class='verilog-verNumb def-Number'>7</span><span class='verilog-verWord def-Keyword'>:</span><span class='verilog-verNumb def-Number'>1</span>]<span class='verilog-verWord def-Keyword'>}</span><span class='verilog-verWord def-Keyword'>;</span>
+73:       ALUOP_ROL<span class='verilog-verWord def-Keyword'>:</span>  <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = <span class='verilog-verWord def-Keyword'>{</span>a<span class='verilog-verNumb def-Number'>[7]</span><span class='verilog-verWord def-Keyword'>,</span> a[<span class='verilog-verNumb def-Number'>6</span><span class='verilog-verWord def-Keyword'>:</span><span class='verilog-verNumb def-Number'>0</span>]<span class='verilog-verWord def-Keyword'>,</span> cin<span class='verilog-verWord def-Keyword'>}</span><span class='verilog-verWord def-Keyword'>;</span>
+74:       ALUOP_SWAP<span class='verilog-verWord def-Keyword'>:</span> <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = <span class='verilog-verWord def-Keyword'>{</span><span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verWord def-Keyword'>,</span> a[<span class='verilog-verNumb def-Number'>3</span><span class='verilog-verWord def-Keyword'>:</span><span class='verilog-verNumb def-Number'>0</span>]<span class='verilog-verWord def-Keyword'>,</span> a[<span class='verilog-verNumb def-Number'>7</span><span class='verilog-verWord def-Keyword'>:</span><span class='verilog-verNumb def-Number'>4</span>]<span class='verilog-verWord def-Keyword'>}</span><span class='verilog-verWord def-Keyword'>;</span>
+75:       <span class='verilog-verWord def-Keyword'>default</span><span class='verilog-verWord def-Keyword'>:</span>    <span class='verilog-verWord def-Keyword'>{</span>addercout<span class='verilog-verWord def-Keyword'>,</span>  y<span class='verilog-verWord def-Keyword'>}</span>  = <span class='verilog-verWord def-Keyword'>{</span><span class='verilog-verNumb def-Number'>1'b0</span><span class='verilog-verWord def-Keyword'>,</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='verilog-verWord def-Keyword'>}</span><span class='verilog-verWord def-Keyword'>;</span>
+76:    <span class='def-Keyword'>endcase</span>
+77: <span class='def-Keyword'>end</span>
+78: 
+79: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>y</span>)
+80:    zout <span class='verilog-verSymb def-Symbol'>=</span> <span class='def-Symbol'>(</span>y <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verNumb def-Number'>8'h00</span><span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+81: 
+82: <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>addercout or op</span>)
+83:    if <span class='def-Symbol'>(</span>op <span class='verilog-verSymb def-Symbol'>=</span><span class='verilog-verSymb def-Symbol'>=</span> ALUOP_SUB<span class='def-Symbol'>)</span> cout <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-verSymb def-Symbol'>~</span>addercout<span class='verilog-verSymb def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// Invert adder's carry to get borrow</span>
+84:    else                 cout <span class='verilog-verSymb def-Symbol'>=</span>  addercout<span class='verilog-verSymb def-Symbol'>;</span>
+85:       
+86: <span class='verilog-verWord def-Keyword'>endmodule</span>
+87: 

@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<project name="src.colorer" default="all" basedir=".">
+
+<property name="root" value="../.." description="root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/colorer" description="this project location"/>
+
+<property file='${root}/../path.properties'/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="src.extra" value="${root}/../${path.shared}/2003" description="colorer schemes src"/>
+
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="bin.extra" value="${bin}"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+<target name="check.all">
+	<dependset>
+		<srcfilelist dir="." files = "build.xml"/>
+		<targetfilelist dir="${bin}" files="bkt.hrc, hrc.hrc, hrd.hrc, colorer5catalog.hrc"/>
+	</dependset>
+</target>
+
+
+<!-- bkt -->
+
+<target name="bkt.check" depends="check.all">
+	<dependset>
+		<srcfilelist dir="${src}" files = "custom.colorer.xml, bracket.xsd"/>
+		<targetfilelist dir="${bin}" files="bkt.hrc"/>
+	</dependset>
+</target>
+
+<target name="bkt" depends="bkt.check">
+	<ant antfile="${util}" target="xsd2hrc">
+		<property name="util.input" value="${src}/bracket.xsd"/>
+		<property name="util.output" value="${bin}/bkt.hrc"/>
+		<property name='xsd2hrc.hrctype' value='bkt'/>
+		<property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.colorer.xml'/>
+	</ant> 
+</target>
+
+
+<!-- hrc -->
+
+<target name="hrc.check" depends="check.all">
+	<dependset>
+		<srcfilelist dir="${src}" files = "custom.hrc.xml"/>
+		<srcfilelist dir="${src.extra}" files = "hrc.xsd"/>
+		<targetfilelist dir="${bin}" files="hrc.hrc"/>
+	</dependset>
+</target>
+
+<target name="hrc" depends="hrc.check">
+	<ant antfile="${util}" target="xsd2hrc">
+		<property name="util.input" value="${src.extra}/hrc.xsd"/>
+		<property name="util.output" value="${bin}/hrc.hrc"/>
+		<property name='xsd2hrc.hrctype' value='hrc'/>
+		<property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.hrc.xml'/>
+	</ant> 
+</target>
+
+
+<!-- hrd -->
+
+<target name="hrd.check" depends="check.all">
+	<dependset>
+		<srcfilelist dir="${src}" files = "custom.colorer.xml"/>
+		<srcfilelist dir="${src.extra}" files = "hrd.xsd"/>
+		<targetfilelist dir="${bin}" files="hrd.hrc"/>
+	</dependset>
+</target>
+
+<target name="hrd" depends="hrd.check">
+	<ant antfile="${util}" target="xsd2hrc">
+		<property name="util.input" value="${src.extra}/hrd.xsd"/>
+		<property name="util.output" value="${bin}/hrd.hrc"/>
+		<property name='xsd2hrc.hrctype' value='hrd'/>
+		<property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.colorer.xml'/>
+	</ant> 
+</target>
+
+<!-- catalog -->
+
+<target name="catalog.check" depends="check.all">
+	<dependset>
+		<srcfilelist dir="${src.extra}" files = "catalog.xsd"/>
+		<targetfilelist dir="${bin}" files="hrd.hrc"/>
+	</dependset>
+</target>
+
+<target name="catalog" depends="catalog.check">
+	<ant antfile="${util}" target="xsd2hrc">
+		<property name="util.input" value="${src.extra}/catalog.xsd"/>
+		<property name="util.output" value="${bin}/colorer5catalog.hrc"/>
+		<property name='xsd2hrc.hrctype' value='colorer5catalog'/>
+                <property name='xsd2hrc.force-single-root' value='false'/>
+	</ant>
+</target>
+
+<!-- custom -->
+
+<target name="custom.check" depends="check.all">
+	<dependset>
+		<srcfilelist dir="${src}" files = "xsd2hrc.custom.xsd, custom.colorer.xml"/>
+		<targetfilelist dir="${bin}" files="xsd2hrc.custom.hrc"/>
+	</dependset>
+</target>
+
+
+<target name="custom" depends="custom.check">
+	<ant antfile="${util}" target="xsd2hrc">
+		<property name="util.input" value="${src}/xsd2hrc.custom.xsd"/>
+		<property name="util.output" value="${bin}/xsd2hrc.custom.hrc"/>
+		<property name='xsd2hrc.hrctype' value='xsd2hrc.custom'/>
+		<property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.colorer.xml'/>
+	</ant> 
+</target>
+
+
+
+<!-- hrce -->
+
+<target name="hrce.xsd.check">
+	<uptodate property="hrce.check"  targetfile="${obj}/hrc.ent.xsd">
+		<srcfiles dir="${src}" includes="hrc.ent.xsl"/>
+		<srcfiles dir="${src.extra}" includes="hrc.xsd"/>
+		<srcfiles dir="." includes="build.xml"/>
+	</uptodate>
+</target>
+
+<target name="hrce.xsd" depends="hrce.xsd.check" unless="hrce.check">
+	<xslt in="${src.extra}/hrc.xsd" out="${obj}/hrc.ent.xsd" style="${src}/hrc.ent.xsl" classpath="${xslt-classpath}"/>
+</target>
+
+
+<target name="hrce.check" depends="check.all">
+	<dependset>
+		<srcfilelist dir="${obj}" files="hrc.ent.xsd"/>
+		<targetfilelist dir="${bin}" files="ent.hrd.hrc"/>
+	</dependset>
+</target>
+
+<target name="hrce" depends="hrce.check, hrce.xsd">
+	<ant antfile="${util}" target="xsd2hrc">
+		<property name="util.input"  value="${obj}/hrc.ent.xsd"/>
+		<property name="util.output" value="${bin}/ent.hrc.hrc"/>
+		<property name='xsd2hrc.hrctype' value='ent.hrc'/>
+		<property name='xsd2hrc.force-single-root' value='no'/>
+	</ant> 
+</target>
+
+
+<!-- final -->
+
+<target name="all" depends="hrc, hrd, catalog, hrce, bkt, custom"/>
+
+<target name="clean">
+	<delete failonerror='false'>
+		<fileset dir="${bin}" includes="hrc.hrc, hrd.hrc, ent.hrc.hrc"/>
+		<fileset dir="${bin.extra}" includes="xsd2hrc.custom.hrc, bkt.hrc, colorer5catalog.hrc"/>
+		<fileset dir="${obj}" includes="*.*"/>
+	</delete>
+</target>
+
+</project>

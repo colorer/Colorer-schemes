@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:ANIMALS="http://www.some-fictitious-zoo.com/rdf#">
+
+   <RDF:Description RDF:about="urn:animals:arachnids">
+     <ANIMALS:name>Arachnids</ANIMALS:name>
+   </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:arachnids:tarantula" ANIMALS:specimens="0">
+         <ANIMALS:name>Tarantula</ANIMALS:name>
+         <ANIMALS:species>Avicularia avicularia</ANIMALS:species>
+       </RDF:Description>
+
+   <RDF:Description RDF:about="urn:animals:birds">
+     <ANIMALS:name>Birds</ANIMALS:name>
+   </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:birds:emu" ANIMALS:specimens="12">
+         <ANIMALS:name>Emu</ANIMALS:name>
+         <ANIMALS:species>Dromaius novaehollandiae</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:birds:barnowl" ANIMALS:specimens="4">
+         <ANIMALS:name>Barn Owl</ANIMALS:name>
+         <ANIMALS:species>Tyto alba</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:birds:raven" ANIMALS:specimens="0">
+         <ANIMALS:name>Raven</ANIMALS:name>
+         <ANIMALS:species>Corvus corax</ANIMALS:species>
+       </RDF:Description>
+
+   <RDF:Description RDF:about="urn:animals:fish">
+     <ANIMALS:name>Fish</ANIMALS:name>
+   </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:fish:cod" ANIMALS:specimens="0">
+         <ANIMALS:name>Cod</ANIMALS:name>
+         <ANIMALS:species>Gadus morhua</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:fish:swordfish" ANIMALS:specimens="3">
+         <ANIMALS:name>Swordfish</ANIMALS:name>
+         <ANIMALS:species>Xiphias gladius</ANIMALS:species>
+       </RDF:Description>
+
+   <RDF:Description RDF:about="urn:animals:mammals">
+     <ANIMALS:name>Mammals</ANIMALS:name>
+   </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:mammals:lion" ANIMALS:specimens="4">
+         <ANIMALS:name>Lion</ANIMALS:name>
+         <ANIMALS:species>Panthera leo</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:mammals:hippopotamus" ANIMALS:specimens="2">
+         <ANIMALS:name>Hippopotamus</ANIMALS:name>
+         <ANIMALS:species>Hippopotamus amphibius</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:mammals:africanelephant" ANIMALS:specimens="4">
+         <ANIMALS:name>African Elephant</ANIMALS:name>
+         <ANIMALS:species>Loxodonta africana</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:mammals:llama" ANIMALS:specimens="3">
+         <ANIMALS:name>Llama</ANIMALS:name>
+         <ANIMALS:species>Lama glama</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:mammals:polarbear" ANIMALS:specimens="0">
+         <ANIMALS:name>Polar Bear</ANIMALS:name>
+         <ANIMALS:species>Thalarctos maritimus</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:mammals:aardvark" ANIMALS:specimens="2">
+         <ANIMALS:name>Aardvark</ANIMALS:name>
+         <ANIMALS:species>Orycteropus afer</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:mammals:ninebandedarmadillo" ANIMALS:specimens="0">
+         <ANIMALS:name>Nine-banded Armadillo</ANIMALS:name>
+         <ANIMALS:species>Dasypus novemcinctus</ANIMALS:species>
+       </RDF:Description>
+
+   <RDF:Description RDF:about="urn:animals:reptiles">
+     <ANIMALS:name>Reptiles</ANIMALS:name>
+   </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:reptiles:anaconda" ANIMALS:specimens="1">
+         <ANIMALS:name>Anaconda</ANIMALS:name>
+         <ANIMALS:species>Eunectes murinus</ANIMALS:species>
+       </RDF:Description>
+
+       <RDF:Description RDF:about="urn:animals:reptiles:chameleon" ANIMALS:specimens="2">
+         <ANIMALS:name>Chameleon</ANIMALS:name>
+         <ANIMALS:species>Chamaeleo chamaelon</ANIMALS:species>
+       </RDF:Description>
+
+  <RDF:Seq RDF:about="urn:animals:data">
+    <RDF:li>
+      <RDF:Seq RDF:about="urn:animals:arachnids">
+        <RDF:li RDF:resource="urn:animals:arachnids:tarantula"/>
+      </RDF:Seq>
+    </RDF:li>
+    <RDF:li>
+      <RDF:Seq RDF:about="urn:animals:birds">
+        <RDF:li RDF:resource="urn:animals:birds:emu"/>
+        <RDF:li RDF:resource="urn:animals:birds:barnowl"/>
+        <RDF:li RDF:resource="urn:animals:birds:raven"/>
+      </RDF:Seq>
+    </RDF:li>
+    <RDF:li>
+      <RDF:Seq RDF:about="urn:animals:fish">
+        <RDF:li RDF:resource="urn:animals:fish:cod"/>
+        <RDF:li RDF:resource="urn:animals:fish:swordfish"/>
+      </RDF:Seq>
+    </RDF:li>
+    <RDF:li>
+      <RDF:Seq RDF:about="urn:animals:mammals">
+        <RDF:li RDF:resource="urn:animals:mammals:lion"/>
+        <RDF:li RDF:resource="urn:animals:mammals:hippopotamus"/>
+        <RDF:li RDF:resource="urn:animals:mammals:africanelephant"/>
+        <RDF:li RDF:resource="urn:animals:mammals:llama"/>
+        <RDF:li RDF:resource="urn:animals:mammals:polarbear"/>
+        <RDF:li RDF:resource="urn:animals:mammals:aardvark"/>
+        <RDF:li RDF:resource="urn:animals:mammals:ninebandedarmadillo"/>
+      </RDF:Seq>
+    </RDF:li>
+    <RDF:li>
+      <RDF:Seq RDF:about="urn:animals:reptiles">
+        <RDF:li RDF:resource="urn:animals:reptiles:anaconda"/>
+        <RDF:li RDF:resource="urn:animals:reptiles:chameleon"/>
+      </RDF:Seq>
+    </RDF:li>
+  </RDF:Seq>
+
+</RDF:RDF>

@@ -1,0 +1,57 @@
+235-9214,235-9246    Что с цветом запятой?
+235-9214, 235-9246
+
+95/98 2000/2001      Странно, но двумя строчками ниже все по другому
+
+95/98
+2000/2001
+
+<первый@адрес.ru>    Бррр...
+<ваш@адрес.ru>       Если у данного файла убрать расширение то все окей
+<entryway@astral.ntu-kpi.kiev.ua?subject=Job>   <- Правильный синтаксис
+  <sввdыфваыf@asd.ыaваsd>
+  <ыва>
+          - кодировка не работает. cregexp думает что dos
+
+;
+=
++
+-
+/
+*
+&
+|
+^
+(
+)
+[
+]
+,
+.
+:
+!
+~
+<
+>
+%
+{
+}
+?
+_
+\
+
+mailto:Все что хотите <ваш@адрес.ru>
+mailto:woldemar@mcep.rshmi.spb.ru
+
+undercover-request@snowhite.cis.uoguelph.ca.
+hehe undercover-request@snowhite.cis.uoguelph.ca.
+
+/pub/usenet/news.answers/mail/mailing-lists.
+
+version 2.55b
+
+тел/факс 450-7907, 451-0028/29
+
+When you're ridin' sixteen hours and there's nothin' much to do
+Holding me back 'cause I'm striving to be
+you're the one who's blamed

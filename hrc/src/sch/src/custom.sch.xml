@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+	<custom-type targetNamespace="http://www.ascc.net/xml/schematron">
+		<prefix>sch</prefix>
+		<empty-prefix/>
+
+		<contributors>Eugene Efremov</contributors>
+
+		<top-level>
+			<element>schema</element>
+		</top-level>
+
+		<outline>
+			<element name='phase' extract='withAttribute' description='Test phase'/>
+			<element name='pattern' extract='attributeValue' description='Pattern selection'/>			
+			<element name='rule' extract='withAttribute' description='Stylesheet rule'/>
+		</outline>
+		<!--
+		<script-n-style>
+			<attribute language="xpath" scheme-suffix="XML.Pattern" region="def:default"/>
+			<attribute language="xpath" scheme-suffix="XML.Expr" region="def:default"/>
+		</script-n-style>-->
+		
+		<type xmlns="http://colorer.sf.net/2003/hrc">
+			<scheme name="path-content">
+				<inherit scheme="xslt:pattern-content"/>
+			</scheme>
+						
+			<scheme name="expr-content">
+				<inherit scheme="xslt:expr-content"/>
+			</scheme>
+		</type>
+	</custom-type>
+
+</custom>

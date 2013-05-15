@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!DOCTYPE custom [
+<!ENTITY entities SYSTEM "entity.hrc">
+]>
+
+<custom xmlns="uri:colorer:custom">
+
+ <custom-type targetNamespace="http://www.wapforum.org/2001/wml">
+  <top-level>
+   <element>wml</element>
+  </top-level>
+
+  <prefix>wml</prefix>
+  <empty-prefix/>
+  <contributors>Eugene Efremov</contributors>
+
+  <outline>
+   <element name='card' extract='withAttribute' description='Card'/>
+  </outline>
+
+  <type xmlns="http://colorer.sf.net/2003/hrc">
+
+   &entities;
+
+   <scheme name="length-content">
+    <regexp match="/\d+(\%)/" region="def:Number" region1="def:NumberSuffix"/>
+   </scheme>
+
+   <scheme name="wdata-conetnt">
+    <inherit scheme="xmlschema:string-content"/>
+   </scheme>
+
+   <scheme name="HREF-content">
+    <inherit scheme="xmlschema:anyURI-content"/>
+   </scheme>
+
+  </type>
+
+ </custom-type>
+</custom>

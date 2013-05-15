@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<bracket type="parser" scheme="bracket">
+ 
+<!-- 
+  -
+  - commands 
+  -
+  -->
+ 
+ <!-- for -->
+  
+ <block name="call.cmd.for" start="(?{symbol}\^)for" end=""
+   scheme1="literal" region1="var" 
+   region-start="keyword" region-end="default" 
+   region-middle="struct-symbol"
+  >
+  <case type="monoblock" start="\[" end="\]"/>
+ </block> 
+  
+ <!-- connect -->
+ 
+ <block name="call.cmd.connect" start="(?{symbol}\^)connect" end=""
+   scheme1="commands.connect" region1="string" 
+   region-start="keyword" region-end="default" 
+   region-middle="struct-symbol"
+  >
+  <case type="monoblock" start="\[" end="\]"/>
+  <!--
+   scheme2="script" region2="default"   
+  <query start1="\[" end1="\]" start2="(?{}\])?#1\{" end2="\}" />
+  -->
+ </block> 
+
+ <!-- rem -->
+ 
+ <block name="call.cmd.comment" start="(?{symbol}\^)rem" end=""
+   scheme1="commands.comment" region1="def:Comment" 
+   region-start="keyword" region-end="default" 
+   region-middle="struct-symbol"
+  >
+  <case type="monoblock" start="\{" end="\}" recursion1="yes"/>
+ </block> 
+
+<!-- 
+  -
+  - functions
+  -
+  -->
+
+ <!-- sql -->
+
+ <name-block name="call.cmd.sql" start="\^" end=""
+   scheme="commands.sql" region="sql.ins" region-end="default"
+   region-start="symbol" region-middle="struct-symbol"
+  >
+  <name match="[^%nname;]+?sql" scheme="name.method" region="name"/>
+  <case type="monoblock" start="\{" end="\}"/>
+  <case type="monoblock" start="\[" end="\]"/>
+ </name-block>
+
+ <!-- match (regexp) -->
+ 
+ <name-block name="call.cmd.re" start="\^" end=""
+   scheme="commands.re" region="string" region-end="default"
+   region-start="symbol" region-middle="regexp:SpecQuote"
+  >
+  <name match="[^%nname;]+?match" scheme="name.method" region="name"/>
+  <case 
+   type="monoblock" start="\[" 
+   end="\](?{}\[(?{regexp:SpecArea}[ixsmg&apos;]*)\])?" 
+  />
+ </name-block>
+
+ <!-- xpath -->
+ 
+ <name-block name="call.cmd.xpath" start="\^" end=""
+   scheme="parser" region="string" region-end="default"
+   region-start="symbol" region-middle="struct-symbol"
+  >
+  <name match="[^%nname;]+?select(?{}Single|String|Number|Bool)?" 
+   scheme="name.method" region="name"/>
+   <!--
+  <case type="monoblock" start="\{" end="\}" scheme="xslt:expr-content"/>
+  -->
+  <case type="monoblock" start="\[" end="\]" scheme="commands.xpath"/>
+ </name-block>
+ 
+<!-- 
+  -
+  - base blocks
+  -
+  -->
+  
+ <name-block name="call.method" start="(?{}%back;?#1[\.\:]|\^)" end=""
+   scheme="parser" region="default" region-end="default"
+   region-start="symbol" region-middle="struct-symbol"
+  >
+  <name match="[^%nname;]+?" scheme="name.method" region="name"/>
+  <case type="monoblock" start="\{(?{}&lt;\?xml)?=" end="\}" scheme="commands.xml"/>
+  <case type="monoblock" start="\[(?{}&lt;\?xml)?=" end="\]" scheme="commands.xml"/>
+  <case type="monoblock" start="\{" end="\}"/>
+  <case type="monoblock" start="\[" end="\]"/> 
+  <case type="monoblock" start="\(" end="\)" scheme="expr"/>
+ </name-block>
+
+
+ <name-block name="call.var" start="\$" end=""
+   scheme="parser" region="default" region-end="default"
+   region-start="var" region-middle="struct-symbol"
+  >
+  <name match="[^%nname;]+?" scheme="name.var" region="var"/>
+  <case type="monoblock" start="\{(?{}&lt;\?xml)?=" end="\}" scheme="commands.xml"/>
+  <case type="monoblock" start="\[(?{}&lt;\?xml)?=" end="\]" scheme="commands.xml"/>
+  <case type="monoblock" start="\{" end="\}"/>
+  <case type="monoblock" start="\[" end="\]"/>
+  <case type="monoblock" start="\(" end="\)" scheme="expr"/>
+ </name-block>
+
+
+</bracket>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the Parser3 Colorer-take5 HRC scheme.
+   -
+   - The Initial Developer of the Original Code is
+   - Eugene Efremov <4mirror@mail.ru>
+   - Portions created by the Initial Developer are Copyright (C) 2004
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

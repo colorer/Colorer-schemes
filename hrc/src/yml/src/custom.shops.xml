@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace='http://market.yandex.ru/'>
+    <empty-prefix/>
+    
+    <top-level>
+            <element>yml_catalog</element>
+    </top-level>
+    
+    <contributors>Kasatkin Konstantin, Eugene Efremov</contributors>
+    
+    <script-n-style>
+    	<element name="url">
+    		<language name="uri"/>
+    		<default name="uri"/>
+    	</element>
+    	<element name="picture">
+    		<language name="uri"/>
+    		<default name="uri"/>
+    	</element>
+    </script-n-style>
+    
+    <outline>
+    	<element name='offer' extract='attributeValue' description='offer id'/>
+    </outline>
+    
+</custom-type>
+
+</custom>

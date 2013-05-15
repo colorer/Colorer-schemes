@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<project name="hrd" default="all" basedir=".">
+
+<!-- build all -->
+
+<property name="target" value="all" description="default subproject target"/>
+
+
+<target name="xsl.check">
+	<uptodate property="xsl.check" targetfile="buildlist.xml">
+		<srcfiles dir="." includes="build.xsl,list.xml"/>
+	</uptodate>
+</target>
+
+<target name="xsl" depends="xsl.check" unless="xsl.check">
+	<xslt in="list.xml" out="buildlist.xml" style="build.xsl" classpath="${xslt-classpath}"/>
+</target>
+
+
+<target name='all' depends="xsl">
+	<ant antfile="buildlist.xml" target="all">
+		<property name="target" value="${target}"/>
+	</ant>
+</target>
+
+
+<target name="clean">
+	<antcall target='all'>
+		<param name='target' value='clean'/>
+	</antcall>
+</target>
+
+
+
+<property file='../../path.properties'/>
+<property name='copy-path' value='../../${path.colorer}/hrd'/>
+
+<target name='copy'>
+	<copy todir='${copy-path}'>
+		<fileset dir='.' includes='**/*.hrd, catalog*.xml'/>
+	</copy>
+</target>
+
+<target name="copy.clean">
+	<delete failonerror='false' includeemptydirs="true">
+		<fileset dir="${copy-path}" includes="**/*.hrd, catalog*.xml"/>
+	</delete>
+</target>
+
+</project>

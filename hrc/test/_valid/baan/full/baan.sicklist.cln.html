@@ -1,0 +1,1027 @@
+   0: <span class='def-Comment def-Syntax'>|******************************************************************************</span>
+   1: <span class='def-Comment def-Syntax'>|* tfzzzdllsickls  0  VRC B402 c3 land</span>
+   2: <span class='def-Comment def-Syntax'>|* Расчет больничного</span>
+   3: <span class='def-Comment def-Syntax'>|* bn25</span>
+   4: <span class='def-Comment def-Syntax'>|* 05/07/99 [11:24]</span>
+   5: <span class='def-Comment def-Syntax'>|******************************************************************************</span>
+   6: <span class='def-Comment def-Syntax'>|* Script Type: Library</span>
+   7: <span class='def-Comment def-Syntax'>|******************************************************************************</span>
+   8: <span class='Baan-baanDirective def-Directive'>#include</span> <span class='Baan-baanString def-String'>"itfzzyerrors"</span>   
+   9: <span class='Baan-baanDirective def-Directive'>#include</span> <span class='Baan-baanString def-String'>"itfzzydomains"</span>   
+  10: <span class='Baan-baanDirective def-Directive'>#include</span> <span class='Baan-baanString def-String'>"itfzzzbuffer000"</span>   
+  11: <span class='Baan-baanDirective def-Directive'>#include</span> <span class='Baan-baanString def-String'>"itfzzz022"</span>   
+  12: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll007m00
+  13: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll094m01
+  14: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdllbizcnt
+  15: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdllperiod
+  16: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdlltable
+  17: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdllmids
+  18: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll171
+  19: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdllclcres
+  20: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll300
+  21: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdll027m01
+  22: <span class='Baan-baanDirective def-Directive'>#pragma</span> used dll otfzzzdllcalcut
+  23: 
+  24: <span class='def-Comment def-Syntax'>| Вход: (Эти переменные должны быть заполнены до вызова</span>
+  25: <span class='def-Comment def-Syntax'>|        функций)</span>
+  26: <span class='Baan-baanKeyword def-Keyword'>extern</span>  <span class='Baan-baanKeyword def-Keyword'>long</span> AccPeriod <span class='def-Comment def-Syntax'>| Текущий период</span>
+  27: <span class='Baan-baanKeyword def-Keyword'>extern</span>  <span class='Baan-baanKeyword def-Keyword'>long</span> CurrStaff <span class='def-Comment def-Syntax'>| Сотрудник</span>
+  28: <span class='Baan-baanKeyword def-Keyword'>extern</span>  <span class='Baan-baanKeyword def-Keyword'>long</span> CalcCurrWorkingPlace <span class='def-Comment def-Syntax'>| Текущее рабместо</span>
+  29: <span class='def-Comment def-Syntax'>| Таблицы:</span>
+  30: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz007 <span class='def-Comment def-Syntax'>| День табелей рабочих мест</span>
+  31: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz006 <span class='def-Comment def-Syntax'>| Табель рабместа</span>
+  32: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz097 <span class='def-Comment def-Syntax'>| Больничный лист</span>
+  33: 
+  34: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz016 <span class='def-Comment def-Syntax'>| Вхождение кодов расчета</span>
+  35: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz080 <span class='def-Comment def-Syntax'>| Расчет</span>
+  36: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz051 <span class='def-Comment def-Syntax'>| Норма начисления-удержания</span>
+  37: 
+  38: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz072 <span class='def-Comment def-Syntax'>| Лицевые</span>
+  39: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz022 <span class='def-Comment def-Syntax'>| Функции</span>
+  40: 
+  41: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz211 <span class='def-Comment def-Syntax'>| Протокол расчета</span>
+  42: <span class='Baan-baanKeyword def-Keyword'>table</span> ttfzzz212 <span class='def-Comment def-Syntax'>| Запись протокола расчета</span>
+  43: 
+  44: <span class='Baan-baanDirective def-Directive'>#define</span> TmКndCode <span class='Baan-baanKeyword def-Keyword'>domain</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>str<span class='Baan-baanNumber def-Number'>.</span>id<span class='Baan-baanNumber def-Number'>.8</span>
+  45: <span class='Baan-baanDirective def-Directive'>#define</span> CalcCode  <span class='Baan-baanKeyword def-Keyword'>domain</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>str3
+  46: <span class='Baan-baanDirective def-Directive'>#define</span> Period <span class='Baan-baanKeyword def-Keyword'>domain</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>id9
+  47: <span class='Baan-baanDirective def-Directive'>#define</span> ContKind <span class='Baan-baanKeyword def-Keyword'>domain</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd
+  48: 
+  49: <span class='Baan-baanDirective def-Directive'>#define</span> sklsSuffix <span class='Baan-baanString def-String'>""</span>
+  50: <span class='Baan-baanKeyword def-Keyword'>extern</span> BOOL recalc
+  51: 
+  52: <span class='def-Comment def-Syntax'>| Найти больничный лист по его ключу      </span>
+  53: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> ERRCODE <span class='Baan-baanUserProcedure def-Identifier'>skls.findByID</span><span class='Baan-baanSymbol def-Symbol'>(</span>IDENT sklsempl<span class='Baan-baanSymbol def-Symbol'>,</span> <span class='Baan-baanKeyword def-Keyword'>domain</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>id aList<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+  54:  <span class='Baan-baanSQL def-Directive'>SELECT</span> 
+  55:  <span class='Baan-baanSymbol def-Symbol'>*</span> <span class='Baan-baanSQL def-Directive'>FROM</span> tfzzz097 <span class='Baan-baanSQL def-Directive'>WHERE</span> 
+  56:       _index1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>sklsempl</span><span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>aList</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+  57:  <span class='Baan-baanSQL def-Directive'>SELECTDO</span> 
+  58:  <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errSetOk</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+  59:     <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>
+  60:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errorSet</span><span class='Baan-baanSymbol def-Symbol'>(</span>errNotFound<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanString def-String'>"tfzzz097"</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+  61: <span class='Baan-baanSymbol def-Symbol'>}</span>
+  62: <span class='def-Comment def-Syntax'>|  Расчитать больниный</span>
+  63: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@params</span><span class='def-Comment def-Syntax'> </span>
+  64: <span class='def-Comment def-Syntax'>|  aCode - код расчета</span>
+  65: <span class='def-Comment def-Syntax'>|  timeKind - вид времени</span>
+  66: <span class='def-Comment def-Syntax'>|  isTimePayed - true - повременный иначе - сдельный</span>
+  67: <span class='def-Comment def-Syntax'>|  useList - пользоваться ли списком расчитанных больничных.</span>
+  68: <span class='def-Comment def-Syntax'>| если да, то перед вызовом первой функции надо вызвать clcleaves.init</span>
+  69: <span class='def-Comment def-Syntax'>|  aResult - переменная, в которую надо вернуть сумму больничного</span>
+  70: <span class='def-Comment def-Syntax'>|  days - переменная, в которую надо вернуть количество дней, </span>
+  71: <span class='def-Comment def-Syntax'>|  hours - переменная, в которую надо вернуть количество часов</span>
+  72: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> ERRCODE <span class='Baan-baanUserProcedure def-Identifier'>sklsclc.Calculate</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span>TmКndCode timeKind<span class='Baan-baanSymbol def-Symbol'>,</span>BOOL isTimePayed<span class='Baan-baanSymbol def-Symbol'>,</span>Bool useList<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> MONEY aResult<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> <span class='Baan-baanKeyword def-Keyword'>double</span> days<span class='Baan-baanSymbol def-Symbol'>,</span> <span class='Baan-baanKeyword def-Keyword'>ref</span> <span class='Baan-baanKeyword def-Keyword'>double</span> hours<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+  73:   ERRCODE err                
+  74:   MONEY Total
+  75:   <span class='Baan-baanKeyword def-Keyword'>double</span> CurDays<span class='Baan-baanSymbol def-Symbol'>,</span>CurHours
+  76:   <span class='def-Comment def-Syntax'>| Начало обработки больничных</span>
+  77:   aResult<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+  78:   err<span class='Baan-baanSymbol def-Symbol'>=</span>begProcess<span class='Baan-baanSymbol def-Symbol'>(</span>timeKind<span class='Baan-baanSymbol def-Symbol'>)</span>               
+  79:   Days <span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+  80:   Hours <span class='Baan-baanSymbol def-Symbol'>=</span> <span class='Baan-baanNumber def-Number'>0</span>
+  81:   HANDLE<span class='Baan-baanNumber def-Number'>.</span>ERR              
+  82:   TDate EndDate
+  83:   <span class='def-Comment def-Syntax'>|if recalc then</span>
+  84:     EndDate<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>endDateOfPeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>AccPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+  85:   <span class='def-Comment def-Syntax'>|else </span>
+  86:   <span class='def-Comment def-Syntax'>|  EndDate=0</span>
+  87:   <span class='def-Comment def-Syntax'>|endif</span>
+  88:   <span class='Baan-baanUserProcedure def-Identifier'>tab.forInterval.Begin.forLine</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>begDateOfPeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>AccPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>EndDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+  89:  <span class='Baan-baanKeyword def-Keyword'> while</span> <span class='Baan-baanUserProcedure def-Identifier'>tab.forInterval.hasNext</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+  90:       <span class='def-Comment def-Syntax'>| Обработать дату табеля</span>
+  91:       err<span class='Baan-baanSymbol def-Symbol'>=</span>processDay<span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>isTimePayed<span class='Baan-baanSymbol def-Symbol'>,</span>Total<span class='Baan-baanSymbol def-Symbol'>,</span>CurDays<span class='Baan-baanSymbol def-Symbol'>,</span>CurHours<span class='Baan-baanSymbol def-Symbol'>,</span>useList<span class='Baan-baanSymbol def-Symbol'>)</span>  
+  92:       HANDLE<span class='Baan-baanNumber def-Number'>.</span>ERR                   
+  93:       aResult<span class='Baan-baanSymbol def-Symbol'>=</span>aResult<span class='Baan-baanSymbol def-Symbol'>+</span>Total
+  94:       Days<span class='Baan-baanSymbol def-Symbol'>=</span>Days<span class='Baan-baanSymbol def-Symbol'>+</span>CurDays
+  95:       Hours<span class='Baan-baanSymbol def-Symbol'>=</span>Hours<span class='Baan-baanSymbol def-Symbol'>+</span>CurHours
+  96:       <span class='Baan-baanUserProcedure def-Identifier'>tab.forInterval.next</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+  97:  <span class='Baan-baanKeyword def-Keyword'> endwhile </span>               
+  98:   <span class='Baan-baanUserProcedure def-Identifier'>tab.forInterval.end</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+  99:   <span class='def-Comment def-Syntax'>| Конец обработки больничных</span>
+ 100:   err<span class='Baan-baanSymbol def-Symbol'>=</span>handleSickListEnd<span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>isTimePayed<span class='Baan-baanSymbol def-Symbol'>,</span>Total<span class='Baan-baanSymbol def-Symbol'>,</span>CurDays<span class='Baan-baanSymbol def-Symbol'>,</span>CurHours<span class='Baan-baanSymbol def-Symbol'>,</span>useList<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 101:   aResult<span class='Baan-baanSymbol def-Symbol'>=</span>aResult<span class='Baan-baanSymbol def-Symbol'>+</span>Total 
+ 102:   Days<span class='Baan-baanSymbol def-Symbol'>=</span>Days<span class='Baan-baanSymbol def-Symbol'>+</span>CurDays
+ 103:   Hours<span class='Baan-baanSymbol def-Symbol'>=</span>Hours<span class='Baan-baanSymbol def-Symbol'>+</span>CurHours
+ 104:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>err<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 105: <span class='Baan-baanSymbol def-Symbol'>}</span>              
+ 106: TmКndCode prc<span class='Baan-baanNumber def-Number'>.</span>TimeKind
+ 107: TmКndCode prc<span class='Baan-baanNumber def-Number'>.</span>OldTimeKind
+ 108: IDENT     prc<span class='Baan-baanNumber def-Number'>.</span>OldSickList 
+ 109: <span class='Baan-baanVariable def-Var'>DATE</span>      prc<span class='Baan-baanNumber def-Number'>.</span>SickListDate
+ 110: Ident     prc<span class='Baan-baanNumber def-Number'>.</span>SickList
+ 111: <span class='Baan-baanKeyword def-Keyword'>long</span>      prc<span class='Baan-baanNumber def-Number'>.</span>SickListLength       
+ 112: <span class='Baan-baanKeyword def-Keyword'>double</span>    prc<span class='Baan-baanNumber def-Number'>.</span>FundH
+ 113: <span class='def-Comment def-Syntax'>| Начало обработки больничных</span>
+ 114: <span class='Baan-baanKeyword def-Keyword'>function</span> ERRCODE begProcess<span class='Baan-baanSymbol def-Symbol'>(</span>TmКndCode timeKind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 115:   prc<span class='Baan-baanNumber def-Number'>.</span>timeKind<span class='Baan-baanSymbol def-Symbol'>=</span>timeKind           
+ 116:   prc<span class='Baan-baanNumber def-Number'>.</span>OldTimeKind<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanString def-String'>"ХАМ"</span>
+ 117:   prc<span class='Baan-baanNumber def-Number'>.</span>OldSickList<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>         
+ 118:   prc<span class='Baan-baanNumber def-Number'>.</span>SickListDate<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 119:   prc<span class='Baan-baanNumber def-Number'>.</span>SickListLength<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 120:   prc<span class='Baan-baanNumber def-Number'>.</span>FundH<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0.0</span>
+ 121:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errSetOk</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 122: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 123: <span class='def-Comment def-Syntax'>| Текущий вид времени</span>
+ 124: <span class='Baan-baanKeyword def-Keyword'>function</span> TmКndCode currentTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 125:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanProcedure def-Symbol'>strip$</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz007<span class='Baan-baanNumber def-Number'>.</span>tb_v_cod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 126: <span class='Baan-baanSymbol def-Symbol'>}</span>                    
+ 127: <span class='def-Comment def-Syntax'>| Заданный вид времени</span>
+ 128: <span class='Baan-baanKeyword def-Keyword'>function</span> TmКndCode needTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 129:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>prc<span class='Baan-baanNumber def-Number'>.</span>timeKind<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 130: <span class='Baan-baanSymbol def-Symbol'>}</span>                
+ 131: <span class='def-Comment def-Syntax'>| Обработать окончание больничного     </span>
+ 132: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@created</span><span class='def-Comment def-Syntax'> </span>
+ 133: <span class='def-Comment def-Syntax'>|  28.10.99 (12:44:39) by Max Belugin</span>
+ 134: <span class='Baan-baanKeyword def-Keyword'>function</span> ERRCODE handleSickListEnd <span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span>BOOL isTimePayed<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> MONEY aResult<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> <span class='Baan-baanKeyword def-Keyword'>double</span> days<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> <span class='Baan-baanKeyword def-Keyword'>double</span> hours<span class='Baan-baanSymbol def-Symbol'>,</span>Bool useList<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>    
+ 135:     ERRCODE err
+ 136:    <span class='Baan-baanKeyword def-Keyword'> if</span> prc<span class='Baan-baanNumber def-Number'>.</span>SickListDate<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span><span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 137:      <span class='Baan-baanKeyword def-Keyword'> if</span> prc<span class='Baan-baanNumber def-Number'>.</span>SickList<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span><span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 138:         <span class='Baan-baanUserProcedure def-Identifier'>clog.setSickList</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.empl</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>prc<span class='Baan-baanNumber def-Number'>.</span>SickList<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 139:      <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 140:         <span class='def-Comment def-Syntax'>| обработать больничный </span>
+ 141:        <span class='Baan-baanKeyword def-Keyword'> if</span> 
+ 142:           <span class='Baan-baanSymbol def-Symbol'>(</span>useCalcedDocs <span class='Baan-baanKeyword def-Keyword'>or</span> <span class='Baan-baanKeyword def-Keyword'>not</span> 
+ 143:            <span class='Baan-baanUserProcedure def-Identifier'>clog.hasSickList</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.empl</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>prc<span class='Baan-baanNumber def-Number'>.</span>SickList<span class='Baan-baanSymbol def-Symbol'>,</span>AccPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 144:           <span class='Baan-baanSymbol def-Symbol'>)</span>
+ 145:           <span class='Baan-baanKeyword def-Keyword'>or</span>
+ 146:           <span class='Baan-baanSymbol def-Symbol'>(</span>useList <span class='Baan-baanKeyword def-Keyword'>and</span> <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.haveToCalc</span><span class='Baan-baanSymbol def-Symbol'>(</span>prc<span class='Baan-baanNumber def-Number'>.</span>SickList<span class='Baan-baanSymbol def-Symbol'>,</span>needTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 147:           <span class='Baan-baanSymbol def-Symbol'>)</span>
+ 148:         <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 149:          <span class='Baan-baanKeyword def-Keyword'> if</span> useList <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 150:             <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.add</span><span class='Baan-baanSymbol def-Symbol'>(</span>prc<span class='Baan-baanNumber def-Number'>.</span>SickList<span class='Baan-baanSymbol def-Symbol'>,</span>needTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 151:          <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 152:           err<span class='Baan-baanSymbol def-Symbol'>=</span>sklscnt<span class='Baan-baanNumber def-Number'>.</span>performOne<span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>needTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>prc<span class='Baan-baanNumber def-Number'>.</span>SickListDate<span class='Baan-baanSymbol def-Symbol'>,</span>prc<span class='Baan-baanNumber def-Number'>.</span>SickListLength<span class='Baan-baanSymbol def-Symbol'>,</span>prc<span class='Baan-baanNumber def-Number'>.</span>FundH<span class='Baan-baanSymbol def-Symbol'>,</span>isTimePayed<span class='Baan-baanSymbol def-Symbol'>,</span>aResult<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 153:         HANDLE<span class='Baan-baanNumber def-Number'>.</span>ERR
+ 154:      <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 155:       <span class='Baan-baanUserProcedure def-Identifier'>clog.setSickList</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 156:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 157:     days<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span> hours<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 158:     prc<span class='Baan-baanNumber def-Number'>.</span>SickListLength<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 159:     prc<span class='Baan-baanNumber def-Number'>.</span>FundH<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 160:     prc<span class='Baan-baanNumber def-Number'>.</span>SickListDate<span class='Baan-baanSymbol def-Symbol'>=</span>getSickListDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 161:     prc<span class='Baan-baanNumber def-Number'>.</span>SickList<span class='Baan-baanSymbol def-Symbol'>=</span>currentSickList<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 162:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>errOk<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 163: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 164: <span class='Baan-baanKeyword def-Keyword'>function</span> ERRCODE processDay<span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span> BOOL isTimePayed<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> MONEY aResult<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> <span class='Baan-baanKeyword def-Keyword'>double</span> Days<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> <span class='Baan-baanKeyword def-Keyword'>double</span> Hours<span class='Baan-baanSymbol def-Symbol'>,</span>Bool useList<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 165:     Days<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 166:     Hours<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>                             
+ 167:     aResult<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 168:     <span class='def-Comment def-Syntax'>| Если текущий вид времени = требуемому</span>
+ 169:    <span class='Baan-baanKeyword def-Keyword'> if</span> currentTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span>needTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 170:         <span class='def-Comment def-Syntax'>| Если начало нового больничного</span>
+ 171:        <span class='Baan-baanKeyword def-Keyword'> if</span> isSickListBegin<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 172:             <span class='def-Comment def-Syntax'>| Обработать конец предыдущего</span>
+ 173:             handleSickListEnd<span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>isTimePayed<span class='Baan-baanSymbol def-Symbol'>,</span>aResult<span class='Baan-baanSymbol def-Symbol'>,</span>Days<span class='Baan-baanSymbol def-Symbol'>,</span>Hours<span class='Baan-baanSymbol def-Symbol'>,</span>useList<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 174:        <span class='Baan-baanKeyword def-Keyword'> endif </span>                                 
+ 175:         <span class='def-Comment def-Syntax'>| Количество дней больничного++</span>
+ 176:         prc<span class='Baan-baanNumber def-Number'>.</span>SickListLength<span class='Baan-baanSymbol def-Symbol'>=</span>prc<span class='Baan-baanNumber def-Number'>.</span>SickListLength<span class='Baan-baanSymbol def-Symbol'>+</span><span class='Baan-baanNumber def-Number'>1</span>                         
+ 177:         <span class='Baan-baanKeyword def-Keyword'>long</span> D
+ 178:         <span class='Baan-baanKeyword def-Keyword'>double</span> H
+ 179:         <span class='Baan-baanUserProcedure def-Identifier'>ghis.fundForPeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>tb.workingPlace.id</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>tb.date</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>tb.date</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>D<span class='Baan-baanSymbol def-Symbol'>,</span>H<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 180:         prc<span class='Baan-baanNumber def-Number'>.</span>FundH<span class='Baan-baanSymbol def-Symbol'>=</span>prc<span class='Baan-baanNumber def-Number'>.</span>FundH<span class='Baan-baanSymbol def-Symbol'>+</span>H
+ 181:         Days<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>1</span>
+ 182:         Hours<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>tb.Hours</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 183:    <span class='Baan-baanKeyword def-Keyword'> endif </span>                                  
+ 184:     <span class='def-Comment def-Syntax'>| Сохранить состояние в переменных</span>
+ 185:     saveToOld<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 186:     <span class='Baan-baanKeyword def-Keyword'>RETURN</span><span class='Baan-baanSymbol def-Symbol'>(</span>errOk<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 187: <span class='Baan-baanSymbol def-Symbol'>}</span>         
+ 188: <span class='def-Comment def-Syntax'>| Является ли текущий день табеля началом больничного</span>
+ 189: <span class='Baan-baanKeyword def-Keyword'>function</span> BOOL isSickListBegin<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 190:     <span class='def-Comment def-Syntax'>| Был ли разрыв в днях:</span>
+ 191:     <span class='def-Comment def-Syntax'>|   код старого дня не равен коду текущего</span>
+ 192:    <span class='Baan-baanKeyword def-Keyword'> if</span> prc<span class='Baan-baanNumber def-Number'>.</span>OldTimeKind<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>CurrentTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 193:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>true</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 194:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 195:     <span class='def-Comment def-Syntax'>| если нет, то отличается ли</span>
+ 196:     <span class='def-Comment def-Syntax'>| связанный с днем больничный от</span>
+ 197:     <span class='def-Comment def-Syntax'>| предыдущего</span>
+ 198:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>currentSickList<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>prc<span class='Baan-baanNumber def-Number'>.</span>OldSickList<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 199: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 200: <span class='def-Comment def-Syntax'>| created 12.10.99                    </span>
+ 201: <span class='def-Comment def-Syntax'>| Возвращает двту больничного для</span>
+ 202: <span class='def-Comment def-Syntax'>| текущей даты табеля</span>
+ 203: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanVariable def-Var'>DATE</span> getSickListDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 204:    <span class='Baan-baanKeyword def-Keyword'> if</span> hasSickList<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>            
+ 205:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>curSickList<span class='Baan-baanNumber def-Number'>.</span>BegDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>  
+ 206:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 207:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>tb.date</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 208: <span class='Baan-baanSymbol def-Symbol'>}</span>                    
+ 209: <span class='def-Comment def-Syntax'>| Есть ли у текущей даты табеля </span>
+ 210: <span class='def-Comment def-Syntax'>| соответствующий ей больничный</span>
+ 211: <span class='Baan-baanKeyword def-Keyword'>function</span> BOOL hasSickList<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span> 
+ 212:  BOOL aResult
+ 213:  aResult<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>skls.findByID</span><span class='Baan-baanSymbol def-Symbol'>(</span>CurrStaff<span class='Baan-baanSymbol def-Symbol'>,</span> tfzzz007<span class='Baan-baanNumber def-Number'>.</span>tb_bolli<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span>errOk
+ 214:  <span class='Baan-baanUserProcedure def-Identifier'>ok</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 215:  <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>aResult<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 216: <span class='Baan-baanSymbol def-Symbol'>}</span>               
+ 217: <span class='def-Comment def-Syntax'>| Возвращает дату начала больничного,</span>
+ 218: <span class='def-Comment def-Syntax'>| связанного с текущей датой табеля</span>
+ 219: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanVariable def-Var'>DATE</span> curSickList<span class='Baan-baanNumber def-Number'>.</span>BegDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 220:     <span class='Baan-baanUserProcedure def-Identifier'>skls.findByID</span><span class='Baan-baanSymbol def-Symbol'>(</span>CurrStaff<span class='Baan-baanSymbol def-Symbol'>,</span> currentSickList<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 221:       HERR<span class='Baan-baanNumber def-Number'>.</span>N
+ 222:    <span class='Baan-baanKeyword def-Keyword'> if</span> skls<span class='Baan-baanNumber def-Number'>.</span>firstDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 223:       <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz097<span class='Baan-baanNumber def-Number'>.</span>sklsbdat<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 224:    <span class='Baan-baanKeyword def-Keyword'> endif </span>
+ 225:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>skls<span class='Baan-baanNumber def-Number'>.</span>firstDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 226: <span class='def-Comment def-Syntax'>|    endif</span>
+ 227: <span class='Baan-baanSymbol def-Symbol'>}</span>                                  
+ 228: <span class='def-Comment def-Syntax'>| Сохранить состояние в переменных</span>
+ 229: <span class='Baan-baanKeyword def-Keyword'>function</span> saveToOld<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>                
+ 230:     <span class='def-Comment def-Syntax'>| Если день не игнорируется</span>
+ 231:    <span class='Baan-baanKeyword def-Keyword'> if</span> <span class='Baan-baanKeyword def-Keyword'>not</span> isIgnoredDay<span class='Baan-baanSymbol def-Symbol'>(</span>CurrentTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 232:         <span class='def-Comment def-Syntax'>| Если текущий вид времени &lt;> Требуемому</span>
+ 233:      <span class='Baan-baanKeyword def-Keyword'> if</span> CurrentTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>NeedTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 234:       prc<span class='Baan-baanNumber def-Number'>.</span>OldSickList<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>          
+ 235:       <span class='Baan-baanKeyword def-Keyword'>else</span>               
+ 236:           prc<span class='Baan-baanNumber def-Number'>.</span>OldSickList<span class='Baan-baanSymbol def-Symbol'>=</span>CurrentSickList<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 237:      <span class='Baan-baanKeyword def-Keyword'> endif </span>               
+ 238:       prc<span class='Baan-baanNumber def-Number'>.</span>OldTimeKind<span class='Baan-baanSymbol def-Symbol'>=</span>CurrentTimeKind<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 239:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 240: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 241: <span class='def-Comment def-Syntax'>| Тип времени не учитывается в больничном       </span>
+ 242: <span class='Baan-baanKeyword def-Keyword'>function</span> BOOL isIgnoredDay<span class='Baan-baanSymbol def-Symbol'>(</span>TmКndCode TimeKind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 243:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanProcedure def-Symbol'>strip$</span><span class='Baan-baanSymbol def-Symbol'>(</span>TimeKind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanProcedure def-Symbol'>strip$</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>get.leave.holiday.time</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 244: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 245: <span class='Baan-baanDirective def-Directive'>#define</span> dv<span class='Baan-baanSymbol def-Symbol'>(</span>a<span class='Baan-baanSymbol def-Symbol'>,</span>b<span class='Baan-baanSymbol def-Symbol'>)</span> b<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>?</span><span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>:</span>a<span class='Baan-baanSymbol def-Symbol'>/</span>b
+ 246: <span class='def-Comment def-Syntax'>| расчитать больничный</span>
+ 247: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@params</span>
+ 248: <span class='def-Comment def-Syntax'>| aCode - код расчета</span>
+ 249: <span class='def-Comment def-Syntax'>| aTimeKind - вид времени</span>
+ 250: <span class='def-Comment def-Syntax'>| begDate - дата начала</span>
+ 251: <span class='def-Comment def-Syntax'>| Length - длина </span>
+ 252: <span class='def-Comment def-Syntax'>| aResult - переменная, в которую возвращается сумма</span>
+ 253: <span class='Baan-baanKeyword def-Keyword'>function</span> ERRCODE sklscnt<span class='Baan-baanNumber def-Number'>.</span>performOne<span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span> TmКndCode aTimeKind<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanVariable def-Var'>DATE</span> begDate<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>long</span> Length<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>double</span> FundH<span class='Baan-baanSymbol def-Symbol'>,</span>BOOL isTimePayed<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>ref</span> MONEY aResult<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>   
+ 254:     ibuf<span class='Baan-baanNumber def-Number'>.</span>dim<span class='Baan-baanSymbol def-Symbol'>(</span>ttfzzz007<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 255:     ibuf<span class='Baan-baanNumber def-Number'>.</span>store<span class='Baan-baanSymbol def-Symbol'>(</span>ttfzzz007<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 256:     ERRCODE err            
+ 257:     
+ 258:     <span class='Baan-baanKeyword def-Keyword'>double</span> PersFund<span class='Baan-baanSymbol def-Symbol'>,</span>H <span class='def-Comment def-Syntax'>| Личный фонд</span>
+ 259:     <span class='Baan-baanKeyword def-Keyword'>double</span> periodFundH <span class='def-Comment def-Syntax'>| </span>
+ 260:     
+ 261:     MONEY S <span class='def-Comment def-Syntax'>| Cумма месяца</span>
+ 262:   MONEY S1 <span class='def-Comment def-Syntax'>| Сумма базы</span>
+ 263: 
+ 264:      <span class='Baan-baanKeyword def-Keyword'>double</span> T<span class='Baan-baanSymbol def-Symbol'>,</span>T1
+ 265:     <span class='Baan-baanKeyword def-Keyword'>long</span> f
+ 266:     TPeriod aBegPeriod
+ 267:     aBegPeriod<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>begDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 268:   <span class='def-Comment def-Syntax'>| message(sprintf$("%D002",begDate)) | stub</span>
+ 269:   Money mdBase 
+ 270:     MONEY bonuses    
+ 271:     <span class='Baan-baanKeyword def-Keyword'>double</span> BonusK
+ 272:   <span class='def-Comment def-Syntax'>| Если форма оплаты повременная    </span>
+ 273:  <span class='Baan-baanKeyword def-Keyword'> if</span> isTimePayed <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 274:        <span class='def-Comment def-Syntax'>|&lt;  MaxBelugin 16/06/00 16:33:54</span>
+ 275:        <span class='def-Comment def-Syntax'>| Исключительно для отчетности</span>
+ 276:       <span class='Baan-baanUserProcedure def-Identifier'>mids.calculateBase</span><span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span> begDate<span class='Baan-baanSymbol def-Symbol'>,</span>T<span class='Baan-baanSymbol def-Symbol'>,</span>T1<span class='Baan-baanSymbol def-Symbol'>,</span>F<span class='Baan-baanSymbol def-Symbol'>,</span>H<span class='Baan-baanSymbol def-Symbol'>,</span>S1<span class='Baan-baanSymbol def-Symbol'>,</span>BonusK<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 277:       <span class='def-Comment def-Syntax'>|  MaxBelugin 16/06/00 16:33:56></span>
+ 278:    
+ 279:       <span class='def-Comment def-Syntax'>| Расчитать базовую стоимость</span>
+ 280:       err<span class='Baan-baanSymbol def-Symbol'>=</span>sklscnt<span class='Baan-baanNumber def-Number'>.</span>CalcBase<span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span> aTimeKind<span class='Baan-baanSymbol def-Symbol'>,</span> begDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 281:         HANDLE<span class='Baan-baanNumber def-Number'>.</span>ERR                      
+ 282:       <span class='def-Comment def-Syntax'>|&lt;  MaxBelugin 03/04/00 12:55:06</span>
+ 283:       <span class='Baan-baanKeyword def-Keyword'>double</span> rate
+ 284:       rate<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.rate</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 285:       <span class='def-Comment def-Syntax'>|  MaxBelugin 03/04/00 12:55:13></span>
+ 286:       S1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>sklscnt.totalBy</span><span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>boln<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>*</span>rate <span class='def-Comment def-Syntax'>|  MaxBelugin 03/04/00 12:57:19 </span>
+ 287:       <span class='def-Comment def-Syntax'>| Удалить протокол</span>
+ 288:       <span class='Baan-baanProcedure def-Symbol'>db.retry.point</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 289:       err<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>cnlg.delete</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 290:         END<span class='Baan-baanNumber def-Number'>.</span>ERR<span class='Baan-baanNumber def-Number'>.</span>TR    
+ 291:       <span class='Baan-baanUserProcedure def-Identifier'>clog.addDef</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>clc<span class='Baan-baanNumber def-Number'>.</span>prop<span class='Baan-baanNumber def-Number'>.</span>mm<span class='Baan-baanNumber def-Number'>.</span>base<span class='Baan-baanSymbol def-Symbol'>,</span>S1<span class='Baan-baanSymbol def-Symbol'>,</span>abegPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 292:     <span class='Baan-baanKeyword def-Keyword'>else</span>
+ 293:       <span class='Baan-baanUserProcedure def-Identifier'>mids.calculateBase</span><span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span> begDate<span class='Baan-baanSymbol def-Symbol'>,</span>T<span class='Baan-baanSymbol def-Symbol'>,</span>T1<span class='Baan-baanSymbol def-Symbol'>,</span>F<span class='Baan-baanSymbol def-Symbol'>,</span>H<span class='Baan-baanSymbol def-Symbol'>,</span>S1<span class='Baan-baanSymbol def-Symbol'>,</span>BonusK<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 294:       MdBase<span class='Baan-baanSymbol def-Symbol'>=</span>dv<span class='Baan-baanSymbol def-Symbol'>(</span>s1<span class='Baan-baanSymbol def-Symbol'>,</span>t1<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 295:       <span class='def-Comment def-Syntax'>| Среднечасовая хрень</span>
+ 296:      <span class='Baan-baanKeyword def-Keyword'> if</span> h<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 297:         S1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 298:       <span class='Baan-baanKeyword def-Keyword'>else</span> 
+ 299:         S1<span class='Baan-baanSymbol def-Symbol'>=</span>S1<span class='Baan-baanSymbol def-Symbol'>/</span>H    
+ 300:      <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 301:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 302:     <span class='def-Comment def-Syntax'>| расчиать сумму премий</span>
+ 303:   <span class='def-Comment def-Syntax'>|    message("s1+2+3+4:"&amp;str$(Schk2+Sh+Sm))</span>
+ 304:     bonuses<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>processBonuses</span><span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>begDate<span class='Baan-baanSymbol def-Symbol'>)</span>   
+ 305:     <span class='Baan-baanUserProcedure def-Identifier'>clog.addDef</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>clc<span class='Baan-baanNumber def-Number'>.</span>prop<span class='Baan-baanNumber def-Number'>.</span>mnth<span class='Baan-baanNumber def-Number'>.</span>bonus<span class='Baan-baanSymbol def-Symbol'>,</span>bonuses<span class='Baan-baanSymbol def-Symbol'>,</span>aBegPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='def-Comment def-Syntax'>|  MaxBelugin 16/06/00 17:18:37</span>
+ 306:   Money mdBonus
+ 307:   mdBonus<span class='Baan-baanSymbol def-Symbol'>=</span>dv<span class='Baan-baanSymbol def-Symbol'>(</span>bonuses<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>wpc.graphDays</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>AccPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 308:   <span class='Baan-baanUserProcedure def-Identifier'>clog.addDef</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>clc<span class='Baan-baanNumber def-Number'>.</span>prop<span class='Baan-baanNumber def-Number'>.</span>day<span class='Baan-baanNumber def-Number'>.</span>bonus<span class='Baan-baanSymbol def-Symbol'>,</span>mdBonus<span class='Baan-baanSymbol def-Symbol'>,</span>aBegPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 309:   <span class='def-Comment def-Syntax'>| Если форма оплаты повременная      </span>
+ 310:   MONEY MMOTi
+ 311:   MMOTi<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>MMOTs</span><span class='Baan-baanSymbol def-Symbol'>(</span>AccPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 312:  <span class='Baan-baanKeyword def-Keyword'> if</span> isTimePayed <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 313:     S<span class='Baan-baanSymbol def-Symbol'>=</span>S1<span class='Baan-baanSymbol def-Symbol'>+</span>bonuses     
+ 314:     PersFund<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wpc.graphDays</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>AccPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='def-Comment def-Syntax'>|  MaxBelugin 19/09/00 14:51:37 PersFund=wpc.graphDays(CalcCurrWorkingPlace,aBegPeriod)</span>
+ 315:     mdBase<span class='Baan-baanSymbol def-Symbol'>=</span>dv<span class='Baan-baanSymbol def-Symbol'>(</span>S1<span class='Baan-baanSymbol def-Symbol'>,</span>PersFund<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 316:     err<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>errorGet</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 317:     HANDLE<span class='Baan-baanNumber def-Number'>.</span>ERR       
+ 318:     <span class='def-Comment def-Syntax'>|message("Фонд:"&amp;str$(PersFund))</span>
+ 319:     <span class='def-Comment def-Syntax'>|message("Продолж. больничного:"&amp;str$(Length))</span>
+ 320:     <span class='def-Comment def-Syntax'>|message("Сумма:"&amp;str$(s))</span>
+ 321:     S<span class='Baan-baanSymbol def-Symbol'>=</span>S<span class='Baan-baanSymbol def-Symbol'>/</span>PersFund
+ 322:     S<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanProcedure def-Symbol'>min</span><span class='Baan-baanSymbol def-Symbol'>(</span>S<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanSymbol def-Symbol'>(</span>MMOTi<span class='Baan-baanSymbol def-Symbol'>*</span><span class='Baan-baanNumber def-Number'>85</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>/</span>PersFund<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 323:     S<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanProcedure def-Symbol'>round</span><span class='Baan-baanSymbol def-Symbol'>(</span>S<span class='Baan-baanSymbol def-Symbol'>*</span>Length<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanNumber def-Number'>2</span><span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 324:   <span class='Baan-baanKeyword def-Keyword'>else</span>
+ 325:       <span class='Baan-baanKeyword def-Keyword'>long</span> Dummy   
+ 326:       periodFundH<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wpc.graphHours</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>AccPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='def-Comment def-Syntax'>|  MaxBelugin 20/09/00 12:05:23 periodFundH=wpc.graphHours(CalcCurrWorkingPlace,aBegPeriod)</span>
+ 327:     S<span class='Baan-baanSymbol def-Symbol'>=</span>S1<span class='Baan-baanSymbol def-Symbol'>+</span>bonuses<span class='Baan-baanSymbol def-Symbol'>*</span>BonusK<span class='Baan-baanSymbol def-Symbol'>/</span>H
+ 328:     S<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanProcedure def-Symbol'>min</span><span class='Baan-baanSymbol def-Symbol'>(</span>S<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanSymbol def-Symbol'>(</span>MMOTi<span class='Baan-baanSymbol def-Symbol'>*</span><span class='Baan-baanNumber def-Number'>85</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>/</span>periodFundH<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 329:     S<span class='Baan-baanSymbol def-Symbol'>=</span>S<span class='Baan-baanSymbol def-Symbol'>*</span>FundH
+ 330:  <span class='Baan-baanKeyword def-Keyword'> endif </span>       
+ 331:   <span class='Baan-baanUserProcedure def-Identifier'>clog.addDef</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>clc<span class='Baan-baanNumber def-Number'>.</span>prop<span class='Baan-baanNumber def-Number'>.</span>md<span class='Baan-baanNumber def-Number'>.</span>base<span class='Baan-baanSymbol def-Symbol'>,</span>mdBase<span class='Baan-baanSymbol def-Symbol'>,</span>aBegPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 332:   Money mdIncome
+ 333:   mdIncome<span class='Baan-baanSymbol def-Symbol'>=</span>mdBase<span class='Baan-baanSymbol def-Symbol'>+</span>mdBonus
+ 334:   <span class='Baan-baanUserProcedure def-Identifier'>clog.addDef</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>clc<span class='Baan-baanNumber def-Number'>.</span>prop<span class='Baan-baanNumber def-Number'>.</span>avd<span class='Baan-baanNumber def-Number'>.</span>fact<span class='Baan-baanNumber def-Number'>.</span>income<span class='Baan-baanSymbol def-Symbol'>,</span>mdIncome<span class='Baan-baanSymbol def-Symbol'>,</span>aBegPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 335:   Money forClc
+ 336:   forClc<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanProcedure def-Symbol'>min</span><span class='Baan-baanSymbol def-Symbol'>(</span>mdIncome<span class='Baan-baanSymbol def-Symbol'>,</span>dv<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>(</span>MMOTi<span class='Baan-baanSymbol def-Symbol'>*</span><span class='Baan-baanNumber def-Number'>85</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>PersFund<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 337:   <span class='Baan-baanUserProcedure def-Identifier'>clog.addDef</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>clc<span class='Baan-baanNumber def-Number'>.</span>prop<span class='Baan-baanNumber def-Number'>.</span>day<span class='Baan-baanNumber def-Number'>.</span>for<span class='Baan-baanNumber def-Number'>.</span>calc<span class='Baan-baanSymbol def-Symbol'>,</span>forClc<span class='Baan-baanSymbol def-Symbol'>,</span>aBegPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 338:     <span class='def-Comment def-Syntax'>| updated by Shatanov 23.03.2000 19:37</span>
+ 339:     <span class='def-Comment def-Syntax'>| but ttfzzz173 used</span>
+ 340:     <span class='def-Comment def-Syntax'>|  s=S*getPercent(CurrStaff,CalcCurrWorkingPlace, begDate,aCode)/100</span>
+ 341:   s<span class='Baan-baanSymbol def-Symbol'>=</span>S<span class='Baan-baanSymbol def-Symbol'>*</span><span class='Baan-baanUserProcedure def-Identifier'>getPercent</span><span class='Baan-baanSymbol def-Symbol'>(</span>CurrStaff<span class='Baan-baanSymbol def-Symbol'>,</span> begDate<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>/</span><span class='Baan-baanNumber def-Number'>100</span>
+ 342:   <span class='Baan-baanUserProcedure def-Identifier'>clog.addDef</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>clc<span class='Baan-baanNumber def-Number'>.</span>prop<span class='Baan-baanNumber def-Number'>.</span>pers<span class='Baan-baanNumber def-Number'>.</span>perc<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>getPercent</span><span class='Baan-baanSymbol def-Symbol'>(</span>CurrStaff<span class='Baan-baanSymbol def-Symbol'>,</span> begDate<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>aBegPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 343:   <span class='Baan-baanUserProcedure def-Identifier'>clog.addDef</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>clc<span class='Baan-baanNumber def-Number'>.</span>prop<span class='Baan-baanNumber def-Number'>.</span>day<span class='Baan-baanNumber def-Number'>.</span>pay<span class='Baan-baanSymbol def-Symbol'>,</span>forClc<span class='Baan-baanSymbol def-Symbol'>*</span><span class='Baan-baanUserProcedure def-Identifier'>getPercent</span><span class='Baan-baanSymbol def-Symbol'>(</span>CurrStaff<span class='Baan-baanSymbol def-Symbol'>,</span> begDate<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>/</span><span class='Baan-baanNumber def-Number'>100</span><span class='Baan-baanSymbol def-Symbol'>,</span>aBegPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 344:   <span class='def-Comment def-Syntax'>|message("Итого="&amp;str$(S))</span>
+ 345:   aResult<span class='Baan-baanSymbol def-Symbol'>=</span>S 
+ 346:   ibuf<span class='Baan-baanNumber def-Number'>.</span>restore<span class='Baan-baanSymbol def-Symbol'>(</span>ttfzzz007<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 347:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errSetOk</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 348: <span class='Baan-baanSymbol def-Symbol'>}</span>                                
+ 349: 
+ 350: <span class='def-Comment def-Syntax'>| Расчет базовой стоимости  </span>
+ 351: <span class='def-Comment def-Syntax'>| created 14.10.99 by MaxBelugin</span>
+ 352: <span class='Baan-baanKeyword def-Keyword'>function</span> ERRCODE sklscnt<span class='Baan-baanNumber def-Number'>.</span>calcBase <span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span>TmКndCode aTimeKind<span class='Baan-baanSymbol def-Symbol'>,</span> <span class='Baan-baanVariable def-Var'>DATE</span> aDate<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 353:   ERRCODE err
+ 354:   <span class='def-Comment def-Syntax'>| Создать временный расчетный протокол</span>
+ 355:   <span class='Baan-baanProcedure def-Symbol'>db.retry.point</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 356:   err<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>cnlg.fillNew</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 357:  <span class='Baan-baanKeyword def-Keyword'> if</span> err<span class='Baan-baanSymbol def-Symbol'>=</span>errOk <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 358:     err<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>cnlg.insert</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 359:  <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 360:   END<span class='Baan-baanNumber def-Number'>.</span>ERR<span class='Baan-baanNumber def-Number'>.</span>TR
+ 361:   <span class='def-Comment def-Syntax'>| Заполнить расчетный листок</span>
+ 362:   err<span class='Baan-baanSymbol def-Symbol'>=</span>sklscnt<span class='Baan-baanNumber def-Number'>.</span>fillCalcLog<span class='Baan-baanSymbol def-Symbol'>(</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span> aTimeKind<span class='Baan-baanSymbol def-Symbol'>,</span> aDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 363:   HANDLE<span class='Baan-baanNumber def-Number'>.</span>ERR
+ 364:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>errOk<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 365: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 366: 
+ 367: <span class='def-Comment def-Syntax'>| Заполнение расчетного листка</span>
+ 368: <span class='def-Comment def-Syntax'>| created 14.10.99 by MaxBelugin</span>
+ 369: <span class='Baan-baanKeyword def-Keyword'>function</span> ERRCODE sklscnt<span class='Baan-baanNumber def-Number'>.</span>fillCalcLog<span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span>TmКndCode aTimeKind<span class='Baan-baanSymbol def-Symbol'>,</span> <span class='Baan-baanVariable def-Var'>DATE</span> aDate<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 370:     ERRCODE err
+ 371:     <span class='def-Comment def-Syntax'>| Для всех лицевых данных на момент </span>
+ 372:     <span class='def-Comment def-Syntax'>| начала больничного{               </span>
+ 373:     <span class='Baan-baanSQL def-Directive'>SELECT</span> <span class='Baan-baanSymbol def-Symbol'>*</span> <span class='Baan-baanSQL def-Directive'>FROM</span> tfzzz016 <span class='Baan-baanSQL def-Directive'>WHERE</span>                  
+ 374:       ts_cd1<span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span>
+ 375:       <span class='Baan-baanSQL def-Directive'>AND</span>   
+ 376:       ts_flg <span class='Baan-baanSQL def-Directive'>in</span> <span class='Baan-baanSymbol def-Symbol'>(</span> tfzzz.fl.vhogd.boln<span class='Baan-baanSymbol def-Symbol'>)</span>      
+ 377:     <span class='Baan-baanSQL def-Directive'>ORDER</span> <span class='Baan-baanSQL def-Directive'>BY</span>
+ 378:       ts_no          
+ 379:     <span class='Baan-baanSQL def-Directive'>SELECTDO</span>    
+ 380:     <span class='def-Comment def-Syntax'>| расчитать лицевое данное   </span>
+ 381:       err<span class='Baan-baanSymbol def-Symbol'>=</span>calcPersData<span class='Baan-baanSymbol def-Symbol'>(</span>aDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 382:       HANDLE<span class='Baan-baanNumber def-Number'>.</span>ERR
+ 383:     <span class='def-Comment def-Syntax'>| }     </span>
+ 384:     <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>                       
+ 385:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>errOk<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 386: <span class='Baan-baanSymbol def-Symbol'>}</span>                            
+ 387: 
+ 388: <span class='def-Comment def-Syntax'>| расчитать лицевое данное     </span>
+ 389: <span class='def-Comment def-Syntax'>| считатется, что протокол расчета создан </span>
+ 390: <span class='def-Comment def-Syntax'>| и загружен в буфер</span>
+ 391: <span class='def-Comment def-Syntax'>| created 15.10.99 (01:39:00 ) by Max Belugin</span>
+ 392: <span class='Baan-baanKeyword def-Keyword'>function</span> ERRCODE calcPersData<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanVariable def-Var'>Date</span> aDate<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 393:     <span class='def-Comment def-Syntax'>| Расчет = Создать расчет по его коду в лицевом счете </span>
+ 394:     <span class='def-Comment def-Syntax'>| Расчет.ЛицевыеДанные = Срез на дату начала</span>
+ 395:     <span class='def-Comment def-Syntax'>| Расчет.Протокол = Текущий протокол</span>
+ 396:     <span class='def-Comment def-Syntax'>| Расчет.ПротоколИсточников = Текущий протокол</span>
+ 397:     <span class='def-Comment def-Syntax'>| Расчет.Расчитать</span>
+ 398:   <span class='def-Comment def-Syntax'>|message(tfzzz072.ld_code) | stub</span>
+ 399:   clcres<span class='Baan-baanNumber def-Number'>.</span>save<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 400:   <span class='Baan-baanKeyword def-Keyword'>long</span> oldAccPeriod
+ 401:   <span class='Baan-baanUserProcedure def-Identifier'>setEnvForSickList</span><span class='Baan-baanSymbol def-Symbol'>(</span>aDate<span class='Baan-baanSymbol def-Symbol'>)</span>     
+ 402:   oldAccPeriod<span class='Baan-baanSymbol def-Symbol'>=</span>AccPeriod
+ 403:   AccPeriod<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 404:   <span class='Baan-baanKeyword def-Keyword'>String</span> oldCode<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>3</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 405:   oldCode<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz080<span class='Baan-baanNumber def-Number'>.</span>ras_code
+ 406:   tfzzz080<span class='Baan-baanNumber def-Number'>.</span>ras_code<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz016<span class='Baan-baanNumber def-Number'>.</span>ts_cd2
+ 407:   clcres<span class='Baan-baanNumber def-Number'>.</span>initByPeriod<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aDate<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 408:   ERRCODE err
+ 409:   Ident old<span class='Baan-baanNumber def-Number'>.</span>wp
+ 410:   old<span class='Baan-baanNumber def-Number'>.</span>wp<span class='Baan-baanSymbol def-Symbol'>=</span>CalcCurrWorkingPlace
+ 411:   CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wpc.workingPlaceByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>aDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 412:   err<span class='Baan-baanSymbol def-Symbol'>=</span>calcCurrCode<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 413:   AccPeriod<span class='Baan-baanSymbol def-Symbol'>=</span>oldAccPeriod
+ 414:   CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>=</span>old<span class='Baan-baanNumber def-Number'>.</span>wp
+ 415:   <span class='Baan-baanUserProcedure def-Identifier'>cnlg.addFromCalcRes</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 416:     tfzzz080<span class='Baan-baanNumber def-Number'>.</span>ras_code<span class='Baan-baanSymbol def-Symbol'>=</span>oldCode
+ 417:     clcres<span class='Baan-baanNumber def-Number'>.</span>retrieve<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 418:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>err<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 419: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 420: <span class='def-Comment def-Syntax'>| Возврящает текущий больничный</span>
+ 421: <span class='Baan-baanKeyword def-Keyword'>function</span> IDENT currentSickList<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 422:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz007<span class='Baan-baanNumber def-Number'>.</span>tb_bolli<span class='Baan-baanSymbol def-Symbol'>)</span> 
+ 423: <span class='Baan-baanSymbol def-Symbol'>}</span>             
+ 424: <span class='def-Comment def-Syntax'>| Является ли больничный продолжением</span>
+ 425: <span class='def-Comment def-Syntax'>|function BOOL skls.isCountinue(){</span>
+ 426: <span class='def-Comment def-Syntax'>|    return(tfzzz097.sklscont=tfzzz.checkbox.true)</span>
+ 427: <span class='def-Comment def-Syntax'>|}</span>
+ 428: <span class='def-Comment def-Syntax'>| Дата начала первого больничного,</span>
+ 429: <span class='def-Comment def-Syntax'>| продолжением которого является этот</span>
+ 430: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanVariable def-Var'>DATE</span> skls<span class='Baan-baanNumber def-Number'>.</span>firstDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 431:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz097<span class='Baan-baanNumber def-Number'>.</span>sklsfrst<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 432: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 433: 
+ 434: <span class='def-Comment def-Syntax'>|!!! debug</span>
+ 435: <span class='Baan-baanKeyword def-Keyword'>extern</span>  <span class='Baan-baanKeyword def-Keyword'>long</span>    NumberRet
+ 436: <span class='Baan-baanKeyword def-Keyword'>extern</span>  <span class='Baan-baanKeyword def-Keyword'>double</span>    sum<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>120</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 437: <span class='def-Comment def-Syntax'>|!!! debug></span>
+ 438: 
+ 439:   
+ 440: <span class='Baan-baanDirective def-Directive'>#define</span> calcDllName <span class='Baan-baanString def-String'>"otfzzzdllcalc"</span>
+ 441: <span class='def-Comment def-Syntax'>| Расчет.Расчитать</span>
+ 442: <span class='Baan-baanKeyword def-Keyword'>function</span> ERRCODE calcCurrCode<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 443:     <span class='Baan-baanKeyword def-Keyword'>long</span> dll_id  
+ 444:     <span class='Baan-baanKeyword def-Keyword'>long</span> func_id
+ 445:     <span class='Baan-baanKeyword def-Keyword'>STRING</span> funcName<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>50</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 446:     ERRCODE res
+ 447:     dll_id <span class='Baan-baanSymbol def-Symbol'>=</span> <span class='Baan-baanProcedure def-Symbol'>load_dll</span><span class='Baan-baanSymbol def-Symbol'>(</span>calcDllName<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 448:    <span class='Baan-baanKeyword def-Keyword'> if</span> dll_id<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 449:       <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errorSet</span><span class='Baan-baanSymbol def-Symbol'>(</span>errError<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanString def-String'>"Не могу загрузить "</span><span class='Baan-baanSymbol def-Symbol'>&amp;</span>calcDllName<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 450:    <span class='Baan-baanKeyword def-Keyword'> endif </span>      
+ 451:     <span class='def-Comment def-Syntax'>|!!! Debug</span>
+ 452:     <span class='Baan-baanKeyword def-Keyword'>String</span> ccc<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>4</span><span class='Baan-baanSymbol def-Symbol'>)</span>                    
+ 453:     ccc<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz016<span class='Baan-baanNumber def-Number'>.</span>ts_cd2
+ 454:     <span class='def-Comment def-Syntax'>|!!! Debug></span>
+ 455:     funcname<span class='Baan-baanSymbol def-Symbol'>=</span>getSklsFunctionName<span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz016<span class='Baan-baanNumber def-Number'>.</span>ts_cd2<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 456:    <span class='Baan-baanKeyword def-Keyword'> if</span> <span class='Baan-baanUserProcedure def-Identifier'>wasError</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 457:       <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errorGet</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 458:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 459:    <span class='Baan-baanKeyword def-Keyword'> if</span> funcname<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span><span class='Baan-baanString def-String'>""</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 460:     func_id <span class='Baan-baanSymbol def-Symbol'>=</span> <span class='Baan-baanProcedure def-Symbol'>get_function</span> <span class='Baan-baanSymbol def-Symbol'>(</span>dll_id<span class='Baan-baanSymbol def-Symbol'>,</span> funcName<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 461:    <span class='Baan-baanKeyword def-Keyword'> if</span> func_id <span class='Baan-baanSymbol def-Symbol'>=</span> <span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 462:       <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errorSet</span><span class='Baan-baanSymbol def-Symbol'>(</span>errError<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanProcedure def-Symbol'>sprintf$</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanString def-String'>"Не могу загрузить функцию: %s "</span><span class='Baan-baanSymbol def-Symbol'>,</span> funcname<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 463:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 464:       res <span class='Baan-baanSymbol def-Symbol'>=</span> <span class='Baan-baanProcedure def-Symbol'>exec_function</span> <span class='Baan-baanSymbol def-Symbol'>(</span>dll_id<span class='Baan-baanSymbol def-Symbol'>,</span> func_id<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 465:     <span class='def-Comment def-Syntax'>| !!! Debug</span>
+ 466:     Money CalcFuncRet
+ 467:     CalcFuncRet<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 468:     CalcFuncRet<span class='Baan-baanSymbol def-Symbol'>=</span>Sum<span class='Baan-baanSymbol def-Symbol'>(</span>NumberRet<span class='Baan-baanSymbol def-Symbol'>)</span>      
+ 469:     CalcFuncRet<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 470:     <span class='def-Comment def-Syntax'>| !!! Debug></span>
+ 471:    <span class='Baan-baanKeyword def-Keyword'> if</span> res <span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span> <span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 472:       <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errorSet</span><span class='Baan-baanSymbol def-Symbol'>(</span>errError<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanProcedure def-Symbol'>sprintf$</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanString def-String'>"Не могу выполнить функцию: %s"</span><span class='Baan-baanSymbol def-Symbol'>,</span> funcName<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 473:    <span class='Baan-baanKeyword def-Keyword'> endif </span>     
+ 474:  <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 475:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>errSetOk</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 476: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 477: <span class='def-Comment def-Syntax'>| возвращает имя функуии, вычисляющей расчет </span>
+ 478: <span class='def-Comment def-Syntax'>| для больничного по коду начисления/удержания</span>
+ 479: <span class='def-Comment def-Syntax'>| aCode</span>
+ 480: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@created</span><span class='def-Comment def-Syntax'> </span>
+ 481: <span class='def-Comment def-Syntax'>|  18.10.99 (12:23:41 ) by Max Belugin</span>
+ 482: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>string</span> getSklsFunctionName<span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 483:     <span class='Baan-baanSQL def-Directive'>SELECT</span> <span class='Baan-baanSymbol def-Symbol'>*</span> <span class='Baan-baanSQL def-Directive'>FROM</span> tfzzz051<span class='Baan-baanSymbol def-Symbol'>,</span>tfzzz022    <span class='Baan-baanSQL def-Directive'>WHERE</span> 
+ 484:       tfzzz051._index1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 485:       <span class='Baan-baanSQL def-Directive'>and</span>
+ 486:       tfzzz022._index1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>nrm_func<span class='Baan-baanSymbol def-Symbol'>}</span><span class='Baan-baanComment def-Comment def-Syntax'>|fn_id=nrm_func    </span>
+ 487:     <span class='Baan-baanSQL def-Directive'>SELECTDO</span> 
+ 488:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanProcedure def-Symbol'>strip$</span><span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz022<span class='Baan-baanNumber def-Number'>.</span>fn_nm<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>&amp;</span>sklsSuffix<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 489:   <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>
+ 490:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanString def-String'>""</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 491: <span class='Baan-baanSymbol def-Symbol'>}</span>    
+ 492: 
+ 493: <span class='def-Comment def-Syntax'>| Возвращает сумму текущего расчетного протокола</span>
+ 494: <span class='def-Comment def-Syntax'>| по типу вхождения в больничный - aContKind.</span>
+ 495: <span class='def-Comment def-Syntax'>| created 19.10.99 (03:08:15 ) by Max Belugin</span>
+ 496: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> MONEY <span class='Baan-baanUserProcedure def-Identifier'>sklscnt.totalBy</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>domain</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd aContKind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 497:     MONEY aResult
+ 498:     aResult<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 499:     <span class='Baan-baanSQL def-Directive'>SELECT</span> <span class='Baan-baanSymbol def-Symbol'>*</span> <span class='Baan-baanSQL def-Directive'>FROM</span> tfzzz212<span class='Baan-baanSymbol def-Symbol'>,</span>tfzzz016 <span class='Baan-baanSQL def-Directive'>WHERE</span> 
+ 500:       log<span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>tfzzz211.id</span>
+ 501:       <span class='Baan-baanSQL def-Directive'>AND</span>
+ 502:       kind<span class='Baan-baanSymbol def-Symbol'>=</span>ts_cd2
+ 503:       <span class='Baan-baanSQL def-Directive'>AND</span>
+ 504:       ts_cd1<span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span>
+ 505:       <span class='Baan-baanSQL def-Directive'>AND</span>
+ 506:       ts_flg<span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>aContKind</span>
+ 507:     <span class='Baan-baanSQL def-Directive'>SELECTDO</span>
+ 508:         aResult<span class='Baan-baanSymbol def-Symbol'>=</span>aResult<span class='Baan-baanSymbol def-Symbol'>+</span>tfzzz212<span class='Baan-baanNumber def-Number'>.</span>total
+ 509:     <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>                       
+ 510:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>aResult<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 511: <span class='Baan-baanSymbol def-Symbol'>}</span> 
+ 512: 
+ 513: <span class='def-Comment def-Syntax'>| Обработка премий</span>
+ 514: <span class='def-Comment def-Syntax'>|  begDate - дата начала больничного</span>
+ 515: <span class='def-Comment def-Syntax'>| created 22.10.99 (03:40:30) by Max Belugin</span>
+ 516: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY <span class='Baan-baanUserProcedure def-Identifier'>processBonuses</span> <span class='Baan-baanSymbol def-Symbol'>(</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanVariable def-Var'>DATE</span> begDate<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 517:     Period bolnPrd
+ 518:     Period prevPrd
+ 519:     Period firstYearPrd
+ 520:     CalcCode bonusCode
+ 521:     ContKind aKind
+ 522:     <span class='Baan-baanVariable def-Var'>Date</span> startDate <span class='def-Comment def-Syntax'>| Дата с которой смотреть премии             </span>
+ 523:     Period startPrd <span class='def-Comment def-Syntax'>| Период с которого смотреть премии</span>
+ 524:     <span class='Baan-baanVariable def-Var'>Date</span> firstYearDate <span class='def-Comment def-Syntax'>| Дата начала первого периода года</span>
+ 525:     MONEY Total
+ 526:     <span class='Baan-baanKeyword def-Keyword'>long</span> goodPeriods
+ 527:     
+ 528:     startDate<span class='Baan-baanSymbol def-Symbol'>=</span>lastAcceptanceDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 529:     bolnPrd<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>begDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 530:     prevPrd<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>prevPeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>bolnPrd<span class='Baan-baanSymbol def-Symbol'>)</span>  
+ 531:     firstYearPrd<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>firstPeriodOfYearOf</span><span class='Baan-baanSymbol def-Symbol'>(</span>bolnPrd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 532:     firstYearDate<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>begDateOfPeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>firstYearPrd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 533:    <span class='Baan-baanKeyword def-Keyword'> if</span> firstYearDate<span class='Baan-baanSymbol def-Symbol'>></span>startDate <span class='Baan-baanKeyword def-Keyword'>then</span> 
+ 534:         startDate<span class='Baan-baanSymbol def-Symbol'>=</span>firstYearDate
+ 535:    <span class='Baan-baanKeyword def-Keyword'> endif </span>            
+ 536:     startPrd<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>startDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 537:     Total<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 538:    <span class='Baan-baanKeyword def-Keyword'> if</span> startPrd<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>=</span>prevPrd <span class='Baan-baanKeyword def-Keyword'>then</span> 
+ 539:         <span class='Baan-baanSQL def-Directive'>SELECT</span> ts_cd2:<span class='Baan-baanSQLParam def-Identifier'>bonusCode</span><span class='Baan-baanSymbol def-Symbol'>,</span>ts_flg:<span class='Baan-baanSQLParam def-Identifier'>aKind</span> <span class='Baan-baanSQL def-Directive'>FROM</span> tfzzz016 <span class='Baan-baanSQL def-Directive'>WHERE</span>  
+ 540:           _index2<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 541:           <span class='Baan-baanSQL def-Directive'>AND</span>
+ 542:           ts_flg <span class='Baan-baanSQL def-Directive'>IN</span> <span class='Baan-baanSymbol def-Symbol'>(</span>
+ 543:             tfzzz.fl.vhogd.mid.1.3.l<span class='Baan-baanSymbol def-Symbol'>,</span>
+ 544:             tfzzz.fl.vhogd.mid.1.12.l<span class='Baan-baanSymbol def-Symbol'>,</span>
+ 545:             tfzzz.fl.vhogd.mid.1<span class='Baan-baanSymbol def-Symbol'>,</span>
+ 546:             tfzzz.fl.vhogd.mid.1.3<span class='Baan-baanSymbol def-Symbol'>,</span>
+ 547:             tfzzz.fl.vhogd.mid.1.12
+ 548:           <span class='Baan-baanSymbol def-Symbol'>)</span>
+ 549:         <span class='Baan-baanSQL def-Directive'>SELECTDO</span>     
+ 550:             Total<span class='Baan-baanSymbol def-Symbol'>=</span>Total<span class='Baan-baanSymbol def-Symbol'>+</span>processBonusesByCode<span class='Baan-baanSymbol def-Symbol'>(</span>aKind<span class='Baan-baanSymbol def-Symbol'>,</span> bonusCode<span class='Baan-baanSymbol def-Symbol'>,</span>startDate<span class='Baan-baanSymbol def-Symbol'>,</span>prevPrd<span class='Baan-baanSymbol def-Symbol'>)</span> 
+ 551:         <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>
+ 552:         goodPeriods<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>includedCount</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>startPrd<span class='Baan-baanSymbol def-Symbol'>,</span>prevPrd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 553:    <span class='Baan-baanKeyword def-Keyword'> endif </span>            
+ 554:     <span class='def-Comment def-Syntax'>|message("Всего премиий="&amp;str$(total)&amp;"/"&amp;str$(goodPeriods))    </span>
+ 555:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>/</span><span class='Baan-baanUserProcedure def-Identifier'>periodsBetween</span><span class='Baan-baanSymbol def-Symbol'>(</span>startPrd<span class='Baan-baanSymbol def-Symbol'>,</span>prevPrd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 556: <span class='Baan-baanSymbol def-Symbol'>}</span>  
+ 557:   
+ 558: <span class='def-Comment def-Syntax'>| Обработка премий по коду. Возвращает сумму премий</span>
+ 559: <span class='def-Comment def-Syntax'>| created 25.10.99 (12:03:24) by Max Belugin</span>
+ 560: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY processBonusesByCode<span class='Baan-baanSymbol def-Symbol'>(</span>ContKind aKind<span class='Baan-baanSymbol def-Symbol'>,</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanVariable def-Var'>Date</span> aBeg<span class='Baan-baanSymbol def-Symbol'>,</span> Period anEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 561:    <span class='Baan-baanKeyword def-Keyword'> if</span> contKindIsCL<span class='Baan-baanSymbol def-Symbol'>(</span>aKind<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 562:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>processBonusesByCodeCL<span class='Baan-baanSymbol def-Symbol'>(</span>aKind<span class='Baan-baanSymbol def-Symbol'>,</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>aBeg<span class='Baan-baanSymbol def-Symbol'>,</span>anEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 563:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 564:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>processBonusesByCodePersDat<span class='Baan-baanSymbol def-Symbol'>(</span>aKind<span class='Baan-baanSymbol def-Symbol'>,</span>aCode<span class='Baan-baanSymbol def-Symbol'>,</span>aBeg<span class='Baan-baanSymbol def-Symbol'>,</span>anEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 565: <span class='Baan-baanSymbol def-Symbol'>}</span> 
+ 566: 
+ 567: <span class='def-Comment def-Syntax'>| Брать ли данные из расчетного листа для</span>
+ 568: <span class='def-Comment def-Syntax'>| типа вхождения aKind</span>
+ 569: <span class='def-Comment def-Syntax'>| created 28.10.99 (11:30:20) by Max Belugin</span>
+ 570: <span class='Baan-baanKeyword def-Keyword'>function</span> BOOL contKindIsCL <span class='Baan-baanSymbol def-Symbol'>(</span>ContKind aKind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 571:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>(</span>aKind<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>mid<span class='Baan-baanNumber def-Number'>.1</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 572:            <span class='Baan-baanKeyword def-Keyword'>or</span>
+ 573:              <span class='Baan-baanSymbol def-Symbol'>(</span>aKind<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>mid<span class='Baan-baanNumber def-Number'>.1.3</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 574:              <span class='Baan-baanKeyword def-Keyword'>or</span>
+ 575:              <span class='Baan-baanSymbol def-Symbol'>(</span>aKind<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>mid<span class='Baan-baanNumber def-Number'>.1.12</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 576: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 577: <span class='def-Comment def-Syntax'>| Обработка премий по коду (Из расчетного листа). Возвращает сумму премий</span>
+ 578: <span class='def-Comment def-Syntax'>| created 25.10.99 (12:03:24) by Max Belugin</span>
+ 579: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY processBonusesByCodeCL<span class='Baan-baanSymbol def-Symbol'>(</span>ContKind aKind<span class='Baan-baanSymbol def-Symbol'>,</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanVariable def-Var'>Date</span> aBeg<span class='Baan-baanSymbol def-Symbol'>,</span> TPeriod anEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 580:   <span class='def-Comment def-Syntax'>| Выяснить, является ли рабместо главным</span>
+ 581:   BOOL isMain           
+ 582:   TPeriod aPeriod
+ 583:   IDENT  aWorkPlace     
+ 584:   IDENT  CurrStaff
+ 585:   MONEY CurTotal          
+ 586:   MONEY Total
+ 587:   isMain<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wp.isMain</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>)</span>   
+ 588:   CurrStaff<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.empl</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 589:   <span class='Baan-baanVariable def-Var'>Date</span> wpBeg<span class='Baan-baanSymbol def-Symbol'>,</span>wpEnd
+ 590:   wpBeg<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wpc.begDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 591:   wpEnd<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.annihilate.date</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 592:   <span class='def-Comment def-Syntax'>| Начало обработки                                                          </span>
+ 593:   Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalBeg<span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>aKind<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aBeg<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>anEnd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 594:   <span class='Baan-baanSQL def-Directive'>SELECT</span> rl_id:<span class='Baan-baanSQLParam def-Identifier'>aWorkPlace</span><span class='Baan-baanSymbol def-Symbol'>,</span>ras_per:<span class='Baan-baanSQLParam def-Identifier'>aPeriod</span><span class='Baan-baanSymbol def-Symbol'>,</span>rl_summa:<span class='Baan-baanSQLParam def-Identifier'>CurTotal</span> 
+ 595:   <span class='Baan-baanSQL def-Directive'>FROM</span>  tfzzz081<span class='Baan-baanSymbol def-Symbol'>,</span> tfzzz076<span class='Baan-baanSymbol def-Symbol'>,</span> tfzzz026 <span class='Baan-baanComment def-Comment def-Syntax'>| Расчетный листок, Запись протокола расчета, рабочее место</span>
+ 596:   <span class='Baan-baanSQL def-Directive'>WHERE</span>
+ 597:     <span class='Baan-baanSymbol def-Symbol'>(</span> 
+ 598:       <span class='Baan-baanComment def-Comment def-Syntax'>| Если рабочее место - главное, то выбирать все</span>
+ 599:       <span class='Baan-baanComment def-Comment def-Syntax'>| глaвные рабочие места данного человека</span>
+ 600:       <span class='Baan-baanSymbol def-Symbol'>(</span>:<span class='Baan-baanSQLParam def-Identifier'>isMain</span><span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>0 
+ 601:        <span class='Baan-baanSQL def-Directive'>AND</span>              
+ 602:         tfzzz026._index4 <span class='Baan-baanSQL def-Directive'>between</span> 
+ 603:           <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz.checkbox.true<span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>wpBeg</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 604:           <span class='Baan-baanSQL def-Directive'>AND</span>
+ 605:           <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz.checkbox.true<span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>wpEnd</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 606:        <span class='Baan-baanSQL def-Directive'>AND</span>
+ 607:        tfzzz026._index2<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>CurrStaff</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 608:       <span class='Baan-baanSymbol def-Symbol'>)</span>
+ 609:       <span class='Baan-baanSQL def-Directive'>OR</span> 
+ 610:       <span class='Baan-baanComment def-Comment def-Syntax'>| иначе, только заданное рабочее место</span>
+ 611:       <span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz026._index1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>CalcCurrWorkingPlace</span><span class='Baan-baanSymbol def-Symbol'>}</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 612:     <span class='Baan-baanSymbol def-Symbol'>)</span> 
+ 613:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 614:     <span class='Baan-baanComment def-Comment def-Syntax'>| Условие по рабочему месту{</span>
+ 615:     tfzzz076._index1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz026.wp_id<span class='Baan-baanSymbol def-Symbol'>}</span> <span class='Baan-baanComment def-Comment def-Syntax'>| rl_id    </span>
+ 616:     <span class='Baan-baanSQL def-Directive'>AND</span>       
+ 617:     tfzzz076._index1<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz026.wp_id<span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>anEnd</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 618:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 619:     ras_dat<span class='Baan-baanSymbol def-Symbol'>></span><span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>aBeg</span>
+ 620:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 621:     <span class='Baan-baanComment def-Comment def-Syntax'>| Связь расчетного листка с протоколом{</span>
+ 622:     tfzzz081._index1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz076.ras_grp<span class='Baan-baanSymbol def-Symbol'>,</span>tfzzz076.ras_per<span class='Baan-baanSymbol def-Symbol'>}</span>
+ 623:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 624:     tfzzz081._index2<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz076.ras_id<span class='Baan-baanSymbol def-Symbol'>}</span>
+ 625:     <span class='Baan-baanSQL def-Directive'>AND</span>                                   
+ 626:     tfzzz081._index5<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 627:   <span class='Baan-baanSQL def-Directive'>ORDER</span> <span class='Baan-baanSQL def-Directive'>BY</span> 
+ 628:     tfzzz076._index3
+ 629:   <span class='Baan-baanSQL def-Directive'>SELECTDO</span> 
+ 630:         <span class='def-Comment def-Syntax'>| Обработать запись расчетного листка </span>
+ 631:          <span class='def-Comment def-Syntax'>||message("Премия"&amp;str$(CurTotal)&amp;" период="&amp;str$(aPeriod))                                      </span>
+ 632:          Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalAdd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>,</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>CurTotal<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 633:   <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>         
+ 634:   <span class='def-Comment def-Syntax'>| Конец обработки</span>
+ 635:   Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalEnd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 636:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 637: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 638: 
+ 639: <span class='def-Comment def-Syntax'>| Обработка премий по коду (Из лицевых данных). Возвращает сумму премий</span>
+ 640: <span class='def-Comment def-Syntax'>| created 25.10.99 (12:03:24) by Max Belugin</span>
+ 641: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY processBonusesByCodePersDat<span class='Baan-baanSymbol def-Symbol'>(</span>ContKind aKind<span class='Baan-baanSymbol def-Symbol'>,</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanVariable def-Var'>Date</span> aBeg<span class='Baan-baanSymbol def-Symbol'>,</span> TPeriod anEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 642:   <span class='def-Comment def-Syntax'>| Выяснить, является ли рабместо главным</span>
+ 643:   BOOL isMain           
+ 644:   TPeriod aPeriod
+ 645:   IDENT  aWorkPlace     
+ 646:   MONEY CurTotal          
+ 647:   MONEY Total  
+ 648:   <span class='Baan-baanVariable def-Var'>DATE</span> aBegDate
+ 649:   <span class='Baan-baanVariable def-Var'>DATE</span> EndDate
+ 650:   IDENT CurrStaff
+ 651:   isMain<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wp.isMain</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>)</span>   
+ 652:   CurrStaff<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.empl</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 653:   EndDate<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>endDateOfPeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>anEnd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 654:   <span class='Baan-baanVariable def-Var'>Date</span> wpBeg<span class='Baan-baanSymbol def-Symbol'>,</span>wpEnd
+ 655:   wpBeg<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wpc.begDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 656:   wpEnd<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.annihilate.date</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 657:   <span class='def-Comment def-Syntax'>| Начало обработки</span>
+ 658:   Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalBeg<span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>aKind<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aBeg<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>anEnd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 659:   <span class='Baan-baanSQL def-Directive'>SELECT</span> ld_beg:<span class='Baan-baanSQLParam def-Identifier'>aBegDate</span><span class='Baan-baanSymbol def-Symbol'>,</span>ld_id:<span class='Baan-baanSQLParam def-Identifier'>aWorkPlace</span><span class='Baan-baanSymbol def-Symbol'>,</span>ld_znach:<span class='Baan-baanSQLParam def-Identifier'>CurTotal</span> 
+ 660:   <span class='Baan-baanSQL def-Directive'>FROM</span>  tfzzz072<span class='Baan-baanSymbol def-Symbol'>,</span> tfzzz026 <span class='Baan-baanComment def-Comment def-Syntax'>| Лицевые данные, Запись протокола расчета, рабочее место</span>
+ 661:   <span class='Baan-baanSQL def-Directive'>WHERE</span>  
+ 662:     <span class='Baan-baanComment def-Comment def-Syntax'>| Условие по рабочему месту{</span>
+ 663:     <span class='Baan-baanSymbol def-Symbol'>(</span> 
+ 664:       <span class='Baan-baanComment def-Comment def-Syntax'>| Если рабочее место - главное, то выбирать все</span>
+ 665:       <span class='Baan-baanComment def-Comment def-Syntax'>| глaвные рабочие места данного человека</span>
+ 666:       <span class='Baan-baanSymbol def-Symbol'>(</span>:<span class='Baan-baanSQLParam def-Identifier'>isMain</span><span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>0 
+ 667:        <span class='Baan-baanSQL def-Directive'>AND</span> 
+ 668:         tfzzz026._index4 <span class='Baan-baanSQL def-Directive'>between</span> 
+ 669:           <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz.checkbox.true<span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>wpBeg</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 670:           <span class='Baan-baanSQL def-Directive'>AND</span>
+ 671:           <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz.checkbox.true<span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>wpEnd</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 672:        <span class='Baan-baanSQL def-Directive'>AND</span>
+ 673:        tfzzz026._index2<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>CurrStaff</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 674:       <span class='Baan-baanSymbol def-Symbol'>)</span>
+ 675:       <span class='Baan-baanSQL def-Directive'>OR</span> 
+ 676:       <span class='Baan-baanComment def-Comment def-Syntax'>| иначе, только заданное рабочее место</span>
+ 677:       <span class='Baan-baanSymbol def-Symbol'>(</span>tfzzz026._index1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>CalcCurrWorkingPlace</span><span class='Baan-baanSymbol def-Symbol'>}</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 678:     <span class='Baan-baanSymbol def-Symbol'>)</span> 
+ 679:     <span class='Baan-baanComment def-Comment def-Syntax'>|}</span>
+ 680:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 681:     tfzzz072._index2 <span class='Baan-baanSQL def-Directive'>between</span> 
+ 682:       <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz026.wp_id<span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span><span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>aBeg</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 683:         <span class='Baan-baanSQL def-Directive'>AND</span>
+ 684:         <span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz026.wp_id<span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span><span class='Baan-baanSymbol def-Symbol'>,</span>:<span class='Baan-baanSQLParam def-Identifier'>EndDate</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 685:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 686:     ld_ed_iz<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz.ed.iz.ld.summ
+ 687:   <span class='Baan-baanSQL def-Directive'>ORDER</span> <span class='Baan-baanSQL def-Directive'>BY</span> ld_beg
+ 688:   <span class='Baan-baanSQL def-Directive'>SELECTDO</span> 
+ 689:       aPeriod<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aBegDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 690:         <span class='def-Comment def-Syntax'>| Обработать запись расчетного листка                                       </span>
+ 691:          Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalAdd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>,</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>CurTotal<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 692:   <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>         
+ 693:   <span class='def-Comment def-Syntax'>| Конец обработки</span>
+ 694:   Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalEnd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 695:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 696: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 697: 
+ 698: <span class='def-Comment def-Syntax'>| Обработка премий по коду (Из расчетного листа). Возвращает сумму премий</span>
+ 699: <span class='def-Comment def-Syntax'>| created 25.10.99 (12:03:24) by Max Belugin</span>
+ 700: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY processBonusesByCodeCL<span class='Baan-baanNumber def-Number'>.</span>old<span class='Baan-baanSymbol def-Symbol'>(</span>ContKind aKind<span class='Baan-baanSymbol def-Symbol'>,</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanVariable def-Var'>Date</span> aBeg<span class='Baan-baanSymbol def-Symbol'>,</span> Period anEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 701:   <span class='def-Comment def-Syntax'>| Выяснить, является ли рабместо главным</span>
+ 702:   BOOL isMain           
+ 703:   Period aPeriod
+ 704:   IDENT  aWorkPlace     
+ 705:   MONEY CurTotal          
+ 706:   MONEY Total
+ 707:   isMain<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wp.isMain</span><span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>)</span>   
+ 708:   <span class='def-Comment def-Syntax'>| Начало обработки</span>
+ 709:   Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalBeg<span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>aKind<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aBeg<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>anEnd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 710:   <span class='Baan-baanVariable def-Var'>Date</span> wpBeg<span class='Baan-baanSymbol def-Symbol'>,</span>wpEnd
+ 711:   wpBeg<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wpc.begDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 712:   wpEnd<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.annihilate.date</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 713:   <span class='Baan-baanSQL def-Directive'>SELECT</span> rl_id:<span class='Baan-baanSQLParam def-Identifier'>aWorkPlace</span><span class='Baan-baanSymbol def-Symbol'>,</span>rl_p_v:<span class='Baan-baanSQLParam def-Identifier'>aPeriod</span><span class='Baan-baanSymbol def-Symbol'>,</span>rl_summa:<span class='Baan-baanSQLParam def-Identifier'>CurTotal</span> 
+ 714:   <span class='Baan-baanSQL def-Directive'>FROM</span>  tfzzz081<span class='Baan-baanSymbol def-Symbol'>,</span> tfzzz076<span class='Baan-baanSymbol def-Symbol'>,</span> tfzzz026 <span class='Baan-baanComment def-Comment def-Syntax'>| Расчетный листок, Запись протокола расчета, рабочее место</span>
+ 715:   <span class='Baan-baanSQL def-Directive'>WHERE</span>
+ 716:     <span class='Baan-baanComment def-Comment def-Syntax'>| Связь расчетного листка с протоколом{</span>
+ 717:     tfzzz076._index1<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>rl_id<span class='Baan-baanSymbol def-Symbol'>,</span>rl_p_v<span class='Baan-baanSymbol def-Symbol'>,</span>rl_rasch<span class='Baan-baanSymbol def-Symbol'>}</span>
+ 718:     <span class='Baan-baanComment def-Comment def-Syntax'>|tfzzz076.ras_grp=rl_id | Связь с протоколом: Рабочее место</span>
+ 719:     <span class='Baan-baanComment def-Comment def-Syntax'>|AND</span>
+ 720:     <span class='Baan-baanComment def-Comment def-Syntax'>|tfzzz076.ras_per=rl_p_v | Связь с протоколом: Период</span>
+ 721:     <span class='Baan-baanComment def-Comment def-Syntax'>|AND</span>
+ 722:     <span class='Baan-baanComment def-Comment def-Syntax'>|tfzzz076.ras_id=rl_rasch  | Связь с протоколом: ID строки</span>
+ 723:     <span class='Baan-baanSQL def-Directive'>AND</span>                                   
+ 724:     <span class='Baan-baanComment def-Comment def-Syntax'>| }                        </span>
+ 725:     <span class='Baan-baanComment def-Comment def-Syntax'>| Условие по рабочему месту{</span>
+ 726:     tfzzz081._index4<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>tfzzz026.wp_id<span class='Baan-baanSymbol def-Symbol'>}</span> <span class='Baan-baanComment def-Comment def-Syntax'>| rl_id</span>
+ 727:     
+ 728:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 729:     <span class='Baan-baanSymbol def-Symbol'>(</span> 
+ 730:       <span class='Baan-baanComment def-Comment def-Syntax'>| Если рабочее место - главное, то выбирать все</span>
+ 731:       <span class='Baan-baanComment def-Comment def-Syntax'>| глaвные рабочие места данного человека</span>
+ 732:       <span class='Baan-baanSymbol def-Symbol'>(</span>:<span class='Baan-baanSQLParam def-Identifier'>isMain</span><span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>0 
+ 733:        <span class='Baan-baanSQL def-Directive'>AND</span> 
+ 734:        tfzzz026.wp_vid<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz.checkbox.true
+ 735:        <span class='Baan-baanSQL def-Directive'>AND</span>
+ 736:        tfzzz026._index2<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>CurrStaff</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 737:        <span class='Baan-baanSQL def-Directive'>AND</span>
+ 738:        tfzzz026.wp_crdat <span class='Baan-baanSQL def-Directive'>BETWEEN</span> :<span class='Baan-baanSQLParam def-Identifier'>wpBeg</span> <span class='Baan-baanSQL def-Directive'>AND</span> :<span class='Baan-baanSQLParam def-Identifier'>wpEnd</span>
+ 739:       <span class='Baan-baanSymbol def-Symbol'>)</span>
+ 740:       <span class='Baan-baanSQL def-Directive'>OR</span> 
+ 741:       <span class='Baan-baanComment def-Comment def-Syntax'>| иначе, только заданное рабочее место</span>
+ 742:       <span class='Baan-baanSymbol def-Symbol'>(</span>wp_id<span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>CalcCurrWorkingPlace</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 743:     <span class='Baan-baanSymbol def-Symbol'>)</span> 
+ 744:     <span class='Baan-baanComment def-Comment def-Syntax'>|}</span>
+ 745:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 746:     ras_dat<span class='Baan-baanSymbol def-Symbol'>></span><span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>aBeg</span>
+ 747:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 748:     rl_p_v<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>anEnd</span>
+ 749:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 750:     rl_c_n_u<span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span>
+ 751:   <span class='Baan-baanSQL def-Directive'>ORDER</span> <span class='Baan-baanSQL def-Directive'>BY</span> 
+ 752:     rl_p_v
+ 753:   <span class='Baan-baanSQL def-Directive'>SELECTDO</span> 
+ 754:         <span class='def-Comment def-Syntax'>| Обработать запись расчетного листка </span>
+ 755:          <span class='def-Comment def-Syntax'>|message("Премия"&amp;str$(CurTotal)&amp;" период="&amp;str$(aPeriod))                                      </span>
+ 756:          Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalAdd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>,</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>CurTotal<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 757:   <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>         
+ 758:   <span class='def-Comment def-Syntax'>| Конец обработки</span>
+ 759:   Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalEnd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 760:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 761: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 762: 
+ 763: <span class='def-Comment def-Syntax'>| Обработка премий по коду (Из лицевых данных). Возвращает сумму премий</span>
+ 764: <span class='def-Comment def-Syntax'>| created 25.10.99 (12:03:24) by Max Belugin</span>
+ 765: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY processBonusesByCodePersDat<span class='Baan-baanNumber def-Number'>.</span>old<span class='Baan-baanSymbol def-Symbol'>(</span>ContKind aKind<span class='Baan-baanSymbol def-Symbol'>,</span>CalcCode aCode<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanVariable def-Var'>Date</span> aBeg<span class='Baan-baanSymbol def-Symbol'>,</span> Period anEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 766:   <span class='def-Comment def-Syntax'>| Выяснить, является ли рабместо главным</span>
+ 767:   BOOL isMain           
+ 768:   Period aPeriod
+ 769:   IDENT  aWorkPlace     
+ 770:   MONEY CurTotal          
+ 771:   MONEY Total  
+ 772:   <span class='Baan-baanVariable def-Var'>Date</span> wpBeg<span class='Baan-baanSymbol def-Symbol'>,</span>wpEnd<span class='Baan-baanSymbol def-Symbol'>,</span>EndDate<span class='Baan-baanSymbol def-Symbol'>,</span>aBegDAte
+ 773:   wpBeg<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>wpc.begDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 774:   wpEnd<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>get.wp.annihilate.date</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 775:   EndDate<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>endDateOfPeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>anEnd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 776:   <span class='def-Comment def-Syntax'>| Начало обработки        </span>
+ 777: 
+ 778:   Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalBeg<span class='Baan-baanSymbol def-Symbol'>(</span>CalcCurrWorkingPlace<span class='Baan-baanSymbol def-Symbol'>,</span>aKind<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aBeg<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span>anEnd<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 779:   <span class='Baan-baanSQL def-Directive'>SELECT</span> ld_beg:<span class='Baan-baanSQLParam def-Identifier'>aBegDate</span><span class='Baan-baanSymbol def-Symbol'>,</span>ld_id:<span class='Baan-baanSQLParam def-Identifier'>aWorkPlace</span><span class='Baan-baanSymbol def-Symbol'>,</span>ld_znach:<span class='Baan-baanSQLParam def-Identifier'>CurTotal</span> 
+ 780:   <span class='Baan-baanSQL def-Directive'>FROM</span>  tfzzz072<span class='Baan-baanSymbol def-Symbol'>,</span> tfzzz026 <span class='Baan-baanComment def-Comment def-Syntax'>| Лицевые данные, Запись протокола расчета, рабочее место</span>
+ 781:   <span class='Baan-baanSQL def-Directive'>WHERE</span>    
+ 782:     <span class='Baan-baanComment def-Comment def-Syntax'>| Условие по рабочему месту{</span>
+ 783:     ld_id<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz026.wp_id
+ 784:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 785:     ld_code<span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>aCode</span>
+ 786:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 787:     <span class='Baan-baanSymbol def-Symbol'>(</span> 
+ 788:       <span class='Baan-baanComment def-Comment def-Syntax'>| Если рабочее место - главное, то выбирать все</span>
+ 789:       <span class='Baan-baanComment def-Comment def-Syntax'>| глaвные рабочие места данного человека</span>
+ 790:       <span class='Baan-baanSymbol def-Symbol'>(</span>:<span class='Baan-baanSQLParam def-Identifier'>isMain</span><span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>0 
+ 791:        <span class='Baan-baanSQL def-Directive'>AND</span> 
+ 792:        tfzzz026.wp_vid<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz.checkbox.true
+ 793:        <span class='Baan-baanSQL def-Directive'>AND</span>
+ 794:        tfzzz026._index2<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanSymbol def-Symbol'>{</span>:<span class='Baan-baanSQLParam def-Identifier'>CurrStaff</span><span class='Baan-baanSymbol def-Symbol'>}</span>
+ 795:        <span class='Baan-baanSQL def-Directive'>AND</span>
+ 796:        tfzzz026.wp_crdat <span class='Baan-baanSQL def-Directive'>BETWEEN</span> :<span class='Baan-baanSQLParam def-Identifier'>wpBeg</span> <span class='Baan-baanSQL def-Directive'>AND</span> :<span class='Baan-baanSQLParam def-Identifier'>wpEnd</span>
+ 797:       <span class='Baan-baanSymbol def-Symbol'>)</span>
+ 798:       <span class='Baan-baanSQL def-Directive'>OR</span> 
+ 799:       <span class='Baan-baanComment def-Comment def-Syntax'>| иначе, только заданное рабочее место</span>
+ 800:       <span class='Baan-baanSymbol def-Symbol'>(</span>wp_id<span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>CalcCurrWorkingPlace</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 801:     <span class='Baan-baanSymbol def-Symbol'>)</span> 
+ 802:     <span class='Baan-baanComment def-Comment def-Syntax'>|}</span>
+ 803:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 804:     ld_beg<span class='Baan-baanSymbol def-Symbol'>></span><span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>aBeg</span>
+ 805:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 806:     ld_beg<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>=</span>:<span class='Baan-baanSQLParam def-Identifier'>EndDate</span>
+ 807:     <span class='Baan-baanSQL def-Directive'>AND</span>
+ 808:     ld_ed_iz<span class='Baan-baanSymbol def-Symbol'>=</span>tfzzz.ed.iz.ld.summ
+ 809:   <span class='Baan-baanSQL def-Directive'>ORDER</span> <span class='Baan-baanSQL def-Directive'>BY</span> ld_beg
+ 810:   <span class='Baan-baanSQL def-Directive'>SELECTDO</span> 
+ 811:       aPeriod<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanUserProcedure def-Identifier'>periodByDate</span><span class='Baan-baanSymbol def-Symbol'>(</span>aBegDate<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 812:         <span class='def-Comment def-Syntax'>| Обработать запись расчетного листка                                       </span>
+ 813:          Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalAdd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>,</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>CurTotal<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 814:   <span class='Baan-baanSQL def-Directive'>ENDSELECT</span>         
+ 815:   <span class='def-Comment def-Syntax'>| Конец обработки</span>
+ 816:   Total <span class='Baan-baanSymbol def-Symbol'>=</span> totalEnd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 817:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 818: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 819: 
+ 820: <span class='def-Comment def-Syntax'>| Возвращает дату последнего приема на работу</span>
+ 821: <span class='def-Comment def-Syntax'>| created 26.10.99 (11:54:27) by Max Belugin</span>
+ 822: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanVariable def-Var'>DATE</span> lastAcceptanceDate<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>      
+ 823:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>get.last.acceptance</span><span class='Baan-baanSymbol def-Symbol'>(</span>CurrStaff<span class='Baan-baanSymbol def-Symbol'>,</span> <span class='Baan-baanProcedure def-Symbol'>date.num</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>,</span> <span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 824: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 825:            
+ 826: 
+ 827: Money  perTotal
+ 828: <span class='def-Comment def-Syntax'>| Длина периода, число обработанных периодов</span>
+ 829: <span class='Baan-baanKeyword def-Keyword'>long</span>   perLen<span class='Baan-baanSymbol def-Symbol'>,</span>perCount                      
+ 830: <span class='def-Comment def-Syntax'>| Последний обработанный период</span>
+ 831: Period perLast<span class='Baan-baanSymbol def-Symbol'>,</span>perBeg<span class='Baan-baanSymbol def-Symbol'>,</span>perEnd
+ 832: 
+ 833: <span class='def-Comment def-Syntax'>| рабочее место</span>
+ 834: IDENT perWorkPlace
+ 835: 
+ 836: <span class='def-Comment def-Syntax'>| Начинаем обработку записей с типом вхождения aKind</span>
+ 837: <span class='def-Comment def-Syntax'>| created 27.10.99 (11:48:02) by Max Belugin</span>
+ 838: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY totalBeg<span class='Baan-baanSymbol def-Symbol'>(</span>IDENT aWorkPlace<span class='Baan-baanSymbol def-Symbol'>,</span>ContKind aKind<span class='Baan-baanSymbol def-Symbol'>,</span>Period aBeg<span class='Baan-baanSymbol def-Symbol'>,</span>Period anEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 839:     perTotal<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 840:     perLen<span class='Baan-baanSymbol def-Symbol'>=</span>contKindToLen<span class='Baan-baanSymbol def-Symbol'>(</span>aKind<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 841:     perLast<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 842:     perBeg<span class='Baan-baanSymbol def-Symbol'>=</span>aBeg
+ 843:     perEnd<span class='Baan-baanSymbol def-Symbol'>=</span>anEnd    
+ 844:     perWorkPlace<span class='Baan-baanSymbol def-Symbol'>=</span>aWorkPlace
+ 845:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>0</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 846: <span class='Baan-baanSymbol def-Symbol'>}</span>                                 
+ 847: 
+ 848: <span class='def-Comment def-Syntax'>| Обработать сумму периода</span>
+ 849: <span class='def-Comment def-Syntax'>| created 26.10.99 (04:30:09) by Max Belugin</span>
+ 850: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY totalAdd<span class='Baan-baanSymbol def-Symbol'>(</span>MONEY Total<span class='Baan-baanSymbol def-Symbol'>,</span>Period aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>MONEY CurTotal<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 851:   MONEY aResult
+ 852:   aResult<span class='Baan-baanSymbol def-Symbol'>=</span>Total
+ 853:  <span class='Baan-baanKeyword def-Keyword'> if</span> isNewPeriod<span class='Baan-baanSymbol def-Symbol'>(</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 854:    <span class='Baan-baanKeyword def-Keyword'> if</span> isClusterBegin<span class='Baan-baanSymbol def-Symbol'>(</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 855:         aResult<span class='Baan-baanSymbol def-Symbol'>=</span>totalEnd<span class='Baan-baanSymbol def-Symbol'>(</span>Total<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 856:         perCount<span class='Baan-baanSymbol def-Symbol'>=</span>goodPeriodsCount<span class='Baan-baanSymbol def-Symbol'>(</span>perWorkPlace<span class='Baan-baanSymbol def-Symbol'>,</span>perBeg<span class='Baan-baanSymbol def-Symbol'>,</span>perEnd<span class='Baan-baanSymbol def-Symbol'>,</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>perLen<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 857:    <span class='Baan-baanKeyword def-Keyword'> endif </span>                  
+ 858:     perLast<span class='Baan-baanSymbol def-Symbol'>=</span>aPeriod
+ 859:  <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 860:   perTotal<span class='Baan-baanSymbol def-Symbol'>=</span>perTotal<span class='Baan-baanSymbol def-Symbol'>+</span>CurTotal
+ 861:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>aResult<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 862: <span class='Baan-baanSymbol def-Symbol'>}</span> 
+ 863: 
+ 864: <span class='def-Comment def-Syntax'>| Закончить подсчет суммы </span>
+ 865: <span class='def-Comment def-Syntax'>| created 26.10.99 (04:30:41) by Max Belugin</span>
+ 866: <span class='Baan-baanKeyword def-Keyword'>function</span> MONEY totalEnd<span class='Baan-baanSymbol def-Symbol'>(</span>MONEY Total<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 867:     MONEY aResult                             
+ 868:     <span class='def-Comment def-Syntax'>| Новая сумма = Сумма + (Сумма кластера*Число обработанных периодов)/Число периодов в кластере</span>
+ 869:     <span class='def-Comment def-Syntax'>|message("Премия ="&amp;str$(perTotal)&amp;"*"&amp;str$(perCount)&amp;"/"&amp;str$(perLen)&amp;"="&amp;str$(round((perTotal*perCount)/perLen,2,1)))                                      </span>
+ 870:     aResult<span class='Baan-baanSymbol def-Symbol'>=</span>Total<span class='Baan-baanSymbol def-Symbol'>+</span><span class='Baan-baanProcedure def-Symbol'>round</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>(</span>perTotal<span class='Baan-baanSymbol def-Symbol'>*</span>perCount<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>/</span>perLen<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanNumber def-Number'>2</span><span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 871:     perTotal<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>                        
+ 872:     perCount<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 873:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>aResult<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 874: <span class='Baan-baanSymbol def-Symbol'>}</span> 
+ 875: 
+ 876: <span class='def-Comment def-Syntax'>| Является ли данный период началом периода усреднения      </span>
+ 877: <span class='def-Comment def-Syntax'>| created 27.10.99 (12:25:37) by Max Belugin</span>
+ 878: <span class='Baan-baanKeyword def-Keyword'>function</span> BOOL isClusterBegin <span class='Baan-baanSymbol def-Symbol'>(</span>Period aPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 879:    <span class='Baan-baanKeyword def-Keyword'> if</span> perLast<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span> <span class='Baan-baanKeyword def-Keyword'>then</span> 
+ 880:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>true</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 881:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 882:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>clusterNoOf<span class='Baan-baanSymbol def-Symbol'>(</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>clusterNoOf<span class='Baan-baanSymbol def-Symbol'>(</span>perLast<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 883: <span class='Baan-baanSymbol def-Symbol'>}</span>        
+ 884: 
+ 885: <span class='def-Comment def-Syntax'>| Номер отразка смежных периодов для aPeriod</span>
+ 886: <span class='Baan-baanKeyword def-Keyword'>function</span> BOOL clusterNoOf <span class='Baan-baanSymbol def-Symbol'>(</span>Period aPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 887:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>noOfPeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>-</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>/</span>perLen<span class='Baan-baanSymbol def-Symbol'>)</span>    
+ 888: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 889: <span class='def-Comment def-Syntax'>| Приступаем ли к обработке нового периода?</span>
+ 890: <span class='def-Comment def-Syntax'>| created 27.10.99 (01:17:14) by Max Belugin</span>
+ 891: <span class='Baan-baanKeyword def-Keyword'>function</span> BOOL isNewPeriod <span class='Baan-baanSymbol def-Symbol'>(</span>Period aPeriod<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 892:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>perLast<span class='Baan-baanSymbol def-Symbol'>&lt;</span><span class='Baan-baanSymbol def-Symbol'>></span>aPeriod<span class='Baan-baanSymbol def-Symbol'>)</span>  
+ 893: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 894: 
+ 895: <span class='def-Comment def-Syntax'>| Количество периодов усреднения по типу вхождения</span>
+ 896: <span class='def-Comment def-Syntax'>| created 27.10.99 (12:04:56) by Max Belugin</span>
+ 897: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>long</span> contKindToLen<span class='Baan-baanSymbol def-Symbol'>(</span>ContKind aKind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 898:     <span class='Baan-baanKeyword def-Keyword'>on</span> <span class='Baan-baanKeyword def-Keyword'>case</span> aKind 
+ 899:       <span class='Baan-baanKeyword def-Keyword'>case</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>mid<span class='Baan-baanNumber def-Number'>.1.3.</span>l<span class='Baan-baanSymbol def-Symbol'>:</span>
+ 900:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>3</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 901:       <span class='Baan-baanKeyword def-Keyword'>case</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>mid<span class='Baan-baanNumber def-Number'>.1.12.</span>l<span class='Baan-baanSymbol def-Symbol'>:</span>
+ 902:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>12</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 903:       <span class='Baan-baanKeyword def-Keyword'>case</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>mid<span class='Baan-baanNumber def-Number'>.1</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 904:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 905:       <span class='Baan-baanKeyword def-Keyword'>case</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>mid<span class='Baan-baanNumber def-Number'>.1.3</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 906:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>3</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 907:       <span class='Baan-baanKeyword def-Keyword'>case</span> tfzzz<span class='Baan-baanNumber def-Number'>.</span>fl<span class='Baan-baanNumber def-Number'>.</span>vhogd<span class='Baan-baanNumber def-Number'>.</span>mid<span class='Baan-baanNumber def-Number'>.1.12</span><span class='Baan-baanSymbol def-Symbol'>:</span>
+ 908:         <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>12</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 909:     <span class='Baan-baanKeyword def-Keyword'>endcase</span>   
+ 910:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 911: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 912:                       
+ 913: <span class='def-Comment def-Syntax'>| возвращает число включенных в средние периодов</span>
+ 914: <span class='def-Comment def-Syntax'>| для рабместа aWorkPlace, </span>
+ 915: <span class='def-Comment def-Syntax'>| в отрезке смжных периодов длиной ClusterLength</span>
+ 916: <span class='def-Comment def-Syntax'>| которому принадлежит период aPeriod</span>
+ 917: <span class='def-Comment def-Syntax'>| , рассматриваются только периоды </span>
+ 918: <span class='def-Comment def-Syntax'>| находящиеся между aBeg и anEnd (включая их)</span>
+ 919: <span class='def-Comment def-Syntax'>| created 01.11.99 (05:00:34) by Max Belugin</span>
+ 920: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>long</span> goodPeriodsCount <span class='Baan-baanSymbol def-Symbol'>(</span>IDENT aWorkPlace<span class='Baan-baanSymbol def-Symbol'>,</span> Period aBeg<span class='Baan-baanSymbol def-Symbol'>,</span>Period anEnd<span class='Baan-baanSymbol def-Symbol'>,</span>Period aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>long</span> ClusterLength<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 921:     Period aClusterBeg<span class='Baan-baanSymbol def-Symbol'>,</span>aClusterEnd
+ 922:     aClusterBeg <span class='Baan-baanSymbol def-Symbol'>=</span> getClusterBegOf<span class='Baan-baanSymbol def-Symbol'>(</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>ClusterLength<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 923:     aClusterEnd <span class='Baan-baanSymbol def-Symbol'>=</span> getClusterEndOf<span class='Baan-baanSymbol def-Symbol'>(</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>ClusterLength<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 924:  <span class='Baan-baanKeyword def-Keyword'> if</span> aClusterBeg<span class='Baan-baanSymbol def-Symbol'>&lt;</span>aBeg <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 925:       aClusterBeg<span class='Baan-baanSymbol def-Symbol'>=</span>aBeg
+ 926:  <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 927:  <span class='Baan-baanKeyword def-Keyword'> if</span> aClusterEnd<span class='Baan-baanSymbol def-Symbol'>></span>anEnd <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 928:       aClusterEnd<span class='Baan-baanSymbol def-Symbol'>=</span>anEnd
+ 929:  <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 930:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>includedCount</span><span class='Baan-baanSymbol def-Symbol'>(</span>aWorkPlace<span class='Baan-baanSymbol def-Symbol'>,</span>aClusterBeg<span class='Baan-baanSymbol def-Symbol'>,</span>aClusterEnd<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 931: <span class='Baan-baanSymbol def-Symbol'>}</span> 
+ 932: 
+ 933: <span class='def-Comment def-Syntax'>| Возвращает первый месяц отрезка в ClusterLen</span>
+ 934: <span class='def-Comment def-Syntax'>| смежных периодов, в который входит месяц Month</span>
+ 935: <span class='def-Comment def-Syntax'>| created 02.11.99 (11:40:43) by Max Belugin</span>
+ 936: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>long</span> clusterBegMonthNo<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>long</span> Month<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>long</span> ClusterLen<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 937:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>(</span>Month<span class='Baan-baanSymbol def-Symbol'>-</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>/</span>ClusterLen<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>*</span>ClusterLen<span class='Baan-baanSymbol def-Symbol'>+</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 938: <span class='Baan-baanSymbol def-Symbol'>}</span>            
+ 939:   
+ 940: <span class='def-Comment def-Syntax'>| Возвращает последний месяц отрезка в ClusterLen</span>
+ 941: <span class='def-Comment def-Syntax'>| смежных периодов, в который входит месяц Month</span>
+ 942: <span class='def-Comment def-Syntax'>| created 02.11.99 (11:41:37) by Max Belugin</span>
+ 943: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>long</span> clusterEndMonthNo<span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>long</span> Month<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>long</span> ClusterLen<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 944:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span>clusterBegMonthNo<span class='Baan-baanSymbol def-Symbol'>(</span>Month<span class='Baan-baanSymbol def-Symbol'>,</span>ClusterLen<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>+</span>ClusterLen<span class='Baan-baanSymbol def-Symbol'>-</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 945: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 946: 
+ 947: <span class='def-Comment def-Syntax'>| Возвращает первый период отрезка в ClusterLength</span>
+ 948: <span class='def-Comment def-Syntax'>| смежных периодов, в который входит aPeriod</span>
+ 949: <span class='def-Comment def-Syntax'>| created 01.11.99 (05:18:41) by Max Belugin</span>
+ 950: <span class='Baan-baanKeyword def-Keyword'>function</span> Period getClusterBegOf<span class='Baan-baanSymbol def-Symbol'>(</span>Period aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>long</span> ClusterLength<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanSymbol def-Symbol'>{</span>
+ 951:     <span class='Baan-baanKeyword def-Keyword'>long</span> Kind<span class='Baan-baanSymbol def-Symbol'>,</span>Year<span class='Baan-baanSymbol def-Symbol'>,</span>Month
+ 952:     <span class='Baan-baanUserProcedure def-Identifier'>decodePeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>Kind<span class='Baan-baanSymbol def-Symbol'>,</span>Year<span class='Baan-baanSymbol def-Symbol'>,</span>Month<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 953:     Month<span class='Baan-baanSymbol def-Symbol'>=</span>clusterBegMonthNo<span class='Baan-baanSymbol def-Symbol'>(</span>Month<span class='Baan-baanSymbol def-Symbol'>,</span>ClusterLength<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 954:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>encodePeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>Kind<span class='Baan-baanSymbol def-Symbol'>,</span>Year<span class='Baan-baanSymbol def-Symbol'>,</span>Month<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 955: <span class='Baan-baanSymbol def-Symbol'>}</span> 
+ 956: 
+ 957: <span class='def-Comment def-Syntax'>| Возвращает последний период отрезка в ClusterLength</span>
+ 958: <span class='def-Comment def-Syntax'>| смежных периодов, в который входит aPeriod</span>
+ 959: <span class='def-Comment def-Syntax'>| created 01.11.99 (05:19:00) by Max Belugin</span>
+ 960: <span class='Baan-baanKeyword def-Keyword'>function</span> Period getClusterEndOf<span class='Baan-baanSymbol def-Symbol'>(</span>Period aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanKeyword def-Keyword'>long</span> ClusterLength<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanSymbol def-Symbol'>{</span>
+ 961:     <span class='Baan-baanKeyword def-Keyword'>long</span> Kind<span class='Baan-baanSymbol def-Symbol'>,</span>Year<span class='Baan-baanSymbol def-Symbol'>,</span>Month
+ 962:     <span class='Baan-baanUserProcedure def-Identifier'>decodePeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>aPeriod<span class='Baan-baanSymbol def-Symbol'>,</span>Kind<span class='Baan-baanSymbol def-Symbol'>,</span>Year<span class='Baan-baanSymbol def-Symbol'>,</span>Month<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 963:     Month<span class='Baan-baanSymbol def-Symbol'>=</span>clusterEndMonthNo<span class='Baan-baanSymbol def-Symbol'>(</span>Month<span class='Baan-baanSymbol def-Symbol'>,</span>ClusterLength<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 964:     <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>encodePeriod</span><span class='Baan-baanSymbol def-Symbol'>(</span>Kind<span class='Baan-baanSymbol def-Symbol'>,</span>Year<span class='Baan-baanSymbol def-Symbol'>,</span>Month<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 965: <span class='Baan-baanSymbol def-Symbol'>}</span>             
+ 966: 
+ 967: <span class='Baan-baanDirective def-Directive'>#define</span> MaxLeaveCount <span class='Baan-baanNumber def-Number'>2000</span>
+ 968: <span class='Baan-baanKeyword def-Keyword'>long</span> leaves<span class='Baan-baanSymbol def-Symbol'>(</span>MaxLeaveCount<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 969: TmКndCode kinds<span class='Baan-baanSymbol def-Symbol'>(</span>MaxLeaveCount<span class='Baan-baanSymbol def-Symbol'>)</span>
+ 970: <span class='Baan-baanKeyword def-Keyword'>long</span> leaves<span class='Baan-baanNumber def-Number'>.</span>count
+ 971: <span class='def-Comment def-Syntax'>| Инициализировать список расчитанных больничных </span>
+ 972: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@created</span>
+ 973: <span class='def-Comment def-Syntax'>|  MaxBelugin 26/09/00 15:58:28 </span>
+ 974: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.init</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 975:   leaves<span class='Baan-baanNumber def-Number'>.</span>count<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>
+ 976: <span class='Baan-baanSymbol def-Symbol'>}</span>               
+ 977: <span class='def-Comment def-Syntax'>| Есть ли пара leave kind в списке расчитанных </span>
+ 978: <span class='def-Comment def-Syntax'>| больничных</span>
+ 979: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@created</span>
+ 980: <span class='def-Comment def-Syntax'>|  MaxBelugin 26/09/00 16:00:13 </span>
+ 981: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> Bool <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.has</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>long</span> leave<span class='Baan-baanSymbol def-Symbol'>,</span>TmКndCode kind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 982:   <span class='Baan-baanKeyword def-Keyword'>long</span> i
+ 983:  <span class='Baan-baanKeyword def-Keyword'> for</span> i<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>1</span> <span class='Baan-baanKeyword def-Keyword'>to</span> leaves<span class='Baan-baanNumber def-Number'>.</span>count
+ 984:    <span class='Baan-baanKeyword def-Keyword'> if</span> leaves<span class='Baan-baanSymbol def-Symbol'>(</span>i<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span>leave <span class='Baan-baanKeyword def-Keyword'>and</span> <span class='Baan-baanProcedure def-Symbol'>strip$</span><span class='Baan-baanSymbol def-Symbol'>(</span>kinds<span class='Baan-baanSymbol def-Symbol'>(</span>i<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span>kind <span class='Baan-baanKeyword def-Keyword'>then</span>
+ 985:       <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>True</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 986:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+ 987:  <span class='Baan-baanKeyword def-Keyword'> endfor</span>
+ 988:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>false</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 989: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 990: <span class='def-Comment def-Syntax'>| Есть ли пара leave kind в списке расчитанных </span>
+ 991: <span class='def-Comment def-Syntax'>| больничных</span>
+ 992: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@created</span>
+ 993: <span class='def-Comment def-Syntax'>|  MaxBelugin 26/09/00 16:00:13 </span>
+ 994: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> Bool <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.haveToCalc</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>long</span> leave<span class='Baan-baanSymbol def-Symbol'>,</span>TmКndCode kind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+ 995:    <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanUserProcedure def-Identifier'>clcleaves.hasLeave</span><span class='Baan-baanSymbol def-Symbol'>(</span>leave<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>and</span> <span class='Baan-baanKeyword def-Keyword'>not</span> <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.has</span><span class='Baan-baanSymbol def-Symbol'>(</span>leave<span class='Baan-baanSymbol def-Symbol'>,</span>kind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+ 996: <span class='Baan-baanSymbol def-Symbol'>}</span>
+ 997: <span class='def-Comment def-Syntax'>| Есть leave расчитанных </span>
+ 998: <span class='def-Comment def-Syntax'>| больничных</span>
+ 999: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@created</span>
+1000: <span class='def-Comment def-Syntax'>|  MaxBelugin 26/09/00 16:00:13 </span>
+1001: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> Bool <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.hasLeave</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>long</span> leave<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+1002:   <span class='Baan-baanKeyword def-Keyword'>long</span> i
+1003:  <span class='Baan-baanKeyword def-Keyword'> for</span> i<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>1</span> <span class='Baan-baanKeyword def-Keyword'>to</span> leaves<span class='Baan-baanNumber def-Number'>.</span>count
+1004:    <span class='Baan-baanKeyword def-Keyword'> if</span> leaves<span class='Baan-baanSymbol def-Symbol'>(</span>i<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span>leave <span class='Baan-baanKeyword def-Keyword'>then</span>
+1005:       <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>True</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+1006:    <span class='Baan-baanKeyword def-Keyword'> endif</span>
+1007:  <span class='Baan-baanKeyword def-Keyword'> endfor</span>
+1008:   <span class='Baan-baanKeyword def-Keyword'>return</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>false</span><span class='Baan-baanSymbol def-Symbol'>)</span>
+1009: <span class='Baan-baanSymbol def-Symbol'>}</span>
+1010: <span class='def-Comment def-Syntax'>| добавить пару leave, kind в список расчитанных </span>
+1011: <span class='def-Comment def-Syntax'>| больничных</span>
+1012: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@created</span>
+1013: <span class='def-Comment def-Syntax'>|  MaxBelugin 26/09/00 16:00:13 </span>
+1014: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.add</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanKeyword def-Keyword'>long</span> leave<span class='Baan-baanSymbol def-Symbol'>,</span>TmКndCode kind<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+1015:  <span class='Baan-baanKeyword def-Keyword'> if</span> <span class='Baan-baanKeyword def-Keyword'>not</span> <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.has</span><span class='Baan-baanSymbol def-Symbol'>(</span>leave<span class='Baan-baanSymbol def-Symbol'>,</span>kind<span class='Baan-baanSymbol def-Symbol'>)</span> <span class='Baan-baanKeyword def-Keyword'>then</span>
+1016:     leaves<span class='Baan-baanNumber def-Number'>.</span>count<span class='Baan-baanSymbol def-Symbol'>=</span>leaves<span class='Baan-baanNumber def-Number'>.</span>count<span class='Baan-baanSymbol def-Symbol'>+</span><span class='Baan-baanNumber def-Number'>1</span>
+1017:     leaves<span class='Baan-baanSymbol def-Symbol'>(</span>leaves<span class='Baan-baanNumber def-Number'>.</span>count<span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span>leave
+1018:     kinds<span class='Baan-baanSymbol def-Symbol'>(</span>leaves<span class='Baan-baanNumber def-Number'>.</span>count<span class='Baan-baanSymbol def-Symbol'>,</span><span class='Baan-baanNumber def-Number'>1</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>=</span>kind
+1019:  <span class='Baan-baanKeyword def-Keyword'> endif</span>
+1020: <span class='Baan-baanSymbol def-Symbol'>}</span>   
+1021: <span class='def-Comment def-Syntax'>|  Зарершить работу со списком расчитанных больничных </span>
+1022: <span class='def-Comment def-Syntax'>|</span><span class='def-CommentContent def-Comment def-Syntax'>@created</span>
+1023: <span class='def-Comment def-Syntax'>|  MaxBelugin 26/09/00 16:03:53 </span>
+1024: <span class='Baan-baanKeyword def-Keyword'>function</span> <span class='Baan-baanKeyword def-Keyword'>extern</span> <span class='Baan-baanUserProcedure def-Identifier'>clcleaves.done</span><span class='Baan-baanSymbol def-Symbol'>(</span><span class='Baan-baanSymbol def-Symbol'>)</span><span class='Baan-baanSymbol def-Symbol'>{</span>
+1025:   leaves<span class='Baan-baanNumber def-Number'>.</span>count<span class='Baan-baanSymbol def-Symbol'>=</span><span class='Baan-baanNumber def-Number'>0</span>  
+1026: <span class='Baan-baanSymbol def-Symbol'>}</span>

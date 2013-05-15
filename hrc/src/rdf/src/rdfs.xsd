@@ -1,0 +1,91 @@
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns="http://www.w3.org/2000/01/rdf-schema#"
+  targetNamespace="http://www.w3.org/2000/01/rdf-schema#"
+  elementFormDefault="qualified">
+
+<xs:annotation>
+ <xs:documentation source="http://www.w3.org/TR/rdf-schema/">
+  <![CDATA[
+   XML schema for RDF Schema
+   Written by Eugene Efremov <4mirror@mail.ru>
+  ]]>
+ </xs:documentation>
+</xs:annotation>
+
+<!-- 
+  - 
+  - !!! nodeElement 
+  -
+  -
+  --> 
+
+<xs:element name="Resource" type="rdf:nodeElement"/>
+<xs:element name="Literal" type="rdf:nodeElement"/>
+<xs:element name="Class" type="rdf:nodeElement"/>
+<xs:element name="Datatype" type="rdf:nodeElement"/>
+<xs:element name="Container" type="rdf:nodeElement"/>
+<xs:element name="ContainerMembershipProperty" type="rdf:nodeElement"/>
+
+<xs:group name="nodeElementURIs">
+ <xs:sequence>
+  <xs:element ref="Resource"/>
+  <xs:element ref="Literal"/>
+  <xs:element ref="Class"/>
+  <xs:element ref="Datatype"/>
+  <xs:element ref="Container"/>
+  <xs:element ref="ContainerMembershipProperty"/>
+ </xs:sequence>
+</xs:group>
+
+<!-- 
+  - 
+  - !!! propertyElt
+  -
+  -
+  --> 
+
+<xs:element name="subClassOf" type="rdf:propertyElt"/>
+<xs:element name="subPropertyOf" type="rdf:propertyElt"/>
+<xs:element name="domain" type="rdf:propertyElt"/>
+<xs:element name="range" type="rdf:propertyElt"/>
+<xs:element name="label" type="rdf:propertyElt"/>
+<xs:element name="comment" type="rdf:propertyElt"/>
+<xs:element name="member" type="rdf:propertyElt"/>
+<xs:element name="seeAlso" type="rdf:propertyElt"/>
+<xs:element name="isDefinedBy" type="rdf:propertyElt"/>
+  
+<xs:group name="propertyElementURIs">
+ <xs:sequence>
+  <xs:element ref="subClassOf"/>
+  <xs:element ref="subPropertyOf"/>
+  <xs:element ref="domain"/>
+  <xs:element ref="range"/>
+  <xs:element ref="label"/>
+  <xs:element ref="comment"/>
+  <xs:element ref="member"/>
+  <xs:element ref="seeAlso"/>
+  <xs:element ref="isDefinedBy"/>
+ </xs:sequence>
+</xs:group>
+  
+<!--
+   -
+   - !!! attributes 
+   -
+   -->
+   
+<xs:attributeGroup name="propertyAttributeURIs">
+ <xs:attribute name="subClassOf" type="xs:string" form="qualified"/>
+ <xs:attribute name="subPropertyOf" type="xs:string" form="qualified"/>
+ <xs:attribute name="domain" type="xs:string" form="qualified"/>
+ <xs:attribute name="range" type="xs:string" form="qualified"/>
+ <xs:attribute name="label" type="xs:string" form="qualified"/>
+ <xs:attribute name="comment" type="xs:string" form="qualified"/>
+ <xs:attribute name="member" type="xs:string" form="qualified"/>
+ <xs:attribute name="seeAlso" type="xs:string" form="qualified"/>
+ <xs:attribute name="isDefinedBy" type="xs:string" form="qualified"/>
+</xs:attributeGroup>
+
+</xs:schema>

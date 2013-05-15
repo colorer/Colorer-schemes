@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<project name="src.parser" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/parser" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+<!-- bracket -->
+
+<target name="bkt.check">
+ <dependset>
+  <srcfilelist dir="${src}" files = "parser.bkt"/>
+  <srcfilelist dir="." files = "build.xml"/>
+  <targetfilelist dir="${bin}" files="parser-brackets.ent.hrc"/>
+ </dependset>
+</target>
+
+<target name="bkt" depends="bkt.check">
+ <ant antfile="${util}" target="bracket">
+  <property name="util.input" value="${src}/parser.bkt"/>
+  <property name="util.output" value="${bin}/parser-brackets.ent.hrc"/>
+ </ant>
+</target>
+
+<!-- hrc -->
+
+<target name="hrc.check">
+ <dependset>
+  <srcfilelist dir="${src}" files = "parser.hrc, parser-ex.ent.hrc"/>
+  <targetfilelist dir="${bin}" files="parser.hrc"/>
+ </dependset>
+</target>
+
+<target name="hrc" depends="bkt, hrc.check">
+ <copy todir='${bin}'>
+   <fileset dir='${src}' includes='parser.hrc, parser-ex.ent.hrc'/>
+ </copy>
+</target>
+
+<!-- final -->
+
+<target name="all" depends="hrc"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${obj}" includes="*.*" excludes='.empty'/>
+  <fileset dir="${bin}" includes="parser*.*"/>
+ </delete>
+</target>
+
+</project>

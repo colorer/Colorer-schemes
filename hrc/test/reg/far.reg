@@ -1,0 +1,191 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Far2\Test\rem~`!@#$%^&*()=/*-+|/[]{};:,.'?<>] ;ddgdfgdf
+[HKEY_CURRENT_USER\Software\Far2\Test\rem=]][]]]
+;комментарий
+;[HKEY_CURRENT_USER\Software\Far2]
+ 
+[HKEY_CURRENT_USER\Software\Far2\Test\rem] ;ddgdfgdf
+;нет группы
+;[HKEY_CURRENT_USER\Software\Far2\Cmdline]
+"UsePromptFormat"=dword:00000000
+"PromptFormat"="$p>"
+;"DelRemovesBlocks"=dword:00000001
+"EditBlock"=dword:00000000
+"AutoComplete"=dword:00000001
+"~`!@#$%^&*()=/*-+|/[]{};:,.'?<>"=""
+;неверное имя группы
+[jHKEY_CURRENT_USER\Software\Far2\Colors\Highlight\Group1]
+
+;удаляем раздел
+[-HKEY_CURRENT_USER\Software\Far2\CodePages] ;jghg
+
+[--HKEY_CURRENT_USER\Software\Far2\CodePages]
+
+[-HKEY_CURRENT_USER\Software\Far2\CodePages]
+@="sfdfsd"
+"CPMenuMode"=dword:00000000
+
+;значение по умолчанию
+[HKEY_CURRENT_USER\Software\Far2\Colors\Highlight\Group1]
+@="sfdfsd"
+
+;удаление значения
+[HKEY_CURRENT_USER\Software\Far2\Colors\Highlight\Group2]
+"Mask"=-
+;jjj
+[HKEY_CURRENT_USER\Software\Far2\Colors\Highlight\Group2]
+"Mask"=----
+
+
+;hex значенийя
+[HKEY_CURRENT_USER\Software\far2\Colors]
+"CurrentPalette"=hex:3f,0f,3e,0e,3f,3f,30,0f,3e,0e,1b,1e,17,1e,30,3e,1b,30,1e,\
+  1b,3e,70,7e,70,70,7e,30,70,30,7e,3e,70,0f,7e,0e,4f,4e,4f,4f,4e,30,4f,70,4e,\
+  7e,07,30,07,07,30,1b,30,30,1b,30,30,30,3f,3e,0f,30,30,3e,38,1b,30,1b,0b,0f,\
+  70,1e,00,70,3f,1b,07,78,38,78,48,38,48,38,30,30,70,70,0f,38,3f,0f,3e,0e,3f,\
+  3f,38,3f,4f,70,4e,7e,4f,4f,4f,3f,0f,3e,0e,3f,3f,38,3f,7e,78,0e,3e,38,0e,4e,\
+  48,7e,3e,38,0e,3e,38,0e,07,1b,38,07,38,07,78,07,38,07,48,70
+"Новый параметр #1"=hex(7):64,00,73,00,66,00,76,00,64,00,66,00,61,00,64,00,66,\
+  00,67,00,68,00,6e,00,62,00,64,00,20,00,72,00,20,00,72,00,74,00,20,00,74,00,\
+  65,00,74,00,67,00,20,00,72,00,74,00,67,00,20,00,77,00,65,00,72,00,67,00,74,\
+  00,67,00,20,00,5c,00,00,00,66,00,64,00,67,00,20,00,64,00,66,00,67,00,64,00,\
+  66,00,5c,00,00,00,00,00
+"Новый параметр #2"=hex(2):64,00,73,00,66,00,67,00,68,00,76,00,62,00,6a,00,6e,\
+  00,6d,00,6b,00,2c,00,6c,00,2e,00,00,00
+"Var"=hex(b):ff,ff,ff,ff,ff,ff,ff,ff
+
+; значение на двух строках
+"test stroki c \\n"="dfsdfsdfdsfsdgdfhggfdsfgdfgsdgfdg regf dfg dg dfg "
+"test stroki c \\n"="dfsdfsdfdsfsdgdfhggfdsfgdfgsdgfdg
+regf dfg dg dfg "
+
+; dword
+"MarkCharCursorColor" = dword:00000000
+
+;отступы
+[HKEY_CURRENT_USER\Software\Far2\Colors\Highlight]
+
+   "MarkCharCursorColor"=	dword:00000000
+ 	"MarkCharSelectedCursorColor"=dword: 00000000
+
+"MarkChar" =  dword:00000000;sfsdbgfsdfd
+"ContinueProcessing"  = dword:00000000    ;edfsdfsdf
+
+[HKEY_CURRENT_USER\Software\Far2\Colors\Highlight\Group4]
+"Mask"="*.exe,*.com,*.bat,*.cmd,%PATHEXT%"
+"IgnoreMask"=dword:00000000
+"ContinueProcessing"=dword:00000000   ;sfdfsdfsdfs
+
+;clsid
+[HKEY_LOCAL_MACHINE\SOFTWARE\{1F2E5C40-9550-11CE-99D2-00AA006E086C}]
+"{1F2E5C40-9550-11CE-99D2-00AA006E086C}"="sdfre"
+"dd"="@device:cm:{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default \DirectSound Device"
+
+
+;экранируемые символы
+[HKEY_CLASSES_ROOT\.dbg\PersistentHandler]
+"=fvdf"="{098f2470-bae0-11cd-b579-08002b30bfeb}"
+"dd"="@device:cm:{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default \DirectSound Device"
+"\""= "\\pphkjhj"
+"\"\\\\" ="\\pphkjhj"
+"\\=\\\\ " = " \\pphkjhj"
+"\"=\\" ="\\pphkjhj"
+"Par\"a\"=meter"=""
+;переменные
+"Test"="%1"   ;dfssd
+"%Test%"="%1"
+"$test\\"="dd"
+"%Test"="\\" ;"
+"gdfgdfg\"=dwordggdfg"=dword:00000000 
+
+[HKEY_CLASSES_ROOT\.dbg\PersistentHandler]
+"=fvdf"="{098f2470-bae0-11cd-b579-08002b30bfeb}"
+"\sdd"="@device:cm:{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default \DirectSound Device"
+"\""= "\\pphkjhj"
+"\"\\\n\\" ="\\pphkjhj"
+"\\"=\\\\\ " = " "\\pphkjhj"
+"\"=\\\ \ \ " ="\\pphkjhj"
+"Par"a"=meter"=""
+;переменные
+"$test\\\d "="dd"
+"%Test"="\"" ;"
+
+
+@="" ;"
+"$test\ hhh"="dd fvfg \' fgg \\ hff$sh\  %dfvdfv% dfsd \t \""
+; имена папок
+"\\\\?\\c:\\server\\dfsdf\\1.txt"=""
+"D:\\projects\\Far\\svn_clean\\farmanager\\1.txt"="D:\\projects\\Far\\svn_clean"
+"D:\\projects\\Far\\svn_clean\\farmanager\1.txt"= ""
+"\D:\\projects\\Far\\svn_clean\\farmanager\\\1.txt"=""
+"{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}"=""
+"\\\\?\\C:\\LOCALS~1\\TEMP\\FTMP00GO.5Q1\\http---forum_kaspersky_com-index_php act=Attach&type=post&id=1097.htm"="1|ru_RU||*"
+
+;разное   http://forum.farmanager.com/viewtopic.php?f=5&t=1573&p=55875#p55875
+"~`!@#$%^&*()=/*-+|/[]{};:,.'?<>"=""
+""="default"
+; \r \n \t ошибка
+"ваы"="ывсыв \r \n \t"
+"ва\r \t\nы"="ывсыв \r \n"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\*\shellex\PropertySheetHandlers\{1F2E5C40-9550-11CE-99D2-00AA006E086C}]
+"D:\\projects\\Far\\svn_clean\\farmanager\\"="@device:cm:{E0F158E1-CB04-11D0-BD4E-00A0C911CE86}\\Default DirectSound Device"
+
+;тест Mask в разделе фара
+[HKEY_CURRENT_USER\Software\Far2\Colors\Highlight\Group5]
+"Mask"="*.rar,*.zip,*.[zj],*.[bg7]z,*.[bg]zip,*.tar,*.t[ag]z,*.ar[cj],*.r[0-9][0-9],*.a[0-9][0-9],*.bz2,*.cab,*.msi,*.jar,*.lha,*.lzh,*.ha,*.ac[bei],*.pa[ck],*.rk,*.cpio,*.rpm,*.zoo,*.hqx,*.sit,*.ice,*.uc2,*.ain,*.imp,*.777,*.ufa,*.boa,*.bs[2a],*.sea,*.hpk,*.ddi,*.x2,*.rkv,*.[lw]sz,*.h[ay]p,*.lim,*.sqz,*.chz"
+"FolderInfo"="DirInfo,File_Id.diz,Descript.ion,ReadMe.*,Read.Me"
+
+[HKEY_CURRENT_USER\Software\Far2\Viewer\LastPositions]
+"Item63"="85,0,0,0,0,\"$D:\\projects\\Far\\svn_clean\\farmanager\\unicode_far\\UNICODE\""
+"Item61"="0,0,0,0,0,\"$D:\\projects\\Far\\svn_clean\\farmanager\\unicode_far\\HACKING-RU\""
+"Item62"="4556,0,0,0,0,\"D:\\projects\\Far\\svn_clean\\farmanager\\unicode_far\\MAINTAINERS\""
+
+[HKEY_CURRENT_USER\Software\Fhhar2\KeyMacros\Shell\Ctrl{}{}{[]][]]
+[HKEY_CURRENT_USER\Software\Feeear2\KeyMacros\Shell\Ctrl=====]
+[HKEY_CURRENT_USER\Software\Faeesdfr2\KeyMacros\Shell\Ctrl[]=]
+;небольшой тест макросов
+[HKEY_CURRENT_USER\Software\Far2\KeyMacros\Shell\Ctrl]
+"Sequence"="~"
+"Sequence"="'"
+"Sequence"="fgdfgdfgdf "
+"Sequence"="; # $ % { } ?"
+"Sequence"="."
+;"Sequence"="a"
+"Sequence"="%a=Editor.Pos(0,5)-1;"
+
+[HKEY_CURRENT_USER\Software\Far2\KeyMacros\Shell\Ins]
+"Sequence"="$if ((fexist(11)) == 1) fexist(1+1) $end"
+"Sequence"="$if (fexist(1,(11+1)+0x12) == 1) fexist() $end"
+"Sequence"="$if (fexistr() == 1) $end"
+"Sequence"="%html=APanel.Current; $if (fexist(fsplit(%html,0x04)+\".files\") == 1) panel.setpos(0,fsplit(%html,0x04)+\"_files\") Ins $end $if (fexist(fsplit(%html,0x04)+\".files\") == 1) panel.setpos(0,fsplit(%html,0x04)+\".files\") Ins $end panel.setpos(0,%html) Ins"
+
+[HKEY_CURRENT_USER\Software\Farsdas2\KeyMacros\Shell\Ctrl]
+"Sequence"="~"
+"Sequence"="'"
+"Sequence"="' \ \\ AltCtrl\ AltCtrl\\"
+"Sequence"="fgdfgdfgdf "
+"Sequence"="; # $ % { } ?"
+"Sequence"="."
+;"Sequence"="a"
+"Sequence"="%a=Editor.Pos(0,5)-1;"
+
+[HKEY_CURRENT_USER\Software\Far2\Plugins\AirBrush]
+"ColorizeAll"=hex(4):01
+"aaaaa"=hex:0,1,2,3
+
+[HKEY_CURRENT_USER\Software\Frgar2\KeyMacros\Shell\Ins]
+"Sequence"="$if ((fexist(11)) == 1) fexist(1+1) $end"
+"Sequence"="$if (fexist(1,(11+1)+0x12) == 1) fexist() $end"
+"Sequence"="$if (fexistr() == 1) $end"
+"Sequence"="%html=APanel.Current; $if (fexist(fsplit(%html,0x04)+\".files\") == 1) panel.setpos(0,fsplit(%html,0x04)+\"_files\") Ins $end $if (fexist(fsplit(%html,0x04)+\".files\") == 1) panel.setpos(0,fsplit(%html,0x04)+\".files\") Ins $end panel.setpos(0,%html) Ins"
+
+;hex значенийя
+[HKEY_CURRENT_USER\Software\far2\Colors]
+"Current"=hex:
+"Новый параметр #1"=hex(7):64,00,73,00,66,00,76,00,64,00,66,00,61,00,64,00,66,\
+  00,67,00,68,00,6e,00,62,00,64,00,20,00,72,00,20,00,72,00,74,00,20,00,74,00,\
+  65,00,74,00,67,00,20,00,72,00,74,00,67,00,20,00,77,00,65,00,72,00,67,00,74,\
+  00,67,00,20,00,5c,00,00,00,66,00,64,00,67,00,20,00,64,00,66,00,67,00,64,00,\
+  66,00,5c,00,00,00,00,00

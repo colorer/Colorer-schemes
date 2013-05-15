@@ -1,0 +1,36 @@
+
+{,},[,],/ - templates
+() - no symbol, block
+
+block:
+ case:
+  mlblock     s([()]{()})e
+  biblock     s({()}{()})e
+  halfblock   s(/()/()/)e
+  monoblock   s({()})e
+  singleblock s(/()/)e
+ name:
+ 
+ ^name{....}
+ 
+ <block name="sheck" start="\^" end="(\%\w+)?" y-add="0"
+  region1="String" region-end="tmpl" 
+  region-middle="StringEdge" scheme-middle="SubstComment">
+   <start match="[^%nname]+?" region="name"/>
+   <case type="monoblock" start="\{" end="\}"/>
+   <case type="monoblock" start="\(" end="\)"/>
+ </block>
+ 
+ 
+property=values.vvv\
+vvvvv
+<block name="prop" start="^" end=""
+region1="value" scheme1="value"
+region-middle="symbol">
+ <start match="\w+" region="name"/>
+ <case type="monoblock" start="\=" end="(?{}\\)?~1$"/>
+</block>
+pair:
+              ((name)/(value)/)
+              ((name)/(value)/)
+              

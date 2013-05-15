@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<project name="src.calcset" default="all" basedir=".">
+
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/calcset" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+<!-- hrc -->
+
+<target name="hrc.check">
+ <dependset>
+  <srcfileset dir="${src}" includes = "*.*"/>
+  <targetfilelist dir="${bin}" files="calcset.hrc"/>
+ </dependset>
+</target>
+
+<target name="hrc" depends="hrc.check">
+ <ant antfile="${util}" target="xsd2hrc">
+   <property name="util.input" value="${src}/calcset.xsd"/>
+   <property name="util.output" value="${bin}/calcset.hrc"/>
+   <property name='xsd2hrc.hrctype' value='calcset'/>
+   <property name='xsd2hrc.top-level-element' value='calc'/>
+   <property name='xsd2hrc.allow-any-attr' value='yes'/>
+ </ant>
+</target>
+
+<!-- final -->
+
+<target name="all" depends="hrc"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${bin}" includes="calcset.hrc"/>
+ </delete>
+</target>
+
+</project>

@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://colorer.sf.net/2003/hrc"
+  targetNamespace="http://colorer.sf.net/2003/hrc"
+  elementFormDefault="qualified">
+
+  <xs:simpleType name="REstring">
+    <xs:annotation><xs:documentation>
+      Regular Expression
+    </xs:documentation></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="collapse"/>
+      <xs:pattern value="/.*/[ix]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="REworddiv">
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="collapse"/>
+      <xs:pattern value="\[.*\]|%.*;"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- EE: entity is a separate type -->
+  <xs:simpleType name="REentity">
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="collapse"/>
+      <xs:pattern value=".*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:simpleType name="REstring-or-null">
+    <xs:union memberTypes="REstring">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value=""/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+  <xs:simpleType name="QName">
+    <xs:annotation><xs:documentation>
+      A pair of type name and valid XML name.
+    </xs:documentation></xs:annotation>
+    <xs:restriction base="xs:QName">
+      <xs:pattern value="(\i\c*:)?\i\c*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attributeGroup name="regionX">
+    <xs:attribute name="region"  type="QName"/>
+    <xs:attribute name="region0" type="QName"/>
+    <xs:attribute name="region1" type="QName"/>
+    <xs:attribute name="region2" type="QName"/>
+    <xs:attribute name="region3" type="QName"/>
+    <xs:attribute name="region4" type="QName"/>
+    <xs:attribute name="region5" type="QName"/>
+    <xs:attribute name="region6" type="QName"/>
+    <xs:attribute name="region7" type="QName"/>
+    <xs:attribute name="region8" type="QName"/>
+    <xs:attribute name="region9" type="QName"/>
+    <xs:attribute name="regiona" type="QName"/>
+    <xs:attribute name="regionb" type="QName"/>
+    <xs:attribute name="regionc" type="QName"/>
+    <xs:attribute name="regiond" type="QName"/>
+    <xs:attribute name="regione" type="QName"/>
+    <xs:attribute name="regionf" type="QName"/>
+  </xs:attributeGroup>
+
+  <xs:element name="hrc" type="hrc"/>
+
+  <xs:complexType name="hrc">
+    <xs:annotation><xs:documentation>
+      Root of the HRC file XML structure.
+    </xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="annotation" type="annotation" minOccurs="0"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="prototype" type="prototype"/>
+        <xs:element name="package" type="package"/>
+        <xs:element name="type" type="type"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:NMTOKEN" use="required">
+      <xs:annotation><xs:documentation>
+        Specifies version of HRC language.
+        For example, 'take5' for Colorer-take5.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <xs:complexType name="annotation">
+    <xs:annotation><xs:documentation>
+      Defines formal documentation for the HRC language elements.
+    </xs:documentation></xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="appinfo">
+        <xs:annotation><xs:documentation>
+          Formal annotation part, used for tools processing.
+        </xs:documentation></xs:annotation>
+        <xs:complexType mixed="true">
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:any namespace="##other" processContents="lax"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentation">
+        <xs:annotation><xs:documentation>
+          Human documentation part.
+        </xs:documentation></xs:annotation>
+        <xs:complexType mixed="true">
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:any namespace="##other" processContents="skip"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="contributors">
+        <xs:annotation><xs:documentation>
+          Contribute information part.
+        </xs:documentation></xs:annotation>
+        <xs:complexType mixed="true">
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:any namespace="##other" processContents="lax"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="package">
+    <xs:annotation><xs:documentation>
+      Defines prototype of the defined file type, but use
+      this type as an internal hidden package structure.
+    </xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="annotation" type="annotation" minOccurs="0"/>
+      <xs:element name="location" type='location' minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:NCName" use="required">
+      <xs:annotation><xs:documentation>
+        Common internal name of this package.
+        Must be valid XML non-qualified name.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="description" type="xs:string" use="required">
+      <xs:annotation><xs:documentation>
+        User description, used to represent package in target IDE.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="targetNamespace" type="xs:anyURI">
+      <xs:annotation><xs:documentation>
+        Applicable to the XML group of languages.
+        Specifies namespace, this HRC file describing.
+        Allows automatically linking and combining different XML languages in HRC.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="prototype">
+    <xs:annotation><xs:documentation>
+      Defines prototype of single target programming language.
+      This prototype must have name, equals to real type, defined
+      in the linked resource.
+    </xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="annotation" type="annotation" minOccurs="0"/>
+      <xs:element name="location" type='location' minOccurs="0"/>
+      <xs:element name="filename" type="filename" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="firstline" type="firstline" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="parameters" type="parameters" minOccurs='0'/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:NCName" use="required">
+      <xs:annotation><xs:documentation>
+        Common internal name of this language type.
+        Must be valid XML non-qualified name.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="description" type="xs:string" use="required">
+      <xs:annotation><xs:documentation>
+        User description, used to represent language in target IDE.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="group" type="xs:Name">
+      <xs:annotation><xs:documentation>
+        Group of languages, this language belongs to.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="targetNamespace" type="xs:anyURI">
+      <xs:annotation><xs:documentation>
+        Applicable to the XML group of languages.
+        Specifies namespace, this HRC file describing.
+        Allows automatically linking and combining different XML languages in HRC.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="location">
+    <xs:annotation><xs:documentation>
+      Points to the location of a HRC file with this language description.
+      Link is a well formed URI address of the requested HRC file.
+      This location can be relative to the current location of the parent type,
+      or absolute (with URI schemas, supported by library).
+      If URI schema is absent, 'file://' is assumed.
+    </xs:documentation></xs:annotation>
+    <xs:attribute name="link" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="filename">
+    <xs:annotation><xs:documentation>
+      Defines Regular Expression, used to identify programming language
+      by its file name. This can include file's extension or
+      some more complex dependencies.
+    </xs:documentation></xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="REstring">
+        <xs:attribute name="weight" type="xs:decimal" default="2">
+          <xs:annotation><xs:documentation>
+            This attribute defines weight, added to the total language
+            weight, when choosing one from a list of available.
+          </xs:documentation></xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="firstline">
+    <xs:annotation><xs:documentation>
+      Defines Regular Expression, used to identify programming language
+      by its starting content. First line can be used, or some small
+      part of text. This entry has less default weight against
+      filename one.
+    </xs:documentation></xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="REstring">
+        <xs:attribute name="weight" type="xs:decimal" default="1">
+          <xs:annotation><xs:documentation>
+            This attribute defines weight, added to the total language
+            weight, when choosing one from a list of available.
+          </xs:documentation></xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="parameters">
+    <xs:annotation><xs:documentation>
+      Custom parameters, used to specify additional properties of this language type.
+      These can include different language resources (icons, templates and so on).
+      Also these parameters could be referenced from schema declaration,
+      this allows to customize schemes loading process.
+    </xs:documentation></xs:annotation>
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="param">
+        <xs:annotation><xs:documentation>
+          Single parameter [name,value] pair.
+        </xs:documentation></xs:annotation>
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+          <xs:attribute name="value" type="xs:string" use="required"/>
+          <xs:attribute name="description" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="type">
+    <xs:annotation><xs:documentation>
+      Language container, used to store all parser specific information.
+      These defines are used by parser to analyze and colorize target text data.
+    </xs:documentation></xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="annotation" type="annotation"/>
+      <xs:element name="import" type="import"/>
+      <xs:element name="region" type="region"/>
+      <xs:element name="entity" type="entity"/>
+      <xs:element name="scheme" type="scheme"/>
+    </xs:choice>
+    <xs:attribute name="name" type="xs:NCName" use="required">
+      <xs:annotation><xs:documentation>
+        HRC Language type name.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="scheme">
+    <xs:annotation><xs:documentation>
+      HRC scheme is a basic unit, which represents some fixed set of
+      lexemes, tokens and syntax regions (lexical context).
+      Each time at any position in the text only one schema is active.
+      Its content is applied to the current text position.
+      
+      When the text parsing process starts, the scheme is used 
+      whose name equals the name of the corresponding type
+      (the base scheme of the type).
+
+    </xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="annotation" type="annotation" minOccurs="0"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="regexp" type="regexp"/>
+        <xs:element name="block" type="block"/>
+        <xs:element name="keywords" type="keywords"/>
+        <xs:element name="inherit" type="inherit"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:NCName" use="required">
+      <xs:annotation><xs:documentation>
+        HRC Scheme name. Unique in this type scope.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="if" type="xs:NCName" use="optional">
+      <xs:annotation><xs:documentation>
+        Load and use this scheme's content only if parameter,
+        to which references this attribute is truth.
+        In other case this scheme is used as an empty one.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="unless" type="xs:NCName" use="optional">
+      <xs:annotation><xs:documentation>
+        Load and use this scheme's content only if parameter,
+        to which references this attribute is not truth.
+        In other case this scheme is used as an empty one.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="import">
+    <xs:annotation><xs:documentation>
+      External type import statement. This statement imports all definitions
+      from the specified type into the current one, so you can use them
+      without explicit type qualifier.
+    </xs:documentation></xs:annotation>
+    <xs:attribute name="type" type="xs:NCName" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="entity">
+    <xs:annotation><xs:documentation>
+      HRC Entity definition. Entities are some form of macro-definitions,
+      they lately can be used in regular expressions syntax to make
+      them simpler. Each entity consists of Entity name and
+      Entity content, which would be substituted into regular expression,
+      when parser finds entity reference. Each entity can be referenced
+      with %entityname; syntax.
+    </xs:documentation></xs:annotation>
+    <xs:attribute name="name" type="xs:NCName" use="required">
+      <xs:annotation><xs:documentation>
+        HRC Entity name.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <!-- EE: entity is a separate type -->
+    <xs:attribute name="value" type="REentity" use="required">
+      <xs:annotation><xs:documentation>
+        HRC Entity value, used to substitute entity in RE string.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="region">
+    <xs:annotation><xs:documentation>
+      Definition of basic syntax region - text range with assigned
+      syntax meaning. Later, these regions can be mapped into
+      required color information and displayed on screen.
+    </xs:documentation></xs:annotation>
+    <xs:attribute name="name" type="xs:NCName" use="required">
+      <xs:annotation><xs:documentation>
+        HRC Region name.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="parent" type="QName">
+      <xs:annotation><xs:documentation>
+        Region's parent reference. If region has parent,
+        its properties can be inherited from this one.
+        Also region inheritance creates tree structure of HRC Regions.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="description" type="xs:string">
+      <xs:annotation><xs:documentation>
+        Optional description, used to represent region's purpose and
+        to show it to user in convenient and friendly way.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="regexp">
+    <xs:annotation><xs:documentation>
+      Regular Expression token.
+    </xs:documentation></xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="blockInner">
+        <xs:attribute name="region" type="QName"/>
+        <xs:attribute name="priority" type="priority" default="normal"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="priority">
+    <xs:annotation><xs:documentation>
+      Priority of any token can be normal and low.
+      Low-priority tokens can't shift down its closing token from called scheme.
+    </xs:documentation></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="low"/>
+      <xs:enumeration value="normal"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="block">
+    <xs:annotation><xs:documentation>
+      Context switch operator.
+      Used to switch currently used context into the specified one.
+      Context is switched, if RE pattern, placed in 'start' attribute,
+      is matches. Switched context is closed, when parser
+      finds match of the 'end' RE.
+    </xs:documentation></xs:annotation>
+    <xs:sequence minOccurs="0">
+      <xs:element name="start" type="blockInner"/>
+      <xs:element name="end" type="blockInner"/>
+    </xs:sequence>
+    <xs:attribute name="start" type="REstring"/>
+    <xs:attribute name="end" type="REstring"/>
+    <xs:attribute name="scheme" type="QName" use="required"/>
+    <xs:attribute name="priority" type="priority" default="normal"/>
+    <xs:attribute name="content-priority" type="priority" default="normal"/>
+    <xs:attribute name="inner-region" default="no">
+      <xs:annotation><xs:documentation>
+        If set to "yes" then the region of referenced scheme does not include
+        text matched by start/end attributes. I.e. all the block's regions
+        are located outside of the scheme region.
+        By default ("no" value) scheme region wraps start/end tokens of the
+        block and defines background for their own regions.
+      </xs:documentation></xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="yes"/>
+          <xs:enumeration value="no"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="regionXX"/>
+  </xs:complexType>
+
+  <xs:attributeGroup name="regionXX">
+    <xs:attribute name="region" type="QName"/>
+    <xs:attribute name="region00" type="QName"/>
+    <xs:attribute name="region01" type="QName"/>
+    <xs:attribute name="region02" type="QName"/>
+    <xs:attribute name="region03" type="QName"/>
+    <xs:attribute name="region04" type="QName"/>
+    <xs:attribute name="region05" type="QName"/>
+    <xs:attribute name="region06" type="QName"/>
+    <xs:attribute name="region07" type="QName"/>
+    <xs:attribute name="region08" type="QName"/>
+    <xs:attribute name="region09" type="QName"/>
+    <xs:attribute name="region0a" type="QName"/>
+    <xs:attribute name="region0b" type="QName"/>
+    <xs:attribute name="region0c" type="QName"/>
+    <xs:attribute name="region0d" type="QName"/>
+    <xs:attribute name="region0e" type="QName"/>
+    <xs:attribute name="region0f" type="QName"/>
+    <xs:attribute name="region10" type="QName"/>
+    <xs:attribute name="region11" type="QName"/>
+    <xs:attribute name="region12" type="QName"/>
+    <xs:attribute name="region13" type="QName"/>
+    <xs:attribute name="region14" type="QName"/>
+    <xs:attribute name="region15" type="QName"/>
+    <xs:attribute name="region16" type="QName"/>
+    <xs:attribute name="region17" type="QName"/>
+    <xs:attribute name="region18" type="QName"/>
+    <xs:attribute name="region19" type="QName"/>
+    <xs:attribute name="region1a" type="QName"/>
+    <xs:attribute name="region1b" type="QName"/>
+    <xs:attribute name="region1c" type="QName"/>
+    <xs:attribute name="region1d" type="QName"/>
+    <xs:attribute name="region1e" type="QName"/>
+    <xs:attribute name="region1f" type="QName"/>
+  </xs:attributeGroup>
+
+  <xs:complexType name="blockInner">
+    <xs:annotation><xs:documentation>
+      Alternative style of RE definition.
+      Could be used, when RE is very complex and
+      it is easier to use character (or CDATA) sections to define it.
+    </xs:documentation></xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="REstring">
+        <xs:attributeGroup ref="regionX"/>
+        <xs:attribute name="match" type="REstring">
+          <xs:annotation><xs:documentation>
+            RE syntax
+          </xs:documentation></xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="inherit">
+    <xs:annotation><xs:documentation>
+      Scheme inheritance construction.
+      If one scheme is inherited in another, then the latter scheme
+      takes all the definitions from the former, as it was included
+      directly in place of inherit operator.
+      One scheme can't inherit another, if that scheme is already
+      makes inheritance (even indirect) of the first one.
+    </xs:documentation></xs:annotation>
+    <xs:sequence>
+      <xs:element name="virtual" type="virtual" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="scheme" type="QName" use="required">
+      <xs:annotation><xs:documentation>
+        Inherited scheme name.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="virtual">
+    <xs:annotation><xs:documentation>
+      Inheritance substitution element.
+      While inheriting one scheme in another, it is possible
+      to redefine inner inherited schemes with some others.
+      This can be used to change inherited language behavior.
+    </xs:documentation></xs:annotation>
+    <xs:attribute name="scheme" type="QName" use="required">
+      <xs:annotation><xs:documentation>
+        Redefined scheme.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="subst-scheme" type="QName" use="required">
+      <xs:annotation><xs:documentation>
+        Scheme to use instead redefined one.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="keywords">
+    <xs:annotation><xs:documentation>
+      List of tokens with equal properties.
+      Keywords, symbols and so on...
+      These lists are used to make processing of many tokens
+      faster, when it isn't required to use RE to define syntax tokens.
+    </xs:documentation></xs:annotation>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="word" type="word"/>
+      <xs:element name="symb" type="symb"/>
+    </xs:choice>
+    <xs:attribute name="ignorecase" default="yes">
+      <xs:annotation><xs:documentation>
+        Match this list of tokens with case sensitive or no.
+      </xs:documentation></xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="yes"/>
+          <xs:enumeration value="no"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="region" type="QName">
+      <xs:annotation><xs:documentation>
+        Region, assigned to this list of tokens.
+        Each token can define its custom region.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="priority" type="priority" default="low"/>
+    <xs:attribute name="worddiv" type="REworddiv">
+      <xs:annotation><xs:documentation>
+        Class of characters, used to search words edges.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="symb">
+    <xs:annotation><xs:documentation>
+      Symbol tokens - ignores specified word edges.
+    </xs:documentation></xs:annotation>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="region" type="QName"/>
+  </xs:complexType>
+
+  <xs:complexType name="word">
+    <xs:annotation><xs:documentation>
+      Keyword tokens - use specified word edges.
+    </xs:documentation></xs:annotation>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="region" type="QName"/>
+  </xs:complexType>
+
+</xs:schema>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1/GPL 2.0/LGPL 2.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is the Colorer Library.
+   -
+   - The Initial Developer of the Original Code is
+   - Cail Lomecb <cail@nm.ru>.
+   - Portions created by the Initial Developer are Copyright (C) 1999-2005
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   - Eugene Efremov <4mirror@mail.ru>
+   -
+   - Alternatively, the contents of this file may be used under the terms of
+   - either the GNU General Public License Version 2 or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+   - in which case the provisions of the GPL or the LGPL are applicable instead
+   - of those above. If you wish to allow use of your version of this file only
+   - under the terms of either the GPL or the LGPL, and not to allow others to
+   - use your version of this file under the terms of the MPL, indicate your
+   - decision by deleting the provisions above and replace them with the notice
+   - and other provisions required by the LGPL or the GPL. If you do not delete
+   - the provisions above, a recipient may use your version of this file under
+   - the terms of any one of the MPL, the GPL or the LGPL.
+   -
+   - ***** END LICENSE BLOCK ***** -->

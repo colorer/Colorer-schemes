@@ -1,0 +1,117 @@
+  0: <span class='vrml-wrlComment def-Comment def-Syntax'>#VRML V2.0 utf8</span>
+  1: 
+  2: <span class='vrml-wrlComment def-Comment def-Syntax'># Prototyp: stepTimeSensor, krokovatelny casovac</span>
+  3: 
+  4: <span class='vrml-wrlSymb def-Symbol'>PROTO</span> stepTimeSensor <span class='vrml-wrlSymb2 def-SymbolStrong def-Symbol'>[</span>
+  5:   <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> startTime <span class='vrml-wrlNumb def-Number'>0.0</span>
+  6:   <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_startTime
+  7:   <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> stopTime <span class='vrml-wrlNumb def-Number'>1.0</span>
+  8:   <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_stopTime
+  9:   <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> timeScale <span class='vrml-wrlNumb def-Number'>1.0</span>
+ 10:   <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_timeScale
+ 11:   <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> loopEnabled <span class='vrml-wrlSymb def-Symbol'>FALSE</span>
+ 12:   <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> set_loopEnabled
+ 13:   <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> stepTime <span class='vrml-wrlNumb def-Number'>1.0</span>
+ 14:   <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_stepTime
+ 15:   <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_time
+ 16:   <span class='vrml-wrlSymb def-Symbol'>eventOut</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> time_changed
+ 17:   <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> running <span class='vrml-wrlSymb def-Symbol'>FALSE</span>
+ 18:   <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> set_running
+ 19:   <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFInt32</span> addStep <span class='vrml-wrlSymb2 def-SymbolStrong def-Symbol'>]</span>
+ 20: <span class='vrml-wrlSymb2 def-SymbolStrong def-Symbol'>{</span>
+ 21:   <span class='vrml-wrlSymb def-Symbol'>DEF</span> stepTimerScr <span class='vrml-wrlWord def-Keyword'>Script</span> <span class='vrml-wrlSymb2 def-SymbolStrong def-Symbol'>{</span>
+ 22:     <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> startTime IS startTime
+ 23:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_startTime IS set_startTime
+ 24:     <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> stopTime IS stopTime
+ 25:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_stopTime IS set_stopTime
+ 26:     <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> timeScale IS timeScale
+ 27:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_timeScale IS set_timeScale
+ 28:     <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> loopEnabled IS loopEnabled
+ 29:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> set_loopEnabled IS set_loopEnabled
+ 30:     <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> stepTime IS stepTime
+ 31:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_stepTime IS set_stepTime
+ 32:     <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> time IS startTime
+ 33:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> set_time IS set_time
+ 34:     <span class='vrml-wrlSymb def-Symbol'>eventOut</span> <span class='vrml-wrlSymb def-Symbol'>SFFloat</span> time_changed IS time_changed
+ 35:     <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> running IS running
+ 36:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> set_running IS set_running
+ 37:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFInt32</span> addStep IS addStep
+ 38: <span class='vrml-wrlComment def-Comment def-Syntax'># private</span>
+ 39:     <span class='vrml-wrlSymb def-Symbol'>eventOut</span> <span class='vrml-wrlSymb def-Symbol'>SFBool</span> enableInternalTimer
+ 40:     <span class='vrml-wrlSymb def-Symbol'>eventIn</span> <span class='vrml-wrlSymb def-Symbol'>SFTime</span> internalTime
+ 41:     <span class='vrml-wrlSymb def-Symbol'>field</span> <span class='vrml-wrlSymb def-Symbol'>SFTime</span> oldEventTime -<span class='vrml-wrlNumb def-Number'>1.0</span>
+ 42:     url <span class='vrml-wrlSymb2 def-SymbolStrong def-Symbol'>[</span>"<span class='vrml-wrlWord def-Keyword'>javascript</span>:
+ 43: <span class='def-Comment def-Syntax'>// Skript pro krokovatelny casovac, pro JavaScript</span>
+ 44: <span class='def-Comment def-Syntax'>// scStepTimeSensor</span>
+ 45: 
+ 46: <span class='def-Keyword'>function</span> setNewTime<span class='def-Symbol'>(</span>newTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 47:   <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>stopTime <span class='def-Symbol'>></span> startTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// lze cyklit</span>
+ 48:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>newTime <span class='def-Symbol'>&lt;</span> startTime<span class='def-Symbol'>)</span> newTime <span class='def-Symbol'>=</span> startTime<span class='def-SymbolStrong def-Symbol'>;</span>
+ 49:     <span class='def-Keyword'>while</span> <span class='def-Symbol'>(</span>newTime <span class='def-Symbol'>></span> stopTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// cas pretekl</span>
+ 50:       <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>loopEnabled<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 51:     newTime <span class='def-Symbol'>-</span><span class='def-Symbol'>=</span> stopTime<span class='def-SymbolStrong def-Symbol'>;</span>
+ 52:       <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-Keyword'>else</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// neloopujeme, stop</span>
+ 53:         newTime <span class='def-Symbol'>=</span> startTime<span class='def-SymbolStrong def-Symbol'>;</span> 
+ 54:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 55:       enableInternalTimer <span class='def-Symbol'>=</span> <span class='def-BooleanConstant def-Constant def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 56:       running <span class='def-Symbol'>=</span> <span class='def-BooleanConstant def-Constant def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 57:     <span class='def-SymbolStrong def-Symbol'>}</span>
+ 58:       <span class='def-SymbolStrong def-Symbol'>}</span>
+ 59:     <span class='def-SymbolStrong def-Symbol'>}</span>
+ 60:   <span class='def-SymbolStrong def-Symbol'>}</span>
+ 61:   time <span class='def-Symbol'>=</span> newTime<span class='def-SymbolStrong def-Symbol'>;</span>
+ 62:   time_changed <span class='def-Symbol'>=</span> newTime<span class='def-SymbolStrong def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// posli event</span>
+ 63: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 64: 
+ 65: <span class='def-Keyword'>function</span> set_startTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 66:   startTime <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
+ 67: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 68: 
+ 69: <span class='def-Keyword'>function</span> set_stopTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 70:   stopTime <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
+ 71: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 72: 
+ 73: <span class='def-Keyword'>function</span> set_timeScale<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 74:   timeScale <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
+ 75: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 76: 
+ 77: <span class='def-Keyword'>function</span> set_loopEnabled<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 78:   loopEnabled <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
+ 79: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 80: 
+ 81: <span class='def-Keyword'>function</span> set_stepTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 82:   stepTime <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
+ 83: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 84: 
+ 85: <span class='def-Keyword'>function</span> set_running<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 86:   <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>running <span class='def-Symbol'>!=</span> eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 87:     running <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
+ 88:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// zapnout casovac</span>
+ 89:       enableInternalTimer <span class='def-Symbol'>=</span> <span class='def-BooleanConstant def-Constant def-Keyword'>true</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 90:       oldEventTime <span class='def-Symbol'>=</span> <span class='def-Symbol'>-</span><span class='def-NumberFloat def-Number'>1.0</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 91:     <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-Keyword'>else</span> <span class='def-Comment def-Syntax'>// vypnout, prepnout do krokovaciho rezimu</span>
+ 92:       enableInternalTimer <span class='def-Symbol'>=</span> <span class='def-BooleanConstant def-Constant def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 93:   <span class='def-SymbolStrong def-Symbol'>}</span>
+ 94: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 95: 
+ 96: <span class='def-Keyword'>function</span> addStep<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 97:   <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>!</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 98:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>eventValue <span class='def-Symbol'>!=</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> setNewTime<span class='def-Symbol'>(</span>time <span class='def-Symbol'>+</span> eventValue <span class='def-Symbol'>*</span> stepTime<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 99:     <span class='def-Keyword'>else</span> setNewTime<span class='def-Symbol'>(</span>startTime<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+100:   <span class='def-SymbolStrong def-Symbol'>}</span>
+101: <span class='def-SymbolStrong def-Symbol'>}</span>
+102: 
+103: <span class='def-Keyword'>function</span> internalTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+104:   <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+105:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>oldEventTime <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+106:       time <span class='def-Symbol'>+=</span> timeScale <span class='def-Symbol'>*</span> <span class='def-Symbol'>(</span>eventValue <span class='def-Symbol'>-</span> oldEventTime<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span> 
+107:       setNewTime<span class='def-Symbol'>(</span>time<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+108:     <span class='def-SymbolStrong def-Symbol'>}</span>
+109:     oldEventTime <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
+110:   <span class='def-SymbolStrong def-Symbol'>}</span>
+111: <span class='def-SymbolStrong def-Symbol'>}</span>
+112: 
+113: <span class='def-Keyword'>function</span> set_time<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+114:   setNewTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+115: <span class='def-SymbolStrong def-Symbol'>}</span>
+116: 

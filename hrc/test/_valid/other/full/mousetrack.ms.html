@@ -1,0 +1,149 @@
+  0: <span class='def-Comment def-Syntax'>-- This script is a basic test to show how to use the new functions added</span>
+  1: <span class='def-Comment def-Syntax'>-- when "MouseTrak.dlx" is placed in you plugins directory.</span>
+  2: 
+  3: <span class='def-Comment def-Syntax'>-- Steps</span>
+  4: <span class='def-Comment def-Syntax'>--    1. Create a Sphere</span>
+  5: <span class='def-Comment def-Syntax'>--    2. Create a cylinder with a small radius (Hair Like)</span>
+  6: <span class='def-Comment def-Syntax'>--    3. Run the MouseTrack.ms script</span>
+  7: <span class='def-Comment def-Syntax'>--    4. Choose "Spray" in the Moustrack utility</span>
+  8: <span class='def-Comment def-Syntax'>--    5. Then under Geometry Spray choose "pick Surface" </span>
+  9: <span class='def-Comment def-Syntax'>--    6. Choose the Sphere</span>
+ 10: <span class='def-Comment def-Syntax'>--    7. Then hit "Pick spray geometry"</span>
+ 11: <span class='def-Comment def-Syntax'>--    8. and choose the cylinder</span>
+ 12: <span class='def-Comment def-Syntax'>--    9. Now as you move the mouse over the sphere pressing the left mouse button,</span>
+ 13: <span class='def-Comment def-Syntax'>--    it will draw cylinders on the sphere.</span>
+ 14: 
+ 15: <span class='def-Comment def-Syntax'>--Script and plugin code by John Wainwright.</span>
+ 16: 
+ 17:     
+ 18: 
+ 19: 
+ 20: 
+ 21: utility mesh_painter <span class='def-String'>"Mesh Painter"</span>
+ 22: <span class='def-Symbol'>(</span>
+ 23:     checkbutton spray <span class='def-String'>"Spray"</span> tooltip<span class='def-Symbol'>:</span><span class='def-String'>"Spray geometry over surface"</span> offset<span class='def-Symbol'>:</span><span class='def-Symbol'>[</span><span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>5</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>]</span> across<span class='def-Symbol'>:</span><span class='def-NumberDec def-Number'>3</span>
+ 24:     checkbutton sel <span class='def-String'>"Select"</span> tooltip<span class='def-Symbol'>:</span><span class='def-String'>"Select faces by painting"</span>
+ 25:     checkbutton sculpt <span class='def-String'>"Sculpt"</span> tooltip<span class='def-Symbol'>:</span><span class='def-String'>"Sculpt mesh surface"</span> offset<span class='def-Symbol'>:</span><span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>5</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>]</span>
+ 26:     
+ 27:     rollout spray_ro <span class='def-String'>"Geometry Spray"</span>
+ 28:     <span class='def-Symbol'>(</span>
+ 29:         local surf<span class='def-Symbol'>,</span> geom
+ 30:         pickbutton pick_surf <span class='def-String'>"Pick surface"</span>
+ 31:         pickbutton pick_geom <span class='def-String'>"Pick spray geometry"</span>
+ 32:         checkbutton do_spray <span class='def-String'>"Spray"</span>
+ 33:         
+ 34:         fn spray_track msg ir obj faceNum shift ctrl alt <span class='def-Symbol'>=</span>
+ 35:         <span class='def-Symbol'>(</span>
+ 36:             if msg <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> #mouseMove and ir <span class='def-Symbol'>!</span><span class='def-Symbol'>=</span> undefined then
+ 37:             <span class='def-Symbol'>(</span>
+ 38:                 local b <span class='def-Symbol'>=</span> copy geom pos<span class='def-Symbol'>:</span>ir<span class='def-Symbol'>.</span>pos
+ 39:                 b<span class='def-Symbol'>.</span>dir <span class='def-Symbol'>=</span> ir<span class='def-Symbol'>.</span>dir
+ 40:             <span class='def-Symbol'>)</span>
+ 41:             if msg <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> #mouseAbort then ok else #continue
+ 42:         <span class='def-Symbol'>)</span>
+ 43: 
+ 44:         <span class='def-Keyword'>on</span> pick_surf picked obj <span class='def-Keyword'>do</span> surf <span class='def-Symbol'>=</span> obj
+ 45:         <span class='def-Keyword'>on</span> pick_geom picked obj <span class='def-Keyword'>do</span> geom <span class='def-Symbol'>=</span> obj
+ 46:         <span class='def-Keyword'>on</span> do_spray changed state <span class='def-Keyword'>do</span> 
+ 47:         <span class='def-Symbol'>(</span>
+ 48:             mouseTrack <span class='def-Keyword'>on</span><span class='def-Symbol'>:</span>surf trackCallBack<span class='def-Symbol'>:</span>spray_track
+ 49:             do_spray<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> false
+ 50:         <span class='def-Symbol'>)</span>
+ 51:     <span class='def-Symbol'>)</span>
+ 52:     
+ 53:     rollout sel_ro <span class='def-String'>"Face Select"</span>
+ 54:     <span class='def-Symbol'>(</span>
+ 55:         local surf
+ 56:         pickbutton pick_surf <span class='def-String'>"Pick surface"</span>
+ 57:         checkbutton do_sel <span class='def-String'>"Select"</span> tooltip<span class='def-Symbol'>:</span><span class='def-String'>"press &lt;alt> key to subtract from selection"</span>
+ 58:         
+ 59:         fn sel_track msg ir obj faceNum shift ctrl alt <span class='def-Symbol'>=</span>
+ 60:         <span class='def-Symbol'>(</span>
+ 61:             if msg <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> #mouseMove and faceNum <span class='def-Symbol'>!</span><span class='def-Symbol'>=</span> undefined then
+ 62:             <span class='def-Symbol'>(</span>
+ 63:                 if not alt then
+ 64:                     setFaceSelection obj #<span class='def-Symbol'>(</span>faceNum<span class='def-Symbol'>)</span> keep<span class='def-Symbol'>:</span>true
+ 65:                 else
+ 66:                 <span class='def-Symbol'>(</span>
+ 67:                     local s <span class='def-Symbol'>=</span> getFaceSelection obj<span class='def-Symbol'>,</span>
+ 68:                           i <span class='def-Symbol'>=</span> findItem s faceNum
+ 69:                     if i <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span> then setFaceSelection obj <span class='def-Symbol'>(</span>deleteItem s i<span class='def-Symbol'>)</span>
+ 70:                 <span class='def-Symbol'>)</span>
+ 71:                 update obj
+ 72:             <span class='def-Symbol'>)</span>
+ 73:             if msg <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> #mouseAbort then ok else #continue
+ 74:         <span class='def-Symbol'>)</span>
+ 75: 
+ 76:         <span class='def-Keyword'>on</span> pick_surf picked obj <span class='def-Keyword'>do</span> surf <span class='def-Symbol'>=</span> obj
+ 77:         <span class='def-Keyword'>on</span> do_sel changed state <span class='def-Keyword'>do</span> 
+ 78:         <span class='def-Symbol'>(</span>
+ 79:             if classOf surf<span class='def-Symbol'>.</span>baseObject <span class='def-Symbol'>!</span><span class='def-Symbol'>=</span> editable_mesh then convertToMesh surf
+ 80:             select surf
+ 81:             max modify mode
+ 82:             subObjectLevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>2</span>
+ 83:             mouseTrack <span class='def-Keyword'>on</span><span class='def-Symbol'>:</span>surf trackCallBack<span class='def-Symbol'>:</span>sel_track
+ 84:             do_sel<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> false
+ 85:         <span class='def-Symbol'>)</span>
+ 86:     <span class='def-Symbol'>)</span>
+ 87:     
+ 88:     rollout sculpt_ro <span class='def-String'>"Sculpt Surface"</span>
+ 89:     <span class='def-Symbol'>(</span>
+ 90:         local surf<span class='def-Symbol'>,</span> last_face
+ 91:         pickbutton pick_surf <span class='def-String'>"Pick surface"</span>
+ 92:         checkbutton do_sculpt <span class='def-String'>"Sculpt"</span> tooltip<span class='def-Symbol'>:</span><span class='def-String'>"drag to pull; &lt;shift>-drag push surface"</span>
+ 93:         
+ 94:         fn sculpt_track msg ir obj faceNum shift ctrl alt <span class='def-Symbol'>=</span>
+ 95:         <span class='def-Symbol'>(</span>
+ 96:             if msg <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> #mouseMove and faceNum <span class='def-Symbol'>!</span><span class='def-Symbol'>=</span> undefined and faceNum <span class='def-Symbol'>!</span><span class='def-Symbol'>=</span> last_face then
+ 97:             <span class='def-Symbol'>(</span>
+ 98:                 local f <span class='def-Symbol'>=</span> getFace obj faceNum<span class='def-Symbol'>,</span> dir <span class='def-Symbol'>=</span> if shift then <span class='def-Symbol'>-</span>ir<span class='def-Symbol'>.</span>dir else ir<span class='def-Symbol'>.</span>dir
+ 99:                 setVert obj f<span class='def-Symbol'>.</span>x <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>getVert obj f<span class='def-Symbol'>.</span>x<span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span> dir <span class='def-Symbol'>*</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>)</span>
+100:                 setVert obj f<span class='def-Symbol'>.</span>y <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>getVert obj f<span class='def-Symbol'>.</span>y<span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span> dir <span class='def-Symbol'>*</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>)</span>
+101:                 setVert obj f<span class='def-Symbol'>.</span>z <span class='def-Symbol'>(</span><span class='def-Symbol'>(</span>getVert obj f<span class='def-Symbol'>.</span>z<span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span> dir <span class='def-Symbol'>*</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>)</span>
+102:                 last_face <span class='def-Symbol'>=</span> faceNum
+103:                 update obj
+104:             <span class='def-Symbol'>)</span>
+105:             if msg <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> #mouseAbort then ok else #continue
+106:         <span class='def-Symbol'>)</span>
+107: 
+108:         <span class='def-Keyword'>on</span> pick_surf picked obj <span class='def-Keyword'>do</span> surf <span class='def-Symbol'>=</span> obj
+109:         <span class='def-Keyword'>on</span> do_sculpt changed state <span class='def-Keyword'>do</span> 
+110:         <span class='def-Symbol'>(</span>
+111:             if classOf surf<span class='def-Symbol'>.</span>baseObject <span class='def-Symbol'>!</span><span class='def-Symbol'>=</span> editable_mesh then convertToMesh surf
+112:             last_face <span class='def-Symbol'>=</span> undefined
+113:             mouseTrack <span class='def-Keyword'>on</span><span class='def-Symbol'>:</span>surf trackCallBack<span class='def-Symbol'>:</span>sculpt_track
+114:             do_sculpt<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> false
+115:         <span class='def-Symbol'>)</span>
+116:     <span class='def-Symbol'>)</span>
+117:     
+118:     <span class='def-Keyword'>on</span> spray changed state <span class='def-Keyword'>do</span> 
+119:     <span class='def-Symbol'>(</span>
+120:         sel<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> sculpt<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> false
+121:         removeRollout sel_ro
+122:         removeRollout sculpt_ro
+123:         <span class='def-Symbol'>(</span>if state then addRollout else removeRollout<span class='def-Symbol'>)</span> spray_ro
+124:     <span class='def-Symbol'>)</span>
+125:     
+126:     <span class='def-Keyword'>on</span> sel changed state <span class='def-Keyword'>do</span> 
+127:     <span class='def-Symbol'>(</span>
+128:         spray<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> sculpt<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> false
+129:         removeRollout spray_ro
+130:         removeRollout sculpt_ro
+131:         <span class='def-Symbol'>(</span>if state then addRollout else removeRollout<span class='def-Symbol'>)</span> sel_ro
+132:     <span class='def-Symbol'>)</span>
+133:     
+134:     <span class='def-Keyword'>on</span> sculpt changed state <span class='def-Keyword'>do</span> 
+135:     <span class='def-Symbol'>(</span>
+136:         spray<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> sel<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> false
+137:         removeRollout spray_ro
+138:         removeRollout sel_ro
+139:         <span class='def-Symbol'>(</span>if state then addRollout else removeRollout<span class='def-Symbol'>)</span> sculpt_ro
+140:     <span class='def-Symbol'>)</span>
+141:     
+142:     <span class='def-Keyword'>on</span> mesh_painter close <span class='def-Keyword'>do</span> 
+143:     <span class='def-Symbol'>(</span>
+144:         removeRollout spray_ro
+145:         removeRollout sel_ro
+146:         removeRollout sculpt_ro
+147:     <span class='def-Symbol'>)</span>
+148: <span class='def-Symbol'>)</span>

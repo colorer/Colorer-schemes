@@ -1,0 +1,16 @@
+ 0: 
+ 1: Begin
+ 2: 
+ 3:  While  Manufacturers<span class='c-Symbol def-Symbol'>[</span>i<span class='c-Symbol def-Symbol'>]</span><span class='c-Symbol def-Symbol'>.</span>ID <span class='c-Symbol def-Symbol'>!</span><span class='c-Symbol def-Symbol'>=</span><span class='def-NumberDec def-Number'>0</span>
+ 4:      BeginWhile
+ 5:        If  Manufacturers<span class='c-Symbol def-Symbol'>[</span>i<span class='c-Symbol def-Symbol'>]</span><span class='c-Symbol def-Symbol'>.</span>ID <span class='c-Symbol def-Symbol'>=</span> <span class='c-Symbol def-Symbol'>=</span> InAudioCardCaps<span class='c-Symbol def-Symbol'>[</span>j<span class='c-Symbol def-Symbol'>]</span><span class='c-Symbol def-Symbol'>.</span>wMid
+ 6:     Then
+ 7:      <span class='c-KeywordWin32 c-KeywordLibFunctions def-FunctionKeyword def-Keyword'>wsprintf</span> <span class='c-Symbol def-Symbol'>(</span> szMessage<span class='c-Symbol def-Symbol'>,</span> <span class='def-StringEdge def-String'>"</span><span class='c-StringFormat def-VarStrong def-Var'>%s</span><span class='c-StringEscape def-StringContent def-String'>\0</span><span class='def-StringEdge def-String'>"</span><span class='c-Symbol def-Symbol'>,</span> Manufacturers<span class='c-Symbol def-Symbol'>[</span>i<span class='c-Symbol def-Symbol'>]</span><span class='c-Symbol def-Symbol'>.</span>Name <span class='c-Symbol def-Symbol'>)</span><span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+ 8:      <span class='c-KeywordANSI def-Keyword'>break</span><span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+ 9:     Else
+10:         i<span class='c-Symbol def-Symbol'>+</span><span class='c-Symbol def-Symbol'>+</span><span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+11:      EndIf
+12:  EndWhile
+13: 
+14: End
+15: 

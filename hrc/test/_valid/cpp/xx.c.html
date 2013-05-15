@@ -1,0 +1,65 @@
+ 0: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-Preproc def-DirectiveContent def-Directive'>sdf sadf asdf \\ sdf\\s \\</span>
+ 1: <span class='c-Preproc def-DirectiveContent def-Directive'> a daf</span>
+ 2: 
+ 3: 
+ 4: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>define</span><span class='c-Preproc def-DirectiveContent def-Directive'> CPTYP_SESSION   1   </span><span class='c-Comment def-Comment def-Syntax'>/* Server-router lost session with server.</span>
+ 5: <span class='c-Comment def-Comment def-Syntax'>                   Invalidate all pages associated with</span>
+ 6: <span class='c-Comment def-Comment def-Syntax'>                   server. */</span>
+ 7: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>define</span><span class='c-Preproc def-DirectiveContent def-Directive'> CPTYP_OFLOW 2   </span><span class='c-Comment def-Comment def-Syntax'>/* Server overflowed Server-router's CPT</span>
+ 8: <span class='c-Comment def-Comment def-Syntax'>                   Invalidate all pages associated with</span>
+ 9: <span class='c-Comment def-Comment def-Syntax'>                   server. */</span>
+10: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>define</span><span class='c-Preproc def-DirectiveContent def-Directive'> CPTYP_DATASET   3   </span><span class='c-Comment def-Comment def-Syntax'>/* Invalidate all pages associated with a</span>
+11: <span class='c-Comment def-Comment def-Syntax'>                   dataset (hash = dsid in this case). */</span>
+12: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>define</span><span class='c-Preproc def-DirectiveContent def-Directive'> CPTYP_AGENT 4   </span><span class='c-Comment def-Comment def-Syntax'>/* Agent chooses to make connection</span>
+13: <span class='c-Comment def-Comment def-Syntax'>                   quiescent. */</span>
+14: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>define</span><span class='c-Preproc def-DirectiveContent def-Directive'> CPTYP_BGARCOL   5   </span><span class='c-Comment def-Comment def-Syntax'>/* Server was garbage collecting dataset while</span>
+15: <span class='c-Comment def-Comment def-Syntax'>                   responding to request.  Client will</span>
+16: <span class='c-Comment def-Comment def-Syntax'>                   "distrust" all pages associated with that</span>
+17: <span class='c-Comment def-Comment def-Syntax'>                   dataset (hash = dsid in this case) until a</span>
+18: <span class='c-Comment def-Comment def-Syntax'>                   type 6 CPT indicates that garbage</span>
+19: <span class='c-Comment def-Comment def-Syntax'>                   collection is complete. */</span>
+20: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-Preproc def-DirectiveContent def-Directive'> adf asdf </span><span class='c-Comment def-Comment def-Syntax'>/* adsfasfd asdf asd xx */</span><span class='c-Preproc def-DirectiveContent def-Directive'> asdf\</span>
+21: <span class='c-Preproc def-DirectiveContent def-Directive'>         ss                  s                       s</span>
+22: 
+23: 
+24: <span class='c-PreprocPref def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='c-PreprocWord def-Directive'>include </span><span class='c-PreprocIncludeEdge def-StringEdge def-String'>"</span><span class='c-PreprocInclude def-Path def-URI'>..\..\</span><span class='def-Path def-URI'>sys\Perlin.hpp</span><span class='c-PreprocIncludeEdge def-StringEdge def-String'>"</span>
+25: 
+26: <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>unsigned</span> <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>char</span> ucl_rotr8<span class='c-Symbol def-Symbol'>(</span><span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>unsigned</span> <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>char</span> value<span class='c-Symbol def-Symbol'>,</span> <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>int</span> shift<span class='c-Symbol def-Symbol'>)</span><span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+27: <span class='c-KeywordANSI def-Keyword'>extern</span> __inline__ <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>unsigned</span> <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>char</span> ucl_rotr8<span class='c-Symbol def-Symbol'>(</span><span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>unsigned</span> <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>char</span> value<span class='c-Symbol def-Symbol'>,</span> <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>int</span> shift<span class='c-Symbol def-Symbol'>)</span>
+28: <span class='def-SymbolStrong def-Symbol'>{</span>
+29:     <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>unsigned</span> <span class='c-KeywordANSI-typenames c-KeywordANSI def-Keyword'>char</span> result<span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+30: 
+31:     __asm__ __volatile__ <span class='c-Symbol def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>movb %b1, %b0; rorb %b2, %b0</span><span class='def-StringEdge def-String'>"</span>
+32:                         <span class='c-StructureSymbol def-SymbolStrong def-Symbol'>:</span> <span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>=a</span><span class='def-StringEdge def-String'>"</span><span class='c-Symbol def-Symbol'>(</span>result<span class='c-Symbol def-Symbol'>)</span> <span class='c-StructureSymbol def-SymbolStrong def-Symbol'>:</span> <span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>g</span><span class='def-StringEdge def-String'>"</span><span class='c-Symbol def-Symbol'>(</span>value<span class='c-Symbol def-Symbol'>)</span><span class='c-Symbol def-Symbol'>,</span> <span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>c</span><span class='def-StringEdge def-String'>"</span><span class='c-Symbol def-Symbol'>(</span>shift<span class='c-Symbol def-Symbol'>)</span><span class='c-Symbol def-Symbol'>)</span><span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+33:     <span class='c-KeywordANSI def-Keyword'>return</span> result<span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+34: <span class='def-SymbolStrong def-Symbol'>}</span>
+35: 
+36: 
+37: <span class='c-AsmCode def-Directive'>__asm</span><span class='c-StructureSymbol def-SymbolStrong def-Symbol'>{</span>
+38:   <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span> <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>edx</span> <span class='c-Comment def-Comment def-Syntax'>// asdfsafd</span>
+39:     <span class='c-Comment def-Comment def-Syntax'>/*  hi all </span><span class='def-TODO def-Error'>!!!</span><span class='c-Comment def-Comment def-Syntax'> */</span>
+40: <span class='c-Comment def-Comment def-Syntax'>// };</span>
+41: <span class='c-StructureSymbol def-SymbolStrong def-Symbol'>}</span><span class='c-StructureSymbol def-SymbolStrong def-Symbol'>;</span>
+42: 
+43: 
+44: xx
+45: 
+46: <span class='c-Comment def-Comment def-Syntax'>/*</span>
+47: <span class='c-Comment def-Comment def-Syntax'>  xxxxxxxxxxxxxxxxx</span>
+48: <span class='c-Comment def-Comment def-Syntax'>  xxxxxxxxxxxxxxxxx</span>
+49: <span class='c-Comment def-Comment def-Syntax'>*/</span>
+50: 
+51: <span class='def-NumberDec def-Number'>12</span>
+52: 
+53: <span class='c-Symbol def-Symbol'>(</span><span class='c-Symbol def-Symbol'>(</span><span class='c-Symbol def-Symbol'>(</span><span class='c-Symbol def-Symbol'>)</span><span class='c-Symbol def-Symbol'>(</span><span class='def-NumberDec def-Number'>55</span><span class='c-Symbol def-Symbol'>)</span><span class='c-Symbol def-Symbol'>)</span><span class='c-Symbol def-Symbol'>)</span>
+54: 
+55: 
+56: <span class='def-NumberDec def-Number'>2</span>
+57: 
+58: <span class='def-Error'>0x23dfes4</span>
+59: 
+60: <span class='c-Comment def-Comment def-Syntax'>/*</span>
+61: <span class='c-Comment def-Comment def-Syntax'>xxxxxxxxxxxxxxx</span>
+62: <span class='c-Comment def-Comment def-Syntax'>xxxxxxxxxxxxxxx</span>
+63: <span class='c-Comment def-Comment def-Syntax'>*/</span>xxxxxxxxxxxxxxx
+64: 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace="uri:wsc">
+	<prefix>wsc</prefix>
+	<empty-prefix/>
+	
+	<!--top-level>
+		<element>package</element>
+	</top-level-->
+	
+	<contributors>Cail Lomecb, Max Belugin, Eugene Efremov</contributors>
+	
+	<outline>
+		<element name='component' extract='withAttribute' description='Component'/>
+	</outline>
+	
+	<processing-instruction name="component">
+		<xs:complexType xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:attribute name="error" type="xs:boolean"/>
+			<xs:attribute name="debug" type="xs:boolean"/>
+		</xs:complexType>
+	</processing-instruction>
+	
+	<script-n-style>
+		<element name="script">
+			<language name="perl" expr="perlscript"/>
+			<language name="jScript" expr="(ecma|j(ava)?)script"/>
+			<language name="vbScript" expr="vbscript"/>
+			<default name="jScript"/>
+		</element>
+	</script-n-style>
+	
+	<type xmlns="http://colorer.sf.net/2003/hrc">
+		<region name="guid.number" parent="def:NumberHex"/>
+		<region name="guid.ln" parent="def:Symbol"/>
+		<region name="guid.bra" parent="def:SymbolStrong"/>
+		
+		<!-- {A42400BD-329F-46F8-A206-D23FA10C52DE} -->
+		
+		<entity name="hex" value="[\dA-Fa-f]"/>
+		<entity name="ln" value="(?{guid.ln}-)"/>
+		<entity name="guid" value="(?{guid.number}%hex;{8}%ln;%hex;{4}%ln;%hex;{4}%ln;%hex;{4}%ln;%hex;{12})"/>
+		
+		<scheme name="guid-content">
+			<regexp match="/(\{)%guid;(\})/" region="guid.bra" 
+				region1="def:PairStart" region2="def:PairEnd"
+			/>
+		</scheme>
+		
+		<scheme name="classid-content">
+			<regexp match="/(clsid)(:)%guid;/" 
+				region1="xml:Attribute.defined.nsprefix" region2="guid.bra"
+			/>
+		</scheme>
+		
+		<scheme name="progid-content">
+			<regexp match="/\./" region="def:Symbol"/>
+			<regexp match="/[\w\d_]/" region="def:KeywordStrong"/>
+		</scheme>
+		
+		<!--scheme name="componentType-content">
+			 <inherit scheme="script-element"/>
+			 <inherit scheme="componentType-content-old"/>
+		</scheme-->
+	</type>
+	
+</custom-type>
+</custom>

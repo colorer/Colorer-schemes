@@ -1,0 +1,461 @@
+<schema
+  xmlns='http://www.w3.org/2001/XMLSchema'
+  targetNamespace='http://www.w3.org/1999/XSL/Transform'
+  xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>
+
+ <annotation>
+  <documentation>
+    This schema of the XSLT language was generated from xslt.dtd
+    by dtd2xsd.pl (c) Mary Holstege, Yuichi Koike, Dan Connolly, Bert Bos bert@w3.org
+    and adopted for using in colorer library as source for HRC syntax generation
+    by Cail Lomecb (cail@nm.ru)
+  </documentation>
+ </annotation>
+
+ <simpleType name='pattern'>
+  <restriction base='string'>
+  </restriction>
+ </simpleType>
+
+ <simpleType name='avt'>
+  <restriction base='string'>
+  </restriction>
+ </simpleType>
+
+ <simpleType name='expr'>
+  <restriction base='string'>
+  </restriction>
+ </simpleType>
+
+ <simpleType name='char'>
+  <restriction base='string'>
+   <length value="1"/>
+  </restriction>
+ </simpleType>
+
+ <simpleType name="yes-no">
+  <restriction base='string'>
+   <enumeration value='yes'/>
+   <enumeration value='no'/>
+  </restriction>
+ </simpleType>
+
+ <simpleType name="prefix-default">
+  <union memberTypes="NCName">
+    <simpleType>
+      <restriction base="string">
+        <enumeration value="#default"/>
+      </restriction>
+    </simpleType>
+  </union>
+ </simpleType>
+
+
+ 
+
+ <!-- ??? -->
+ <attributeGroup name='result-element-atts'>
+  <attribute name='extension-element-prefixes' type='string' use='optional' form="qualified"/>
+  <attribute name='exclude-result-prefixes' type='string' use='optional' form="qualified"/>
+  <attribute name='use-attribute-sets' type='NMTOKENS' use='optional' form="qualified"/>
+  <attribute name='version' type='decimal' use='optional' form="qualified"/>
+ </attributeGroup>
+
+
+ <group name='char-instructions'>
+  <choice>
+   <element ref='xsl:apply-templates'/>
+   <element ref='xsl:call-template'/>
+   <element ref='xsl:apply-imports'/>
+   <element ref='xsl:for-each'/>
+   <element ref='xsl:value-of'/>
+   <element ref='xsl:copy-of'/>
+   <element ref='xsl:number'/>
+   <element ref='xsl:choose'/>
+   <element ref='xsl:if'/>
+   <element ref='xsl:text'/>
+   <element ref='xsl:copy'/>
+   <element ref='xsl:variable'/>
+   <element ref='xsl:message'/>
+   <element ref='xsl:fallback'/>
+  </choice>
+ </group>
+
+ <group name='result-element'>
+  <sequence>
+   <any namespace="##other"/>
+  </sequence>
+ </group>
+
+ <group name='instructions'>
+  <choice>
+   <group ref="xsl:char-instructions"/>
+   <element ref='xsl:processing-instruction'/>
+   <element ref='xsl:comment'/>
+   <element ref='xsl:element'/>
+   <element ref='xsl:attribute'/>
+   <group ref="xsl:result-element"/>
+  </choice>
+ </group>
+
+
+
+ <complexType name='char-template' mixed="true">
+  <choice minOccurs="0" maxOccurs="unbounded">
+   <group ref="xsl:char-instructions"/>
+  </choice>
+ </complexType>
+
+ <complexType name='templateType' mixed="true">
+  <choice  minOccurs='0' maxOccurs='unbounded'>
+   <group ref="xsl:instructions"/>
+  </choice>
+ </complexType>
+
+ <group name="top-levelGroup">
+  <choice>
+   <element ref='xsl:include'/>
+   <element ref='xsl:strip-space'/>
+   <element ref='xsl:preserve-space'/>
+   <element ref='xsl:output'/>
+   <element ref='xsl:key'/>
+   <element ref='xsl:decimal-format'/>
+   <element ref='xsl:attribute-set'/>
+   <element ref='xsl:variable'/>
+   <element ref='xsl:param'/>
+   <element ref='xsl:template'/>
+   <element ref='xsl:namespace-alias'/>
+  </choice>
+ </group>
+
+ <complexType name='top-level'>
+  <sequence>
+   <element ref='xsl:import' minOccurs="0" maxOccurs="unbounded"/>
+   <choice minOccurs='0' maxOccurs='unbounded'>
+    <group ref="xsl:top-levelGroup"/>
+    <any namespace="##other"/>
+   </choice>
+  </sequence>
+  <attribute name='extension-element-prefixes' type='string' use='optional'/>
+  <attribute name='exclude-result-prefixes' type='string' use='optional'/>
+  <attribute name='id' type='ID' use='optional'/>
+  <attribute name='version' type='decimal' use='required'/>
+ </complexType>
+
+ <complexType name="variable-param">
+  <complexContent mixed="true">
+   <extension base="xsl:templateType">
+    <attribute name='name' type='QName' use='required'/>
+    <attribute name='select' type='xsl:expr' use='optional'/>
+   </extension>
+  </complexContent>
+ </complexType>
+
+ <simpleType name="NameTest">
+  <union>
+   <simpleType>
+     <restriction base="string"><enumeration value="*"/></restriction>
+   </simpleType>
+   <simpleType>
+     <restriction base="string"><pattern value="\c\i+\:\*"/></restriction>
+   </simpleType>
+   <simpleType>
+     <restriction base="QName"/>
+   </simpleType>
+  </union>
+ </simpleType>
+
+ <element name='stylesheet' type="xsl:top-level"/>
+ <element name='transform' type="xsl:top-level"/>
+
+
+ <element name='import'>
+  <complexType>
+   <attribute name='href' type='anyURI' use='required'/>
+  </complexType>
+ </element>
+ <element name='include'>
+  <complexType>
+   <attribute name='href' type='anyURI' use='required'/>
+  </complexType>
+ </element>
+ <element name='strip-space'>
+  <complexType>
+   <attribute name='elements' use='required'>
+     <simpleType><list itemType="xsl:NameTest"/></simpleType>
+   </attribute>
+  </complexType>
+ </element>
+ <element name='preserve-space'>
+  <complexType>
+   <attribute name='elements' use='required'>
+     <simpleType><list itemType="xsl:NameTest"/></simpleType>
+   </attribute>
+  </complexType>
+ </element>
+
+ <element name='output'>
+  <complexType>
+   <attribute name='method' use='optional'>
+    <simpleType>
+     <union memberTypes="QName">
+       <simpleType>
+         <restriction base="string">
+           <enumeration value="xml"/><enumeration value="html"/><enumeration value="text"/>
+         </restriction>
+       </simpleType>
+     </union>
+    </simpleType>
+   </attribute>
+   <attribute name='version' type='NMTOKEN' use='optional'/>
+   <attribute name='encoding' type='string' use='optional'/>
+   <attribute name='omit-xml-declaration' type="xsl:yes-no" use='optional'/>
+   <attribute name='standalone' type="xsl:yes-no" use='optional'/>
+   <attribute name='doctype-public' type='string' use='optional'/>
+   <attribute name='doctype-system' type='string' use='optional'/>
+   <attribute name='cdata-section-elements' use='optional'>
+     <simpleType>
+       <list itemType="QName"/>
+     </simpleType>
+   </attribute>
+   <attribute name='indent' type="xsl:yes-no" use='optional'/>
+   <attribute name='media-type' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='key'>
+  <complexType>
+   <attribute name='name' type='QName' use='required'/>
+   <attribute name='match' type='xsl:pattern' use='required'/>
+   <attribute name='use' type='xsl:expr' use='required'/>
+  </complexType>
+ </element>
+
+ <element name='decimal-format'>
+  <complexType>
+   <attribute name='name' type='QName' use='optional'/>
+   <attribute name='decimal-separator' type='xsl:char' default='.'/>
+   <attribute name='grouping-separator' type='xsl:char' default=','/>
+   <attribute name='infinity' type='string' default='Infinity'/>
+   <attribute name='minus-sign' type='xsl:char' default='-'/>
+   <attribute name='NaN' type='string' default='NaN'/>
+   <attribute name='percent' type='xsl:char' default='%'/>
+   <attribute name='per-mille' type='xsl:char' default='&#x2030;'/>
+   <attribute name='zero-digit' type='xsl:char' default='0'/>
+   <attribute name='digit' type='xsl:char' default='#'/>
+   <attribute name='pattern-separator' type='xsl:char' default=';'/>
+  </complexType>
+ </element>
+
+ <element name='namespace-alias'>
+  <complexType>
+   <attribute name='stylesheet-prefix' type="xsl:prefix-default" use='required'/>
+   <attribute name='result-prefix' type="xsl:prefix-default" use='required'/>
+  </complexType>
+ </element>
+
+ <element name='template'>
+  <complexType mixed="true">
+   <sequence>
+    <element ref="xsl:param" minOccurs='0' maxOccurs='unbounded'/>
+    <group ref="xsl:instructions" minOccurs='0' maxOccurs='unbounded'/>
+   </sequence>
+   <attribute name='match' type='xsl:pattern' use='optional'/>
+   <attribute name='name' type='QName' use='optional'/>
+   <attribute name='priority' type='decimal' use='optional'/>
+   <attribute name='mode' type='QName' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='value-of'>
+  <complexType>
+   <attribute name='select' type='xsl:expr' use='required'/>
+   <attribute name='disable-output-escaping' type="xsl:yes-no" default='no'/>
+  </complexType>
+ </element>
+
+ <element name='copy-of'>
+  <complexType>
+   <attribute name='select' type='xsl:expr' use='required'/>
+  </complexType>
+ </element>
+
+ <element name='number'>
+  <complexType>
+   <attribute name='level' default='single'>
+    <simpleType>
+     <restriction base='string'>
+      <enumeration value='single'/>
+      <enumeration value='multiple'/>
+      <enumeration value='any'/>
+     </restriction>
+    </simpleType>
+   </attribute>
+   <attribute name='count' type='xsl:pattern' use='optional'/>
+   <attribute name='from' type='xsl:pattern' use='optional'/>
+   <attribute name='value' type='xsl:expr' use='optional'/>
+   <attribute name='format' type='xsl:avt' default='1'/>
+   <attribute name='lang' type='xsl:avt' use='optional'/>
+   <attribute name='letter-value' type='xsl:avt' use='optional'/>
+   <attribute name='grouping-separator' type='xsl:avt' use='optional'/>
+   <attribute name='grouping-size' type='xsl:avt' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='apply-templates'>
+  <complexType>
+   <choice minOccurs='0' maxOccurs='unbounded'>
+    <element ref='xsl:sort'/>
+    <element ref='xsl:with-param'/>
+   </choice>
+   <attribute name='select' type='xsl:expr'/>
+   <attribute name='mode' type='QName'/>
+  </complexType>
+ </element>
+
+ <element name='apply-imports'>
+  <complexType/>
+ </element>
+
+ <element name='for-each'>
+  <complexType mixed='true'>
+   <sequence>
+    <element ref="xsl:sort" minOccurs='0'/>
+    <choice minOccurs='0' maxOccurs='unbounded'>
+     <group ref="xsl:instructions"/>
+    </choice>
+   </sequence>
+   <attribute name='select' type='xsl:expr' use='required'/>
+  </complexType>
+ </element>
+
+ <element name='sort'>
+  <complexType>
+   <attribute name='select' type='xsl:expr' default='.'/>
+   <attribute name='lang' type='xsl:avt' use='optional'/>
+   <attribute name='data-type' type='xsl:avt' default='text'/>
+   <attribute name='order' type='xsl:avt' default='ascending'/>
+   <attribute name='case-order' type='xsl:avt' use='optional'/>
+  </complexType>
+ </element>
+
+ <complexType name="if-when">
+  <complexContent mixed="true">
+   <extension base="xsl:templateType">
+    <attribute name='test' type='xsl:expr' use='required'/>
+   </extension>
+  </complexContent>
+ </complexType>
+
+ <element name='if' type="xsl:if-when"/>
+
+ <element name='choose'>
+  <complexType>
+   <sequence>
+    <element ref='xsl:when' maxOccurs='unbounded'/>
+    <element ref='xsl:otherwise' minOccurs='0' maxOccurs='1'/>
+   </sequence>
+  </complexType>
+ </element>
+ <element name='when' type="xsl:if-when"/>
+ <element name='otherwise' type="xsl:templateType"/>
+
+ <element name='attribute-set'>
+  <complexType>
+   <sequence minOccurs='0' maxOccurs='unbounded'>
+    <element ref='xsl:attribute'/>
+   </sequence>
+   <attribute name='name' type='QName' use='required'/>
+   <attribute name='use-attribute-sets' type='NMTOKENS' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='call-template'>
+  <complexType>
+   <sequence minOccurs='0' maxOccurs='unbounded'>
+    <element ref='xsl:with-param'/>
+   </sequence>
+   <attribute name='name' type='QName' use='required'/>
+  </complexType>
+ </element>
+
+ <element name='with-param' type="xsl:variable-param"/>
+ <element name='variable' type="xsl:variable-param"/>
+ <element name='param' type="xsl:variable-param"/>
+
+ <element name='text'>
+  <complexType>
+   <simpleContent>
+    <extension base="string">
+     <attribute name='disable-output-escaping' type="xsl:yes-no" default='no'/>
+    </extension>
+   </simpleContent>
+  </complexType>
+ </element>
+
+ <element name='processing-instruction'>
+  <complexType>
+   <complexContent mixed="true">
+    <extension base="xsl:char-template">
+     <attribute name='name' type='xsl:avt' use='required'/>
+    </extension>
+   </complexContent>
+  </complexType>
+ </element>
+
+ <element name='element'>
+  <complexType>
+   <complexContent mixed="true">
+    <extension base="xsl:templateType">
+     <attribute name='name' type='xsl:avt' use='required'/>
+     <attribute name='namespace' type='xsl:avt' use='optional'/>
+     <attribute name='use-attribute-sets' use='optional'>
+      <simpleType>
+       <list itemType="QName"/>
+      </simpleType>
+     </attribute>
+    </extension>
+   </complexContent>
+  </complexType>
+ </element>
+
+ <element name='attribute'>
+  <complexType>
+   <complexContent mixed="true">
+    <extension base="xsl:char-template">
+     <attribute name='name' type='xsl:avt' use='required'/>
+     <attribute name='namespace' type='xsl:avt' use='optional'/>
+    </extension>
+   </complexContent>
+  </complexType>
+ </element>
+
+ <element name='comment' type="xsl:char-template"/>
+
+ <element name='copy'>
+  <complexType>
+   <complexContent mixed="true">
+    <extension base="xsl:templateType">
+     <attribute name='use-attribute-sets' use='optional'>
+      <simpleType>
+       <list itemType="QName"/>
+      </simpleType>
+     </attribute>
+    </extension>
+   </complexContent>
+  </complexType>
+ </element>
+
+ <element name='message'>
+  <complexType>
+   <complexContent mixed="true">
+    <extension base="xsl:templateType">
+     <attribute name='terminate' type="xsl:yes-no" default='no'/>
+    </extension>
+   </complexContent>
+  </complexType>
+ </element>
+
+ <element name='fallback' type="xsl:templateType"/>
+
+</schema>

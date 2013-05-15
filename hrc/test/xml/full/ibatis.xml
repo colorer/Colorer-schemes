@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+
+    <statement id="getInquiryTypes" resultClass="ru.educational.cs.model.inquiry.InquiryTypeModel">
+        select distinct IT.INQUIRY_TYPE_ID as id,
+               INQUIRY_TYPE_NAME as name,
+               MAILBOX_TYPE_ID as mailboxTypeId
+        from CS_INQUIRY_TYPE IT
+        <isNotNull property="userId">
+        where not exists (select 1 from CS_INQUIRY I 
+                                  join CS_INQUIRY_USER IU on IU.INQUIRY_ID = I.INQUIRY_ID  
+                                  where I.INQUIRY_TYPE_ID = IT.INQUIRY_TYPE_ID and I.INQUIRY_IS_ACTIVE = 0 and IU.USER_ID = #userId#)
+        </isNotNull>
+        order by INQUIRY_TYPE_NAME
+    </statement>
+
+    <statement id="getInquiryTypeById" parameterClass="java.lang.Long" resultClass="ru.educational.cs.model.inquiry.InquiryTypeModel">
+        select INQUIRY_TYPE_ID as id,
+               INQUIRY_TYPE_NAME as name,
+               MAILBOX_TYPE_ID as mailboxTypeId
+        from CS_INQUIRY_TYPE
+        where INQUIRY_TYPE_ID = #value#
+    </statement>
+
+    <statement id="getInquiryById" parameterClass="java.util.Map" resultClass="ru.educational.cs.model.inquiry.InquiryModel">
+        select I.INQUIRY_ID as id,
+               IT.INQUIRY_TYPE_ID as inquiryTypeId,
+               INQUIRY_TYPE_NAME as inquiryType,
+               U.USER_ID as userId,
+               INQUIRY_START_DATE as startDate,
+               INQUIRY_END_DATE as endDate,
+               INQUIRY_IS_ACTIVE as active,
+               (select count(USER_ID) from CS_INQUIRY_USER where INQUIRY_ID = #id#) as userCount,
+               IT.INQUIRY_TYPE_USER_MAX_AMOUNT as maxAvailUser
+        from CS_INQUIRY I
+        join CS_INQUIRY_TYPE IT on IT.INQUIRY_TYPE_ID = I.INQUIRY_TYPE_ID
+        left outer join CS_INQUIRY_USER U on U.INQUIRY_ID = I.INQUIRY_ID  
+        where I.INQUIRY_ID = #id# and U.INQUIRY_USER_IS_OWNER = 1
+    </statement>
+
+    <delete id="deleteInquiry" parameterClass="java.lang.Long">
+        delete from CS_INQUIRY where INQUIRY_ID = #value#
+    </delete>
+
+    <update id="acceptInquiry" parameterClass="java.util.Map">
+        update CS_INQUIRY 
+        set INQUIRY_START_DATE = #startDate#,
+            INQUIRY_END_DATE = #endDate#,
+            INQUIRY_IS_ACTIVE = #active#
+        where INQUIRY_ID = #inquiryId#
+    </update>
+
+    <resultMap id="InquiryModelMap" class="ru.educational.cs.model.inquiry.InquiryModel" groupBy="id">
+        <result property="id" column="INQUIRY_ID"/>
+        <result property="inquiryTypeId" column="INQUIRY_TYPE_ID"/>
+        <result property="inquiryTypeName" column="INQUIRY_TYPE_NAME"/>
+        <result property="startDate" column="INQUIRY_START_DATE"/>
+        <result property="endDate" column="INQUIRY_END_DATE"/>
+        <result property="active" column="INQUIRY_IS_ACTIVE"/>
+        <result property="maxAvailUser" column="INQUIRY_TYPE_USER_MAX_AMOUNT"/>
+        <result property="owner" column="USER_IS_OWNER"/>
+        <result property="userCount" column="INQUIRY_USER_COUNT"/>
+        <result property="users" resultMap="InquiryUserModelMap"/>
+    </resultMap>
+
+    <resultMap id="InquiryUserModelMap" class="ru.educational.cs.model.inquiry.InquiryUserModel" groupBy="id">
+        <result property="id" column="USER_ID"/>
+        <result property="inquiryUserId" column="INQUIRY_USER_ID"/>
+        <result property="owner" column="INQUIRY_USER_IS_OWNER"/>
+        <result property="firstName" column="USER_FIRST_NAME"/>
+        <result property="lastName" column="USER_LAST_NAME"/>
+        <result property="middleName" column="USER_MIDDLE_NAME"/>
+        <result property="companyId" column="COMPANY_ID"/>
+        <result property="companyName" column="COMPANY_NAME"/>
+        <result property="emails" resultMap="InquiryUserEmailModelMap"/>
+    </resultMap>
+
+    <resultMap id="InquiryUserEmailModelMap" class="ru.educational.cs.model.EmailModel">
+        <result property="userId" column="USER_ID"/>
+        <result property="emailId" column="EMAIL_ID"/>
+        <result property="email" column="EMAIL_NAME"/>
+    </resultMap>
+
+
+    <select id="getInquiries" parameterClass="java.util.Map" resultMap="InquiryModelMap">
+        select I.INQUIRY_ID,
+               INQUIRY_TYPE_ID,
+               INQUIRY_TYPE_NAME,
+               INQUIRY_START_DATE,
+               INQUIRY_END_DATE,
+               INQUIRY_IS_ACTIVE,
+               INQUIRY_TYPE_USER_MAX_AMOUNT,
+               USER_IS_OWNER,
+               coalesce(USER_COUNT, 0) as INQUIRY_USER_COUNT,
+
+               <isNull property="userEmails">
+               null as
+               </isNull>
+               EMAIL_ID,
+               <isNull property="userEmails">
+               null as
+               </isNull>
+               EMAIL_NAME,
+
+               U.USER_ID,
+               U.USER_FIRST_NAME, 
+               U.USER_LAST_NAME,
+               U.USER_MIDDLE_NAME,
+               IU.INQUIRY_USER_ID,
+               INQUIRY_USER_IS_OWNER,
+               C.COMPANY_ID,
+               COMPANY_NAME
+
+
+        from (
+               select I.INQUIRY_ID,
+                      I.INQUIRY_TYPE_ID,
+                      INQUIRY_TYPE_NAME,
+                      INQUIRY_START_DATE,
+                      INQUIRY_END_DATE,
+                      INQUIRY_CREATE_DATE,
+                      INQUIRY_IS_ACTIVE,
+                      IT.INQUIRY_TYPE_USER_MAX_AMOUNT,
+                      exists (select 1 from CS_INQUIRY_USER EIU where EIU.INQUIRY_ID = I.INQUIRY_ID and EIU.INQUIRY_USER_IS_OWNER = 1 and EIU.USER_ID = #ownerId#) as USER_IS_OWNER
+               from CS_INQUIRY I
+               join CS_INQUIRY_TYPE IT on IT.INQUIRY_TYPE_ID = I.INQUIRY_TYPE_ID
+               <dynamic prepend="where">
+                   <isNotNull prepend="and" property="inquiryId">
+                       I.INQUIRY_ID = #inquiryId#
+                   </isNotNull>
+                   <isNotNull prepend="and" property="userId">
+                       exists (select 1 from CS_INQUIRY_USER EIU where EIU.INQUIRY_ID = I.INQUIRY_ID and EIU.USER_ID = #userId#)
+                   </isNotNull>
+                   <isNotNull prepend="and" property="active">
+                       INQUIRY_IS_ACTIVE = #active#
+                   </isNotNull>
+               </dynamic>   
+               order by INQUIRY_START_DATE, INQUIRY_IS_ACTIVE
+               <dynamic>
+                   <isNotNull property="offset">
+                       <isNotNull property="rowCount">
+                           limit #offset#, #rowCount#
+                       </isNotNull>
+                   </isNotNull>
+               </dynamic>
+             ) I
+        left outer join (select INQUIRY_ID, count(USER_ID) as USER_COUNT
+                         from CS_INQUIRY_USER
+                         group by INQUIRY_ID ) IUC on IUC.INQUIRY_ID = I.INQUIRY_ID
+
+        left outer join CS_INQUIRY_USER IU on IU.INQUIRY_ID = I.INQUIRY_ID
+        left outer join CS_USER U on U.USER_ID = IU.USER_ID
+        left outer join CS_COMPANY C on C.COMPANY_ID = U.COMPANY_ID
+        <isNotNull property="userEmails">
+        left outer join CS_EMAIL E on E.USER_ID = U.USER_ID
+        </isNotNull>
+        order by INQUIRY_START_DATE DESC, INQUIRY_CREATE_DATE DESC, U.USER_LAST_NAME, U.USER_FIRST_NAME, U.USER_MIDDLE_NAME
+    </select>
+
+    <select id="getInquiriesCount" parameterClass="java.util.Map" resultClass="java.lang.Long">
+        select count(*)
+        from CS_INQUIRY I
+        <dynamic prepend="where">
+            <isNotNull prepend="and" property="userId">
+                exists (select 1 from CS_INQUIRY_USER IU where IU.INQUIRY_ID = I.INQUIRY_ID and IU.USER_ID = #userId#)
+            </isNotNull>
+            <isNotNull prepend="and" property="active">
+                INQUIRY_IS_ACTIVE = #active#
+            </isNotNull>
+        </dynamic>   
+    </select>
+
+    <insert id="insertInquiry" parameterClass="java.util.Map">
+        insert into CS_INQUIRY
+          (INQUIRY_TYPE_ID, INQUIRY_CREATE_DATE)
+        values
+          (#typeId#, #curDate#)
+        <selectKey resultClass="java.lang.Long" keyProperty="id">
+            select LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+    <insert id="insertInquiryUser" parameterClass="java.util.Map">
+        insert into CS_INQUIRY_USER
+          (USER_ID, INQUIRY_ID, INQUIRY_USER_IS_OWNER)
+        values
+          (#userId#,  #inquiryId#, #isOwner#)
+        <selectKey resultClass="java.lang.Long" keyProperty="id">
+            select LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+    <delete id="deleteInquiryUser" parameterClass="java.util.Map">
+        delete from CS_INQUIRY_USER where INQUIRY_USER_ID = #inqUserId#
+    </delete>
+
+    <select id="getInquiryUsers" parameterClass="java.util.Map" resultClass="ru.educational.cs.model.inquiry.InquiryUserModel">
+        <!--
+        select INQUIRY_USER_ID as inquiryUserId,
+               U.USER_ID as id,
+               U.COMPANY_ID as companyId,
+               COMPANY_NAME as companyName,
+               U.USER_FIRST_NAME as firstName,
+               U.USER_LAST_NAME as lastName,
+               U.USER_MIDDLE_NAME as middleName,
+               INQUIRY_USER_IS_OWNER as owner
+        from CS_USER U
+        left outer join CS_COMPANY C on C.COMPANY_ID = U.COMPANY_ID
+        <dynamic prepend="where">
+            <isNotNull prepend="and" property="company">
+                COMPANY_NAME = #company#
+            </isNotNull>
+            <iterate prepend="and" property="userNameList" open="(" close=")" conjunction="and">
+                UPPER(USER_FIRST_NAME) like UPPER(#userNameList[]#) or 
+                UPPER(USER_LAST_NAME) like UPPER(#userNameList[]#) or 
+                UPPER(USER_MIDDLE_NAME) like UPPER(#userNameList[]#)
+            </iterate>
+            <isNotNull prepend="and" property="userId">
+               USER_ID in (select IU.USER_ID from CS_INQUIRY I
+                           join CS_INQUIRY_USER IU on IU.INQUIRY_ID = I.INQUIRY_ID
+                           where IU.USER_ID = #userId#)
+            </isNotNull>
+            <isNotNull prepend="and" property="inquiryId">
+              USER_ID not in (select IU.USER_ID 
+                              from CS_INQUIRY_USER IU
+                              where IU.INQUIRY_ID = #inquiryId#)
+            </isNotNull>
+        </dynamic>   
+        order by USER_LAST_NAME, USER_FIRST_NAME 
+        <dynamic>
+            <isNotNull property="offset">
+                <isNotNull property="rowCount">
+                    limit #offset#, #rowCount#
+                </isNotNull>
+            </isNotNull>
+        </dynamic>
+        -->
+    </select>
+
+    <select id="getInquiryUserCount" parameterClass="java.util.Map" resultClass="java.lang.Long">
+        <!--
+        select count(*)
+        from CS_USER U
+        left outer join CS_COMPANY C on C.COMPANY_ID = U.COMPANY_ID
+        <dynamic prepend="where">
+            <isNotNull prepend="and" property="company">
+                COMPANY_NAME = #company#
+            </isNotNull>
+            <iterate prepend="and" property="userNameList" open="(" close=")" conjunction="and">
+                UPPER(USER_FIRST_NAME) like UPPER(#userNameList[]#) or 
+                UPPER(USER_LAST_NAME) like UPPER(#userNameList[]#) or 
+                UPPER(USER_MIDDLE_NAME) like UPPER(#userNameList[]#)
+            </iterate>
+            <isNotNull prepend="and" property="userId">
+               USER_ID in (select IU.USER_ID from CS_INQUIRY I
+                           join CS_INQUIRY_USER IU on IU.INQUIRY_ID = I.INQUIRY_ID
+                           where IU.USER_ID = #userId#)
+            </isNotNull>
+            <isNotNull prepend="and" property="inquiryId">
+              USER_ID not in (select IU.USER_ID 
+                              from CS_INQUIRY_USER IU
+                              where IU.INQUIRY_ID = #inquiryId#)
+            </isNotNull>
+
+        </dynamic>   
+        -->
+    </select>
+
+    <statement id="getInquiryUserByEmail" parameterClass="java.util.Map" resultClass="ru.educational.cs.model.inquiry.InquiryStatusUserModel">
+        select U.USER_ID as id,
+               USER_FIRST_NAME as firstName,
+               USER_MIDDLE_NAME as middleName,
+               USER_LAST_NAME as lastName,
+               USER_IS_ACTIVE as active,
+               USER_IS_APPROVED as approved,
+               USER_IS_SUBSCRIBED as subscribed,
+               USER_GENDER as gender,
+               USER_PASSWORD as password,
+               U.COMPANY_ID as companyId,
+               COMPANY_NAME as companyName,
+               exists (select 1 from CS_INQUIRY_USER IU where IU.USER_ID = U.USER_ID and INQUIRY_ID = #inquiryId#) as belongsThisInquiry,
+               exists (select 1 from CS_INQUIRY I 
+                       join CS_INQUIRY_USER IU on IU.INQUIRY_ID = I.INQUIRY_ID  
+                       where I.INQUIRY_IS_ACTIVE = 0 and IU.USER_ID = U.USER_ID and
+                             I.INQUIRY_TYPE_ID = (select INQUIRY_TYPE_ID from CS_INQUIRY where INQUIRY_ID = #inquiryId#)) as belongsOtherInquiry,
+               exists (select 1 from CS_INQUIRY I 
+                       join CS_INQUIRY_USER IU on IU.INQUIRY_ID = I.INQUIRY_ID  
+                       join CS_USER US on IU.USER_ID = US.USER_ID  
+                       where ((U.COMPANY_ID is not null and US.COMPANY_ID != U.COMPANY_ID) or U.COMPANY_ID is null) and I.INQUIRY_ID = #inquiryId#) as belongsDifferentCompany
+        from CS_USER U
+        inner join CS_EMAIL E on E.USER_ID = U.USER_ID
+        left outer join CS_COMPANY C on C.COMPANY_ID = U.COMPANY_ID
+        where E.EMAIL_NAME = #email#
+    </statement>
+
+
+</sqlMap>
+

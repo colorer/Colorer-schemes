@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='windows-1251'?>
+<!-- 
+ fixed ansi
+ highlighting console defines 
+ (c) Eugene Efremov <4mirror@mail.ru>
+-->
+<hcd name="ansi">
+ <color con='#0' rgb='#000000'/>
+ <color con='#1' rgb='#0000AA'/>
+ <color con='#2' rgb='#00AA00'/>
+ <color con='#3' rgb='#00AAAA'/>
+ <color con='#4' rgb='#AA0000'/> 
+ <color con='#5' rgb='#AA00AA'/>
+ <color con='#6' rgb='#AA5500'/> 
+ <color con='#7' rgb='#AAAAAA'/>
+ <color con='#8' rgb='#555555'/>
+ <color con='#9' rgb='#5555FF'/>
+ <color con='#A' rgb='#55FF55'/>
+ <color con='#B' rgb='#55FFFF'/>
+ <color con='#C' rgb='#FF5555'/>
+ <color con='#D' rgb='#FF55FF'/>
+ <color con='#E' rgb='#FFFF55'/>
+ <color con='#F' rgb='#FFFFFF'/>
+</hcd>

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<project name="src.entity" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/entity" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+<!-- e2h -->
+
+<target name="e2h.check">
+ <uptodate property="e2h.check"  targetfile="${bin}/html-entity-${type}.ent.hrc">
+  <srcfiles dir="." includes="${src}/xhtml-${type}.ent, build.xml"/>
+ </uptodate>
+</target>
+
+<target name="e2h" depends="e2h.check" unless="e2h.check">
+ <ant antfile="${util}" target="ent2hrc">
+  <property name="util.input" value="${src}/xhtml-${type}.ent"/>
+  <property name="util.output" value="${bin}/html-entity-${type}.ent.hrc"/>
+  <property name="ent2hrc.scheme" value="xhtml-${type}"/>
+ </ant>
+</target>
+
+<!-- entity -->
+
+<target name="lat1">
+ <antcall target="e2h">
+  <param name="type" value="lat1"/>
+ </antcall>
+</target>
+
+<target name="special">
+ <antcall target="e2h">
+  <param name="type" value="special"/>
+ </antcall>
+</target>
+
+<target name="symbol">
+ <antcall target="e2h">
+  <param name="type" value="symbol"/>
+ </antcall>
+</target>
+
+<!-- hrc -->
+
+<target name="hrc.check">
+ <dependset>
+  <srcfileset dir="${src}" includes = "*.*"/>
+  <srcfileset dir="." includes = "build.xml"/>
+  <targetfilelist dir="${bin}" files="html-entity.hrc"/>
+ </dependset>
+</target>
+
+<target name="hrc" depends="lat1, special, symbol, hrc.check">
+ <copy todir='${bin}'>
+   <fileset dir='${src}' includes='html-entity.hrc'/>
+ </copy>
+</target>
+
+<!-- final -->
+
+<target name="all" depends="hrc"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${obj}" includes="*.*" excludes='.empty'/>
+  <fileset dir="${bin}" includes="html-entity*.*"/>
+ </delete>
+</target>
+
+
+</project>

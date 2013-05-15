@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<xs:schema
+  xmlns='colorer://namespace.xml/2004/bracket'
+  targetNamespace='colorer://namespace.xml/2004/bracket'
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<annotation>
+ <documentation> 
+  Simple scheme for support 'bracket' add-on for hrc
+  Written by Eugene Efremov (4mirror@mail.ru)
+ </documentation> 
+</annotation>
+
+<xs:simpleType name="re-string">
+  <xs:restriction base="xs:string">
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="QName">
+  <xs:restriction base="xs:QName">
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="blocktype">
+ <xs:restriction base='xs:string'>
+    <xs:enumeration value="query"/>
+    <xs:enumeration value="biblock"/>
+    <xs:enumeration value="halfblock"/>
+    <xs:enumeration value="monoblock"/>
+    <xs:enumeration value="singleblock"/>
+    <xs:enumeration value="noblock"/>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="yesno">
+ <xs:restriction base='xs:string'>
+    <xs:enumeration value="yes"/>
+    <xs:enumeration value="no"/>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:attributeGroup name="blockattr">
+ <xs:attribute name="name" type="xs:string" use="required"/>
+ <xs:attribute name="start" type="re-string"/>
+ <xs:attribute name="end" type="re-string"/>
+ <xs:attribute name="region-start" type="QName"/>
+ <xs:attribute name="region-end" type="QName"/>
+ <xs:attribute name="region-middle" type="QName" use="required"/>
+ <xs:attribute name="scheme-middle" type="QName"/>
+</xs:attributeGroup>
+
+<xs:element name="bracket">
+ <xs:complexType>
+  <xs:sequence>
+   <xs:element name="name-block" type="name-block" minOccurs="1" maxOccurs="unbounded"/>
+   <xs:element name="block" type="block" minOccurs="1" maxOccurs="unbounded"/>
+  </xs:sequence>
+ <xs:attribute name="type" type="xs:string" use="required"/>
+ <xs:attribute name="scheme" type="xs:string" use="required"/>
+ </xs:complexType> 
+</xs:element>
+
+<xs:complexType name="block">
+ <xs:sequence>
+   <xs:element name="query" type="query" minOccurs="0" maxOccurs="unbounded"/>
+   <xs:element name="case" type="case" minOccurs="0" maxOccurs="unbounded"/>
+ </xs:sequence>
+ <xs:attribute name="scheme1" type="QName" use="required"/>
+ <xs:attribute name="region1" type="QName" use="required"/>
+ <xs:attribute name="scheme2" type="QName"/>
+ <xs:attribute name="region2" type="QName"/>
+ <xs:attributeGroup ref="blockattr"/>
+</xs:complexType>
+
+<xs:complexType name="name-block">
+ <xs:sequence>
+   <xs:element name="name" type="name" minOccurs="1" maxOccurs="1"/>
+   <xs:element name="case" type="case" minOccurs="1" maxOccurs="unbounded"/>
+ </xs:sequence>
+ <xs:attribute name="scheme" type="QName" use="required"/>
+ <xs:attribute name="region" type="QName" use="required"/>
+ <xs:attributeGroup ref="blockattr"/>
+</xs:complexType>
+
+<xs:complexType name="name">
+ <xs:attribute name="match" type="re-string"/>
+ <xs:attribute name="scheme" type="QName" use="required"/>
+ <xs:attribute name="region" type="QName" use="required"/>
+</xs:complexType>
+
+<xs:complexType name="case">
+ <xs:attribute name="type" type="blocktype" use="required"/>
+ <xs:attribute name="start" type="re-string"/>
+ <xs:attribute name="end" type="re-string"/>
+ <xs:attribute name="all" type="re-string"/>
+ <xs:attribute name="scheme" type="QName"/>
+ <xs:attribute name="recursion1" type="yesno"/>
+ <xs:attribute name="recursion2" type="yesno"/>
+</xs:complexType>
+
+<xs:complexType name="query">
+ <xs:attribute name="start1" type="re-string"/>
+ <xs:attribute name="end1" type="re-string"/>
+ <xs:attribute name="start2" type="re-string"/>
+ <xs:attribute name="end2" type="re-string"/>
+ <xs:attribute name="recursion1" type="yesno"/>
+ <xs:attribute name="recursion2" type="yesno"/>
+</xs:complexType>
+
+</xs:schema>

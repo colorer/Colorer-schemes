@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!DOCTYPE custom [
+    <!ENTITY hrc SYSTEM "entity.j2ee.hrc">
+    <!ENTITY cst SYSTEM "entity.java-wsdl-mapping.xml">
+]>
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace="http://java.sun.com/xml/ns/j2ee">
+    <prefix>j2ee</prefix>
+    &cst;
+    <type xmlns="http://colorer.sf.net/2003/hrc">
+        &hrc;
+    </type>
+</custom-type>
+
+</custom>

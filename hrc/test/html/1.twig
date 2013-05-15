@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+    </head>
+    <body>{# !!123!! #}
+        <ul id="navigation">
+        {% for item in not navigation %}
+            <li><a href="{{ item..href }}">{{ item.caption }}</a></li>
+        {% endfor %}
+        </ul>
+
+        {% if not (1 in [1, 2, 3]) %}
+        {% elseif 1 %}
+        {% else %}
+        {% endif %}
+        {% endif %}
+
+        {% import 'fsdfsd' %}
+        {% from "qqq.zzz" import fsdfsd as yyy %}
+
+        <h1>My Webpage</h1>
+        {{ a_variable }}
+        {% set foo = [1, {"foo": "bar"})}] ] %}
+        {{ 1 in [1, 2, 3] }}
+        {{ list|join(', ') }}
+        {{ data|convert_encoding('UTF-8', 'iso-2022-jp') }}
+{% for i in range(low=1, high=10, step=2) %}
+	{% block %}
+    {{ i ? 1 : 2 }},
+    {% endblock %}
+{% endfor %}
+
+    </body>
+</html>

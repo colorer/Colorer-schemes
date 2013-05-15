@@ -1,0 +1,197 @@
+// Dies ist ein Script, um Wetterdaten im "grd" Format su lesen
+// und einem Partikel Objekt zuzuweisen
+
+
+global proc int getDataWord( int $fid)
+{
+global	int	$readFromOd;
+int	$value;
+
+	if (!$readFromOd) {
+		fgetword( $fid);
+		$readFromOd = 1;
+	}
+	$value = fgetword( $fid);
+	$readFromOd = ($readFromOd==8 ? 0 : $readFromOd+1);
+	return( $value);
+}
+
+global proc wetter()
+{
+global	int	$readFromOd;	// Anzahl der Worte, die per Pipe von "od"
+				// gelesen wurden. Jedes 9. wird uebersprungen.
+
+int	$dataWordSize = 2;
+int	$gridResX = `intFieldGrp -q -v1 wetterRaster`;
+int	$gridResY = `intFieldGrp -q -v2 wetterRaster`;
+int	$dataSlots = `intFieldGrp -q -v1 wetterSlotAnz`;
+int	$dataGroups = `intFieldGrp -q -v1 wetterGrpAnz`;
+
+int	$readSlot = `intSliderGrp -q -v wetterReadSlot`;		// welcher Slot soll gelesen werden
+int	$readDataGroup = `intSliderGrp -q -v wetterReadGrp` - 1;	// welche Datengruppe soll gelesen werden
+
+int	$dSlotSize = $dataWordSize * $gridResX * $gridResY;
+int	$dGroupSize = $dSlotSize * $dataSlots;
+int	$readOffset = $readDataGroup * $dGroupSize + $readSlot * $dSlotSize;
+
+float	$pSpacing = .1;		// Spacing fuer das Partikel Objekt
+
+string	$dataFile = `textFieldButtonGrp -q -text wetterDataFile`;
+
+string	$pipeCmd = "od -v -s " + $dataFile + " " + $readOffset + ".";
+
+float	$pLX = (($gridResX * $pSpacing) - $pSpacing) / 2;
+float	$pLY = (($gridResY * $pSpacing) - $pSpacing) / 2;
+
+// Entsprechendes Partikel Objekt herstellen
+
+string $pObjectName[] = `particle -grs $pSpacing -ll (-$pLX) 0 (-$pLY) -ur $pLX 0 $pLY`;
+addAttr -ln "rgbPP" -dt vectorArray $pObjectName[1];
+addAttr -ci true -ln "rgbVPP0" -sn "rgbVPP0" -dt "doubleArray" $pObjectName[1];
+
+string $arrayMapNode = `arrayMapper -target $pObjectName[1] -destAttr rgbPP -inputV rgbVPP0 -type ramp`;
+
+$readFromOd = 0;
+int $fid = popen( $pipeCmd, "r");
+int $dSlotWords = $gridResX * $gridResY;
+//int $dSlotWords = 1000;
+float	$value[];
+float	$minVal = 1000;
+float	$maxVal = -1000;
+float	$q;
+string $xxx;
+print("Anfang Lesen ... " + `system( "date")` + "\n");
+
+for ( $i=0 ; $i<$dSlotWords ; $i++ ) {
+	$value[$i] = getDataWord( $fid);
+$maxVal = max( $maxVal, $value[$i]);
+$minVal = min( $minVal, $value[$i]);
+}
+pclose( $fid);
+print("Ende Lesen ... " + `system( "date")` + "\n");
+
+print( "Min Temp: " + $minVal + "\n");
+print( "Max Temp: " + $maxVal + "\n");
+$v = ($maxVal-$minVal);
+for ( $i=0 ; $i<$dSlotWords ; $i++ ) {
+$q = (($value[$i]-$minVal)/$v);
+$xxx += " " + $q;
+}
+print("Ende Konvertieren ... " + `system( "date")` + "\n");
+select -r $pObjectName[1];
+
+print( $dSlotWords + " Elemente\n");
+$tmp = "setAttr \".rgbVPP0\" -type \"doubleArray\" " + $dSlotWords + $xxx;
+eval( $tmp);
+print("Ende zuweisen ... " + `system( "date")` + "\n");
+
+print( "Min Temp: " + $minVal + "\n");
+print( "Max Temp: " + $maxVal + "\n");
+
+}
+
+
+global proc wetterFenster()
+{
+
+	if (`window -exists wFenster`) deleteUI wFenster;
+
+	window -t "Wetter Daten" wFenster;
+		columnLayout;
+			separator -h 10;
+			intFieldGrp -numberOfFields 2
+				-label "Raster"
+				-v1 109
+				-v2 109
+				wetterRaster;
+			intFieldGrp -numberOfFields 1
+				-label "Anzahl Gruppen"
+				-v1 7
+				-cc "wetterUpdateEnables"
+				wetterGrpAnz;
+			intFieldGrp -numberOfFields 1
+				-label "Anzahl Slots"
+				-v1 49
+				-cc "wetterUpdateEnables"
+				wetterSlotAnz;
+			textFieldButtonGrp
+				-label "Daten File"
+				-text "WETTER/dm3mo.dat"
+				-buttonLabel "Browse..."
+				-buttonCommand "wetterFileBrowse"
+				wetterDataFile;
+			separator -h 20;
+			intSliderGrp
+				-label "Lese Gruppe .."
+				-field true
+				-value 1
+				-min 1
+				-max 1
+				wetterReadGrp;
+			intSliderGrp
+				-label "Slot"
+				-field true
+				-value 49
+				-min 1
+				-max 1
+				wetterReadSlot;
+			separator -h 20;
+		setParent ..;
+		rowLayout -numberOfColumns 2
+		    -columnAttach 1 "left" 20
+		    -columnAttach 2 "left" 240
+		    -width 600;
+			button
+				-align "center"
+				-l "Load Data"
+				-c "wetter"
+				-w 100
+				wetterGoButton;
+			button
+				-align "center"
+				-l "Cancel"
+				-c "wetterExit"
+				-w 100
+				wetterExitButton;
+
+
+	wetterUpdateEnables;
+	showWindow;
+}
+
+global proc wetterUpdateEnables()
+{
+int	$v;
+	if (($v = `intFieldGrp -q -v1 wetterGrpAnz`) > 0) {
+		intSliderGrp -e -en true -max $v wetterReadGrp;
+		if ($v < `intSliderGrp -q -v wetterReadGrp`)
+			intSliderGrp -e -v $v wetterReadGrp;
+	} else
+		intSliderGrp -e -en false -max 1 wetterReadGrp;
+
+	if (($v = `intFieldGrp -q -v1 wetterSlotAnz`) > 0) {
+		intSliderGrp -e -en true -max $v wetterReadSlot;
+		if ($v < `intSliderGrp -q -v wetterReadSlot`)
+			intSliderGrp -e -v $v wetterReadSlot;
+	} else
+		intSliderGrp -e -en false -max 1 wetterReadSlot;
+}
+
+global proc wetterFileBrowse()
+{
+string	$wDataName;
+	$wDataName = `fileDialog`;
+	textFieldButtonGrp -e -text $wDataName wetterDataFile;
+//	fileBrowser( "wetterSetDataFile", "Set Name", "", 0);
+}
+
+global proc int wetterSetDataFile( string $wetterDataFile, string $wetterMode)
+{
+	textFieldButtonGrp -e -text $wetterDataFile wetterDataFile;
+	return true;
+}
+
+global proc wetterExit()
+{
+	deleteUI wFenster;
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE journal [
+<!ELEMENT contacts (address, tel+, email?)>
+<!ELEMENT address (street, appt)>
+<!ELEMENT street (PCDATA)>
+<!ELEMENT appt (PCDATA | EMPTY)*>
+<!ELEMENT tel (PCDATA)>
+<!ELEMENT email (PCDATA)>
+]>
+<xml
+     lala="bebe"
+     foo="quux">
+<contacts>
+<address>
+<street>Marks avenue</street>
+<appt DOCTYPE="4" id="4" version="ver1.23"
+      id2="4" ATTLIST="4" id1="4" id3="4" id4="4"/>
+</address>
+<![CDATA[
+asdf
+asdf
+asdfsadff <asdf>
+asdf      <b>kaa</b>
+]]>
+<tel>12-12-12</tel>
+<tel>46-23-62</tel>
+<email>info@j.com</email>
+</contacts>
+
+</xml>

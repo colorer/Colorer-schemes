@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<project name="hrd" default="all" basedir=".">
+
+<property name="target" value="all" description="default subproject target"/>
+
+<target name='hrd2hrd'>
+	<ant antfile="build.xml" dir='hrd' target="${target}"/>
+</target>
+
+
+<target name='hrd2css' depends="hrd2hrd">
+	<ant antfile="build.xml" dir='css' target="${target}"/>
+</target>
+
+<target name='hcd2reg'>
+	<ant antfile="build.xml" dir='reg.addons' target="${target}"/>
+</target>
+
+
+<target name='all' depends="hrd2css, hrd2hrd, hcd2reg"/>
+
+
+<target name="clean">
+	<antcall target='all'>
+		<param name='target' value='clean'/>
+	</antcall>
+</target>
+
+
+<target name="copy.build">
+	<antcall target='all'>
+		<param name='target' value='all'/>
+	</antcall>
+</target>
+
+<target name="copy" depends='copy.build'>
+	<antcall target='all'>
+		<param name='target' value='copy'/>
+	</antcall>
+</target>
+
+<target name="copy.clean">
+	<antcall target='all'>
+		<param name='target' value='copy.clean'/>
+	</antcall>
+</target>
+
+</project>

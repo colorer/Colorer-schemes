@@ -1,0 +1,84 @@
+/* * Style sheet for Colorer Testing */
+
+body, p  {
+    font-size : 9pt;
+    font-family : Tahoma, Lucida Sans Unicode, Arial Cyr, Helv, sans-serif;
+    text-align : justify;
+    color : #A0B8C8;
+}
+
+td {
+    color : #A0B8C8;
+}
+
+.lighter, H1, H2 {
+    color : #D0D8E0;
+}
+.lefter {
+    text-align: left;
+}
+
+.righter {
+    text-align: right;
+}
+
+P I, ul I, ol I, td I  {
+    color : #588098;
+}
+
+H1  {
+    clear : left;
+    font-family : Tahoma, Lucida Sans Unicode, Arial Cyr, Helv, sans-serif;
+    font-size : 120%;
+    text-align : center;
+}
+
+H2  {
+    font-family : Tahoma, Lucida Sans Unicode, Arial Cyr, Helv, sans-serif;
+    font-size : 110%;
+}
+
+h3, h4, h5  {
+    font-family : Tahoma, Lucida Sans Unicode, Arial Cyr, Helv, sans-serif;
+    font-size: 105%;
+}
+
+P XMP, td P XMP, XMP, CODE,  PRE, .MONO  {      /* . в .MONO не относится к разделителю */
+    font-family : Andale Mono, Courier New, Courier, monospace;
+}
+
+#id {
+
+}
+
+DIV.subtoc {padding: 1em; border: solid thin;   /*border не выделяется*/
+    margin: 1em 0;
+    background: #ddd;                          /*background не выделяется*/
+}
+
+/**/
+
+/* Animations */
+@-webkit-keyframes progress-bar-stripes {
+  from  { background-position: 0 0; }
+  to    { background-position: 40px 0; }
+}
+
+/* namespaces */
+@namespace "http://www.w3.org/1999/xhtml";
+@namespace svg "http://www.w3.org/2000/svg";
+
+/* moz-document support */
+@-moz-document regexp("^https?://(?!(www\\.)?youtube\\.com).*"), /* any http or https site, except for youtube */
+    url-prefix("file://"), /* any local file */
+    url-prefix("data:image/") { /* data URIs */
+
+	svg|.progress.active .bar:not(small[class^="new"]) {
+	  -webkit-animation: progress-bar-stripes 2s linear infinite;
+	}
+
+	div.clear::after, p:nth-child(4n+1), span:nth-child(even) {
+		-moz-opacity: 0.1;
+	}
+
+}

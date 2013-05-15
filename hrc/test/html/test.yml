@@ -1,0 +1,70 @@
+--- !<qwqee>
+? ['dasdsa','dsadsa'] : ['ddd' : 'dsds']
+node:
+              ip: 10.0.0.51
+                  user: arc
+              password: xidighei #kjdkfjdkfjkdjf
+           email_list:
+              - arc
+              - hunter
+              - engineer
+           sms_list:
+              - hunter12@sms.mob.ru
+
+? - 1
+             - 2
+             - 3: three
+           :
+             some digits
+
+
+  : plus
+  : !!str colon
+  - \t \x0f sdadsa
+...
+--- |
+Moderators: [Site Admin, Dr.Moder, Polizei]
+# Хэш (как элемент хэша)
+Location: {host: localhost, port: 5432}
+
+
+Date1: 2008-01-01
+Date2: 01.02.2008
+Time: 12:45
+StringDate: "2008-01-01"
+---
+Email list:
+   - arc
+   - &h hunter
+   - engineer
+SMS list:
+   - *h # заменится на hunter
+
+
+simple:
+              one
+              two
+              three
+        
+           continued: >
+              one
+              two
+              three
+        
+           pre: |
+              one
+              two
+              three
+
+
+png: !!binary |
+            iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAIAAAAmdTLBAAAAAXNSR0IArs4c6QAAAARnQU1B
+            AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+            te/PNwvDAKJ/owerAAAAAElFTkSuQmCC
+
+--- # Server
+host: localhost
+port: 80
+--- # Client
+user: root
+homedir: /var/client/home/&*$!

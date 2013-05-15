@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace="http://xsieve.sourceforge.net">
+	<prefix>s</prefix>
+	
+	<top-level/> <!-- package -->
+	
+	<contributors>Eugene Efremov</contributors>
+	
+	<type xmlns="http://colorer.sf.net/2003/hrc">
+		<scheme name="lisp-string-content">
+			<inherit scheme="lisp:lisp"/>
+		</scheme>
+	</type>
+	
+</custom-type>
+
+</custom>

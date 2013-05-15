@@ -1,0 +1,15 @@
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]
+"ctfmon.exe"=-
+
+;The minus sign at the end is marked as an error. It is however a correct syntax 
+;for .REG file. An old version of the Colorer plugin (from 2001) did not have this error.
+
+;Other things misinterpreted as errors:
+
+[HKEY_CURRENT_USER\Software\Far\KeyMacros\Shell\CtrlAltHome]
+"Sequence"="c d \\ Enter"
+;("\\" is marked as an error)
+
+[HKEY_CURRENT_USER\Software\Far\KeyMacros\Shell\CtrlI]
+"Sequence"="m p l a y e r c SPACE CtrlF ENTER"
+; Far macros!

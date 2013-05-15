@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<!DOCTYPE Order [
+
+<!--
+    A DTD for a real on-line order system wouldn't look
+    very much like this, though it would be natural for
+    such systems to use valid XML.
+-->
+    <!ELEMENT Order (Customer,Manifest,Receipt)>
+    <!ATTLIST Order xmlns CDATA #FIXED "http://www.example.com/myschema.xml">
+
+    <!ELEMENT Customer (Name, Cardnum)>
+    <!ELEMENT Name (#PCDATA)>
+    <!ELEMENT Cardnum (#PCDATA)>
+
+    <!ELEMENT Manifest (Item*)>
+
+    <!ELEMENT Item (ID,Title,Quantity,UnitPrice)>
+    <!ELEMENT ID (#PCDATA)>
+    <!ELEMENT Title (#PCDATA)>
+    <!ELEMENT Quantity (#PCDATA)>
+    <!ELEMENT UnitPrice (#PCDATA)>
+
+    <!ELEMENT Receipt (Subtotal,Tax,Total)>
+    <!ELEMENT Subtotal (#PCDATA)>
+    <!ELEMENT Tax (#PCDATA)>
+    <!ELEMENT Total (#PCDATA)>
+
+]>
+
+<Order>
+    <Customer>
+	<Name>Bill Buckram</Name>
+	<Cardnum>234 234 234 234</Cardnum>
+    </Customer>
+    <Manifest>
+	<Item>
+	    <ID>209</ID>
+	    <Title>
+		Duke: A Biography of the Java Evangelist
+	    </Title>
+	    <Quantity>1</Quantity>
+	    <UnitPrice>$10.75</UnitPrice>
+	</Item>
+	<Item>
+	    <ID>208</ID>
+	    <Title>
+		100% Pure: Making Cross Platform Deployment a Reality
+	    </Title>
+	    <Quantity>1</Quantity>
+	    <UnitPrice>$10.75</UnitPrice>
+	</Item>
+	<Item>
+	    <ID>204</ID>
+	    <Title>
+		Making the Transition from C++ to the Java(tm) Language
+	    </Title>
+	    <Quantity>1</Quantity>
+	    <UnitPrice>$10.75</UnitPrice>
+	</Item>
+	<Item>
+	    <ID>202</ID>
+	    <Title>Web Servers for Fun and Profit</Title>
+	    <Quantity>1</Quantity>
+	    <UnitPrice>$10.75</UnitPrice>
+	</Item>
+	<Item>
+	    <ID>210</ID>
+	    <Title>
+		I Think Not: Dukes Likeness to the Federation Insignia
+	    </Title>
+	    <Quantity>1</Quantity>
+	    <UnitPrice>$10.75</UnitPrice>
+	</Item>
+    </Manifest>
+    <Receipt>
+	<Subtotal>$53.75</Subtotal>
+	<Tax>$4.43</Tax>
+	<Total>$58.18</Total>
+    </Receipt>
+</Order>

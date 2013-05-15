@@ -1,0 +1,10 @@
+<bracket type="sh" scheme="bracket">
+ <block  name="s.re" start="s" end="[egimosxpd]*" 
+  scheme1="regexp:pcre.regexp" scheme2="slash"
+  region1="string" region2="string"
+  region-start="regexp:SpecArea" region-end="regexp:SpecArea" 
+  region-middle="def:StringEdge" scheme-middle="def:def">
+   <case type="halfblock" all="[^\w\s]"/>
+ </block>
+
+</bracket>

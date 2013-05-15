@@ -1,0 +1,54 @@
+
+    menuItem
+        -label "atomix" 
+        -divider 0
+        -subMenu 0
+        -command "system(\"winterm -H -c HEY atomix  >/dev/null 2>&1 &\");" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "SW" 
+        -enableCommandRepeat 1
+        -image "commandButton.xpm" 
+        -echoCommand 0
+        menuEditorMenuItem57;
+
+    menuItem
+        -label "zyplex" 
+        -divider 0
+        -subMenu 0
+        -command "system(\"winterm -H -c HEY zyplex >/dev/null 2>&1 &\");" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "W" 
+        -enableCommandRepeat 1
+        -image "commandButton.xpm" 
+        -echoCommand 0
+        menuEditorMenuItem54;
+
+    menuItem
+        -label "asterix" 
+        -divider 0
+        -subMenu 0
+        -command "system(\"winterm -H -c HEY asterix >/dev/null 2>&1 &\");" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "NW" 
+        -enableCommandRepeat 1
+        -image "commandButton.xpm" 
+        -echoCommand 0
+        menuEditorMenuItem55;
+
+setParent -m ..;
+

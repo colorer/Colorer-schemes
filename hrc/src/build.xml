@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="src.all" default="all" basedir=".">
+
+<property name="target" value="all" description="default subproject target"/>
+
+
+<target name="xsl.check">
+	<uptodate property="xsl.check" targetfile="buildlist.xml">
+		<srcfiles dir="." includes="build.xsl,list.xml"/>
+	</uptodate>
+</target>
+
+<target name="xsl" depends="xsl.check" unless="xsl.check">
+	<xslt in="list.xml" out="buildlist.xml" style="build.xsl" classpath="${xslt-classpath}"/>
+</target>
+
+
+<target name='all' depends="xsl">
+	<ant antfile="buildlist.xml" target="all">
+		<property name="target" value="${target}"/>
+	</ant>
+</target>
+
+
+<target name="clean">
+	<antcall target='all'>
+		<param name='target' value='clean'/>
+	</antcall>
+</target>
+
+
+<target name='copy'/>
+<target name='copy.clean'/>
+
+</project>

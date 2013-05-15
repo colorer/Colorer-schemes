@@ -1,0 +1,75 @@
+ 0: <span class='mkb-mkbWord def-Keyword'>if </span><span class='mkb-mkbSymb def-Symbol'>{{</span><span class='mkb-mkbWord def-Keyword'>defined</span> IW_DEBUG<span class='mkb-mkbSymb def-Symbol'>}}</span>
+ 1: <span class='mkb-mkbSymb def-Symbol'>{</span>
+ 2:     <span class='mkb-mkbWord def-Keyword'>define </span>IW_SOUND_IMPORTER
+ 3: <span class='mkb-mkbSymb def-Symbol'>}</span>
+ 4: 
+ 5: <span class='mkb-mkbWord def-Keyword'>includepath </span>h
+ 6: <span class='mkb-mkbWord def-Keyword'>includepath </span>source
+ 7: 
+ 8: <span class='mkb-mkbWord def-Keyword'>defines</span>
+ 9: <span class='mkb-mkbSymb def-Symbol'>{</span>
+10:     IW_SOUND
+11:     IW_SOUND_ADPCM
+12:     IW_SOUND_PCM
+13: <span class='mkb-mkbSymb def-Symbol'>}</span>
+14: 
+15: <span class='mkb-mkbComment def-Comment def-Syntax'>#common IwSound code</span>
+16: <span class='mkb-mkbWord def-Keyword'>files</span>
+17: <span class='mkb-mkbSymb def-Symbol'>{</span>
+18:     <span class='mkb-mkbSymb def-Symbol'>(</span>h<span class='mkb-mkbSymb def-Symbol'>)</span>
+19:     IwResHandlerWAV.h
+20:     IwSound.h
+21:     IwSoundManager.h
+22:     IwSoundData.h
+23:     IwSoundGroup.h
+24:     IwSoundInst.h
+25:     IwSoundParams.h
+26:     IwSoundSpec.h
+27: 
+28:     <span class='mkb-mkbSymb def-Symbol'>(</span>source<span class='mkb-mkbSymb def-Symbol'>)</span>
+29:     IwResHandlerWAV.cpp
+30:     IwSoundManager.cpp
+31:     IwSoundData.cpp
+32:     IwSoundGroup.cpp
+33:     IwSoundInst.cpp
+34:     IwSoundParams.cpp
+35:     IwSoundSpec.cpp
+36: 
+37:     <span class='mkb-mkbSymb def-Symbol'>[</span>Docs<span class='mkb-mkbSymb def-Symbol'>]</span>
+38:     <span class='mkb-mkbSymb def-Symbol'>(</span>docs<span class='mkb-mkbSymb def-Symbol'>)</span>
+39:     iwsound.defines.txt
+40:     iwsound.config.txt
+41: <span class='mkb-mkbSymb def-Symbol'>}</span>
+42: 
+43: <span class='mkb-mkbWord def-Keyword'>if </span><span class='mkb-mkbSymb def-Symbol'>{{</span> <span class='mkb-mkbWord def-Keyword'>defined</span> IW_SOUND_ADPCM <span class='mkb-mkbSymb def-Symbol'>}}</span>
+44: <span class='mkb-mkbSymb def-Symbol'>{</span>
+45:     <span class='mkb-mkbWord def-Keyword'>files</span>
+46:     <span class='mkb-mkbSymb def-Symbol'>{</span>
+47:         <span class='mkb-mkbSymb def-Symbol'>[</span><span class='mkb-mkbSymb def-Symbol'>]</span>
+48:         <span class='mkb-mkbSymb def-Symbol'>(</span>h<span class='mkb-mkbSymb def-Symbol'>)</span>
+49:         IwSoundADPCM.h
+50:         <span class='mkb-mkbSymb def-Symbol'>(</span>source<span class='mkb-mkbSymb def-Symbol'>)</span>
+51:         IwSoundADPCM.cpp
+52:     <span class='mkb-mkbSymb def-Symbol'>}</span>
+53: <span class='mkb-mkbSymb def-Symbol'>}</span>
+54: 
+55: <span class='mkb-mkbWord def-Keyword'>if </span><span class='mkb-mkbSymb def-Symbol'>{{</span> <span class='mkb-mkbWord def-Keyword'>defined</span> IW_SOUND_PCM <span class='mkb-mkbSymb def-Symbol'>}}</span>
+56: <span class='mkb-mkbSymb def-Symbol'>{</span>
+57:     <span class='mkb-mkbWord def-Keyword'>files</span>
+58:     <span class='mkb-mkbSymb def-Symbol'>{</span>
+59:         <span class='mkb-mkbSymb def-Symbol'>[</span><span class='mkb-mkbSymb def-Symbol'>]</span>
+60:         <span class='mkb-mkbSymb def-Symbol'>(</span>h<span class='mkb-mkbSymb def-Symbol'>)</span>
+61:         IwSoundPCM.h
+62:         <span class='mkb-mkbSymb def-Symbol'>(</span>source<span class='mkb-mkbSymb def-Symbol'>)</span>
+63:         IwSoundPCM.cpp
+64:     <span class='mkb-mkbSymb def-Symbol'>}</span>
+65: <span class='mkb-mkbSymb def-Symbol'>}</span>
+66: 
+67: <span class='mkb-mkbWord def-Keyword'>subprojects</span>
+68: <span class='mkb-mkbSymb def-Symbol'>{</span>
+69:     iwutil
+70: <span class='mkb-mkbSymb def-Symbol'>}</span>
+71: 
+72: 
+73: 
+74: 

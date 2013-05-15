@@ -1,0 +1,102 @@
+  0: { =====================================================================
+  1: ANS <span class='forth-forWord def-Keyword'>Forth</span> Test Suite
+  2: 
+  3: Copyright (c) 1998, FORTH, Incorporated
+  4: 
+  5: This set of tests has been taken from John Hayes' original Core.fr
+  6: Dated Mon, <span class='forth-forNumb def-Number'>27</span> Nov <span class='forth-forNumb def-Number'>95</span> 13:10.  We retain the following statement as
+  7: required for its use:
+  8: 
+  9: (C) <span class='forth-forNumb def-Number'>1995</span> JOHNS HOPKINS UNIVERSITY / APPLIED PHYSICS LABORATORY
+ 10: MAY BE DISTRIBUTED FREELY AS LONG AS THIS COPYRIGHT NOTICE REMAINS.
+ 11: 
+ 12: His last know update was VERSION 1.2
+ 13: 
+ 14: This program tests the core <span class='forth-forWord def-Keyword'>words</span> of an ANS <span class='forth-forWord def-Keyword'>Forth</span> system.
+ 15: The program assumes a two's complement implementation where
+ 16: the range of signed numbers <span class='forth-forWord def-Keyword'>is</span> -2^(n-1) ... 2^(n-1)-1 <span class='forth-forWord def-Keyword'>and</span>
+ 17: the range of unsigned numbers <span class='forth-forWord def-Keyword'>is</span> <span class='forth-forNumb def-Number'>0</span> ... 2^(n)-1.
+ 18: 
+ 19: Missing test: negative <span class='forth-forWord def-Keyword'>ALLOT</span>
+ 20: TBD: How<span class='forth-forResWord def-Label'> </span><span class='forth-forWord def-Keyword'>to</span> find number of bits?
+ 21: 
+ 22: Dependencies: {> <span class='forth-forWord def-Keyword'>-></span> } { {{ TESTING MSB 1S &lt;FALSE> &lt;TRUE>
+ 23: 
+ 24: Exports:
+ 25: 
+ 26: ===================================================================== }
+ 27: 
+ 28: <span class='forth-forWord def-Keyword'>HEX</span>
+ 29: 
+ 30: TESTING <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forWord def-Keyword'>,</span> <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>!</span> <span class='forth-forWord def-Keyword'>CELL+</span> <span class='forth-forWord def-Keyword'>CELLS</span> <span class='forth-forWord def-Keyword'>C,</span> <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>C!</span> <span class='forth-forWord def-Keyword'>CHARS</span> 2@ 2! <span class='forth-forWord def-Keyword'>ALIGN</span> <span class='forth-forWord def-Keyword'>ALIGNED</span> <span class='forth-forWord def-Keyword'>+!</span> <span class='forth-forWord def-Keyword'>ALLOT</span>
+ 31: 
+ 32: <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>ALLOT</span>
+ 33: <span class='forth-forWord def-Keyword'>HERE</span>
+ 34: <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>2NDA</span>
+ 35: <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>1STA</span>
+ 36: {> 1STA 2NDA <span class='forth-forWord def-Keyword'>U&lt;</span> <span class='forth-forWord def-Keyword'>-></span> &lt;TRUE> }             <span class='forth-forComment def-Comment def-Syntax'> \ Here must grow with allot</span>
+ 37: {> 1STA <span class='forth-forWord def-Keyword'>1+</span> <span class='forth-forWord def-Keyword'>-></span> 2NDA }                    <span class='forth-forComment def-Comment def-Syntax'> \ ... by one address unit</span>
+ 38: 
+ 39: <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>,</span>
+ 40: <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forNumb def-Number'>2</span> <span class='forth-forWord def-Keyword'>,</span>
+ 41: <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>2ND</span>
+ 42: <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>1ST</span>
+ 43: {> 1ST 2ND <span class='forth-forWord def-Keyword'>U&lt;</span> <span class='forth-forWord def-Keyword'>-></span> &lt;TRUE> }               <span class='forth-forComment def-Comment def-Syntax'> \ Here must grow with allot</span>
+ 44: {> 1ST <span class='forth-forWord def-Keyword'>CELL+</span> <span class='forth-forWord def-Keyword'>-></span> 2ND }                   <span class='forth-forComment def-Comment def-Syntax'> \ ... by one cell</span>
+ 45: {> 1ST <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>CELLS</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> 2ND }
+ 46: {> 1ST <span class='forth-forWord def-Keyword'>@</span> 2ND <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forNumb def-Number'>2</span> }
+ 47: {> <span class='forth-forNumb def-Number'>5</span> 1ST <span class='forth-forWord def-Keyword'>!</span> <span class='forth-forWord def-Keyword'>-></span> }
+ 48: {> 1ST <span class='forth-forWord def-Keyword'>@</span> 2ND <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>5</span> <span class='forth-forNumb def-Number'>2</span> }
+ 49: {> <span class='forth-forNumb def-Number'>6</span> 2ND <span class='forth-forWord def-Keyword'>!</span> <span class='forth-forWord def-Keyword'>-></span> }
+ 50: {> 1ST <span class='forth-forWord def-Keyword'>@</span> 2ND <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>5</span> <span class='forth-forNumb def-Number'>6</span> }
+ 51: {> 1ST 2@ <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>6</span> <span class='forth-forNumb def-Number'>5</span> }
+ 52: {> <span class='forth-forNumb def-Number'>2</span> <span class='forth-forNumb def-Number'>1</span> 1ST 2! <span class='forth-forWord def-Keyword'>-></span> }
+ 53: {> 1ST 2@ <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>2</span> <span class='forth-forNumb def-Number'>1</span> }
+ 54: {> 1S 1ST <span class='forth-forWord def-Keyword'>!</span>  1ST <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> 1S }              <span class='forth-forComment def-Comment def-Syntax'> \ Can store cell-wide value</span>
+ 55: 
+ 56: <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>C,</span>
+ 57: <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forNumb def-Number'>2</span> <span class='forth-forWord def-Keyword'>C,</span>
+ 58: <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>2NDC</span>
+ 59: <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>1STC</span>
+ 60: {> 1STC 2NDC <span class='forth-forWord def-Keyword'>U&lt;</span> <span class='forth-forWord def-Keyword'>-></span> &lt;TRUE> }             <span class='forth-forComment def-Comment def-Syntax'> \ Here must grow with allot</span>
+ 61: {> 1STC <span class='forth-forWord def-Keyword'>CHAR+</span> <span class='forth-forWord def-Keyword'>-></span> 2NDC }                 <span class='forth-forComment def-Comment def-Syntax'> \ ... by one char</span>
+ 62: {> 1STC <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>CHARS</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forWord def-Keyword'>-></span> 2NDC }
+ 63: {> 1STC <span class='forth-forWord def-Keyword'>C@</span> 2NDC <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forNumb def-Number'>2</span> }
+ 64: {> <span class='forth-forNumb def-Number'>3</span> 1STC <span class='forth-forWord def-Keyword'>C!</span> <span class='forth-forWord def-Keyword'>-></span> }
+ 65: {> 1STC <span class='forth-forWord def-Keyword'>C@</span> 2NDC <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>3</span> <span class='forth-forNumb def-Number'>2</span> }
+ 66: {> <span class='forth-forNumb def-Number'>4</span> 2NDC <span class='forth-forWord def-Keyword'>C!</span> <span class='forth-forWord def-Keyword'>-></span> }
+ 67: {> 1STC <span class='forth-forWord def-Keyword'>C@</span> 2NDC <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>3</span> <span class='forth-forNumb def-Number'>4</span> }
+ 68: 
+ 69: <span class='forth-forWord def-Keyword'>ALIGN</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>ALLOT</span> <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forWord def-Keyword'>ALIGN</span> <span class='forth-forWord def-Keyword'>HERE</span> <span class='forth-forNumb def-Number'>3</span> <span class='forth-forWord def-Keyword'>CELLS</span> <span class='forth-forWord def-Keyword'>ALLOT</span>
+ 70: <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>A-ADDR</span>  <span class='forth-forWord def-Keyword'>CONSTANT</span> <span class='forth-forWordDefinition def-Keyword'>UA-ADDR</span>
+ 71: {> UA-ADDR <span class='forth-forWord def-Keyword'>ALIGNED</span> <span class='forth-forWord def-Keyword'>-></span> A-ADDR }
+ 72: {>    <span class='forth-forNumb def-Number'>1</span> A-ADDR <span class='forth-forWord def-Keyword'>C!</span>  A-ADDR <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>-></span>    <span class='forth-forNumb def-Number'>1</span> }
+ 73: {> <span class='forth-forNumb def-Number'>1234</span> A-ADDR  <span class='forth-forWord def-Keyword'>!</span>  A-ADDR  <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>1234</span> }
+ 74: {> <span class='forth-forNumb def-Number'>123</span> <span class='forth-forNumb def-Number'>456</span> A-ADDR 2!  A-ADDR 2@ <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>123</span> <span class='forth-forNumb def-Number'>456</span> }
+ 75: {> <span class='forth-forNumb def-Number'>2</span> A-ADDR <span class='forth-forWord def-Keyword'>CHAR+</span> <span class='forth-forWord def-Keyword'>C!</span>  A-ADDR <span class='forth-forWord def-Keyword'>CHAR+</span> <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>2</span> }
+ 76: {> <span class='forth-forNumb def-Number'>3</span> A-ADDR <span class='forth-forWord def-Keyword'>CELL+</span> <span class='forth-forWord def-Keyword'>C!</span>  A-ADDR <span class='forth-forWord def-Keyword'>CELL+</span> <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>3</span> }
+ 77: {> <span class='forth-forNumb def-Number'>1234</span> A-ADDR <span class='forth-forWord def-Keyword'>CELL+</span> <span class='forth-forWord def-Keyword'>!</span>  A-ADDR <span class='forth-forWord def-Keyword'>CELL+</span> <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>1234</span> }
+ 78: {> <span class='forth-forNumb def-Number'>123</span> <span class='forth-forNumb def-Number'>456</span> A-ADDR <span class='forth-forWord def-Keyword'>CELL+</span> 2!  A-ADDR <span class='forth-forWord def-Keyword'>CELL+</span> 2@ <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>123</span> <span class='forth-forNumb def-Number'>456</span> }
+ 79: 
+ 80: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>BITS</span><span class='forth-forComment def-Comment def-Syntax'> ( X -- U )</span>
+ 81:    <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>SWAP</span> <span class='forth-forResWord def-Label'>BEGIN</span>
+ 82:       <span class='forth-forWord def-Keyword'>DUP</span> <span class='forth-forResWord def-Label'>WHILE</span>
+ 83:          <span class='forth-forWord def-Keyword'>DUP</span> MSB <span class='forth-forWord def-Keyword'>AND</span> <span class='forth-forResWord def-Label'>IF</span>
+ 84:             <span class='forth-forWord def-Keyword'>>R</span> <span class='forth-forWord def-Keyword'>1+</span> <span class='forth-forWord def-Keyword'>R></span>
+ 85:    <span class='forth-forResWord def-Label'>THEN</span>  2*  <span class='forth-forResWord def-Label'>REPEAT</span>  <span class='forth-forWord def-Keyword'>DROP</span><span class='forth-forWord def-Keyword'> ;</span>
+ 86: 
+ 87: <span class='forth-forComment def-Comment def-Syntax'>\ Characters >= 1 au, &lt;= size of cell, >= 8 bits</span>
+ 88: {> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>CHARS</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>&lt;</span> <span class='forth-forWord def-Keyword'>-></span> &lt;FALSE> }
+ 89: {> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>CHARS</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>CELLS</span> <span class='forth-forWord def-Keyword'>></span> <span class='forth-forWord def-Keyword'>-></span> &lt;FALSE> }
+ 90: 
+ 91: <span class='forth-forComment def-Comment def-Syntax'>\ Cells >= 1 au, integral multiple of char size, >= 16 bits</span>
+ 92: {> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>CELLS</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>&lt;</span> <span class='forth-forWord def-Keyword'>-></span> &lt;FALSE> }
+ 93: {> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>CELLS</span> <span class='forth-forNumb def-Number'>1</span> <span class='forth-forWord def-Keyword'>CHARS</span> <span class='forth-forWord def-Keyword'>MOD</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+ 94: {> 1S BITS <span class='forth-forNumb def-Number'>10</span> <span class='forth-forWord def-Keyword'>&lt;</span> <span class='forth-forWord def-Keyword'>-></span> &lt;FALSE> }
+ 95: 
+ 96: {> <span class='forth-forNumb def-Number'>0</span> 1ST <span class='forth-forWord def-Keyword'>!</span> <span class='forth-forWord def-Keyword'>-></span> }
+ 97: {> <span class='forth-forNumb def-Number'>1</span> 1ST <span class='forth-forWord def-Keyword'>+!</span> <span class='forth-forWord def-Keyword'>-></span> }
+ 98: {> 1ST <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>1</span> }
+ 99: {> <span class='forth-forNumb def-Number'>-1</span> 1ST <span class='forth-forWord def-Keyword'>+!</span> 1ST <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>0</span> }
+100: 
+101: 

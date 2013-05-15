@@ -1,0 +1,36 @@
+ 0: <span class='nsi-nsiWord def-Keyword'>Function</span> <span class='nsi-nsiString def-String'>"asdfasdf"</span>
+ 1: 
+ 2: .onInit
+ 3: 
+ 4: un.onUserAbort
+ 5: 
+ 6: <span class='nsi-nsiWord def-Keyword'>FunctionEnd</span>
+ 7: 
+ 8: <span class='nsi-nsiWord def-Keyword'>Function</span> DownloadIfNeeded
+ 9: <span class='nsi-nsiComment def-Comment def-Syntax'>;-----------------------------------------------------------------------------</span>
+10:   <span class='nsi-nsiWord def-Keyword'>pop</span> <span class='def-Var'>$Name</span><span class='nsi-nsiComment def-Comment def-Syntax'>  ; Filename</span>
+11:   <span class='nsi-nsiWord def-Keyword'>pop</span> <span class='def-Var'>$section</span><span class='nsi-nsiComment def-Comment def-Syntax'>  ; section</span>
+12: 
+13:   
+14:   <span class='nsi-nsiWord def-Keyword'>SectionGetFlags</span> <span class='def-Var'>$section</span> <span class='def-Var'>$0</span>
+15:   <span class='nsi-nsiWord def-Keyword'>IntOp</span> <span class='def-Var'>$0</span> <span class='def-Var'>$0</span> &amp; <span class='def-Var'>${SF_SELECTED}</span>
+16:   <span class='nsi-nsiWord def-Keyword'>IntCmp</span> <span class='def-Var'>$0</span> <span class='def-Var'>${SF_SELECTED}</span> +<span class='nsi-nsiNumber def-Number'>1</span> SkipDL
+17: 
+18: <span class='nsi-nsiComment def-Comment def-Syntax'>  ; check if file already exists</span>
+19:   <span class='nsi-nsiWord def-Keyword'>IfFileExists</span> <span class='nsi-nsiString def-String'>"$EXEDIR\$Name"</span> SkipDL
+20: <span class='nsi-nsiLabel def-Label'>  inetc:</span>:get /RESUME <span class='nsi-nsiString def-String'>""</span> <span class='nsi-nsiString def-String'>"http://downloads.sourceforge.net/mingw/$Name"</span> <span class='nsi-nsiString def-String'>"$EXEDIR\$Name"</span> /END
+21:   <span class='nsi-nsiWord def-Keyword'>Pop</span> <span class='def-Var'>$0</span>
+22:   <span class='nsi-nsiWord def-Keyword'>StrCmp</span> <span class='def-Var'>$0</span> <span class='nsi-nsiString def-String'>"OK"</span> DownLoadOK
+23: 
+24: <span class='nsi-nsiComment def-Comment def-Syntax'>  ; can we recover from this now?</span>
+25: 
+26:   <span class='nsi-nsiWord def-Keyword'>detailprint</span> <span class='def-Var'>$0</span>
+27:   <span class='nsi-nsiWord def-Keyword'>Abort</span> <span class='nsi-nsiString def-String'>"Could not download $Name!"</span>
+28: 
+29: <span class='nsi-nsiLabel def-Label'>SkipDL:</span>
+30:   <span class='nsi-nsiWord def-Keyword'>DetailPrint</span> <span class='nsi-nsiString def-String'>"File already exists - skipping $Name."</span>
+31:   <span class='nsi-nsiWord def-Keyword'>Sleep</span> <span class='nsi-nsiNumber def-Number'>1000</span>
+32: 
+33: <span class='nsi-nsiLabel def-Label'>DownLoadOK:</span>
+34: <span class='nsi-nsiWord def-Keyword'>FunctionEnd</span>
+35: 

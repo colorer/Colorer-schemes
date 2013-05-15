@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<project name="schemes" default="copy" basedir=".">
+
+<property name="target" value="all" description="default subproject target"/>
+<property file='path.properties'/>
+
+
+<target name='hrd'>
+	<ant antfile="build.xml" dir='${path.hrd}' target="${target}"/>
+</target>
+
+<target name='hrc'>
+	<ant antfile="build.xml" dir='${path.hrc}' target="${target}"/>
+</target>
+
+<target name='all' depends="hrc, hrd"/>
+
+<target name="hrc.jar" depends='hrc'>
+
+  <mkdir dir='${target-dir}/hrc/auto/types'/>
+
+  <zip destfile='${target-dir}/hrc/common.jar'>
+    <fileset dir='${basedir}/hrc/hrc' includes='**/*' excludes='changes.txt, proto*.hrc, *.ent.hrc, auto, auto/**/*, proto.hrc.far'/>
+  </zip>
+  <copy todir='${target-dir}/hrc/'  overwrite='true'>
+    <fileset dir='hrc/hrc/' includes='proto*.hrc, *.ent.hrc'/>
+  </copy>
+  <copy todir='${target-dir}/hrc/'  overwrite='true'>
+    <fileset dir='hrc/hrc/' includes='auto/**/*'/>
+  </copy>
+  <replace dir="${target-dir}/hrc" includes='*.hrc' token='link="' value='link="jar:common.jar!'/>
+</target>
+
+<target name="hrc.jar.old" depends='hrc'>
+
+  <mkdir dir='${target-dir}/hrc/auto/types'/>
+
+  <zip destfile='${target-dir}/hrc/common.jar'>
+    <fileset dir='${basedir}/hrc/hrc' includes='**/*' excludes='changes.txt, proto*.hrc, *.ent.hrc, auto, auto/**/*'/>
+  </zip>
+  <copy todir='${target-dir}/hrc/'  overwrite='true'>
+    <fileset dir='hrc/hrc/' includes='proto*.hrc, *.ent.hrc'/>
+  </copy>
+  <copy overwrite='true' file ='hrc/hrc/proto.hrc.far' tofile='${target-dir}/hrc/proto.hrc'/>
+  <replace dir="${target-dir}/hrc" includes='*.hrc' token='link="' value='link="jar:common.jar!'/>
+</target>
+
+<target name="hrcupdate.clean">
+  <delete><fileset dir='${build-dir}/..' includes='hrc-update*'/></delete>
+  <delete dir='${hrcupdate-dir}'/>
+</target>
+
+<target name="farbase" description='Builds a base dir for FarColorer'>
+  <mkdir dir='${base-dir}'/>
+  <mkdir dir='${base-dir}/hrc'/>
+  <mkdir dir='${base-dir}/hrd'/>
+  <copy file='hrc/hrc/CHANGELOG' todir='${base-dir}/hrc'/>
+  <copy file='catalog.xml.far' tofile='${base-dir}/catalog.xml'/>
+  <antcall target='hrc.jar'>
+    <param name='target-dir' value='${base-dir}'/>
+  </antcall>
+  <antcall target='hrd'>
+  </antcall>
+  <antcall target='hrd'>
+		<param name='target' value='copy'/>
+    <param name='path.colorer' value='${base-dir}'/>
+  </antcall>
+</target>
+
+<target name="farbase.clean" description='Builds a base dir for FarColorer'>
+	<antcall target='all'>
+		<param name='target' value='clean'/>
+	</antcall>
+  <delete dir='${base-dir}'/>
+</target>
+
+<target name="hrcupdate" description='Builds a package of the current HRC base'>
+  <tstamp><format property="TODAY" pattern="yyyy-MM-dd"/></tstamp>
+  <property name='hrcupdate-zip' value='${build-dir}/hrc-update.${TODAY}.zip'/>
+
+  <mkdir dir='${hrcupdate-dir}/hrc'/>
+  <antcall target='hrc.jar'>
+    <param name='target-dir' value='${hrcupdate-dir}'/>
+  </antcall>
+  <copy file='hrc/hrc/CHANGELOG' todir='${hrcupdate-dir}/hrc'/>
+
+  <zip destfile='${hrcupdate-zip}'>
+    <fileset dir='${hrcupdate-dir}'/>
+  </zip>
+
+</target>
+
+<target name="hrcupdate.old" description='Builds a package of the current HRC base fo old Far'>
+  <tstamp><format property="TODAY" pattern="yyyy-MM-dd"/></tstamp>
+  <property name='hrcupdate-zip' value='${build-dir}/hrc-update.${TODAY}.zip'/>
+
+  <mkdir dir='${hrcupdate-dir}/hrc'/>
+  <antcall target='hrc.jar.old'>
+    <param name='target-dir' value='${hrcupdate-dir}'/>
+  </antcall>
+  <copy file='hrc/hrc/changes.txt' todir='${hrcupdate-dir}'/>
+
+  <zip destfile='${hrcupdate-zip}'>
+    <fileset dir='${hrcupdate-dir}'/>
+  </zip>
+
+</target>
+
+<target name="copy">
+	<antcall target='all'>
+		<param name='target' value='copy'/>
+	</antcall>
+</target>
+
+<target name="copy.clean">
+	<antcall target='all'>
+		<param name='target' value='copy.clean'/>
+	</antcall>
+</target>
+
+
+<target name="clean" depends='copy.clean'>
+	<antcall target='all'>
+		<param name='target' value='clean'/>
+	</antcall>
+</target>
+
+
+
+</project>

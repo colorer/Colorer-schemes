@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+
+<yml_catalog date="2000-11-16 20:17">
+<shop>
+  <name>BestShop</name>
+  <company>Best online seller Inc.</company>
+  <url>http://best.seller.ru/</url>
+
+<currencies>
+  <currency id="RUR" rate="1"/>
+
+  <currency id="USD" rate="23.98"/>
+  <currency id="EUR" rate="36.25"/>
+  <currency id="UAH" rate="5.6"/>
+</currencies>
+
+<categories>
+  <category id="1">Книги</category>
+
+  <category id="2">Видео</category>
+  <category id="3" parentId="1">Детективы</category>
+  <category id="4" parentId="1">Боевики</category>
+  <category id="5" parentId="2">Комедии</category>
+
+  <category id="6">Принтеры</category>
+  <category id="7">Оргтехника</category>
+</categories>
+<offers>
+<offer id="12341" type="vendor.model" available="true" bid="13">
+
+  <url>http://best.seller.ru/product_page.asp?pid=12344</url>
+  <price>700</price>
+  <currencyId>USD</currencyId>
+  <categoryId> 6 </categoryId>
+  <picture>http://best.seller.ru/img/device12345.jpg</picture>
+  <delivery> true </delivery>
+  <typePrefix> Принтер </typePrefix>
+  <vendor> НP </vendor>
+  <vendorCode> Q7533A </vendorCode>
+  <model> Color LaserJet 3000</model>
+  <description>
+    A4, 64Mb, 600x600 dpi, USB 2.0, 29стр/мин ч/б / 15стр/мин цв, лотки на 100л и 250л, плотность до 175г/м, до 60000 стр/месяц
+  </description>
+  <manufacturer_warranty>true</manufacturer_warranty>
+  <country_of_origin>Япония</country_of_origin>
+ 
+</offer>
+<offer id="12346" available="true" bid="21">
+  <url>http://best.seller.ru/product_page.asp?pid=12348</url>
+
+  <price>699.54</price>
+  <currencyId>USD</currencyId>
+  <categoryId>6</categoryId>
+  <picture>http://best.seller.ru/img/device12345.jpg</picture>
+  <delivery>false</delivery>
+  <name> Золотые наручные часы </name>
+  <vendorCode> A1234567B </vendorCode>
+  <description> Изящные золотые часы.</description>
+  <country_of_origin>Китай</country_of_origin>
+
+</offer>
+<offer id="12342" type="book" available="true" bid="17">
+  <url>http://best.seller.ru/product_page.asp?pid=14345</url>
+  <price>80</price>
+  <currencyId>RUR</currencyId>
+
+  <categoryId>3</categoryId>
+  <picture>http://best.seller.ru/product_page.asp?pid=14345.jpg</picture>
+  <delivery>true</delivery>
+  <author>Александра Маринина</author>
+  <name>Все не так. В 2 томах. Том 1</name>
+
+  <publisher>ЭКСМО - Пресс</publisher>
+  <series>А. Маринина - королева детектива</series>
+  <year>2007</year>
+  <ISBN>978-5-699-23647-3</ISBN>
+  <volume>2</volume>
+  <part>1</part>
+  <language>rus </language>
+  <binding>70x90/32</binding>
+  <page_extent>288</page_extent>
+
+  <description>
+Все прекрасно в большом патриархальном семействе Руденко. Но - увы! - 
+впечатление это обманчиво: каждого из многочисленных (еще)Все прекрасно в 
+большом патриархальном семействе Руденко. Но - увы! - впечатление это обманчиво:
+ каждого из многочисленных представителей семьи обуревают свои потаенные страсти
+ и запретные желания. И потому, когда погибает, причем явно.
+  </description>
+
+  <downloadable>false</downloadable>
+
+</offer>
+<offer id="12345" type="artist.title" available="true" bid="11">
+
+  <url>http://best.seller.ru/product_page.asp?pid=12946</url>
+  <price>150</price>
+  <currencyId>USD</currencyId>
+  <categoryId>2</categoryId>
+
+    <picture>http://best.seller.ru/product_page.asp?pid=14345.jpg</picture>
+  <delivery>true</delivery>
+  <artist>Pink Floyd</artist>
+  <title>Dark Side Of The Moon, Platinum Disc</title>
+  <year>1999</year>
+
+  <media>CD</media>
+
+<description> Dark Side Of The Moon, поставивший мир на уши
+ невиданным сочетанием звуков, - это всего-навсего девять 
+треков, и даже не все они писались специально для альбома. 
+Порывшись по сусекам, участники Pink Floyd мудро сделали 
+новое из хорошо забытого старого - песен, которые 
+почему-либо не пошли в дело или остались незаконченными. 
+Одним из источников вдохновения стали саундтреки 
+для кинофильмов, которые группа производила в больших количествах.
+
+</description>
+
+
+</offer>
+
+<offer id="12344" type="artist.title" available="true" bid="56">
+  <url>http://best.seller.ru/product_page.asp?pid=92347</url>
+
+  <price>93</price>
+  <currencyId>RUR</currencyId>
+  <categoryId>2</categoryId>
+  <picture>http://best.seller.ru/img/device92347.jpg</picture>
+  <delivery>true</delivery>
+  <title>Свадьба Мюриэл</title>
+  <year>1999</year>
+  <media>DVD</media>
+  <starring>Тони Колетт (Toni Collette), Рэйчел Грифитс (Rachel Griffiths)</starring>
+
+  <director>П Дж Хоген</director>
+  <originalName>Muriel's wedding</originalName>
+  <country>Австралия</country>
+  <description> 
+Гадкий утенок из провинциального городка покидает свое 
+гнездо, и в компании своей подруги отправляется искать веселой жизни в большой и
+ загадочный город. Фильм о мечтах и реальности, дружбе и юности молодой девушки,    
+ приключения которой повторяют судьбы Золушки и героини Джулии Робертс из 
+ставшего классикой фильма Красотка...
+  </description>
+
+</offer>
+
+<offer id="12341" type="tour" available="true" bid="71">
+  <url>http://best.seller.ru/product_page.asp?pid=12344</url>
+  <price>958</price>
+
+  <currencyId>USD</currencyId>
+  <categoryId>6</categoryId>
+  <picture>http://best.seller.ru/img/device12345.jpg</picture>
+  <delivery>false</delivery>
+  <worldRegion>Африка</worldRegion>
+
+  <country>Египет</country>
+  <region>Хургада</region>
+  <days>7</days>
+  <dataTour>01/01/03</dataTour>
+
+  <dataTour>08/01/03</dataTour>
+  <name>Hilton</name>
+  <hotel_stars>5*****</hotel_stars>
+  <room>SNG</room>
+
+  <meal>ALL</meal>
+  <included>авиаперелет, трансфер, проживание, питание, страховка</included>
+  <transport>Авиа</transport>
+  <description></description>
+
+</offer>
+
+ <offer id="1234" type="event-ticket"  available="true" bid="13"> 
+ <url>url товарного предложения</url>
+ <price>100000</price>
+ <currencyId>RUR</currencyId>
+ <categoryId>3</categoryId> 
+ <picture>url картинки товарного предложения</picture>
+ <delivery>true</delivery>
+ <name>Дмитрий Хворостовский и Национальный филармонический
+ оркестр России. Дирижер - Владимир Спиваков.</name>
+ <place>Московский  международный Дом музыки</place>
+ <hall plan="url плана зала">Большой  зал</hall>
+ <hall_part>Партер р. 1-5</hall_part>
+
+ <date>2004-12-31T19:00</date> 
+ <is_premiere>0</is_premiere>
+ <is_kids>0</is_kids>
+ <description>описание товарного предложения.</description>
+
+</offer>
+
+ <offer id="107" type="vendor.model" bid="23" cbid="43" available="true">
+   <url>http://</url>
+   <price>55</price>
+   <currencyId>USD</currencyId>
+
+   <categoryId>35</categoryId>
+   <picture>http://</picture>
+   <delivery>false</delivery>   
+   <typePrefix>Наушники</typePrefix>
+   <vendor>SONY</vendor>
+
+   <model>MDR-CD480</model>
+   <description> </description>
+  </offer>
+
+    <offer id="107" type="vendor.model" bid="15" available="true">
+   <url>http://</url>
+
+   <price>55</price>
+   <currencyId>USD</currencyId>
+   <categoryId>35</categoryId>
+   <picture>http://</picture>
+   <delivery>true</delivery>
+   <typePrefix>Наушники</typePrefix>
+   <vendor>SONY</vendor>
+   <model>MDR-CD480</model>
+   <description> </description>
+
+  </offer>
+
+   <offer id="107" type="vendor.model" cbid="25" available="true">
+   <url>http://</url>
+
+   <price>55</price>
+   <currencyId>USD</currencyId>
+   <categoryId>35</categoryId>
+   <picture>http://</picture>
+   <delivery>true</delivery>   
+   <typePrefix>Наушники</typePrefix>
+   <vendor>SONY</vendor>
+   <model>MDR-CD480</model>
+   <description> </description>
+
+  </offer>
+
+</offers>
+
+</shop>
+</yml_catalog>

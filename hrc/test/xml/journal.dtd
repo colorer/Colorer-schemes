@@ -1,0 +1,31 @@
+<!ENTITY % idattr 'id ID #IMPLIED'>
+<!ENTITY % opt 'title?,date,about'>
+<!ENTITY % cont 'tel*,url*,email*'>
+<!ELEMENT title (PCDATA)?>
+<!ELEMENT firstname (PCDATA)?>
+<!ELEMENT lastname (PCDATA)?>
+<!ELEMENT email (PCDATA)?>
+<!ELEMENT url (PCDATA)?>
+<!ELEMENT tel (PCDATA)?>
+<!ELEMENT address (PCDATA)?>
+<!ELEMENT fax (PCDATA)?>
+<!ELEMENT date (PCDATA)?>
+<!ELEMENT home-url (PCDATA)?>
+<!ELEMENT article-url (PCDATA)?>
+<!ELEMENT hotkey (PCDATA)? >
+<!ELEMENT article-finished EMPTY>
+<!ELEMENT contents ANY>
+<!ELEMENT hotkeys (PCDATA|hotkey)? >
+<!ELEMENT author (PCDATA | firstname? , lastname? , %cont;) >
+<!ATTLIST author %idattr;>
+<!ELEMENT authors (PCDATA|author*)? >
+<!ELEMENT article (%opt;,author,article-url,hotkeys*,contents*,article-finished) >
+<!ATTLIST article %idattr;>
+<!ELEMENT articles (article)? >
+<!ELEMENT issue (%opt;,home-url?,articles*) >
+<!ATTLIST issue %idattr; index CDATA #REQUIRED >
+<!ELEMENT issues-list (PCDATA|issue*)* >
+<!ELEMENT contacts (address,%cont;)>
+<!ELEMENT journal (title?,contacts?,isues-list,authors-list)>
+<!ATTLIST journal %idattr; src CDATA #IMPLIED >
+

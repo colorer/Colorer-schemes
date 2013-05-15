@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<project name="src.xslt" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/xslt" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+
+
+
+<!-- xsl1 -->
+
+<target name="xsl1.check">
+ <dependset>
+  <srcfilelist dir="." files="build.xml"/>
+  <srcfilelist dir="${src}" files = "xslt.xsd, custom.xslt.xml, xslt.ent.xml"/>
+  <targetfilelist dir="${bin}" files="xslt.hrc"/>
+ </dependset>
+</target>
+
+<target name="xsl1" depends="xsl1.check">
+ <ant antfile="${util}" target="xsd2hrc">
+   <property name="util.input" value="${src}/xslt.xsd"/>
+   <property name="util.output" value="${bin}/xslt.hrc"/>
+   <property name='xsd2hrc.hrctype' value='xslt'/>
+   <property name='xsd2hrc.allow-any-attr' value='yes'/>
+   <!-- has no effect
+   property name='xsd2hrc.allow-unknown-root-elements' value='yes'/-->
+   <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.xslt.xml'/>
+ </ant>
+</target>
+
+
+
+<!-- xsl2 -->
+
+<target name="xsl2.check">
+ <dependset>
+  <srcfilelist dir="." files="build.xml"/>
+  <srcfilelist dir="${src}" files = "schema-for-xslt20.xsd, custom.xslt2.xml, xslt.ent.xml"/>
+  <targetfilelist dir="${bin}" files="xslt2.hrc"/>
+ </dependset>
+</target>
+
+<target name="xsl2" depends="xsl2.check">
+ <ant antfile="${util}" target="xsd2hrc">
+   <property name="util.input" value="${src}/schema-for-xslt20.xsd"/>
+   <property name="util.output" value="${bin}/xslt2.hrc"/>
+   <property name='xsd2hrc.hrctype' value='xslt2'/>
+   <property name='xsd2hrc.allow-any-attr' value='yes'/>
+   <!-- has no effect
+   property name='xsd2hrc.allow-unknown-root-elements' value='yes'/-->
+   <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.xslt2.xml'/>
+ </ant>
+</target>
+
+
+<!-- final -->
+
+<target name="all" depends="xsl1,xsl2"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${bin}" includes="xslt.hrc, xslt2.hrc"/>
+ </delete>
+</target>
+
+</project>

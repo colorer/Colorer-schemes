@@ -1,0 +1,38 @@
+ 0: <span class='verilog-verWord def-Keyword'>module alu</span> <span class='def-Symbol'>(</span>
+ 1:    op<span class='verilog-verSymb def-Symbol'>,</span>
+ 2:    a<span class='verilog-verSymb def-Symbol'>,</span>
+ 3:    b<span class='verilog-verSymb def-Symbol'>,</span>
+ 4:    y<span class='verilog-verSymb def-Symbol'>,</span>
+ 5:    cin<span class='verilog-verSymb def-Symbol'>,</span>
+ 6:    cout<span class='verilog-verSymb def-Symbol'>,</span>
+ 7:    zout
+ 8: <span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+ 9: 
+10:         <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>CLKDIV or HDP or HNDP or VDP or VNDP or PADDR[1:0]</span>)
+11:                 case<span class='def-Symbol'>(</span>PADDR<span class='def-Symbol'>[</span><span class='verilog-verNumb def-Number'>1</span><span class='verilog-verSymb def-Symbol'>:</span><span class='verilog-verNumb def-Number'>0</span><span class='def-Symbol'>]</span><span class='def-Symbol'>)</span>
+12:                         <span class='verilog-verNumb def-Number'>3'b000</span> <span class='verilog-verSymb def-Symbol'>:</span> PRDATA <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> CLKDIV<span class='verilog-verSymb def-Symbol'>;</span>
+13:                         <span class='verilog-verNumb def-Number'>3'b001</span> <span class='verilog-verSymb def-Symbol'>:</span> PRDATA <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> HDP<span class='verilog-verSymb def-Symbol'>;</span>
+14:                         <span class='verilog-verNumb def-Number'>3'b010</span> <span class='verilog-verSymb def-Symbol'>:</span> PRDATA <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> HNDP<span class='verilog-verSymb def-Symbol'>;</span>
+15:                         <span class='verilog-verNumb def-Number'>3'b011</span> <span class='verilog-verSymb def-Symbol'>:</span> PRDATA <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> VDP<span class='verilog-verSymb def-Symbol'>;</span>
+16:                         <span class='verilog-verNumb def-Number'>3'b100</span> <span class='verilog-verSymb def-Symbol'>:</span> PRDATA <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> VNDP<span class='verilog-verSymb def-Symbol'>;</span>
+17:                         default  PRDATA <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> VNDP<span class='verilog-verSymb def-Symbol'>;</span>
+18:                 endcase
+19:             if<span class='def-Symbol'>(</span>a<span class='def-Symbol'>)</span> b <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> c<span class='verilog-verSymb def-Symbol'>;</span>
+20: 
+21: чтобы все было корректно<span class='verilog-verSymb def-Symbol'>,</span> надо писать так<span class='verilog-verSymb def-Symbol'>:</span>
+22: 
+23:         <span class='verilog-verWord def-Keyword'>always</span> @(<span class='verilog-verString def-String'>CLKDIV or HDP or HNDP or VDP or VNDP or PADDR[1:0]</span>)
+24:          <span class='def-Keyword'>begin</span>
+25:                 <span class='def-Keyword'>case</span><span class='verilog-verWord def-Keyword'>(</span>PADDR[<span class='verilog-verNumb def-Number'>1</span><span class='verilog-verWord def-Keyword'>:</span><span class='verilog-verNumb def-Number'>0</span>]<span class='verilog-verWord def-Keyword'>)</span>
+26:                         <span class='verilog-verNumb def-Number'>3'b000</span> <span class='verilog-verWord def-Keyword'>:</span> PRDATA <span class='verilog-verWord def-Keyword'>&lt;=</span> CLKDIV<span class='verilog-verWord def-Keyword'>;</span>
+27:                         <span class='verilog-verNumb def-Number'>3'b001</span> <span class='verilog-verWord def-Keyword'>:</span> PRDATA <span class='verilog-verWord def-Keyword'>&lt;=</span> HDP<span class='verilog-verWord def-Keyword'>;</span>
+28:                         <span class='verilog-verNumb def-Number'>3'b010</span> <span class='verilog-verWord def-Keyword'>:</span> PRDATA <span class='verilog-verWord def-Keyword'>&lt;=</span> HNDP<span class='verilog-verWord def-Keyword'>;</span>
+29:                         <span class='verilog-verNumb def-Number'>3'b011</span> <span class='verilog-verWord def-Keyword'>:</span> PRDATA <span class='verilog-verWord def-Keyword'>&lt;=</span> VDP<span class='verilog-verWord def-Keyword'>;</span>
+30:                         <span class='verilog-verNumb def-Number'>3'b100</span> <span class='verilog-verWord def-Keyword'>:</span> PRDATA <span class='verilog-verWord def-Keyword'>&lt;=</span> VNDP<span class='verilog-verWord def-Keyword'>;</span>
+31:                         <span class='verilog-verWord def-Keyword'>default</span>  PRDATA <span class='verilog-verWord def-Keyword'>&lt;=</span> VNDP<span class='verilog-verWord def-Keyword'>;</span>
+32:                 <span class='def-Keyword'>endcase</span>
+33:             <span class='verilog-verWord def-Keyword'>if</span>(a) b <span class='verilog-verSymb def-Symbol'>&lt;</span><span class='verilog-verSymb def-Symbol'>=</span> c<span class='verilog-verSymb def-Symbol'>;</span>
+34:          <span class='def-Keyword'>end</span>
+35: 
+36: <span class='verilog-verWord def-Keyword'>endmodule</span>
+37: 

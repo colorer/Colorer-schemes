@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<!DOCTYPE custom [
+    <!ENTITY hrc SYSTEM "entity.j2ee.hrc">
+    <!ENTITY cst SYSTEM "entity.faces-config.xml">
+]>
+<custom xmlns="uri:colorer:custom">
+
+<custom-type targetNamespace='http://java.sun.com/dtd/web-facesconfig_1_0.dtd'>
+    <prefix>web-facesconfig_1_0</prefix>
+    &cst;
+</custom-type>
+
+<custom-type targetNamespace='http://java.sun.com/dtd/web-facesconfig_1_1.dtd'>
+    <prefix>web-facesconfig_1_1</prefix>
+    &cst;
+</custom-type>
+
+<custom-type targetNamespace="http://java.sun.com/xml/ns/javaee">
+    <prefix>javaee</prefix>
+    &cst;
+    <type xmlns="http://colorer.sf.net/2003/hrc">
+        &hrc;
+        <scheme name="http-methodType-content">
+            <!--
+                Warning: RE pattern used. Possible compatibility faults
+                Original RE: [!-~-[\(\)<>@,;:"/\[\]?=\{\}\\\p{Z}]]+-->
+            <regexp region="Enumeration" priority="low" match="/[!-\~-[\(\)&lt;&gt;@,;:&#34;\/\[\]?\=\{\}\\\s]]+/"/>
+        </scheme>
+    </type>
+</custom-type>
+
+</custom>

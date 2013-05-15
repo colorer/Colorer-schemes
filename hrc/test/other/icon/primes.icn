@@ -1,0 +1,48 @@
+#
+# (c) Victor Zhumatii, OSPU
+# Ž­Ì¿ ª®¤ ÇÂ¯¥É­® ³Ê¥× ¯Á®Â×Ì¥ Ú³Â«š Â×®«Í ¬³«Ì¬³ ªÁ³¯×®£ÁšÄš¬ ¬¥×®¤š¬³
+#
+
+procedure randoms (n, k) # n times random in 1..k
+     every 1 to n do suspend ? k
+end
+
+procedure pow(a, b, modLimit) # long a^b version
+    powers := list()
+    powers |||:= [a] # 0-Ð Â×¥¯¥­Í
+
+    while (2 ^ (*powers -1) ) <= b do { # ®ªš ¤š­­šÐ Â×¥¯¥­Í ­š¬ ¬®¦¥× ¯®­š¤®¡³×ÍÂÐ
+        last := powers[*powers];
+        powers |||:= [(last*last) % modLimit]
+    }
+    res := 1; 
+    #-d-write("Required space for powers:", *powers)
+    every power := !powers do {
+        if (b % 2 = 1) then {
+            res *:= power;
+            res %:= modLimit;
+        }
+        b /:= 2
+    }
+    return res
+    
+end
+
+procedure isPrime(p) #p mayBePrime
+    pows := set()
+    every pows ++:= set([pow (randoms(40, p-1), p-1, p)])
+    if *pows = 1 & !pows = 1 then return p;
+
+    # ªš¦¤šÐ Â×¥¯¥­Í Â«ÇÚš¿­ÌÅ Ú³Â¥« Ú³Â«®¬ 20 ³§ ³­×¥Á¢š«š 1..p-1 ¯® ¬®¤Ç«Ï p
+    # ¯®¬¥Êš¥×ÂÐ ¢ ¬­®¦Â×¢®
+    # ¥Â«³ ¢ ¬­®¦¥Â×¢¥ ¥Â×Í ×®«Íª® 1, ¢¥Á­Ç×Í p
+end
+
+procedure main()
+#    every write ("Randoms:", randoms (10, 10))
+#    write (pow(2, 10, 10))
+#    every write(pow (randoms(20, 100-1), 100-1, 100))
+#    every p := 1 to 100 do write (p, " --> ", isPrime(p+1000000000000000000) );
+    base :=10000000000000000000000000000000000000000000000000000000000000
+    every p := base + (1 to 100) do write (isPrime(p))
+end

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:annotation><xs:documentation>
+    FAR Manager Calculator plugin settings (calcset.csr) xml schema.
+  </xs:documentation></xs:annotation>
+  <xs:element name="calc">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="set">
+          <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="const">
+                <xs:complexType>
+                  <xs:attribute name="syntax" type="xs:string" use="required"/>
+                  <xs:attribute name="mean" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="op">
+                <xs:complexType>
+                  <xs:attribute name="syntax" type="xs:string" use="required"/>
+                  <xs:attribute name="mean" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="func">
+                <xs:complexType>
+                  <xs:attribute name="syntax" type="xs:string" use="required"/>
+                  <xs:attribute name="mean" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:choice>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="use">
+          <xs:complexType>
+            <xs:attribute name="set" type="xs:string"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="lang">
+          <xs:complexType>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dialog">
+          <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="text">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="field">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                  <xs:attribute name="scale" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:choice>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+      <xs:attribute name="version" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

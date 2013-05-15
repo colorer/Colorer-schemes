@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE catalog
+	PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN"
+	"http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd"
+>
+
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+	
+	<!-- not part of colorer -->
+	<public 
+		publicId="-//W3C//DTD XMLSCHEMA 200102//EN"
+		uri="extern/XMLSchema.dtd"
+	/>
+	<public 
+		publicId="datatypes"
+		uri="extern/datatypes.dtd"
+	/>
+	
+	<!-- colorer take5 -->
+	<public 
+		publicId="-//Cail Lomecb//DTD Colorer HRC take5//EN"
+		uri="2003/hrc.dtd"
+	/>
+	<public 
+		publicId="-//Cail Lomecb//DTD Colorer HRD take5//EN"
+		uri="2003/hrd.dtd"
+	/>
+	<public 
+		publicId="-//Cail Lomecb//DTD Colorer CATALOG take5//EN"
+		uri="2003/catalog.dtd"
+	/>
+	<public 
+		publicId="-//Cail Lomecb//DTD Colorer DOCLINKS take5//EN"
+		uri="2003/doclinks.dtd"
+	/>
+</catalog>

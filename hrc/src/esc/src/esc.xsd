@@ -1,0 +1,260 @@
+<xs:schema
+  xmlns:esc='uri:esc'
+  targetNamespace='uri:esc'
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<annotation>
+ <documentation>
+  Simple scheme for support
+  "Extended selection case" plugin by Ivan Sintyurin (spinoza@mail.ru)
+
+  Note. 'uri:esc' is fictive namespace.
+
+  Written by Eugene Efremov (4mirror@mail.ru)
+ </documentation>
+</annotation>
+
+
+
+<xs:simpleType name="farmacro">
+  <xs:restriction base="xs:string">
+    <xs:whiteSpace value="collapse"/>
+  </xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="farkey">
+  <xs:restriction base="xs:string">
+    <xs:whiteSpace value="collapse"/>
+  </xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="farmask">
+  <xs:restriction base="xs:string">
+    <xs:whiteSpace value="collapse"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="include-string">
+  <xs:restriction base="xs:string">
+    <xs:whiteSpace value="collapse"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="nurber-pres">
+  <xs:restriction base="xs:string">
+    <xs:whiteSpace value="collapse"/>
+    <xs:pattern value="\d{1,3}%?"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:simpleType name='onoff'>
+ <xs:restriction base='string'>
+    <xs:enumeration value='on'/>
+    <xs:enumeration value='off'/>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name='ooi'>
+ <xs:restriction base='string'>
+  <xs:enumeration value='on'/>
+  <xs:enumeration value='off'/>
+  <xs:enumeration value='ignore'/>
+ </xs:restriction>
+</xs:simpleType>
+
+
+
+<xs:element name="Esc-Settings">
+ <xs:complexType>
+  <xs:sequence>
+   <xs:element name="Types">
+    <xs:complexType>
+     <xs:sequence>
+      <xs:element name="type" type="esc:type"/>
+     </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+  </xs:sequence>
+ </xs:complexType>
+</xs:element>
+
+
+<xs:complexType name="type">
+ <xs:sequence>
+  <xs:element name="margin" type="esc:margin"/><!-- 1 -->
+  <xs:element name="quote" type="esc:quote"/><!--2-->
+  <xs:element name="tab" type="esc:tab"/><!--3-->
+  <xs:element name="smartkey" type="esc:smartkey"/><!--4-->
+  <xs:element name="kill" type="esc:kill"/><!--5-->
+  <xs:element name="addsymbol" type="esc:addsymbol"/><!--6-->
+  <xs:element name="autoindent" type="esc:autoindent"/><!--7-->
+  <xs:element name="cursorbeol" type="esc:cursorbeol"/><!--8-->
+  <xs:element name="charcodebase" type="esc:charcodebase"/><!--9-->
+  <xs:element name="eol" type="esc:eol"/><!--10-->
+  <xs:element name="table" type="esc:table"/><!--11-->
+  <xs:element name="savepos" type="esc:savepos"/><!--12-->
+  <xs:element name="lockmode" type="esc:lockmode"/><!--13-->
+  <xs:element name="usermacro" type="esc:usermacro"/><!--14-->
+  <xs:element name="lockfile" type="esc:lockfile"/><!--15-->
+  <xs:element name="wordsym" type="esc:wordsym"/><!--16-->
+ </xs:sequence>
+ <xs:attribute name="name" type="xs:string"/>
+ <xs:attribute name="include" type="esc:include-string"/>
+ <xs:attribute name="mask" type="esc:farmask"/>
+ <xs:attribute name="inherit" type="xs:string"/>
+ <xs:attribute name="skippath" type="esc:onoff"/>
+ <xs:attribute name="overload" type="esc:onoff"/>
+</xs:complexType>
+
+
+<!--  <xs:element name="margin" type="esc:margin"/> 1 -->
+<xs:complexType name="margin">
+ <xs:attribute name="autowrap" type="esc:onoff"/>
+ <xs:attribute name="wrap" type="esc:nurber-pres"/>
+ <xs:attribute name="justify" type="esc:onoff"/>
+</xs:complexType>
+
+<!--  <xs:element name="quote" type="esc:quote"/>2-->
+<xs:complexType name="quote">
+ <xs:attribute name="value" type="esc:onoff"/>
+ <xs:attribute name="quoteeol" type="esc:onoff"/>
+</xs:complexType>
+
+<!--<xs:element name="tab" type="esc:tab"/>3-->
+<xs:complexType name="tab">
+ <xs:attribute name="tabsize" type="xs:positiveInteger"/>
+ <xs:attribute name="expandtabs" type="esc:ooi"/>
+</xs:complexType>
+
+<!--  <xs:element name="smartkey" type="esc:smartkey"/>- 4-->
+<xs:complexType name="smartkey">
+ <xs:attribute name="tab" type="esc:onoff"/>
+ <xs:attribute name="backspace" type="esc:onoff"/>
+ <xs:attribute name="stopchar" type="xs:string"/>
+ <xs:attribute name="home" type="esc:onoff"/>
+ <xs:attribute name="lines" type="xs:positiveInteger"/>
+</xs:complexType>
+
+<!--  <xs:element name="kill" type="esc:kill"/>- 5-->
+<xs:complexType name="kill">
+ <xs:attribute name="killspace" type="esc:onoff"/>
+ <xs:attribute name="p_end" type="esc:onoff"/>
+ <xs:attribute name="p_minuses" type="esc:onoff"/>
+ <xs:attribute name="killemptylines" type="esc:onoff"/>
+ <xs:attribute name="forcekel" type="esc:onoff"/>
+</xs:complexType>
+
+<!--  <xs:element name="addsymbol" type="esc:addsymbol"/>- 6-->
+<xs:complexType name="addsymbol">
+ <xs:attribute name="value" type="esc:onoff"/>
+ <xs:attribute name="start" type="xs:string"/>
+ <xs:attribute name="end" type="xs:string"/>
+ <xs:attribute name="start_b" type="xs:string"/>
+ <xs:attribute name="end_b" type="xs:string"/>
+</xs:complexType>
+
+<!--  <xs:element name="autoindent" type="esc:autoindent"/>- 7-->
+<xs:complexType name="autoindent">
+ <xs:attribute name="value" type="esc:ooi"/>
+</xs:complexType>
+
+<!--  <xs:element name="cursorbeol" type="esc:cursorbeol"/>- 8-->
+<xs:complexType name="cursorbeol">
+ <xs:attribute name="value" type="esc:ooi"/>
+</xs:complexType>
+
+<!--  <xs:element name="charcodebase" type="esc:charcodebase"/>- 9-->
+<xs:complexType name="charcodebase">
+ <xs:attribute name="value">
+  <xs:simpleType>
+   <xs:restriction base='xs:string'>
+    <xs:enumeration value='hex'/>
+    <xs:enumeration value='dec'/>
+    <xs:enumeration value='oct'/>
+    <xs:enumeration value='ignore'/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
+</xs:complexType>
+
+<!--  <xs:element name="eol" type="esc:eol"/>- 10-->
+<xs:complexType name="eol">
+ <xs:attribute name="value" type="xs:string"/>
+</xs:complexType>
+
+<!--  <xs:element name="table" type="esc:table"/>- 11-->
+<xs:complexType name="table">
+ <xs:attribute name="value" type="xs:nonNegativeInteger"/>
+ <xs:attribute name="name" type="esc:farmask"/>
+</xs:complexType>
+
+<!--  <xs:element name="savepos" type="esc:savepos"/>- 12-->
+<xs:complexType name="savepos">
+ <xs:attribute name="value" type="esc:ooi"/>
+ <xs:attribute name="minlines" type="xs:nonNegativeInteger"/>
+</xs:complexType>
+
+<!--  <xs:element name="lockmode" type="esc:lockmode"/>- 13-->
+<xs:complexType name="lockmode">
+ <xs:attribute name="value" type="esc:ooi"/>
+</xs:complexType>
+
+<!--  <xs:element name="usermacro" type="esc:usermacro"/>- 14-->
+<xs:complexType name="usermacro">
+ <xs:sequence>
+  <xs:element name="macro" type="esc:macro"/>
+ </xs:sequence>
+ <xs:attribute name="value" type="esc:onoff"/>
+</xs:complexType>
+
+<!--  <xs:element name="lockfile" type="esc:lockfile"/>- 15-->
+<xs:complexType name="lockfile">
+ <xs:attribute name="value" type="esc:onoff"/>
+</xs:complexType>
+
+<!--  <xs:element name="wordsym" type="esc:wordsym"/>- 16-->
+<xs:complexType name="wordsym">
+ <xs:attribute name="value" type="esc:onoff"/>
+ <xs:attribute name="alphanum" type="esc:onoff"/>
+ <xs:attribute name="additional" type="xs:string"/>
+</xs:complexType>
+
+
+<!-- type/usermacro/macro -->
+
+<xs:complexType name="macro">
+ <xs:attribute name="key" type="esc:farkey"/>
+ <xs:attribute name="sequence" type="esc:farmacro"/>
+ <xs:attribute name="lclick" type="esc:onoff"/>
+ <xs:attribute name="mclick" type="esc:onoff"/>
+ <xs:attribute name="rlick" type="esc:onoff"/>
+ <xs:attribute name="rctrl" type="esc:onoff"/>
+ <xs:attribute name="lctrl" type="esc:onoff"/>
+ <xs:attribute name="ralt" type="esc:onoff"/>
+ <xs:attribute name="lalt" type="esc:onoff"/>
+ <xs:attribute name="shift" type="esc:onoff"/>
+ <xs:attribute name="stop" type="esc:onoff"/>
+ <xs:attribute name="selection">
+  <xs:simpleType>
+   <xs:restriction base='xs:string'>
+    <xs:enumeration value='on'/>
+    <xs:enumeration value='off'/>
+    <xs:enumeration value='stream'/>
+    <xs:enumeration value='column'/>
+    <xs:enumeration value='ignore'/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
+ <xs:attribute name="auto">
+  <xs:simpleType>
+   <xs:restriction base='xs:string'>
+    <xs:enumeration value='off'/>
+    <xs:enumeration value='oncreate'/>
+    <xs:enumeration value='onload'/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
+ <xs:attribute name="silent" type="esc:onoff"/>
+ <xs:attribute name="enable" type="esc:onoff"/>
+</xs:complexType>
+
+</xs:schema>

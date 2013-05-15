@@ -1,0 +1,544 @@
+  0:    <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SNMP-FRAMEWORK-MIB</span> <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>DEFINITIONS</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>BEGIN</span>
+  1: 
+  2:    <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>IMPORTS</span>
+  3:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MODULE-IDENTITY</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-TYPE</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span>
+  4:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-IDENTITY</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span>
+  5:        <span class='asn1-dAsn1Identifier def-Identifier'>snmpModules</span>                           <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>FROM</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SNMPv2-SMI</span>
+  6:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>TEXTUAL-CONVENTION</span>                    <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>FROM</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SNMPv2-TC</span>
+  7:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MODULE-COMPLIANCE</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-GROUP</span>       <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>FROM</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SNMPv2-CONF</span><span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>;</span>
+  8: 
+  9:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIB</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MODULE-IDENTITY</span>
+ 10:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>LAST-UPDATED</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>9901190000Z</span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>            <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> 19 January 1999</span>
+ 11:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>ORGANIZATION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>SNMPv3 Working Group</span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+ 12:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>CONTACT-INFO</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>WG-EMail:   snmpv3@tis.com</span><span class='asn1-dAsn1String def-String'></span>
+ 13: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>Subscribe:  majordomo@tis.com</span><span class='asn1-dAsn1String def-String'></span>
+ 14: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>In message body:  subscribe snmpv3</span><span class='asn1-dAsn1String def-String'></span>
+ 15: <span class='asn1-dAsn1String def-String'></span>
+ 16: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>Chair:      Russ Mundy</span><span class='asn1-dAsn1String def-String'></span>
+ 17: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>TIS Labs at Network Associates</span><span class='asn1-dAsn1String def-String'></span>
+ 18: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>postal:     3060 Washington Rd</span><span class='asn1-dAsn1String def-String'></span>
+ 19: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Glenwood MD 21738</span><span class='asn1-dAsn1String def-String'></span>
+ 20: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>USA</span><span class='asn1-dAsn1String def-String'></span>
+ 21: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>EMail:      mundy@tis.com</span><span class='asn1-dAsn1String def-String'></span>
+ 22: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>phone:      +1 301-854-6889</span><span class='asn1-dAsn1String def-String'></span>
+ 23: <span class='asn1-dAsn1String def-String'></span>
+ 24: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>Co-editor   Dave Harrington</span><span class='asn1-dAsn1String def-String'></span>
+ 25: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Cabletron Systems, Inc.</span><span class='asn1-dAsn1String def-String'></span>
+ 26: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>postal:     Post Office Box 5005</span><span class='asn1-dAsn1String def-String'></span>
+ 27: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Mail Stop: Durham</span><span class='asn1-dAsn1String def-String'></span>
+ 28: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>35 Industrial Way</span><span class='asn1-dAsn1String def-String'></span>
+ 29: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Rochester, NH 03867-5005</span><span class='asn1-dAsn1String def-String'></span>
+ 30: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>USA</span><span class='asn1-dAsn1String def-String'></span>
+ 31: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>EMail:      dbh@ctron.com</span><span class='asn1-dAsn1String def-String'></span>
+ 32: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>phone:      +1 603-337-7357</span><span class='asn1-dAsn1String def-String'></span>
+ 33: <span class='asn1-dAsn1String def-String'></span>
+ 34: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>Co-editor   Randy Presuhn</span><span class='asn1-dAsn1String def-String'></span>
+ 35: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>BMC Software, Inc.</span><span class='asn1-dAsn1String def-String'></span>
+ 36: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>postal:     965 Stewart Drive</span><span class='asn1-dAsn1String def-String'></span>
+ 37: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Sunnyvale, CA 94086</span><span class='asn1-dAsn1String def-String'></span>
+ 38: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>USA</span><span class='asn1-dAsn1String def-String'></span>
+ 39: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>EMail:      randy_presuhn@bmc.com</span><span class='asn1-dAsn1String def-String'></span>
+ 40: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>phone:      +1 408-616-3100</span><span class='asn1-dAsn1String def-String'></span>
+ 41: <span class='asn1-dAsn1String def-String'></span>
+ 42: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>Co-editor:  Bert Wijnen</span><span class='asn1-dAsn1String def-String'></span>
+ 43: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>IBM T.J. Watson Research</span><span class='asn1-dAsn1String def-String'></span>
+ 44: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>postal:     Schagen 33</span><span class='asn1-dAsn1String def-String'></span>
+ 45: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>3461 GL Linschoten</span><span class='asn1-dAsn1String def-String'></span>
+ 46: <span class='asn1-dAsn1String def-String'></span>
+ 47: <span class='asn1-dAsn1String def-String'></span>
+ 48: <span class='asn1-dAsn1String def-String'></span>
+ 49: <span class='asn1-dAsn1String def-String'></span>
+ 50: <span class='asn1-dAsn1String def-String'></span>
+ 51: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Netherlands</span><span class='asn1-dAsn1String def-String'></span>
+ 52: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>EMail:      wijnen@vnet.ibm.com</span><span class='asn1-dAsn1String def-String'></span>
+ 53: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>phone:      +31 348-432-794</span><span class='asn1-dAsn1String def-String'></span>
+ 54: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+ 55:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span>  <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>The SNMP Management Architecture MIB</span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+ 56:    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> Revision History</span>
+ 57: 
+ 58:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>REVISION</span>     <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>9901190000Z</span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>            <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> 19 January 1999</span>
+ 59:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span>  <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>Updated editors' addresses, fixed typos.</span><span class='asn1-dAsn1String def-String'></span>
+ 60: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>Published as RFC2571.</span><span class='asn1-dAsn1String def-String'></span>
+ 61: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+ 62:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>REVISION</span>     <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>9711200000Z</span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>            <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> 20 November 1997</span>
+ 63:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span>  <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>The initial version, published in RFC 2271.</span><span class='asn1-dAsn1String def-String'></span>
+ 64: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+ 65:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpModules</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>10</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+ 66: 
+ 67:    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> Textual Conventions used in the SNMP Management Architecture ***</span>
+ 68: 
+ 69:    <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SnmpEngineID</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>TEXTUAL-CONVENTION</span>
+ 70:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+ 71:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>An SNMP engine's administratively-unique identifier.</span><span class='asn1-dAsn1String def-String'></span>
+ 72: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Objects of this type are for identification, not for</span><span class='asn1-dAsn1String def-String'></span>
+ 73: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>addressing, even though it is possible that an</span><span class='asn1-dAsn1String def-String'></span>
+ 74: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>address may have been used in the generation of</span><span class='asn1-dAsn1String def-String'></span>
+ 75: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>a specific value.</span><span class='asn1-dAsn1String def-String'></span>
+ 76: <span class='asn1-dAsn1String def-String'></span>
+ 77: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>The value for this object may not be all zeros or</span><span class='asn1-dAsn1String def-String'></span>
+ 78: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>all 'ff'H or the empty (zero length) string.</span><span class='asn1-dAsn1String def-String'></span>
+ 79: <span class='asn1-dAsn1String def-String'></span>
+ 80: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>The initial value for this object may be configured</span><span class='asn1-dAsn1String def-String'></span>
+ 81: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>via an operator console entry or via an algorithmic</span><span class='asn1-dAsn1String def-String'></span>
+ 82: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>function.  In the latter case, the following</span><span class='asn1-dAsn1String def-String'></span>
+ 83: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>example algorithm is recommended.</span><span class='asn1-dAsn1String def-String'></span>
+ 84: <span class='asn1-dAsn1String def-String'></span>
+ 85: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>In cases where there are multiple engines on the</span><span class='asn1-dAsn1String def-String'></span>
+ 86: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>same system, the use of this algorithm is NOT</span><span class='asn1-dAsn1String def-String'></span>
+ 87: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>appropriate, as it would result in all of those</span><span class='asn1-dAsn1String def-String'></span>
+ 88: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>engines ending up with the same ID value.</span><span class='asn1-dAsn1String def-String'></span>
+ 89: <span class='asn1-dAsn1String def-String'></span>
+ 90: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>1) The very first bit is used to indicate how the</span><span class='asn1-dAsn1String def-String'></span>
+ 91: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>rest of the data is composed.</span><span class='asn1-dAsn1String def-String'></span>
+ 92: <span class='asn1-dAsn1String def-String'></span>
+ 93: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>0 - as defined by enterprise using former methods</span><span class='asn1-dAsn1String def-String'></span>
+ 94: <span class='asn1-dAsn1StrWSpace def-Prefix'>                           </span><span class='asn1-dAsn1String def-String'>that existed before SNMPv3. See item 2 below.</span><span class='asn1-dAsn1String def-String'></span>
+ 95: <span class='asn1-dAsn1String def-String'></span>
+ 96: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>1 - as defined by this architecture, see item 3</span><span class='asn1-dAsn1String def-String'></span>
+ 97: <span class='asn1-dAsn1StrWSpace def-Prefix'>                           </span><span class='asn1-dAsn1String def-String'>below.</span><span class='asn1-dAsn1String def-String'></span>
+ 98: <span class='asn1-dAsn1String def-String'></span>
+ 99: <span class='asn1-dAsn1String def-String'></span>
+100: <span class='asn1-dAsn1String def-String'></span>
+101: <span class='asn1-dAsn1String def-String'></span>
+102: <span class='asn1-dAsn1String def-String'></span>
+103: <span class='asn1-dAsn1String def-String'></span>
+104: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>Note that this allows existing uses of the</span><span class='asn1-dAsn1String def-String'></span>
+105: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>engineID (also known as AgentID [RFC1910]) to</span><span class='asn1-dAsn1String def-String'></span>
+106: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>co-exist with any new uses.</span><span class='asn1-dAsn1String def-String'></span>
+107: <span class='asn1-dAsn1String def-String'></span>
+108: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>2) The snmpEngineID has a length of 12 octets.</span><span class='asn1-dAsn1String def-String'></span>
+109: <span class='asn1-dAsn1String def-String'></span>
+110: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>The first four octets are set to the binary</span><span class='asn1-dAsn1String def-String'></span>
+111: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>equivalent of the agent's SNMP management</span><span class='asn1-dAsn1String def-String'></span>
+112: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>private enterprise number as assigned by the</span><span class='asn1-dAsn1String def-String'></span>
+113: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>Internet Assigned Numbers Authority (IANA).</span><span class='asn1-dAsn1String def-String'></span>
+114: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>For example, if Acme Networks has been assigned</span><span class='asn1-dAsn1String def-String'></span>
+115: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>{ enterprises 696 }, the first four octets would</span><span class='asn1-dAsn1String def-String'></span>
+116: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>be assigned '000002b8'H.</span><span class='asn1-dAsn1String def-String'></span>
+117: <span class='asn1-dAsn1String def-String'></span>
+118: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>The remaining eight octets are determined via</span><span class='asn1-dAsn1String def-String'></span>
+119: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>one or more enterprise-specific methods. Such</span><span class='asn1-dAsn1String def-String'></span>
+120: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>methods must be designed so as to maximize the</span><span class='asn1-dAsn1String def-String'></span>
+121: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>possibility that the value of this object will</span><span class='asn1-dAsn1String def-String'></span>
+122: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>be unique in the agent's administrative domain.</span><span class='asn1-dAsn1String def-String'></span>
+123: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>For example, it may be the IP address of the SNMP</span><span class='asn1-dAsn1String def-String'></span>
+124: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>entity, or the MAC address of one of the</span><span class='asn1-dAsn1String def-String'></span>
+125: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>interfaces, with each address suitably padded</span><span class='asn1-dAsn1String def-String'></span>
+126: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>with random octets.  If multiple methods are</span><span class='asn1-dAsn1String def-String'></span>
+127: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>defined, then it is recommended that the first</span><span class='asn1-dAsn1String def-String'></span>
+128: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>octet indicate the method being used and the</span><span class='asn1-dAsn1String def-String'></span>
+129: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>remaining octets be a function of the method.</span><span class='asn1-dAsn1String def-String'></span>
+130: <span class='asn1-dAsn1String def-String'></span>
+131: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>3) The length of the octet strings varies.</span><span class='asn1-dAsn1String def-String'></span>
+132: <span class='asn1-dAsn1String def-String'></span>
+133: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>The first four octets are set to the binary</span><span class='asn1-dAsn1String def-String'></span>
+134: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>equivalent of the agent's SNMP management</span><span class='asn1-dAsn1String def-String'></span>
+135: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>private enterprise number as assigned by the</span><span class='asn1-dAsn1String def-String'></span>
+136: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>Internet Assigned Numbers Authority (IANA).</span><span class='asn1-dAsn1String def-String'></span>
+137: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>For example, if Acme Networks has been assigned</span><span class='asn1-dAsn1String def-String'></span>
+138: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>{ enterprises 696 }, the first four octets would</span><span class='asn1-dAsn1String def-String'></span>
+139: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>be assigned '000002b8'H.</span><span class='asn1-dAsn1String def-String'></span>
+140: <span class='asn1-dAsn1String def-String'></span>
+141: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>The very first bit is set to 1. For example, the</span><span class='asn1-dAsn1String def-String'></span>
+142: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>above value for Acme Networks now changes to be</span><span class='asn1-dAsn1String def-String'></span>
+143: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>'800002b8'H.</span><span class='asn1-dAsn1String def-String'></span>
+144: <span class='asn1-dAsn1String def-String'></span>
+145: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>The fifth octet indicates how the rest (6th and</span><span class='asn1-dAsn1String def-String'></span>
+146: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>following octets) are formatted. The values for</span><span class='asn1-dAsn1String def-String'></span>
+147: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>the fifth octet are:</span><span class='asn1-dAsn1String def-String'></span>
+148: <span class='asn1-dAsn1String def-String'></span>
+149: <span class='asn1-dAsn1StrWSpace def-Prefix'>                         </span><span class='asn1-dAsn1String def-String'>0     - reserved, unused.</span><span class='asn1-dAsn1String def-String'></span>
+150: <span class='asn1-dAsn1String def-String'></span>
+151: <span class='asn1-dAsn1StrWSpace def-Prefix'>                         </span><span class='asn1-dAsn1String def-String'>1     - IPv4 address (4 octets)</span><span class='asn1-dAsn1String def-String'></span>
+152: <span class='asn1-dAsn1String def-String'></span>
+153: <span class='asn1-dAsn1String def-String'></span>
+154: <span class='asn1-dAsn1String def-String'></span>
+155: <span class='asn1-dAsn1String def-String'></span>
+156: <span class='asn1-dAsn1String def-String'></span>
+157: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>lowest non-special IP address</span><span class='asn1-dAsn1String def-String'></span>
+158: <span class='asn1-dAsn1String def-String'></span>
+159: <span class='asn1-dAsn1StrWSpace def-Prefix'>                         </span><span class='asn1-dAsn1String def-String'>2     - IPv6 address (16 octets)</span><span class='asn1-dAsn1String def-String'></span>
+160: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>lowest non-special IP address</span><span class='asn1-dAsn1String def-String'></span>
+161: <span class='asn1-dAsn1String def-String'></span>
+162: <span class='asn1-dAsn1StrWSpace def-Prefix'>                         </span><span class='asn1-dAsn1String def-String'>3     - MAC address (6 octets)</span><span class='asn1-dAsn1String def-String'></span>
+163: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>lowest IEEE MAC address, canonical</span><span class='asn1-dAsn1String def-String'></span>
+164: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>order</span><span class='asn1-dAsn1String def-String'></span>
+165: <span class='asn1-dAsn1String def-String'></span>
+166: <span class='asn1-dAsn1StrWSpace def-Prefix'>                         </span><span class='asn1-dAsn1String def-String'>4     - Text, administratively assigned</span><span class='asn1-dAsn1String def-String'></span>
+167: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Maximum remaining length 27</span><span class='asn1-dAsn1String def-String'></span>
+168: <span class='asn1-dAsn1String def-String'></span>
+169: <span class='asn1-dAsn1StrWSpace def-Prefix'>                         </span><span class='asn1-dAsn1String def-String'>5     - Octets, administratively assigned</span><span class='asn1-dAsn1String def-String'></span>
+170: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Maximum remaining length 27</span><span class='asn1-dAsn1String def-String'></span>
+171: <span class='asn1-dAsn1String def-String'></span>
+172: <span class='asn1-dAsn1StrWSpace def-Prefix'>                         </span><span class='asn1-dAsn1String def-String'>6-127 - reserved, unused</span><span class='asn1-dAsn1String def-String'></span>
+173: <span class='asn1-dAsn1String def-String'></span>
+174: <span class='asn1-dAsn1StrWSpace def-Prefix'>                       </span><span class='asn1-dAsn1String def-String'>127-255 - as defined by the enterprise</span><span class='asn1-dAsn1String def-String'></span>
+175: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                 </span><span class='asn1-dAsn1String def-String'>Maximum remaining length 27</span><span class='asn1-dAsn1String def-String'></span>
+176: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+177:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>OCTET STRING</span> <span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SIZE</span><span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>5</span><span class='asn1-dAsn1Symbol def-Symbol'>..</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>32</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span>
+178: 
+179:    <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SnmpSecurityModel</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>TEXTUAL-CONVENTION</span>
+180:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+181:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>An identifier that uniquely identifies a</span><span class='asn1-dAsn1String def-String'></span>
+182: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>securityModel of the Security Subsystem within the</span><span class='asn1-dAsn1String def-String'></span>
+183: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>SNMP Management Architecture.</span><span class='asn1-dAsn1String def-String'></span>
+184: <span class='asn1-dAsn1String def-String'></span>
+185: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>The values for securityModel are allocated as</span><span class='asn1-dAsn1String def-String'></span>
+186: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>follows:</span><span class='asn1-dAsn1String def-String'></span>
+187: <span class='asn1-dAsn1String def-String'></span>
+188: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>- The zero value is reserved.</span><span class='asn1-dAsn1String def-String'></span>
+189: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>- Values between 1 and 255, inclusive, are reserved</span><span class='asn1-dAsn1String def-String'></span>
+190: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>for standards-track Security Models and are</span><span class='asn1-dAsn1String def-String'></span>
+191: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>managed by the Internet Assigned Numbers Authority</span><span class='asn1-dAsn1String def-String'></span>
+192: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>(IANA).</span><span class='asn1-dAsn1String def-String'></span>
+193: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>- Values greater than 255 are allocated to</span><span class='asn1-dAsn1String def-String'></span>
+194: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>enterprise-specific Security Models.  An</span><span class='asn1-dAsn1String def-String'></span>
+195: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>enterprise-specific securityModel value is defined</span><span class='asn1-dAsn1String def-String'></span>
+196: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>to be:</span><span class='asn1-dAsn1String def-String'></span>
+197: <span class='asn1-dAsn1String def-String'></span>
+198: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>enterpriseID * 256 + security model within</span><span class='asn1-dAsn1String def-String'></span>
+199: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>enterprise</span><span class='asn1-dAsn1String def-String'></span>
+200: <span class='asn1-dAsn1String def-String'></span>
+201: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>For example, the fourth Security Model defined by</span><span class='asn1-dAsn1String def-String'></span>
+202: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>the enterprise whose enterpriseID is 1 would be</span><span class='asn1-dAsn1String def-String'></span>
+203: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>260.</span><span class='asn1-dAsn1String def-String'></span>
+204: <span class='asn1-dAsn1String def-String'></span>
+205: <span class='asn1-dAsn1String def-String'></span>
+206: <span class='asn1-dAsn1String def-String'></span>
+207: <span class='asn1-dAsn1String def-String'></span>
+208: <span class='asn1-dAsn1String def-String'></span>
+209: <span class='asn1-dAsn1String def-String'></span>
+210: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>This scheme for allocation of securityModel</span><span class='asn1-dAsn1String def-String'></span>
+211: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>values allows for a maximum of 255 standards-</span><span class='asn1-dAsn1String def-String'></span>
+212: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>based Security Models, and for a maximum of</span><span class='asn1-dAsn1String def-String'></span>
+213: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>255 Security Models per enterprise.</span><span class='asn1-dAsn1String def-String'></span>
+214: <span class='asn1-dAsn1String def-String'></span>
+215: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>It is believed that the assignment of new</span><span class='asn1-dAsn1String def-String'></span>
+216: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>securityModel values will be rare in practice</span><span class='asn1-dAsn1String def-String'></span>
+217: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>because the larger the number of simultaneously</span><span class='asn1-dAsn1String def-String'></span>
+218: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>utilized Security Models, the larger the</span><span class='asn1-dAsn1String def-String'></span>
+219: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>chance that interoperability will suffer.</span><span class='asn1-dAsn1String def-String'></span>
+220: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Consequently, it is believed that such a range</span><span class='asn1-dAsn1String def-String'></span>
+221: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>will be sufficient.  In the unlikely event that</span><span class='asn1-dAsn1String def-String'></span>
+222: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>the standards committee finds this number to be</span><span class='asn1-dAsn1String def-String'></span>
+223: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>insufficient over time, an enterprise number</span><span class='asn1-dAsn1String def-String'></span>
+224: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>can be allocated to obtain an additional 255</span><span class='asn1-dAsn1String def-String'></span>
+225: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>possible values.</span><span class='asn1-dAsn1String def-String'></span>
+226: <span class='asn1-dAsn1String def-String'></span>
+227: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Note that the most significant bit must be zero;</span><span class='asn1-dAsn1String def-String'></span>
+228: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>hence, there are 23 bits allocated for various</span><span class='asn1-dAsn1String def-String'></span>
+229: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>organizations to design and define non-standard</span><span class='asn1-dAsn1String def-String'></span>
+230: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>securityModels.  This limits the ability to</span><span class='asn1-dAsn1String def-String'></span>
+231: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>define new proprietary implementations of Security</span><span class='asn1-dAsn1String def-String'></span>
+232: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Models to the first 8,388,608 enterprises.</span><span class='asn1-dAsn1String def-String'></span>
+233: <span class='asn1-dAsn1String def-String'></span>
+234: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>It is worthwhile to note that, in its encoded</span><span class='asn1-dAsn1String def-String'></span>
+235: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>form, the securityModel value will normally</span><span class='asn1-dAsn1String def-String'></span>
+236: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>require only a single byte since, in practice,</span><span class='asn1-dAsn1String def-String'></span>
+237: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>the leftmost bits will be zero for most messages</span><span class='asn1-dAsn1String def-String'></span>
+238: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>and sign extension is suppressed by the encoding</span><span class='asn1-dAsn1String def-String'></span>
+239: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>rules.</span><span class='asn1-dAsn1String def-String'></span>
+240: <span class='asn1-dAsn1String def-String'></span>
+241: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>As of this writing, there are several values</span><span class='asn1-dAsn1String def-String'></span>
+242: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>of securityModel defined for use with SNMP or</span><span class='asn1-dAsn1String def-String'></span>
+243: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>reserved for use with supporting MIB objects.</span><span class='asn1-dAsn1String def-String'></span>
+244: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>They are as follows:</span><span class='asn1-dAsn1String def-String'></span>
+245: <span class='asn1-dAsn1String def-String'></span>
+246: <span class='asn1-dAsn1StrWSpace def-Prefix'>                        </span><span class='asn1-dAsn1String def-String'>0  reserved for 'any'</span><span class='asn1-dAsn1String def-String'></span>
+247: <span class='asn1-dAsn1StrWSpace def-Prefix'>                        </span><span class='asn1-dAsn1String def-String'>1  reserved for SNMPv1</span><span class='asn1-dAsn1String def-String'></span>
+248: <span class='asn1-dAsn1StrWSpace def-Prefix'>                        </span><span class='asn1-dAsn1String def-String'>2  reserved for SNMPv2c</span><span class='asn1-dAsn1String def-String'></span>
+249: <span class='asn1-dAsn1StrWSpace def-Prefix'>                        </span><span class='asn1-dAsn1String def-String'>3  User-Based Security Model (USM)</span><span class='asn1-dAsn1String def-String'></span>
+250: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+251:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>INTEGER</span><span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>0</span> <span class='asn1-dAsn1Symbol def-Symbol'>..</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>2147483647</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span>
+252: 
+253:    <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SnmpMessageProcessingModel</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>TEXTUAL-CONVENTION</span>
+254:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+255:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>An identifier that uniquely identifies a Message</span><span class='asn1-dAsn1String def-String'></span>
+256: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Processing Model of the Message Processing</span><span class='asn1-dAsn1String def-String'></span>
+257: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Subsystem within a SNMP Management Architecture.</span><span class='asn1-dAsn1String def-String'></span>
+258: <span class='asn1-dAsn1String def-String'></span>
+259: <span class='asn1-dAsn1String def-String'></span>
+260: <span class='asn1-dAsn1String def-String'></span>
+261: <span class='asn1-dAsn1String def-String'></span>
+262: <span class='asn1-dAsn1String def-String'></span>
+263: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>The values for messageProcessingModel are</span><span class='asn1-dAsn1String def-String'></span>
+264: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>allocated as follows:</span><span class='asn1-dAsn1String def-String'></span>
+265: <span class='asn1-dAsn1String def-String'></span>
+266: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>- Values between 0 and 255, inclusive, are</span><span class='asn1-dAsn1String def-String'></span>
+267: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>reserved for standards-track Message Processing</span><span class='asn1-dAsn1String def-String'></span>
+268: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>Models and are managed by the Internet Assigned</span><span class='asn1-dAsn1String def-String'></span>
+269: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>Numbers Authority (IANA).</span><span class='asn1-dAsn1String def-String'></span>
+270: <span class='asn1-dAsn1String def-String'></span>
+271: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>- Values greater than 255 are allocated to</span><span class='asn1-dAsn1String def-String'></span>
+272: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>enterprise-specific Message Processing Models.</span><span class='asn1-dAsn1String def-String'></span>
+273: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>An enterprise messageProcessingModel value is</span><span class='asn1-dAsn1String def-String'></span>
+274: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>defined to be:</span><span class='asn1-dAsn1String def-String'></span>
+275: <span class='asn1-dAsn1String def-String'></span>
+276: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>enterpriseID * 256 +</span><span class='asn1-dAsn1String def-String'></span>
+277: <span class='asn1-dAsn1StrWSpace def-Prefix'>                           </span><span class='asn1-dAsn1String def-String'>messageProcessingModel within enterprise</span><span class='asn1-dAsn1String def-String'></span>
+278: <span class='asn1-dAsn1String def-String'></span>
+279: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>For example, the fourth Message Processing Model</span><span class='asn1-dAsn1String def-String'></span>
+280: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>defined by the enterprise whose enterpriseID</span><span class='asn1-dAsn1String def-String'></span>
+281: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>is 1 would be 260.</span><span class='asn1-dAsn1String def-String'></span>
+282: <span class='asn1-dAsn1String def-String'></span>
+283: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>This scheme for allocating messageProcessingModel</span><span class='asn1-dAsn1String def-String'></span>
+284: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>values allows for a maximum of 255 standards-</span><span class='asn1-dAsn1String def-String'></span>
+285: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>based Message Processing Models, and for a</span><span class='asn1-dAsn1String def-String'></span>
+286: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>maximum of 255 Message Processing Models per</span><span class='asn1-dAsn1String def-String'></span>
+287: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>enterprise.</span><span class='asn1-dAsn1String def-String'></span>
+288: <span class='asn1-dAsn1String def-String'></span>
+289: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>It is believed that the assignment of new</span><span class='asn1-dAsn1String def-String'></span>
+290: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>messageProcessingModel values will be rare</span><span class='asn1-dAsn1String def-String'></span>
+291: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>in practice because the larger the number of</span><span class='asn1-dAsn1String def-String'></span>
+292: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>simultaneously utilized Message Processing Models,</span><span class='asn1-dAsn1String def-String'></span>
+293: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>the larger the chance that interoperability</span><span class='asn1-dAsn1String def-String'></span>
+294: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>will suffer. It is believed that such a range</span><span class='asn1-dAsn1String def-String'></span>
+295: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>will be sufficient.  In the unlikely event that</span><span class='asn1-dAsn1String def-String'></span>
+296: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>the standards committee finds this number to be</span><span class='asn1-dAsn1String def-String'></span>
+297: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>insufficient over time, an enterprise number</span><span class='asn1-dAsn1String def-String'></span>
+298: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>can be allocated to obtain an additional 256</span><span class='asn1-dAsn1String def-String'></span>
+299: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>possible values.</span><span class='asn1-dAsn1String def-String'></span>
+300: <span class='asn1-dAsn1String def-String'></span>
+301: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Note that the most significant bit must be zero;</span><span class='asn1-dAsn1String def-String'></span>
+302: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>hence, there are 23 bits allocated for various</span><span class='asn1-dAsn1String def-String'></span>
+303: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>organizations to design and define non-standard</span><span class='asn1-dAsn1String def-String'></span>
+304: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>messageProcessingModels.  This limits the ability</span><span class='asn1-dAsn1String def-String'></span>
+305: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>to define new proprietary implementations of</span><span class='asn1-dAsn1String def-String'></span>
+306: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Message Processing Models to the first 8,388,608</span><span class='asn1-dAsn1String def-String'></span>
+307: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>enterprises.</span><span class='asn1-dAsn1String def-String'></span>
+308: <span class='asn1-dAsn1String def-String'></span>
+309: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>It is worthwhile to note that, in its encoded</span><span class='asn1-dAsn1String def-String'></span>
+310: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>form, the messageProcessingModel value will</span><span class='asn1-dAsn1String def-String'></span>
+311: <span class='asn1-dAsn1String def-String'></span>
+312: <span class='asn1-dAsn1String def-String'></span>
+313: <span class='asn1-dAsn1String def-String'></span>
+314: <span class='asn1-dAsn1String def-String'></span>
+315: <span class='asn1-dAsn1String def-String'></span>
+316: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>normally require only a single byte since, in</span><span class='asn1-dAsn1String def-String'></span>
+317: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>practice, the leftmost bits will be zero for</span><span class='asn1-dAsn1String def-String'></span>
+318: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>most messages and sign extension is suppressed</span><span class='asn1-dAsn1String def-String'></span>
+319: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>by the encoding rules.</span><span class='asn1-dAsn1String def-String'></span>
+320: <span class='asn1-dAsn1String def-String'></span>
+321: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>As of this writing, there are several values of</span><span class='asn1-dAsn1String def-String'></span>
+322: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>messageProcessingModel defined for use with SNMP.</span><span class='asn1-dAsn1String def-String'></span>
+323: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>They are as follows:</span><span class='asn1-dAsn1String def-String'></span>
+324: <span class='asn1-dAsn1String def-String'></span>
+325: <span class='asn1-dAsn1StrWSpace def-Prefix'>                        </span><span class='asn1-dAsn1String def-String'>0  reserved for SNMPv1</span><span class='asn1-dAsn1String def-String'></span>
+326: <span class='asn1-dAsn1StrWSpace def-Prefix'>                        </span><span class='asn1-dAsn1String def-String'>1  reserved for SNMPv2c</span><span class='asn1-dAsn1String def-String'></span>
+327: <span class='asn1-dAsn1StrWSpace def-Prefix'>                        </span><span class='asn1-dAsn1String def-String'>2  reserved for SNMPv2u and SNMPv2*</span><span class='asn1-dAsn1String def-String'></span>
+328: <span class='asn1-dAsn1StrWSpace def-Prefix'>                        </span><span class='asn1-dAsn1String def-String'>3  reserved for SNMPv3</span><span class='asn1-dAsn1String def-String'></span>
+329: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+330:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>INTEGER</span><span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>0</span> <span class='asn1-dAsn1Symbol def-Symbol'>..</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>2147483647</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span>
+331: 
+332:    <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SnmpSecurityLevel</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>TEXTUAL-CONVENTION</span>
+333:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+334:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>A Level of Security at which SNMP messages can be</span><span class='asn1-dAsn1String def-String'></span>
+335: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>sent or with which operations are being processed;</span><span class='asn1-dAsn1String def-String'></span>
+336: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>in particular, one of:</span><span class='asn1-dAsn1String def-String'></span>
+337: <span class='asn1-dAsn1String def-String'></span>
+338: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>noAuthNoPriv - without authentication and</span><span class='asn1-dAsn1String def-String'></span>
+339: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                     </span><span class='asn1-dAsn1String def-String'>without privacy,</span><span class='asn1-dAsn1String def-String'></span>
+340: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>authNoPriv   - with authentication but</span><span class='asn1-dAsn1String def-String'></span>
+341: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                     </span><span class='asn1-dAsn1String def-String'>without privacy,</span><span class='asn1-dAsn1String def-String'></span>
+342: <span class='asn1-dAsn1StrWSpace def-Prefix'>                      </span><span class='asn1-dAsn1String def-String'>authPriv     - with authentication and</span><span class='asn1-dAsn1String def-String'></span>
+343: <span class='asn1-dAsn1StrWSpace def-Prefix'>                                     </span><span class='asn1-dAsn1String def-String'>with privacy.</span><span class='asn1-dAsn1String def-String'></span>
+344: <span class='asn1-dAsn1String def-String'></span>
+345: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>These three values are ordered such that</span><span class='asn1-dAsn1String def-String'></span>
+346: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>noAuthNoPriv is less than authNoPriv and</span><span class='asn1-dAsn1String def-String'></span>
+347: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>authNoPriv is less than authPriv.</span><span class='asn1-dAsn1String def-String'></span>
+348: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+349:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>INTEGER</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>noAuthNoPriv</span><span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span>
+350:                               <span class='asn1-dAsn1Identifier def-Identifier'>authNoPriv</span><span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>2</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span>
+351:                               <span class='asn1-dAsn1Identifier def-Identifier'>authPriv</span><span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>3</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span>
+352:                             <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+353: 
+354:    <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SnmpAdminString</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>TEXTUAL-CONVENTION</span>
+355:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DISPLAY-HINT</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>255a</span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+356:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+357:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>An octet string containing administrative</span><span class='asn1-dAsn1String def-String'></span>
+358: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>information, preferably in human-readable form.</span><span class='asn1-dAsn1String def-String'></span>
+359: <span class='asn1-dAsn1String def-String'></span>
+360: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>To facilitate internationalization, this</span><span class='asn1-dAsn1String def-String'></span>
+361: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>information is represented using the ISO/IEC</span><span class='asn1-dAsn1String def-String'></span>
+362: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>IS 10646-1 character set, encoded as an octet</span><span class='asn1-dAsn1String def-String'></span>
+363: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>string using the UTF-8 transformation format</span><span class='asn1-dAsn1String def-String'></span>
+364: <span class='asn1-dAsn1String def-String'></span>
+365: <span class='asn1-dAsn1String def-String'></span>
+366: <span class='asn1-dAsn1String def-String'></span>
+367: <span class='asn1-dAsn1String def-String'></span>
+368: <span class='asn1-dAsn1String def-String'></span>
+369: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>described in [RFC2279].</span><span class='asn1-dAsn1String def-String'></span>
+370: <span class='asn1-dAsn1String def-String'></span>
+371: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Since additional code points are added by</span><span class='asn1-dAsn1String def-String'></span>
+372: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>amendments to the 10646 standard from time</span><span class='asn1-dAsn1String def-String'></span>
+373: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>to time, implementations must be prepared to</span><span class='asn1-dAsn1String def-String'></span>
+374: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>encounter any code point from 0x00000000 to</span><span class='asn1-dAsn1String def-String'></span>
+375: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>0x7fffffff.  Byte sequences that do not</span><span class='asn1-dAsn1String def-String'></span>
+376: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>correspond to the valid UTF-8 encoding of a</span><span class='asn1-dAsn1String def-String'></span>
+377: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>code point or are outside this range are</span><span class='asn1-dAsn1String def-String'></span>
+378: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>prohibited.</span><span class='asn1-dAsn1String def-String'></span>
+379: <span class='asn1-dAsn1String def-String'></span>
+380: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>The use of control codes should be avoided.</span><span class='asn1-dAsn1String def-String'></span>
+381: <span class='asn1-dAsn1String def-String'></span>
+382: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>When it is necessary to represent a newline,</span><span class='asn1-dAsn1String def-String'></span>
+383: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>the control code sequence CR LF should be used.</span><span class='asn1-dAsn1String def-String'></span>
+384: <span class='asn1-dAsn1String def-String'></span>
+385: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>The use of leading or trailing white space should</span><span class='asn1-dAsn1String def-String'></span>
+386: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>be avoided.</span><span class='asn1-dAsn1String def-String'></span>
+387: <span class='asn1-dAsn1String def-String'></span>
+388: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>For code points not directly supported by user</span><span class='asn1-dAsn1String def-String'></span>
+389: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>interface hardware or software, an alternative</span><span class='asn1-dAsn1String def-String'></span>
+390: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>means of entry and display, such as hexadecimal,</span><span class='asn1-dAsn1String def-String'></span>
+391: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>may be provided.</span><span class='asn1-dAsn1String def-String'></span>
+392: <span class='asn1-dAsn1String def-String'></span>
+393: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>For information encoded in 7-bit US-ASCII,</span><span class='asn1-dAsn1String def-String'></span>
+394: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>the UTF-8 encoding is identical to the</span><span class='asn1-dAsn1String def-String'></span>
+395: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>US-ASCII encoding.</span><span class='asn1-dAsn1String def-String'></span>
+396: <span class='asn1-dAsn1String def-String'></span>
+397: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>UTF-8 may require multiple bytes to represent a</span><span class='asn1-dAsn1String def-String'></span>
+398: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>single character / code point; thus the length</span><span class='asn1-dAsn1String def-String'></span>
+399: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>of this object in octets may be different from</span><span class='asn1-dAsn1String def-String'></span>
+400: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>the number of characters encoded.  Similarly,</span><span class='asn1-dAsn1String def-String'></span>
+401: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>size constraints refer to the number of encoded</span><span class='asn1-dAsn1String def-String'></span>
+402: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>octets, not the number of characters represented</span><span class='asn1-dAsn1String def-String'></span>
+403: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>by an encoding.</span><span class='asn1-dAsn1String def-String'></span>
+404: <span class='asn1-dAsn1String def-String'></span>
+405: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Note that when this TC is used for an object that</span><span class='asn1-dAsn1String def-String'></span>
+406: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>is used or envisioned to be used as an index, then</span><span class='asn1-dAsn1String def-String'></span>
+407: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>a SIZE restriction MUST be specified so that the</span><span class='asn1-dAsn1String def-String'></span>
+408: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>number of sub-identifiers for any object instance</span><span class='asn1-dAsn1String def-String'></span>
+409: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>does not exceed the limit of 128, as defined by</span><span class='asn1-dAsn1String def-String'></span>
+410: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>[RFC1905].</span><span class='asn1-dAsn1String def-String'></span>
+411: <span class='asn1-dAsn1String def-String'></span>
+412: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>Note that the size of an SnmpAdminString object is</span><span class='asn1-dAsn1String def-String'></span>
+413: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>measured in octets, not characters.</span><span class='asn1-dAsn1String def-String'></span>
+414: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+415:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>OCTET STRING</span> <span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SIZE</span> <span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>0</span><span class='asn1-dAsn1Symbol def-Symbol'>..</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>255</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span>
+416: 
+417: 
+418: 
+419: 
+420: 
+421: 
+422:    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> Administrative assignments ***************************************</span>
+423: 
+424:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkAdmin</span>
+425:        <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>OBJECT IDENTIFIER</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIB</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+426:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBObjects</span>
+427:        <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>OBJECT IDENTIFIER</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIB</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>2</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+428:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBConformance</span>
+429:        <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>OBJECT IDENTIFIER</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIB</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>3</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+430: 
+431:    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> the snmpEngine Group ********************************************</span>
+432: 
+433:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngine</span> <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>OBJECT IDENTIFIER</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBObjects</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+434: 
+435:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineID</span>     <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-TYPE</span>
+436:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>SnmpEngineID</span>
+437:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MAX-ACCESS</span>   <span class='asn1-dAsn1Identifier def-Identifier'>read-only</span>
+438:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+439:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>An SNMP engine's administratively-unique identifier.</span><span class='asn1-dAsn1String def-String'></span>
+440: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+441:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngine</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+442: 
+443:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineBoots</span>  <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-TYPE</span>
+444:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>INTEGER</span> <span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span><span class='asn1-dAsn1Symbol def-Symbol'>..</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>2147483647</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span>
+445:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MAX-ACCESS</span>   <span class='asn1-dAsn1Identifier def-Identifier'>read-only</span>
+446:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+447:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>The number of times that the SNMP engine has</span><span class='asn1-dAsn1String def-String'></span>
+448: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>(re-)initialized itself since snmpEngineID</span><span class='asn1-dAsn1String def-String'></span>
+449: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>was last configured.</span><span class='asn1-dAsn1String def-String'></span>
+450: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+451:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngine</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>2</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+452: 
+453:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineTime</span>   <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-TYPE</span>
+454:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>INTEGER</span> <span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>0</span><span class='asn1-dAsn1Symbol def-Symbol'>..</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>2147483647</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span>
+455:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>UNITS</span>        <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>seconds</span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+456:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MAX-ACCESS</span>   <span class='asn1-dAsn1Identifier def-Identifier'>read-only</span>
+457:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+458:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>The number of seconds since the value of</span><span class='asn1-dAsn1String def-String'></span>
+459: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>the snmpEngineBoots object last changed.</span><span class='asn1-dAsn1String def-String'></span>
+460: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>When incrementing this object's value would</span><span class='asn1-dAsn1String def-String'></span>
+461: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>cause it to exceed its maximum,</span><span class='asn1-dAsn1String def-String'></span>
+462: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>snmpEngineBoots is incremented as if a</span><span class='asn1-dAsn1String def-String'></span>
+463: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>re-initialization had occurred, and this</span><span class='asn1-dAsn1String def-String'></span>
+464: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>object's value consequently reverts to zero.</span><span class='asn1-dAsn1String def-String'></span>
+465: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+466:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngine</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>3</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+467: 
+468:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineMaxMessageSize</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-TYPE</span>
+469:        <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>SYNTAX</span>       <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>INTEGER</span> <span class='asn1-dAsn1Symbol def-Symbol'>(</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>484</span><span class='asn1-dAsn1Symbol def-Symbol'>..</span><span class='asn1-dAsn1Number def-NumberDec def-Number'>2147483647</span><span class='asn1-dAsn1Symbol def-Symbol'>)</span>
+470: 
+471: 
+472: 
+473: 
+474: 
+475:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MAX-ACCESS</span>   <span class='asn1-dAsn1Identifier def-Identifier'>read-only</span>
+476:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+477:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>The maximum length in octets of an SNMP message</span><span class='asn1-dAsn1String def-String'></span>
+478: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>which this SNMP engine can send or receive and</span><span class='asn1-dAsn1String def-String'></span>
+479: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>process, determined as the minimum of the maximum</span><span class='asn1-dAsn1String def-String'></span>
+480: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>message size values supported among all of the</span><span class='asn1-dAsn1String def-String'></span>
+481: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>transports available to and supported by the engine.</span><span class='asn1-dAsn1String def-String'></span>
+482: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+483:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngine</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>4</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+484: 
+485: 
+486:    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> Registration Points for Authentication and Privacy Protocols **</span>
+487: 
+488:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpAuthProtocols</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-IDENTITY</span>
+489:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>        <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+490:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span>  <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>Registration point for standards-track</span><span class='asn1-dAsn1String def-String'></span>
+491: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>authentication protocols used in SNMP Management</span><span class='asn1-dAsn1String def-String'></span>
+492: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>Frameworks.</span><span class='asn1-dAsn1String def-String'></span>
+493: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+494:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkAdmin</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+495: 
+496:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpPrivProtocols</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-IDENTITY</span>
+497:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>        <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+498:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span>  <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>Registration point for standards-track privacy</span><span class='asn1-dAsn1String def-String'></span>
+499: <span class='asn1-dAsn1StrWSpace def-Prefix'>                     </span><span class='asn1-dAsn1String def-String'>protocols used in SNMP Management Frameworks.</span><span class='asn1-dAsn1String def-String'></span>
+500: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+501:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkAdmin</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>2</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+502: 
+503:    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> Conformance information ******************************************</span>
+504: 
+505:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBCompliances</span>
+506:                   <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>OBJECT IDENTIFIER</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span><span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBConformance</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span><span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+507:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBGroups</span>
+508:                   <span class='asn1-dAsn1BuiltinType def-TypeKeyword def-Keyword'>OBJECT IDENTIFIER</span> <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span><span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBConformance</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>2</span><span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+509: 
+510:    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> compliance statements</span>
+511: 
+512:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBCompliance</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MODULE-COMPLIANCE</span>
+513:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+514:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>The compliance statement for SNMP engines which</span><span class='asn1-dAsn1String def-String'></span>
+515: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>implement the SNMP Management Framework MIB.</span><span class='asn1-dAsn1String def-String'></span>
+516: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+517:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MODULE</span>    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> this module</span>
+518:            <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>MANDATORY-GROUPS</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineGroup</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+519: 
+520:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBCompliances</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+521: 
+522:    <span class='asn1-dAsn1CommentEdge def-Comment def-Syntax'>--</span><span class='asn1-dAsn1LineComment def-LineComment def-Comment def-Syntax'> units of conformance</span>
+523: 
+524: 
+525: 
+526: 
+527: 
+528:    <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineGroup</span> <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECT-GROUP</span>
+529:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>OBJECTS</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span>
+530:                  <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineID</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span>
+531:                  <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineBoots</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span>
+532:                  <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineTime</span><span class='asn1-dAsn1Symbol def-Symbol'>,</span>
+533:                  <span class='asn1-dAsn1Identifier def-Identifier'>snmpEngineMaxMessageSize</span>
+534:                <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+535:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>STATUS</span>       <span class='asn1-dAsn1Identifier def-Identifier'>current</span>
+536:        <span class='asn1-dAsn1TypeRefer def-VarStrong def-Var'>DESCRIPTION</span> <span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span><span class='asn1-dAsn1String def-String'>A collection of objects for identifying and</span><span class='asn1-dAsn1String def-String'></span>
+537: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>determining the configuration and current timeliness</span><span class='asn1-dAsn1String def-String'></span>
+538: <span class='asn1-dAsn1StrWSpace def-Prefix'>                    </span><span class='asn1-dAsn1String def-String'>values of an SNMP engine.</span><span class='asn1-dAsn1String def-String'></span>
+539: <span class='asn1-dAsn1StrWSpace def-Prefix'>                   </span><span class='asn1-dAsn1StrQuote def-StringEdge def-String'>"</span>
+540:        <span class='asn1-dAsn1Symbol def-Symbol'>::=</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>{</span> <span class='asn1-dAsn1Identifier def-Identifier'>snmpFrameworkMIBGroups</span> <span class='asn1-dAsn1Number def-NumberDec def-Number'>1</span> <span class='asn1-dAsn1StructSymb def-SymbolStrong def-Symbol'>}</span>
+541: 
+542:    <span class='asn1-dAsn1Keyword def-KeywordStrong def-Keyword'>END</span>
+543: 

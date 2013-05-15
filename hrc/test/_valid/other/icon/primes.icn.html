@@ -1,0 +1,48 @@
+ 0: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+ 1: <span class='icon-iconComment def-Comment def-Syntax'># (c) Victor Zhumatii, OSPU</span>
+ 2: <span class='icon-iconComment def-Comment def-Syntax'># Он╠┐ код ╟┬пе╔но │╩е╫ п┴о┬╫╠е ┌│┬лЪ ┬╫ол═ м│л╠м│ к┴│п╫ог┴Ъ─Ъм ме╫одЪм│</span>
+ 3: <span class='icon-iconComment def-Comment def-Syntax'>#</span>
+ 4: 
+ 5: <span class='icon-iconWord def-Keyword'>procedure</span> randoms <span class='def-Symbol'>(</span>n<span class='icon-iconSymb def-Symbol'>,</span> k<span class='def-Symbol'>)</span> <span class='icon-iconComment def-Comment def-Syntax'># n times random in 1..k</span>
+ 6:      <span class='icon-iconWord def-Keyword'>every</span> <span class='icon-iconNumb def-Number'>1</span> to n <span class='icon-iconWord def-Keyword'>do</span> <span class='icon-iconWord def-Keyword'>suspend</span> <span class='icon-iconSymb def-Symbol'>?</span> k
+ 7: <span class='icon-iconWord def-Keyword'>end</span>
+ 8: 
+ 9: <span class='icon-iconWord def-Keyword'>procedure</span> pow<span class='def-Symbol'>(</span>a<span class='icon-iconSymb def-Symbol'>,</span> b<span class='icon-iconSymb def-Symbol'>,</span> modLimit<span class='def-Symbol'>)</span> <span class='icon-iconComment def-Comment def-Syntax'># long a^b version</span>
+10:     powers <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconWord def-Keyword'>list</span><span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+11:     powers <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='def-Symbol'>[</span>a<span class='def-Symbol'>]</span> <span class='icon-iconComment def-Comment def-Syntax'># 0-╨ ┬╫епен═</span>
+12: 
+13:     <span class='icon-iconWord def-Keyword'>while</span> <span class='def-Symbol'>(</span><span class='icon-iconNumb def-Number'>2</span> <span class='icon-iconSymb def-Symbol'>^</span> <span class='def-Symbol'>(</span><span class='icon-iconSymb def-Symbol'>*</span>powers <span class='icon-iconSymb def-Symbol'>-</span><span class='icon-iconNumb def-Number'>1</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>)</span> <span class='icon-iconSymb def-Symbol'>&lt;</span><span class='icon-iconSymb def-Symbol'>=</span> b <span class='icon-iconWord def-Keyword'>do</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='icon-iconComment def-Comment def-Syntax'># ПокЪ дЪннЪ╨ ┬╫епен═ нЪм може╫ понЪдоб│╫═┬╨</span>
+14:         last <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> powers<span class='def-Symbol'>[</span><span class='icon-iconSymb def-Symbol'>*</span>powers<span class='def-Symbol'>]</span><span class='icon-iconSymb def-Symbol'>;</span>
+15:         powers <span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>|</span><span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='def-Symbol'>[</span><span class='def-Symbol'>(</span>last<span class='icon-iconSymb def-Symbol'>*</span>last<span class='def-Symbol'>)</span> <span class='icon-iconSymb def-Symbol'>%</span> modLimit<span class='def-Symbol'>]</span>
+16:     <span class='def-SymbolStrong def-Symbol'>}</span>
+17:     res <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>1</span><span class='icon-iconSymb def-Symbol'>;</span> 
+18:     <span class='icon-iconComment def-Comment def-Syntax'>#-d-write("Required space for powers:", *powers)</span>
+19:     <span class='icon-iconWord def-Keyword'>every</span> power <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconSymb def-Symbol'>!</span>powers <span class='icon-iconWord def-Keyword'>do</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+20:         <span class='icon-iconWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>b <span class='icon-iconSymb def-Symbol'>%</span> <span class='icon-iconNumb def-Number'>2</span> <span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>1</span><span class='def-Symbol'>)</span> <span class='icon-iconWord def-Keyword'>then</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+21:             res <span class='icon-iconSymb def-Symbol'>*</span><span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> power<span class='icon-iconSymb def-Symbol'>;</span>
+22:             res <span class='icon-iconSymb def-Symbol'>%</span><span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> modLimit<span class='icon-iconSymb def-Symbol'>;</span>
+23:         <span class='def-SymbolStrong def-Symbol'>}</span>
+24:         b <span class='icon-iconSymb def-Symbol'>/</span><span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>2</span>
+25:     <span class='def-SymbolStrong def-Symbol'>}</span>
+26:     <span class='icon-iconWord def-Keyword'>return</span> res
+27:     
+28: <span class='icon-iconWord def-Keyword'>end</span>
+29: 
+30: <span class='icon-iconWord def-Keyword'>procedure</span> isPrime<span class='def-Symbol'>(</span>p<span class='def-Symbol'>)</span> <span class='icon-iconComment def-Comment def-Syntax'>#p mayBePrime</span>
+31:     pows <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconWord def-Keyword'>set</span><span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+32:     <span class='icon-iconWord def-Keyword'>every</span> pows <span class='icon-iconSymb def-Symbol'>+</span><span class='icon-iconSymb def-Symbol'>+</span><span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconWord def-Keyword'>set</span><span class='def-Symbol'>(</span><span class='def-Symbol'>[</span>pow <span class='def-Symbol'>(</span>randoms<span class='def-Symbol'>(</span><span class='icon-iconNumb def-Number'>40</span><span class='icon-iconSymb def-Symbol'>,</span> p<span class='icon-iconSymb def-Symbol'>-</span><span class='icon-iconNumb def-Number'>1</span><span class='def-Symbol'>)</span><span class='icon-iconSymb def-Symbol'>,</span> p<span class='icon-iconSymb def-Symbol'>-</span><span class='icon-iconNumb def-Number'>1</span><span class='icon-iconSymb def-Symbol'>,</span> p<span class='def-Symbol'>)</span><span class='def-Symbol'>]</span><span class='def-Symbol'>)</span>
+33:     <span class='icon-iconWord def-Keyword'>if</span> <span class='icon-iconSymb def-Symbol'>*</span>pows <span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>1</span> <span class='icon-iconSymb def-Symbol'>&amp;</span> <span class='icon-iconSymb def-Symbol'>!</span>pows <span class='icon-iconSymb def-Symbol'>=</span> <span class='icon-iconNumb def-Number'>1</span> <span class='icon-iconWord def-Keyword'>then</span> <span class='icon-iconWord def-Keyword'>return</span> p<span class='icon-iconSymb def-Symbol'>;</span>
+34: 
+35:     <span class='icon-iconComment def-Comment def-Syntax'># кЪждЪ╨ ┬╫епен═ ┬л╟┌Ъ┐н╠┼ ┌│┬ел ┌│┬лом 20 │з │н╫е┴вЪлЪ 1..p-1 по мод╟л╧ p</span>
+36:     <span class='icon-iconComment def-Comment def-Syntax'># поме╩Ъе╫┬╨ в множ┬╫во</span>
+37:     <span class='icon-iconComment def-Comment def-Syntax'># е┬л│ в множе┬╫ве е┬╫═ ╫ол═ко 1, ве┴н╟╫═ p</span>
+38: <span class='icon-iconWord def-Keyword'>end</span>
+39: 
+40: <span class='icon-iconWord def-Keyword'>procedure</span> main<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+41: <span class='icon-iconComment def-Comment def-Syntax'>#    every write ("Randoms:", randoms (10, 10))</span>
+42: <span class='icon-iconComment def-Comment def-Syntax'>#    write (pow(2, 10, 10))</span>
+43: <span class='icon-iconComment def-Comment def-Syntax'>#    every write(pow (randoms(20, 100-1), 100-1, 100))</span>
+44: <span class='icon-iconComment def-Comment def-Syntax'>#    every p := 1 to 100 do write (p, " --> ", isPrime(p+1000000000000000000) );</span>
+45:     base <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span><span class='icon-iconNumb def-Number'>10000000000000000000000000000000000000000000000000000000000000</span>
+46:     <span class='icon-iconWord def-Keyword'>every</span> p <span class='icon-iconSymb def-Symbol'>:</span><span class='icon-iconSymb def-Symbol'>=</span> base <span class='icon-iconSymb def-Symbol'>+</span> <span class='def-Symbol'>(</span><span class='icon-iconNumb def-Number'>1</span> to <span class='icon-iconNumb def-Number'>100</span><span class='def-Symbol'>)</span> <span class='icon-iconWord def-Keyword'>do</span> write <span class='def-Symbol'>(</span>isPrime<span class='def-Symbol'>(</span>p<span class='def-Symbol'>)</span><span class='def-Symbol'>)</span>
+47: <span class='icon-iconWord def-Keyword'>end</span>

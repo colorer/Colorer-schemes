@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<defs>
+
+<mask default="*.*"/>
+
+<keys default="def">
+	
+	<!-- ◊ ○▬∞©®º‹›¿♠♣♥♦￭﹩אՔ  №㆝-->
+	<key name="def" value="∙"/>
+	
+	<key name="xml" value="¤"/>
+	<key name="sgml" value="☼"/><!-- околохмл -->
+	
+	<key name="ini" value="◊"/>
+	<!--key name="chek" value="√"/-->
+	<key name="lst" value="§"/>
+	<key name="data" value="■"/>
+	<key name="plg" value="♂"/><!-- компоненты -->
+	<key name="java" value="♀"/><!-- java/net -->
+	
+	<key name="src" value="○"/><!-- исполняемое в виде текста -->
+	<key name="inc" value="·"/>
+	
+	<key name="res" value="⌂"/><!-- ресурсы -->
+	
+	<key name="img" value="☺"/>
+	<key name="audio" value="♪"/>
+	<key name="video" value="♫"/>
+	<!--key name="subt" value="㆝"/-->
+	<key name="ico" value="°"/><!-- oпределяет тип файла -->
+	<key name="fnt" value="Ք"/><!-- "ї" не подходит, "▬" глючит -->
+	
+	<key name="arc" value="↕"/>
+	<key name="lnk" value="↔"/><!-- ссылки -->
+	
+	<key name="hlp" value="¿"/>
+	
+	<key name="hidden" value=" "/><!-- nbsp, not space... -->
+	<key name="sys" value="‼"/>
+	<key name="1st" value="!"/>
+
+	<key name="bak" value="≈"/>
+	<key name="err" value="≠"/><!-- debug info -->
+	
+	<key name="msa" value="♦"/><!-- © M$ - word/etc -->
+	
+	<key name='plg-inf' value="›"/> <!-- only for plug panels -->
+	
+</keys>
+<colors default="def">
+	<cursor back="3" fore="0"/>
+	
+	<col name="def" value="B" rgb="#55FFFF"/><!-- default -->
+	<col name="dir" value="F" rgb="#FFFFFF"/>
+	<col name="exe" value="A" rgb="#55FF55"/>
+	<col name="src" value="2" rgb="#00AA00"/>
+	
+	<col name="net" value="9" rgb="#5555FF"/><!-- inet -->
+	<col name="cfg" value="D" rgb="#FF55FF"/><!-- cfg, style --><!-- цвет изменен -->
+	<col name="mak" value="5" rgb="#CC22AA"/><!-- makefile -->
+	<col name="meta" value="0" rgb="#000000"/><!-- rdf, xsd, dtd -->
+	
+	<col name="txt" value="7" rgb="#AAAAAA"/>
+	<col name="img" value="C" rgb="#FF5555"/><!-- multimedia -->
+	<col name="lib" value="8" rgb="#777777"/>
+	<col name="bak" value="4" rgb="#AA0000"/><!-- мусор -->
+
+	
+	<col name="sys" value="3" rgb="#00AAAA"/>
+	<col name="hidden" value="6" rgb="#0000CC"/> <!-- Это не стандартный цвет! -->
+	
+	<!-- only for plug panels -->
+	<col name="plg-err" value='C' rgb="#FF5555"/>
+	<col name="plg-war" value='4' rgb="#AA0000"/>
+	<col name="plg-txt" value='7' rgb="AAAAAAA"/>
+	
+	<!-- это цвета панелей, в их красить файлы нельзя -->
+	<col name="back" value="1" rgb="#0000AA" allow="no"/>
+	<col name="select" value="E" rgb="#FFFF55" allow="no"/>
+</colors>
+</defs>

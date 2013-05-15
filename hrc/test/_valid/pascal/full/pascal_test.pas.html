@@ -1,0 +1,328 @@
+  0: <span class='pascal-pComment def-Comment def-Syntax'>//=============================================</span>
+  1: <span class='pascal-pComment def-Comment def-Syntax'>//Pascal/Delphi/Delphi.Net Text for Test Syntax</span>
+  2: <span class='pascal-pComment def-Comment def-Syntax'>//=============================================</span>
+  3: 
+  4: <span class='pascal-pComment def-Comment def-Syntax'>// comment 1</span>
+  5: 
+  6: <span class='pascal-pComment def-Comment def-Syntax'>{</span>
+  7: <span class='pascal-pComment def-Comment def-Syntax'>   commect 2</span>
+  8: <span class='pascal-pComment def-Comment def-Syntax'>}</span>
+  9: 
+ 10: <span class='pascal-pComment def-Comment def-Syntax'>(*</span>
+ 11: <span class='pascal-pComment def-Comment def-Syntax'>   comment 3</span>
+ 12: <span class='pascal-pComment def-Comment def-Syntax'>*)</span>
+ 13: 
+ 14: <span class='pascal-pWord def-Keyword'>unit</span> pascal_test <span class='pascal-pWord def-Keyword'>platform</span> <span class='pascal-pWord def-Keyword'>experimental</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 15: 
+ 16: <span class='pascal-pOther def-Directive'>{$B-,O-,D+}</span>
+ 17: 
+ 18: <span class='pascal-pWord def-Keyword'>interface</span>
+ 19: 
+ 20: <span class='pascal-pWord def-Keyword'>Uses</span> MyCompany<span class='pascal-pSymb def-Symbol'>.</span>MyDepartment<span class='pascal-pSymb def-Symbol'>.</span>OtherUnit <span class='pascal-pWord def-Keyword'>as</span> aUnit<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pComment def-Comment def-Syntax'>//.Net</span>
+ 21: 
+ 22: <span class='pascal-pWord def-Keyword'>type</span>
+ 23: 
+ 24:   T_Delphi_Class <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord2 def-Keyword'>class </span><span class='pascal-pSymb def-Symbol'>(</span>TComponent<span class='pascal-pSymb def-Symbol'>,</span> IUnknown<span class='pascal-pSymb def-Symbol'>,</span> ICloneable<span class='pascal-pSymb def-Symbol'>)</span>
+ 25:   <span class='pascal-pWord def-Keyword'>private</span>
+ 26:   <span class='pascal-pWord def-Keyword'>protected</span>
+ 27:     <span class='pascal-pWord def-Keyword'>function</span> GetHandle<span class='pascal-pSymb def-Symbol'>:</span> THandle<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>cdecl</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>reintroduce</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>overload</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>virtual</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>platform</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 28:     <span class='pascal-pOther def-Directive'>{$IFDEF MSWINDOWS}</span>
+ 29:     <span class='pascal-pWord def-Keyword'>procedure</span> WMCREATE<span class='pascal-pSymb def-Symbol'>(</span><span class='pascal-pWord def-Keyword'>var</span> Message<span class='pascal-pSymb def-Symbol'>:</span> TMessage<span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>message</span> WM_CREATE<span class='def-SymbolStrong def-Symbol'>;</span>
+ 30:     <span class='pascal-pOther def-Directive'>{$ENDIF IFDEF MSWINDOWS}</span>
+ 31:     <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>function</span> A<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Boolean</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>override</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>deprecated</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 32:     <span class='pascal-pWord def-Keyword'>procedure</span> ObjAddRef<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>safecall</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 33:     <span class='pascal-pWord def-Keyword'>function</span> IUnknown<span class='pascal-pSymb def-Symbol'>.</span>_AddRef <span class='pascal-pSymb def-Symbol'>=</span> ObjAddRef<span class='def-SymbolStrong def-Symbol'>;</span>
+ 34:     <span class='pascal-pWord def-Keyword'>procedure</span> Ovr<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>overload</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 35:   <span class='pascal-pWord def-Keyword'>public</span>
+ 36:     <span class='pascal-pWord def-Keyword'>property</span> Objects<span class='pascal-pSymb def-Symbol'>[</span>Index<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='pascal-pSymb def-Symbol'>]</span><span class='pascal-pSymb def-Symbol'>:</span> TObject <span class='pascal-pWord def-Keyword'>read</span> GetObject<span class='pascal-pSymb def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>platform</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>deprecated</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 37:   <span class='pascal-pWord def-Keyword'>published</span>
+ 38:     <span class='pascal-pWord def-Keyword'>property</span> Idx<span class='pascal-pSymb def-Symbol'>:</span> TMySet <span class='pascal-pWord def-Keyword'>index</span> <span class='def-NumberDec def-Number'>0</span> <span class='pascal-pWord def-Keyword'>read</span> GetIdx <span class='pascal-pWord def-Keyword'>write</span> SetIdx <span class='pascal-pWord def-Keyword'>default</span> <span class='pascal-pSymb def-Symbol'>[</span><span class='pascal-pSymb def-Symbol'>]</span><span class='pascal-pSymb def-Symbol'>;</span>
+ 39:     <span class='pascal-pWord def-Keyword'>property</span> Prop<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Byte</span> <span class='pascal-pWord def-Keyword'>read</span> GetProp <span class='pascal-pWord def-Keyword'>write</span> SetProp <span class='pascal-pWord def-Keyword'>default</span> <span class='def-NumberDec def-Number'>0</span> <span class='pascal-pWord def-Keyword'>stored</span> isStoredProp<span class='pascal-pSymb def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>default</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>deprecated</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 40:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 41: 
+ 42:   T_DotNet_Class <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord2 def-Keyword'>class </span><span class='pascal-pSymb def-Symbol'>(</span>TObject<span class='pascal-pSymb def-Symbol'>)</span>
+ 43:   <span class='pascal-pWord def-Keyword'>private</span>
+ 44:      <span class='pascal-pWord def-Keyword'>var</span>
+ 45:        fDW<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>DWord</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 46:      <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>var</span>
+ 47:        fReadInt<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 48:   <span class='pascal-pWord def-Keyword'>strict</span> <span class='pascal-pWord def-Keyword'>private</span> fInt<span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 49:   <span class='pascal-pWord def-Keyword'>protected</span>
+ 50:     <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>function</span> GetIntData<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 51:     <span class='pascal-pWord def-Keyword'>type</span> TNestedClass <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord2 def-Keyword'>class</span>
+ 52:       <span class='pascal-pWord def-Keyword'>procedure</span> Hello<span class='def-SymbolStrong def-Symbol'>;</span>
+ 53:     <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 54:     <span class='pascal-pWord def-Keyword'>procedure</span> CheckIt<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>override</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>final</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 55:   <span class='pascal-pWord def-Keyword'>strict</span> <span class='pascal-pWord def-Keyword'>protected</span>
+ 56:     <span class='pascal-pWord def-Keyword'>procedure</span> Finalize<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>override</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 57:   <span class='pascal-pWord def-Keyword'>public</span>
+ 58:     <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>function</span> GetStream<span class='pascal-pSymb def-Symbol'>(</span>Stream<span class='pascal-pSymb def-Symbol'>:</span> TStream<span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>:</span> System<span class='pascal-pSymb def-Symbol'>.</span>IO<span class='pascal-pSymb def-Symbol'>.</span>Stream<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>overload</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>static</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 59:     <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>constructor</span> Create<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pComment def-Comment def-Syntax'>//class constructor</span>
+ 60:     <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>property</span> IntData<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span> <span class='pascal-pWord def-Keyword'>read</span> GetIntData<span class='pascal-pSymb def-Symbol'>;</span>
+ 61:     <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>operator</span> Add<span class='pascal-pSymb def-Symbol'>(</span><span class='pascal-pWord def-Keyword'>const</span> Left<span class='pascal-pSymb def-Symbol'>,</span> Right<span class='pascal-pSymb def-Symbol'>:</span> TBcd<span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>:</span> TBcd<span class='def-SymbolStrong def-Symbol'>;</span>
+ 62:   <span class='pascal-pWord def-Keyword'>published</span>
+ 63:   <span class='pascal-pWord2 def-Keyword'>end</span> <span class='pascal-pWord def-Keyword'>platform</span> <span class='pascal-pWord def-Keyword'>experimental</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 64: 
+ 65:   T_DotNet_Class_sealed <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord2 def-Keyword'>class sealed</span>
+ 66: 
+ 67:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 68: 
+ 69:   T_DotNet_ClassHelper1 <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord2 def-Keyword'>class helper </span><span class='pascal-pWord def-Keyword'>for</span> TObject
+ 70: 
+ 71:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 72: 
+ 73:   T_DotNet_ClassHelper2 <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord2 def-Keyword'>class helper </span><span class='pascal-pSymb def-Symbol'>(</span>TObjectHelper<span class='pascal-pSymb def-Symbol'>)</span> <span class='pascal-pWord def-Keyword'>for</span> TPersistent
+ 74: 
+ 75:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 76: 
+ 77:   T_Classic_Record <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord2 def-Keyword'>record</span>
+ 78:     d<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>double</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 79:     <span class='pascal-pWord def-Keyword'>case</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>byte</span> <span class='pascal-pWord def-Keyword'>of</span>
+ 80:       <span class='def-NumberDec def-Number'>0</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pSymb def-Symbol'>(</span>
+ 81:            C<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Char</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 82:            B<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Byte</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 83:            D<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Double</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 84:          <span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 85:       <span class='def-NumberDec def-Number'>1</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pSymb def-Symbol'>(</span>
+ 86:            W<span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pType def-TypeKeyword def-Keyword'>WideChar</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 87:          <span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 88:       <span class='def-NumberDec def-Number'>2</span><span class='pascal-pSymb def-Symbol'>:</span> DW<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>DWORD</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 89:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 90: 
+ 91:   T_DotNet_Record <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord2 def-Keyword'>packed record</span>
+ 92:     Data<span class='pascal-pSymb def-Symbol'>:</span> TObject<span class='def-SymbolStrong def-Symbol'>;</span>
+ 93:     Arr<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pWord def-Keyword'>packed</span> <span class='pascal-pWord def-Keyword'>array</span> <span class='pascal-pSymb def-Symbol'>[</span><span class='def-NumberDec def-Number'>0</span><span class='pascal-pSymb def-Symbol'>..</span><span class='def-NumberDec def-Number'>15</span><span class='pascal-pSymb def-Symbol'>]</span> <span class='pascal-pWord def-Keyword'>of</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Word</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 94:     <span class='pascal-pSymb def-Symbol'>[</span>MarshalAs<span class='pascal-pSymb def-Symbol'>(</span>UnmanagedType<span class='pascal-pSymb def-Symbol'>.</span>LPTStr<span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>]</span>
+ 95:     pszText<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>string</span> <span class='pascal-pWord def-Keyword'>platform</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 96:     Bounds<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pWord2 def-Keyword'>record</span>
+ 97:       <span class='pascal-pWord def-Keyword'>case</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span> <span class='pascal-pWord def-Keyword'>of</span>
+ 98:         <span class='def-NumberDec def-Number'>0</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pSymb def-Symbol'>(</span>lMinimum<span class='pascal-pSymb def-Symbol'>,</span> lMaximum<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Longint</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 99:         <span class='def-NumberDec def-Number'>1</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pSymb def-Symbol'>(</span>dwMinimum<span class='pascal-pSymb def-Symbol'>,</span> dwMaximum<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>DWORD</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+100:         <span class='def-NumberDec def-Number'>2</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pSymb def-Symbol'>(</span>dwReserved0<span class='pascal-pSymb def-Symbol'>,</span> dwReserved1<span class='pascal-pSymb def-Symbol'>,</span> dwReserved2<span class='pascal-pSymb def-Symbol'>,</span>
+101:             dwReserved3<span class='pascal-pSymb def-Symbol'>,</span> dwReserved4<span class='pascal-pSymb def-Symbol'>,</span> dwReserved5<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>DWORD</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+102:     <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+103:     Metrics<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pWord2 def-Keyword'>packed record</span>
+104:       <span class='pascal-pWord def-Keyword'>case</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span> <span class='pascal-pWord def-Keyword'>of</span>
+105:         <span class='def-NumberDec def-Number'>0</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pSymb def-Symbol'>(</span>cSteps<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>DWORD</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+106:         <span class='def-NumberDec def-Number'>1</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pSymb def-Symbol'>(</span>cbCustomData<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>DWORD</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+107:         <span class='def-NumberDec def-Number'>2</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pSymb def-Symbol'>(</span>dwReserved0<span class='pascal-pSymb def-Symbol'>,</span> dwReserved1<span class='pascal-pSymb def-Symbol'>,</span> dwReserved2<span class='pascal-pSymb def-Symbol'>,</span>
+108:             dwReserved3<span class='pascal-pSymb def-Symbol'>,</span> dwReserved4<span class='pascal-pSymb def-Symbol'>,</span> dwReserved5<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>DWORD</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+109:     <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+110:   <span class='pascal-pWord def-Keyword'>public</span>
+111:     <span class='pascal-pWord def-Keyword'>function</span> GetA<span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+112:   <span class='pascal-pWord def-Keyword'>strict</span> <span class='pascal-pWord def-Keyword'>private</span>
+113:     <span class='pascal-pWord def-Keyword'>class</span> <span class='pascal-pWord def-Keyword'>function</span> GetB<span class='pascal-pSymb def-Symbol'>(</span>r<span class='pascal-pSymb def-Symbol'>:</span> TMyPackedRec<span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>deprecated</span><span class='def-SymbolStrong def-Symbol'>;</span>
+114:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+115: 
+116:   I_Pascal_Interface <span class='pascal-pWord2 def-Keyword'>= interface</span>
+117: 
+118:     <span class='pascal-pWord def-Keyword'>procedure</span> BeginLock<span class='def-SymbolStrong def-Symbol'>;</span>
+119:     <span class='pascal-pWord def-Keyword'>procedure</span> EndLock<span class='def-SymbolStrong def-Symbol'>;</span>
+120: 
+121:     <span class='pascal-pWord def-Keyword'>function</span> GetProp<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+122:     <span class='pascal-pWord def-Keyword'>procedure</span> SetProp<span class='pascal-pSymb def-Symbol'>(</span>Value<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+123: 
+124: 
+125:     <span class='pascal-pWord def-Keyword'>property</span> Prop<span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span> <span class='pascal-pWord def-Keyword'>read</span> GetProp <span class='pascal-pWord def-Keyword'>write</span> SetProp<span class='pascal-pSymb def-Symbol'>;</span>
+126: 
+127:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+128: 
+129: 
+130: <span class='pascal-pWord def-Keyword'>var</span>
+131:   varBoolean<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Boolean</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pConst def-Constant def-Keyword'>True</span><span class='def-SymbolStrong def-Symbol'>;</span>
+132:   varByteBool<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>ByteBool</span><span class='def-SymbolStrong def-Symbol'>;</span>
+133:   varWordBool<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>WordBool</span> <span class='pascal-pSymb def-Symbol'>=</span> Falsel<span class='def-SymbolStrong def-Symbol'>;</span>
+134:   varLongBool<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>LongBool</span><span class='def-SymbolStrong def-Symbol'>;</span>
+135:   varByte<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Byte</span><span class='def-SymbolStrong def-Symbol'>;</span>
+136:   varChar<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Char</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pString def-String'>'@'</span><span class='def-SymbolStrong def-Symbol'>;</span>
+137:   varAnsiChar<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>AnsiChar</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pNumb def-Number'>#1</span><span class='def-SymbolStrong def-Symbol'>;</span>
+138:   varWord<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Word</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pNumb def-Number'>$AF</span><span class='def-SymbolStrong def-Symbol'>;</span>
+139:   varLongWord<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>LongWord</span><span class='def-SymbolStrong def-Symbol'>;</span>
+140:   varInteger<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pSymb def-Symbol'>-</span><span class='def-NumberDec def-Number'>123</span><span class='def-SymbolStrong def-Symbol'>;</span>
+141:   varLongInt<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>LongInt</span><span class='def-SymbolStrong def-Symbol'>;</span>
+142:   varSmallInt<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>SmallInt</span><span class='def-SymbolStrong def-Symbol'>;</span>
+143:   varDWORD<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>DWORD</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pNumb def-Number'>$FFFF</span><span class='def-SymbolStrong def-Symbol'>;</span>
+144:   varSingle<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Single</span><span class='def-SymbolStrong def-Symbol'>;</span>
+145:   varLongInt<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>LongInt</span><span class='def-SymbolStrong def-Symbol'>;</span>
+146:   varPtr<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pNetUnsafeType pascal-pType def-TypeKeyword def-Keyword'>Pointer</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pSymb def-Symbol'>@</span>varBoolean<span class='def-SymbolStrong def-Symbol'>;</span>
+147:   varUINT<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>UINT</span> <span class='pascal-pNetUnsafeWord pascal-pWord def-Keyword'>absolute</span> varDWORD<span class='def-SymbolStrong def-Symbol'>;</span>
+148:   varCurrency<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Currency</span><span class='def-SymbolStrong def-Symbol'>;</span>
+149:   varInt64<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Int64</span><span class='def-SymbolStrong def-Symbol'>;</span>
+150:   varComp<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Comp</span> <span class='pascal-pNetUnsafeWord pascal-pWord def-Keyword'>absolute</span> varInt64<span class='def-SymbolStrong def-Symbol'>;</span>
+151:   varString<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>String</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pString def-String'>'go go'</span><span class='pascal-pNumb def-Number'>#13</span><span class='pascal-pNumb def-Number'>#10</span><span class='pascal-pString def-String'>'do do'</span><span class='def-SymbolStrong def-Symbol'>;</span>
+152:   varShortStr<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>ShortString</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pString def-String'>'abcd'</span><span class='def-SymbolStrong def-Symbol'>;</span>
+153:   varAnsiStr<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>AnsiString</span><span class='def-SymbolStrong def-Symbol'>;</span>
+154:   varChar<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pNetUnsafeType pascal-pType def-TypeKeyword def-Keyword'>PChar</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pString def-String'>'efgh'</span><span class='def-SymbolStrong def-Symbol'>;</span>
+155:   varWideStr<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>WideString</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pString def-String'>'123'</span><span class='def-SymbolStrong def-Symbol'>;</span>
+156:   varPWideChar<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>PWideChar</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pConst def-Constant def-Keyword'>nil</span><span class='def-SymbolStrong def-Symbol'>;</span>
+157:   varReal<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Real</span><span class='def-SymbolStrong def-Symbol'>;</span>
+158:   varReal48<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pNetUnsafeType pascal-pType def-TypeKeyword def-Keyword'>Real48</span><span class='def-SymbolStrong def-Symbol'>;</span>
+159:   varDouble<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Double</span><span class='def-SymbolStrong def-Symbol'>;</span>
+160:   varExtended<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Extended</span><span class='def-SymbolStrong def-Symbol'>;</span>
+161:   varVariant<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Variant</span> <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pConst def-Constant def-Keyword'>null</span><span class='def-SymbolStrong def-Symbol'>;</span>
+162:   varOleVariant<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>OleVariant</span><span class='def-SymbolStrong def-Symbol'>;</span>
+163:   varText<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Text</span><span class='def-SymbolStrong def-Symbol'>;</span>
+164:   varTextFile<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>TextFile</span><span class='def-SymbolStrong def-Symbol'>;</span>
+165:   varDateTime<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>TDateTime</span><span class='def-SymbolStrong def-Symbol'>;</span>
+166: 
+167:   <span class='pascal-pComment def-Comment def-Syntax'>// .Net "&amp;" Prefix for .NET Native</span>
+168:   TMyType <span class='pascal-pSymb def-Symbol'>:</span> &amp;<span class='pascal-pWord def-Keyword'>Type</span><span class='def-SymbolStrong def-Symbol'>;</span>
+169: 
+170: <span class='pascal-pWord def-Keyword'>threadvar</span>
+171:   i<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+172: 
+173: <span class='pascal-pWord def-Keyword'>const</span>
+174:   cMaxLen <span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>4096</span> <span class='pascal-pWord def-Keyword'>platform</span><span class='def-SymbolStrong def-Symbol'>;</span>
+175: 
+176: <span class='pascal-pWord def-Keyword'>resourcestring</span>
+177:  rsError <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pString def-String'>'Error: %s'</span><span class='def-SymbolStrong def-Symbol'>;</span>
+178: 
+179: <span class='pascal-pWord2 def-Keyword'>implementation</span>
+180: 
+181: <span class='pascal-pWord def-Keyword'>function</span> BASMTEST<span class='pascal-pSymb def-Symbol'>(</span><span class='pascal-pWord def-Keyword'>const</span> s<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pNetUnsafeType pascal-pType def-TypeKeyword def-Keyword'>PChar</span><span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pNetUnsafeType pascal-pType def-TypeKeyword def-Keyword'>PChar</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>stdcall</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>assembler</span><span class='def-SymbolStrong def-Symbol'>;</span>
+182: <span class='pascal-pWord def-Keyword'>asm</span>
+183:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>ebp</span>
+184:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span>     <span class='asm-asmRegister def-Register'>ebp</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>esp</span>
+185:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>add</span>     <span class='asm-asmRegister def-Register'>esp</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>-</span>cSetScrollInfo_VarsAndResultSize
+186:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>add</span>     <span class='asm-asmRegister def-Register'>ebp</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>-</span>cSetScrollInfo_VarsAndResultSize
+187:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>edx</span>
+188: 
+189:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>ebx</span>
+190:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>ebp</span>
+191: <span class='asm-asmLabel def-Label'>              @@code_start1:</span>
+192:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>call</span>    <span class='asm-asmLabel def-Label'>@@delta1</span>
+193: <span class='asm-asmLabel def-Label'>              @@delta1:</span>
+194:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>pop</span>     <span class='asm-asmRegister def-Register'>ebx</span>
+195:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmMnemonics def-Keyword'>offset</span> <span class='asm-asmLabel def-Label'>@@delta1</span>
+196:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>sub</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmMnemonics def-Keyword'>offset</span> <span class='asm-asmLabel def-Label'>@@code_start1</span>
+197:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>sub</span>     <span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>eax</span>
+198:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmMnemonics def-Keyword'>offset</span> LB_CODE_DATA
+199:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>sub</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmMnemonics def-Keyword'>offset</span> <span class='asm-asmLabel def-Label'>@@code_start1</span>
+200:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>lea</span>     <span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>+</span><span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>]</span>
+201:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>pop</span>     <span class='asm-asmRegister def-Register'>ebp</span>
+202: 
+203:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>lea</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebp</span><span class='asm-asmSymbol def-Symbol'>]</span>.TSetScrollInfo_Vars.C
+204:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>eax</span>
+205:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    ELSB_GETCONTROLLER
+206:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.WM_ELSCROLLBAR
+207:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebp</span><span class='asm-asmSymbol def-Symbol'>]</span>.TSetScrollInfo_Params.hWnd
+208:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>call</span>    <span class='asm-asmLabel def-Label'>dword</span> <span class='asm-asmMnemonics def-Keyword'>ptr</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.SendMessage
+209: 
+210:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.SetScrollInfo
+211:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>lea</span>     <span class='asm-asmRegister def-Register'>edx</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.jiSetScrollInfo
+212:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>call</span>    <span class='asm-asmLabel def-Label'>@@RestoreSavedCode</span> <span class='asm-asmComment def-Comment def-Syntax'>// eax = MSrc = @SetScrollInfo, edx = PJumpInstruction</span>
+213: 
+214: <span class='asm-asmLabel def-Label'>@@BeginLock:</span>
+215:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>cmp</span>     <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.IsWin9X<span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmNumDec def-NumberDec def-Number'>1</span>
+216:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>je</span>      <span class='asm-asmLabel def-Label'>@@CLI</span>
+217:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>lea</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.LockID
+218:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>eax</span>
+219:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmNumDec def-NumberDec def-Number'>1</span>
+220:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmNumDec def-NumberDec def-Number'>0</span>
+221:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>call</span>    <span class='asm-asmLabel def-Label'>dword</span> <span class='asm-asmMnemonics def-Keyword'>ptr</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.CreateMutex
+222:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span>     <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebp</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCommon_Vars.hLock<span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>eax</span>
+223:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>test</span>    <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>eax</span>
+224:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>jz</span>      <span class='asm-asmLabel def-Label'>@@BLR</span>
+225:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    INFINITE
+226:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>eax</span>
+227:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>call</span>    <span class='asm-asmLabel def-Label'>dword</span> <span class='asm-asmMnemonics def-Keyword'>ptr</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.WaitForSingleObject
+228:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>jmp</span>     <span class='asm-asmLabel def-Label'>@@BLR</span>
+229: <span class='asm-asmLabel def-Label'>  @@CLI:</span>      <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>cli</span>
+230: <span class='asm-asmLabel def-Label'>  @@BLR:</span>      <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>ret</span>     <span class='asm-asmNumHex def-NumberHex def-Number'>$00</span>
+231: 
+232: <span class='asm-asmLabel def-Label'>@@EndLock:</span>
+233:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>cmp</span>     <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.IsWin9X<span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmNumDec def-NumberDec def-Number'>1</span>
+234:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>je</span>      <span class='asm-asmLabel def-Label'>@@STI</span>
+235:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span>     <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebp</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCommon_Vars.hLock
+236:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>test</span>    <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>eax</span>
+237:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>jz</span>      <span class='asm-asmLabel def-Label'>@@ELR</span>
+238:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>push</span>    <span class='asm-asmRegister def-Register'>eax</span>
+239:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>call</span>    <span class='asm-asmLabel def-Label'>dword</span> <span class='asm-asmMnemonics def-Keyword'>ptr</span> <span class='asm-asmSymbol def-Symbol'>[</span><span class='asm-asmRegister def-Register'>ebx</span><span class='asm-asmSymbol def-Symbol'>]</span>.TCodeData.CloseHandle
+240:               <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>jmp</span>     <span class='asm-asmLabel def-Label'>@@ELR</span>
+241: <span class='asm-asmLabel def-Label'>  @@STI:</span>      <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>sti</span>
+242: <span class='asm-asmLabel def-Label'>  @@ELR:</span>      <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>ret</span>     <span class='asm-asmNumHex def-NumberHex def-Number'>$00</span>
+243: 
+244: <span class='asm-asmLabel def-Label'>LB_CODE_DATA:</span>
+245: 
+246: <span class='asm-asmLabel def-Label'>@@SendMessage:</span>
+247:               <span class='asm-asmDefinition def-Directive'>dw</span>      <span class='asm-asmNumDec def-NumberDec def-Number'>0</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmNumDec def-NumberDec def-Number'>0</span>
+248: 
+249: <span class='asm-asmLabel def-Label'>@@LockID:</span>
+250:               <span class='asm-asmDefinition def-Directive'>db</span>      <span class='asm-asmString def-String'>'HookApi:{7DDF4ADB-4A01-4F4B-83AA-8D91C21E99D2}:123456789012345:Lock'</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmNumHex def-NumberHex def-Number'>$0</span> <span class='asm-asmComment def-Comment def-Syntax'>//= 'HookApi:'+ID_WM_ELSCROLLBAR+':'+DWordToStr(GetCurrentProcessID()):Lock</span>
+251: <span class='pascal-pWord def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+252: 
+253: <span class='pascal-pWord def-Keyword'>function</span> SearchPath<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>external</span> kernel32 <span class='pascal-pWord def-Keyword'>name</span> <span class='pascal-pString def-String'>'SearchPathA'</span><span class='pascal-pSymb def-Symbol'>;</span>
+254: 
+255: <span class='pascal-pWord def-Keyword'>exports</span>
+256:   BASMTEST <span class='pascal-pWord def-Keyword'>index</span> <span class='def-NumberDec def-Number'>0</span> <span class='pascal-pWord def-Keyword'>name</span> <span class='pascal-pString def-String'>'@BASMTEST'</span><span class='pascal-pSymb def-Symbol'>;</span>
+257: 
+258: <span class='pascal-pWord def-Keyword'>forward</span> <span class='pascal-pWord def-Keyword'>procedure</span> pb<span class='pascal-pSymb def-Symbol'>(</span><span class='pascal-pWord def-Keyword'>var</span> i1<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>integer</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>var</span> b2 <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pType def-TypeKeyword def-Keyword'>boolean</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+259: 
+260: <span class='pascal-pWord def-Keyword'>procedure</span> a<span class='pascal-pSymb def-Symbol'>(</span>a<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>dword</span><span class='def-SymbolStrong def-Symbol'>;</span> b<span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pType def-TypeKeyword def-Keyword'>boolean</span><span class='def-SymbolStrong def-Symbol'>;</span> Ptr<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pNetUnsafeType pascal-pType def-TypeKeyword def-Keyword'>Pointer</span><span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>cdecl</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pWord def-Keyword'>register</span><span class='def-SymbolStrong def-Symbol'>;</span>
+261: <span class='pascal-pWord def-Keyword'>var</span>
+262:   i<span class='pascal-pSymb def-Symbol'>:</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Integer</span><span class='def-SymbolStrong def-Symbol'>;</span>
+263: <span class='pascal-pWord def-Keyword'>label</span>
+264:   lbA<span class='def-SymbolStrong def-Symbol'>;</span>
+265: <span class='pascal-pWord2 def-Keyword'>begin</span>
+266:   <span class='pascal-pWord def-Keyword'>if</span> b <span class='pascal-pSymb def-Symbol'>=</span> TObject<span class='pascal-pSymb def-Symbol'>(</span>Ptr<span class='pascal-pSymb def-Symbol'>)</span><span class='pascal-pSymb def-Symbol'>.</span><span class='pascal-pType def-TypeKeyword def-Keyword'>WordBool</span> <span class='pascal-pWord def-Keyword'>then</span>
+267:     <span class='pascal-pWord def-Keyword'>exit</span><span class='def-SymbolStrong def-Symbol'>;</span>
+268:   pb<span class='pascal-pSymb def-Symbol'>(</span> a<span class='pascal-pSymb def-Symbol'>,</span>  b<span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+269:   <span class='pascal-pWord def-Keyword'>for</span> i<span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span><span class='def-NumberDec def-Number'>100</span> <span class='pascal-pWord def-Keyword'>downto</span> <span class='def-NumberDec def-Number'>0</span> <span class='pascal-pWord def-Keyword'>do</span>
+270:     <span class='pascal-pWord def-Keyword'>if</span> b <span class='pascal-pWord def-Keyword'>then</span>
+271:       <span class='pascal-pWord def-Keyword'>break</span>
+272:     <span class='pascal-pWord def-Keyword'>else</span>
+273:     <span class='pascal-pWord2 def-Keyword'>begin</span>
+274:        <span class='pascal-pWord def-Keyword'>if</span> <span class='pascal-pSymb def-Symbol'>(</span><span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span><span class='pascal-pSymb def-Symbol'>)</span> <span class='pascal-pWord def-Keyword'>then</span>
+275:          <span class='pascal-pWord def-Keyword'>continue</span><span class='def-SymbolStrong def-Symbol'>;</span>
+276:        b <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span><span class='def-SymbolStrong def-Symbol'>;</span>
+277:        <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+278:        <span class='pascal-pWord def-Keyword'>if</span> b <span class='pascal-pWord def-Keyword'>then</span>
+279:          <span class='pascal-pWord def-Keyword'>exit</span><span class='def-SymbolStrong def-Symbol'>;</span>
+280:        <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+281:        <span class='pascal-pWord def-Keyword'>if</span> <span class='pascal-pSymb def-Symbol'>(</span><span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span><span class='pascal-pSymb def-Symbol'>)</span> <span class='pascal-pWord def-Keyword'>then</span>
+282:          <span class='pascal-pWord def-Keyword'>goto</span> MY_LABEL<span class='def-SymbolStrong def-Symbol'>;</span>
+283:        <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+284:     <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+285:   <span class='pascal-pComment def-Comment def-Syntax'>// end for i</span>
+286:   <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+287:   <span class='pascal-pWord def-Keyword'>with</span> <span class='pascal-pWord def-Keyword'>Self</span><span class='pascal-pSymb def-Symbol'>.</span>RA<span class='pascal-pSymb def-Symbol'>^</span> <span class='pascal-pWord def-Keyword'>do</span> <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span><span class='def-SymbolStrong def-Symbol'>;</span>
+288:   d<span class='pascal-pSymb def-Symbol'>:</span>=<span class='pascal-pNumb def-Number'>^A</span><span class='def-SymbolStrong def-Symbol'>;</span>
+289:   <span class='pascal-pWord def-Keyword'>while</span> a<span class='pascal-pSymb def-Symbol'>></span><span class='def-NumberDec def-Number'>0</span> <span class='pascal-pWord def-Keyword'>do</span>
+290:     <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span><span class='def-SymbolStrong def-Symbol'>;</span>
+291:   <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+292:   <span class='pascal-pWord2 def-Keyword'>repeat</span> <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+293:    <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+294:   <span class='pascal-pWord2 def-Keyword'>until</span> <span class='pascal-pConst def-Constant def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>;</span>
+295:   <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+296:   <span class='pascal-pWord2 def-Keyword'>try</span>
+297:   <span class='pascal-pWord def-Keyword'>except</span>
+298:     <span class='pascal-pWord def-Keyword'>on</span> e<span class='pascal-pSymb def-Symbol'>:</span> Exception <span class='pascal-pWord def-Keyword'>do</span>
+299:     <span class='pascal-pWord2 def-Keyword'>begin</span>
+300:       <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+301:       <span class='pascal-pWord def-Keyword'>raise</span><span class='def-SymbolStrong def-Symbol'>;</span>
+302:     <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+303:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+304:   <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+305:   <span class='pascal-pWord2 def-Keyword'>try</span>
+306:     <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+307:   <span class='pascal-pWord def-Keyword'>finally</span>
+308:     <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+309:   <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+310:   <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+311:   <span class='pascal-pWord def-Keyword'>goto</span> lbA<span class='def-SymbolStrong def-Symbol'>;</span>
+312:   <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+313: lbA<span class='pascal-pSymb def-Symbol'>:</span>
+314:   <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+315:   Abort<span class='def-SymbolStrong def-Symbol'>;</span>
+316:   <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>.</span>
+317: <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+318: 
+319: <span class='pascal-pWord def-Keyword'>type</span>
+320:   TByteArray <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pWord def-Keyword'>array</span><span class='pascal-pSymb def-Symbol'>[</span><span class='def-NumberDec def-Number'>0</span><span class='pascal-pSymb def-Symbol'>..</span><span class='def-NumberDec def-Number'>10000</span><span class='pascal-pSymb def-Symbol'>]</span><span class='pascal-pWord def-Keyword'>of</span> <span class='pascal-pType def-TypeKeyword def-Keyword'>Byte</span><span class='def-SymbolStrong def-Symbol'>;</span>
+321:   PByteArray <span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pSymb def-Symbol'>^</span>TByteArray<span class='def-SymbolStrong def-Symbol'>;</span>
+322: 
+323: 
+324: <span class='pascal-pWord def-Keyword'>initialization</span>
+325: <span class='pascal-pWord def-Keyword'>finalization</span>
+326: <span class='pascal-pWord2 def-Keyword'>end</span><span class='pascal-pSymb def-Symbol'>.</span>
+327: 

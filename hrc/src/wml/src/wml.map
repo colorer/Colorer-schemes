@@ -1,0 +1,18 @@
+SimpleType boolean = boolean
+SimpleType number = integer
+
+SimpleType length = string
+SimpleType vdata = string
+SimpleType HREF = wml:vdata
+SimpleType ContentType = wml:vdata
+
+AttrGroup coreattrs
+AttrGroup cardev
+
+ModelGroup emph
+ModelGroup layout
+ModelGroup text
+ModelGroup flow
+ModelGroup task
+ModelGroup navelmts
+

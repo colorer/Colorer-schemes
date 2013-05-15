@@ -1,0 +1,153 @@
+  0: <span class='pascal-pComment def-Comment def-Syntax'>(***************************************************</span>
+  1: <span class='pascal-pComment def-Comment def-Syntax'>ssssssssssssssssssssssssssssssssss</span>
+  2: <span class='pascal-pComment def-Comment def-Syntax'>ssssssssssssssssssssssssssssssssss</span>
+  3: <span class='pascal-pComment def-Comment def-Syntax'>***************************************************)</span>
+  4: 
+  5: <span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span> вырезать в test<span class='pascal-pSymb def-Symbol'>.</span>pas <span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span><span class='pascal-pSymb def-Symbol'>*</span> <span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='def-NumberDec def-Number'>8</span><span class='pascal-pSymb def-Symbol'>&lt;</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span><span class='pascal-pSymb def-Symbol'>-</span>
+  6: 
+  7:   <span class='pascal-pWord def-Keyword'>if</span> Pos<span class='pascal-pSymb def-Symbol'>(</span>ReplaceDialog1<span class='pascal-pSymb def-Symbol'>.</span>FindText<span class='pascal-pSymb def-Symbol'>,</span>  Memo1<span class='pascal-pSymb def-Symbol'>.</span><span class='pascal-pType def-TypeKeyword def-Keyword'>Text</span><span class='pascal-pSymb def-Symbol'>)</span> <span class='pascal-pSymb def-Symbol'>&lt;</span><span class='pascal-pSymb def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span> <span class='pascal-pWord def-Keyword'>then</span>
+  8: 
+  9: 
+ 10: <span class='pascal-pWord def-Keyword'>program</span> Test_Colors<span class='def-SymbolStrong def-Symbol'>;</span>
+ 11: 
+ 12: <span class='pascal-pComment def-Comment def-Syntax'>{</span>
+ 13: <span class='pascal-pComment def-Comment def-Syntax'>Добавить в список зарезервированных слов Delphi (Pascal.Hrc):</span>
+ 14: <span class='pascal-pComment def-Comment def-Syntax'>  cdecl</span>
+ 15: <span class='pascal-pComment def-Comment def-Syntax'>  stdcall</span>
+ 16: <span class='pascal-pComment def-Comment def-Syntax'>  pascal</span>
+ 17: <span class='pascal-pComment def-Comment def-Syntax'>  register</span>
+ 18: <span class='pascal-pComment def-Comment def-Syntax'>  safecall</span>
+ 19: <span class='pascal-pComment def-Comment def-Syntax'>  default</span>
+ 20: <span class='pascal-pComment def-Comment def-Syntax'>  nodefault</span>
+ 21: <span class='pascal-pComment def-Comment def-Syntax'>  message</span>
+ 22: <span class='pascal-pComment def-Comment def-Syntax'>  read</span>
+ 23: <span class='pascal-pComment def-Comment def-Syntax'>  write</span>
+ 24: <span class='pascal-pComment def-Comment def-Syntax'>}</span>
+ 25: 
+ 26: <span class='pascal-pComment def-Comment def-Syntax'>{ Приколы с asm-блоком в Pascal'e</span>
+ 27: <span class='pascal-pComment def-Comment def-Syntax'>  Пишу, потому что сам Borland выделяет правильно! :-) }</span>
+ 28: <span class='pascal-pWord def-Keyword'>procedure</span> TestAsmBlock1<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pComment def-Comment def-Syntax'>{проверка asm-блока}</span>
+ 29: <span class='pascal-pWord2 def-Keyword'>begin</span>
+ 30:   <span class='pascal-pWord def-Keyword'>asm</span>
+ 31: <span class='asm-asmLabel def-Label'>   loop1:</span>   <span class='asm-asmComment def-Comment def-Syntax'>{это метка}</span>
+ 32: <span class='asm-asmLabel def-Label'>   @@loop2:</span> <span class='asm-asmComment def-Comment def-Syntax'>{это метка}</span>
+ 33: <span class='asm-asmLabel def-Label'>   @loop:</span>   <span class='asm-asmComment def-Comment def-Syntax'>{это тоже метка, а цветом не выделилась}</span>
+ 34: <span class='asm-asmSymbol def-Symbol'>;</span>      <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>inc</span> <span class='asm-asmRegister def-Register'>dx</span>      <span class='asm-asmComment def-Comment def-Syntax'>{эта строка НЕ закомметирована, а цветом выделяется}</span>
+ 35:                    <span class='asm-asmComment def-Comment def-Syntax'>{здесь ';' - "пустой" оператор}</span>
+ 36: <span class='asm-asmComment def-Comment def-Syntax'>//      inc dx      эта строка закомметирована, цветом не выделяется</span>
+ 37:     <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span> <span class='asm-asmRegister def-Register'>ah</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmNumDec def-NumberDec def-Number'>1</span>       <span class='asm-asmComment def-Comment def-Syntax'>{это комметарий в asm-блоке, цветом не выделяется}</span>
+ 38:     <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>int</span> <span class='asm-asmNumHex def-NumberHex def-Number'>16h</span>
+ 39:     <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>or</span> <span class='asm-asmRegister def-Register'>ah</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>ah</span>
+ 40:     <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>je</span> <span class='asm-asmLabel def-Label'>@end</span>         <span class='asm-asmComment def-Comment def-Syntax'>{здесь '@end' метка, а не зарезервированное слово}</span>
+ 41:     <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>jmp</span> <span class='asm-asmLabel def-Label'>@loop</span>
+ 42: <span class='asm-asmLabel def-Label'>   @end:</span>            <span class='asm-asmComment def-Comment def-Syntax'>{это та же метка}</span>
+ 43:     <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span> Variable<span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmNumDec def-NumberDec def-Number'>2</span>
+ 44:  <span class='pascal-pWord def-Keyword'> end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 45:   WriteLn<span class='pascal-pSymb def-Symbol'>(</span>Variable<span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 46: <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 47: 
+ 48: <span class='pascal-pWord def-Keyword'>procedure</span> TestAsmBlock21<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pComment def-Comment def-Syntax'>{еще примерчик}</span>
+ 49: <span class='pascal-pWord2 def-Keyword'>begin</span>
+ 50:   <span class='pascal-pWord def-Keyword'>if</span> Variable <span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span> <span class='pascal-pWord def-Keyword'>then</span>
+ 51:   <span class='pascal-pWord2 def-Keyword'>begin</span>
+ 52:     Variable <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 53:     <span class='pascal-pWord def-Keyword'>asm</span>
+ 54: <span class='asm-asmLabel def-Label'>     @loop:</span>
+ 55:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span> <span class='asm-asmRegister def-Register'>ah</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmNumDec def-NumberDec def-Number'>1</span><span class='asm-asmSymbol def-Symbol'>;</span> <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>int</span> <span class='asm-asmNumHex def-NumberHex def-Number'>16h</span><span class='asm-asmSymbol def-Symbol'>;</span>  <span class='asm-asmComment def-Comment def-Syntax'>{так тоже можно писать, а выделяется неправильно}</span>
+ 56:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>or</span> <span class='asm-asmRegister def-Register'>ah</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>ah</span>
+ 57:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>je</span> <span class='asm-asmLabel def-Label'>@end</span>
+ 58:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>jmp</span> <span class='asm-asmLabel def-Label'>@loop</span>
+ 59: <span class='asm-asmLabel def-Label'>     @end:</span>
+ 60:    <span class='pascal-pWord def-Keyword'> end</span>            <span class='pascal-pComment def-Comment def-Syntax'>{здесь после 'end' - ';' не обязательна, но это конец блока}</span>
+ 61:   <span class='pascal-pWord2 def-Keyword'>end</span> <span class='pascal-pWord def-Keyword'>else</span>         <span class='pascal-pComment def-Comment def-Syntax'>{это пошел уже не asm-блок}</span>
+ 62:     Variable <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 63:   Inc<span class='pascal-pSymb def-Symbol'>(</span>Variable<span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span> WriteLn<span class='pascal-pSymb def-Symbol'>(</span>Variable<span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 64: <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 65: 
+ 66: <span class='pascal-pWord def-Keyword'>procedure</span> TestAsmBlock22<span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pComment def-Comment def-Syntax'>{та же процедурка с маленьким изменением}</span>
+ 67: <span class='pascal-pWord2 def-Keyword'>begin</span>
+ 68:   <span class='pascal-pWord def-Keyword'>if</span> Variable <span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span> <span class='pascal-pWord def-Keyword'>then</span>
+ 69:   <span class='pascal-pWord2 def-Keyword'>begin</span>
+ 70:     Variable <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 71:     <span class='pascal-pWord def-Keyword'>asm</span>
+ 72: <span class='asm-asmLabel def-Label'>     @loop:</span>
+ 73:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>mov</span> <span class='asm-asmRegister def-Register'>ah</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmNumDec def-NumberDec def-Number'>1</span>
+ 74:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>int</span> <span class='asm-asmNumHex def-NumberHex def-Number'>16h</span>
+ 75:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>or</span> <span class='asm-asmRegister def-Register'>ah</span><span class='asm-asmSymbol def-Symbol'>,</span> <span class='asm-asmRegister def-Register'>ah</span>
+ 76:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>je</span> <span class='asm-asmLabel def-Label'>@end</span>
+ 77:       <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>jmp</span> <span class='asm-asmLabel def-Label'>@loop</span>
+ 78: <span class='asm-asmLabel def-Label'>     @end:</span>
+ 79:    <span class='pascal-pWord def-Keyword'> end</span>           <span class='pascal-pComment def-Comment def-Syntax'>{это тоже конец блока}</span>
+ 80:   <span class='pascal-pWord2 def-Keyword'>end</span> <span class='pascal-pWord def-Keyword'>else</span>
+ 81:     Variable <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 82:   Inc<span class='pascal-pSymb def-Symbol'>(</span>Variable<span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span> WriteLn<span class='pascal-pSymb def-Symbol'>(</span>Variable<span class='pascal-pSymb def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 83: <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 84: 
+ 85: <span class='pascal-pWord2 def-Keyword'>begin</span>
+ 86:   Ch <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pNumb def-Number'>#32</span><span class='def-SymbolStrong def-Symbol'>;</span>  <span class='pascal-pComment def-Comment def-Syntax'>{это символ пробела}</span>
+ 87:   Ch <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pNumb def-Number'>#$20</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='pascal-pComment def-Comment def-Syntax'>{это тоже символ пробела, но он не выделился}</span>
+ 88:   f <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>4.93e33</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 89:   i <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='pascal-pNumb def-Number'>$3fa33</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 90:   i <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span><span class='pascal-pNumb def-Number'>$3fa33</span><span class='def-SymbolStrong def-Symbol'>;</span>   <span class='pascal-pComment def-Comment def-Syntax'>// ? :=</span>
+ 91:   i <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>23</span><span class='pascal-pSymb def-Symbol'>..</span><span class='def-NumberDec def-Number'>33</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 92:   i <span class='pascal-pSymb def-Symbol'>:</span><span class='pascal-pSymb def-Symbol'>=</span> <span class='def-NumberDec def-Number'>984</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 93:   <span class='def-NumberFloat def-Number'>5.4</span> <span class='def-NumberDec def-Number'>0</span><span class='pascal-pSymb def-Symbol'>.</span>  <span class='def-Error'>$3Fg</span>
+ 94:   <span class='def-NumberFloat def-Number'>5.4</span> <span class='def-NumberDec def-Number'>0</span><span class='pascal-pSymb def-Symbol'>.</span>
+ 95:   <span class='pascal-pWord def-Keyword'>safecall</span> <span class='def-NumberDec def-Number'>23</span>
+ 96:   <span class='pascal-pComment def-Comment def-Syntax'>// from tst.asm</span>
+ 97:   <span class='def-NumberDec def-Number'>1</span><span class='pascal-pSymb def-Symbol'>.</span>  <span class='def-NumberFloat def-Number'>.1</span>
+ 98:   <span class='def-NumberDec def-Number'>1</span><span class='pascal-pSymb def-Symbol'>.</span> <span class='def-NumberFloat def-Number'>.1</span>         <span class='pascal-pComment def-Comment def-Syntax'>// &lt;?</span>
+ 99:   <span class='def-NumberDec def-Number'>1</span><span class='pascal-pSymb def-Symbol'>..</span><span class='def-NumberDec def-Number'>1</span>
+100:   <span class='def-NumberDec def-Number'>1</span><span class='pascal-pSymb def-Symbol'>.</span> <span class='pascal-pSymb def-Symbol'>..</span><span class='pascal-pSymb def-Symbol'>..</span><span class='def-NumberFloat def-Number'>.1</span><span class='pascal-pSymb def-Symbol'>..</span><span class='def-NumberFloat def-Number'>.1</span>
+101:   <span class='def-NumberDec def-Number'>0</span><span class='pascal-pSymb def-Symbol'>..</span><span class='def-NumberFloat def-Number'>.1e2</span>
+102:   <span class='def-NumberFloat def-Number'>1.1</span><span class='pascal-pSymb def-Symbol'>.</span><span class='def-NumberFloat def-Number'>1e-1</span>
+103:   <span class='pascal-pSymb def-Symbol'>)</span><span class='def-NumberFloat def-Number'>.3</span>
+104: <span class='def-NumberFloat def-Number'>.3</span> <span class='def-NumberFloat def-Number'>.3</span><span class='pascal-pSymb def-Symbol'>(</span><span class='pascal-pSymb def-Symbol'>)</span>
+105: <span class='def-NumberDec def-Number'>3</span><span class='pascal-pSymb def-Symbol'>.</span>
+106: <span class='def-NumberDec def-Number'>3</span><span class='pascal-pSymb def-Symbol'>.</span><span class='pascal-pSymb def-Symbol'>(</span>dfd<span class='pascal-pSymb def-Symbol'>)</span>
+107:     <span class='def-NumberFloat def-Number'>3e3</span>
+108: <span class='pascal-pWord2 def-Keyword'>end</span><span class='pascal-pSymb def-Symbol'>.</span>
+109: 
+110: 
+111: 
+112: <span class='pascal-pComment def-Comment def-Syntax'>// Tested on Colorer 2.8</span>
+113: 
+114: <span class='pascal-pComment def-Comment def-Syntax'>//  БАГИ с "end"</span>
+115: 
+116:  <span class='pascal-pWord2 def-Keyword'>begin</span>
+117: 
+118:     <span class='pascal-pWord def-Keyword'>asm</span>
+119:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>xor</span> <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmRegister def-Register'>eax</span>
+120:         <span class='asm-asmComment def-Comment def-Syntax'>// sdffffdsfdfds</span>
+121: <span class='pascal-pWord def-Keyword'> end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+122:   <span class='pascal-pComment def-Comment def-Syntax'>//</span>
+123:  <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+124:   <span class='pascal-pComment def-Comment def-Syntax'>//</span>
+125: 
+126: <span class='pascal-pWord2 def-Keyword'>begin</span>
+127:  <span class='pascal-pWord def-Keyword'>asm</span>
+128:      <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>xor</span> <span class='asm-asmRegister def-Register'>ax</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmRegister def-Register'>ax</span>
+129:      <span class='asm-asmComment def-Comment def-Syntax'>//  xor ax,ax</span>
+130: <span class='pascal-pWord def-Keyword'> end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+131: <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+132: 
+133: 
+134: <span class='pascal-pComment def-Comment def-Syntax'>// А ЗДЕСЬ ВСЕ ОК. Какая то зависимость от отступа ( при сдвиге "end" влево/вправо ).</span>
+135: 
+136:  <span class='pascal-pWord2 def-Keyword'>begin</span>
+137: 
+138:     <span class='pascal-pWord def-Keyword'>asm</span>
+139:         <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>xor</span> <span class='asm-asmRegister def-Register'>eax</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmRegister def-Register'>eax</span>
+140:         <span class='asm-asmComment def-Comment def-Syntax'>// sdffffdsfdfds</span>
+141:  <span class='pascal-pWord def-Keyword'> end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+142: 
+143:  <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+144: 
+145: 
+146: <span class='pascal-pWord2 def-Keyword'>begin</span>
+147:  <span class='pascal-pWord def-Keyword'>asm</span>
+148:      <span class='asm-asmiBase asm-asmMnemonics def-Keyword'>xor</span> <span class='asm-asmRegister def-Register'>ax</span><span class='asm-asmSymbol def-Symbol'>,</span><span class='asm-asmRegister def-Register'>ax</span>
+149:      <span class='asm-asmComment def-Comment def-Syntax'>//  xor ax,ax</span>
+150:  <span class='pascal-pWord def-Keyword'> end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+151: <span class='pascal-pWord2 def-Keyword'>end</span><span class='def-SymbolStrong def-Symbol'>;</span>
+152: 

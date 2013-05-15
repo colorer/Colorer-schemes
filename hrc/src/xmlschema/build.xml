@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<project name="src.xmlschema" default="all" basedir=".">
+
+<property name="root" value="../.." description="colorer root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="../../src/xmlschema" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+
+
+
+<!-- hrc -->
+
+<target name="hrc.check">
+ <dependset>
+  <srcfilelist dir="." files = "build.xml"/>
+  <srcfilelist dir="${src}" files = "XMLSchema.xsd, custom.xsd.xml"/>
+  <targetfilelist dir="${bin}" files="xmlschema.hrc"/>
+ </dependset>
+</target>
+
+<target name="hrc" depends="hrc.check">
+ <ant antfile="${util}" target="xsd2hrc">
+  <property name="util.input" value="${src}/XMLSchema.xsd"/>
+  <property name="util.output" value="${bin}/xmlschema.hrc"/>
+  <property name='xsd2hrc.hrctype' value='xmlschema'/>
+  <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.xsd.xml'/>
+ </ant>
+</target>
+
+
+
+<!-- xsi.hrc -->
+
+<target name="xsi.hrc.check">
+ <dependset>
+  <srcfilelist dir="." files = "build.xml"/>
+  <srcfilelist dir="${src}" files = "XMLSchema-instance.xsd, custom.xsd.xml"/>
+  <targetfilelist dir="${bin}" files="xmlschema-instance.hrc"/>
+ </dependset>
+</target>
+
+<target name="xsi.hrc" depends="xsi.hrc.check">
+ <ant antfile="${util}" target="xsd2hrc">
+  <property name="util.input" value="${src}/XMLSchema-instance.xsd"/>
+  <property name="util.output" value="${bin}/xmlschema-instance.hrc"/>
+  <property name='xsd2hrc.hrctype' value='xsi'/>
+  <property name='xsd2hrc.custom-defines' value='${this}/${src}/custom.xsd.xml'/>
+ </ant>
+</target>
+
+
+
+<!-- final -->
+
+<target name="all" depends="hrc, xsi.hrc"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${bin}" includes="xmlschema.hrc, xmlschema-instance.hrc"/>
+ </delete>
+</target>
+
+</project>

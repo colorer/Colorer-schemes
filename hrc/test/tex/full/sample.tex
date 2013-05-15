@@ -1,0 +1,99 @@
+% В ColorSet.Hrc сделано изменение
+% <Files Scheme="Tex" Exts="/\.(tex)|(cls)|(sty)$/i" Color="dText">
+%
+% А теперь о самой раскраске:
+% 1) поскольку ТеХ по-особому относится к скобкам {} и [], то их содержимое
+%    выделяется красненьким, чтобы сразу была видна парность/непарность
+%    этих скобок.
+% 2) Все формулы пишутся на черном фоне
+% 3) Символы, которых быть не должно - на красном фоне
+% 4) Цифры - зеленые
+% 5) Основной текст - дефолтного цвета.
+% 6) Спецсимволы - белые
+% 7) Команды - желтые
+% 8) Примечания - непонятного серо-зеленого цвета.
+%
+% Чтобы долго не извращаться, я просто кусков из реальной статьи нарезал
+
+$$  asf asfd sdf $$
+$ s  { d { sdf } d } asfa sfd  s $
+
+{s    s    s}
+[s s s s s s]
+
+\documentstyle[12pt]{article}
+\begin{document}
+\title{Excitation of plasma oscillations by moving Josephson vortices in
+layered superconductors}
+\author{ }
+\maketitle
+
+The density of the superconducting current between layers $n$ and $n+1$ is
+given by $$j^{(s)}_{\perp n}(\varphi_n)=j_c \sin{\varphi_n}$$,
+where $\varphi_n$ is the gauge invariant phase difference. We shall adopt an
+exactly solvable model substituting $\sin{\varphi_n}$ by the saw-tooth
+function
+\begin{equation}
+%
+% синий цвет фона {equation} - для симметрии с \end{equation},
+% хотя, это, конечно, кривизна.
+%
+j^{(s)}_{\perp n}(\varphi_n)=j_c\arcsin{\sin{\varphi_n}},
+\end{equation}
+
+%
+% а вот и эти самые злополучные \begin{equation}
+% и \end{equation}
+%
+In the displacement current we take into account only the component along
+$z$ axis, since due to the strong anisotropy of a layered superconductor the
+plasma frequency in the direction parallel to the layers, $\Omega_p =c/
+\lambda$, is much larger, than typical frequencies of the problem, which
+are of the order of the plasma frequency for perpendicular direction,
+$\omega_p= c_z/\lambda_c$. Here $c_z =c/\sqrt{\epsilon}$, $\epsilon$ is a
+dielectric constant in $z$ direction, $\lambda$ and $\lambda_c =c/
+\sqrt{8\pi d j_c}$ are the screening lengths for the current flowing
+parallel and perpendicular to the layers, respectively. Then we get the
+equations
+\begin{eqnarray}
+j^{(s)}_{\perp n}(\varphi_n)-
+\frac{c^2}{8\pi d}
+%
+% а вот и \frac{}{}
+% хочется, чтобы в \frac{c^2}+... буквы "\frac" были бы на красном фоне,
+% поскольку нету второй пары скобок {}
+%
+\frac{\partial^2\varphi_n}{\partial x^2} +
+2\lambda_c^2\frac{\partial}{\partial x} (P_{n+1} - P_n) =
+-\frac{\lambda_c^2}{c^2}
+\frac{\partial}{\partial t}
+\left(
+  \frac{            % такие многострочные фраки должны правильно
+    4\pi            % отрабатываться! Как это сделать с одновременной
+    \sigma_{\perp}  % закраской фона в красный цвет у неправильных фраков
+   }                % я просто не знаю :(
+   {
+     \epsilon
+   }+
+  \frac{\partial}{\partial t}
+\right)
+\varphi_n
+\\ % разделитель
+\frac{c^2}{2d^2}
+\frac{\partial}{\partial x}
+(\varphi_n -\varphi_{n-1}) +\Omega_p^2 P_n -
+  \frac{c^2}{d^2}(P_{n+1}+P_{n-1}-2P_n
+)=
+-\frac{\partial}{\partial t}
+\left(4\pi \sigma_{\|} +
+  \frac{\partial}{\partial t}
+\right) P_n.
+\end{eqnarray}
+%
+% eqnarray = equation array
+% В принципе, eqnarray может быть вложен в equation.
+%
+The solution of these equations yields spatial and temporal dependencies of
+electric and magnetic fields.
+
+\end{document}

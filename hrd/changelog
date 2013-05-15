@@ -1,0 +1,26 @@
+﻿$Revision$
+	$Author$ $Date$
+	- обновлен стиль Classic take4 like by Sim
+
+#Revision: 1885
+	Author: ctapmex Date: 2012-11-15 15:11:20 +0600 (Чт, 15 ноя 2012)
+	- Добавлен стиль Classic take4 like by Sim. (#1)
+	- Перемещен visual-rgb.hrd в папку contrib
+
+#Revision: 1884
+	Author: ctapmex Date: 2012-11-15 15:00:00 +0600 (Чт, 15 ноя 2012)
+	Перемещен visual.hrd в папку contrib.
+	
+#Revision: 1874
+	Author: ctapmex Date: 2012-10-08 11:43:02 +0600 (Пн, 08 окт 2012)
+	Добавлены стили от Roman Kuzmin
+	
+#Revision: 1400
+	Author: formirror Date: 2010-02-19 00:29:03 +0500 (Пт, 19 фев 2010)
+	
+#Revision: 1349 
+	formirror Date: 2010-02-10 03:10:19 +0300 (Ср, 10 фев 2010) 
+	Реструктуризация
+	- Переносим css и палитры в корень.
+	- Добавляем аддон для *.reg
+	- Все теперь билдится автоматичски

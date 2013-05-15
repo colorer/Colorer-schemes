@@ -1,0 +1,577 @@
+<?xml version="1.0"?>
+<project name='Colorer-take5' default="info" basedir=".">
+
+  <description>
+    This is the top-level buildfile, used by ANT tool (http://jakarta.apache.org/ant/)
+    It contains tasks, used to build and distribute Colorer-take5 library packages.
+  </description>
+
+  <!-- Chance to redefine properties without changing default build.properties file -->
+  <property file='build.user.properties'/>
+
+  <property file='build.properties'/>
+
+
+  <property name='build-dir' value='distr'/>
+
+  <property name='distr-version' value='.version'/>
+
+  <property name='hrcupdate-dir' value='${build-dir}/hrc-update'/>
+
+  <property name='library-name' value='Colorer-take5${distr-version}'/>
+  <property name='library-dir' value='${build-dir}/${library-name}'/>
+  <property name='library-zip' value='${build-dir}/${library-name}.zip'/>
+
+  <property name='library-linux-name' value='Colorer-take5-linux${distr-version}'/>
+  <property name='library-linux-dir' value='${build-dir}/${library-linux-name}'/>
+  <property name='library-linux-tar' value='${build-dir}/${library-linux-name}.tar'/>
+  <property name='library-linux-tar.bz2' value='${library-linux-tar}.bz2'/>
+
+  <property name='this.far-dir' value='c:\far\plugins\colorer'/>
+
+  <property name='farplugin-name' value='FarColorer-take5${distr-version}'/>
+  <property name='farplugin-dir' value='${build-dir}/${farplugin-name}'/>
+  <property name='farplugin-zip' value='${build-dir}/${farplugin-name}.zip'/>
+
+  <property name='eclipseplugin-version' value='_1.0.0'/>
+  <property name='eclipseplugin-name' value='EclipseColorer-take5${eclipseplugin-version}'/>
+  <property name='eclipsedir-name' value='net.sf.colorer${eclipseplugin-version}'/>
+  <property name='eclipseplugin-dir' value='${build-dir}/${eclipseplugin-name}/${eclipsedir-name}'/>
+  <property name='eclipseplugin-zip' value='${build-dir}/${eclipseplugin-name}.zip'/>
+
+  <property name='fixcrlf-ext' value="**/*.cpp, **/*.c, **/*.h, **/*.hpp, **/*makefile*, **/*.java,
+                                      **/*.prop*, **/*.sh, **/*.hrc, **/*.hrd, **/*.xml,
+                                      **/*.dep,
+                                      **/*.txt, **/*.html, **/*.xsd, **/*.dtd, **/configure*, **/Makefile*,
+                                      **/README, **/LICENSE, **/LINUX, **/MACOS, **/TODO, **/WHATSNEW"/>
+
+  <property environment='env'/>
+  <property name='env.Path' value=''/>
+  <property name='env.LIB' value=''/>
+  <property name='native-path-add' value=''/>
+  <property name='native-libs-add' value=''/>
+  <property name='native-path' value='${env.Path}:${native-path-add}'/>
+  <property name='native-libs' value='${env.LIB}:${native-libs-add}'/>
+
+  <property name='use-dot' value='NO'/>
+  <property name='dot-path' value=''/>
+
+  <xmlcatalog id="DTDs">
+    <dtd publicid="-//Cail Lomecb//DTD Colorer HRC take5//EN"
+         location="doc/2003/hrc.dtd"/>
+    <dtd publicid="-//Cail Lomecb//DTD Colorer HRD take5//EN"
+         location="doc/2003/hrd.dtd"/>
+    <dtd publicid="-//Cail Lomecb//DTD Colorer CATALOG take5//EN"
+         location="doc/2003/catalog.dtd"/>
+  </xmlcatalog>
+
+
+  <target name="init">
+    <condition property='make' value='${vc.make}'><equals arg1='${platform}' arg2='vc'/></condition>
+    <condition property='makefile' value='${vc.makefile}'><equals arg1='${platform}' arg2='vc'/></condition>
+
+    <condition property='make' value='${bcc.make}'><equals arg1='${platform}' arg2='bcc'/></condition>
+    <condition property='makefile' value='${bcc.makefile}'><equals arg1='${platform}' arg2='bcc'/></condition>
+
+    <condition property='make' value='${cygwin.make}'><equals arg1='${platform}' arg2='cygwin'/></condition>
+    <condition property='makefile' value='${cygwin.makefile}'><equals arg1='${platform}' arg2='cygwin'/></condition>
+
+    <condition property='make' value='${gcc.make}'><equals arg1='${platform}' arg2='gcc'/></condition>
+    <condition property='makefile' value='${gcc.makefile}'><equals arg1='${platform}' arg2='gcc'/></condition>
+
+    <condition property='make' value='${macos.make}'><equals arg1='${platform}' arg2='macos'/></condition>
+    <condition property='makefile' value='${macos.makefile}'><equals arg1='${platform}' arg2='macos'/></condition>
+
+    <condition property='fail-on-badpaths' value='true'><equals arg1='${fail-on-bad-paths}' arg2='true'/></condition>
+
+    <fail unless='make'>
+
+      No 'platform' property was specified. Use
+      ant -Dplatform=[vc|bcc|cygwin|gcc|macos]
+
+    </fail>
+
+    <property name='add.excludes' value='**/*.ilc, **/*.ild, **/*.pdb,
+              **/*.ilf, **/*.ils, **/*.tds, **/*.map, **/*.o, **/*.exp
+              **/colorer/colorer.exe, **/colorer/colorer, **/warn_out
+              **/*.obj, **/*.lib, **/*.map, **/*.log, **/*.dll, **/*.asm,
+              **/*.so, **/src.zip, **/colorer.jar, **/objs/*,
+              **/build.user.properties
+              '/>
+
+    <uptodate property="doc.javadoc.required" targetfile="doc/java/package-list">
+      <srcfiles dir= "src/net.sf.colorer/src" includes="**/*.java, **/*.html"/>
+    </uptodate>
+
+    <uptodate property="doc.doxygen.required" targetfile="doc/api/index.html">
+      <srcfiles dir= "src" includes="**/*.h, **/*.cpp, **/doxygen.cfg*, **/*.html"/>
+    </uptodate>
+
+    <available file='${doxygen}' property='doxygen-exists'/>
+    <condition property='doxygen-exists-orfail' value='true'>
+      <or>
+       <isset property='doxygen-exists'/>
+       <isset property='fail-on-badpaths'/>
+      </or>
+    </condition>
+
+    <available file='${eclipse.dir}' type='dir' property='eclipse.plugins-exists'/>
+
+  </target>
+
+  <target name="info" description='Shows help'>
+<echo>
+  You can build Colorer-take5 library into four kinds of packages:
+    ``ant all''             - Builds all available packages
+    ``ant library''         - Full library distribution
+    ``ant library-linux''   - Library unix package version
+    ``ant eclipseplugin''   - Eclipse IDE plugin
+    ``ant farplugin''       - FAR Manager plugin
+  Service builds:
+    ``hrcupdate''           - Builds zip with current HRC for
+                              separate distribution.
+    ``ant this.colorer''    - Builds binary executables and installs
+                              them into the current working copy.
+    ``ant this.far''        - Builds far manager executables and installs
+                              them into FAR Manager folder.
+</echo>
+  </target>
+
+  <target name="all" depends='init, library, farplugin, eclipseplugin, library-linux' description='Builds all available packages: library, farplugin and eclipseplugin'>
+  </target>
+
+  <target name="clean" depends='init, library.clean, farplugin.clean, eclipseplugin.clean, hrc.clean, hrcupdate.clean, doc.clean'
+          description='Cleans all the temporary files'>
+
+  </target>
+
+  <target name="make.clean">
+    <exec dir='${make.dir}' executable='${make}'>
+      <arg line='${makefile}'/>
+      <arg line='clean'/>
+      <env key='Path' path='${native-path}:${java.library.path}'/>
+    </exec>
+  </target>
+
+
+
+  <target name='install' depends='init' description='Installs Colorer-take5 Library'>
+  </target>
+
+  <target name="doc.clean">
+    <delete file='src\shared\colorer_doc\warn_out'/>
+    <ant dir='doc/hrc-ref' antfile='build.xml' target='clean'/>
+    <delete dir='doc/api'/>
+    <delete dir='doc/java'/>
+  </target>
+
+  <target name="doc.hrc-ref" depends='init'>
+    <ant dir='doc/hrc-ref' antfile='build.xml' target='all'/>
+  </target>
+
+  <target name="doc" depends='init, doc.javadoc, doc.doxygen, doc.hrc-ref' description='Builds all the documentation files'>
+  </target>
+
+  <target name="doc.javadoc" depends='init' description='Generates Java classes documentation' unless='doc.javadoc.required'>
+    <ant dir='src/net.sf.colorer' antfile='javadoc.xml' target='javadoc'>
+      <property name='doc.dir' value='../../doc/java'/>
+    </ant>
+  </target>
+
+  <target name="doc.doxygen" depends='init' if='doxygen-exists-orfail' description='Generates C++ classes documentation' unless='doc.doxygen.required'>
+    <antcall target='doxygen-check'/>
+    <copy file='src/shared/colorer_doc/doxygen.cfg.in'
+          tofile="src/shared/colorer_doc/doxygen.cfg">
+      <filterset>
+        <filter token='use-dot' value='${use-dot}'/>
+        <filter token='dot-path' value='${dot-path}'/>
+      </filterset>
+    </copy>
+    <exec executable='${doxygen}' dir='src/shared/colorer_doc'
+          failonerror='true'>
+      <arg value='doxygen.cfg'/>
+    </exec>
+    <delete file='src/shared/colorer_doc/doxygen.cfg'/>
+  </target>
+
+  <target name='doxygen-check' unless='doxygen-exists'>
+    <echo>
+* ********** WARNING!!! *************
+* Can't find doxygen executable modules to generate
+* documentation from source C++ files.
+*
+* If you have these files, please fix 'build.properties'
+* file in colorer root directory and restart building.
+* You can ignore this build error, removing 'fail-on-bad-paths'
+* property from the 'build.properties' file.
+    </echo>
+    <fail if='fail-on-badpaths'>
+******** Build stopped because of bad doxygen paths.
+    </fail>
+  </target>
+
+  <target name="hrc" depends='init' description='Generates all required HRC files'>
+    <ant dir='src/hrc' antfile='build.xml' target='all'/>
+  </target>
+
+  <target name="hrc.clean" depends='init' description='Cleans all the generated HRC files'>
+    <ant dir='src/hrc' antfile='build.xml' target='clean'/>
+  </target>
+
+  <target name="hrc.jar" depends='hrc'>
+
+    <mkdir dir='${target-dir}/hrc/auto/types'/>
+
+    <zip destfile='${target-dir}/hrc/common.jar'>
+      <fileset dir='hrc' includes='**/*' excludes='changes.txt, proto*.hrc, proto*.xml, auto, auto/**/*'/>
+    </zip>
+    <copy todir='${target-dir}/hrc/'  overwrite='true'>
+      <fileset dir='hrc/' includes='proto*.hrc, proto*.xml'/>
+    </copy>
+    <replace file="${target-dir}/hrc/proto.hrc" token='link="' value='link="jar:common.jar!'/>
+
+    <zip destfile='${target-dir}/hrc/auto/types/auto.jar'>
+      <fileset dir='hrc/auto' includes='gen/**/*, qrm/**/*, types/**/*'/>
+    </zip>
+
+    <copy todir='${target-dir}/hrc/auto' overwrite='true'>
+      <fileset dir='hrc/auto' includes='*.hrc'/>
+    </copy>
+    <replace dir="${target-dir}/hrc/auto" includes='*.hrc' token='link="' value='link="jar:types/auto.jar!'/>
+  </target>
+
+  <target name="hrcupdate.clean" depends='init'>
+    <delete><fileset dir='${build-dir}/..' includes='hrc-update*'/></delete>
+    <delete dir='${hrcupdate-dir}'/>
+  </target>
+
+  <target name="hrcupdate" depends='init' description='Builds a package of the current HRC base'>
+    <tstamp><format property="TODAY" pattern="yyyy-MM-dd"/></tstamp>
+    <property name='hrcupdate-zip' value='${build-dir}/hrc-update.${TODAY}.zip'/>
+
+    <mkdir dir='${hrcupdate-dir}/hrc'/>
+    <antcall target='hrc.jar'>
+      <param name='target-dir' value='${hrcupdate-dir}'/>
+    </antcall>
+    <copy file='hrc/changes.txt' todir='${hrcupdate-dir}'/>
+
+    <zip destfile='${hrcupdate-zip}'>
+      <fileset dir='${hrcupdate-dir}'/>
+    </zip>
+
+  </target>
+
+
+  <target name="this.colorer" depends='init, hrc' description='Builds binary executable and moves it into current working copy'>
+    <exec dir='src/colorer' executable='${make}' failonerror='true'>
+      <arg line='${makefile}'/>
+      <env key='Path' path='${native-path}:${java.library.path}'/>
+      <env key='LIB' path='${native-libs}'/>
+    </exec>
+    <condition property="lib">
+      <or>
+        <available filepath="src/colorer" file="colorer.exe"/>
+        <available filepath="src/colorer" file="colorer"/>
+      </or>
+    </condition>
+    <fail unless='lib' message='Native executable library was not compiled'/>
+    <copy todir="./bin">
+      <fileset dir="src/colorer" includes="colorer.exe, colorer"/>
+    </copy>
+  </target>
+
+  <target name="library.clean" depends='init'>
+    <delete dir='${library-dir}'/>
+    <delete file='${library-zip}'/>
+    <antcall target='make.clean'>
+      <param name='make.dir' value='src/colorer'/>
+    </antcall>
+  </target>
+
+  <target name="library" depends='init, hrc, doc' description='Builds Colorer-take5 Library source distribution package'>
+
+    <exec dir='src/colorer' executable='${make}' failonerror='true'>
+      <arg line='${makefile}'/>
+      <env key='Path' path='${native-path}:${java.library.path}'/>
+      <env key='LIB' path='${native-libs}'/>
+    </exec>
+    <condition property="lib">
+      <or>
+        <available filepath="src/colorer" file="colorer.exe"/>
+        <available filepath="src/colorer" file="colorer"/>
+      </or>
+    </condition>
+    <fail unless='lib' message='Native executable library was not compiled'/>
+
+    <mkdir dir='${library-dir}'/>
+
+    <copy todir="${library-dir}/bin">
+      <fileset dir="src/colorer" includes="colorer.exe,colorer"/>
+      <fileset dir="bin" includes="**"/>
+    </copy>
+    <copy todir="${library-dir}">
+      <fileset dir="." includes="hrc/**, hrd/**, src/**" excludes='${add.excludes}'/>
+      <fileset dir="." includes="doc/**" excludes='**/*.log, **/*.fo, **/*-merged'/>
+    </copy>
+    <copy todir='${library-dir}' includeemptydirs='false'>
+      <fileset dir='.' includes='*' excludes='*.log, build.user.properties'/>
+    </copy>
+
+    <fixcrlf srcdir="${build-dir}/${library-name}" eol="lf"
+             includes="${fixcrlf-ext}"
+    />
+
+    <zip destfile='${library-zip}'>
+      <fileset dir='${build-dir}' includes='${library-name}/**'/>
+    </zip>
+
+  </target>
+
+
+  <target name="library-linux.clean" depends='init'>
+    <delete dir='${library-linux-dir}'/>
+    <delete file='${library-linux-zip}'/>
+    <antcall target='make.clean'>
+      <param name='make.dir' value='src/colorer'/>
+    </antcall>
+  </target>
+
+  <target name="library-linux" depends='init, hrc, doc' description='Builds Colorer-take5 Library linux package'>
+
+    <mkdir dir='${library-linux-dir}'/>
+
+    <copy todir="${library-linux-dir}/bin">
+      <fileset dir="bin" includes="**" excludes='**/*.exe, **/*.bat'/>
+    </copy>
+    <copy todir="${library-linux-dir}">
+      <fileset dir="." includes="hrc/**, hrd/**, src/**" excludes='${add.excludes}'/>
+      <fileset dir="." includes="doc/**" excludes='**/*.log, **/*.fo, **/*-merged'/>
+    </copy>
+    <copy todir='${library-linux-dir}' includeemptydirs='false'>
+      <fileset dir='.' includes='LICENSE, README, catalog.xml' excludes='*.log'/>
+    </copy>
+    <copy todir='${library-linux-dir}' includeemptydirs='false'>
+      <fileset dir='src/libcolorer/linux' includes='*'/>
+    </copy>
+    <fixcrlf srcdir="${library-linux-dir}" eol="lf"
+             includes="${fixcrlf-ext}"
+    />
+    <tar destfile='${library-linux-tar.bz2}' compression='bzip2'>
+      <tarfileset dir='${library-linux-dir}' mode='755' includes='configure'/>
+      <tarfileset dir='${library-linux-dir}' includes='**/*' excludes='configure'/>
+    </tar>
+
+  </target>
+
+
+  <target name="eclipseplugin.clean" depends='init'>
+    <delete dir='${eclipseplugin-dir}' failonerror='false'/>
+    <delete file='${eclipseplugin-zip}' failonerror='false'/>
+    <ant dir='src/net.sf.colorer' antfile='build.xml' target='clean'>
+      <property name='temp.folder' value='../../${build-dir}/${eclipseplugin-name}'/>
+    </ant>
+    <antcall target='make.clean'>
+      <param name='make.dir' value='src/net.sf.colorer/libnative'/>
+    </antcall>
+  </target>
+
+  <target name='eclipse.plugins-check' unless='eclipse.plugins-exists'>
+    <echo>
+* ********** WARNING!!! *************
+* Can't find ECLIPSE IDE folder.
+* Eclipse libraries are used to compile EclipseColorer plugin.
+*
+* If you have these files, please fix 'build.properties'
+* file in colorer root directory and restart building.
+* You can ignore this build error, removing 'fail-on-bad-paths'
+* property from the 'build.properties' file.
+    </echo>
+    <fail if='fail-on-badpaths'>
+******** Build stopped because of bad Eclipse IDE paths.
+    </fail>
+  </target>
+
+  <target name="eclipseplugin" depends='init' description='Eclipse plugin package'>
+
+    <antcall target='eclipse.plugins-check'/>
+
+    <ant dir='src/net.sf.colorer' antfile='build.xml' target='gather'>
+      <property name='temp.folder' value='../../${build-dir}/${eclipseplugin-name}'/>
+    </ant>
+
+    <exec dir='src/net.sf.colorer/libnative' executable='${make}' failonerror='true'>
+      <arg line='${makefile}'/>
+      <env key='Path' path='${native-path}:${java.library.path}'/>
+    </exec>
+
+    <condition property="lib">
+      <or>
+        <available filepath="src/net.sf.colorer/libnative" file="net_sf_colorer.dll"/>
+        <available filepath="src/net.sf.colorer/libnative" file="libnet_sf_colorer.so"/>
+        <available filepath="src/net.sf.colorer/libnative" file="libnet_sf_colorer.jnilib"/>
+      </or>
+    </condition>
+    <fail unless='lib'>
+    *********** ERROR! Native part of the Colorer Java library was not compiled
+    </fail>
+
+    <mkdir dir='${eclipseplugin-dir}'/>
+
+    <mkdir dir="${eclipseplugin-dir}/os/win32/x86"/>
+    <mkdir dir="${eclipseplugin-dir}/os/linux/x86"/>
+    <mkdir dir="${eclipseplugin-dir}/os/macosx/ppc"/>
+    <copy todir="${eclipseplugin-dir}/os/win32/x86">
+      <fileset dir="src/net.sf.colorer/libnative" includes="net_sf_colorer.dll"/>
+    </copy>
+    <copy todir="${eclipseplugin-dir}/os/linux/x86">
+      <fileset dir="src/net.sf.colorer/libnative" includes="libnet_sf_colorer.so"/>
+    </copy>
+    <copy todir="${eclipseplugin-dir}/os/macosx/ppc">
+      <fileset dir="src/net.sf.colorer/libnative" includes="libnet_sf_colorer.jnilib"/>
+    </copy>
+
+    <mkdir dir='${eclipseplugin-dir}/colorer'/>
+    <antcall target='hrc.jar'>
+      <param name='target-dir' value='${eclipseplugin-dir}/colorer'/>
+    </antcall>
+
+    <mkdir dir='${eclipseplugin-dir}/colorer/hrd/rgb'/>
+    <copy todir='${eclipseplugin-dir}/colorer/hrd/rgb'>
+      <fileset dir='hrd/rgb' includes='**'/>
+    </copy>
+
+    <copy todir='${eclipseplugin-dir}/colorer'>
+      <fileset dir='.' includes='README'/>
+      <fileset dir='src/net.sf.colorer/distr' includes='catalog.xml'/>
+    </copy>
+    <copy todir='${eclipseplugin-dir}'>
+      <fileset dir='.' includes='LICENSE'/>
+    </copy>
+
+    <fixcrlf srcdir="${eclipseplugin-dir}" eol="lf"
+             includes="${fixcrlf-ext}"
+    />
+
+    <zip destfile='${eclipseplugin-zip}'>
+      <fileset dir='${build-dir}/${eclipseplugin-name}'/>
+    </zip>
+
+    <mkdir dir='${build-dir}/update/features'/>
+    <mkdir dir='${build-dir}/update/plugins'/>
+    <zip destfile='${build-dir}/update/features/${eclipsedir-name}.jar'>
+      <fileset dir='src/net.sf.colorer' includes='feature.xml'/>
+      <fileset dir='doc' includes='MPL-1.1.html'/>
+      <fileset dir='doc/images' includes='logo-colorer.png'/>
+    </zip>
+    <zip destfile='${build-dir}/update/plugins/${eclipsedir-name}.jar'>
+      <fileset dir='${eclipseplugin-dir}'/>
+    </zip>
+    <copy todir='${build-dir}/update'>
+      <fileset dir='src/net.sf.colorer' includes='site.xml'/>
+    </copy>
+
+
+  </target>
+
+
+
+  <target name="farplugin.clean" depends='init'>
+    <delete dir='${farplugin-dir}'/>
+    <delete file='${farplugin-zip}'/>
+    <antcall target='make.clean'>
+      <param name='make.dir' value='src/pcolorer'/>
+    </antcall>
+  </target>
+
+  <target name="farplugin" depends='init' description='Builds FarColorer distribution package'>
+
+    <condition property="system">
+      <os family='windows'/>
+    </condition>
+
+    <fail unless='system'>
+    *********** FarColorer plugin is available only on Windows system
+    </fail>
+
+    <exec dir='src/pcolorer' executable='${make}' failonerror='true'>
+      <arg line='${makefile}'/>
+      <env key='Path' path='${native-path}:${java.library.path}'/>
+    </exec>
+
+    <available property='lib' file='src/pcolorer/colorer.dll'/>
+    <fail unless='lib'>
+    *********** ERROR! FarColorer plugin was not compiled
+    </fail>
+
+    <mkdir dir='${farplugin-dir}/bin'/>
+
+    <copy todir='${farplugin-dir}/bin'>
+      <fileset dir='src/pcolorer/farfiles' includes='coloree.hlf,coloree.lng,colorer.hlf,colorer.lng,shortcuts.reg'/>
+      <fileset dir='src/pcolorer' includes='colorer.dll'/><!-- colorer.map -->
+    </copy>
+
+    <mkdir dir='${farplugin-dir}/hrd/console'/>
+    <copy todir='${farplugin-dir}/hrd/console'>
+      <fileset dir='hrd/console' includes='**'/>
+    </copy>
+
+    <copy todir='${farplugin-dir}'>
+      <fileset dir='.' includes='LICENSE,README'/>
+      <fileset dir='src/pcolorer' includes='catalog.xml'/>
+    </copy>
+
+    <antcall target='hrc.jar'>
+      <param name='target-dir' value='${farplugin-dir}'/>
+    </antcall>
+    <zip destfile='${farplugin-zip}'>
+      <fileset dir='${farplugin-dir}'/>
+    </zip>
+
+  </target>
+
+  <target name="this.far" depends='init' description='Builds FarColorer plugin and updates it in working FAR instance'>
+    <condition property="system">
+      <os family='windows'/>
+    </condition>
+    <fail unless='system'>
+    *********** FarColorer plugin is available only on Windows system
+    </fail>
+    <exec dir='src/pcolorer' executable='${make}' failonerror='true'>
+      <arg line='${makefile}'/>
+      <env key='Path' path='${native-path}:${java.library.path}'/>
+    </exec>
+    <available property='lib' file='src/pcolorer/colorer.dll'/>
+    <fail unless='lib'>
+    *********** ERROR! FarColorer plugin was not compiled
+    </fail>
+
+    <mkdir dir='${this.far-dir}'/>
+
+    <move failonerror='false' file='${this.far-dir}/bin/colorer.dll' todir='${env.TEMP}'/>
+    <copy todir='${this.far-dir}/bin'>
+      <fileset dir='src/pcolorer/farfiles' includes='coloree.hlf,coloree.lng,colorer.hlf,colorer.lng,shortcuts.reg'/>
+      <fileset dir='src/pcolorer' includes='colorer.dll,colorer.map'/><!-- colorer.map -->
+    </copy>
+  </target>
+
+
+  <target name="this.eclipse.build" depends='init' description='Builds EclipseColorer plugin inplace'>
+    <ant dir='src/net.sf.colorer' antfile='build.xml' target='gather'>
+      <property name='temp.folder' value='../../${build-dir}/${eclipseplugin-name}'/>
+    </ant>
+    <exec dir='src/net.sf.colorer/libnative' executable='${make}' failonerror='true'>
+      <arg line='${makefile}'/>
+      <env key='Path' path='${native-path}:${java.library.path}'/>
+    </exec>
+  </target>
+
+  <target name="this.eclipse" depends='this.eclipse.build' description='Builds EclipseColorer plugin and updates it in working Eclipse instance'>
+    <copy todir='${eclipse.dir}/plugins/${eclipsedir-name}' overwrite='true'>
+      <fileset dir="src/net.sf.colorer" includes='colorer.jar, plugin.xml'/>
+    </copy>
+    <copy todir='${eclipse.dir}/plugins/${eclipsedir-name}/os/win32/x86' overwrite='true'>
+      <fileset dir="src/net.sf.colorer/libnative" includes='net_sf_colorer.dll'/>
+    </copy>
+  </target>
+
+</project>

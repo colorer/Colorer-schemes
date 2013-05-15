@@ -1,0 +1,77 @@
+ 0: !yellow = #<span class='sass-IDSelector def-Keyword'>fc0</span>
+ 1: 
+ 2: =<span class='sass-IncludeMixin def-Label'>bordered</span>
+ 3:   :<span class='css-PropertyName def-KeywordStrong def-Keyword'>border</span>
+ 4:     :<span class='css-PropertyName def-KeywordStrong def-Keyword'>top</span>
+ 5:       :<span class='css-PropertyName def-KeywordStrong def-Keyword'>width</span><span class='def-Symbol'> </span><span class='css-Number def-Number'>2</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+ 6:       :<span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='def-Symbol'> </span>= !yellow
+ 7:     :<span class='css-PropertyName def-KeywordStrong def-Keyword'>left</span>
+ 8:       :<span class='css-PropertyName def-KeywordStrong def-Keyword'>width</span><span class='def-Symbol'> </span><span class='css-Number def-Number'>1</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+ 9:       :<span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='def-Symbol'> </span><span class='def-NumberPrefix def-Number'>#</span><span class='def-NumberHex def-Number'>000</span>
+10:   <span class='css-DeprecatedPropertyName def-DeprecatedKeyword def-Keyword'>-moz-border-radius</span><span class='def-Symbol'>:</span> <span class='css-Number def-Number'>10</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+11: 
+12: =<span class='sass-IncludeMixin def-Label'>header-font</span>
+13:   :<span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='def-Symbol'> </span><span class='def-NumberPrefix def-Number'>#</span><span class='def-NumberHex def-Number'>f00</span>
+14:   :<span class='css-PropertyName def-KeywordStrong def-Keyword'>font</span>
+15:     :<span class='css-PropertyName def-KeywordStrong def-Keyword'>size</span><span class='def-Symbol'> </span><span class='css-Number def-Number'>20</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+16: 
+17: =<span class='sass-IncludeMixin def-Label'>compound</span>
+18:   +<span class='sass-IncludeMixin def-Label'>header-font</span>
+19:   +<span class='sass-IncludeMixin def-Label'>bordered</span>
+20: 
+21: =<span class='sass-IncludeMixin def-Label'>complex</span>
+22:   +<span class='sass-IncludeMixin def-Label'>header-font</span>
+23:   text<span class='def-Symbol'>:</span>
+24:     decoration<span class='def-Symbol'>:</span> <span class='css-PropertyValue def-Parameter'>none</span>
+25:   &amp;:<span class='def-Symbol'>after</span>
+26:     <span class='css-PropertyName def-KeywordStrong def-Keyword'>content</span><span class='def-Symbol'>:</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>.</span><span class='def-StringEdge def-String'>"</span>
+27:     <span class='css-PropertyName def-KeywordStrong def-Keyword'>display</span><span class='def-Symbol'>:</span> <span class='css-PropertyValue def-Parameter'>block</span>
+28:     <span class='css-PropertyName def-KeywordStrong def-Keyword'>height</span><span class='def-Symbol'>:</span> <span class='css-Number def-Number'>0</span>
+29:     <span class='css-PropertyName def-KeywordStrong def-Keyword'>clear</span><span class='def-Symbol'>:</span> <span class='css-PropertyValue def-Parameter'>both</span>
+30:     <span class='css-PropertyName def-KeywordStrong def-Keyword'>visibility</span><span class='def-Symbol'>:</span> <span class='css-PropertyValue def-Parameter'>hidden</span>
+31:   * html &amp;
+32:     <span class='css-PropertyName def-KeywordStrong def-Keyword'>height</span><span class='def-Symbol'>:</span> <span class='css-Number def-Number'>1</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+33:     +<span class='sass-IncludeMixin def-Label'>header-font</span>
+34: =<span class='sass-IncludeMixin def-Label'>deep</span>
+35:   a<span class='def-Symbol'>:</span>hover
+36:     :<span class='css-PropertyName def-KeywordStrong def-Keyword'>text-decoration</span><span class='def-Symbol'> </span><span class='css-PropertyValue def-Parameter'>underline</span>
+37:     +<span class='sass-IncludeMixin def-Label'>compound</span>
+38: 
+39: 
+40: #<span class='sass-IDSelector def-Keyword'>main</span>
+41:   :<span class='css-PropertyName def-KeywordStrong def-Keyword'>width</span><span class='def-Symbol'> </span><span class='css-Number def-Number'>15</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>em</span>
+42:   :<span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='def-Symbol'> </span><span class='def-NumberPrefix def-Number'>#</span><span class='def-NumberHex def-Number'>0000ff</span>
+43:   p
+44:     +<span class='sass-IncludeMixin def-Label'>bordered</span>
+45:     :<span class='css-PropertyName def-KeywordStrong def-Keyword'>border</span>
+46:       :<span class='def-Symbol'>style</span><span class='def-Symbol'> </span><span class='css-PropertyValue def-Parameter'>dotted</span>
+47:       :<span class='css-PropertyName def-KeywordStrong def-Keyword'>width</span><span class='def-Symbol'> </span><span class='css-Number def-Number'>2</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+48:   .<span class='sass-ClassSelector def-TypeKeyword def-Keyword'>cool</span>
+49:     :<span class='css-PropertyName def-KeywordStrong def-Keyword'>width</span><span class='def-Symbol'> </span><span class='css-Number def-Number'>100</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+50: 
+51: #<span class='sass-IDSelector def-Keyword'>left</span>
+52:   +<span class='sass-IncludeMixin def-Label'>bordered</span>
+53:   :<span class='css-PropertyName def-KeywordStrong def-Keyword'>font</span>
+54:     :<span class='css-PropertyName def-KeywordStrong def-Keyword'>size</span><span class='def-Symbol'> </span><span class='css-Number def-Number'>2</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>em</span>
+55:     :<span class='def-Symbol'>weight</span><span class='def-Symbol'> </span><span class='css-PropertyValue def-Parameter'>bold</span>
+56:   :<span class='css-PropertyName def-KeywordStrong def-Keyword'>float</span><span class='def-Symbol'> </span><span class='css-PropertyValue def-Parameter'>left</span>
+57: 
+58: #<span class='sass-IDSelector def-Keyword'>right</span>
+59:   +<span class='sass-IncludeMixin def-Label'>bordered</span>
+60:   +<span class='sass-IncludeMixin def-Label'>header-font</span>
+61:   :<span class='css-PropertyName def-KeywordStrong def-Keyword'>float</span><span class='def-Symbol'> </span><span class='css-PropertyValue def-Parameter'>right</span>
+62: 
+63: .<span class='sass-ClassSelector def-TypeKeyword def-Keyword'>bordered</span>
+64:   +<span class='sass-IncludeMixin def-Label'>bordered</span>
+65: 
+66: .<span class='sass-ClassSelector def-TypeKeyword def-Keyword'>complex</span>
+67:   +<span class='sass-IncludeMixin def-Label'>complex</span>
+68: 
+69: .<span class='sass-ClassSelector def-TypeKeyword def-Keyword'>more-complex</span>
+70:   +<span class='sass-IncludeMixin def-Label'>complex</span>
+71:   +<span class='sass-IncludeMixin def-Label'>deep</span>
+72:   <span class='css-PropertyName def-KeywordStrong def-Keyword'>display</span><span class='def-Symbol'>:</span> <span class='css-PropertyValue def-Parameter'>inline</span>
+73:   -webkit-nonsense<span class='def-Symbol'>:</span>
+74:     top-right<span class='def-Symbol'>:</span> <span class='css-Number def-Number'>1</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+75:     bottom-left<span class='def-Symbol'>:</span> <span class='css-Number def-Number'>1</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>px</span>
+76: 

@@ -1,0 +1,44 @@
+ 0: { =====================================================================
+ 1: ANS <span class='forth-forWord def-Keyword'>Forth</span> Test Suite
+ 2: 
+ 3: Copyright (c) 1998, FORTH, Incorporated
+ 4: 
+ 5: This set of tests has been taken from John Hayes' original Core.fr
+ 6: Dated Mon, <span class='forth-forNumb def-Number'>27</span> Nov <span class='forth-forNumb def-Number'>95</span> 13:10.  We retain the following statement as
+ 7: required for its use:
+ 8: 
+ 9: (C) <span class='forth-forNumb def-Number'>1995</span> JOHNS HOPKINS UNIVERSITY / APPLIED PHYSICS LABORATORY
+10: MAY BE DISTRIBUTED FREELY AS LONG AS THIS COPYRIGHT NOTICE REMAINS.
+11: 
+12: His last know update was VERSION 1.2
+13: 
+14: This program tests the core <span class='forth-forWord def-Keyword'>words</span> of an ANS <span class='forth-forWord def-Keyword'>Forth</span> system.
+15: The program assumes a two's complement implementation where
+16: the range of signed numbers <span class='forth-forWord def-Keyword'>is</span> -2^(n-1) ... 2^(n-1)-1 <span class='forth-forWord def-Keyword'>and</span>
+17: the range of unsigned numbers <span class='forth-forWord def-Keyword'>is</span> <span class='forth-forNumb def-Number'>0</span> ... 2^(n)-1.
+18: 
+19: Dependencies: {> <span class='forth-forWord def-Keyword'>-></span> } { {{ TESTING
+20: 
+21: Exports:
+22: 
+23: ===================================================================== }
+24: 
+25: <span class='forth-forWord def-Keyword'>HEX</span>
+26: 
+27: TESTING <span class='forth-forWord def-Keyword'>CHAR</span> <span class='forth-forString def-String'>[CHAR]</span> [ ] <span class='forth-forWord def-Keyword'>BL</span> S"
+28: 
+29: {> <span class='forth-forWord def-Keyword'>BL</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>20</span> }
+30: {> <span class='forth-forWord def-Keyword'>CHAR</span> <span class='forth-forString def-String'>X</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>58</span> }
+31: {> <span class='forth-forWord def-Keyword'>CHAR</span> <span class='forth-forString def-String'>HELLO</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>48</span> }
+32: {> <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>GC1</span> <span class='forth-forResWord def-Label'>[CHAR]</span> <span class='forth-forString def-String'>X</span><span class='forth-forWord def-Keyword'> ;</span> <span class='forth-forWord def-Keyword'>-></span> }
+33: {> <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>GC2</span> <span class='forth-forResWord def-Label'>[CHAR]</span> <span class='forth-forString def-String'>HELLO</span><span class='forth-forWord def-Keyword'> ;</span> <span class='forth-forWord def-Keyword'>-></span> }
+34: {> GC1 <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>58</span> }
+35: {> GC2 <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>48</span> }
+36: {> <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>GC3</span> <span class='forth-forResWord def-Label'>[</span><span class='def-Insertion'></span>
+37: <span class='def-Insertion'>      GC1</span><span class='forth-forResWord def-Label'> ]</span> <span class='forth-forWord def-Keyword'>LITERAL</span><span class='forth-forWord def-Keyword'> ;</span> <span class='forth-forWord def-Keyword'>-></span> }
+38: {> GC3 <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>58</span> }
+39: {> <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>GC4</span> <span class='forth-forWord def-Keyword'>S" </span><span class='forth-forString def-String'>XY</span><span class='forth-forWord def-Keyword'>"</span><span class='forth-forWord def-Keyword'> ;</span> <span class='forth-forWord def-Keyword'>-></span> }
+40: {> GC4 <span class='forth-forWord def-Keyword'>SWAP</span> <span class='forth-forWord def-Keyword'>DROP</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>2</span> }
+41: {> GC4 <span class='forth-forWord def-Keyword'>DROP</span> <span class='forth-forWord def-Keyword'>DUP</span> <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>SWAP</span> <span class='forth-forWord def-Keyword'>CHAR+</span> <span class='forth-forWord def-Keyword'>C@</span> <span class='forth-forWord def-Keyword'>-></span> <span class='forth-forNumb def-Number'>58</span> <span class='forth-forNumb def-Number'>59</span> }
+42: 
+43: 

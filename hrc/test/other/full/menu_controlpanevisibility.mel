@@ -1,0 +1,139 @@
+
+    menuItem
+        -label "Help Line" 
+        -divider 0
+        -subMenu 0
+        -command "setHelpLineVisible (!`isHelpLineVisible`); updatePrefsMenu" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "N" 
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -annotation "Help Line: Toggle the help line on/off" 
+        menuItem113;
+
+    menuItem
+        -label "Status Line" 
+        -divider 0
+        -subMenu 0
+        -command "setStatusLineVisible (!`isStatusLineVisible`); updatePrefsMenu" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "NE" 
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -annotation "Status Line: Toggle the status line on/off" 
+        menuItem114;
+
+    menuItem
+        -label "Channel Box" 
+        -divider 0
+        -subMenu 0
+        -command "setChannelBoxVisible (!`isChannelBoxVisible`); updatePrefsMenu" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "E" 
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -annotation "Channel Box: Toggle the channel box on/off" 
+        menuItem115;
+
+    menuItem
+        -label "Feedback Line" 
+        -divider 0
+        -subMenu 0
+        -command "setFeedbackLineVisible (!`isFeedbackLineVisible`); updatePrefsMenu" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "SE" 
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -annotation "Feedback Line: Toggle the feedback line on/off" 
+        menuItem116;
+
+    menuItem
+        -label "Timeline" 
+        -divider 0
+        -subMenu 0
+        -command "setTimeSliderVisible (!`isTimeSliderVisible`); updatePrefsMenu" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "S" 
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -annotation "Timeline: Toggle the timeline on/off" 
+        menuItem117;
+
+    menuItem
+        -label "Playback Range" 
+        -divider 0
+        -subMenu 0
+        -command "setPlaybackRangeVisible (!`isPlaybackRangeVisible`); updatePrefsMenu" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "SW" 
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -annotation "Playback Range: Toggle the playback range on/off" 
+        menuItem118;
+
+    menuItem
+        -label "Shelf" 
+        -divider 0
+        -subMenu 0
+        -command "setShelfVisible (!`isShelfVisible`); updatePrefsMenu" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "W" 
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -annotation "Shelf: Toggle the shelf on/off" 
+        menuItem119;
+
+    menuItem
+        -label "Command Line" 
+        -divider 0
+        -subMenu 0
+        -command "setCommandLineVisible (!`isCommandLineVisible`); updatePrefsMenu" 
+        -altModifier 0
+        -ctrlModifier 0
+        -shiftModifier 0
+        -optionBox 0
+        -enable 1
+        -data 0
+        -radialPosition "NW" 
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -annotation "Command Line: Toggle the playback range on/off" 
+        menuItem120;
+
+setParent -m ..;
+

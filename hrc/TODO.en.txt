@@ -1,0 +1,35 @@
+﻿Some comments here are in Russian. You may want to use http://translate.google.com to read them.
+
+
+colorer.log:
+
+error: duplicate scheme name 'yml:xmlss-uri-elementContent'
+error: unqualified name 'perfomace_type-element' doesn't belong to any imported type [I:\WORK\colorer\main\colorer\hrc/auto\gen/yml.hrc]
+error: cannot resolve scheme name 'perfomace_type-element' in scheme 'yml:_hrc_int_d12e53-content'
+(Only Yandex scheme is left. This is my fault ...
+UPD: It's not the scheme - there is a bug in xsd2hrc, because of which xmlss duplicated ...)
+
+
+«1. for r1273 we should cancel point 2 and remake it the other way - add to xml type wxs and fb2 extensions» -
+it will be necessary to create own schemes for them... UPD: wxs will wait until the new converter, through xsd2hrc its
+impossible to do it correctly... UPD2: fb2 can wait too. xsd2hrc is obsolete, there is no desire to do anything complicated
+with it now. Need to write a new converter. And be quick, while I still have resource for this...
+
+
+- doclinks are not highlighed in colore files. Add? UPD: after, if there is a need
+- clarify the state of xpointer.hrc. I remember exactly that I once did it. Or was just going to do?
+(UPD: found it half-written in the 2006 archives. And I'm not sure if it is needed. UPD2: not needed now for sure)
+
+
+With far.hrc and its macro situation is unclear... While the exact syntax is not known - it can't be helped.
+
+esc scheme, the problem with &quot; - an example in the tests of esc_message.xml
+=========================
+
+- - Some issues in one of the schemes
+	colorer\hrc\auto\types\auto.jar\types\assa.hrc
+	4) The contents of tags \p1, \p2, \p4 can have negative values
+	6) Tags \p1, \p2, \p4 can be in any position among other tags, not only in the last
+	7) Add tags \fax and \fay to paint them with another color, because they need a fairly recent version of the subtitle renderer
+	Examples of incorrect coloring of files in the folder test
+

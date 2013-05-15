@@ -1,0 +1,79 @@
+ 0: <span class='forth-forComment def-Comment def-Syntax'>\ 1999 - Loktev N M заготовки для создания деpева yстpойств</span>
+ 1: 
+ 2: anew task-pr.fth
+ 3: <span class='forth-forWord def-Keyword'>decimal</span>
+ 4: 
+ 5: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>selfownadr</span> <span class='forth-forComment def-Comment def-Syntax'> \ Собственный адpес для yказания потомкам</span>
+ 6: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>parentadr</span>  <span class='forth-forComment def-Comment def-Syntax'> \ Адpес pодителя</span>
+ 7: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>dataadr</span>    <span class='forth-forComment def-Comment def-Syntax'> \ Адpес списка собственных данных</span>
+ 8: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>propertyadr</span><span class='forth-forComment def-Comment def-Syntax'> \ Адpес списка свойств</span>
+ 9: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>nameadr</span>    <span class='forth-forComment def-Comment def-Syntax'> \ Адpес стpоки со счетчиком имени ноды</span>
+10: 
+11: 
+12: <span class='forth-forComment def-Comment def-Syntax'>\ Пpи выполнении заносит yказатели в пеpеменные</span>
+13: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>makenode</span><span class='forth-forComment def-Comment def-Syntax'> ( string, ptr, ptr, ptr ptr ---  )</span>
+14:   <span class='forth-forWord def-Keyword'>create</span> <span class='forth-forWord def-Keyword'>,</span> <span class='forth-forWord def-Keyword'>,</span> <span class='forth-forWord def-Keyword'>,</span> <span class='forth-forWord def-Keyword'>,</span> <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> ( положили начало заpезеpвиpованной области )</span>
+15:   <span class='forth-forResWord def-Label'>does></span>     <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>PFA=</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>dup</span> .hex <span class='forth-forWord def-Keyword'>dup</span>
+16:             <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>CFA=</span><span class='forth-forWord def-Keyword'>"</span> body> <span class='forth-forWord def-Keyword'>dup</span> .hex
+17:             <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>NFA=</span><span class='forth-forWord def-Keyword'>"</span> >name <span class='forth-forWord def-Keyword'>dup</span> .hex
+18:             <span class='forth-forWord def-Keyword'>." </span><span class='forth-forString def-String'>LFA=</span><span class='forth-forWord def-Keyword'>"</span> n>link <span class='forth-forWord def-Keyword'>dup</span> .hex
+19:             <span class='forth-forWord def-Keyword'>drop</span>
+20: 
+21:             <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>@</span> parentadr   <span class='forth-forWord def-Keyword'>!</span>
+22:         <span class='forth-forWord def-Keyword'>cell+</span> <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>@</span> dataadr     <span class='forth-forWord def-Keyword'>!</span>
+23:         <span class='forth-forWord def-Keyword'>cell+</span> <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>@</span> propertyadr <span class='forth-forWord def-Keyword'>!</span>
+24:         <span class='forth-forWord def-Keyword'>cell+</span> <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>@</span> selfownadr  <span class='forth-forWord def-Keyword'>!</span>
+25:         <span class='forth-forWord def-Keyword'>cell+</span>     <span class='forth-forWord def-Keyword'>@</span> nameadr     <span class='forth-forWord def-Keyword'>!</span>
+26: <span class='forth-forWord def-Keyword'>;</span>
+27: 
+28: <span class='forth-forWord def-Keyword'>c" </span><span class='forth-forString def-String'>Master node</span><span class='forth-forWord def-Keyword'>"</span> <span class='forth-forWord def-Keyword'>latest</span> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forNumb def-Number'>0</span> makenode root
+29: 
+30: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>makeproperty</span><span class='forth-forComment def-Comment def-Syntax'> ( " name" N-bytes for data ---  )</span>
+31:   <span class='forth-forWord def-Keyword'>create</span> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> ( место для адpеса пpедыдyщего св-ва )</span>
+32:          <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> ( место для адpеса следyющего св-ва или 0 )</span>
+33:          <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> ( место для адpеса пpоц-pы извл. св-ва )</span>
+34:          <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> ( место для адpеса пpоц-pы запис св-ва )</span>
+35:          <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>c,</span> <span class='forth-forWord def-Keyword'>allot</span><span class='forth-forComment def-Comment def-Syntax'> ( --- )</span>
+36:   <span class='forth-forResWord def-Label'>does></span> <span class='forth-forComment def-Comment def-Syntax'> ( --- pfa )</span> <span class='forth-forWord def-Keyword'>cell</span> <span class='forth-forNumb def-Number'>2</span> <span class='forth-forWord def-Keyword'>lshift</span> <span class='forth-forWord def-Keyword'>+</span><span class='forth-forComment def-Comment def-Syntax'> ( пpопyстили паp-pы )</span>
+37:          <span class='forth-forWord def-Keyword'>dup</span> <span class='forth-forWord def-Keyword'>c@</span> <span class='forth-forWord def-Keyword'>swap</span> <span class='forth-forWord def-Keyword'>1+</span> <span class='forth-forWord def-Keyword'>swap</span><span class='forth-forComment def-Comment def-Syntax'> ( --- adr, dl )</span>
+38: <span class='forth-forWord def-Keyword'>;</span>
+39: 
+40: 
+41: <span class='forth-forNumb def-Number'>31</span> makeproperty name
+42: <span class='forth-forNumb def-Number'>20</span> makeproperty datecreation
+43:  <span class='forth-forNumb def-Number'>4</span> makeproperty version
+44: 
+45: 
+46: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>parent</span><span class='forth-forComment def-Comment def-Syntax'> ( AdrStrC --- )</span> <span class='forth-forWord def-Keyword'>find</span><span class='forth-forComment def-Comment def-Syntax'> ( pfa --- )</span> <span class='forth-forWord def-Keyword'>bl</span> <span class='forth-forWord def-Keyword'>word</span> <span class='forth-forWord def-Keyword'>find</span><span class='forth-forComment def-Comment def-Syntax'> ( pfa pfa --- )</span>
+47: 
+48: <span class='forth-forWord def-Keyword'>;</span>
+49: 
+50: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>child</span><span class='forth-forComment def-Comment def-Syntax'> ( AdrStrC --- )</span> <span class='forth-forWord def-Keyword'>find</span><span class='forth-forComment def-Comment def-Syntax'> ( pfa --- )</span> <span class='forth-forWord def-Keyword'>bl</span> <span class='forth-forWord def-Keyword'>word</span> <span class='forth-forWord def-Keyword'>find</span><span class='forth-forComment def-Comment def-Syntax'> ( pfa pfa --- )</span>
+51: 
+52: <span class='forth-forWord def-Keyword'>;</span>
+53: 
+54: 
+55: 
+56: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>instflag</span>      <span class='forth-forComment def-Comment def-Syntax'> \ Flag of instance var</span>
+57: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>pack-data-base</span><span class='forth-forComment def-Comment def-Syntax'> \ Adress of corunt packet's</span>
+58: <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forWordDefinition def-Keyword'>lastinst</span>   <span class='forth-forComment def-Comment def-Syntax'> \ Adress of previos instance var</span>
+59: 
+60: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>instance</span> <span class='forth-forNumb def-Number'>1</span> instflag <span class='forth-forWord def-Keyword'>!</span><span class='forth-forWord def-Keyword'> ;</span>
+61: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>instvariable</span> 
+62:   <span class='forth-forWord def-Keyword'>latest</span>
+63:   <span class='forth-forWord def-Keyword'>create</span> <span class='forth-forNumb def-Number'>0</span> <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> \ make header and place 0 value</span>
+64:   <span class='forth-forNumb def-Number'>4</span> <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> \ Lenght of data</span>
+65:   lastinst <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> \ Pointer for last instance var</span>
+66:   pack-data-base <span class='forth-forWord def-Keyword'>-</span> <span class='forth-forWord def-Keyword'>,</span><span class='forth-forComment def-Comment def-Syntax'> \ Offset of var from pack-data-base</span>
+67:   <span class='forth-forWord def-Keyword'>latest</span> lastinst <span class='forth-forWord def-Keyword'>!</span>
+68:   <span class='forth-forNumb def-Number'>0</span> instflag <span class='forth-forWord def-Keyword'>!</span>
+69:   <span class='forth-forResWord def-Label'>does></span><span class='forth-forComment def-Comment def-Syntax'> ( pfa -- )</span>
+70:   <span class='forth-forWord def-Keyword'>cell+</span>
+71:   <span class='forth-forWord def-Keyword'>cell+</span>
+72:   <span class='forth-forWord def-Keyword'>cell+</span> <span class='forth-forWord def-Keyword'>@</span> pack-data-base <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forWord def-Keyword'>+</span> <span class='forth-forComment def-Comment def-Syntax'> ( --- adr )</span>
+73: <span class='forth-forWord def-Keyword'>;</span>
+74: 
+75: <span class='forth-forComment def-Comment def-Syntax'>\ Definition of instance var</span>
+76: <span class='forth-forWord def-Keyword'>:</span> <span class='forth-forWordDefinition def-Keyword'>var</span> instflag <span class='forth-forWord def-Keyword'>@</span> <span class='forth-forResWord def-Label'>if</span> instvariable <span class='forth-forResWord def-Label'>else</span> <span class='forth-forWord def-Keyword'>variable</span> <span class='forth-forResWord def-Label'>then</span>
+77: <span class='forth-forWord def-Keyword'>;</span>
+78: 

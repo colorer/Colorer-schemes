@@ -1,0 +1,25 @@
+ 0: <span class='sql-sqlComment def-Comment def-Syntax'>/*</span>
+ 1: <span class='sql-sqlComment def-Comment def-Syntax'>   Проблема с выделением(подсветкой) "скобок"</span>
+ 2: <span class='sql-sqlComment def-Comment def-Syntax'></span>
+ 3: <span class='sql-sqlComment def-Comment def-Syntax'>  начало: "create or replace package (.)* is"</span>
+ 4: <span class='sql-sqlComment def-Comment def-Syntax'>            здесь надо еще исключть вариант:</span>
+ 5: <span class='sql-sqlComment def-Comment def-Syntax'>                 "create or replace package body (.)* is"</span>
+ 6: <span class='sql-sqlComment def-Comment def-Syntax'>  конец:   end </span>
+ 7: <span class='sql-sqlComment def-Comment def-Syntax'>*/</span>
+ 8: 
+ 9: <span class='sql-tsqlWord def-Keyword'>create or replace package </span><span class='def-Text'>TTT</span><span class='sql-tsqlWord def-Keyword'> is</span>
+10: 
+11: <span class='sql-sqlComment def-Comment def-Syntax'>-- ...</span>
+12: 
+13: <span class='sql-tsqlWord def-Keyword'>end</span><span class='sql-sqlSymb def-Symbol'>;</span>
+14: 
+15: 
+16: <span class='sql-tsqlWord def-Keyword'>create</span>
+17: <span class='sql-tsqlWord def-Keyword'>or</span> <span class='sql-sqlWord def-Keyword'>replace</span> <span class='sql-sqlWord def-Keyword'>package</span> TTT <span class='sql-tsqlWord def-Keyword'>is</span>
+18: 
+19: <span class='sql-sqlComment def-Comment def-Syntax'>-- ...С переводом строки уже не работает, хотя указано: create(\s)*or(\s)*replace...</span>
+20: 
+21: <span class='sql-tsqlWord def-Keyword'>end</span><span class='sql-sqlSymb def-Symbol'>;</span>
+22: 
+23: 
+24: 

@@ -1,0 +1,314 @@
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  elementFormDefault="qualified">
+
+<xs:annotation>
+ <xs:documentation source="http://www.w3.org/TR/rdf-syntax-grammar/index.html#section-grammar-summary">
+  <![CDATA[
+   XML schema for RDF/XML Syntax Specification.
+   Written by Eugene Efremov <4mirror@mail.ru>
+  ]]>
+ </xs:documentation>
+ <xs:documentation>
+ 
+  NOTE! Complete description of RDF semantic via XML schema is impossible.
+ 
+  You MUST use this only with Colorer xsd2hrc 
+   or equivalent XSD customization tools.
+  
+  Some part of this schema definitions is "virtual classes" and  
+   MUST BE REDEFINED via Colorer custom.xml (or by other means).
+  
+ </xs:documentation>
+</xs:annotation>
+
+<!-- root -->
+
+<xs:element name="RDF">
+ <xs:complexType>
+  <xs:group ref="nodeElementURIs"/>
+ </xs:complexType> 
+</xs:element>
+
+
+<!-- 
+  - 
+  - !!! nodeElement 
+  -
+  -
+  --> 
+
+  <!-- rdf:Seq, rdf:Bag, rdf:Alt, rdf:Statement, rdf:Property and rdf:List. -->
+
+<xs:element name="Description" type="nodeElement"/>
+<xs:element name="nil" type="nodeElement"/>
+
+
+<xs:group name="nodeElementURIs">
+ <annotation><documentation>
+  7.2.5 nodeElementURIs 	
+   anyURI - ( coreSyntaxTerms | rdf:li | oldTerms )
+ </documentation></annotation>
+ 
+ <xs:sequence>
+  <xs:element ref="Description"/>
+  <xs:element ref="nil"/>
+  <xs:group ref="rdfOtherElements-node"/>
+  <!-- rdf:Seq, rdf:Bag, rdf:Alt, rdf:Statement, rdf:Property and rdf:List. 
+  <xs:any namespace="##other" processContents="skip"/>-->
+ </xs:sequence> 
+</xs:group>
+
+<xs:complexType name="nodeElement">
+ <annotation><documentation>
+  7.2.11 nodeElement 	
+   start-element(URI == nodeElementURIs
+     attributes == set((idAttr | nodeIdAttr | aboutAttr )?, propertyAttr*))
+   propertyEltList
+   end-element()  
+ </documentation></annotation>
+
+ <xs:attribute ref="ID"/>
+ <xs:attribute ref="nodeID"/>
+ <xs:attribute ref="about"/>
+ <xs:attributeGroup ref="propertyAttr"/>
+ <xs:group ref="propertyElementURIs"/>
+</xs:complexType>
+
+
+
+<!-- 
+  - 
+  - !!! propertyElt
+  -
+  -
+  --> 
+
+  <!-- subject predicate object type value first rest _n ? -->
+
+<xs:element name="li" type="propertyElt"/>
+  
+<xs:group name="propertyElementURIs">
+ <xs:sequence>
+  <!-- subject predicate object type value first rest _n ? -->
+  <xs:element ref="li"/>
+  <xs:group ref="rdfOtherElements-prop"/>
+  <!--
+  <xs:any namespace="##other" processContents="skip"/>-->
+ </xs:sequence> 
+</xs:group>
+
+
+<xs:complexType name="propertyElt">
+ <xs:annotation>
+  <xs:documentation>
+    Pure virtual type
+    MUST be replased
+  </xs:documentation>
+ </xs:annotation>
+ <xs:attribute ref="ID"/>
+ <xs:attribute ref="datatype"/>
+ <xs:attribute ref="nodeID"/>
+ <xs:attribute ref="parseType"/>
+ <xs:attribute ref="resource"/>
+ <xs:attributeGroup ref="propertyAttr"/> 
+ <!--
+  Element content must be defined by other means.
+  
+  resourcePropertyElt | literalPropertyElt | parseTypeLiteralPropertyElt | parseTypeResourcePropertyElt | parseTypeCollectionPropertyElt | parseTypeOtherPropertyElt | emptyPropertyElt
+ -->
+</xs:complexType>
+
+  
+<xs:complexType name="resourcePropertyElt">
+ <xs:attribute ref="ID"/>
+ <xs:attributeGroup ref="propertyAttr"/> 
+ <xs:group ref="nodeElementURIs"/>
+</xs:complexType>
+
+<xs:complexType name="literalPropertyElt">
+ <xs:simpleContent>
+  <xs:extension base="xs:string">
+   <xs:attribute ref="ID"/>
+   <xs:attribute ref="datatype"/>
+   <xs:attribute ref="parseType"/>
+   <xs:attributeGroup ref="propertyAttr"/> 
+  </xs:extension>
+ </xs:simpleContent>
+</xs:complexType>
+
+<xs:complexType name="parseTypeLiteralPropertyElt" mixed='true'>
+ <xs:attribute ref="ID"/>
+ <xs:attribute ref="parseType"/>
+ <xs:attributeGroup ref="propertyAttr"/> 
+ <xs:sequence>
+  <xs:any namespace="##other" processContents="skip"/>    
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="parseTypeResourcePropertyElt">
+ <xs:attribute ref="ID"/>
+ <xs:attribute ref="parseType"/>
+ <xs:attributeGroup ref="propertyAttr"/> 
+ <xs:group ref="propertyElementURIs"/>
+</xs:complexType>
+
+<xs:complexType name="parseTypeCollectionPropertyElt">
+ <xs:attribute ref="ID"/>
+ <xs:attribute ref="parseType"/>
+ <xs:attributeGroup ref="propertyAttr"/> 
+ <xs:group ref="nodeElementURIs"/>
+</xs:complexType>
+
+<xs:complexType name="parseTypeOtherPropertyElt" mixed='true'>
+ <annotation><documentation>
+  All   rdf:parseType   attribute   values   other  than  the  strings
+  "Resource",  "Literal"  or  "Collection" are treated as if the value
+  was  "Literal".  This  production  matches and acts as if production
+  parseTypeLiteralPropertyElt   was  matched.  No  extra  triples  are
+  generated for other rdf:parseType values.
+ </documentation></annotation>
+ <xs:attribute ref="ID"/>
+ <xs:attribute ref="parseType"/>
+ <xs:attributeGroup ref="propertyAttr"/> 
+ <xs:sequence>
+  <xs:any namespace="##other" processContents="skip"/>    
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="emptyPropertyElt">
+ <xs:attribute ref="ID"/>
+ <xs:attribute ref="resource"/>
+ <xs:attribute ref="nodeID"/>
+ <xs:attributeGroup ref="propertyAttr"/> 
+</xs:complexType>
+
+
+<!--
+   -
+   - !!! attributes 
+   -
+   -->
+
+      
+<xs:attribute name="about" type="xs:anyURI"/>
+<xs:attribute name="resource" type="xs:anyURI"/>
+<xs:attribute name="datatype" type="xs:anyURI"/>
+<xs:attribute name="ID" type="xs:ID"/>
+<xs:attribute name="nodeID" type="xs:ID"/>
+
+<xs:attribute name="parseType" type="parseTypeAttr"/>
+<xs:simpleType name="parseTypeAttr">
+ <xs:restriction base="xs:string">
+  <xs:enumeration value="Resource"/>
+  <xs:enumeration value="Literal"/>
+  <xs:enumeration value="Collection"/>
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:attributeGroup name="propertyAttr">
+ <annotation><documentation>
+  7.2.25 propertyAttr 	
+   attribute(URI == propertyAttributeURIs, string-value == anyString)
+ </documentation></annotation>
+ 
+ <xs:attributeGroup ref="rdfOtherAttr"/>
+ <xs:anyAttribute namespace="##other" processContents="lax"/> 
+</xs:attributeGroup>
+
+
+<!-- 
+  -
+  - !!! other attributes and elements
+  -
+  -->
+
+
+<xs:group name="containerElements-prop">
+ <annotation><documentation>
+  <![CDATA[
+   XSD don't understand definition like this:
+
+   <xs:element name="_\d+" type="propertyElt"/>
+
+   This pure virtual group must be redefined by other means.
+  ]]>
+ </documentation></annotation>
+ <xs:sequence>
+  <xs:element name='_1' type='propertyElt'/>
+ </xs:sequence> 
+</xs:group>
+<xs:group name="containerElements-node">
+ <annotation><documentation>
+  This virtual scheme must be replaced.
+ </documentation></annotation>
+ <xs:sequence>
+  <xs:element name='_1' type='nodeElement'/>
+ </xs:sequence> 
+</xs:group>
+<xs:attributeGroup name="containerAttr">
+ <annotation><documentation>
+  This virtual scheme must be replaced.
+ </documentation></annotation>
+ <xs:attribute name="_1" type="xs:string" form="qualified"/>
+</xs:attributeGroup>
+
+<xs:group name="rdfOtherElements-node">
+ <xs:sequence>
+  <xs:element name="Seq" type="nodeElement"/>
+  <xs:element name="Bag" type="nodeElement"/>
+  <xs:element name="Alt" type="nodeElement"/>
+  <xs:element name='Statement' type='nodeElement'/>
+  <xs:element name='Property' type='nodeElement'/>
+  <xs:element name='XMLLiteral' type='nodeElement'/>
+  <xs:element name='List' type='nodeElement'/>
+  <xs:element name='subject' type='nodeElement'/>
+  <xs:element name='predicate' type='nodeElement'/>
+  <xs:element name='object' type='nodeElement'/>
+  <xs:element name='type' type='nodeElement'/>
+  <xs:element name='value' type='nodeElement'/>
+  <xs:element name='first' type='nodeElement'/>
+  <xs:element name='rest' type='nodeElement'/>
+  <xs:group ref="containerElements-node"/>
+ </xs:sequence>
+</xs:group>
+<xs:group name="rdfOtherElements-prop">
+ <xs:sequence>
+  <xs:element name="Seq" type="propertyElt"/>
+  <xs:element name="Bag" type="propertyElt"/>
+  <xs:element name="Alt" type="propertyElt"/>
+  <xs:element name='Statement' type='propertyElt'/>
+  <xs:element name='Property' type='propertyElt'/>
+  <xs:element name='XMLLiteral' type='propertyElt'/>
+  <xs:element name='List' type='propertyElt'/>
+  <xs:element name='subject' type='propertyElt'/>
+  <xs:element name='predicate' type='propertyElt'/>
+  <xs:element name='object' type='propertyElt'/>
+  <xs:element name='type' type='propertyElt'/>
+  <xs:element name='value' type='propertyElt'/>
+  <xs:element name='first' type='propertyElt'/>
+  <xs:element name='rest' type='propertyElt'/>
+  <xs:group ref="containerElements-prop"/>
+ </xs:sequence>
+</xs:group>
+<xs:attributeGroup name="rdfOtherAttr">
+  <xs:attribute name="Seq" type="xs:string" form="qualified"/>
+  <xs:attribute name="Bag" type="xs:string" form="qualified"/>
+  <xs:attribute name="Alt" type="xs:string" form="qualified"/>
+  <xs:attribute name='Statement' type="xs:string" form="qualified"/>
+  <xs:attribute name='Property' type="xs:string" form="qualified"/>
+  <xs:attribute name='XMLLiteral' type="xs:string" form="qualified"/>
+  <xs:attribute name='List' type="xs:string" form="qualified"/>
+  <xs:attribute name='subject' type="xs:string" form="qualified"/>
+  <xs:attribute name='predicate' type="xs:string" form="qualified"/>
+  <xs:attribute name='object' type="xs:string" form="qualified"/>
+  <xs:attribute name='type' type="xs:anyURI" form="qualified"/>
+  <xs:attribute name='value' type="xs:string" form="qualified"/>
+  <xs:attribute name='first' type="xs:string" form="qualified"/>
+  <xs:attribute name='rest' type="xs:string" form="qualified"/>
+  <xs:attributeGroup ref="containerAttr"/>
+</xs:attributeGroup>
+
+</xs:schema>

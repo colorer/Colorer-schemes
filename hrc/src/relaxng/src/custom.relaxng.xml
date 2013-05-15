@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<custom xmlns="uri:colorer:custom">
+
+  <custom-type targetNamespace="http://relaxng.org/ns/structure/1.0">
+
+    <prefix>r</prefix>
+    <prefix>rn</prefix>
+    <prefix>rng</prefix>
+    <empty-prefix/>
+
+    <top-level>
+      <element>grammar</element>
+    </top-level>
+
+    <outline>
+      <element name='grammar' extract='withAttribute' description='Relax NG Grammar'/>
+      <element name='define' extract='withAttribute' description='Relax NG Define'/>
+      <element name='start' extract='withAttribute' description='Relax NG Start of schema'/>
+      <element name='element' extract='withAttribute' description='Relax NG Element'/>
+    </outline>
+
+  </custom-type>
+
+</custom>

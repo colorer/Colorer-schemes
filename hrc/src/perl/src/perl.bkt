@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<bracket type="perl" scheme="bracket">
+
+ <block  name="s.eval" start="\bs\s*" end="[egimosx]*"
+  scheme1="RegExpString" scheme2="perl"
+  region1="String" region2="EvalText"
+  region-start="ReType" region-end="ReModif" 
+  region-middle="StringEdge" scheme-middle="SubstComment">
+   <case type="biblock" start="\{" end="\}"/>
+   <case type="biblock" start="\(" end="\)"/>
+ </block>
+
+ <block  name="s.normal" start="\bs\s*" end="[egimosx]*"
+  scheme1="RegExpString" scheme2="SubstElements"
+  region1="String" region2="String"
+  region-start="ReType" region-end="ReModif" 
+  region-middle="StringEdge" scheme-middle="SubstComment">
+   <case type="biblock" start="\[" end="\]" recursion2="yes"/>
+   <case type="biblock" start="&lt;" end="&gt;" recursion1="yes" recursion2="yes"/>
+   <case type="halfblock" all="[^\w\s]"/>
+ </block>
+ 
+ <block  name="tr" start="\b(?{}tr|y)\s*" end="[dsc]*"
+  scheme1="ClassString" scheme2="ClassString"
+  region1="String" region2="String"
+  region-start="ReType" region-end="ReModif" 
+  region-middle="StringEdge" scheme-middle="SubstComment">
+   <case type="biblock" start="\{" end="\}"/>
+   <case type="biblock" start="\(" end="\)"/>
+   <case type="biblock" start="\[" end="\]"/>
+   <case type="biblock" start="&lt;" end="&gt;"/>
+   <case type="halfblock" all="[^\w\s]"/>
+ </block>
+ 
+ <block  name="qr" start="\bqr\s*" end="[imosx]*"
+  scheme1="RegExpString" region1="String" 
+  region-start="ReType" region-end="ReModif" 
+  region-middle="StringEdge">
+   <case type="monoblock" start="\{" end="\}" />
+   <case type="monoblock" start="\(" end="\)"/>
+   <case type="monoblock" start="\[" end="\]"/>
+   <case type="monoblock" start="&lt;" end="&gt;" recursion1="yes"/>
+   <case type="singleblock" all="[^\w\s]"/>
+ </block> 
+
+ <block  name="m" start="\bm\s*" end="[cgimosx]*"
+  scheme1="RegExpString" region1="String" 
+  region-start="ReType" region-end="ReModif" 
+  region-middle="StringEdge">
+   <case type="monoblock" start="\{" end="\}"/>
+   <case type="monoblock" start="\(" end="\)"/>
+   <case type="monoblock" start="\[" end="\]"/>
+   <case type="monoblock" start="&lt;" end="&gt;" recursion1="yes"/>
+   <case type="singleblock" all="[^\w\s]"/>
+ </block> 
+ 
+ <block  name="qq" start="\bqq\s*" end=""
+  scheme1="SubstElements" region1="String" 
+  region-start="ReType" region-end="ReModif" 
+  region-middle="StringEdge">
+   <case type="monoblock" start="\{" end="\}" recursion1="yes"/>
+   <case type="monoblock" start="\(" end="\)" recursion1="yes"/>
+   <case type="monoblock" start="\[" end="\]" recursion1="yes"/>
+   <case type="monoblock" start="&lt;" end="&gt;" recursion1="yes"/>
+   <case type="singleblock" all="[^\w\s]"/>
+ </block> 
+
+ <block  name="qx" start="\bqx\s*" end=""
+  scheme1="SubstElements" region1="SystemExec"
+  region-start="ReType" region-end="ReModif" 
+  region-middle="StringEdge">
+   <case type="monoblock" start="\{" end="\}" recursion1="yes"/>
+   <case type="monoblock" start="\(" end="\)" recursion1="yes"/>
+   <case type="monoblock" start="\[" end="\]" recursion1="yes"/>
+   <case type="monoblock" start="&lt;" end="&gt;" recursion1="yes"/>
+   <case type="singleblock" all="[^\w\s]"/>
+ </block> 
+
+ <block  name="qw" start="\bq(?{}w)?\s*" end=""
+  scheme1="String" region1="String" 
+  region-start="ReType" region-end="ReModif" 
+  region-middle="StringEdge">
+   <case type="monoblock" start="\{" end="\}" recursion1="yes"/>
+   <case type="monoblock" start="\(" end="\)" recursion1="yes"/>
+   <case type="monoblock" start="\[" end="\]" recursion1="yes"/>
+   <case type="monoblock" start="&lt;" end="&gt;" recursion1="yes"/>
+   <case type="singleblock" all="[^\w\s]"/>
+ </block> 
+ 
+</bracket>

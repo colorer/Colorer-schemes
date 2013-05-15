@@ -1,0 +1,330 @@
+  0: <span class='def-Comment def-Syntax'>-------------------------------------------------------------------------------</span>
+  1: <span class='def-Comment def-Syntax'>--</span>
+  2: <span class='def-Comment def-Syntax'>--   RCMENU.MS</span>
+  3: <span class='def-Comment def-Syntax'>--   This script adds new items to MAX's right click menu</span>
+  4: <span class='def-Comment def-Syntax'>--   By Ravi Karra [Kinetix]             ravi.karra@ktx.com</span>
+  5: <span class='def-Comment def-Syntax'>--     Commands added by Frank DeLise</span>
+  6: <span class='def-Comment def-Syntax'>--     Make sure you have MXSAgni.dlx file in MAX Plugins folder</span>
+  7: <span class='def-Comment def-Syntax'>--     Please refer to MXSAgni.doc for information on the functions in MXSAgni.dlx</span>
+  8: <span class='def-Comment def-Syntax'>--     Build 5-03-98 .1</span>
+  9: <span class='def-Comment def-Syntax'>-------------------------------------------------------------------------------</span>
+ 10: 
+ 11: <span class='def-Comment def-Syntax'>-- Array of all the menu items that are added</span>
+ 12: menu_items <span class='def-Symbol'>=</span> #<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+ 13: 
+ 14: <span class='def-Comment def-Syntax'>--This function gets called when a menu item is selected</span>
+ 15: fn fnSelected item <span class='def-Symbol'>=</span>
+ 16: <span class='def-Symbol'>(</span>
+ 17:     case item of
+ 18:     <span class='def-Symbol'>(</span>
+ 19:     <span class='def-String'>"Edit CV's"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+ 20:     
+ 21:     If $<span class='def-Symbol'>.</span>modifiers<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> undefined then
+ 22:         <span class='def-Symbol'>(</span>
+ 23:         Max modify mode
+ 24:         subobjectlevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+ 25:         <span class='def-Symbol'>)</span>
+ 26:         else
+ 27:         <span class='def-Symbol'>(</span>
+ 28:         if Querybox <span class='def-String'>"Collapse"</span> beep<span class='def-Symbol'>:</span>yes then <span class='def-Symbol'>(</span>
+ 29:             
+ 30:             local obj <span class='def-Symbol'>=</span> $
+ 31:             Converttomesh $
+ 32:             select obj
+ 33:             Max modify mode
+ 34:             subobjectlevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+ 35:             <span class='def-Symbol'>)</span>
+ 36:         <span class='def-Symbol'>)</span>    
+ 37:     <span class='def-Symbol'>)</span>
+ 38:     
+ 39: 
+ 40:     
+ 41:     <span class='def-String'>"Edit Vertices"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+ 42:     
+ 43:     If $<span class='def-Symbol'>.</span>modifiers<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> undefined then
+ 44:         <span class='def-Symbol'>(</span>
+ 45:         Max modify mode
+ 46:         subobjectlevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+ 47:         <span class='def-Symbol'>)</span>
+ 48:         else
+ 49:         <span class='def-Symbol'>(</span>
+ 50:         if Querybox <span class='def-String'>"Collapse"</span> beep<span class='def-Symbol'>:</span>yes then <span class='def-Symbol'>(</span>
+ 51:             
+ 52:             local obj <span class='def-Symbol'>=</span> $
+ 53:             Converttomesh $
+ 54:             select obj
+ 55:             Max modify mode
+ 56:             subobjectlevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+ 57:             <span class='def-Symbol'>)</span>
+ 58:         <span class='def-Symbol'>)</span>    
+ 59:     <span class='def-Symbol'>)</span>
+ 60:     
+ 61:     <span class='def-String'>"Edit Faces"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+ 62:         If $<span class='def-Symbol'>.</span>modifiers<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> undefined then
+ 63:         <span class='def-Symbol'>(</span>
+ 64:         Max modify mode
+ 65:         subobjectlevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>2</span>
+ 66:         <span class='def-Symbol'>)</span>
+ 67:         else
+ 68:         <span class='def-Symbol'>(</span>
+ 69:         if Querybox <span class='def-String'>"Collapse"</span> beep<span class='def-Symbol'>:</span>yes then <span class='def-Symbol'>(</span>
+ 70:             
+ 71:             local obj <span class='def-Symbol'>=</span> $
+ 72:             Converttomesh $
+ 73:             select obj
+ 74:             Max modify mode
+ 75:             subobjectlevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>2</span>
+ 76:             <span class='def-Symbol'>)</span>
+ 77:         <span class='def-Symbol'>)</span>    
+ 78: 
+ 79:         <span class='def-Symbol'>)</span>
+ 80:     <span class='def-String'>"Edit Edges"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+ 81: 
+ 82:         If $<span class='def-Symbol'>.</span>modifiers<span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> undefined then
+ 83:         <span class='def-Symbol'>(</span>
+ 84:         Max modify mode
+ 85:         subobjectlevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>3</span>
+ 86:         <span class='def-Symbol'>)</span>
+ 87:         else
+ 88:         <span class='def-Symbol'>(</span>
+ 89:         if Querybox <span class='def-String'>"Collapse"</span> beep<span class='def-Symbol'>:</span>yes then <span class='def-Symbol'>(</span>
+ 90:             
+ 91:             local obj <span class='def-Symbol'>=</span> $
+ 92:             Converttomesh $
+ 93:             select obj
+ 94:             Max modify mode
+ 95:             subobjectlevel <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>3</span>
+ 96:             <span class='def-Symbol'>)</span>
+ 97:         <span class='def-Symbol'>)</span>    
+ 98: 
+ 99:         <span class='def-Symbol'>)</span>
+100:     
+101:     <span class='def-String'>"Convert to Mesh"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+102:     local obj <span class='def-Symbol'>=</span> $
+103:     Converttomesh $
+104:     select obj
+105:     <span class='def-Symbol'>)</span>
+106:     
+107:     <span class='def-String'>"Convert to Nurbs"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+108:     local obj <span class='def-Symbol'>=</span> $
+109:     ConverttoNurbsSurface $
+110:     Select obj
+111:     <span class='def-Symbol'>)</span>
+112:     
+113:     
+114:     <span class='def-String'>"Convert to Nurbs Curve"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+115:     local obj <span class='def-Symbol'>=</span> $
+116:     ConverttoNurbsCurve $
+117:     select obj
+118:     <span class='def-Symbol'>)</span>
+119:     
+120:     <span class='def-String'>"Convert to Nurbs Surface"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+121:         Local obj <span class='def-Symbol'>=</span> $
+122:         ConverttoNurbsCurve obj
+123:         ConvertToNurbsSurface obj
+124:         Max Modify Mode
+125:         select obj
+126:         <span class='def-Symbol'>)</span>
+127:         
+128:             
+129:     <span class='def-String'>"Extrude"</span><span class='def-Symbol'>:</span> 
+130:         <span class='def-Symbol'>(</span>
+131:             addModifier selection <span class='def-Symbol'>(</span>Extrude amount<span class='def-Symbol'>:</span><span class='def-NumberDec def-Number'>30</span><span class='def-Symbol'>)</span>
+132:         <span class='def-Symbol'>)</span>
+133:         <span class='def-String'>"Cast Shadows:On"</span><span class='def-Symbol'>:</span>selection<span class='def-Symbol'>.</span>castshadows <span class='def-Symbol'>=</span> true
+134:         <span class='def-String'>"Cast Shadows:Off"</span><span class='def-Symbol'>:</span>selection<span class='def-Symbol'>.</span>castshadows <span class='def-Symbol'>=</span> false
+135:         <span class='def-String'>"Light Properties:"</span><span class='def-Symbol'>:</span><span class='def-Symbol'>(</span>
+136:     
+137:         Rollout LightRoll <span class='def-String'>"Lights"</span>
+138:         <span class='def-Symbol'>(</span>
+139:     
+140: Group <span class='def-String'>"Light Properties"</span>
+141:         <span class='def-Symbol'>(</span>
+142:         CheckBox LON <span class='def-String'>"ON:"</span>Checked<span class='def-Symbol'>:</span>$<span class='def-Symbol'>.</span><span class='def-Keyword'>on</span>
+143:         ColorPicker LC <span class='def-String'>"Light Color:"</span> color<span class='def-Symbol'>:</span>$<span class='def-Symbol'>.</span>color offset<span class='def-Symbol'>:</span><span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>50</span><span class='def-Symbol'>,</span><span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>22</span><span class='def-Symbol'>]</span>
+144:         Spinner mt <span class='def-String'>"Multiplier:"</span> range<span class='def-Symbol'>:</span><span class='def-Symbol'>[</span><span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>50</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>50</span><span class='def-Symbol'>,</span>$<span class='def-Symbol'>.</span>multiplier<span class='def-Symbol'>]</span>width<span class='def-Symbol'>:</span><span class='def-NumberDec def-Number'>90</span> offset<span class='def-Symbol'>:</span><span class='def-Symbol'>[</span><span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>30</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>]</span> 
+145:         Checkbox CS <span class='def-String'>"CastShadows"</span>checked<span class='def-Symbol'>:</span>$<span class='def-Symbol'>.</span>castshadows
+146:         Button upd <span class='def-String'>"Update"</span> Across<span class='def-Symbol'>:</span><span class='def-NumberDec def-Number'>3</span>
+147:         Button pst <span class='def-String'>"Paste"</span>
+148:         Button CL <span class='def-String'>"Ok"</span> width<span class='def-Symbol'>:</span><span class='def-NumberDec def-Number'>20</span> Align<span class='def-Symbol'>:</span>#right 
+149:         
+150:         <span class='def-Symbol'>)</span>
+151:         <span class='def-Keyword'>on</span> upd pressed <span class='def-Keyword'>do</span>
+152:         <span class='def-Symbol'>(</span>
+153:         if isKindOf $ Light then
+154:             <span class='def-Symbol'>(</span>            
+155:             lc<span class='def-Symbol'>.</span>color <span class='def-Symbol'>=</span> $<span class='def-Symbol'>.</span>color
+156:             cs<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> $<span class='def-Symbol'>.</span>castshadows
+157:             mt<span class='def-Symbol'>.</span>value <span class='def-Symbol'>=</span> $<span class='def-Symbol'>.</span>multiplier
+158:             lon<span class='def-Symbol'>.</span>checked <span class='def-Symbol'>=</span> $<span class='def-Symbol'>.</span><span class='def-Keyword'>on</span>
+159:             <span class='def-Symbol'>)</span>
+160:             Else
+161:             <span class='def-Symbol'>(</span>
+162:             Messagebox <span class='def-String'>"A Light needs to be selected!"</span>
+163:             <span class='def-Symbol'>)</span>
+164:         
+165: 
+166:         <span class='def-Symbol'>)</span>
+167:             <span class='def-Keyword'>on</span> pst pressed <span class='def-Keyword'>do</span>
+168:         <span class='def-Symbol'>(</span>
+169:         if isKindOf $ Light then
+170:             <span class='def-Symbol'>(</span>            
+171:             $<span class='def-Symbol'>.</span>color <span class='def-Symbol'>=</span> lc<span class='def-Symbol'>.</span>color 
+172:             $<span class='def-Symbol'>.</span>castshadows <span class='def-Symbol'>=</span> cs<span class='def-Symbol'>.</span>checked 
+173:             $<span class='def-Symbol'>.</span>multiplier <span class='def-Symbol'>=</span> mt<span class='def-Symbol'>.</span>value 
+174:             $<span class='def-Symbol'>.</span><span class='def-Keyword'>on</span> <span class='def-Symbol'>=</span> lon<span class='def-Symbol'>.</span>checked 
+175:             <span class='def-Symbol'>)</span>
+176:             Else
+177:             <span class='def-Symbol'>(</span>
+178:             Messagebox <span class='def-String'>"A Light needs to be selected!"</span>
+179:             <span class='def-Symbol'>)</span>
+180:         
+181: 
+182:         <span class='def-Symbol'>)</span>
+183: 
+184:         
+185:     
+186:     On cl pressed <span class='def-Keyword'>do</span>
+187:         <span class='def-Symbol'>(</span>
+188:         CloseRolloutFloater NW 
+189:         <span class='def-Symbol'>)</span>
+190:         <span class='def-Keyword'>on</span> LC changed color <span class='def-Keyword'>do</span> <span class='def-Symbol'>(</span>
+191:         If isKindof $ Light then $<span class='def-Symbol'>.</span>color <span class='def-Symbol'>=</span> color
+192:         <span class='def-Symbol'>)</span>
+193:         
+194:         <span class='def-Keyword'>on</span> cs changed state <span class='def-Keyword'>do</span> <span class='def-Symbol'>(</span>
+195:             If isKindof $ Light then $<span class='def-Symbol'>.</span>castshadows <span class='def-Symbol'>=</span> state
+196:             <span class='def-Symbol'>)</span>
+197:         <span class='def-Keyword'>on</span> mt changed value <span class='def-Keyword'>do</span> <span class='def-Symbol'>(</span>
+198:             If isKindof $ Light then $<span class='def-Symbol'>.</span>multiplier <span class='def-Symbol'>=</span> value
+199:             <span class='def-Symbol'>)</span> 
+200:         <span class='def-Keyword'>on</span> lon changed state <span class='def-Keyword'>do</span> <span class='def-Symbol'>(</span>
+201:             If isKindof $ Light then $<span class='def-Symbol'>.</span><span class='def-Keyword'>on</span> <span class='def-Symbol'>=</span> state
+202:             <span class='def-Symbol'>)</span>
+203:         <span class='def-Symbol'>)</span>
+204:         
+205:         If nw <span class='def-Symbol'>!</span><span class='def-Symbol'>=</span>undefined then
+206:             <span class='def-Symbol'>(</span>
+207:             RemoveRollout Lightroll NW
+208:             CloseRolloutFloater NW
+209:             NW <span class='def-Symbol'>=</span> NewrolloutFloater <span class='def-String'>"LightBoy"</span> <span class='def-NumberDec def-Number'>200</span> <span class='def-NumberDec def-Number'>180</span>
+210:             Addrollout LightRoll NW
+211:             lightroll<span class='def-Symbol'>.</span>lc <span class='def-Symbol'>=</span> $<span class='def-Symbol'>.</span>color
+212:             lightroll<span class='def-Symbol'>.</span>cs <span class='def-Symbol'>=</span> $<span class='def-Symbol'>.</span>castshadows
+213:             lightroll<span class='def-Symbol'>.</span>mt <span class='def-Symbol'>=</span> $<span class='def-Symbol'>.</span>multiplier
+214:             lightroll<span class='def-Symbol'>.</span>lon <span class='def-Symbol'>=</span> $<span class='def-Symbol'>.</span><span class='def-Keyword'>on</span>
+215:             <span class='def-Symbol'>)</span>
+216:             else
+217:             <span class='def-Symbol'>(</span>
+218:             NW <span class='def-Symbol'>=</span> NewrolloutFloater <span class='def-String'>"LightBoy"</span> <span class='def-NumberDec def-Number'>200</span> <span class='def-NumberDec def-Number'>180</span>
+219:             Addrollout LightRoll NW
+220:             <span class='def-Symbol'>)</span>
+221:         <span class='def-Symbol'>)</span>
+222:     <span class='def-Symbol'>)</span>
+223:         
+224: <span class='def-Symbol'>)</span>
+225: 
+226: <span class='def-Comment def-Syntax'>-- filter function for adding the menu items </span>
+227: fn flt_items <span class='def-Symbol'>=</span> 
+228: <span class='def-Symbol'>(</span>
+229:     <span class='def-Comment def-Syntax'>-- Make sure to delete all the items in the array</span>
+230:     while <span class='def-Symbol'>(</span>menu_items<span class='def-Symbol'>.</span>count <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>do</span> deleteItem menu_items <span class='def-NumberDec def-Number'>1</span>    
+231:     
+232:     <span class='def-Comment def-Syntax'>-- Add the menu item only if it is a shape object</span>
+233:     if isKindOf $ Shape then
+234:     <span class='def-Symbol'>(</span>
+235:         append menu_items <span class='def-String'>"Convert to Nurbs Curve"</span>
+236:         append menu_items <span class='def-String'>"Convert to Nurbs Surface"</span>
+237:     <span class='def-Symbol'>)</span>
+238:     
+239:     <span class='def-Comment def-Syntax'>-- Add all the generic menu items</span>
+240:     <span class='def-Comment def-Syntax'>--append menu_items  "Scale Twice"</span>
+241:     <span class='def-Comment def-Syntax'>--append menu_items  "Scale Half"</span>
+242: 
+243: 
+244:     if isKindOf $ Light then
+245:     <span class='def-Symbol'>(</span>
+246:         append menu_items <span class='def-String'>"Cast Shadows:On"</span>
+247:         append menu_items <span class='def-String'>"Cast Shadows:Off"</span>
+248:         append menu_items <span class='def-String'>"Light Properties:"</span>
+249:     <span class='def-Symbol'>)</span>
+250:     
+251:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Sphere then
+252:     <span class='def-Symbol'>(</span>
+253:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+254:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+255:     <span class='def-Symbol'>)</span>
+256:     
+257:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Box then
+258:     <span class='def-Symbol'>(</span>
+259:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+260:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+261:     <span class='def-Symbol'>)</span>
+262:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Cylinder then
+263:     <span class='def-Symbol'>(</span>
+264:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+265:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+266:     <span class='def-Symbol'>)</span>
+267:     
+268:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Torus then
+269:     <span class='def-Symbol'>(</span>
+270:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+271:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+272:     <span class='def-Symbol'>)</span>
+273:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Teapot then
+274:     <span class='def-Symbol'>(</span>
+275:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+276:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+277:     <span class='def-Symbol'>)</span>
+278:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Cone then
+279:     <span class='def-Symbol'>(</span>
+280:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+281:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+282:     <span class='def-Symbol'>)</span>
+283:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> GeoSphere then
+284:     <span class='def-Symbol'>(</span>
+285:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+286:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+287:     <span class='def-Symbol'>)</span>
+288:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Tube then
+289:     <span class='def-Symbol'>(</span>
+290:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+291:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+292:     <span class='def-Symbol'>)</span>
+293:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Pyramid then
+294:     <span class='def-Symbol'>(</span>
+295:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+296:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+297:     <span class='def-Symbol'>)</span>
+298:     if Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Prism then
+299:     <span class='def-Symbol'>(</span>
+300:         append menu_items <span class='def-String'>"Convert to Mesh"</span>
+301:         append menu_items <span class='def-String'>"Convert to Nurbs"</span>
+302:     <span class='def-Symbol'>)</span>
+303: 
+304:     
+305:     if classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> Editable_Mesh then
+306:     <span class='def-Symbol'>(</span>
+307:     
+308:         append menu_items <span class='def-String'>"Edit Vertices"</span>
+309:         append menu_items <span class='def-String'>"Edit Faces"</span>
+310:         append menu_items <span class='def-String'>"Edit Edges"</span>
+311:         
+312:     <span class='def-Symbol'>)</span>
+313:     If Classof $ <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> CV_surf then
+314:         <span class='def-Symbol'>(</span>
+315:             append menu_items <span class='def-String'>"Edit CV's"</span>
+316:         <span class='def-Symbol'>)</span>
+317: 
+318: 
+319: 
+320: <span class='def-Symbol'>)</span>
+321: 
+322: 
+323: 
+324: 
+325: registerRightClickMenu menu_items fnSelected filter<span class='def-Symbol'>:</span>flt_items
+326: 
+327: <span class='def-Comment def-Syntax'>--Uncomment the following to unRegister the right_click functions--</span>
+328: <span class='def-Comment def-Syntax'>--unregisterRightClickMenu fnSelected</span>
+329: 

@@ -1,0 +1,52 @@
+.menu
+{
+	padding: 10px;
+	font-size: 0.8em;
+}
+
+.menu ul
+{
+	margin: 0 0 0 10px;padding:0;
+} 
+
+
+.menu li
+{
+	list-style-image: url(/style/skin/mn.png);
+	list-style-type: square;
+	margin: 3px 0 0 5px; padding: 0;
+	-moz-binding: url(/style/binding.xml#menu);
+	behavior: url(/style/menu.htc);
+}
+
+
+.menu li.off ul
+{
+	display: none;
+}
+
+
+.menu li.off
+{
+	list-style-image: url(/style/skin/mof.png);
+	list-style-type: circle;
+}
+
+.menu li.on
+{
+	list-style-image: url(/style/skin/mon.png);
+	list-style-type: disc;
+}
+
+.menu p
+{
+	behavior: url(/style/hover.htc);
+	font-size: 1em;
+	padding: 0;
+}
+
+
+.menu p:hover, .menu p.hover
+{
+	background-color: #FFe0c0;  
+}

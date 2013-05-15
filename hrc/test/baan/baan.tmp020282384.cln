@@ -1,0 +1,142 @@
+|******************************************************************************
+|* tfzzz0458m002s  0  VRC B402 c4 land
+|* Печать формы № Т-1а
+|* Белугин Максим                
+|* 2001-08-13
+|******************************************************************************
+|* Main table tfzzz058 Движение работников, Form Type 4
+|******************************************************************************
+                                                                                
+|****************************** declaration section ***************************
+declaration:
+    #include "itfzzzcommon"
+    #include "itfzzydomains"
+    #include "itfzzyerrors"
+    
+    #pragma used dll otfzzzdll064m01
+    #pragma used dll otfzzzdll003m01
+    #pragma used dll otfzzzdll193
+    #pragma used dll otfzzzdll056m01
+    #pragma used dll otfzzzdll058m01
+    #pragma used dll otfzzzdll058m00
+    #pragma used dll otfzzzdll021m01
+    #pragma used dll otfzzzdll017m01
+    #pragma used dll otfzzzdll019m01
+    #pragma used dll otfzzzdll192
+    #pragma used dll otfzzzdllt8
+    
+	#define CR_REP_NAME "rtfzzz045811004.rpt"
+
+	#pragma used dll otudlldllreport
+	#include	"itudllreports"
+
+	table	ttfzzz058	| Движение работников
+
+    extern domain tfzzz.str10 number
+    extern TDate date.from, date.to, pr.date
+    extern TCheck only.done
+    
+#define kind tfzzz.pnp.type.dismission
+	
+before.program:
+	date.from=0
+	date.to=DR_MAX_DATE
+
+form.1:
+	init.form:
+		get.screen.defaults()
+
+|****************************** choice section ********************************
+
+choice.cont.process:
+	on.choice:
+		execute(print.data)
+
+choice.print.data:
+	on.choice:
+		read.main.table()
+		showCurrentError()
+
+field.number:
+	before.zoom:
+    	set.enum.values(kind) 
+
+	after.input:
+		DetectDate(true)
+
+field.pr.date:
+	before.zoom:
+    	set.enum.values(kind) 
+
+	before.input:
+		DetectDate(false)
+
+|****************************** function section ******************************
+
+functions:
+function String dat(long X){
+	if (X=0) or (X=DR_MAX_DATE) then
+		return("")
+	endif
+	return(cr.date(X))
+}
+
+function read.main.table(){
+	DECLARE_ROWSET(rsReport)
+	String rsFile(128)
+	assert.v(
+		open.xml.rowset(spool.report, rsFile, USE_ROWSET(rsReport))> 0, 
+		"Проблема при генерации отчета"
+	)
+	Date docDate
+	docDate=0
+	select	tfzzz058.*
+	from	tfzzz058, tfzzz100
+	where 
+        (
+       		tfzzz058._index4 inrange 
+			{tfzzz.checkbox.true,  :date.from} and 
+			{tfzzz.checkbox.true, :date.to}
+			or
+            (tfzzz058._index4 inrange 
+			  {tfzzz.checkbox.false,  :date.from} and 
+			  {tfzzz.checkbox.false, :date.to}
+			  and
+			  :only.done=tfzzz.checkbox.false
+            )
+		)		
+		and
+		tfzzz058._index5={:number, :pr.date}
+		and
+		tfzzz058.pnplopty refers to tfzzz100
+		and
+		tfzzz100.opertype=kind
+	selectdo
+		if docDate=0 then
+			docDate=pr.date
+		endif
+    	fire.setProps(true, 1)
+    		HERR.V
+    	write.xml.row ( USE_ROWSET(rsReport) )
+	endselect
+	
+	long dummy
+	dummy=close.xml.rowset(USE_ROWSET(rsReport))
+	
+	long    activ.record
+    string  server.file(128)
+	activ.record = crystal.request.open(CR_REP_NAME, PLAIN_ROWSET, rsFile, server.file)
+ 	assert.v(activ.record<>0,"Запись активации не создана")
+
+	if crystal.close.request(activ.record) then endif
+	if launch.rview(server.file) then endif
+}
+
+function void detectDate(TBOOL lMode){
+	if (pr.date=0) or lMode then
+		select	tfzzz058.pnplprdt:pr.date from tfzzz058 where	tfzzz058._index5 = {:number}
+		as set with 1 rows
+		selectdo
+		endselect
+	endif
+}

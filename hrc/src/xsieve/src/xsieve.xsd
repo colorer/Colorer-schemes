@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns="http://xsieve.sourceforge.net"
+	targetNamespace="http://xsieve.sourceforge.net"
+	elementFormDefault="qualified"
+ >
+
+<xs:annotation><xs:documentation><![CDATA[
+    XML schema for XSieve elements.
+    Written for colorer.take5.
+    
+    (c) Eugene Efremov <4mirror@mail.ru>, 2006
+]]></xs:documentation></xs:annotation>
+
+<xs:simpleType name="lisp-string">
+	<xs:annotation>
+		<xs:documentation>
+		 Embedded lisp
+		</xs:documentation>
+	</xs:annotation>
+	<xs:restriction base="xs:token">
+		<xs:pattern value=".+"/>
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:element name='init' type='lisp-string'/>
+<xs:element name='scheme' type='lisp-string'/>
+
+</xs:schema>

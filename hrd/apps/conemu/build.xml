@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+	Rules for convert concole HRD to RGB.
+-->
+
+<project name="conemu" default="conemu" basedir=".">
+
+<property name="hrd-path" value="../../hrd" description="hrd location"/>
+
+<property file='../../../path.properties'/>
+<property name='shemes' value="../../../${path.shared}" description='path to dtd, xsd, etc.'/>
+
+<!-- con2rgb -->
+
+<target name="conemu.prop">
+	<xmlcatalog id="xsd2hrcdtd">
+		<catalogpath>
+			<fileset dir='${shemes}' includes='colorer.cat'/>
+		</catalogpath>
+	</xmlcatalog>
+</target>
+
+
+<target name="conemu" depends="conemu.prop">
+	<xslt in="${hrd-path}/console/${input}" out="${hrd-path}/console/emu/${output}" style="conemu.xsl" classpath="${xslt-classpath}">
+		<xmlcatalog refid="xsd2hrcdtd"/>
+	</xslt>  
+</target>
+
+
+<target name="clean">
+    <delete failonerror='false'>
+        <fileset dir="${hrd-path}/console/emu" includes="${output}"/>
+    </delete>
+</target>
+
+
+<target name='all' depends="conemu"/>
+
+</project>

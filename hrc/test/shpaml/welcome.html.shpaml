@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block description %}
+    Home SEO-friendly Description
+{% endblock %}
+
+{% block title %} Home Title {% endblock %}
+
+{% block custom_scripts %}
+    script type=text/javascript VERBATIM
+        $(document).live('pageinit',function(event){
+
+            //show URL build as they type
+            $("#username").keyup(function (e) {
+                $("#uri-username").text($(this).val());
+                if(e.keyCode == 13) {
+                    go();
+                }
+            }).keyup();
+            $("#notebook").keyup(function (e) {
+                $("#uri-notebook").text($(this).val());
+                if(e.keyCode == 13) {
+                    go();
+                }
+            }).keyup();
+          
+            $("#go").click(function(){
+                go();
+            });
+        });
+
+        //send user to URL
+        function go() {
+            //validation: username must not be blank
+            if ($("#username").val() == "") {
+                $("#feedback").show().fadeOut(2700);
+                return;
+            }
+            window.location.href = "/" + $("#username").val() + "/" + $("#notebook").val();
+        }
+{% endblock %}
+
+{% block content-primary %}
+        h1
+            Welcome to Everblog
+        p.p-bot-5
+            Everblog is a free web service which presents an Evernote user's public notebooks in blog format.
+        > hr
+        p.p-top-5
+            Simply enter your evernote username and the name of a
+            span.italic
+                public
+            notebook to begin:
+        div.ui-hide-label data-role=fieldcontain
+            form
+                label for=username | evernote username
+                > input.margin-5 type=text id=username name=username placeholder="evernote username"
+                div.min-height-20.red
+                    div#feedback.hidden
+                        Username cannot be left blank
+                label for=notebook | notebook name
+                > input.margin-5 type=text id=notebook name=notebook placeholder="notebook name"
+        div.bold
+            table
+                tr
+                    td width=300px
+                        http://everblog.com/<span id="uri-username"></span>/<span id="uri-notebook"></span>
+                    td
+                        button#go data-theme=b | go
+{% endblock %}
+{% block content-secondary %}
+div data-content-theme="d" data-theme="b" data-collapsed="true" data-role="collapsible" class="ui-collapsible ui-collapsible-collapsed"
+    h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"
+        a class="ui-collapsible-heading-toggle ui-btn ui-btn-up-b ui-btn-icon-left ui-corner-top ui-corner-bottom" href="#" data-theme="b"
+            span class="ui-btn-inner ui-corner-top ui-corner-bottom"
+                span class="ui-btn-text"
+                    More in this section
+                    span class="ui-collapsible-heading-status"
+                        click to expand contents
+                span class="ui-icon ui-icon-plus ui-icon-shadow"
+                    PASS
+    div class="ui-collapsible-content ui-body-d ui-collapsible-content-collapsed" aria-hidden="true"
+        ul data-dividertheme="d" data-theme="c" data-role="listview" class="ui-listview"
+            li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-btn ui-bar-d" | Buttons
+            li data-theme="a" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-a"
+                div class="ui-btn-inner ui-li"
+                    div class="ui-btn-text"
+                        a href="buttons-types.html" class="ui-link-inherit" | Button basics
+                    span class="ui-icon ui-icon-arrow-r ui-icon-shadow"
+                        PASS
+            li data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"
+                div class="ui-btn-inner ui-li"
+                    div class="ui-btn-text"
+                        a href="buttons-icons.html" class="ui-link-inherit" | Button icons
+                    span class="ui-icon ui-icon-arrow-r ui-icon-shadow"
+                        PASS
+            li data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c"
+                div class="ui-btn-inner ui-li"
+                    div class="ui-btn-text"
+                        a href="buttons-inline.html" class="ui-link-inherit" | Inline buttons
+                    span class="ui-icon ui-icon-arrow-r ui-icon-shadow"
+                        PASS
+{% endblock %}

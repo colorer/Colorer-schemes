@@ -1,0 +1,465 @@
+  0: <span class='dssp-dsspString def-String'>"Расшиpения pедактоpа.        Версия 1.2. 20 Ноября  1990."</span>
+  1: <span class='dssp-dsspParam def-Parameter'>B10</span> <span class='dssp-dsspParam def-Parameter'>CR</span> <span class='def-NumberDec def-Number'>12</span> <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR <span class='dssp-dsspParam def-Parameter'>TOS</span>''
+  2: <span class='dssp-dsspExpr def-Directive'>PROGRAM $EDEXT</span> USE SYSTEM USE $EDIT
+  3: <span class='dssp-dsspParam def-Parameter'>B8</span>
+  4: <span class='dssp-dsspComment def-Comment def-Syntax'>[ '' NOP   '' ATT   '' POINT '' COPY   '' CTRLD '' EX    '' CTRLF '' GET</span>
+  5: <span class='dssp-dsspComment def-Comment def-Syntax'>  0        1 A      2 B      3 C       4 D      5 E      6 F      7 G</span>
+  6: <span class='dssp-dsspComment def-Comment def-Syntax'></span>
+  7: <span class='dssp-dsspComment def-Comment def-Syntax'> '' ERS    '' ГТ    '' DIV   '' STS    '' NSTR  '' .BK   '' NOP   '' NOP</span>
+  8: <span class='dssp-dsspComment def-Comment def-Syntax'> 10 H      11 I     12 J     13 K      14 L     15 M     16 N     17 O</span>
+  9: <span class='dssp-dsspComment def-Comment def-Syntax'></span>
+ 10: <span class='dssp-dsspComment def-Comment def-Syntax'> '' ТАБ    '' TXT   '' DL    '' IC     '' DC    '' CTRLU '' IL    '' NOP</span>
+ 11: <span class='dssp-dsspComment def-Comment def-Syntax'> 20 P      21 Q     22 R     23 S      24 T     25 U     26 V     27 W</span>
+ 12: <span class='dssp-dsspComment def-Comment def-Syntax'></span>
+ 13: <span class='dssp-dsspComment def-Comment def-Syntax'> '' ТАБ    '' !->   '' &lt;-    '' AR2    '' UP    '' DOWN  '' ПРДМ  '' NOPOIN</span>
+ 14: <span class='dssp-dsspComment def-Comment def-Syntax'> 30 X      31 Y     32 Z     33 {      34 \     35 }     36 ^     37 _</span>
+ 15: <span class='dssp-dsspComment def-Comment def-Syntax'></span>
+ 16: <span class='dssp-dsspComment def-Comment def-Syntax'> '' WINDOW '' TSTR  '' LDATE '' SK+    '' MARKS '' DATE  '' EXR   '' L1</span>
+ 17: <span class='dssp-dsspComment def-Comment def-Syntax'> 40        41       42       43        44       45       46       47</span>
+ 18: <span class='dssp-dsspComment def-Comment def-Syntax'></span>
+ 19: <span class='dssp-dsspComment def-Comment def-Syntax'> '' AU+    '' .BSTR '' TOLMOV '' ZAPIS '' EDIT  '' REST  '' BEG   '' .ПС</span>
+ 20: <span class='dssp-dsspComment def-Comment def-Syntax'> 50        51       52        53       54       55       56       57</span>
+ 21: <span class='dssp-dsspComment def-Comment def-Syntax'></span>
+ 22: <span class='dssp-dsspComment def-Comment def-Syntax'> '' ST3    '' RENSC '' TOPMOV '' SCHFL '' ZB    '' IFL</span>
+ 23: <span class='dssp-dsspComment def-Comment def-Syntax'> 60        61       62        63       64       65 ]</span>
+ 24: 
+ 25:  <span class='def-NumberDec def-Number'>4</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> CTRLD
+ 26: <span class='def-NumberDec def-Number'>12</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> DIV
+ 27: <span class='def-NumberDec def-Number'>13</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> STS
+ 28: <span class='def-NumberDec def-Number'>15</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> .BK
+ 29: <span class='def-NumberDec def-Number'>23</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> IC
+ 30: <span class='def-NumberDec def-Number'>24</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> DC
+ 31: <span class='def-NumberDec def-Number'>30</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> TAB
+ 32: <span class='def-NumberDec def-Number'>31</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> !-<span class='dssp-dsspParam def-Parameter'>></span>
+ 33: <span class='def-NumberDec def-Number'>32</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> <span class='dssp-dsspParam def-Parameter'>&lt;</span>-
+ 34: <span class='def-NumberDec def-Number'>34</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> UP
+ 35: <span class='def-NumberDec def-Number'>35</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> DOWN
+ 36: <span class='def-NumberDec def-Number'>40</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> WINDOW
+ 37: <span class='def-NumberDec def-Number'>41</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> TSTR
+ 38: <span class='def-NumberDec def-Number'>43</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> SK+
+ 39: <span class='def-NumberDec def-Number'>44</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> MARKS
+ 40: <span class='def-NumberDec def-Number'>46</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> EXR
+ 41: <span class='def-NumberDec def-Number'>47</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> L1
+ 42: <span class='def-NumberDec def-Number'>50</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> AU+
+ 43: <span class='def-NumberDec def-Number'>51</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> .BSTR
+ 44: <span class='def-NumberDec def-Number'>52</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> TOLMOV
+ 45: <span class='def-NumberDec def-Number'>53</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> ZAPIS
+ 46: <span class='def-NumberDec def-Number'>54</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> EDIT
+ 47: <span class='def-NumberDec def-Number'>55</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> REST
+ 48: <span class='def-NumberDec def-Number'>56</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> BEG
+ 49: <span class='def-NumberDec def-Number'>57</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> .PC
+ 50: <span class='def-NumberDec def-Number'>60</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> ST3
+ 51: <span class='def-NumberDec def-Number'>61</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> RENSC
+ 52: <span class='def-NumberDec def-Number'>62</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> TOPMOV
+ 53: <span class='def-NumberDec def-Number'>63</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> SCHFL
+ 54: <span class='def-NumberDec def-Number'>64</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> ZB
+ 55: <span class='def-NumberDec def-Number'>65</span> EXE <span class='dssp-dsspParam def-Parameter'>HEAD</span> IFL
+ 56: 
+ 57: :: : ?<span class='dssp-dsspParam def-Parameter'>SP</span> #  <span class='dssp-dsspParam def-Parameter'>=</span> ;
+ 58: :: : ?BK <span class='def-NumberDec def-Number'>12</span> <span class='dssp-dsspParam def-Parameter'>=</span> ;
+ 59: :: : SPE #  <span class='dssp-dsspParam def-Parameter'>TOB</span>'' ;
+ 60: 
+ 61: <span class='dssp-dsspComment def-Comment def-Syntax'>[Форматирование]</span>
+ 62: <span class='dssp-dsspParam def-Parameter'>VAR A</span>
+ 63: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR NDLS</span> <span class='def-NumberDec def-Number'>113</span> <span class='dssp-dsspParam def-Parameter'>!</span> NDLS
+ 64: : ER <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> MARKS <span class='dssp-dsspComment def-Comment def-Syntax'>[L,H,1/0]</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> ER1 DD</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+ 65: : ER1 <span class='dssp-dsspComment def-Comment def-Syntax'>[L,H]</span> SCHFL
+ 66:   <span class='dssp-dsspParam def-Parameter'>C2</span> - <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspParam def-Parameter'>C2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[LINE]</span> <span class='dssp-dsspParam def-Parameter'>C</span> ST3 <span class='def-NumberDec def-Number'>5</span> - ST3 <span class='dssp-dsspParam def-Parameter'>HS</span> + <span class='def-NumberDec def-Number'>5</span> + <span class='dssp-dsspParam def-Parameter'>SEG</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> TOLMOV RENSC</span>
+ 67:   <span class='dssp-dsspComment def-Comment def-Syntax'>[L,SK]</span> .BSTR ER2 <span class='dssp-dsspComment def-Comment def-Syntax'>[L]</span> TSTR <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspParam def-Parameter'>E2</span> WINDOW L1 TOLMOV <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+ 68: 
+ 69: <span class='dssp-dsspComment def-Comment def-Syntax'>[Основной цикл]</span>
+ 70: : ER2 <span class='dssp-dsspComment def-Comment def-Syntax'>[SK]</span> AF <span class='dssp-dsspParam def-Parameter'>!</span> A <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> OSTR</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+ 71:   : OSTR <span class='dssp-dsspComment def-Comment def-Syntax'>[SK]</span> A @B <span class='dssp-dsspWord def-Keyword'>BR</span><span class='dssp-dsspExpr def-Directive'> 12 OS1 40 OS2 #- OS3</span><span class='dssp-dsspWord def-Keyword'> ELSE</span><span class='dssp-dsspExpr def-Directive'> OS4</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[SK']</span> ;
+ 72: 
+ 73: : OS1 <span class='dssp-dsspComment def-Comment def-Syntax'>[SK]</span> <span class='def-NumberDec def-Number'>1</span>- <span class='dssp-dsspParam def-Parameter'>C</span> EX0 A AF -
+ 74:   <span class='dssp-dsspWord def-Keyword'>BR</span><span class='dssp-dsspExpr def-Directive'> 0 OSTR0 NDLS OSTR0 DLS-1 OSTR0</span><span class='dssp-dsspWord def-Keyword'> ELSE</span><span class='dssp-dsspExpr def-Directive'> OSTR1</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[SK-1]</span> ;
+ 75:   : OSTR0 A+ AF A AF - UN <span class='dssp-dsspParam def-Parameter'>C2</span> AU+ <span class='dssp-dsspParam def-Parameter'>!SB</span> <span class='dssp-dsspParam def-Parameter'>!1+</span> TSTR ;
+ 76:   : OSTR1 A <span class='def-NumberDec def-Number'>1</span>+ @B BR <span class='def-NumberDec def-Number'>12</span> OSTR0 #  OSTR0 #- OSTR0
+ 77:     #| OSTR0 <span class='def-NumberDec def-Number'>177</span> OSTR0 <span class='dssp-dsspWord def-Keyword'>ELSE OSTR2</span> ;
+ 78:     : OSTR2 <span class='dssp-dsspParam def-Parameter'>!1-</span> LEN <span class='def-NumberDec def-Number'>40</span> A <span class='dssp-dsspParam def-Parameter'>!TB</span> A+ ;
+ 79: 
+ 80: : OS2 A AF - <span class='dssp-dsspWord def-Keyword'>BR</span><span class='dssp-dsspExpr def-Directive'> NDLS +STR DLS-1 +STR</span><span class='dssp-dsspWord def-Keyword'> ELSE</span><span class='dssp-dsspExpr def-Directive'> A+</span> ;
+ 81: : +STR <span class='dssp-dsspParam def-Parameter'>!1+</span> LEN <span class='def-NumberDec def-Number'>12</span> A <span class='dssp-dsspParam def-Parameter'>!TB</span> OSTR0 ;
+ 82: 
+ 83: : OS3 A <span class='def-NumberDec def-Number'>1</span>+ @B ?BK <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> OS31 OS4</span> ;
+ 84: : OS31 A <span class='def-NumberDec def-Number'>1</span>- @B <span class='dssp-dsspWord def-Keyword'>BR</span><span class='dssp-dsspExpr def-Directive'> #  OS4 #- OS4</span><span class='dssp-dsspWord def-Keyword'> ELSE</span><span class='dssp-dsspExpr def-Directive'> OST1</span> ;
+ 85: : OST1 <span class='dssp-dsspComment def-Comment def-Syntax'>[SK]</span> <span class='def-NumberDec def-Number'>1</span>- <span class='dssp-dsspParam def-Parameter'>C</span> EX0 <span class='dssp-dsspParam def-Parameter'>!1-</span> LEN AF A AF - AF <span class='def-NumberDec def-Number'>2</span>+ <span class='dssp-dsspParam def-Parameter'>!</span> AF AF <span class='dssp-dsspParam def-Parameter'>!SB</span> A+ A+ <span class='dssp-dsspComment def-Comment def-Syntax'>[SK-1]</span> ;
+ 86: 
+ 87: : OS4 A AF - NDLS <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> STR1 A+</span> ;
+ 88: : STR1 A <span class='def-NumberDec def-Number'>2</span>- <span class='dssp-dsspParam def-Parameter'>!</span> A A @B ?<span class='dssp-dsspParam def-Parameter'>SP</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> +STR STR2</span> ;
+ 89: : STR2 <span class='def-NumberDec def-Number'>40</span> A NDLS NEG <span class='dssp-dsspParam def-Parameter'>SRCHB</span> <span class='def-NumberDec def-Number'>1</span>+ A + <span class='dssp-dsspParam def-Parameter'>!</span> NSL
+ 90:        <span class='def-NumberDec def-Number'>40</span> A NDLS <span class='dssp-dsspParam def-Parameter'>SRCHB</span> <span class='def-NumberDec def-Number'>1</span>- A + <span class='dssp-dsspParam def-Parameter'>!</span> KSL
+ 91:        A PER MESTOP <span class='dssp-dsspWord def-Keyword'>BR0</span><span class='dssp-dsspExpr def-Directive'> NPER EPER</span> +STR ;
+ 92: : NPER NSL <span class='def-NumberDec def-Number'>1</span>- <span class='dssp-dsspParam def-Parameter'>!</span> A ;
+ 93: : EPER AF MESTOP <span class='def-NumberDec def-Number'>1</span>+ AF - AF <span class='def-NumberDec def-Number'>2</span>- <span class='dssp-dsspParam def-Parameter'>!</span> AF AF <span class='dssp-dsspParam def-Parameter'>!SB</span> MESTOP <span class='dssp-dsspParam def-Parameter'>!</span> A #- A <span class='def-NumberDec def-Number'>1</span>- <span class='dssp-dsspParam def-Parameter'>!TB</span> ;
+ 94: : A+ <span class='dssp-dsspParam def-Parameter'>!1+</span> A ;
+ 95: : DLS-<span class='def-NumberDec def-Number'>1</span> NDLS <span class='def-NumberDec def-Number'>1</span>- ;
+ 96: 
+ 97: <span class='dssp-dsspComment def-Comment def-Syntax'>[Процедура переноса слов]</span>
+ 98: <span class='dssp-dsspParam def-Parameter'>VAR NSL</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Начало]</span>
+ 99: <span class='dssp-dsspParam def-Parameter'>VAR KSL</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Конец]</span>
+100: <span class='dssp-dsspParam def-Parameter'>VAR LGL</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Левая гласная, адр. или 0]</span>
+101: <span class='dssp-dsspParam def-Parameter'>VAR RGL</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Правая гласная, адр. или 0]</span>
+102: <span class='dssp-dsspParam def-Parameter'>VAR DLINA</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Адрес посл. возм. литеры в строке]</span>
+103: <span class='dssp-dsspParam def-Parameter'>VAR MESTOP</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Место пер., адр. посл.буквы]</span>
+104: 
+105: <span class='dssp-dsspComment def-Comment def-Syntax'>[Вход: адр. посл. возможной</span>
+106: <span class='dssp-dsspComment def-Comment def-Syntax'> буквы в строке (длина-1) в стеке, адр. первой и посл.</span>
+107: <span class='dssp-dsspComment def-Comment def-Syntax'> букв слова в переменных NSL и KSL]</span>
+108: : PER <span class='dssp-dsspComment def-Comment def-Syntax'>[TEK]</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspParam def-Parameter'>!</span> DLINA PERENOS <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+109: : PERENOS <span class='dssp-dsspComment def-Comment def-Syntax'>[TEK]</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> ISKRGL</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[TEK]</span> <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> ISKLGL</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span>
+110:   LGL <span class='dssp-dsspWord def-Keyword'>BR0</span><span class='dssp-dsspExpr def-Directive'> NETPER PEREN1</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+111: 
+112: <span class='dssp-dsspComment def-Comment def-Syntax'>[Правая гласная]</span>
+113: : ISKRGL <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspParam def-Parameter'>C</span> @B <span class='dssp-dsspComment def-Comment def-Syntax'>[A+1B]</span> <span class='dssp-dsspParam def-Parameter'>C</span> ?<span class='dssp-dsspParam def-Parameter'>SP</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> IRGL1</span>
+114:   GLAS? <span class='dssp-dsspComment def-Comment def-Syntax'>[A+1,1/0]</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> IRGL2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[A+1]</span> ;
+115: <span class='dssp-dsspComment def-Comment def-Syntax'>[Кончилось]</span>
+116: : IRGL1 <span class='dssp-dsspComment def-Comment def-Syntax'>[A,40]</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspParam def-Parameter'>!0</span> RGL EX <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> ;
+117: <span class='dssp-dsspComment def-Comment def-Syntax'>[Есть гласная]</span>
+118: : IRGL2 <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspParam def-Parameter'>!</span> RGL EX <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> ;
+119: 
+120: <span class='dssp-dsspComment def-Comment def-Syntax'>[Левая гласная]</span>
+121: : ISKLGL <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> <span class='dssp-dsspParam def-Parameter'>C</span> @B <span class='dssp-dsspComment def-Comment def-Syntax'>[A,B]</span> <span class='dssp-dsspParam def-Parameter'>C</span> ?<span class='dssp-dsspParam def-Parameter'>SP</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> ILGL1</span>
+122:   GLAS? <span class='dssp-dsspComment def-Comment def-Syntax'>[A,1/0]</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> ILGL2</span> <span class='def-NumberDec def-Number'>1</span>- <span class='dssp-dsspComment def-Comment def-Syntax'>[A-1]</span> ;
+123: <span class='dssp-dsspComment def-Comment def-Syntax'>[Кончилось]</span>
+124: : ILGL1 <span class='dssp-dsspComment def-Comment def-Syntax'>[A,40]</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspParam def-Parameter'>!0</span> LGL EX <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> ;
+125: <span class='dssp-dsspComment def-Comment def-Syntax'>[Есть гласная]</span>
+126: : ILGL2 <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspParam def-Parameter'>!</span> LGL EX <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> ;
+127: 
+128: <span class='dssp-dsspComment def-Comment def-Syntax'>[Не переносится]</span>
+129: : NETPER <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='dssp-dsspParam def-Parameter'>!0</span> MESTOP <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+130: 
+131: <span class='dssp-dsspComment def-Comment def-Syntax'>[Левая гласная есть, дальше]</span>
+132: : PEREN1 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> RGL <span class='dssp-dsspWord def-Keyword'>BR0</span><span class='dssp-dsspExpr def-Directive'> PEREN11 PEREN2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+133: <span class='dssp-dsspComment def-Comment def-Syntax'>[Есть обе гласные]</span>
+134: : PEREN2 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> RGL LGL - <span class='dssp-dsspComment def-Comment def-Syntax'>[RGL-LGL]</span> <span class='dssp-dsspWord def-Keyword'>BR</span><span class='dssp-dsspExpr def-Directive'> 1 PER0 2 PER1</span><span class='dssp-dsspWord def-Keyword'> ELSE</span><span class='dssp-dsspExpr def-Directive'> PER2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+135: <span class='dssp-dsspComment def-Comment def-Syntax'>[Перенос невозможен, левее]</span>
+136: : PEREN11 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> LGL <span class='def-NumberDec def-Number'>1</span>- PERENOS <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+137: 
+138: <span class='dssp-dsspComment def-Comment def-Syntax'>[Гласные рядом]</span>
+139: : PER0 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> LGL NSL <span class='dssp-dsspParam def-Parameter'>=</span> NOT RGL KSL <span class='dssp-dsspParam def-Parameter'>=</span> NOT <span class='dssp-dsspParam def-Parameter'>&amp;</span> LGL <span class='def-NumberDec def-Number'>1</span>- @B SPEC? NOT <span class='dssp-dsspParam def-Parameter'>&amp;</span>
+140:   RGL <span class='def-NumberDec def-Number'>1</span>+ @B SPEC? NOT <span class='dssp-dsspParam def-Parameter'>&amp;</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[1/0]</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> PER01 PEREN11</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+141: <span class='dssp-dsspComment def-Comment def-Syntax'>[Перенос возможен]</span>
+142: : PER01 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> LGL <span class='dssp-dsspParam def-Parameter'>!</span> MESTOP <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+143: 
+144: <span class='dssp-dsspComment def-Comment def-Syntax'>[Гласные через 1 букву]</span>
+145: : PER1 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> LGL <span class='def-NumberDec def-Number'>1</span>+ @B #й <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> PER11 PER12</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+146: <span class='dssp-dsspComment def-Comment def-Syntax'>[Перенос после й]</span>
+147: : PER11 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> LGL <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspParam def-Parameter'>!</span> MESTOP MESTOP DLINA <span class='dssp-dsspParam def-Parameter'>></span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> PEREN11</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+148: <span class='dssp-dsspComment def-Comment def-Syntax'>[Между гласными согласная]</span>
+149: : PER12 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> LGL NSL <span class='dssp-dsspParam def-Parameter'>=</span> NOT LGL <span class='def-NumberDec def-Number'>1</span>- @B SPEC? NOT <span class='dssp-dsspParam def-Parameter'>&amp;</span>
+150:   <span class='dssp-dsspComment def-Comment def-Syntax'>[1/0]</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> PER01 PEREN11</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+151: 
+152: <span class='dssp-dsspComment def-Comment def-Syntax'>[Между гласными 2 или больше букв]</span>
+153: : PER2 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='def-NumberDec def-Number'>0</span> LGL RGL LGL - <span class='def-NumberDec def-Number'>1</span>- <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> PER20</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[1/0]</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> PEREN11 PER22</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+154: <span class='dssp-dsspComment def-Comment def-Syntax'>[Есть ли между гласными SPEC?]</span>
+155: : PER20 <span class='dssp-dsspComment def-Comment def-Syntax'>[0,A]</span> <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspParam def-Parameter'>C</span> @B SPEC? <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> PER201</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[1/0,A+1]</span> ;
+156: : PER201 <span class='dssp-dsspComment def-Comment def-Syntax'>[0,A]</span> <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='dssp-dsspParam def-Parameter'>T1</span> <span class='dssp-dsspParam def-Parameter'>E2</span> EX <span class='dssp-dsspComment def-Comment def-Syntax'>[1,A]</span> ;
+157: <span class='dssp-dsspComment def-Comment def-Syntax'>[Анализ переноса возможен]</span>
+158: : PER22 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> LGL <span class='def-NumberDec def-Number'>2</span>+ @B <span class='dssp-dsspParam def-Parameter'>C</span> #ъ <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspParam def-Parameter'>E2</span> #ь <span class='dssp-dsspParam def-Parameter'>=</span> &amp;<span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> 2 1</span> LGL + <span class='dssp-dsspParam def-Parameter'>!</span> MESTOP
+159:   MESTOP DLINA <span class='dssp-dsspParam def-Parameter'>></span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> PEREN11</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+160: 
+161: <span class='dssp-dsspComment def-Comment def-Syntax'>[Проверка на SPEC?]</span>
+162: : SPEC? <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> BR #- <span class='def-NumberDec def-Number'>1</span>  #/ <span class='def-NumberDec def-Number'>1</span>  #_ <span class='def-NumberDec def-Number'>1</span>  #, <span class='def-NumberDec def-Number'>1</span>  #. <span class='def-NumberDec def-Number'>1</span>  #! <span class='def-NumberDec def-Number'>1</span>  #? <span class='def-NumberDec def-Number'>1</span>  #; <span class='def-NumberDec def-Number'>1</span>  #" <span class='def-NumberDec def-Number'>1</span>
+163:   #' <span class='def-NumberDec def-Number'>1</span>  #( <span class='def-NumberDec def-Number'>1</span>  #) <span class='def-NumberDec def-Number'>1</span>  #[ <span class='def-NumberDec def-Number'>1</span>  #] <span class='def-NumberDec def-Number'>1</span>  #: <span class='def-NumberDec def-Number'>1</span>  #> <span class='def-NumberDec def-Number'>1</span>  #&lt; <span class='def-NumberDec def-Number'>1</span>
+164:   <span class='dssp-dsspWord def-Keyword'>ELSE 0</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[1/0]</span> ;
+165: <span class='dssp-dsspComment def-Comment def-Syntax'>[Проверка на гласную]</span>
+166: : GLAS? <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> BR  #а <span class='def-NumberDec def-Number'>1</span>  #е <span class='def-NumberDec def-Number'>1</span>  #и <span class='def-NumberDec def-Number'>1</span>  #о <span class='def-NumberDec def-Number'>1</span>  #у <span class='def-NumberDec def-Number'>1</span>  #э <span class='def-NumberDec def-Number'>1</span>  #ы <span class='def-NumberDec def-Number'>1</span>  #ю <span class='def-NumberDec def-Number'>1</span>  #я <span class='def-NumberDec def-Number'>1</span>
+167:   #А <span class='def-NumberDec def-Number'>1</span>  #Е <span class='def-NumberDec def-Number'>1</span>  #И <span class='def-NumberDec def-Number'>1</span>  #О <span class='def-NumberDec def-Number'>1</span>  #У <span class='def-NumberDec def-Number'>1</span>  #Э <span class='def-NumberDec def-Number'>1</span>  #Ы <span class='def-NumberDec def-Number'>1</span>  #Ю <span class='def-NumberDec def-Number'>1</span>  #Я <span class='def-NumberDec def-Number'>1</span>
+168:   <span class='dssp-dsspWord def-Keyword'>ELSE 0</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[1/0]</span> ;
+169: 
+170: : @A AF @B ;
+171: : @U UN <span class='def-NumberDec def-Number'>1</span>- @B ;
+172: : AU1+ AF @B UN <span class='dssp-dsspParam def-Parameter'>!TB</span> <span class='dssp-dsspParam def-Parameter'>!1+</span> AF <span class='dssp-dsspParam def-Parameter'>!1+</span> UN ;
+173: 
+174: <span class='dssp-dsspComment def-Comment def-Syntax'>[AA - вставляется в ZAPIS, обработка символа в конце строки]</span>
+175: : AA <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspWord def-Keyword'>BR</span><span class='dssp-dsspExpr def-Directive'> #  MBK</span><span class='dssp-dsspWord def-Keyword'> ELSE</span><span class='dssp-dsspExpr def-Directive'> PEREP</span> TAB ;
+176: : MBK <span class='dssp-dsspParam def-Parameter'>D</span> .BK IL ;
+177: ' EL NUSE
+178: '' AA <span class='dssp-dsspParam def-Parameter'>!</span> EL
+179: : PEREP <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> PEREP1</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> BEG <span class='dssp-dsspWord def-Keyword'>BR0</span><span class='dssp-dsspExpr def-Directive'> DBELL PEREP2</span> ;
+180: : PEREP2 <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> !-<span class='dssp-dsspParam def-Parameter'>></span> DIV .PC TAB ZAPIS <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+181: : PEREP1 <span class='dssp-dsspParam def-Parameter'>&lt;</span>- @A ?<span class='dssp-dsspParam def-Parameter'>SP</span> @A ?BK &amp;<span class='def-NumberDec def-Number'>0</span> EX+ BEG EX0 ;
+182: : DBELL <span class='dssp-dsspParam def-Parameter'>D</span> BELL ;
+183: 
+184: <span class='dssp-dsspComment def-Comment def-Syntax'>[AA1 -выравнивание по правому краю]</span>
+185: : AA1 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> .BW REST NDLS <span class='dssp-dsspParam def-Parameter'>></span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> BELL AAA1</span> .BK <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+186: : AAA1 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> NDLS REST - <span class='dssp-dsspParam def-Parameter'>C</span> TAB <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> EXTENT</span> <span class='dssp-dsspParam def-Parameter'>DD</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+187: : EXTENT <span class='dssp-dsspComment def-Comment def-Syntax'>[J,I]</span> <span class='dssp-dsspParam def-Parameter'>C</span> EX0 BEG <span class='dssp-dsspConstr def-Insertion'>IF0</span><span class='dssp-dsspExpr def-Directive'> TAB?</span> <span class='dssp-dsspParam def-Parameter'>&lt;</span>- @A ?<span class='dssp-dsspParam def-Parameter'>SP</span> @U ?<span class='dssp-dsspParam def-Parameter'>SP</span> NOT <span class='dssp-dsspParam def-Parameter'>&amp;</span>
+188:   <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> IC2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[J,I НОВ.]</span> ;
+189: : IC2 IC <span class='def-NumberDec def-Number'>1</span>- ;
+190: : TAB? <span class='dssp-dsspComment def-Comment def-Syntax'>[J,I]</span> <span class='dssp-dsspParam def-Parameter'>C2</span> <span class='dssp-dsspParam def-Parameter'>C2</span> <span class='dssp-dsspParam def-Parameter'>=</span> EX+ <span class='dssp-dsspParam def-Parameter'>E2D</span> <span class='dssp-dsspParam def-Parameter'>C</span> TAB <span class='dssp-dsspComment def-Comment def-Syntax'>[I,I]</span> ;
+191: 
+192: ' <span class='dssp-dsspParam def-Parameter'>TRB</span> <span class='dssp-dsspParam def-Parameter'>@</span> <span class='dssp-dsspParam def-Parameter'>HEAD</span> OLDTRB
+193: ' <span class='dssp-dsspParam def-Parameter'>TRB</span> NUSE
+194: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR INFTRB</span>
+195: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR BIGL</span> <span class='def-NumberDec def-Number'>1</span> <span class='dssp-dsspParam def-Parameter'>!</span> BIGL
+196: : NEWTRB <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> OLDTRB BIGL <span class='dssp-dsspConstr def-Insertion'>IF0</span><span class='dssp-dsspExpr def-Directive'> TBIG</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[B']</span>
+197:   <span class='dssp-dsspParam def-Parameter'>C</span> BR #> K.  #&lt; #,  #. #>  #, #&lt;  #= #-  #* #:  #+ #;
+198:        #- #=  #: #*  #; #+  <span class='dssp-dsspWord def-Keyword'>ELSE C</span>  <span class='dssp-dsspParam def-Parameter'>E2D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+199: 
+200: <span class='dssp-dsspWord def-Keyword'>COPYW E E'</span>
+201: :: : E <span class='dssp-dsspExpr def-Directive'>S( TRB BASE@ )</span> <span class='dssp-dsspParam def-Parameter'>B10</span> INFTRB <span class='dssp-dsspParam def-Parameter'>!</span> <span class='dssp-dsspParam def-Parameter'>TRB</span> E' ;
+202: '' OLDTRB <span class='dssp-dsspParam def-Parameter'>!</span> INFTRB
+203: 
+204: : K. <span class='dssp-dsspParam def-Parameter'>!0</span> BIGL #. ;
+205: : TBIG <span class='dssp-dsspParam def-Parameter'>C</span> #  <span class='dssp-dsspParam def-Parameter'>></span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> TBIG1</span> ;
+206: : TBIG1 RUSCAP <span class='dssp-dsspParam def-Parameter'>!1</span> BIGL ;
+207: 
+208: <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>CNST CAP</span>
+209: #А #Б #В #Г #Д #Е #Ж #З #И #Й #К #Л #М #Н #О #П
+210: #Р #С #Т #У #Ф #Х #Ц #Ч #  #Щ #Ъ #Ы #Ь #Э #Ю #Я ;
+211: 
+212: <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>CNST LIT</span>
+213: #а #б #в #г #д #е #ж #з #и #й #к #л #м #н #о #п
+214: #р #с #т #у #ф #х #ц #ч #ш #щ #ъ #ы #ь #э #ю #я ;
+215: 
+216: : TOCAP LATCAP RUSCAP ;
+217: : RUSCAP <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='def-NumberDec def-Number'>0</span> ' LIT <span class='def-NumberDec def-Number'>40</span> <span class='dssp-dsspParam def-Parameter'>SRCHB</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[B,I]</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='def-NumberDec def-Number'>40</span> <span class='dssp-dsspParam def-Parameter'>&lt;</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> CAP E2</span> <span class='dssp-dsspParam def-Parameter'>E2D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[B']</span> ;
+218: : LATCAP <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> <span class='dssp-dsspParam def-Parameter'>C</span> #a #z <span class='dssp-dsspParam def-Parameter'>SEG</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> 40 0</span> - <span class='dssp-dsspComment def-Comment def-Syntax'>[B']</span> ;
+219: 
+220: <span class='dssp-dsspComment def-Comment def-Syntax'>[Расшифровка сокращений]</span>
+221: : K20 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> VVD FIND <span class='dssp-dsspWord def-Keyword'>BR0</span><span class='dssp-dsspExpr def-Directive'> D K21</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+222: : K21 <span class='dssp-dsspComment def-Comment def-Syntax'>[AZ]</span> 'BA <span class='dssp-dsspParam def-Parameter'>@</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[BA]</span> EXEC <span class='dssp-dsspComment def-Comment def-Syntax'>[A,DL]</span> <span class='dssp-dsspParam def-Parameter'>C2</span> @B #_ <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> BAC</span> <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> ZAS</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='dssp-dsspParam def-Parameter'>D</span> ;
+223: : BAC <span class='dssp-dsspParam def-Parameter'>&lt;</span>- DC <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='def-NumberDec def-Number'>1</span>- ;
+224: : ZAS <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> <span class='dssp-dsspParam def-Parameter'>C</span> @B <span class='dssp-dsspParam def-Parameter'>C</span> #* <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> ZAS1 ZAPIS</span> <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspComment def-Comment def-Syntax'>[A+1]</span> ;
+225: : ZAS1 <span class='dssp-dsspComment def-Comment def-Syntax'>[*]</span> <span class='dssp-dsspParam def-Parameter'>D</span> '' <span class='dssp-dsspParam def-Parameter'>TRB</span> <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> EDITT</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+226: : EDITT EDIT @U ?<span class='dssp-dsspParam def-Parameter'>SP</span> EX+ ;
+227: 
+228: <span class='dssp-dsspComment def-Comment def-Syntax'>[Прием сокращения]</span>
+229: : VVD <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='def-NumberDec def-Number'>40</span> UN <span class='def-NumberDec def-Number'>1</span>- BEG NEG <span class='dssp-dsspParam def-Parameter'>SRCHB</span> NEG <span class='dssp-dsspComment def-Comment def-Syntax'>[SK]</span>
+230:   UN <span class='dssp-dsspParam def-Parameter'>C2</span> - <span class='dssp-dsspParam def-Parameter'>C2</span> TWE <span class='dssp-dsspComment def-Comment def-Syntax'>[SK]</span>
+231:   SWIM PRS <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> VVD1</span> <span class='dssp-dsspParam def-Parameter'>D</span>
+232:   <span class='dssp-dsspComment def-Comment def-Syntax'>[SK]</span> <span class='def-NumberDec def-Number'>1</span>- <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> ZB</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+233: : VVD1 <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> <span class='dssp-dsspParam def-Parameter'>C</span> @B TOCAP <span class='dssp-dsspParam def-Parameter'>C2</span> <span class='dssp-dsspParam def-Parameter'>!TB</span> <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspComment def-Comment def-Syntax'>[A+1]</span> ;
+234: 
+235: <span class='dssp-dsspParam def-Parameter'>B16</span>
+236: : TWE #  <span class='dssp-dsspParam def-Parameter'>!!!</span> WIMAGE <span class='def-NumberDec def-Number'>7</span> <span class='dssp-dsspParam def-Parameter'>MIN</span> <span class='dssp-dsspParam def-Parameter'>C</span> SHR <span class='def-NumberDec def-Number'>7</span> <span class='dssp-dsspParam def-Parameter'>!</span> WIMAGE SWIM <span class='dssp-dsspParam def-Parameter'>C2</span> - <span class='def-NumberDec def-Number'>1</span>+ <span class='def-NumberDec def-Number'>2000</span> <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>!SB</span> ;
+237: : SLR INFTRB '' OLDTRB <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> MNEW MOLD</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspParam def-Parameter'>!</span> <span class='dssp-dsspParam def-Parameter'>TRB</span> <span class='dssp-dsspParam def-Parameter'>!</span> INFTRB ;
+238: : MNEW '' NEWTRB ;
+239: : MOLD '' OLDTRB ;
+240: 
+241: : .W RCP <span class='dssp-dsspParam def-Parameter'>T0</span> SCP ;
+242: : .BW .W TSTR WINDOW ;
+243: 
+244: <span class='dssp-dsspComment def-Comment def-Syntax'>[Центрирование текста в строке]</span>
+245: : CENTR .PC UP AF <span class='dssp-dsspComment def-Comment def-Syntax'>[ADR]</span> NOSP <span class='dssp-dsspComment def-Comment def-Syntax'>[DL]</span> <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> DC</span> NDLS REST - SHR
+246:   <span class='dssp-dsspParam def-Parameter'>C</span> BB <span class='dssp-dsspParam def-Parameter'>></span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> T0</span> <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> IC</span> .PC ;
+247:   : NOSP <span class='dssp-dsspComment def-Comment def-Syntax'>[A]</span> <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> NOSP1</span> <span class='dssp-dsspParam def-Parameter'>E2D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[I]</span> ;
+248:     : NOSP1 <span class='dssp-dsspComment def-Comment def-Syntax'>[A,I]</span> <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspParam def-Parameter'>C3</span> + @B ?<span class='dssp-dsspParam def-Parameter'>SP</span> EX0 <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspComment def-Comment def-Syntax'>[A,I+1]</span> ;
+249: 
+250: : STRLEN <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='dssp-dsspExpr def-Directive'>S( BASE@ )</span> <span class='dssp-dsspParam def-Parameter'>B10</span> .BW .STS 0C <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR
+251:  <span class='dssp-dsspString def-String'> "Длина стpоки (Ввод - "</span> <span class='dssp-dsspParam def-Parameter'>TOS</span>''
+252:   NDLS <span class='def-NumberDec def-Number'>2</span> TON<span class='dssp-dsspString def-String'> ") - "</span> <span class='dssp-dsspParam def-Parameter'>TOS</span>'' <span class='def-NumberDec def-Number'>2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[TEXTCOLOR]</span> <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR
+253:   <span class='def-Insertion'>ON</span><span class='dssp-dsspConstr def-Insertion'> NERR NOP</span> TIN
+254:   <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspWord def-Keyword'>BR0</span><span class='dssp-dsspExpr def-Directive'> NDLS C</span> <span class='dssp-dsspParam def-Parameter'>E2D</span> <span class='def-NumberDec def-Number'>1</span> <span class='dssp-dsspParam def-Parameter'>MAX</span> DLS <span class='dssp-dsspParam def-Parameter'>MIN</span> <span class='dssp-dsspParam def-Parameter'>!</span> NDLS .BW .STS L1 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+255: 
+256: <span class='dssp-dsspParam def-Parameter'>B10</span>
+257: <span class='dssp-dsspParam def-Parameter'>VAR USLOVIE</span>
+258: : WORDTORUS <span class='dssp-dsspParam def-Parameter'>!0</span> USLOVIE TOEND TOSTART <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> TORUS1</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+259:   : TORUS1 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> AF @B <span class='dssp-dsspParam def-Parameter'>C</span> ?<span class='dssp-dsspParam def-Parameter'>SP</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> DEX</span> <span class='dssp-dsspParam def-Parameter'>C</span> ?BK <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> .PCDEX UCHNGR</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+260:     : DEX <span class='dssp-dsspParam def-Parameter'>D</span> EX <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+261:     : .PCDEX .PC DEX <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+262:     : UCHNGR USLOVIE <span class='dssp-dsspWord def-Keyword'>BR0</span><span class='dssp-dsspExpr def-Directive'> CHNGR 0</span> <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[DOP,B,B]</span>
+263:       <span class='dssp-dsspParam def-Parameter'>C</span> <span class='dssp-dsspWord def-Keyword'>BR</span><span class='dssp-dsspExpr def-Directive'> #. SBROS #  NOP #: NOP</span><span class='dssp-dsspWord def-Keyword'> ELSE</span><span class='dssp-dsspExpr def-Directive'> UST</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='dssp-dsspParam def-Parameter'>E2</span> IZMSDV ;
+264:       : SBROS <span class='dssp-dsspParam def-Parameter'>!1</span> USLOVIE ;
+265:       : UST <span class='dssp-dsspParam def-Parameter'>!0</span> USLOVIE ;
+266:       : CHNGR <span class='dssp-dsspParam def-Parameter'>C</span>
+267:         BR
+268:         #A <span class='def-NumberDec def-Number'>95</span>
+269:         #B <span class='def-NumberDec def-Number'>96</span>
+270:         #C <span class='def-NumberDec def-Number'>158</span>
+271:         #E <span class='def-NumberDec def-Number'>96</span>
+272:         #P <span class='def-NumberDec def-Number'>32</span>
+273:         #O <span class='def-NumberDec def-Number'>95</span>
+274:         #K <span class='def-NumberDec def-Number'>95</span>
+275:         #M <span class='def-NumberDec def-Number'>95</span>
+276:         #T <span class='def-NumberDec def-Number'>142</span>
+277:         #X <span class='def-NumberDec def-Number'>141</span>
+278:         #H <span class='def-NumberDec def-Number'>101</span>
+279:         #А <span class='def-NumberDec def-Number'>32</span>
+280:         #Б <span class='def-NumberDec def-Number'>32</span>
+281:         #В <span class='def-NumberDec def-Number'>32</span>
+282:         #Г <span class='def-NumberDec def-Number'>32</span>
+283:         #Д <span class='def-NumberDec def-Number'>32</span>
+284:         #Е <span class='def-NumberDec def-Number'>32</span>
+285:         #Ж <span class='def-NumberDec def-Number'>32</span>
+286:         #З <span class='def-NumberDec def-Number'>32</span>
+287:         #И <span class='def-NumberDec def-Number'>32</span>
+288:         #Й <span class='def-NumberDec def-Number'>32</span>
+289:         #К <span class='def-NumberDec def-Number'>32</span>
+290:         #Л <span class='def-NumberDec def-Number'>32</span>
+291:         #М <span class='def-NumberDec def-Number'>32</span>
+292:         #Н <span class='def-NumberDec def-Number'>32</span>
+293:         #О <span class='def-NumberDec def-Number'>32</span>
+294:         #П <span class='def-NumberDec def-Number'>32</span>
+295: 
+296:         #Р <span class='def-NumberDec def-Number'>80</span>
+297:         #С <span class='def-NumberDec def-Number'>80</span>
+298:         #Т <span class='def-NumberDec def-Number'>80</span>
+299:         #У <span class='def-NumberDec def-Number'>80</span>
+300:         #Ф <span class='def-NumberDec def-Number'>80</span>
+301:         #Х <span class='def-NumberDec def-Number'>80</span>
+302:         #Ц <span class='def-NumberDec def-Number'>80</span>
+303:         #Ч <span class='def-NumberDec def-Number'>80</span>
+304:         #  <span class='def-NumberDec def-Number'>80</span>
+305:         #Щ <span class='def-NumberDec def-Number'>80</span>
+306:         #Ъ <span class='def-NumberDec def-Number'>80</span>
+307:         #Ы <span class='def-NumberDec def-Number'>80</span>
+308:         #Ь <span class='def-NumberDec def-Number'>80</span>
+309:         #Э <span class='def-NumberDec def-Number'>80</span>
+310:         #Ю <span class='def-NumberDec def-Number'>80</span>
+311:         #Я <span class='def-NumberDec def-Number'>80</span>
+312:         <span class='dssp-dsspWord def-Keyword'>ELSE 0</span> ;
+313:       : IZMSDV + <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> <span class='dssp-dsspParam def-Parameter'>C</span> AF <span class='dssp-dsspParam def-Parameter'>!TB</span> <span class='dssp-dsspParam def-Parameter'>TOB</span> AU1+ <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+314: 
+315: 
+316: '' WORDTORU <span class='def-NumberDec def-Number'>69</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[aF6]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+317: 
+318: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>VAR LINNEW</span> <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>!</span> LINNEW
+319: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>VAR NEWPOSLIN</span> <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>!</span> NEWPOSLIN
+320: 
+321: : IZMNEWLIN LINNEW NOT <span class='dssp-dsspParam def-Parameter'>!</span> LINNEW <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+322: 
+323: 
+324: : STRZAMEN <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> SYMZAMEN</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+325:   : SYMZAMEN <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> OSTFREE EX0 @A <span class='dssp-dsspParam def-Parameter'>C</span> ?BK <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> EXNEWLINE UCHNGR</span> ;
+326:     : EXNEWLINE NEWLINE EX <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+327:       : NEWLINE <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> <span class='dssp-dsspParam def-Parameter'>D</span> LEN TSTR - <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> NEWSTR</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+328:         : NEWSTR <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> .PC LINNEW <span class='dssp-dsspConstr def-Insertion'>IF0</span><span class='dssp-dsspExpr def-Directive'> PEREDV</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+329:           : PEREDV <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> NEWPOSLIN OSTFREE <span class='dssp-dsspParam def-Parameter'>C2</span> - <span class='dssp-dsspConstr def-Insertion'>IF-</span><span class='dssp-dsspExpr def-Directive'> T0</span> <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> !-></span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+330:             : OSTFREE <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> KBUF AF - <span class='def-NumberDec def-Number'>1</span>- ;
+331: 
+332: '' STRZAMEN <span class='def-NumberDec def-Number'>68</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[aF6]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+333: 
+334: <span class='dssp-dsspComment def-Comment def-Syntax'>[Формирование файла с помощью]</span>
+335: <span class='dssp-dsspComment def-Comment def-Syntax'>[ADDEHELP - добавить текст отмеченный маpкеpами как новую секцию в файл помощи]</span>
+336:        <span class='dssp-dsspParam def-Parameter'>CHANNEL   CH0</span>    <span class='dssp-dsspComment def-Comment def-Syntax'>[Канал для связи с файлом помощи]</span>
+337:        <span class='dssp-dsspParam def-Parameter'>WORD</span> <span class='dssp-dsspParam def-Parameter'>VAR  N</span>      <span class='dssp-dsspComment def-Comment def-Syntax'>[Номер секции]</span>
+338:        <span class='dssp-dsspParam def-Parameter'>WORD</span> <span class='dssp-dsspParam def-Parameter'>VAR  HIGH</span>   <span class='dssp-dsspComment def-Comment def-Syntax'>[Номеp стpоки веpхнего маpкеpа]</span>
+339:        <span class='dssp-dsspParam def-Parameter'>WORD</span> <span class='dssp-dsspParam def-Parameter'>VAR  QSTRS</span>  <span class='dssp-dsspComment def-Comment def-Syntax'>[Счетчик строк]</span>
+340:        <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>VAR  SBPTR</span>  <span class='dssp-dsspComment def-Comment def-Syntax'>[Указатель по вектоpу SBUF]</span>
+341:        <span class='dssp-dsspParam def-Parameter'>WORD</span> <span class='dssp-dsspParam def-Parameter'>VAR  NSTROK</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Сколько стpок пеpенести в файл]</span>
+342:        <span class='dssp-dsspParam def-Parameter'>WORD</span> <span class='dssp-dsspParam def-Parameter'>VAR  LITTLE</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Номеp стpоки нижнего маpкеpа]</span>
+343:        <span class='dssp-dsspParam def-Parameter'>LONG</span> <span class='dssp-dsspParam def-Parameter'>VAR  OLDPOS</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Позиция в файле помощи, куда надо пеpеписать</span>
+344: <span class='dssp-dsspComment def-Comment def-Syntax'>                         число строк в секции]</span>
+345:    <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>VAR  UDAL?</span>  <span class='dssp-dsspComment def-Comment def-Syntax'>[Пеpеменная флаг - удалять текст после пеpенесенмя</span>
+346: <span class='dssp-dsspComment def-Comment def-Syntax'>                         в файл помощи (1) или нет (0)]</span>
+347:     <span class='def-NumberDec def-Number'>79</span> <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>VCTR SBUF</span>   <span class='dssp-dsspComment def-Comment def-Syntax'>[Буфеp для выводимой стpоки]</span>
+348: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='def-NumberDec def-Number'>11</span> <span class='dssp-dsspParam def-Parameter'>BYTE</span> <span class='dssp-dsspParam def-Parameter'>VCTR NFHELP</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[Буфеp для имени файла помощи]</span>
+349: 
+350: <span class='dssp-dsspString def-String'>"COMDSSP.HLP"</span> <span class='def-NumberDec def-Number'>0</span> ' NFHELP <span class='dssp-dsspParam def-Parameter'>!SB</span>
+351: 
+352: : IZMUDAL <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> .BW .STS <span class='def-NumberDec def-Number'>113</span> <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR
+353:  <span class='dssp-dsspString def-String'> "Вы действительно "</span> <span class='dssp-dsspParam def-Parameter'>TOS</span>'' UDAL? <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> "нехотите" "хотите"</span>
+354:   <span class='def-NumberDec def-Number'>118</span> <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR <span class='dssp-dsspParam def-Parameter'>TOS</span>'' <span class='def-NumberDec def-Number'>113</span> <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR
+355:  <span class='dssp-dsspString def-String'> " удалять текст после его записи в HELPing (Y/N)"</span> <span class='dssp-dsspParam def-Parameter'>TOS</span>'' TEXTCOLOR <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR
+356:   UDAL? <span class='dssp-dsspParam def-Parameter'>TIB</span> <span class='dssp-dsspWord def-Keyword'>BR</span><span class='dssp-dsspExpr def-Directive'> #Y NOT #y NOT</span><span class='dssp-dsspWord def-Keyword'> ELSE</span><span class='dssp-dsspExpr def-Directive'> NOP</span> <span class='dssp-dsspParam def-Parameter'>!</span> UDAL? .BW .STS L1 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+357: 
+358: : NAMEFHLP .BW .STS
+359:  <span class='dssp-dsspString def-String'> "Введите имя файла помощи - "</span> #  <span class='dssp-dsspParam def-Parameter'>!!!</span> NFHELP
+360:   <span class='def-NumberDec def-Number'>14</span> <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR <span class='dssp-dsspParam def-Parameter'>TOS</span>''
+361:   <span class='def-NumberDec def-Number'>0</span> ' NFHELP <span class='def-NumberDec def-Number'>12</span> TIS
+362:   TEXTCOLOR <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR .BW .STS L1 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+363: 
+364: : ADDEHELP <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> MARKS <span class='dssp-dsspComment def-Comment def-Syntax'>[L,H,1/0]</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> ADDEHLP DD</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+365:   : ADDEHLP <span class='dssp-dsspComment def-Comment def-Syntax'>[L,H]</span> <span class='dssp-dsspParam def-Parameter'>!</span> HIGH <span class='dssp-dsspParam def-Parameter'>!</span> LITTLE
+366:     BEG TSTR <span class='dssp-dsspComment def-Comment def-Syntax'>[Тек позиция и тек стpока]</span>
+367:     ST3 SGX <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>MAX</span>
+368:     <span class='dssp-dsspComment def-Comment def-Syntax'>[Тек позиция и тек стpока,ST3]</span>
+369:     <span class='def-Insertion'>EON</span><span class='dssp-dsspConstr def-Insertion'> EXERR NOP</span>
+370:     <span class='def-Insertion'>ON</span><span class='dssp-dsspConstr def-Insertion'> ZAPROS NAMEFHLP</span>
+371:     <span class='def-Insertion'>ON</span><span class='dssp-dsspConstr def-Insertion'> .RAS ".HLP"</span>
+372:     <span class='def-NumberDec def-Number'>0</span> ' NFHELP <span class='def-NumberDec def-Number'>12</span> <span class='dssp-dsspParam def-Parameter'>C2</span> <span class='dssp-dsspParam def-Parameter'>C2</span> <span class='dssp-dsspParam def-Parameter'>TOS</span>
+373:     CONNECT CH0 OPEN CH0
+374: 
+375:     .BW .STS
+376:      <span class='def-NumberDec def-Number'>14</span> <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR
+377:    <span class='dssp-dsspString def-String'> "Номеp добавляемой секции - "</span> <span class='dssp-dsspParam def-Parameter'>TOS</span>'' TIN <span class='dssp-dsspParam def-Parameter'>!</span> N
+378:     .BW .STS L1
+379: 
+380:     <span class='def-NumberDec def-Number'>0</span> <span class='def-NumberDec def-Number'>2</span> SPOS CH0 IW CH0 <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> GH0</span> <span class='dssp-dsspParam def-Parameter'>C</span>
+381:     <span class='dssp-dsspWord def-Keyword'>BR0</span><span class='dssp-dsspExpr def-Directive'> CYCL SOOB</span> CLOSE CH0
+382:     -<span class='def-NumberDec def-Number'>1</span> <span class='def-NumberDec def-Number'>0</span> SCURS
+383:     N <span class='def-NumberDec def-Number'>0</span> ' NFHELP <span class='def-NumberDec def-Number'>12</span> GENHELP
+384:     <span class='def-NumberDec def-Number'>6</span> <span class='def-NumberDec def-Number'>8</span> SCURS <span class='dssp-dsspParam def-Parameter'>E3</span> <span class='dssp-dsspParam def-Parameter'>E2</span>
+385:     RENSC TOLMOV TOPMOV <span class='dssp-dsspComment def-Comment def-Syntax'>[EXIST STATUS]</span> <span class='dssp-dsspConstr def-Insertion'>IF0</span><span class='dssp-dsspExpr def-Directive'> ?UDAL</span> .BK ;
+386:     : ?UDAL UDAL? <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> UDALYT</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+387:     : SOOB .BW .STS<span class='dssp-dsspString def-String'> "Данная секция уже есть !!!"</span> <span class='dssp-dsspParam def-Parameter'>TOS</span>'' <span class='dssp-dsspParam def-Parameter'>TRB</span> <span class='dssp-dsspParam def-Parameter'>D</span> .BW .STS L1 ;
+388: 
+389: : CYCL <span class='def-NumberDec def-Number'>0</span> SPOS CH0
+390:   TEXTCOLOR <span class='dssp-dsspParam def-Parameter'>!</span> SCOLOR
+391:   <span class='dssp-dsspComment def-Comment def-Syntax'>[L,H,Тек позиция и тек стpока,ST3,L,H]</span>
+392:   ADDEH0 ;
+393:   : GH0 <span class='dssp-dsspComment def-Comment def-Syntax'>[есть ли данная секция в файле]</span>
+394:     <span class='dssp-dsspComment def-Comment def-Syntax'>[0]</span> IW CH0 N <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> GH0'</span> POS CH0 <span class='def-NumberDec def-Number'>4</span> + SPOS CH0 <span class='dssp-dsspComment def-Comment def-Syntax'>[0]</span> ;
+395:     : GH0' <span class='dssp-dsspComment def-Comment def-Syntax'>[0]</span> <span class='dssp-dsspParam def-Parameter'>D</span> IL CH0 EX ;
+396: 
+397: : FHM <span class='dssp-dsspString def-String'>."</span>
+398: <span class='dssp-dsspString def-String'>Нет свободных секций в файле помощи "</span> FNAME CH0 EXERR ;
+399: 
+400: : UDALYT <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> HIGH <span class='dssp-dsspParam def-Parameter'>!</span> M2 LITTLE <span class='dssp-dsspParam def-Parameter'>!</span> M1 CTRLD <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+401: 
+402: : ADDEH0 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span>
+403:    <span class='def-Insertion'>EON</span><span class='dssp-dsspConstr def-Insertion'> EXERR NOP</span>
+404:    IW CH0 IW CH0 <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> FHM</span>
+405:    <span class='def-NumberDec def-Number'>2</span> SPOS CH0 IW CH0 <span class='def-NumberDec def-Number'>6</span> <span class='dssp-dsspParam def-Parameter'>*</span> <span class='def-NumberDec def-Number'>4</span> + SPOS CH0 N OW CH0 LENB CH0 OL CH0
+406:    LENB CH0 <span class='dssp-dsspParam def-Parameter'>!</span> OLDPOS
+407:    LENB CH0 <span class='def-NumberDec def-Number'>2</span>+ SPOS CH0
+408:    <span class='dssp-dsspParam def-Parameter'>!0</span> QSTRS
+409:    DOWN
+410:    LITTLE HIGH <span class='dssp-dsspParam def-Parameter'>C2</span> - <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspComment def-Comment def-Syntax'>[L,SK]</span> <span class='dssp-dsspParam def-Parameter'>E2</span> TOLMOV
+411:    <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> ADDEH1</span>
+412:    OLDPOS SPOS CH0
+413:    QSTRS OW CH0
+414:    <span class='def-NumberDec def-Number'>2</span> SPOS CH0 IW CH0 <span class='def-NumberDec def-Number'>1</span>+ <span class='def-NumberDec def-Number'>2</span> SPOS CH0 OW CH0 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+415: 
+416: : ADDEH1 <span class='dssp-dsspComment def-Comment def-Syntax'>[Ввод и вывод одной строки]</span>
+417:    #  <span class='dssp-dsspParam def-Parameter'>!!!</span> SBUF
+418:    <span class='def-NumberDec def-Number'>13</span> <span class='def-NumberDec def-Number'>78</span> <span class='dssp-dsspParam def-Parameter'>!</span> SBUF <span class='def-NumberDec def-Number'>10</span> <span class='def-NumberDec def-Number'>79</span> <span class='dssp-dsspParam def-Parameter'>!</span> SBUF
+419:    <span class='dssp-dsspParam def-Parameter'>!0</span> SBPTR
+420:    ADDEH2
+421:    <span class='def-NumberDec def-Number'>0</span> ' SBUF <span class='def-NumberDec def-Number'>80</span> OS CH0
+422:    <span class='dssp-dsspParam def-Parameter'>!1+</span> QSTRS DOWN <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+423: 
+424: <span class='dssp-dsspComment def-Comment def-Syntax'>[Заполнение вуфера SBUF]</span>
+425: : ADDEH2 <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='dssp-dsspParam def-Parameter'>!0</span> SBPTR AF <span class='def-NumberDec def-Number'>80</span> <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> ADDEH3</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+426:   : ADDEH3 <span class='dssp-dsspComment def-Comment def-Syntax'>[AF]</span> <span class='dssp-dsspParam def-Parameter'>C</span> @B <span class='dssp-dsspParam def-Parameter'>C</span> <span class='def-NumberDec def-Number'>10</span> <span class='dssp-dsspParam def-Parameter'>=</span> <span class='dssp-dsspConstr def-Insertion'>IF+</span><span class='dssp-dsspExpr def-Directive'> ADDEH4</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span>
+427:     SBPTR <span class='dssp-dsspParam def-Parameter'>!</span> SBUF <span class='dssp-dsspComment def-Comment def-Syntax'>[AF]</span> <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspComment def-Comment def-Syntax'>[AF']</span> <span class='dssp-dsspParam def-Parameter'>!1+</span> SBPTR <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+428:     : ADDEH4 <span class='dssp-dsspComment def-Comment def-Syntax'>[B]</span> <span class='dssp-dsspParam def-Parameter'>D</span> EX <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+429: <span class='dssp-dsspParam def-Parameter'>B10</span>
+430: : helpcom
+431:     BEG TSTR <span class='dssp-dsspComment def-Comment def-Syntax'>[Тек позиция и тек стpока]</span>
+432:     ST3 SGX <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>MAX</span> CLS
+433:     <span class='dssp-dsspComment def-Comment def-Syntax'>[Тек позиция и тек стpока,ST3]</span>
+434:     <span class='def-Insertion'>EON</span><span class='dssp-dsspConstr def-Insertion'> EXERR NOP</span>
+435:     <span class='def-Insertion'>ON</span><span class='dssp-dsspConstr def-Insertion'> .RAS ".HLP"</span> <span class='def-Insertion'>ON</span><span class='dssp-dsspConstr def-Insertion'> ZAPROS NAMEFHLP</span>
+436:     <span class='def-NumberDec def-Number'>20</span><span class='dssp-dsspString def-String'> "COMAND32.HLP"</span> GENHELP
+437:     RENSC TOLMOV TOPMOV .BK ;
+438: 
+439: <span class='dssp-dsspComment def-Comment def-Syntax'>[Стягивание текста в стpоке]</span>
+440: : STYG <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> TAB AF <span class='dssp-dsspComment def-Comment def-Syntax'>[AFendstr]</span> .BK UP <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> STYGSTR</span> <span class='dssp-dsspParam def-Parameter'>D</span> .BK <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+441:   : STYGSTR <span class='dssp-dsspComment def-Comment def-Syntax'>[AFendstr]</span>
+442:     KBUF AF - EX- <span class='dssp-dsspParam def-Parameter'>C</span> AF <span class='dssp-dsspParam def-Parameter'>></span> EX0 TOEND <span class='dssp-dsspConstr def-Insertion'>RP</span><span class='dssp-dsspExpr def-Directive'> OBRWORD</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[AFendstr]</span> ;
+443:     : OBRWORD <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span>
+444:       AF @B ?BK EX+
+445:       AF <span class='def-NumberDec def-Number'>1</span>+ @B ?<span class='dssp-dsspParam def-Parameter'>SP</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> DC EX</span> ;
+446: 
+447: : NSTYG <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> MARKS <span class='dssp-dsspComment def-Comment def-Syntax'>[L,H,1/0]</span> <span class='dssp-dsspWord def-Keyword'>BR+</span><span class='dssp-dsspExpr def-Directive'> DONSTYG DD</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+448:   : DONSTYG <span class='dssp-dsspComment def-Comment def-Syntax'>[L,H]</span> <span class='dssp-dsspParam def-Parameter'>C2</span> - <span class='def-NumberDec def-Number'>1</span>+ <span class='dssp-dsspParam def-Parameter'>E2</span> TOLMOV <span class='dssp-dsspConstr def-Insertion'>DO</span><span class='dssp-dsspExpr def-Directive'> STYG</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
+449: 
+450: '' ER       <span class='def-NumberDec def-Number'>25</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[F7]</span>   <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR
+451: '' K20      <span class='def-NumberDec def-Number'>26</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[F8]</span>   <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR
+452: '' SLR      <span class='def-NumberDec def-Number'>28</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[F10]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR
+453: '' IZMUDAL  <span class='def-NumberDec def-Number'>49</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[sF6]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+454: '' ADDEHELP <span class='def-NumberDec def-Number'>50</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[sF7]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+455: '' AA1      <span class='def-NumberDec def-Number'>51</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[sF8]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+456: '' NAMEFHLP <span class='def-NumberDec def-Number'>53</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[sF10]</span> <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+457: '' NSTYG    <span class='def-NumberDec def-Number'>60</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[^SF7]</span> <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+458: '' STYG     <span class='def-NumberDec def-Number'>61</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[^SF8]</span> <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+459: '' <span class='dssp-dsspComment def-Comment def-Syntax'>[STRLEN]</span> TOEND   <span class='def-NumberDec def-Number'>70</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[aF7]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+460: '' CENTR    <span class='def-NumberDec def-Number'>71</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[aF8]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+461: '' helpcom  <span class='def-NumberDec def-Number'>72</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[aF9]</span>  <span class='dssp-dsspParam def-Parameter'>C</span> ' EXR NUSE <span class='dssp-dsspParam def-Parameter'>!</span> EXR <span class='dssp-dsspComment def-Comment def-Syntax'>[+]</span>
+462: 
+463: <span class='dssp-dsspParam def-Parameter'>UNDEF</span>
+464: 

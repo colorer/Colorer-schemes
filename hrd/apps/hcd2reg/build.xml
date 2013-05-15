@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<project name="hcd2reg" default="all" basedir=".">
+
+<!-- all properties -->
+<property name='input' value='../../palette' />
+<property name='out.path' value='../../reg.addons' />
+
+
+
+<target name="hcd2reg">
+	<xslt basedir='${input}' destdir='${out.path}/${output}' style="hcd2reg.xsl" classpath="${xslt-classpath}">
+		<mapper type='glob'  from="*.xml" to="*.reg"/>
+		<param name="path" expression="${regpath}"/>
+	</xslt>  
+</target>
+
+<target name='all' depends="hcd2reg"/>
+
+<target name="clean">
+	<delete failonerror='false'>
+		<fileset dir="${out.path}/${output}" includes="*.reg"/>
+	</delete>
+</target>
+
+
+</project>
