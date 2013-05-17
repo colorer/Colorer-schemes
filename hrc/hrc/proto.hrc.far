@@ -837,7 +837,6 @@
  <prototype name="jcl" group="rare" description="JCL">
     <location link="rare/jcl.hrc"/>
     <filename>/\.(jcl)$/i</filename>
-    <firstline weight='2'>/^\/\//i</firstline>
   </prototype>
 
   <prototype name="sml" group="rare" description="Standard ML">
