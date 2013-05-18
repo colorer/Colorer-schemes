@@ -578,6 +578,10 @@
     <location link="scripts/qmake.hrc"/>
     <filename>/\.pr[oif]$/i</filename>
   </prototype>
+  <prototype name="solution" group="scripts" description="Microsoft Visual Studio Solution File">
+    <location link="scripts/solution.hrc"/>
+    <filename>/\.sln/</filename>
+  </prototype>
 
   <prototype name="mkb" group="scripts" description="Project build file for Airplay SDK">
     <filename>/\.(mkb|mkf)$/i</filename>

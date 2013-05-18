@@ -1,3 +1,8 @@
+2013-05-18
+  New:
+    - Microsoft solution scheme
+    - DirectShow constants in c++ scheme
+
 2013-05-06
   New:
     - smarty scheme
