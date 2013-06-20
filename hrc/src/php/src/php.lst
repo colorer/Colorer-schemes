@@ -1515,15 +1515,18 @@ LIBXML_ERR_NONE (integer)
 LIBXML_ERR_WARNING (integer)
 LIBXML_VERSION (integer)
 LIBXML_DOTTED_VERSION (string)
-<!-- XXV. .NET Functions -->
+     <!-- XXV. .NET Functions -->
 dotnet_load -- Loads a DOTNET module
      <!-- XXVI. Error Handling and Logging Functions -->
 debug_backtrace --  Generates a backtrace 
 debug_print_backtrace --  Prints a backtrace 
+◾error_get_last -- Get the last occurred error
 error_log -- Send an error message somewhere
 error_reporting -- Sets which PHP errors are reported
 restore_error_handler --  Restores the previous error handler function 
+restore_exception_handler -- Restores the previously defined exception handler function
 set_error_handler --  Sets a user-defined error handler function. 
+set_exception_handler -- Sets a user-defined exception handler function
 trigger_error --  Generates a user-level error/warning/notice message 
 user_error -- Alias of trigger_error()
 
@@ -1538,10 +1541,11 @@ E_COMPILE_WARNING (integer)
 E_USER_ERROR (integer) 
 E_USER_WARNING (integer) 
 E_USER_NOTICE (integer) 
+E_STRICT (integer)
+E_RECOVERABLE_ERROR (integer)
 E_DEPRECATED ( integer ) 
 E_USER_DEPRECATED ( integer ) 
 E_ALL (integer) 
-E_STRICT (integer) 
      <!-- XXVII. File Alteration Monitor Functions -->
 fam_cancel_monitor -- Terminate monitoring
 fam_close -- Close FAM connection
