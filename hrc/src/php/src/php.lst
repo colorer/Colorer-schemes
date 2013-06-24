@@ -1,6 +1,4 @@
      <!-- PHP Language Constructs -->
-true
-false
 and
 or
 xor
@@ -1307,6 +1305,9 @@ scandir --  List files and directories inside the specified path
 
 DIRECTORY_SEPARATOR (string)
 PATH_SEPARATOR (string)
+SCANDIR_SORT_ASCENDING (integer)
+SCANDIR_SORT_DESCENDING (integer)
+SCANDIR_SORT_NONE (integer) 
      <!-- XXIV. DOM XML Functions -->
 DomAttribute->name --  Returns name of attribute 
 DomAttribute->specified --  Checks if attribute is specified 

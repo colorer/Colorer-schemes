@@ -15,6 +15,12 @@
 <region name="php.label" parent="def:Label"/>
 <region name="php.keyword" parent="def:Keyword"/>
 
+<region name="DocBlockEntity" parent="def:Identifier" />
+<region name="DocBlockVar" parent="def:Var" />
+<region name="DocBlockParam" parent="def:ParameterUnknown" />
+
+<entity name="DocBlockEntity" value="(?{DocBlockEntity}@[\w\\-]+)"/>
+
 <!-- symbolic link -->
 <scheme name="VarLink">
     <regexp match="/\$\$\w+/" region="VarString"/>
@@ -48,7 +54,7 @@
 
 <scheme name="StringCore">
     <inherit scheme="StringBaseCore">
-    	<virtual scheme="StringBaseCorePrintf" subst-scheme="StringCorePrintf" />
+        <virtual scheme="StringBaseCorePrintf" subst-scheme="StringCorePrintf" />
     </inherit>
     <!-- regexp match='/\\\\$/' region0="dError"/ -->
     
@@ -201,20 +207,74 @@
     />
 </scheme>
 
-    
-<scheme name="Script">
-    <!-- Numbers -->
+<scheme name="php.numbers">
     <inherit scheme="CHexNumber"/>
     <inherit scheme="FloatNumber"/>
     <inherit scheme="DecNumber"/>
     <inherit scheme="BinNumber"/>
-    
+</scheme>
+<scheme name="php.booleans">
+    <keywords region="def:BooleanConstant" ignorecase="yes">
+        <word name="true"/>
+        <word name="false"/>
+    </keywords>
+</scheme>
+
+<scheme name="DocBlockVar">
+    <regexp match="/\$[\w-]+/" region="DocBlockVar" />
+</scheme>
+<scheme name="DocBlockType">
+    <inherit scheme="DocBlockVar"/>
+    <keywords region="Symbol">
+        <symb name="|"/>
+        <symb name="]"/>
+        <symb name="["/>
+    </keywords>
+    <regexp match="/[^\s\|\[\]]*/" region="php.type"/>
+</scheme>
+<scheme name="DocBlock" if="docblock">
+    <block start="/(@(param|return|throws|var))\s*/" end="/\s|$|(\*\/?=)/" scheme="DocBlockType"
+        region01="DocBlockEntity"
+    />
+    <block start="/%DocBlockEntity; \s* ((\())/x" end="/(\))/" scheme="DocBlockEntityParams"
+        region01="Symbol"     region10="Symbol"
+        region02="PairStart"  region11="PairEnd"
+    />
+    <regexp match="/%DocBlockEntity;/" />
+    <inherit scheme="DocBlockVar"/>
+    <inherit scheme="Comment"/>
+</scheme>
+<scheme name="DocBlockEntityParams">
+    <inherit scheme="DocBlockEntity" />
+    <regexp match="/(([&quot;&apos;])).*?((\1))/" region="String"
+        region1="PairStart"  region3="PairEnd"
+        region2="StringEdge" region4="StringEdge"
+     />
+    <block start="/(\{)/" end="/(\})/" scheme="DocBlockEntityParams"
+        region00="SymbolStrong" region10="SymbolStrong"
+        region01="PairStart"    region11="PairEnd"
+    />
+    <!--regexp match="/\w+\s*=?=/" region="def:Parameter"/-->
+    <inherit scheme="php.numbers"/>
+    <inherit scheme="php.booleans"/>
+    <keywords region="Symbol">
+        <symb name="="/>
+        <symb name=","/>
+    </keywords>
+    <regexp match="/[\w-]+(\s*=)?=/" region="DocBlockParam"/>
+</scheme>
+
+<scheme name="Script">
+    <!-- Numbers -->
+    <inherit scheme="php.numbers"/>
+    <inherit scheme="php.booleans"/>
+
     <!-- support regexp -->
-    <block start="/&#34;/" end="/&#34;/" 
+    <block start="/&quot;/" end="/&quot;/" 
         scheme="RegExp.String" region="String"
         region00="PairStart" region10="PairEnd"
     />
-    <block start="/'/" end="/'/" 
+    <block start="/&apos;/" end="/&apos;/" 
         scheme="RegExp.StringBase" region="String"
         region00="PairStart" region10="PairEnd"
     />
@@ -222,6 +282,11 @@
     
     <!-- Linear Comments-->
     <block start="/\/\/|\#/" end="/$/" scheme="Comment" region="Comment" priority="low"/>
+    <block start="/(\/\*)\*?=/" end="/(\*\/)/" scheme="DocBlock"
+        region="CommentDocContent" inner-region="yes"
+        region00="PairStart"       region10="PairEnd"
+        region01="CommentDocEdge"  region11="CommentDocEdge"
+    />
     <block start="/\/\*/" end="/\*\//" scheme="Comment"
         region="Comment" region00="PairStart" region10="PairEnd"
     />
@@ -262,8 +327,8 @@
     <regexp match="/\M (^|\s)(function) [\s&amp;]+ (?{FunctionOutline}[\:\w_*&amp;~]+)/ix"/>    
     
     <regexp match="/((\())\s*(integer|int|boolean|bool|float|double|string|array|object|resource)\s*((\)))/"
-    	region="php.type"
-    	region1="def:PairStart" region2="Symbol" region4="Symbol" region5="def:PairEnd"
+        region="php.type"
+        region1="def:PairStart" region2="Symbol" region4="Symbol" region5="def:PairEnd"
     />
 
     <inherit scheme="PairedBrackets">

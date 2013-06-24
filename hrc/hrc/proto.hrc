@@ -259,6 +259,7 @@
     <parameters>
       <param name="posix-re" value="false" description='Use eregs highlightning'/>
       <param name="include-base-consts"   value="true" description='PHP Predefined Constants'/>
+      <param name="docblock" value="true" description="DocBlock highlightning"/>
       &php-proto-gen;
     </parameters>
   </prototype>
