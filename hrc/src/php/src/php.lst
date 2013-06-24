@@ -2,7 +2,6 @@
 and
 or
 xor
-exception
 php_user_filter  
 array
 as
@@ -101,7 +100,6 @@ __NAMESPACE__
 
 
      <!-- PHP Core Predefined Constants -->
-
 PHP_VERSION (string)
 PHP_MAJOR_VERSION ( integer ) 
 PHP_MINOR_VERSION ( integer ) 
@@ -3626,18 +3624,18 @@ mysqli_close -- Closes a previously opened database connection
 mysqli_commit -- Commits the current transaction
 mysqli_connect_errno -- Returns the error code from last connect call
 mysqli_connect_error -- Returns a string description of the last connect error
-mysqli_connect -- Open a new connection to the MySQL server
+mysqli_connect -- Open a new connection to the MySQL server [deprecated]
 mysqli_data_seek -- Adjusts the result pointer to an arbitary row in the result
 mysqli_debug -- Performs debugging operations
-mysqli_disable_reads_from_master -- 
-mysqli_disable_rpl_parse -- 
+mysqli_disable_reads_from_master --  [deprecated]
+mysqli_disable_rpl_parse --  [deprecated]
 mysqli_dump_debug_info -- Dump debugging information into the log
 mysqli_embedded_connect -- Open a connection to an embedded mysql server.
 mysqli_enable_reads_from_master -- 
 mysqli_enable_rpl_parse -- 
 mysqli_errno -- Returns the error code for the most recent function call
 mysqli_error -- Returns a string description of the last error
-mysqli_escape_string -- Alias of mysqli_real_escape_string()
+mysqli_escape_string -- Alias of mysqli_real_escape_string() [deprecated]
 mysqli_execute -- Alias for mysqli_stmt_execute() [deprecated]
 mysqli_fetch_array -- Fetch a result row as an associative, a numeric array, or both.
 mysqli_fetch_assoc -- Fetch a result row as an associative array
@@ -3663,7 +3661,7 @@ mysqli_info -- Retrieves information about the most recently executed query
 mysqli_init --  Initializes MySQLi and returns an object for use with mysqli_real_connect 
 mysqli_insert_id -- Returns the auto generated id used in the last query
 mysqli_kill -- Asks the server to kill a MySQL thread
-mysqli_master_query -- Enforce execution of a query on the master in a master/slave setup.
+mysqli_master_query -- Enforce execution of a query on the master in a master/slave setup. [deprecated]
 mysqli_more_results -- Check if there any more query results from a multi query.
 mysqli_multi_query -- Performs a query on the database
 mysqli_next_result -- prepare next result from multi_query.
@@ -3677,17 +3675,17 @@ mysqli_query -- Performs a query on the database
 mysqli_real_connect -- Opens a connection to a mysql server
 mysqli_real_escape_string --  Escapes special characters in a string for use in a SQL statement, taking into account the current charset of the connection 
 mysqli_real_query -- Execute an SQL query
-mysqli_report -- enables or disables internal report functions
+mysqli_report -- enables or disables internal report functions [deprecated]
 mysqli_rollback -- Rolls back current transaction
-mysqli_rpl_parse_enabled -- 
-mysqli_rpl_probe -- 
+mysqli_rpl_parse_enabled --  [deprecated]
+mysqli_rpl_probe --  [deprecated]
 mysqli_rpl_query_type -- 
 mysqli_select_db -- Selects the default database for database queries
 mysqli_send_long_data -- Alias for mysqli_stmt_send_long_data() [deprecated]
 mysqli_send_query -- 
 mysqli_server_end -- 
 mysqli_server_init -- Initialize embedded server.
-mysqli_set_opt -- Alias of mysqli_options()
+mysqli_set_opt -- Alias of mysqli_options() [deprecated]
 mysqli_sqlstate -- Returns the SQLSTATE error from previous MySQL operation.
 mysqli_ssl_set -- Used for establishing secure connections using SSL.
 mysqli_stat -- Gets the current system status
@@ -4736,19 +4734,19 @@ output_reset_rewrite_vars --  Reset URL rewriter values
      <!-- LXXIX. Object property and method call overloading -->
 overload -- Enable property and method call overloading for a class
      <!-- LXXX. PDF Functions -->
-pdf_add_annotation -- Deprecated: Adds annotation
-pdf_add_bookmark -- Adds bookmark for current page
-pdf_add_launchlink -- Add a launch annotation for current page
-pdf_add_locallink -- Add a link annotation for current page
-pdf_add_note -- Sets annotation for current page
-pdf_add_outline -- Deprecated: Adds bookmark for current page
-pdf_add_pdflink -- Adds file link annotation for current page
+pdf_add_annotation -- Deprecated: Adds annotation [deprecated]
+pdf_add_bookmark -- Adds bookmark for current page [deprecated]
+pdf_add_launchlink -- Add a launch annotation for current page [deprecated]
+pdf_add_locallink -- Add a link annotation for current page [deprecated]
+pdf_add_note -- Sets annotation for current page [deprecated]
+pdf_add_outline -- Deprecated: Adds bookmark for current page [deprecated]
+pdf_add_pdflink -- Adds file link annotation for current page [deprecated]
 pdf_add_thumbnail -- Adds thumbnail for current page
-pdf_add_weblink -- Adds weblink for current page
+pdf_add_weblink -- Adds weblink for current page [deprecated]
 pdf_arc -- Draws an arc (counterclockwise)
 pdf_arcn -- Draws an arc (clockwise)
-pdf_attach_file -- Adds a file attachment for current page
-pdf_begin_page -- Starts new page
+pdf_attach_file -- Adds a file attachment for current page [deprecated]
+pdf_begin_page -- Starts new page [deprecated]
 pdf_begin_pattern -- Starts new pattern
 pdf_begin_template -- Starts new template
 pdf_circle -- Draws a circle
@@ -4756,7 +4754,7 @@ pdf_clip -- Clips to current path
 pdf_close_image -- Closes an image
 pdf_close_pdi_page --  Close the page handle 
 pdf_close_pdi --  Close the input PDF document 
-pdf_close -- Closes a pdf resource
+pdf_close -- Closes a pdf resource [deprecated]
 pdf_closepath_fill_stroke -- Closes, fills and strokes current path
 pdf_closepath_stroke -- Closes path and draws line along path
 pdf_closepath -- Closes path
@@ -4770,64 +4768,64 @@ pdf_end_template -- Finish template
 pdf_endpath -- Deprecated: Ends current path
 pdf_fill_stroke -- Fills and strokes current path
 pdf_fill -- Fills current path
-pdf_findfont -- Prepare font for later use with pdf_setfont().
+pdf_findfont -- Prepare font for later use with pdf_setfont(). [deprecated]
 pdf_get_buffer -- Fetch the buffer containing the generated PDF data.
-pdf_get_font -- Deprecated: font handling
-pdf_get_fontname -- Deprecated: font handling
-pdf_get_fontsize -- Deprecated: font handling
-pdf_get_image_height -- Deprecated: returns height of an image
-pdf_get_image_width -- Deprecated: Returns width of an image
-pdf_get_majorversion --  Returns the major version number of the PDFlib 
-pdf_get_minorversion --  Returns the minor version number of the PDFlib 
+pdf_get_font -- Deprecated: font handling [deprecated]
+pdf_get_fontname -- Deprecated: font handling [deprecated]
+pdf_get_fontsize -- Deprecated: font handling [deprecated]
+pdf_get_image_height -- Deprecated: returns height of an image [deprecated]
+pdf_get_image_width -- Deprecated: Returns width of an image [deprecated]
+pdf_get_majorversion --  Returns the major version number of the PDFlib  [deprecated]
+pdf_get_minorversion --  Returns the minor version number of the PDFlib  [deprecated]
 pdf_get_parameter -- Gets certain parameters
-pdf_get_pdi_parameter -- Get some PDI string parameters
-pdf_get_pdi_value -- Gets some PDI numerical parameters
+pdf_get_pdi_parameter -- Get some PDI string parameters [deprecated]
+pdf_get_pdi_value -- Gets some PDI numerical parameters [deprecated]
 pdf_get_value -- Gets certain numerical value
 pdf_initgraphics -- Resets graphic state
 pdf_lineto -- Draws a line
 pdf_makespotcolor -- Makes a spotcolor
 pdf_moveto -- Sets current point
 pdf_new -- Creates a new pdf resource
-pdf_open_CCITT -- Opens a new image file with raw CCITT data
-pdf_open_file -- Opens a new pdf object
-pdf_open_gif -- Deprecated: Opens a GIF image
-pdf_open_image_file -- Reads an image from a file
-pdf_open_image -- Versatile function for images
-pdf_open_jpeg -- Deprecated: Opens a JPEG image
+pdf_open_CCITT -- Opens a new image file with raw CCITT data [deprecated]
+pdf_open_file -- Opens a new pdf object [deprecated]
+pdf_open_gif -- Deprecated: Opens a GIF image [deprecated]
+pdf_open_image_file -- Reads an image from a file [deprecated]
+pdf_open_image -- Versatile function for images [deprecated]
+pdf_open_jpeg -- Deprecated: Opens a JPEG image [deprecated]
 pdf_open_memory_image -- Opens an image created with PHP's image functions
 pdf_open_pdi_page --  Prepare a page 
-pdf_open_pdi --  Opens a PDF file 
+pdf_open_pdi --  Opens a PDF file  [deprecated]
 pdf_open_png --  Deprecated: Opens a PNG image 
-pdf_open_tiff -- Deprecated: Opens a TIFF image
+pdf_open_tiff -- Deprecated: Opens a TIFF image [deprecated]
 pdf_open -- Deprecated: Open a new pdf object
-pdf_place_image -- Places an image on the page
-pdf_place_pdi_page -- Places an image on the page
+pdf_place_image -- Places an image on the page [deprecated]
+pdf_place_pdi_page -- Places an image on the page [deprecated]
 pdf_rect -- Draws a rectangle
 pdf_restore -- Restores formerly saved environment
 pdf_rotate -- Sets rotation
 pdf_save -- Saves the current environment
 pdf_scale -- Sets scaling
-pdf_set_border_color -- Sets color of border around links and annotations
-pdf_set_border_dash -- Sets dash style of border around links and annotations
-pdf_set_border_style -- Sets style of border around links and annotations
-pdf_set_char_spacing -- Deprecated: Sets character spacing
-pdf_set_duration -- Deprecated: Sets duration between pages
+pdf_set_border_color -- Sets color of border around links and annotations [deprecated]
+pdf_set_border_dash -- Sets dash style of border around links and annotations [deprecated]
+pdf_set_border_style -- Sets style of border around links and annotations [deprecated]
+pdf_set_char_spacing -- Deprecated: Sets character spacing [deprecated]
+pdf_set_duration -- Deprecated: Sets duration between pages [deprecated]
 pdf_set_font -- Deprecated: Selects a font face and size
 pdf_set_horiz_scaling -- Sets horizontal scaling of text [deprecated]
-pdf_set_info_author --  Deprecated: Fills the author field of the document 
-pdf_set_info_creator --  Deprecated: Fills the creator field of the document 
-pdf_set_info_keywords --  Deprecated: Fills the keywords field of the document 
-pdf_set_info_subject --  Deprecated: Fills the subject field of the document 
-pdf_set_info_title --  Deprecated: Fills the title field of the document 
+pdf_set_info_author --  Deprecated: Fills the author field of the document  [deprecated]
+pdf_set_info_creator --  Deprecated: Fills the creator field of the document  [deprecated]
+pdf_set_info_keywords --  Deprecated: Fills the keywords field of the document  [deprecated]
+pdf_set_info_subject --  Deprecated: Fills the subject field of the document  [deprecated]
+pdf_set_info_title --  Deprecated: Fills the title field of the document  [deprecated]
 pdf_set_info -- Fills a field of the document information
-pdf_set_leading -- Deprecated: Sets distance between text lines
+pdf_set_leading -- Deprecated: Sets distance between text lines [deprecated]
 pdf_set_parameter -- Sets certain parameters
-pdf_set_text_matrix -- Deprecated: Sets the text matrix
+pdf_set_text_matrix -- Deprecated: Sets the text matrix [deprecated]
 pdf_set_text_pos -- Sets text position
-pdf_set_text_rendering -- Deprecated: Determines how text is rendered
-pdf_set_text_rise -- Deprecated: Sets the text rise
+pdf_set_text_rendering -- Deprecated: Determines how text is rendered [deprecated]
+pdf_set_text_rise -- Deprecated: Sets the text rise [deprecated]
 pdf_set_value -- Sets certain numerical value
-pdf_set_word_spacing -- Deprecated: Sets spacing between words
+pdf_set_word_spacing -- Deprecated: Sets spacing between words [deprecated]
 pdf_setcolor -- Sets fill and stroke color
 pdf_setdash -- Sets dash pattern
 pdf_setflat -- Sets flatness
@@ -4840,11 +4838,11 @@ pdf_setlinejoin -- Sets linejoin parameter
 pdf_setlinewidth -- Sets line width
 pdf_setmatrix -- Sets current transformation matrix
 pdf_setmiterlimit -- Sets miter limit
-pdf_setpolydash -- Deprecated: Sets complicated dash pattern
+pdf_setpolydash -- Deprecated: Sets complicated dash pattern [deprecated]
 pdf_setrgbcolor_fill -- Sets filling color to rgb color value [deprecated]
 pdf_setrgbcolor_stroke -- Sets drawing color to rgb color value [deprecated]
 pdf_setrgbcolor -- Sets drawing and filling color to rgb color value [deprecated]
-pdf_show_boxed -- Output text in a box
+pdf_show_boxed -- Output text in a box [deprecated]
 pdf_show_xy -- Output text at given position
 pdf_show -- Output text at current position
 pdf_skew -- Skews the coordinate system
@@ -5243,13 +5241,13 @@ PREG_SPLIT_OFFSET_CAPTURE
 qdom_error -- Returns the error string from the last QDOM operation or FALSE if no errors occurred
 qdom_tree -- Creates a tree of an XML string
      <!-- XCIII. Regular Expression Functions (POSIX Extended) -->
-ereg_replace -- Replace regular expression
-ereg -- Regular expression match
-eregi_replace -- replace regular expression case insensitive
-eregi -- case insensitive regular expression match
-split -- split string into array by regular expression
-spliti --  Split string into array by regular expression case insensitive 
-sql_regcase --  Make regular expression for case insensitive match 
+ereg_replace -- Replace regular expression [deprecated]
+ereg -- Regular expression match [deprecated]
+eregi_replace -- replace regular expression case insensitive [deprecated]
+eregi -- case insensitive regular expression match [deprecated]
+split -- split string into array by regular expression [deprecated]
+spliti --  Split string into array by regular expression case insensitive [deprecated]
+sql_regcase --  Make regular expression for case insensitive match [deprecated]
      <!-- XCIV. Semaphore, Shared Memory and IPC Functions -->
 ftok --  Convert a pathname and a project identifier to a System V IPC key 
 msg_get_queue --  Create or attach to a message queue 
@@ -7096,3 +7094,11 @@ libxml_get_last_error -- Retrieve last error from libxml
 libxml_set_external_entity_loader -- Changes the default external entity loader
 libxml_set_streams_context -- Set the streams context for the next libxml document load or write
 libxml_use_internal_errors -- Disable libxml errors and allow user to fetch error information as needed
+    <!-- XXX. Exceptions -->
+ErrorException::getSeverity -- Gets the exception severity
+Exception::getPrevious -- Returns previous Exception
+Exception::getCode -- Gets the Exception code
+Exception::getFile -- Gets the file in which the exception occurred
+Exception::getLine -- Gets the line in which the exception occurred
+Exception::getTrace -- Gets the stack trace
+Exception::getTraceAsString -- Gets the stack trace as a string

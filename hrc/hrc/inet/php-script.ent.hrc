@@ -21,6 +21,9 @@
 
 <entity name="DocBlockEntity" value="(?{DocBlockEntity}@[\w\\-]+)"/>
 
+<region name="Namespace" parent="def:Prefix" />
+<region name="NamespaceDelimoter" parent="def:SymbolStrong" />
+
 <!-- symbolic link -->
 <scheme name="VarLink">
     <regexp match="/\$\$\w+/" region="VarString"/>
@@ -170,7 +173,8 @@
 </scheme>
 
 
-<!-- POSIX RegExp -->
+<!-- Posix functions are deprecated. Didn't work for a long time anyway -->
+<!-- POSIX RegExp - ->
 
 <scheme name="posix.BaseCore">
     <inherit scheme="regexp:posix.regexp">
@@ -205,7 +209,7 @@
         region01="KeywordStrong" region02="PairStart" region03="Symbol"
         region10="PairEnd" region11="Symbol"
     />
-</scheme>
+</scheme-->
 
 <scheme name="php.numbers">
     <inherit scheme="CHexNumber"/>
@@ -254,7 +258,7 @@
         region00="SymbolStrong" region10="SymbolStrong"
         region01="PairStart"    region11="PairEnd"
     />
-    <!--regexp match="/\w+\s*=?=/" region="def:Parameter"/-->
+    <regexp match="/\w+\s*=?=/" region="def:Parameter"/>
     <inherit scheme="php.numbers"/>
     <inherit scheme="php.booleans"/>
     <keywords region="Symbol">
@@ -270,10 +274,17 @@
 	<inherit scheme="DocBlockEntity"/>
 </scheme>
 
+<scheme name="Namespaces">
+	<regexp match="/([\w]+)\\?=/" region1="Namespace" />
+    <keywords region="NamespaceDelimoter">
+    	<symb name="\"/>
+    </keywords>
+</scheme>
 <scheme name="Script">
     <!-- Numbers -->
     <inherit scheme="php.numbers"/>
     <inherit scheme="php.booleans"/>
+    <inherit scheme="Namespaces"/>
 
     <!-- support regexp -->
     <block start="/&quot;/" end="/&quot;/" 
@@ -315,9 +326,8 @@
     <block start="/`/" end="/`/" scheme="StringCore" 
         region="SystemExec" region00="String" region10="String"
     />
-    
-    <!-- posix regexp support (ereg\w*)|(spliti?)|(sql_regcase)--> 
-    <inherit scheme="posix.Support"/>  
+<!-- Posix functions are deprecated. Didn't work for a long time anyway -->
+    <!--inherit scheme="posix.Support"/-->
     
     <inherit scheme="VarLink"/>
     <!-- variable highlighting -->
