@@ -232,7 +232,7 @@
     </keywords>
     <regexp match="/[^\s\|\[\]]*/" region="php.type"/>
 </scheme>
-<scheme name="DocBlock" if="docblock">
+<scheme name="DocBlockEntity">
     <block start="/(@(param|return|throws|var))\s*/" end="/\s|$|(\*\/?=)/" scheme="DocBlockType"
         region01="DocBlockEntity"
     />
@@ -250,7 +250,7 @@
         region1="PairStart"  region3="PairEnd"
         region2="StringEdge" region4="StringEdge"
      />
-    <block start="/(\{)/" end="/(\})/" scheme="DocBlock"
+    <block start="/(\{)/" end="/(\})/" scheme="DocBlockEntityParams"
         region00="SymbolStrong" region10="SymbolStrong"
         region01="PairStart"    region11="PairEnd"
     />
@@ -262,6 +262,12 @@
         <symb name=","/>
     </keywords>
     <regexp match="/[\w-]+(\s*=)?=/" region="DocBlockParam"/>
+
+    <regexp match="/&quot;/" region="Error" priority="low"/>
+</scheme>
+
+<scheme name="DocBlock" if="docblock">
+	<inherit scheme="DocBlockEntity"/>
 </scheme>
 
 <scheme name="Script">
