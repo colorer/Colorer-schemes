@@ -250,7 +250,7 @@
         region1="PairStart"  region3="PairEnd"
         region2="StringEdge" region4="StringEdge"
      />
-    <block start="/(\{)/" end="/(\})/" scheme="DocBlockEntityParams"
+    <block start="/(\{)/" end="/(\})/" scheme="DocBlock"
         region00="SymbolStrong" region10="SymbolStrong"
         region01="PairStart"    region11="PairEnd"
     />
