@@ -96,7 +96,7 @@
 			<inherit scheme="Parenthes" />
 		</scheme>
 		<scheme name="Script">
-			<block start="/(\{%)?#2\s+((autoescape|block|filter|for|macro|set|spaceless))/" end="/(end\Y3)/"
+			<block start="/(\{%)?#2\s+((autoescape|block|filter|for|macro|spaceless))/" end="/(end\Y3)/"
 				region02="PairStart"   region10="PairEnd"
 				region03="def:Keyword" region11="def:Keyword"
 				scheme="Script" priority="low"
@@ -110,7 +110,7 @@
 				region2="def:Keyword"
 			/>
 			<inherit scheme="Expressions" />
-			<regexp match="/(\{%)?#2\s+ (endautoescape|else|elseif|endblock|endif|endfilter|endfor|endif|endmacro|endset|endspaceless) /x" region2="def:Error" priority="low" />
+			<regexp match="/(\{%)?#2\s+ (endautoescape|else|elseif|endblock|endif|endfilter|endfor|endif|endmacro|endspaceless) /x" region2="def:Error" priority="low" />
 		</scheme>
 
 

@@ -28,7 +28,7 @@
 
 	<scheme name="jsonMETA">
 		<inherit scheme='jsonQuote'/>
-		<regexp match="/\\[&quot;&apos;]/" region0="StringContent"/>
+		<regexp match="/\\[&quot;&apos;/]/" region0="StringContent"/>
 	</scheme>
 
 	<scheme name="String">
@@ -42,36 +42,57 @@
 		</inherit>
 	</scheme>
 
-	<scheme name="AposString">
-		<block start="/(')/" end="/(')/" 
+
+    <scheme name="json.float">
+        <regexp match="/(-)? \B    (\.)\d+ (e[\-+]?\d+)? \b/ix" region0="NumberFloat" region1="def:Symbol" region2="def:Symbol" region3="NumberSuffix"/>
+        <regexp match="/(-)? \b \d+(\.)\d* (e[\-+]?\d+)? \b/ix" region0="NumberFloat" region1="def:Symbol" region2="def:Symbol" region3="NumberSuffix"/>
+        <regexp match="/(-)? \b \d+        (e[\-+]?\d+)  \b/ix" region0="NumberFloat" region1="def:Symbol"                      region2="NumberSuffix"/>
+    </scheme>
+    <scheme name="json.decimal">
+        <regexp match="/(-)?\b\d+ (ul{0,2}|l{1,2}u?|i64|i128)?\b/ix" region0="NumberDec" region1="def:Symbol" region2="NumberSuffix"/>
+    </scheme>
+<!-- JSON допускает ТОЛЬКО десятичные и float числа -->
+    <scheme name="json.numbers">
+      <inherit scheme="json.float"/>
+      <inherit scheme="json.decimal"/>
+    </scheme>
+
+<!-- JSON !!!НЕ ДОПУСКАЕТ!!! использование одинарных кавычек! -->
+	<scheme name="jsonString">
+		<block start="/(&quot;)/" end="/(&quot;)/"
 			scheme="String" region="String"
 			region00='StringEdge' region01='PairStart'
 			region10='StringEdge' region11='PairEnd'
 		/>
 	</scheme>
-
-	<scheme name="QuotString">
-		<block start='/(")/' end='/(")/'
-			scheme="String" region="String"
-			region00='StringEdge' region01='PairStart'
-			region10='StringEdge' region11='PairEnd'
-		/>
+	<scheme name="booleans">
+		<keywords region="def:BooleanConstant">
+			<word name="false"/>
+			<word name="true"/>
+		</keywords>
+	</scheme>
+	<scheme name="null">
+		<keywords region="def:Keyword">
+			<word name="null"/>
+		</keywords>
 	</scheme>
       
-	<scheme name="jsonString">
-		<inherit scheme="AposString"/>
-		<inherit scheme="QuotString"/>
-	</scheme>
-
 	<scheme name="json">
 		<block start="/\/\//" end="/\M(&lt;\/scr|$)/i" scheme="jsonComment" region="Comment"/>
 		<block start="/\/\*/" end="/\*\//"             scheme="jsonComment" region="Comment" region00="PairStart" region10="PairEnd"/>
 		<inherit scheme="PairedBrackets">
 			<virtual scheme="PairedBrackets" subst-scheme="json"/>
 		</inherit>
-		<inherit scheme="def:Number"/>
+		<inherit scheme="json.numbers"/>
 		<inherit scheme="jsonString"/>
-
+		<inherit scheme="booleans"/>
+		<inherit scheme="null"/>
+		<keywords region="def:Symbol">
+			<symb name=","/>
+		</keywords>
+		<keywords region="def:SymbolStrong">
+			<symb name=":"/>
+		</keywords>
 		<block scheme="RE" region="String">
 			<start region1="Symbol" region2="StringEdge" region3="PairStart">
 			<![CDATA[
@@ -88,6 +109,7 @@
 				]]>
 			</end>
 		</block>
+		<regexp match="/[^\s]/" region="def:Error" priority="low" />
 	</scheme>
 
 </type>

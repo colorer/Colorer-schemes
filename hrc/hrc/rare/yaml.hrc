@@ -18,18 +18,19 @@
                 </prototype>
             </appinfo>
             <documentation>
-                Script language for MUD Neronis (http://neronis.ru)
+                Yaml files highlighting
             </documentation>
         </annotation>
         <import type="def"/>
 		<entity name="byte" value="\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5]" />
+		<entity name="word" value="\d{1,4}|[0-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5]" />
 
 		<region name="KeyName" parent="def:Keyword"/>
 		<region name="DocumentStart" parent="def:Symbol"/>
 		<region name="DocumentEnd" parent="def:Symbol"/>
 		<region name="Tag" parent="def:EMail"/>
 		<region name="TagEdge" parent="def:Tag"/>
-
+		<region name="IP" parent="def:EMail"/>
 
 		<scheme name="Escapes">
 			<regexp match="/\\[0\\abtnvfre&quot;N_Lp]/" region="def:SymbolStrong" />
@@ -47,7 +48,7 @@
 		</scheme>
 		<scheme name="Strings">
 		    <inherit scheme="Escapes"/>
-			<regexp match="/(%byte;)\.(%byte;)\.(%byte;)\.(%byte;)/" region="def:EMail" />
+			<regexp match="/(%byte;)(?{def:Symbol}\.)(%byte;)(?{def:Symbol}\.)(%byte;)(?{def:Symbol}\.)(%byte;)((?{def:SymbolStrong}:)(%word;))?/" region="IP" />
 			<regexp match="/%[\w\._]+%/" region="def:Constant" />
 			<inherit scheme="Date" />
 			<inherit scheme="def:Time" />

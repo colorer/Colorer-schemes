@@ -237,7 +237,7 @@
     <regexp match="/[^\s\|\[\]]*/" region="php.type"/>
 </scheme>
 <scheme name="DocBlockEntity">
-    <block start="/(@(param|return|throws|var))\s*/" end="/\s|$|(\*\/?=)/" scheme="DocBlockType"
+    <block start="/(@(param|property|return|throws|var))\s*/" end="/\s|$|(\*\/?=)/" scheme="DocBlockType"
         region01="DocBlockEntity"
     />
     <block start="/%DocBlockEntity; \s* ((\())/x" end="/(\))/" scheme="DocBlockEntityParams"
