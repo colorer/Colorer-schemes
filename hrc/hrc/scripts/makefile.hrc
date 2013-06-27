@@ -418,6 +418,7 @@
 	<inherit scheme='quote'>
 		<virtual scheme='quote.v' subst-scheme='vars.all'/>
 	</inherit>
+	<inherit scheme='comments'/>
 </scheme>
 
 <scheme name='keyword-if-content'>
@@ -476,6 +477,7 @@
 		/>
 	</block>
 	<inherit scheme='keywords-cond.ms'/>
+	<inherit scheme='comments'/>
 </scheme>
 
 

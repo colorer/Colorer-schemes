@@ -1,3 +1,6 @@
+2013-06-27
+  Fixed:
+    - makefile.hrc : Comment is not colored after include and in if-endif block 
 2013-06-24
   New:
     - DocBlock support fo PHP-files
