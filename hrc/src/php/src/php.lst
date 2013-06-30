@@ -7065,27 +7065,27 @@ IDNA_ERROR_LABEL_HAS_DOT (integer)
 IDNA_ERROR_INVALID_ACE_LABEL (integer) 
 IDNA_ERROR_BIDI (integer) 
 IDNA_ERROR_CONTEXTJ (integer) 
-Collator::FRENCH_COLLATION (integer)
-Collator::ALTERNATE_HANDLING (integer) 
-Collator::CASE_FIRST (integer) 
-Collator::CASE_LEVEL (integer)
-Collator::NORMALIZATION_MODE (integer) 
-Collator::STRENGTH (integer)
-Collator::HIRAGANA_QUATERNARY_MODE (integer)
-Collator::NUMERIC_COLLATION (integer)
-Collator::DEFAULT_VALUE (integer)
-Collator::PRIMARY (integer)
-Collator::SECONDARY (integer)
-Collator::TERTIARY (integer)
-Collator::DEFAULT_STRENGTH (integer)
-Collator::QUATERNARY (integer)
-Collator::IDENTICAL (integer)
-Collator::OFF (integer)
-Collator::ON (integer)
-Collator::SHIFTED (integer)
-Collator::NON_IGNORABLE (integer)
-Collator::LOWER_FIRST (integer)
-Collator::UPPER_FIRST (integer)
+FRENCH_COLLATION (integer)
+ALTERNATE_HANDLING (integer) 
+CASE_FIRST (integer) 
+CASE_LEVEL (integer)
+NORMALIZATION_MODE (integer) 
+STRENGTH (integer)
+HIRAGANA_QUATERNARY_MODE (integer)
+NUMERIC_COLLATION (integer)
+DEFAULT_VALUE (integer)
+PRIMARY (integer)
+SECONDARY (integer)
+TERTIARY (integer)
+DEFAULT_STRENGTH (integer)
+QUATERNARY (integer)
+IDENTICAL (integer)
+OFF (integer)
+ON (integer)
+SHIFTED (integer)
+NON_IGNORABLE (integer)
+LOWER_FIRST (integer)
+UPPER_FIRST (integer)
      <!-- XXX. libxml -->
 libxml_clear_errors -- Clear libxml error buffer
 libxml_disable_entity_loader -- Disable the ability to load external entities
@@ -7102,3 +7102,163 @@ Exception::getFile -- Gets the file in which the exception occurred
 Exception::getLine -- Gets the line in which the exception occurred
 Exception::getTrace -- Gets the stack trace
 Exception::getTraceAsString -- Gets the stack trace as a string
+   <!-- XXX. PDO -->
+PDO::commit -- Commits a transaction
+PDO::errorCode -- Fetch the SQLSTATE associated with the last operation on the database handle
+PDO::errorInfo -- Fetch extended error information associated with the last operation on the database handle
+PDO::exec -- Execute an SQL statement and return the number of affected rows
+PDO::getAttribute -- Retrieve a database connection attribute
+PDO::getAvailableDrivers -- Return an array of available PDO drivers
+PDO::inTransaction -- Checks if inside a transaction
+PDO::lastInsertId -- Returns the ID of the last inserted row or sequence value
+PDO::prepare -- Prepares a statement for execution and returns a statement object
+PDO::query -- Executes an SQL statement, returning a result set as a PDOStatement object
+PDO::quote -- Quotes a string for use in a query.
+PDO::rollBack -- Rolls back a transaction
+PDO::setAttribute -- Set an attribute
+PDO::pgsqlLOBCreate -- Creates a new large object
+PDO::pgsqlLOBOpen -- Opens an existing large object stream
+PDO::pgsqlLOBUnlink -- Deletes the large object
+PDO::sqliteCreateAggregate -- Registers an aggregating User Defined Function for use in SQL statements
+PDO::sqliteCreateFunction -- Registers a User Defined Function for use in SQL statements
+PDOStatement::bindParam -- Binds a parameter to the specified variable name
+PDOStatement::bindValue -- Binds a value to a parameter
+PDOStatement::closeCursor -- Closes the cursor, enabling the statement to be executed again.
+PDOStatement::columnCount -- Returns the number of columns in the result set
+PDOStatement::debugDumpParams -- Dump an SQL prepared command
+PDOStatement::errorCode -- Fetch the SQLSTATE associated with the last operation on the statement handle
+PDOStatement::errorInfo -- Fetch extended error information associated with the last operation on the statement handle
+PDOStatement::execute -- Executes a prepared statement
+PDOStatement::fetch -- Fetches the next row from a result set
+PDOStatement::fetchAll -- Returns an array containing all of the result set rows
+PDOStatement::fetchColumn -- Returns a single column from the next row of a result set
+PDOStatement::fetchObject -- Fetches the next row and returns it as an object.
+PDOStatement::getAttribute -- Retrieve a statement attribute
+PDOStatement::getColumnMeta -- Returns metadata for a column in a result set
+PDOStatement::nextRowset -- Advances to the next rowset in a multi-rowset statement handle
+PDOStatement::rowCount -- Returns the number of rows affected by the last SQL statement
+PDOStatement::setAttribute -- Set a statement attribute
+PDOStatement::setFetchMode -- Set the default fetch mode for this statement
+PDOException::getTraceAsString -- 
+
+PARAM_BOOL (integer)
+PARAM_NULL (integer)
+PARAM_INT (integer)
+PARAM_STR (integer)
+PARAM_LOB (integer)
+PARAM_STMT (integer)
+PARAM_INPUT_OUTPUT (integer)
+FETCH_LAZY (integer)
+FETCH_ASSOC (integer)
+FETCH_NAMED (integer)
+FETCH_NUM (integer)
+FETCH_BOTH (integer)
+FETCH_OBJ (integer)
+FETCH_BOUND (integer)
+FETCH_COLUMN (integer)
+FETCH_CLASS (integer)
+FETCH_INTO (integer)
+FETCH_FUNC (integer)
+FETCH_GROUP (integer)
+FETCH_UNIQUE (integer)
+FETCH_KEY_PAIR (integer)
+FETCH_CLASSTYPE (integer)
+FETCH_SERIALIZE (integer)
+FETCH_PROPS_LATE (integer)
+ATTR_AUTOCOMMIT (integer)
+ATTR_PREFETCH (integer)
+ATTR_TIMEOUT (integer)
+ATTR_ERRMODE (integer)
+ATTR_SERVER_VERSION (integer)
+ATTR_CLIENT_VERSION (integer)
+ATTR_SERVER_INFO (integer)
+ATTR_CONNECTION_STATUS (integer)
+ATTR_CASE (integer)
+ATTR_CURSOR_NAME (integer)
+ATTR_CURSOR (integer)
+ATTR_DRIVER_NAME (string)
+ATTR_ORACLE_NULLS (integer)
+ATTR_PERSISTENT (integer)
+ATTR_STATEMENT_CLASS (integer)
+ATTR_FETCH_CATALOG_NAMES (integer)
+ATTR_FETCH_TABLE_NAMES (integer)
+ATTR_STRINGIFY_FETCHES (integer)
+ATTR_MAX_COLUMN_LEN (integer)
+ATTR_DEFAULT_FETCH_MODE (integer)
+ATTR_EMULATE_PREPARES (integer)
+ERRMODE_SILENT (integer)
+ERRMODE_WARNING (integer)
+ERRMODE_EXCEPTION (integer)
+CASE_NATURAL (integer)
+CASE_LOWER (integer)
+CASE_UPPER (integer)
+NULL_NATURAL (integer)
+NULL_EMPTY_STRING (integer)
+NULL_TO_STRING (integer)
+FETCH_ORI_NEXT (integer)
+FETCH_ORI_PRIOR (integer)
+FETCH_ORI_FIRST (integer)
+FETCH_ORI_LAST (integer)
+FETCH_ORI_ABS (integer)
+FETCH_ORI_REL (integer)
+CURSOR_FWDONLY (integer)
+CURSOR_SCROLL (integer)
+ERR_NONE (string)
+PARAM_EVT_ALLOC
+PARAM_EVT_FREE
+PARAM_EVT_EXEC_PRE
+PARAM_EVT_EXEC_POST
+PARAM_EVT_FETCH_PRE
+PARAM_EVT_FETCH_POST
+PARAM_EVT_NORMALIZE
+CUBRID_ATTR_ISOLATION_LEVEL
+CUBRID_ATTR_LOCK_TIMEOUT
+CUBRID_ATTR_MAX_STRING_LENGTH
+CUBRID_SCH_TABLE
+CUBRID_SCH_VIEW
+CUBRID_SCH_QUERY_SPEC
+CUBRID_SCH_ATTRIBUTE
+CUBRID_SCH_TABLE_ATTRIBUTE
+CUBRID_SCH_METHOD
+CUBRID_SCH_TABLE_METHOD
+CUBRID_SCH_METHOD_FILE
+CUBRID_SCH_SUPER_TABLE
+CUBRID_SCH_SUB_TABLE
+CUBRID_SCH_CONSTRAINT
+CUBRID_SCH_TRIGGER
+CUBRID_SCH_TABLE_PRIVILEGE
+CUBRID_SCH_COL_PRIVILEGE
+CUBRID_SCH_DIRECT_SUPER_TABLE
+CUBRID_SCH_PRIMARY_KEY
+CUBRID_SCH_IMPORTED_KEYS
+CUBRID_SCH_EXPORTED_KEYS
+CUBRID_SCH_CROSS_REFERENCE 
+FB_ATTR_DATE_FORMAT (integer)
+FB_ATTR_TIME_FORMAT (integer)
+FB_ATTR_TIMESTAMP_FORMAT (integer)
+MYSQL_ATTR_USE_BUFFERED_QUERY (integer)
+MYSQL_ATTR_LOCAL_INFILE (integer)
+MYSQL_ATTR_INIT_COMMAND (integer)  
+MYSQL_ATTR_READ_DEFAULT_FILE (integer)  
+MYSQL_ATTR_READ_DEFAULT_GROUP (integer)  
+MYSQL_ATTR_MAX_BUFFER_SIZE (integer)  
+MYSQL_ATTR_DIRECT_QUERY (integer)  
+MYSQL_ATTR_FOUND_ROWS (integer)  
+MYSQL_ATTR_IGNORE_SPACE (integer)  
+MYSQL_ATTR_COMPRESS (integer)  
+MYSQL_ATTR_SSL_CA (integer)  
+MYSQL_ATTR_SSL_CAPATH (integer)  
+MYSQL_ATTR_SSL_CERT (integer)  
+MYSQL_ATTR_CIPHER (integer)  
+MYSQL_ATTR_KEY (integer)
+SQLSRV_TXN_READ_UNCOMMITTED (integer)
+SQLSRV_TXN_READ_COMMITTED (integer)
+SQLSRV_TXN_REPEATABLE_READ (integer)
+SQLSRV_TXN_SNAPSHOT (integer)
+SQLSRV_TXN_SERIALIZABLE (integer)
+SQLSRV_ENCODING_BINARY (integer)
+SQLSRV_ENCODING_SYSTEM (integer)
+SQLSRV_ENCODING_UTF8 (integer)
+SQLSRV_ENCODING_DEFAULT (integer)
+SQLSRV_ATTR_QUERY_TIMEOUT (integer)
+SQLSRV_ATTR_DIRECT_QUERY (integer)

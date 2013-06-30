@@ -19,7 +19,7 @@
 <region name="DocBlockVar" parent="def:Var" />
 <region name="DocBlockParam" parent="def:ParameterUnknown" />
 
-<entity name="DocBlockEntity" value="(?{DocBlockEntity}@[\w\\-]+)"/>
+<entity name="DocBlockEntity" value="(?{DocBlockEntity}@[\w\\-]+\b)"/>
 
 <region name="Namespace" parent="def:Prefix" />
 <region name="NamespaceDelimoter" parent="def:SymbolStrong" />
@@ -237,7 +237,7 @@
     <regexp match="/[^\s\|\[\]]*/" region="php.type"/>
 </scheme>
 <scheme name="DocBlockEntity">
-    <block start="/(@(param|property|return|throws|var))\s*/" end="/\s|$|(\*\/?=)/" scheme="DocBlockType"
+    <block start="/(@(param|property|return|throws|var)\b)\s*/" end="/\s|$|(\*\/?=)/" scheme="DocBlockType"
         region01="DocBlockEntity"
     />
     <block start="/%DocBlockEntity; \s* ((\())/x" end="/(\))/" scheme="DocBlockEntityParams"
