@@ -130,8 +130,8 @@
             <word name="ceil"/>
             <word name="charAt"/>
             <word name="charCodeAt"/>
-            <word name="clearTimeout"/>
             <word name="clearInterval"/>
+            <word name="clearTimeout"/>
             <word name="CollectGarbage"/>
             <word name="compile"/>
             <word name="concat"/>
@@ -228,9 +228,12 @@
             <word name="tan"/>
             <word name="test"/>
             <word name="toArray"/>
+            <word name="toExponential"/>
+            <word name="toFixed"/>
             <word name="toGMTString"/>
             <word name="toLocaleString"/>
             <word name="toLowerCase"/>
+            <word name="toPrecision"/>
             <word name="toString"/>
             <word name="toUpperCase"/>
             <word name="toUTCString"/>
@@ -238,9 +241,6 @@
             <word name="unescape"/>
             <word name="UTC"/>
             <word name="valueOf"/>
-            <word name="toExponential"/>
-            <word name="toFixed"/>
-            <word name="toPrecision"/>
          </keywords>
       </scheme>
 
