@@ -18,7 +18,7 @@
       
       <import type="def"/>
 
-      <scheme name="jComment">
+      <scheme name="jCommentContent">
          <keywords region="CommentContent">
             <word name="@cc_on"/>
             <word name="@cc_off"/>
@@ -37,16 +37,28 @@
             <word name="@_microsoft"/>
          </keywords>
       </scheme>
+
+      <scheme name="jsComments">
+<!-- just ignore html comments -->
+          <regexp match="/^\s* &lt;!--/x" region0="Comment"/>
+          <regexp match="/^\s* --&gt;/x" region0="Comment"/>
+          <keywords region="def:Error">
+              <symb name="*/"/>
+          </keywords>
+<!-- Linear Comments-->
+          <block start="/\/\//" end="/\M(&lt;\/scr|$)/i" scheme="jCommentContent" region="Comment"/>
+          <block start="/\/\*/" end="/\*\//" scheme="jCommentContent" region="Comment" region00="PairStart" region10="PairEnd"/>
+      </scheme>
       
       <scheme name='jsQuote'>
-      	<regexp match="/\\u[\dA-Fa-f]{4}/" region0="StringContent"/>
-      	<regexp match="/\\x[\dA-Fa-f]{2}/" region0="StringContent"/>
-      	<regexp match="/\\[\\bfnrtv]/" region0="StringContent"/>
+          <regexp match="/\\u[\dA-Fa-f]{4}/" region0="StringContent"/>
+          <regexp match="/\\x[\dA-Fa-f]{2}/" region0="StringContent"/>
+          <regexp match="/\\[\\bfnrtv]/" region0="StringContent"/>
       </scheme>
 
       <scheme name="jsMETA">
-      	<inherit scheme='jsQuote'/>
-      	<regexp match="/\\[&quot;&apos;]/" region0="StringContent"/>
+          <inherit scheme='jsQuote'/>
+          <regexp match="/\\[&quot;&apos;]/" region0="StringContent"/>
       </scheme>
 
       <!-- EE: add regexp support -->
@@ -56,10 +68,10 @@
       
             
       <scheme name="RE">
-       <inherit scheme="regexp:pcre.regexp">
-        <virtual scheme="regexp:string" subst-scheme="jsMETA"/>
-        <virtual scheme="regexp:pcre.regexp" subst-scheme="RE"/>        
-       </inherit>
+         <inherit scheme="regexp:pcre.regexp">
+            <virtual scheme="regexp:string" subst-scheme="jsMETA"/>
+            <virtual scheme="regexp:pcre.regexp" subst-scheme="RE"/>        
+         </inherit>
       </scheme>
       
       <!-- EE: support js in attr -->
@@ -80,217 +92,30 @@
       </scheme>
       
       <scheme name="jString">
-       <inherit scheme="AposString"/>
-       <inherit scheme="QuotString"/>
+         <inherit scheme="AposString"/>
+         <inherit scheme="QuotString"/>
       </scheme>
       
       <scheme name="AposScript">
-       <inherit scheme="jScript">
-        <virtual scheme="jString" subst-scheme="AposString"/>
-       </inherit>
+         <inherit scheme="jScript">
+            <virtual scheme="jString" subst-scheme="AposString"/>
+         </inherit>
       </scheme>
       <scheme name="QuotScript">
-       <inherit scheme="jScript">
-        <virtual scheme="jString" subst-scheme="QuotString"/>
-       </inherit>
+         <inherit scheme="jScript">
+            <virtual scheme="jString" subst-scheme="QuotString"/>
+         </inherit>
       </scheme>
 
-      <scheme name="jScript">
-<!-- just ignore html comments -->
-         <regexp match="/^\s* &lt;!--/x" region0="Comment"/>
-         <regexp match="/^\s* --&gt;/x" region0="Comment"/>
-<!-- Linear Comments-->
-         <block start="/\/\//" end="/\M(&lt;\/scr|$)/i" scheme="jComment" region="Comment"/>
-         <block start="/\/\*/" end="/\*\//" scheme="jComment" region="Comment" region00="PairStart" region10="PairEnd"/>
-         <regexp match="/^\M\s* function \s+ ([\w_]+) /x" region1="Function"/>
-         <regexp match="/\b ([\w_]+) \M\s* [=:] \s* function\b /x" region1="Function"/>
-         <inherit scheme="PairedBrackets">
-            <virtual scheme="PairedBrackets" subst-scheme="jScript"/>
-         </inherit>
-<!-- Numbers -->
-         <inherit scheme="def:Number"/>
-<!-- Strings -->
-         <inherit scheme="jString"/>
-
-      <!-- EE: add regexp support -->
-         <block scheme="RE" region="String">
-           <start region1="Symbol" region2="StringEdge" region3="PairStart">
-            <![CDATA[
-             /
-             ( [\=\!]\~ | && | \|\| |
-             [^<\]\}\)\+\-\w\s\/\;] |
-             \bif | ~ | ^)
-             \s* ((\/))\M[^\/\*>] /x
-            ]]>
-           </start>
-           <end region0="StringEdge" region1="PairEnd" region2="regexp:SpecArea">
-            <![CDATA[
-             /(\y2([cmiogxes]*))/x
-            ]]>
-           </end>
-         </block>
-
-<!-- faults with var1/var2 :(
-   <regexp match='/ \/ ( \\. | [^\\\/] )*? \/ /x' region="String"/>
-   -->
-         <regexp match="/\$[\d_*&amp;+`']/" region="Var"/>
-         <keywords region="Keyword">
-            <word name="break"/>
-            <word name="case"/>
-            <word name="catch"/>
-            <word name="const"/>
-            <word name="continue"/>
-            <word name="default"/>
-            <word name="do"/>
-            <word name="else"/>
-            <word name="finally"/>
-            <word name="for"/>
-            <word name="function"/>
-            <word name="if"/>
-            <word name="in"/>
-            <word name="instanceof"/>
-            <word name="new"/>
-            <word name="return"/>
-            <word name="switch"/>
-            <word name="this"/>
-            <word name="throw"/>
-            <word name="try"/>
-            <word name="typeof"/>
-            <word name="var"/>
-            <word name="while"/>
-            <word name="with"/>
-         </keywords>
-         <keywords region="Symbol">
-<!-- Properties -->
-            <word name=".E"/>
-            <word name=".length"/>
-            <word name=".LN2"/>
-            <word name=".LN10"/>
-            <word name=".LOG2E"/>
-            <word name=".LOG10E"/>
-            <word name=".PI"/>
-            <word name=".SQRT1_2"/>
-            <word name=".SQRT2"/>
-         </keywords>
-         <regexp match="/!\M\w/" region="Symbol"/>
-         <keywords region="Symbol">
-<!-- Operators Computational  -->
-            <symb name="++"/>
-            <symb name="--"/>
-            <symb name="*"/>
-            <symb name="/"/>
-            <symb name="%"/>
-            <symb name="+"/>
-            <symb name="-"/>
-<!-- Operators Logical -->
-            <symb name="!"/>
-            <symb name="&lt;"/>
-            <symb name="&gt;"/>
-            <symb name="&lt;="/>
-            <symb name="&gt;="/>
-            <symb name="=="/>
-            <symb name="!="/>
-            <symb name="&amp;&amp;"/>
-            <symb name="||"/>
-            <symb name="?" region="SymbolStrong"/> <!-- EE: strong -->
-<!-- Operators Bitwise -->
-            <symb name="~"/>
-            <symb name="&lt;&lt;"/>
-            <symb name="/&gt;&gt;"/>
-            <symb name="&gt;&gt;&gt;"/>
-            <symb name="&amp;"/>
-            <symb name="^"/>
-            <symb name="|"/>
-<!-- Operators Assignment -->
-            <symb name="==="/>
-            <symb name="!=="/>
-            <symb name="="/>
-            <symb name="+="/>
-            <symb name="-+"/>
-            <symb name="*="/>
-            <symb name="/="/>
-            <symb name="%="/>
-            <symb name="&lt;&lt;="/>
-            <symb name="/&gt;&gt;="/>
-            <symb name="&gt;&gt;&gt;="/>
-            <symb name="&amp;="/>
-            <symb name="|="/>
-            <symb name="^="/>
-<!-- Operators other?  -->
-            <!-- EE: this operators cannot used in this plase...
-            <symb name="["/>
-            <symb name="]"/>
-            <symb name="{"/>
-            <symb name="}"/>
-            <symb name="("/>
-            <symb name=")"/>-->
-            <symb name=","/>
-            <symb name="."/>
-            <symb name=":" region="SymbolStrong"/> <!-- EE: strong -->
-            <symb name=";" region="SymbolStrong"/> <!-- EE: strong -->
-         </keywords>
-         <!-- EE: copy from c.hrc -->
-         <keywords region="def:Error">
-            <symb name="["/><symb name="]"/>
-            <symb name="{"/><symb name="}"/>
-            <symb name="("/><symb name=")"/>
-            <symb name="*/"/>
-         </keywords>
-
+      <scheme name="jsBooleans">
          <keywords region="BooleanConstant">
             <word name="true"/>
             <word name="false"/>
-            <word name="null"/>
-            <word name="undefined"/>
          </keywords>
-         <keywords region="Var">
-<!-- Objects -->
-            <word name="ActiveXObject"/>
-            <word name="arguments"/>
-            <word name="Arguments"/>
-            <word name="Array"/>
-            <word name="BooleanConstant"/>
-            <word name="Call"/>
-            <word name="caller"/>
-            <word name="Closure"/>
-            <word name="constructor"/>
-            <word name="Date"/>
-            <word name="Dictionary"/>
-            <word name="Enumerator"/>
-            <word name="FileSystemObject"/>
-            <word name="Function"/>
-            <word name="global"/>
-            <word name="Global"/>
-            <word name="ignoreCase"/>
-            <word name="Image"/>
-            <word name="index"/>
-            <word name="Infinity"/>
-            <word name="input"/>
-            <word name="input"/>
-            <word name="lastIndex"/>
-            <word name="lastMatch"/>
-            <word name="lastParen"/>
-            <word name="leftContext"/>
-            <word name="Math"/>
-            <word name="MAX_VALUE"/>
-            <word name="MIN_VALUE"/>
-            <word name="multiline"/>
-            <word name="NaN"/>
-            <word name="NEGATIVE_INFINITY"/>
-            <word name="Number"/>
-            <word name="Object"/>
-            <word name="POSITIVE_INFINITY"/>
-            <word name="prototype"/>
-            <word name="RegExp"/>
-            <word name="rightContext"/>
-            <word name="Script"/>
-            <word name="source"/>
-            <word name="TextStream"/>
-            <word name="VBArray"/>
-            <word name="With"/>
-         </keywords>
+      </scheme>
+
+      <scheme name="jsMethods">
          <keywords region="Keyword">
-<!-- Methods -->
             <word name="abs"/>
             <word name="acos"/>
             <word name="alert"/>
@@ -338,13 +163,14 @@
             <word name="getUTCDate"/>
             <word name="getUTCDay"/>
             <word name="getUTCFullYear"/>
-            <word name="getUTCHour"/>
+            <word name="getUTCHours"/>
             <word name="getUTCMilliseconds"/>
             <word name="getUTCMinutes"/>
             <word name="getUTCMonth"/>
             <word name="getUTCSeconds"/>
             <word name="getVarDate"/>
             <word name="getYear"/>
+            <word name="hasOwnProperty" />
             <word name="indexOf"/>
             <word name="isFinite"/>
             <word name="isNaN"/>
@@ -415,6 +241,185 @@
             <word name="toExponential"/>
             <word name="toFixed"/>
             <word name="toPrecision"/>
+         </keywords>
+      </scheme>
+
+      <scheme name="jsObjects">
+          <keywords region="Var">
+             <word name="ActiveXObject"/>
+             <word name="arguments"/>
+             <word name="Arguments"/>
+             <word name="Array"/>
+             <word name="BooleanConstant"/>
+             <word name="Call"/>
+             <word name="caller"/>
+             <word name="Closure"/>
+             <word name="constructor"/>
+             <word name="Date"/>
+             <word name="Dictionary"/>
+             <word name="Enumerator"/>
+             <word name="FileSystemObject"/>
+             <word name="Function"/>
+             <word name="global"/>
+             <word name="Global"/>
+             <word name="ignoreCase"/>
+             <word name="Image"/>
+             <word name="index"/>
+             <word name="Infinity"/>
+             <word name="input"/>
+             <word name="input"/>
+             <word name="lastIndex"/>
+             <word name="lastMatch"/>
+             <word name="lastParen"/>
+             <word name="leftContext"/>
+             <word name="Math"/>
+             <word name="MAX_VALUE"/>
+             <word name="MIN_VALUE"/>
+             <word name="multiline"/>
+             <word name="NaN"/>
+             <word name="NEGATIVE_INFINITY"/>
+             <word name="Number"/>
+             <word name="Object"/>
+             <word name="POSITIVE_INFINITY"/>
+             <word name="prototype"/>
+             <word name="RegExp"/>
+             <word name="rightContext"/>
+             <word name="Script"/>
+             <word name="source"/>
+             <word name="TextStream"/>
+             <word name="VBArray"/>
+             <word name="With"/>
+          </keywords>
+      </scheme>
+
+      <scheme name="jsKeywords">
+          <keywords region="Keyword">
+             <word name="break"/>
+             <word name="case"/>
+             <word name="catch"/>
+             <word name="const"/>
+             <word name="continue"/>
+             <word name="default"/>
+             <word name="do"/>
+             <word name="else"/>
+             <word name="finally"/>
+             <word name="for"/>
+             <word name="function"/>
+             <word name="if"/>
+             <word name="in"/>
+             <word name="instanceof"/>
+             <word name="new"/>
+             <word name="null"/>
+             <word name="return"/>
+             <word name="switch"/>
+             <word name="this"/>
+             <word name="throw"/>
+             <word name="try"/>
+             <word name="typeof"/>
+             <word name="undefined"/>
+             <word name="var"/>
+             <word name="while"/>
+             <word name="with"/>
+          </keywords>
+      </scheme>
+      <scheme name="jsOperators">
+          <keywords region="Symbol">
+ <!-- Operators Computational  -->
+             <symb name="++"/>
+             <symb name="--"/>
+             <symb name="*"/>
+             <symb name="/"/>
+             <symb name="%"/>
+             <symb name="+"/>
+             <symb name="-"/>
+ <!-- Operators Logical -->
+             <symb name="!"/>
+             <symb name="&lt;"/>
+             <symb name="&gt;"/>
+             <symb name="&lt;="/>
+             <symb name="&gt;="/>
+             <symb name="=="/>
+             <symb name="!="/>
+             <symb name="&amp;&amp;"/>
+             <symb name="||"/>
+             <symb name="?" region="SymbolStrong"/> <!-- EE: strong -->
+ <!-- Operators Bitwise -->
+             <symb name="~"/>
+             <symb name="&lt;&lt;"/>
+             <symb name="/&gt;&gt;"/>
+             <symb name="&gt;&gt;&gt;"/>
+             <symb name="&amp;"/>
+             <symb name="^"/>
+             <symb name="|"/>
+ <!-- Operators Assignment -->
+             <symb name="==="/>
+             <symb name="!=="/>
+             <symb name="="/>
+             <symb name="+="/>
+             <symb name="-+"/>
+             <symb name="*="/>
+             <symb name="/="/>
+             <symb name="%="/>
+             <symb name="&lt;&lt;="/>
+             <symb name="/&gt;&gt;="/>
+             <symb name="&gt;&gt;&gt;="/>
+             <symb name="&amp;="/>
+             <symb name="|="/>
+             <symb name="^="/>
+ <!-- Operators other?  -->
+             <symb name=","/>
+             <symb name="."/>
+             <symb name=":" region="SymbolStrong"/> <!-- EE: strong -->
+             <symb name=";" region="SymbolStrong"/> <!-- EE: strong -->
+          </keywords>
+      </scheme>
+
+      <scheme name="jScript">
+         <inherit scheme="jsComments" />
+         <regexp match="/^\M\s* function \s+ ([\w_]+) /x" region1="Function"/>
+         <regexp match="/\b ([\w_]+) \M\s* [=:] \s* function\b /x" region1="Function"/>
+         <inherit scheme="PairedBrackets">
+            <virtual scheme="PairedBrackets" subst-scheme="jScript"/>
+         </inherit>
+<!-- Numbers -->
+         <inherit scheme="def:Number"/>
+<!-- Strings -->
+         <inherit scheme="jString"/>
+
+      <!-- EE: add regexp support -->
+         <block scheme="RE" region="String">
+           <start region1="Symbol" region2="StringEdge" region3="PairStart">
+            <![CDATA[
+             /
+             ( [\=\!]\~ | && | \|\| |
+             [^<\]\}\)\+\-\w\s\/\;] |
+             \bif | ~ | ^)
+             \s* ((\/)) /x
+            ]]>
+           </start>
+           <end region0="StringEdge" region1="PairEnd" region2="regexp:SpecArea">
+            <![CDATA[
+             /(\y2([igm]*))/x
+            ]]>
+           </end>
+         </block>
+
+<!-- faults with var1/var2 :(
+   <regexp match='/ \/ ( \\. | [^\\\/] )*? \/ /x' region="String"/>
+   -->
+         <regexp match="/\$[\d_*&amp;+`']/" region="Var"/>
+         <inherit scheme="jsKeywords"/>
+         <regexp match="/!\w?=/" region="Symbol"/>
+         <inherit scheme="jsOperators"/>
+
+         <inherit scheme="jsBooleans"/>
+         <inherit scheme="jsObjects"/>
+         <inherit scheme="jsMethods" />
+
+         <keywords region="def:Error">
+            <symb name="["/><symb name="]"/>
+            <symb name="{"/><symb name="}"/>
+            <symb name="("/><symb name=")"/>
          </keywords>
       </scheme>
 
