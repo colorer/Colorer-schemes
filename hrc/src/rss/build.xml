@@ -11,7 +11,7 @@
 <property name="bin" value="ready" description="this project binary|hrc"/>
 <property name="obj" value="objs" description="this project temp"/>
 
-
+<mkdir dir='${obj}'/>
 <!-- generate entity from dtd
 
 <target name="ent.check">

@@ -11,7 +11,7 @@
 <property name="obj" value="objs" description="this project temp"/>
 
 
-
+<mkdir dir='${obj}'/>
 <!-- packages.xml -->
 
 <target name="pack-xml.check">

@@ -11,6 +11,8 @@
 
 <!-- generate dtd -->
 
+<mkdir dir='${obj}'/>
+
 <target name="dtd-gen.check">
  <uptodate property="dtd-gen.check" srcfile="build.xml" targetfile="${obj}/ant-gen.dtd"/>
 </target>
