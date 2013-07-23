@@ -17,6 +17,7 @@
       <!-- TODO: support ECMA-262 ... 357 -->
       
       <import type="def"/>
+      <entity name="worddiv" value="[^\w$]" />
 
       <scheme name="jCommentContent">
          <keywords region="CommentContent">
@@ -108,7 +109,7 @@
       </scheme>
 
       <scheme name="jsBooleans">
-         <keywords region="BooleanConstant">
+         <keywords region="BooleanConstant" worddiv="%worddiv;">
             <word name="true"/>
             <word name="false"/>
          </keywords>
@@ -245,12 +246,11 @@
       </scheme>
 
       <scheme name="jsObjects">
-          <keywords region="Var">
+          <keywords region="Var" worddiv="%worddiv;">
              <word name="ActiveXObject"/>
              <word name="arguments"/>
-             <word name="Arguments"/>
              <word name="Array"/>
-             <word name="BooleanConstant"/>
+             <word name="Boolean"/>
              <word name="Call"/>
              <word name="caller"/>
              <word name="Closure"/>
@@ -267,7 +267,7 @@
              <word name="index"/>
              <word name="Infinity"/>
              <word name="input"/>
-             <word name="input"/>
+             <word name="Iterator"/>
              <word name="lastIndex"/>
              <word name="lastMatch"/>
              <word name="lastParen"/>
@@ -275,17 +275,19 @@
              <word name="Math"/>
              <word name="MAX_VALUE"/>
              <word name="MIN_VALUE"/>
-             <word name="multiline"/>
              <word name="NaN"/>
              <word name="NEGATIVE_INFINITY"/>
              <word name="Number"/>
              <word name="Object"/>
+             <word name="ParallelArray"/>
              <word name="POSITIVE_INFINITY"/>
              <word name="prototype"/>
+             <word name="Proxy"/>
              <word name="RegExp"/>
              <word name="rightContext"/>
              <word name="Script"/>
              <word name="source"/>
+             <word name="String"/>
              <word name="TextStream"/>
              <word name="VBArray"/>
              <word name="With"/>
@@ -293,13 +295,14 @@
       </scheme>
 
       <scheme name="jsKeywords">
-          <keywords region="Keyword">
+          <keywords region="Keyword" worddiv="%worddiv;">
              <word name="break"/>
              <word name="case"/>
              <word name="catch"/>
-             <word name="const"/>
              <word name="continue"/>
+             <word name="debugger"/>
              <word name="default"/>
+             <word name="delete"/>
              <word name="do"/>
              <word name="else"/>
              <word name="finally"/>
@@ -318,8 +321,27 @@
              <word name="typeof"/>
              <word name="undefined"/>
              <word name="var"/>
+             <word name="void"/>
              <word name="while"/>
              <word name="with"/>
+          </keywords>
+          <keywords region="Keyword" worddiv="%worddiv;">
+             <word name="class"/>
+             <word name="const"/>
+             <word name="enum"/>
+             <word name="export"/>
+             <word name="extends"/>
+             <word name="implemets"/>
+             <word name="import"/>
+             <word name="interface"/>
+             <word name="let"/>
+             <word name="package"/>
+             <word name="private"/>
+             <word name="protected"/>
+             <word name="public"/>
+             <word name="static"/>
+             <word name="super"/>
+             <word name="yield"/>
           </keywords>
       </scheme>
       <scheme name="jsOperators">
@@ -394,7 +416,7 @@
              ( [\=\!]\~ | && | \|\| |
              [^<\]\}\)\+\-\w\s\/\;] |
              \bif | ~ | ^)
-             \s* ((\/)) /x
+             \s* ((\/[\/*]?!)) /x
             ]]>
            </start>
            <end region0="StringEdge" region1="PairEnd" region2="regexp:SpecArea">

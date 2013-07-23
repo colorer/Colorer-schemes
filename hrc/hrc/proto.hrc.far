@@ -924,7 +924,7 @@
    </prototype>
    <prototype name="yaml" group="rare" description="YAML">
      <location link="rare/yaml.hrc"/>
-     <filename weight="10">/\.(yml)$/</filename>
+     <filename weight="10">/\.(ya?ml)$/</filename>
    </prototype>
 
   <!--  other types  -->
