@@ -7,20 +7,29 @@
      xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hrc.xsd">
    <type name="jScript">
 
-    <annotation><documentation>
-       JScript scheme
-    </documentation><contributors><![CDATA[
-       Evgeny Stepanischev <se@e-kazan.ru>
-       Eugene Efremov <4mirror@mail.ru>
-    ]]></contributors></annotation>
+    <annotation>
+        <documentation>
+           JScript scheme
+        </documentation>
+        <contributors><![CDATA[
+           Evgeny Stepanischev <se@e-kazan.ru>
+           Eugene Efremov <4mirror@mail.ru>
+           Eugene Myronchuk <hidden@nowhere.com>
+        ]]></contributors>
+        <appinfo>
+            <require>
+                <package name="html-entity"/>
+            </require>
+        </appinfo>
+    </annotation>
 
-      <!-- TODO: support ECMA-262 ... 357 -->
-      
-      <import type="def"/>
-      <entity name="worddiv" value="[^\w$]" />
+    <!-- TODO: support ECMA-262 ... 357 -->
 
-      <scheme name="jCommentContent">
-         <keywords region="CommentContent">
+    <import type="def"/>
+    <entity name="worddiv" value="[^\w$]" />
+
+    <scheme name="jCommentContent">
+        <keywords region="CommentContent">
             <word name="@cc_on"/>
             <word name="@cc_off"/>
             <word name="@set"/>
@@ -36,45 +45,45 @@
             <word name="@_win32"/>
             <word name="@_x86"/>
             <word name="@_microsoft"/>
-         </keywords>
-      </scheme>
+        </keywords>
+    </scheme>
 
-      <scheme name="jsComments">
+    <scheme name="jsComments">
 <!-- just ignore html comments -->
-          <regexp match="/^\s* &lt;!--/x" region0="Comment"/>
-          <regexp match="/^\s* --&gt;/x" region0="Comment"/>
-          <keywords region="def:Error">
-              <symb name="*/"/>
-          </keywords>
+        <regexp match="/^\s* &lt;!--/x" region0="Comment"/>
+        <regexp match="/^\s* --&gt;/x" region0="Comment"/>
+        <keywords region="def:Error">
+            <symb name="*/"/>
+        </keywords>
 <!-- Linear Comments-->
-          <block start="/\/\//" end="/\M(&lt;\/scr|$)/i" scheme="jCommentContent" region="Comment"/>
-          <block start="/\/\*/" end="/\*\//" scheme="jCommentContent" region="Comment" region00="PairStart" region10="PairEnd"/>
-      </scheme>
+        <block start="/\/\//" end="/\M(&lt;\/scr|$)/i" scheme="jCommentContent" region="Comment"/>
+        <block start="/\/\*/" end="/\*\//" scheme="jCommentContent" region="Comment" region00="PairStart" region10="PairEnd"/>
+    </scheme>
       
-      <scheme name='jsQuote'>
-          <regexp match="/\\u[\dA-Fa-f]{4}/" region0="StringContent"/>
-          <regexp match="/\\x[\dA-Fa-f]{2}/" region0="StringContent"/>
-          <regexp match="/\\[\\bfnrtv]/" region0="StringContent"/>
-      </scheme>
+    <scheme name='jsQuote'>
+        <regexp match="/\\u[\dA-Fa-f]{4}/" region0="StringContent"/>
+        <regexp match="/\\x[\dA-Fa-f]{2}/" region0="StringContent"/>
+        <regexp match="/\\[\\bfnrtv]/" region0="StringContent"/>
+    </scheme>
 
-      <scheme name="jsMETA">
-          <inherit scheme='jsQuote'/>
-          <regexp match="/\\[&quot;&apos;]/" region0="StringContent"/>
-      </scheme>
+    <scheme name="jsMETA">
+        <inherit scheme='jsQuote'/>
+        <regexp match="/\\[&quot;&apos;]/" region0="StringContent"/>
+        <inherit scheme="html-entity:html-entity"/>
+    </scheme>
 
-      <!-- EE: add regexp support -->
-      <scheme name="String">
-         <inherit scheme="jsMETA"/>
-      </scheme>
-      
-            
-      <scheme name="RE">
-         <inherit scheme="regexp:pcre.regexp">
+    <!-- EE: add regexp support -->
+    <scheme name="String">
+        <inherit scheme="jsMETA"/>
+    </scheme>
+
+    <scheme name="RE">
+        <inherit scheme="regexp:pcre.regexp">
             <virtual scheme="regexp:string" subst-scheme="jsMETA"/>
             <virtual scheme="regexp:pcre.regexp" subst-scheme="RE"/>        
-         </inherit>
-      </scheme>
-      
+        </inherit>
+    </scheme>
+
       <!-- EE: support js in attr -->
       <!-- TODO: mark apos/quots in attr as error -->
       <scheme name="AposString">
