@@ -1,6 +1,19 @@
+2013-07-30
+  Fixed:
+    - js : entities in string content
+
+2013-07-05 (07-22)
+  Fixed:
+    - js : js rexexp problem fixed, js methods added, some js recomposition
+
+2013-06-30
+  Fixed:
+    - php : PDO class added (functions and constants); DocBlock small fix
+
 2013-06-27
   Fixed:
     - makefile.hrc : Comment is not colored after include and in if-endif block 
+
 2013-06-24
   New:
     - DocBlock support fo PHP-files
