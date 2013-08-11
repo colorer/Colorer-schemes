@@ -523,7 +523,7 @@
   </prototype>
   <prototype name="apache" group="scripts" description="Apache httpd.conf">
     <location link="scripts/apache.hrc"/>
-    <filename>/(httpd\.conf|srm\.conf|access\.conf|\.htaccess|apache\.conf)$/i</filename>
+    <filename weight="3">/(httpd\.conf|srm\.conf|access\.conf|\.htaccess|apache\.conf)$/i</filename>
   </prototype>
   <prototype name="shell" group="scripts" description="sh/ksh/bash script">
     <location link="scripts/sh.hrc"/>
