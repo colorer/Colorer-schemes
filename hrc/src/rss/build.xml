@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <project name="rss.hrc" default="all" basedir=".">
 
-<property name="root" value="../.." description="colorer root location"/>
+<property name="root" value="../../.." description="hrc project root location"/>
 <property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
-<property name="this" value="../../src/rss" description="this project location"/>
+<property name="this" value="/src/rss" description="this project location"/>
 
 <!--property name="inc" value="../../src.inc" description="include files location"/-->
 

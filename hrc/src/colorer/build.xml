@@ -3,7 +3,7 @@
 
 <property name="root" value="../.." description="root location"/>
 <property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
-<property name="this" value="../../src/colorer" description="this project location"/>
+<property name="this" value="/src/colorer" description="this project location"/>
 
 <property file='${root}/../path.properties'/>
 

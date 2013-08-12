@@ -14,22 +14,18 @@
 	<xslt in="list.xml" out="buildlist.xml" style="build.xsl" classpath="${xslt-classpath}"/>
 </target>
 
-
-<target name='all' depends="xsl">
-	<ant antfile="buildlist.xml" target="all">
-		<property name="target" value="${target}"/>
-	</ant>
-</target>
-
+<target name='all' depends="xsl">                 
+	<ant antfile="buildlist.xml" target="all">       
+		<property name="target" value="${target}"/>    
+		<property name="bin" value="${bin}"/>          
+		<property name="bin.prot" value="${bin}/hrc"/> 
+	</ant>                                           
+</target>                                         
 
 <target name="clean">
 	<antcall target='all'>
 		<param name='target' value='clean'/>
 	</antcall>
 </target>
-
-
-<target name='copy'/>
-<target name='copy.clean'/>
 
 </project>
