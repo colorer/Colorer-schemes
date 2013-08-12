@@ -37,7 +37,7 @@ colorer_path = join(root_path, normpath(prop_path["colorer"]))
 catalog_path = join(root_path, normpath(prop_path["catalog"]))
 hrd_path = join(root_path, prop_path["hrd"])
 
-colorer = join(colorer_path, "bin", "colorer") + " -c " + catalog_path
+colorer = join(colorer_path, "colorer") + " -c " + catalog_path + " -eh " + join(colorer_path, "error.log")
 if not os.path.isfile(colorer):
   sys.exit("Error: No colorer in %s" % colorer_path)
 
