@@ -2,12 +2,11 @@
 <project name="hrd2css" default="all" basedir=".">
 
 <!-- all properties -->
-<property name="xslt-classpath" value=""/>
-<property name='input' value='../hrd/rgb' />
-<property name='output' value='.' />
-
 <property file='../../path.properties'/>
 <property name='shemes' value="../../${path.shared}" description='path to dtd, xsd, etc.'/>
+<property name="xslt-classpath" value=""/>
+<property name='input' value="../../${path.build-dir}/${path.base-dir}/hrd/rgb"/>
+<property name='output' value="../../${path.build-dir}/${path.base-dir}/hrd/css"/>
 
 <!-- hrd2css  -->
 
@@ -36,7 +35,7 @@
 </target>
 
 
-<property name='copy-path' value='../../${path.colorer}/hrd/css'/>
+<property name='copy-path' value="../../${path.build-dir}/${path.base-dir}/hrd/css"/>
 
 <target name='copy'>
 	<copy todir='${copy-path}'>

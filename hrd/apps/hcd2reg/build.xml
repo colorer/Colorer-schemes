@@ -2,8 +2,9 @@
 <project name="hcd2reg" default="all" basedir=".">
 
 <!-- all properties -->
-<property name='input' value='../../palette' />
-<property name='out.path' value='../../reg.addons' />
+<property file='../../../path.properties'/>
+<property name='input' value='../../palette'/>
+<property name='out.path' value='../../../${path.build-dir}/${path.base-dir}/hrd/reg.addons'/>
 
 
 

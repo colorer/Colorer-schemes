@@ -5,11 +5,10 @@
 
 <project name="con2rgb" default="con2rgb" basedir=".">
 
-<property name="hrd-path" value="../../hrd" description="hrd location"/>
-<property name="hcd-path" value="../../palette" description="palette location"/>
-
 <property file='../../../path.properties'/>
 <property name='shemes' value="../../../${path.shared}" description='path to dtd, xsd, etc.'/>
+<property name="hrd-path" value="../../../${path.build-dir}/${path.base-dir}/hrd" description="hrd location"/>
+<property name="hcd-path" value="../../palette" description="palette location"/>
 
 <!-- con2rgb -->
 

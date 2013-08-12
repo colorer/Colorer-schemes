@@ -4,6 +4,18 @@
 <!-- build all -->
 
 <property name="target" value="all" description="default subproject target"/>
+<property name="clean-action" value="false" description="current copy action"/>
+
+<property file='../../path.properties'/>
+<property name='copy-path' value='../../${path.build-dir}/${path.base-dir}/hrd'/>
+
+<target name='all' depends="xsl">
+	<antcall target='copy'/>
+	<antcall target='copy.clean'/>
+	<ant antfile="buildlist.xml" target="all">
+		<property name="target" value="${target}"/>
+	</ant>
+</target>
 
 
 <target name="xsl.check">
@@ -17,31 +29,21 @@
 </target>
 
 
-<target name='all' depends="xsl">
-	<ant antfile="buildlist.xml" target="all">
-		<property name="target" value="${target}"/>
-	</ant>
-</target>
-
-
-<target name="clean">
-	<antcall target='all'>
-		<param name='target' value='clean'/>
-	</antcall>
-</target>
-
-
-
-<property file='../../path.properties'/>
-<property name='copy-path' value='../../${path.colorer}/hrd'/>
-
-<target name='copy'>
+<target name='copy' unless="${clean-action}">
 	<copy todir='${copy-path}'>
 		<fileset dir='.' includes='**/*.hrd, catalog*.xml'/>
 	</copy>
 </target>
 
-<target name="copy.clean">
+<target name="clean">
+	<antcall target='all'>
+		<param name='target' value='clean'/>
+		<param name='clean-action' value='true'/>
+	</antcall>
+</target>
+
+
+<target name="copy.clean" if="${clean-action}">
 	<delete failonerror='false' includeemptydirs="true">
 		<fileset dir="${copy-path}" includes="**/*.hrd, catalog*.xml"/>
 	</delete>

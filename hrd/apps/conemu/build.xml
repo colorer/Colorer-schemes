@@ -5,11 +5,9 @@
 
 <project name="conemu" default="conemu" basedir=".">
 
-<property name="hrd-path" value="../../hrd" description="hrd location"/>
-
 <property file='../../../path.properties'/>
 <property name='shemes' value="../../../${path.shared}" description='path to dtd, xsd, etc.'/>
-
+<property name="hrd-path" value="../../../${path.build-dir}/${path.base-dir}/hrd" description="hrd location"/>
 <!-- con2rgb -->
 
 <target name="conemu.prop">
