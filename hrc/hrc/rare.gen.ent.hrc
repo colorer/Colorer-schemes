@@ -7,7 +7,7 @@
   <prototype name="log4j" group="rare.inet" description="Apache Log4j Config" targetNamespace="http://jakarta.apache.org/log4j/">
     <location link="rare/gen/log4j.hrc"/>
     <firstline weight='4'>/&lt;!DOCTYPE\s+log4j:configuration\b/</firstline>
-    <filename weight='2'>/\.xml/ix</filename>
+    <filename weight='2'>/\.xml$/ix</filename>
   </prototype>
 
   
@@ -29,7 +29,7 @@
   <prototype name="yml" group="rare.inet" description="Yandex Market Language" targetNamespace='http://market.yandex.ru/'>
     <location link="rare/gen/yml.hrc"/>
     <firstline weight='4'>/&lt;!DOCTYPE\s+yml_catalog\b/</firstline>
-    <filename weight='2'>/\.xml/ix</filename>
+    <filename weight='2'>/\.xml$/ix</filename>
   </prototype>
   
   
