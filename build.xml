@@ -102,20 +102,4 @@
 	</zip>
 </target>
 
-<!-- remove this after farmanager build script update -->
-<target name="farbase">
-	<property name="base.far_dir" value='${path.build-dir}/${path.base-far}'/>
-
-	<antcall target='base.far'/>
-	<copy todir='base'>
-		<fileset dir='${path.build-dir}/${path.base-far}'/>
-	</copy>
-</target>
-
-<target name="farbase.clean">
-	<delete dir="${path.build-dir}/${path.base-far}"/>
-</target>
-
-<!-- remove this after farmanager build script update -->
-
 </project>
