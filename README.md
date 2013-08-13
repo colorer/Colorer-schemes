@@ -16,7 +16,7 @@ How to build from source
 
 ###Common###
 
-For build the library of schemes must
+To build the library of schemes, you will need:
 
   * git
   * ant 1.8 or higher
