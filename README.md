@@ -44,8 +44,8 @@ where the *target* is one of the values
 
 ###Features of build under Windows###
 
-Before starting the build scripts, make sure that the PATH environment variable contains the path to the jdk and ant.
-The same must be set the environment variable *JAVA_HOME*.
+Before starting the build scripts, make sure that the *PATH* environment variable contains the path to the jdk and ant.
+The same must be set the environment variable *JAVA_HOME*. For example:
 
     set PATH=v:\apps\jdk\bin;v:\apps\ant\bin;%PATH%
     set JAVA_HOME=v:\apps\jdk
