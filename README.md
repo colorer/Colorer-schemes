@@ -3,6 +3,8 @@
 The library of schemes is a basic set of descriptions of syntaxes and styles of the coloring, used by Colorer library.
 The project contains files and scripts for creation of library of schemes.
 
+*improvements of translation of the file into English it is welcomed*
+
 Structure
 ------------------------
 
@@ -71,6 +73,21 @@ In the file */usr/share/ant/bin/ant* commenting lines
 
 This action corrects the error `Warning: XML resolver not found; external catalogs will be ignored`  when building schemes.
 A more detailed description of the error [in Debian bug-tracker](http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=552032).
+
+##Develop##
+
+Descriptions of syntaxes (scheme) divided into static and generated. Static there are in a directory hrc/hrc, generated in hrc/src.
+
+After scheme change, it is necessary to make testing of changes for regressions. For this purpose it is necessary:
+
+  1. build the library of schemes `build base`
+  2. to be convinced that in bin directory in a root of the project lies colorer.exe (the utility for work with library of schemes)
+  3. in a directory of hrc/test to start a script `perl runtest.pl --full`. or analog of `runtest.py` 
+  4. during work of a script the result of a coloring of the file with a standard will be checked, the result is output in the console and in the fails.html file in hrc/test/*time_of_test* directory.
+  5. after the analysis of divergences in case of mistakes it is necessary to correct the scheme. If the current coloring is considered true, it is necessary to replace the standard file with the new.
+     Files standards are in hrc/test/_valid. New files in hrc/test/*time_of_test*
+
+As before modification of a repository, it is recommended to edit the hrc/hrc/CHANGELOG file
 
 Links
 ------------------------
