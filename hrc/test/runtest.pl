@@ -20,7 +20,7 @@ set_prop_path($root_path."/path.properties");
 
 my $colorer_path = $root_path.$prop_path{colorer}; 
 my $catalog_path = $root_path.$prop_path{catalog};
-my $hrd_path     = $root_path.$prop_path{hrd};
+my $hrd_path     = $root_path.$prop_path{"build-dir"}."/".$prop_path{"base-dir"}."/".$prop_path{"hrd"};
 
 my $colorer  = "$colorer_path/colorer -c $catalog_path -eh $colorer_path/error.log";
 my $diff  = 'diff -U 1 -bB';
@@ -59,7 +59,6 @@ else
 		push @retlist, $File::Find::name unless -d;
 	}, @lst;
 }
-
 
 
 print "Running test mode: $runMode @prnlist\n";
@@ -143,7 +142,7 @@ sub set_prop_path
 	{
 		chomp;
 		next if /^\s*#/;
-		$prop_path{$1} = $2 if /^\s*path\.(\w+)\s*=\s*(\S+)/;
+		$prop_path{$1} = $2 if /^\s*path\.([\w-]+)\s*=\s*(\S+)/;
 	}
 	close PATH;
 }
