@@ -352,10 +352,10 @@
 	</scheme>
 
 	<scheme name="htmlCoreTags">
-		<keywords ignorecase="yes" region="htmlOpenTag">
+		<keywords ignorecase="yes" region="htmlOpenTag" worddiv="[^\w-]">
 			<word name="a"/>
 		</keywords>
-		<keywords ignorecase="yes" region="htmlOpenTag">
+		<keywords ignorecase="yes" region="htmlOpenTag" worddiv="[^\w-]">
 			<!--word name="above"/-->
 			<!--word name="id"/-->
 			<!--word name="ilayer"/-->
@@ -670,6 +670,9 @@
              scheme="html-css:css" region00="PairStrongStart" region10="PairStrongEnd" 
              region01="htmlTagBr" region02="htmlOpenTag" 
              region11="htmlTagBr" region12="htmlOpenTag"
+      />
+      <block start="/\M&lt;\s*svg/ix" end="/(&lt;\/svg&gt;)?#6/ix"
+             scheme="svg:svg-root-addref" content-priority="low"
       />
 
 

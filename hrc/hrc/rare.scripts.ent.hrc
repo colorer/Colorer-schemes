@@ -1,7 +1,7 @@
 
   <prototype name="aditor" group="rare.scripts" description="Aditor highlight">
     <location link="rare/scripts/aditor.hrc"/>
-    <filename>/\.(hgh)$/i</filename>
+    <filename>/\.hgh$/i</filename>
   </prototype>
   <prototype name="pagemakerscript" group="rare.scripts" description="PageMaker Script">
     <location link="rare/scripts/spt.hrc"/>
@@ -39,7 +39,7 @@
 
   <prototype name="ppWizard" group="rare.scripts" description="ppWizard">
     <location link="rare/scripts/ppwizard.hrc"/>
-    <filename>/\.i(t|h)$/i</filename>
+    <filename>/\.i[th]$/i</filename>
   </prototype>
 
   <prototype name="RSMac" group="rare.scripts" description="R-Style macrofile">
@@ -66,11 +66,11 @@
 
   <prototype name="irclog" group="rare.scripts" description="irc logs">
     <location link="rare/scripts/irclog.hrc"/>
-    <filename>/^\.irclog/i</filename>
+    <filename>/^\.irclog$/i</filename>
   </prototype>
   <prototype name="micqlog" group="rare.scripts" description="micq logs">
     <location link="rare/scripts/micqlog.hrc"/>
-    <filename>/^[\._]log/i</filename>
+    <filename>/^[\._]log$/i</filename>
     <firstline>/^&lt;$/i</firstline>
   </prototype>
 
@@ -109,7 +109,7 @@
     <location link="rare/scripts/csql.hrc"/>
   </prototype>
   <prototype name="cppsql" group="rare.database" description="EmbeddedSQL for C++">
-    <filename>/\.(ecpp)$/i</filename>
+    <filename>/\.ecpp$/i</filename>
     <location link="rare/scripts/cppsql.hrc"/>
   </prototype>
   <prototype name="cobolsql" group="rare.database" description="EmbeddedSQL for COBOL">

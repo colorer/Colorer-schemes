@@ -6,12 +6,12 @@
 
   <prototype name="msdossys" group="scripts.ini" description="MsDos.sys">
     <location link="scripts/ini/msdossys.hrc"/>
-    <filename>/^msdos\.sys/i</filename>
+    <filename>/^msdos\.sys$/i</filename>
   </prototype>
   
   <prototype name="configsys" group="scripts.ini" description="Config.sys">
     <location link="scripts/ini/configsys.hrc"/>
-    <filename>/^config\.sys/i</filename>
+    <filename>/^config\.sys$/i</filename>
   </prototype>
   
   <prototype name="reg" group="scripts.ini" description="Regedit">
@@ -23,12 +23,12 @@
   <!-- we will write scripts for generate it... 
   prototype name="inf" group="scripts.ini" description="Windows INF">
     <location link="scripts/ini/inf.hrc"/>
-    <filename>/\.(inf)$/i</filename>
+    <filename>/\.inf$/i</filename>
   </prototype-->
   
   <prototype name="ini" group="scripts.ini" description="Other INI">
     <location link="scripts/ini/ini.hrc"/>
-    <filename>/\.(ini|inf)$/i</filename>
+    <filename>/\.in[if]$/i</filename>
     <!--|conf[^\.]* (ctl|tpl|ini|cfg|inf|srg|types|tab|dof|dsk|lng) -->
     <firstline>/^[;\[]/</firstline>
   </prototype>

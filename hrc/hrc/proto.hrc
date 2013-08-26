@@ -67,7 +67,7 @@
   </package>
   <prototype name="d" group="main" description="D">
     <location link="base/d.hrc"/>
-    <filename>/\.(d|di)$/i</filename>
+    <filename>/\.di?$/i</filename>
     <firstline>/^\s*(module|import)\b/xi</firstline>
     <parameters>
       <param name="format-str" value="true" description="Highlight printf-like %format in strings"/>
@@ -97,7 +97,7 @@
   </prototype>
   <prototype name="java" group="main" description="Java">
     <location link="base/java.hrc"/>
-    <filename>/\.(java|jav|jad)$/i</filename>
+    <filename>/\.ja(va|v|d)$/i</filename>
     <firstline weight='2'>/^\/\/ Decompiled by Jad/</firstline>
     <parameters>
       <param name="j2se-classes" value="true" description="Use some common used J2SE class names"/>
@@ -107,7 +107,7 @@
   </prototype>
   <prototype name="idl" group="main" description="IDL">
     <location link="base/idl.hrc"/>
-    <filename>/\.(hvs|(i|o)dl)$/i</filename>
+    <filename>/\.(hvs|[io]dl)$/i</filename>
     <firstline>/^\s*(\/\* | \/\/)/xi</firstline>
     <firstline>/\#include/</firstline>
   </prototype>
@@ -160,7 +160,7 @@
   </prototype>
   <prototype name="scala" group="main" description="Scala">
     <location link="base/scala.hrc"/>
-    <filename>/\.(scala)$/i</filename>
+    <filename>/\.scala$/i</filename>
   </prototype>
   <prototype name="tcltk" group="main" description="Tcl/Tk/Expect">
     <location link="base/tcltk.hrc"/>
@@ -191,7 +191,7 @@
 
   <prototype name="css" group="inet" description="css">
     <location link="inet/css.hrc"/>
-    <filename>/\.(css)$/i</filename>
+    <filename>/\.css$/i</filename>
     <parameters>
      <param name="html-css" value="true" description="Default use css for HTML"/>
      <param name="svg-css" value="false" description="Default use css for SVG"/>
@@ -199,47 +199,40 @@
   </prototype>
   <prototype name="html-css" group="inet" description="css for html">
     <location link="inet/html-css.hrc"/>
-    <filename weight="0">/\.(css)$/i</filename>
-    <!--parameters>
-      <param name="ie-css" value="true" description="Use non-standard MSIE css extensions"/>
-      <param name="moz-css" value="true" description="Use non-standard Gecho-based css extensions"/>
-      <param name="opera-css" value="true" description="Use non-standard opera-based css extensions"/>
-      <param name="webkit-css" value="true" description="Use non-standard webkit-based css extensions"/>
-      <param name="khtml-css" value="true" description="Use non-standard khtml-based css extensions"/>
-    </parameters-->
+    <filename weight="0">/\.css$/i</filename>
   </prototype>
   <prototype name="svg-css" group="inet" description="css for svg">
     <location link="inet/svg-css.hrc"/>
-    <filename weight="0">/\.(css)$/i</filename>
+    <filename weight="0">/\.css$/i</filename>
   </prototype>
   <prototype name="sass" group="inet" description="SASS">
     <location link="inet/sass.hrc"/>
-    <filename>/\.(sass)$/i</filename>
+    <filename>/\.sass$/i</filename>
   </prototype>
   <prototype name="less" group="inet" description="Less css">
     <location link="inet/less.hrc"/>
-    <filename>/\.(less)$/</filename>
+    <filename>/\.less$/</filename>
   </prototype>
   <prototype name="smarty" group="inet" description="Smarty PHP Templates">
     <location link="inet/smarty.hrc"/>
-    <filename weight="10">/\.(smarty)$/</filename>
+    <filename weight="10">/\.smarty$/</filename>
   </prototype>
   <prototype name="ss" group="inet" description="SilverStripe">
     <location link="inet/ss.hrc"/>
-    <filename weight="10">/\.(ss)$/</filename>
+    <filename weight="10">/\.ss$/</filename>
   </prototype>
   <prototype name="twig" group="inet" description="Twig PHP Templates">
     <location link="inet/twig.hrc"/>
-    <filename weight="10">/\.(twig)$/</filename>
+    <filename weight="10">/\.twig$/</filename>
   </prototype>
 
   <prototype name="haml" group="inet" description="HAML">
     <location link="inet/haml.hrc"/>
-    <filename>/\.(haml)$/i</filename>
+    <filename>/\.haml$/i</filename>
   </prototype>
   <prototype name="shpaml" group="inet" description="SHPAML">
     <location link="inet/shpaml.hrc"/>
-    <filename>/\.(shpaml)$/i</filename>
+    <filename>/\.shpaml$/i</filename>
   </prototype>
   <prototype name="erb" group="inet" description="ERB">
     <location link="inet/erb.hrc"/>
@@ -291,23 +284,23 @@
   </package>
   <prototype name="asp.vb" group="inet" description="asp - VBScript">
     <location link="inet/asp.vb.hrc"/>
-    <filename>/\.(as(p|a)|ht(r|x|a)|inc)$/i</filename>
+    <filename>/\.(as[pa]|ht[rxa]|inc)$/i</filename>
     <firstline weight='2'>/language\s*=.*vbscript/i</firstline>
     <firstline>/&lt;\%/i</firstline>
   </prototype>
   <prototype name="asp.js" group="inet" description="asp - JavaScript">
     <location link="inet/asp.js.hrc"/>
-    <filename>/\.(as(p|a)|ht(r|x|a)|inc)$/i</filename>
+    <filename>/\.(as[pa]|ht[rxa]|inc)$/i</filename>
     <firstline weight='2'>/language\s*=.*j(ava)?script/i</firstline>
   </prototype>
   <prototype name="asp.ps" group="inet" description="asp - PerlScript">
     <location link="inet/asp.ps.hrc"/>
-    <filename>/\.(as(p|a)|ht(r|x|a)|inc)$/i</filename>
+    <filename>/\.(as[pa]|ht[rxa]|inc)$/i</filename>
     <firstline weight='2'>/language\s*=.*perlscript/i</firstline>
   </prototype>
   <prototype name="adp" group="inet" description="AOLserver Dynamic Pages">
     <location link="inet/adp.hrc"/>
-    <filename>/\.(adp)$/i</filename>
+    <filename>/\.adp$/i</filename>
     <firstline weight='2'>/language\s*=.*tcltk/i</firstline>
     <firstline>/&lt;\%/i</firstline>
   </prototype>
@@ -317,7 +310,7 @@
   </prototype>
   <prototype name="coldfusion" group="inet" description="ColdFusion">
     <location link="inet/coldfusion.hrc"/>
-    <filename>/\.(cfm|cfc)$/i</filename>
+    <filename>/\.cf[mc]$/i</filename>
   </prototype>
   <prototype name="jScript" group="inet" description="JavaScript">
     <location link="inet/jscript.hrc"/>
@@ -329,23 +322,23 @@
   </prototype>
   <prototype name="vbScript" group="inet" description="VBScript">
     <location link="inet/vbscript.hrc"/>
-    <filename>/\.(vbs)$/i</filename>
+    <filename>/\.vbs$/i</filename>
   </prototype>
 
   <prototype name="rss" group="inet" description="rss" targetNamespace="http://purl.org/rss/1.0/">
     <location link="inet/gen/rss.hrc"/>
-    <filename>/\.(rss)$/i</filename>
+    <filename>/\.rss$/i</filename>
     <filename weight='1.5'>/^rss/i</filename>
     <firstline>/xmlns="http:\/\/purl\.org\/rss\/1\.0\/"/</firstline>
     <firstline>/&lt;rss version="0\.91"&gt;/</firstline>
   </prototype>
   <prototype name="htc" group="inet" description="HTC">
     <location link="inet/gen/htc.hrc"/>
-    <filename weight='3'>/\.(htc)$/i</filename>
+    <filename weight='3'>/\.htc$/i</filename>
   </prototype>
   <prototype name="xbl" group="inet" description="Mozilla XBL" targetNamespace="http://www.mozilla.org/xbl">
     <location link="inet/gen/xbl.hrc"/>
-    <filename weight='0.5'>/\.(xml)/i</filename>
+    <filename weight='0.5'>/\.xml$/i</filename>
     <firstline weight="5">/\bxmlns\s*=\s*(["'])http:\/\/www\.mozilla\.org\/xbl\1/</firstline>
   </prototype>
   <prototype name="wml" group="inet" description="wml" targetNamespace="http://www.wapforum.org/2001/wml">
@@ -396,7 +389,7 @@
 
   <prototype name="xslt" group="xml" description="xslt 1.0" targetNamespace="http://www.w3.org/1999/XSL/Transform">
     <location link="xml/gen/xslt.hrc"/>
-    <filename>/\.(xslt?)$/i</filename>
+    <filename>/\.xslt?$/i</filename>
     <firstline>/ xsl:stylesheet /x</firstline>
     <firstline>/ XSL\/Transform /x</firstline>
     <parameters>
@@ -408,12 +401,12 @@
   <!-- targetNamespace duplicate. It's not good... -->
   <prototype name="xslt2" group="xml" description="xslt 2.0" targetNamespace="http://www.w3.org/1999/XSL/Transform">
     <location link="xml/gen/xslt2.hrc"/>
-    <filename>/\.(xslt?2?)$/i</filename>
+    <filename>/\.xslt?2?$/i</filename>
     <firstline weight="3">/\b(stylesheet|transform)\s+ .* \bversion\s*=\s*([&quot;&apos;])2\.0\2 /sx</firstline>
   </prototype>
   <prototype name="xquery" group="xml" description="xquery 1.0">
     <location link="xml/xquery.hrc"/>
-    <filename>/\.(xq)$/i</filename>
+    <filename>/\.xq$/i</filename>
     <firstline weight="2">/^\s*xquery\s+version\b/x</firstline>
   </prototype>
   <prototype name="xslfo" group="xml" description="xslfo 1.0" targetNamespace="http://www.w3.org/1999/XSL/Transform">
@@ -423,7 +416,7 @@
 
   <prototype name="xmlschema" group="xml" description="XML Schema" targetNamespace="http://www.w3.org/2001/XMLSchema">
     <location link="xml/gen/xmlschema.hrc"/>
-    <filename>/\.(xsd?)$/i</filename>
+    <filename>/\.xsd?$/i</filename>
   </prototype>
   <package name="xsi" description="XML Schema instance" targetNamespace="http://www.w3.org/2001/XMLSchema-instance">
     <location link="xml/gen/xmlschema-instance.hrc"/>
@@ -431,7 +424,7 @@
 
   <prototype name="relaxng" group="xml" description="Relax NG" targetNamespace="http://relaxng.org/ns/structure/1.0">
     <location link="xml/gen/relaxng.hrc"/>
-    <filename>/\.rng/ix</filename>
+    <filename>/\.rng$/ix</filename>
   </prototype>
   <prototype name="schematron" group="xml" description="schematron" targetNamespace="http://www.ascc.net/xml/schematron">
     <location link="xml/gen/schematron.hrc"/>
@@ -478,7 +471,7 @@
   <!--  database languages  -->
   <prototype name="clarion" group="database" description="Clarion">
     <location link="db/clarion.hrc"/>
-    <filename>/\.(cla|clw)$/i</filename>
+    <filename>/\.cl[aw]$/i</filename>
   </prototype>
   <!-- warning!! extensions conflict with Clipper -->
   <prototype name="Clipper" group="database" description="Clipper">
@@ -530,7 +523,7 @@
   </prototype>
   <prototype name="avisynth" group="scripts" description="AviSynth">
     <location link="scripts/avisynth.hrc"/>
-    <filename>/\.(avs|avsi)$/i</filename>
+    <filename>/\.avsi?$/i</filename>
   </prototype>
   <prototype name="config" group="scripts" description="Config, INI and CTL">
     <location link="scripts/config.hrc"/>
@@ -578,11 +571,11 @@
   </prototype>
   <prototype name="solution" group="scripts" description="Microsoft Visual Studio Solution File">
     <location link="scripts/solution.hrc"/>
-    <filename>/\.sln/</filename>
+    <filename>/\.sln$/</filename>
   </prototype>
 
   <prototype name="mkb" group="scripts" description="Project build file for Airplay SDK">
-    <filename>/\.(mkb|mkf)$/i</filename>
+    <filename>/\.mk[bf]$/i</filename>
     <location link="scripts/mkb.hrc"/>
   </prototype>
   <prototype name="ant" group="scripts" description="Ant's build.xml" targetNamespace="http://jakarta.apache.org/ant/">
@@ -620,7 +613,7 @@
 
   <prototype name="javacc" group="scripts" description="Java Compiler Compiler">
     <location link="scripts/javacc.hrc"/>
-    <filename>/\.(jjt?)$/i</filename>
+    <filename>/\.jjt?$/i</filename>
   </prototype>
   <prototype name="javaProperties" group="scripts" description="Java properties">
     <location link="scripts/javaprop.hrc"/>
@@ -656,7 +649,7 @@
   </prototype>
   <prototype name="pnuts" group="scripts" description="Java: Pnuts">
     <location link="scripts/pnuts.hrc"/>
-    <filename>/\.(pnut)$/i</filename>
+    <filename>/\.pnut$/i</filename>
     <parameters>
       <param name="pnuts-modules" value="true" description="Use some common Pnuts module function names"/>
       <param name="j2se-classes" value="true" description="Use some common used J2SE class names"/>
@@ -667,7 +660,7 @@
 
     <prototype name="scons" group="scripts" description="SCons">
     <location link="scripts/scons.hrc"/>
-    <filename>/(SConstruct|SConscript)$/i</filename>
+    <filename>/SCons(truct|cript)$/i</filename>
   </prototype>
   <prototype name="rtf" group="scripts" description="RTF text">
     <location link="scripts/rtf.hrc"/>
@@ -711,7 +704,7 @@
   </prototype>
   <prototype name="nsi" group="scripts.install" description="Nullsoft Install Script">
     <location link="scripts/nsi.hrc"/>
-    <filename>/\.ns(i|h)$/i</filename>
+    <filename>/\.ns[ih]$/i</filename>
   </prototype>
   <prototype name="iss" group="scripts.install" description="InnoSetup script">
     <location link="scripts/iss.hrc"/>
@@ -736,11 +729,11 @@
   </prototype>
   <prototype name="ada" group="rare" description="Ada">
     <location link="rare/ada.hrc"/>
-    <filename>/\.(ads|adb|adc)$/i</filename>
+    <filename>/\.ad[sbc]$/i</filename>
   </prototype>
   <prototype name="abap4" group="rare" description="ABAP/4">
     <location link="rare/abap4.hrc"/>
-    <filename>/\.(abap4|abap)$/i</filename>
+    <filename>/\.abap4?$/i</filename>
   </prototype>
   <prototype name="asasm" group="rare" description="ASASM">
     <location link="rare/asasm.hrc"/>
@@ -783,7 +776,7 @@
   </prototype>
   <prototype name="cup" group="rare" description="CUP">
     <location link="rare/cup.hrc"/>
-    <filename>/\.(cup)$/i</filename>
+    <filename>/\.cup$/i</filename>
   </prototype>
   <prototype name="eiffel" group="rare" description="Eiffel">
     <location link="rare/eiffel.hrc"/>
@@ -804,7 +797,7 @@
   <prototype name="mako" group="rare" description="Mako templates">
     <location link="rare/mako.hrc"/>
     <!-- extension conflicts with Makefile, hence weight is less than 2 -->
-    <filename weight="1.5">/\.(mako|mak)$/i</filename>
+    <filename weight="1.5">/\.mako?$/i</filename>
     <firstline>/\&lt;%/</firstline>
   </prototype>
   <prototype name="matlab" group="rare" description="MatLab">
@@ -827,7 +820,7 @@
   </prototype>
   <prototype name="pl1" group="rare" description="PL1">
     <location link="rare/pl1.hrc"/>
-    <filename>/\.(pl1|pli)$/i</filename>
+    <filename>/\.pl[1i]$/i</filename>
   </prototype>
   <prototype name="rexx" group="rare" description="Rexx">
     <location link="rare/rexx.hrc"/>
@@ -838,7 +831,7 @@
   </prototype>
  <prototype name="jcl" group="rare" description="JCL">
     <location link="rare/jcl.hrc"/>
-    <filename>/\.(jcl)$/i</filename>
+    <filename>/\.jcl$/i</filename>
   </prototype>
 
   <prototype name="sml" group="rare" description="Standard ML">
@@ -875,7 +868,7 @@
  </prototype>
   <prototype name="ubasic" group="rare" description="UniVision Basic">
     <location link="rare/ubasic.hrc"/>
-    <filename>/\.(uvbasic)$/i</filename>
+    <filename>/\.uvbasic$/i</filename>
     <firstline>/^(PROGRAM\s+\w+$|(SUBROUTINE|EXTERNALFUNCTION)\s+\w+(\s+)?(\(.*\))?$)/</firstline>
   </prototype>
   <prototype name="z80" group="rare" description="z80asm">
@@ -888,7 +881,7 @@
   </prototype>
   <prototype name="a51" group="rare" description="8051 asm">
     <location link="rare/a51-5.hrc"/>
-    <filename>/\.a5(1|2)$/i</filename>
+    <filename>/\.a5[12]$/i</filename>
   </prototype>
   <prototype name="avr" group="rare" description="AVR asm">
     <location link="rare/avr-5.hrc"/>
@@ -897,11 +890,11 @@
   </prototype>
   <prototype name="mason" group="rare" description="mason">
     <location link="rare/mason.hrc"/>
-    <filename>/\.(mc)$/i</filename>
+    <filename>/\.mc$/i</filename>
   </prototype>
   <prototype name="postscript" group="rare" description="PostScript">
     <location link="rare/postscript.hrc"/>
-    <filename>/\.((e)?ps|pfa|gsf)$/i</filename>
+    <filename>/\.(e?ps|pfa|gsf)$/i</filename>
     <firstline weight="3">/^\%\!PS/</firstline>
     <firstline>/^\%\!/</firstline>
   </prototype>
@@ -921,7 +914,7 @@
    </prototype>
    <prototype name="yaml" group="rare" description="YAML">
      <location link="rare/yaml.hrc"/>
-     <filename weight="10">/\.(ya?ml)$/</filename>
+     <filename weight="10">/\.ya?ml$/</filename>
    </prototype>
 
   <!--  other types  -->
@@ -942,7 +935,7 @@
   </prototype>
   <prototype name="ddoc" group="other" description="Ddoc">
     <location link="misc/ddoc.hrc"/>
-    <filename>/\.(dd|ddoc)$/i</filename>
+    <filename>/\.dd(oc)?$/i</filename>
     <firstline weight="3">/^Ddoc/x</firstline>
     <parameters>
       <!-- firstline -->

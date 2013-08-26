@@ -106,7 +106,7 @@
   </prototype>
   <prototype name="web-jsptaglibrary_1_1" group="rare.j2ee" description="JSP Tag Library 1.1" targetNamespace="http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
     <location link="rare/j2ee/web-jsptaglibrary_1_1.hrc"/>
-    <filename>/\.tld/i</filename>
+    <filename>/\.tld$/i</filename>
     <firstline weight='2'>/http:\/\/java\.sun\.com\/j2ee\/dtds\/web-jsptaglibrary_1_1\.dtd/</firstline>
     <parameters>
       <!-- firstline -->
@@ -116,17 +116,17 @@
   </prototype>
   <prototype name="web-jsptaglibrary_1_2" group="rare.j2ee" description="JSP Tag Library 1.2" targetNamespace="http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
     <location link="rare/j2ee/web-jsptaglibrary_1_2.hrc"/>
-    <filename>/\.tld/i</filename>
+    <filename>/\.tld$/i</filename>
     <firstline weight='4'>/http:\/\/java\.sun\.com\/dtd\/web-jsptaglibrary_1_2\.dtd/</firstline>
   </prototype>
   <prototype name="web-jsptaglibrary_2_0" group="rare.j2ee" description="JSP Tag Library 2.0" targetNamespace="http://java.sun.com/xml/ns/j2ee">
     <location link="rare/j2ee/web-jsptaglibrary_2_0.hrc"/>
-    <filename>/\.tld/i</filename>
+    <filename>/\.tld$/i</filename>
     <firstline weight='4'>/http:\/\/java\.sun\.com\/xml\/ns\/j2ee(\/|\s+)web-jsptaglibrary_2_0\.xsd/</firstline>
   </prototype>
   <prototype name="web-jsptaglibrary_2_1" group="rare.j2ee" description="JSP Tag Library 2.1" targetNamespace="http://java.sun.com/xml/ns/javaee">
     <location link="rare/j2ee/web-jsptaglibrary_2_1.hrc"/>
-    <filename>/\.tld/i</filename>
+    <filename>/\.tld$/i</filename>
     <firstline weight='4'>/http:\/\/java\.sun\.com\/xml\/ns\/javaee(\/|\s+)web-jsptaglibrary_2_1\.xsd/</firstline>
   </prototype>
   <prototype name="j2ee_web_services_1_0" group="rare.j2ee" description="J2EE WebServices 1.0" targetNamespace="http://www.ibm.com/webservices/dtd/j2ee_web_services_1_0.dtd">

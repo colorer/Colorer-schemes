@@ -38,7 +38,7 @@
   </package>
   <prototype name="xsieve" group="rare.scripts" description="XSieve xslt">
     <location link="rare/gen/xsieve.hrc"/>
-    <filename>/\.(xsl)$/i</filename>
+    <filename>/\.xsl$/i</filename>
     <firstline weight='5'>/\bxmlns:s\s*=\s*(["'])http:\/\/xsieve\.sourceforge\.net\1/</firstline>
   </prototype>  
   
