@@ -345,6 +345,10 @@
     <location link="inet/gen/wml.hrc"/>
     <filename>/\.wml$/i</filename>
   </prototype>
+  <prototype name="mxml" group="inet" description="MXML">
+    <location link="inet/mxml.hrc"/>
+    <filename>/\.mxml$/i</filename>
+  </prototype>
 
 
   <!--  xml types  -->
