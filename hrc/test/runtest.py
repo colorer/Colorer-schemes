@@ -27,9 +27,10 @@ tests_path = normpath(dirname(__file__))
 root_path = join(tests_path, "..", "..")
 with open(join(root_path, "path.properties")) as pf:
   prop_path = dict(
-    [line.strip()[5:].split("=")
-      for line in pf
-        if line.startswith("path.")]
+    [[x.strip()
+      for x in line.strip()[5:].split("=")]
+        for line in pf
+          if line.startswith("path.")]
   )
 # print prop_path
 
@@ -37,13 +38,16 @@ colorer_path = join(root_path, normpath(prop_path["colorer"]))
 catalog_path = join(root_path, normpath(prop_path["catalog"]))
 hrd_path = join(root_path, prop_path["hrd"])
 
-colorer = join(colorer_path, "colorer") + " -c " + catalog_path + " -eh " + join(colorer_path, "error.log")
+colorer_exe = "colorer.exe";
+colorer = join(colorer_path, colorer_exe)
 if not os.path.isfile(colorer):
-  sys.exit("Error: No colorer in %s" % colorer_path)
+  sys.exit("Error: No %s in %s" % (colorer_exe, colorer_path))
+
+colorer_opts = ["-c", catalog_path, "-eh", join(colorer_path, "error.log")]
 
 valid_dir = normpath(join(tests_path, "_valid"))
-# __2009-06-05_12-35
-current_dir = datetime.today().strftime("__%Y-%m-%d_%H-%M")
+# __2009-06-05_12-35-00
+current_dir = datetime.today().strftime("__%Y-%m-%d_%H-%M-%S")
 if os.path.exists(current_dir):
   sys.exit("Exiting: Test dir already exists - %s" % current_dir)
 os.mkdir(current_dir)
@@ -116,11 +120,13 @@ for root, dirs, files in os.walk(tests_path):
     test_list.append(path)
 
 failed = 0
+changed = 0
 for no, test in enumerate(test_list):
   print "Processing (%s/%s) %s" % (no+1, len(test_list), test)
 
-  origname = join(valid_dir, test)
-  outname = join(current_dir, "%s.html" % test)
+  filename = "%s.html" % test
+  origname = join(  valid_dir, filename)
+  outname  = join(current_dir, filename)
   outdir = dirname(outname)
 
   fail_log.write('<div><pre class="testname">%s</pre><pre>' % test)
@@ -129,7 +135,8 @@ for no, test in enumerate(test_list):
     # print creating
     os.makedirs(outdir)
 
-  cmd = '%s -ht "%s" -dc -dh -ln -o "%s"' % (colorer, test, outname)
+  args = ["-ht", test, "-dc", "-dh", "-ln", "-o", outname]
+  cmd = [colorer] + colorer_opts + args
   # print cmd
   ret = subprocess.call(cmd)
   if ret != 0:
@@ -150,15 +157,24 @@ for no, test in enumerate(test_list):
     with open(outname, "wb") as fw:
       fw.writelines(lines)
 
-  diff = filediff("%s.html" % origname, outname)
-  for line in diff:
-    fail_log.write(line)
+  if os.path.isfile(origname):
+    diff = filediff(origname, outname)
+    if len(diff):
+      changed += 1
+      for line in diff:
+        fail_log.write(line)
+  else:
+    fail_log.write(origname + "does not exist!")
+    changed += 1
 
   fail_log.write('</pre><div>')
 
 fail_log.write('</body></html>')
 fail_log.close()
-print "Executed: %s, Failed: %s/%s%%" % (len(test_list), failed, (float(failed)/len(test_list)*100))
+print "Executed: %s, Failed: %s (%1.2f%%), Changed: %s (%1.2f%%)" % (len(test_list),
+  failed , (float(failed )/len(test_list)*100),
+  changed, (float(changed)/len(test_list)*100),
+)
 
 
 """
