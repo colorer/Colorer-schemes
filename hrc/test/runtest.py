@@ -18,6 +18,8 @@ import optparse
 import subprocess
 import unittest
 import fnmatch
+import threading
+import multiprocessing.pool
 from datetime import datetime
 from os.path import abspath, dirname, join, normpath
 
@@ -121,15 +123,22 @@ for root, dirs, files in os.walk(tests_path):
 
 failed = 0
 changed = 0
-for no, test in enumerate(test_list):
-  print "Processing (%s/%s) %s" % (no+1, len(test_list), test)
+no = 0
+total = len(test_list)
+
+import threading
+lock = threading.Lock()
+
+def run_one_test(test):
+  global no
+  with lock:
+    no += 1
+    print "Processing (%s/%s) %s" % (no, len(test_list), test)
 
   filename = "%s.html" % test
   origname = join(  valid_dir, filename)
   outname  = join(current_dir, filename)
   outdir = dirname(outname)
-
-  fail_log.write('<div><pre class="testname">%s</pre><pre>' % test)
 
   if not os.path.exists(outdir):
     # print creating
@@ -139,6 +148,14 @@ for no, test in enumerate(test_list):
   cmd = [colorer] + colorer_opts + args
   # print cmd
   ret = subprocess.call(cmd)
+  return (test, ret, origname, outname)
+
+pool = multiprocessing.pool.ThreadPool()
+results = pool.map(run_one_test, test_list)
+
+for test, ret, origname, outname in results:
+  fail_log.write('<div><pre class="testname">%s</pre><pre>' % test)
+
   if ret != 0:
     failed += 1
     print "Failed: colorer returned %s" % ret
