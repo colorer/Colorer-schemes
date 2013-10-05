@@ -1,3 +1,12 @@
+2013-10-05
+  New:
+    - Diet (Vibe.d) syntax (Vladimir Panteleev)
+    - MXML (Macromedia XML) syntax (Vladimir Panteleev)
+  Fixed:
+    - D - several fixes (Vladimir Panteleev)
+    - MediaWiki - fix HTML attributes withut leading space (Vladimir Panteleev)
+    - ActionScript - fix keyword list, add XML literals (Vladimir Panteleev)
+
 2013-08-25
     - New: inline SVG in HTML support
 
