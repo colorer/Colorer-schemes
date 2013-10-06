@@ -506,9 +506,7 @@
 		</keywords>
 	</scheme>
 
-    <scheme name="htmlCore">
-      <block start="/~/" end="/[^\w\:\-]?=/" scheme="htmlCoreTags" region="htmlUnknowTag"/>
-
+    <scheme name="htmlCoreParams">
       <block start='/\b(style)(\s)*(\=)(\s)*((\"))/i' end='/(\")/' scheme="html-css:AposRuleContent" 
              region01="htmlParam" region03="htmlTagEqu" region05="def:PairStart" 
              region06="htmlString" region10="def:PairEnd" region11="htmlString"
@@ -524,6 +522,12 @@
       <regexp match="/ \b [0-9\.]+ \%? /x" region="htmlNumb"/>
       <block start="/([\x22\x27])/" end="/\y1/" scheme="htmlString" region="htmlString"/>
       <regexp match="/\=/" region="htmlTagEqu"/>
+    </scheme>
+
+    <scheme name="htmlCore">
+      <block start="/~/" end="/[^\w\:\-]?=/" scheme="htmlCoreTags" region="htmlUnknowTag"/>
+
+      <inherit scheme="htmlCoreParams"/>
     </scheme>
 
 	<scheme name="htmljScript">

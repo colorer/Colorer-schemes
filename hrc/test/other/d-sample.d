@@ -231,6 +231,9 @@ double sqrt(double x); /++ ditto +/
 ///         ...
 /// ----
 
+/+++++++++/
+/*********/
+
 // *** string escapes ***
 const bell = "\007";                    // octal escape
 const badEscape = "\z";                 // unrecognized escapes should be errors
@@ -295,6 +298,10 @@ struct S(T)                                                                     
 }
 string escapeShellCommand(in char[][] args...)                                                               // yes
 {}
+
+// no (performance)
+new PropertyInfo("id", "id", new NumberType(10,false,SqlType.INTEGER), 0, true, true, false, null, RelationType.None, null, null, null, null, null, null, null, null, null, null, null, null)
+int delegate(type var, type var, type var, type var, type var, type var, type var, type var, type var, type var, type var, type var, type var) d;
 
 
 // *** D2 operator overloading ***

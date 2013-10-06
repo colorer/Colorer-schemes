@@ -1,0 +1,20 @@
+!!! 5
+html(lang="en")
+  head
+    title= "pageTitle" ~ "X<Y> "
+  body
+    h1#caption Diet test page #{2+2}X
+    p.first
+      b First Paragraph!
+    p(style='color: red;') Five plus five
+      | equals
+      = 5+5
+    #sanity(style='background-color: lightgreen')
+      - if( 12 == 13 )
+        p
+          b WTF!
+      - else
+        p
+          - foreach( i; 0 .. 10 )
+            b Everything OK! (#{i})
+              br

@@ -77,7 +77,7 @@
 </scheme>
 
 <scheme name='ddoc'>
-	<regexp match='/^\s*\w+:/' region='sectiontitle'/>
+	<regexp match='/^\s*\w+:($|\s)/' region='sectiontitle'/>
 	<inherit scheme='content'/>
 </scheme>
 
