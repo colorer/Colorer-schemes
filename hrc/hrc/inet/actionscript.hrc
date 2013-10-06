@@ -61,7 +61,7 @@
          <block start="/\/\*/" end="/\*\//" scheme="jComment" region="Comment" region00="PairStart" region10="PairEnd"/>
 
          <regexp match="/(package)\s+\m(([\w\._]+))/" region1="Keyword" region2="Package" region3="PackageOutline"/>
-         <regexp match="/(import)\s+\m(([\w\._]+))/" region1="Keyword" region2="Import" region3="ImportOutline"/>
+         <regexp match="/(import)\s+\m(([\w\._\*]+))/" region1="Keyword" region2="Import" region3="ImportOutline"/>
          <regexp match="/(class)\s+\m([\w\._]+)/" region1="Keyword" region2="Class"/>
          <regexp match="/(function)\s+\m(([gs]et\s+)?[\w_]+)/" region1="Keyword" region2="Function" region3="Keyword"/>
          <regexp match="/([\w_]+)\M\s*(\:.*)?\=\s*function/" region1="Function"/>
