@@ -42,3 +42,5 @@ var a = 10;
 a/= 5; // correct
 a /= 5; // incorrect
 
+// ES6
+let x = 5;

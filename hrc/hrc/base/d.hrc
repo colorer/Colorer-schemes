@@ -1118,7 +1118,14 @@
 	/>
 	
 	<block scheme='d.expr' region='label.const'>
-		<start match='/(\bgoto\s+)?~10\b(case|default)\b/' 
+		<start match='/\b\M(goto)\s+(case|default)\b/'
+			region1='key' region2='key'
+		/>
+		<end match='/;\m/'/>
+	</block>
+	
+	<block scheme='d.expr' region='label.const'>
+		<start match='/\b(case|default)\b/'
 			region1='key' region2='symb' region3='def:PairStart'
 		/>
 		<end match='/:/' region0='label.mark'/>
