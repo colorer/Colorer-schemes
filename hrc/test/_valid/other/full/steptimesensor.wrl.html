@@ -44,15 +44,15 @@
  43: <span class='def-Comment def-Syntax'>// Skript pro krokovatelny casovac, pro JavaScript</span>
  44: <span class='def-Comment def-Syntax'>// scStepTimeSensor</span>
  45: 
- 46: <span class='def-Keyword'>function</span> setNewTime<span class='def-Symbol'>(</span>newTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
- 47:   <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>stopTime <span class='def-Symbol'>></span> startTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// lze cyklit</span>
- 48:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>newTime <span class='def-Symbol'>&lt;</span> startTime<span class='def-Symbol'>)</span> newTime <span class='def-Symbol'>=</span> startTime<span class='def-SymbolStrong def-Symbol'>;</span>
- 49:     <span class='def-Keyword'>while</span> <span class='def-Symbol'>(</span>newTime <span class='def-Symbol'>></span> stopTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// cas pretekl</span>
- 50:       <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>loopEnabled<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 46: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> setNewTime<span class='def-Symbol'>(</span>newTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 47:   <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>stopTime <span class='def-Symbol'>></span> startTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// lze cyklit</span>
+ 48:     <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>newTime <span class='def-Symbol'>&lt;</span> startTime<span class='def-Symbol'>)</span> newTime <span class='def-Symbol'>=</span> startTime<span class='def-SymbolStrong def-Symbol'>;</span>
+ 49:     <span class='jScript-ES5ReservedWord def-Keyword'>while</span> <span class='def-Symbol'>(</span>newTime <span class='def-Symbol'>></span> stopTime<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// cas pretekl</span>
+ 50:       <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>loopEnabled<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  51:     newTime <span class='def-Symbol'>-</span><span class='def-Symbol'>=</span> stopTime<span class='def-SymbolStrong def-Symbol'>;</span>
- 52:       <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-Keyword'>else</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// neloopujeme, stop</span>
+ 52:       <span class='def-SymbolStrong def-Symbol'>}</span> <span class='jScript-ES5ReservedWord def-Keyword'>else</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// neloopujeme, stop</span>
  53:         newTime <span class='def-Symbol'>=</span> startTime<span class='def-SymbolStrong def-Symbol'>;</span> 
- 54:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 54:     <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  55:       enableInternalTimer <span class='def-Symbol'>=</span> <span class='def-BooleanConstant def-Constant def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>;</span>
  56:       running <span class='def-Symbol'>=</span> <span class='def-BooleanConstant def-Constant def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>;</span>
  57:     <span class='def-SymbolStrong def-Symbol'>}</span>
@@ -63,47 +63,47 @@
  62:   time_changed <span class='def-Symbol'>=</span> newTime<span class='def-SymbolStrong def-Symbol'>;</span> <span class='def-Comment def-Syntax'>// posli event</span>
  63: <span class='def-SymbolStrong def-Symbol'>}</span>
  64: 
- 65: <span class='def-Keyword'>function</span> set_startTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 65: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> set_startTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  66:   startTime <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
  67: <span class='def-SymbolStrong def-Symbol'>}</span>
  68: 
- 69: <span class='def-Keyword'>function</span> set_stopTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 69: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> set_stopTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  70:   stopTime <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
  71: <span class='def-SymbolStrong def-Symbol'>}</span>
  72: 
- 73: <span class='def-Keyword'>function</span> set_timeScale<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 73: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> set_timeScale<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  74:   timeScale <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
  75: <span class='def-SymbolStrong def-Symbol'>}</span>
  76: 
- 77: <span class='def-Keyword'>function</span> set_loopEnabled<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 77: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> set_loopEnabled<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  78:   loopEnabled <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
  79: <span class='def-SymbolStrong def-Symbol'>}</span>
  80: 
- 81: <span class='def-Keyword'>function</span> set_stepTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 81: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> set_stepTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  82:   stepTime <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
  83: <span class='def-SymbolStrong def-Symbol'>}</span>
  84: 
- 85: <span class='def-Keyword'>function</span> set_running<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
- 86:   <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>running <span class='def-Symbol'>!=</span> eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 85: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> set_running<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 86:   <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>running <span class='def-Symbol'>!=</span> eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  87:     running <span class='def-Symbol'>=</span> eventValue<span class='def-SymbolStrong def-Symbol'>;</span>
- 88:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// zapnout casovac</span>
+ 88:     <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Comment def-Syntax'>// zapnout casovac</span>
  89:       enableInternalTimer <span class='def-Symbol'>=</span> <span class='def-BooleanConstant def-Constant def-Keyword'>true</span><span class='def-SymbolStrong def-Symbol'>;</span>
  90:       oldEventTime <span class='def-Symbol'>=</span> <span class='def-Symbol'>-</span><span class='def-NumberFloat def-Number'>1.0</span><span class='def-SymbolStrong def-Symbol'>;</span>
- 91:     <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-Keyword'>else</span> <span class='def-Comment def-Syntax'>// vypnout, prepnout do krokovaciho rezimu</span>
+ 91:     <span class='def-SymbolStrong def-Symbol'>}</span> <span class='jScript-ES5ReservedWord def-Keyword'>else</span> <span class='def-Comment def-Syntax'>// vypnout, prepnout do krokovaciho rezimu</span>
  92:       enableInternalTimer <span class='def-Symbol'>=</span> <span class='def-BooleanConstant def-Constant def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>;</span>
  93:   <span class='def-SymbolStrong def-Symbol'>}</span>
  94: <span class='def-SymbolStrong def-Symbol'>}</span>
  95: 
- 96: <span class='def-Keyword'>function</span> addStep<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
- 97:   <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>!</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
- 98:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>eventValue <span class='def-Symbol'>!=</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> setNewTime<span class='def-Symbol'>(</span>time <span class='def-Symbol'>+</span> eventValue <span class='def-Symbol'>*</span> stepTime<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
- 99:     <span class='def-Keyword'>else</span> setNewTime<span class='def-Symbol'>(</span>startTime<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 96: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> addStep<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 97:   <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>!</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 98:     <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>eventValue <span class='def-Symbol'>!=</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> setNewTime<span class='def-Symbol'>(</span>time <span class='def-Symbol'>+</span> eventValue <span class='def-Symbol'>*</span> stepTime<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 99:     <span class='jScript-ES5ReservedWord def-Keyword'>else</span> setNewTime<span class='def-Symbol'>(</span>startTime<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
 100:   <span class='def-SymbolStrong def-Symbol'>}</span>
 101: <span class='def-SymbolStrong def-Symbol'>}</span>
 102: 
-103: <span class='def-Keyword'>function</span> internalTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
-104:   <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
-105:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>oldEventTime <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+103: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> internalTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+104:   <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>running<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+105:     <span class='jScript-ES5ReservedWord def-Keyword'>if</span> <span class='def-Symbol'>(</span>oldEventTime <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
 106:       time <span class='def-Symbol'>+=</span> timeScale <span class='def-Symbol'>*</span> <span class='def-Symbol'>(</span>eventValue <span class='def-Symbol'>-</span> oldEventTime<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span> 
 107:       setNewTime<span class='def-Symbol'>(</span>time<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
 108:     <span class='def-SymbolStrong def-Symbol'>}</span>
@@ -111,7 +111,7 @@
 110:   <span class='def-SymbolStrong def-Symbol'>}</span>
 111: <span class='def-SymbolStrong def-Symbol'>}</span>
 112: 
-113: <span class='def-Keyword'>function</span> set_time<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+113: <span class='jScript-ES5ReservedWord def-Keyword'>function</span> set_time<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
 114:   setNewTime<span class='def-Symbol'>(</span>eventValue<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
 115: <span class='def-SymbolStrong def-Symbol'>}</span>
 116: 

@@ -38,7 +38,11 @@ with open(join(root_path, "path.properties")) as pf:
 
 colorer_path = join(root_path, normpath(prop_path["colorer"]))
 catalog_path = join(root_path, normpath(prop_path["catalog"]))
-hrd_path = join(root_path, prop_path["hrd"])
+hrd_path     = join(root_path, normpath(prop_path["build-dir"]), prop_path["base-dir"], prop_path["hrd"])
+hrd = os.getenv('COLORER5HRD', 'white')
+css = "%s/css/%s.css" % (hrd_path, hrd)
+if not os.path.isfile(css):
+  print "Warning: Stylesheet %s does not exist" % css
 
 colorer_exe = "colorer.exe";
 colorer = join(colorer_path, colorer_exe)
@@ -91,12 +95,10 @@ fail_log.write(
 <html>
 <head>
   <title>%s Colorer Test Results</title>
-  <style type="text/css">
-.testname {text-weight:bold}
-  </style>
+  <link href="%s" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-""" % current_dir)
+""" % (current_dir, normpath("../" + css)))
   
 
 test_list = []
