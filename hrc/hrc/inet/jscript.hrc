@@ -303,8 +303,13 @@
           </keywords>
       </scheme>
 
+      <region name="ES5ReservedWord"             parent="Keyword"               description="ECMAScript 5.1 Reserved Words" />
+      <region name="ES5FutureReservedWord"       parent="ES5ReservedWord"       description="ECMAScript 5.1 Future Reserved Words" />
+      <region name="ES3FutureReservedWord"       parent="ES5FutureReservedWord" description="ECMAScript 3.0 Future Reserved Words" />
+      <region name="ES5StrictFutureReservedWord" parent="ES5FutureReservedWord" description="ECMAScript 5.1 Future Reserved Words (strict mode only)" />
+
       <scheme name="jsKeywords">
-          <keywords region="Keyword" worddiv="%worddiv;">
+          <keywords region="ES5ReservedWord" worddiv="%worddiv;">
              <word name="break"/>
              <word name="case"/>
              <word name="catch"/>
@@ -321,27 +326,43 @@
              <word name="in"/>
              <word name="instanceof"/>
              <word name="new"/>
-             <word name="null"/>
              <word name="return"/>
              <word name="switch"/>
              <word name="this"/>
              <word name="throw"/>
              <word name="try"/>
              <word name="typeof"/>
-             <word name="undefined"/>
              <word name="var"/>
              <word name="void"/>
              <word name="while"/>
              <word name="with"/>
           </keywords>
-          <keywords region="Keyword" worddiv="%worddiv;">
+          <keywords region="ES5FutureReservedWord" worddiv="%worddiv;">
              <word name="class"/>
              <word name="const"/>
              <word name="enum"/>
              <word name="export"/>
              <word name="extends"/>
-             <word name="implemets"/>
              <word name="import"/>
+             <word name="super"/>
+          </keywords>
+          <keywords region="ES3FutureReservedWord" worddiv="%worddiv;">
+             <!-- not including ES5 future reserved words -->
+             <word name="abstract"/>
+             <word name="boolean"/>
+             <word name="byte"/>
+             <word name="char"/>
+             <word name="float"/>
+             <word name="goto"/>
+             <word name="long"/>
+             <word name="native"/>
+             <word name="short"/>
+             <word name="synchronized"/>
+             <word name="transient"/>
+             <word name="volatile"/>
+          </keywords>
+          <keywords region="ES5StrictFutureReservedWord" worddiv="%worddiv;">
+             <word name="implements"/>
              <word name="interface"/>
              <word name="let"/>
              <word name="package"/>
@@ -349,10 +370,10 @@
              <word name="protected"/>
              <word name="public"/>
              <word name="static"/>
-             <word name="super"/>
              <word name="yield"/>
           </keywords>
       </scheme>
+
       <scheme name="jsOperators">
           <keywords region="Symbol">
  <!-- Operators Computational  -->
@@ -424,7 +445,7 @@
              /
              ( [\=\!]\~ | && | \|\| |
              [^<\]\}\)\+\-\w\s\/\;] |
-             \bif | ~ | ^)
+             \bif | ~ | ^ | return )
              \s* ((\/[\/*]?!)) /x
             ]]>
            </start>

@@ -153,9 +153,14 @@ switch(x)
 {
 	case 'a':
 		goto case 'b';
+		goto case EnumMember;
 		goto default;
-		goto y;
+		goto label;
+	case EnumMember:
+	case Enum.EnumMember:
 }
+label:
+goto label;
 
 // *** DDoc (D documentation) ***
 
@@ -302,7 +307,6 @@ string escapeShellCommand(in char[][] args...)                                  
 // no (performance)
 new PropertyInfo("id", "id", new NumberType(10,false,SqlType.INTEGER), 0, true, true, false, null, RelationType.None, null, null, null, null, null, null, null, null, null, null, null, null)
 int delegate(type var, type var, type var, type var, type var, type var, type var, type var, type var, type var, type var, type var, type var) d;
-
 
 // *** D2 operator overloading ***
 struct Overloaded

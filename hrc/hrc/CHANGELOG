@@ -1,3 +1,9 @@
+2013-10-08
+  Fixed:
+    - ActionScript: Property outliner, * in imports (Vladimir Panteleev)
+    - jscript: Update reserved word list, returning regex test result (Vladimir Panteleev)
+    - D: Enums in switch cases (Vladimir Panteleev)
+
 2013-10-05
   New:
     - Diet (Vibe.d) syntax (Vladimir Panteleev)
