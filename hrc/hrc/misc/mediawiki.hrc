@@ -42,8 +42,8 @@
 	<region name="start"         parent="def:PairStart"/>
 	<region name="end"           parent="def:PairEnd"  />
 
-<scheme name="htmlCore">
-	<inherit scheme="html:htmlCore"/>
+<scheme name="htmlCoreParams">
+	<inherit scheme="html:htmlCoreParams"/>
 </scheme>
 
 <scheme name="html">
@@ -52,7 +52,7 @@
 		<virtual scheme="CloseHTMLTags" subst-scheme="def:empty"/>
 	</inherit>
 	<inherit scheme="html:html">
-		<virtual scheme="html:htmlCore" subst-scheme="htmlCore"/>
+		<virtual scheme="html:htmlCoreParams" subst-scheme="htmlCoreParams"/>
 		<virtual scheme="html:html" subst-scheme="html"/>
 	</inherit>
 </scheme>
@@ -99,7 +99,7 @@
 </scheme>
 
 <scheme name="PreformattedTag">
-	<block start="/~(?{html:htmlTagBr}&lt;)(?{html:htmlOpenTag}\w+)/" end="/(?{html:htmlTagBr}&gt;)/" scheme="html:htmlCore" />
+	<block start="/~(?{html:htmlTagBr}&lt;)(?{html:htmlOpenTag}\w+)/" end="/(?{html:htmlTagBr}&gt;)/" scheme="html:htmlCoreParams" />
 </scheme>
 
 <scheme name="CloseHTMLTags">
@@ -296,9 +296,9 @@
 
 <scheme name="TableAttributes">
 	<inherit scheme="Text">
-		<virtual scheme="Text" subst-scheme="htmlCore"/>
+		<virtual scheme="Text" subst-scheme="htmlCoreParams"/>
 	</inherit>
-	<inherit scheme="htmlCore"/>
+	<inherit scheme="htmlCoreParams"/>
 </scheme>
 
 <scheme name="TableRow">

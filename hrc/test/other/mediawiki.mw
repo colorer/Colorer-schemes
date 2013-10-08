@@ -292,7 +292,7 @@ dolor sit amet.
 |}
 
 
-{| style="color: black; background-color: #ffffcc;" width="85%"
+{|style="color: black; background-color: #ffffcc;" width="85%"
 | colspan="2" | This column width is 85% of the screen width (and has a background color)
 |-
 | style="width: 30%; background-color: white;"|

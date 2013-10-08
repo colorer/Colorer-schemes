@@ -53,7 +53,7 @@
  52: 
  53: <span class='mediawiki-HeadMark mediawiki-Symbol def-Keyword'>==</span> <span class='mediawiki-Heading def-Keyword'>Preformatted text blocks </span><span class='mediawiki-HeadMark mediawiki-Symbol def-Keyword'>==</span>
  54: 
- 55: <span class='mediawiki-Preformatted def-Directive'> </span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>nowiki</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>Start with a space in the first column,
+ 55: <span class='mediawiki-Preformatted def-Directive'> </span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>nowiki</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span><span class='mediawiki-Preformatted def-Directive'>Start with a space in the first column,</span>
  56: (before the nowiki tag).
  57: 
  58: Then your block format will be
@@ -75,7 +75,7 @@
  74: 
  75: <span class='html-htmlComment def-Comment def-Syntax'>&lt;!-- This is a comment --></span>
  76: 
- 77: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>pre</span> <span class='html-htmlParam def-Parameter'>style</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"</span><span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='css-Symbol def-Symbol'>:</span> <span class='css-w3cColors css-baseColors def-Var'>red</span><span class='html-htmlString def-String'>"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span> Text is '''preformatted''' and 
+ 77: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>pre</span><span class='mediawiki-Preformatted def-Directive'> </span><span class='html-htmlParam def-Parameter'>style</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"</span><span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='css-Symbol def-Symbol'>:</span><span class='mediawiki-Preformatted def-Directive'> </span><span class='css-w3cColors css-baseColors def-Var'>red</span><span class='html-htmlString def-String'>"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span><span class='mediawiki-Preformatted def-Directive'> Text is '''preformatted''' and </span>
  78: <span class='mediawiki-Preformatted def-Directive'>''markups'' '''''cannot''''' be done</span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>pre</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
  79: 
  80: <span class='xml-CharRef def-Parameter'>&amp;</span><span class='xml-CharRef def-Parameter'>copy</span><span class='xml-CharRef def-Parameter'>;</span>
@@ -220,7 +220,7 @@
 219: 
 220: <span class='mediawiki-HeadMark mediawiki-Symbol def-Keyword'>==</span> <span class='mediawiki-Heading def-Keyword'>Tables </span><span class='mediawiki-HeadMark mediawiki-Symbol def-Keyword'>==</span>
 221: 
-222: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>{|</span><span class='html-htmlUnknowTag def-Tag'></span>
+222: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>{|</span>
 223: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span>Orange
 224: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span>Apple
 225: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|-</span>
@@ -239,7 +239,7 @@
 238: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span>Butter<span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>||</span>Ice<span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>br</span><span class='html-htmlTagBr def-OpenTag def-Tag'>/></span>cream<span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>||</span>and<span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>br</span><span class='html-htmlTagBr def-OpenTag def-Tag'>/></span>more
 239: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|}</span>
 240: 
-241: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>{|</span><span class='html-htmlUnknowTag def-Tag'></span>
+241: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>{|</span>
 242: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span>Lorem ipsum dolor sit amet, 
 243: consetetur sadipscing elitr, 
 244: sed diam nonumy eirmod tempor invidunt
@@ -256,8 +256,8 @@
 255: <span class='mediawiki-ListMark mediawiki-Symbol def-Keyword'>*</span><span class='mediawiki-ListText def-Number'> sed diam nonumy eirmod tempor invidunt</span>
 256: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|}</span>
 257: 
-258: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>{|</span><span class='html-htmlUnknowTag def-Tag'></span>
-259: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>!</span> <span class='html-htmlParam def-Parameter'>align</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"left"</span><span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span> Item
+258: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>{|</span>
+259: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>!</span><span class='mediawiki-TableHeader mediawiki-Italic def-StringEdge def-String'> </span><span class='html-htmlParam def-Parameter'>align</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"left"</span><span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span> Item
 260: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>!</span><span class='mediawiki-TableHeader mediawiki-Italic def-StringEdge def-String'> Amount </span><span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>!!</span><span class='mediawiki-TableHeader mediawiki-Italic def-StringEdge def-String'> Cost</span>
 261: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|-</span>
 262: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span>Orange
@@ -292,7 +292,7 @@
 291: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|}</span>
 292: 
 293: 
-294: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>{|</span> <span class='html-htmlParam def-Parameter'>style</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"</span><span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='css-Symbol def-Symbol'>:</span> <span class='css-w3cColors css-baseColors def-Var'>black</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='css-PropertyName def-KeywordStrong def-Keyword'>background-color</span><span class='css-Symbol def-Symbol'>:</span> <span class='def-NumberPrefix def-Number'>#</span><span class='def-NumberHex def-Number'>ffffcc</span><span class='def-SymbolStrong def-Symbol'>;</span><span class='html-htmlString def-String'>"</span> <span class='html-htmlParam def-Parameter'>width</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"85%"</span>
+294: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>{|</span><span class='html-htmlParam def-Parameter'>style</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"</span><span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='css-Symbol def-Symbol'>:</span> <span class='css-w3cColors css-baseColors def-Var'>black</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='css-PropertyName def-KeywordStrong def-Keyword'>background-color</span><span class='css-Symbol def-Symbol'>:</span> <span class='def-NumberPrefix def-Number'>#</span><span class='def-NumberHex def-Number'>ffffcc</span><span class='def-SymbolStrong def-Symbol'>;</span><span class='html-htmlString def-String'>"</span> <span class='html-htmlParam def-Parameter'>width</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"85%"</span>
 295: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span> <span class='html-htmlParam def-Parameter'>colspan</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"2"</span> <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span> This column width is 85% of the screen width (and has a background color)
 296: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|-</span>
 297: <span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span> <span class='html-htmlParam def-Parameter'>style</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"</span><span class='css-PropertyName def-KeywordStrong def-Keyword'>width</span><span class='css-Symbol def-Symbol'>:</span> <span class='css-Number def-Number'>30</span><span class='css-UnitSuffix def-NumberSuffix def-Number'>%</span><span class='def-SymbolStrong def-Symbol'>;</span> <span class='css-PropertyName def-KeywordStrong def-Keyword'>background-color</span><span class='css-Symbol def-Symbol'>:</span> <span class='css-w3cColors css-baseColors def-Var'>white</span><span class='def-SymbolStrong def-Symbol'>;</span><span class='html-htmlString def-String'>"</span><span class='mediawiki-TableMark mediawiki-Symbol def-Keyword'>|</span>

@@ -345,6 +345,10 @@
     <location link="inet/gen/wml.hrc"/>
     <filename>/\.wml$/i</filename>
   </prototype>
+  <prototype name="mxml" group="inet" description="MXML">
+    <location link="inet/mxml.hrc"/>
+    <filename>/\.mxml$/i</filename>
+  </prototype>
 
 
   <!--  xml types  -->
@@ -777,6 +781,10 @@
   <prototype name="cup" group="rare" description="CUP">
     <location link="rare/cup.hrc"/>
     <filename>/\.cup$/i</filename>
+  </prototype>
+  <prototype name="diet" group="rare" description="Vibe.d Diet Templates">
+    <location link="rare/diet.hrc"/>
+    <filename>/\.dt$/i</filename>
   </prototype>
   <prototype name="eiffel" group="rare" description="Eiffel">
     <location link="rare/eiffel.hrc"/>
