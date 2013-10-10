@@ -117,10 +117,12 @@
          </inherit>
       </scheme>
 
-      <scheme name="jsBooleans">
+      <scheme name="jsConstants">
          <keywords region="BooleanConstant" worddiv="%worddiv;">
             <word name="true"/>
             <word name="false"/>
+            <word name="null"/>
+            <word name="undefined"/>
          </keywords>
       </scheme>
 
@@ -464,7 +466,7 @@
          <regexp match="/!\w?=/" region="Symbol"/>
          <inherit scheme="jsOperators"/>
 
-         <inherit scheme="jsBooleans"/>
+         <inherit scheme="jsConstants"/>
          <inherit scheme="jsObjects"/>
          <inherit scheme="jsMethods" />
 
