@@ -127,12 +127,12 @@
         <start region2="def:PairStart" region3="StringEdge"><![CDATA[
             /([^\\]')?#2
              (([\/\|\@\#\%\$\^&\*\?\!\~]))\M
-             (([^'])|(\\'))*(\2[isUmDAexXS]*')
+             (([^'])|(\\'))*(\2[imsxeADSUXJu]*')
             /xs
         ]]></start>
         <end region1="def:PairEnd" region2="StringEdge" region3="regexp:SpecArea">
         <![CDATA[
-            /((\y2([isUmDAexXS]*)))\M'/
+            /((\y2([imsxeADSUXJu]*)))\M'/
         ]]></end>
     </block>
 </scheme>
