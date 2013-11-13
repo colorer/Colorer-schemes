@@ -20,6 +20,7 @@
 <region name="DocBlockParam" parent="def:ParameterUnknown" />
 
 <entity name="DocBlockEntity" value="(?{DocBlockEntity}@[\w\\-]+\b)"/>
+<entity name="PatternModifiers" value="[eimsuxADJSUX]" />
 
 <region name="Namespace" parent="def:Prefix" />
 <region name="NamespaceDelimoter" parent="def:SymbolStrong" />
@@ -79,6 +80,7 @@
         <symb name="m"/>
         <symb name="s"/>
         <symb name="x"/>
+        <symb name="J"/>
         <symb name="U"/>
         <symb name="X"/>
         <symb name="-" region="def:Symbol"/>
@@ -127,12 +129,12 @@
         <start region2="def:PairStart" region3="StringEdge"><![CDATA[
             /([^\\]')?#2
              (([\/\|\@\#\%\$\^&\*\?\!\~]))\M
-             (([^'])|(\\'))*(\2[imsxeADSUXJu]*')
+             (([^'])|(\\'))*(\2[%PatternModifiers;]*')
             /xs
         ]]></start>
         <end region1="def:PairEnd" region2="StringEdge" region3="regexp:SpecArea">
         <![CDATA[
-            /((\y2([imsxeADSUXJu]*)))\M'/
+            /((\y2([%PatternModifiers;]*)))\M'/
         ]]></end>
     </block>
 </scheme>
@@ -162,12 +164,12 @@
         <start region2="def:PairStart" region3="StringEdge"><![CDATA[
             /([^\\]")?#2
              (([\/\|\@\#\%\$\^&\*\?\!\~]))\M
-             (([^"])|(\\"))*(\2[isUmDAexXS]*")
+             (([^"])|(\\"))*(\2[%PatternModifiers;]*")
             /xs
         ]]></start>
         <end region1="def:PairEnd" region2="StringEdge" region3="regexp:SpecArea">
         <![CDATA[
-            /((\y2([isUmDAexXS]*)))\M"/
+            /((\y2([%PatternModifiers;]*)))\M"/
         ]]></end>
     </block>
 </scheme>
