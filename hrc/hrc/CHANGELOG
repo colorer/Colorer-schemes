@@ -1,3 +1,16 @@
+2013-12-10
+  Fixed:
+    - csharp: add interface in outlined (Aidar)
+    - farhelp: fix page link (Aidar)
+
+2013-11-13
+  Fixed:
+    - php: regexp modifiers changed
+
+2013-10-22
+  Fixed:
+    - php: regexp modifiers "u" and "J" added
+
 2013-10-08
   Fixed:
     - ActionScript: Property outliner, * in imports (Vladimir Panteleev)

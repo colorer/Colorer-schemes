@@ -42,7 +42,7 @@
 
        
       <scheme name="linkancor">
-      	<regexp match="/~\M(?{Page}\w+)/" />
+      	<regexp match="/~\M(?{Page}[\w\.]+)/" />
        <keywords region="def:Keyword">
             <word name="Contents"/>
             <word name="Config"/>
