@@ -82,6 +82,9 @@
                          region="String" region01="Symbol" region02="StringEdge"
                          region03="PairStart" region10="StringEdge" region11="PairEnd"/>
 
+<!-- Generics -->
+         <block start="/\.(&lt;)/" end="/(&gt;)/" scheme="actionscript" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
+
 <!-- XML literal -->
          <block start="/\M&lt;%xml:QName;(:?\s+%xml:QName;=(:?['&quot;]).*?\2)*\s*(:?\/?&gt;|$)/" end="//" scheme="xml:xml" region="XmlContent"/>
 

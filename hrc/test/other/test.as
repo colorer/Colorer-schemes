@@ -8,5 +8,7 @@ package foo.bar.TestPackage
             { // this is a comment
             }
         }
+
+        private static var someVector : __AS3__.vec.Vector.<int>;
     }
 }
