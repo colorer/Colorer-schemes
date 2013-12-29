@@ -236,6 +236,13 @@ double sqrt(double x); /++ ditto +/
 ///         ...
 /// ----
 
+/// $(D void f()(const(char)[]) )
+/** $(D true // foo ) **/
+/** $(D true // TODO ()) **/
+/** $(D true /* aoeu()) **/
+/** $(D true /// TODO ()) **/
+/** $(D true /** aoeu()) **/
+
 /+++++++++/
 /*********/
 
@@ -260,6 +267,8 @@ const matching2 = q"[ ({<" "[a]" ]"; // "
 const matching3 = q"{ ([<" "{a}" }"; // "
 const matching4 = q"< ([{" "<a>" >"; // "
 const tokenString = q{ foreach (i; 1..10) { writeln("C:\\Hello"); } };
+"%-(%s%)".format(arr); // the "-" flag for %(
+q"<...>"w // highlight the w
 
 // *** standard library types ***
 string str;
@@ -277,6 +286,7 @@ try {} catch {}
 void takesByReference(ref int x);
 enum b = __traits(isAbstractClass, T);
 static assert(__traits(compiles, interval.span(iPosInfInterval)));
+y = cast(inout)x;
 
 // *** decl ***
 pragma(msg, "Hello");
@@ -287,6 +297,9 @@ scope (exit) {}
 // *** enum ***
 enum x = 5; // {}                       // manifest constants // {}
 enum int ZERO = 0;                      // typed manifest constants
+enum uint alignment;                    // value-less enums allowed for DDoc
+enum foo alignment;                     // don't highlight unknown types
+enum te(alias F) = SD!F.init;           // enums can now have template parameters
 
 // *** outliner ***
 enum                  spacious                  = { bar }; // outliner shouldn't contain spaces              // yes
@@ -303,6 +316,43 @@ struct S(T)                                                                     
 }
 string escapeShellCommand(in char[][] args...)                                                               // yes
 {}
+ // int foo ()                                                                                               // no
+sort(...)                                                                                                    // yes
+auto partition3(alias less = "a < b", SwapStrategy ss = SwapStrategy.unstable, Range, E)(Range r, E pivot)   // yes
+private void formatObject(Writer, T, Char)(ref Writer w, ref T val, ref FormatSpec!Char f)                   // yes
+private void quickSortImpl(alias less, Range)(Range r)                                                       // yes
+private int run(string[] args, string output = null)                                                         // yes
+private T cenforce(T)(T condition, lazy const(char)[] name, string file = __FILE__, size_t line = __LINE__)  // yes
+ struct Pool(T, bool byRef, bool haveNull = true) {}                                                         // yes (ambiguity with function declaration)
+debug getFoo()                                                                                               // no
+	.ping();
+void f()                                                                                                     // yes
+in
+{}
+out(int result)                                                                                              // no
+{}
+body
+{
+	version(DontCare)                                                                                        // no
+	{}
+	import dont.care;                                                                                        // no
+}
+
+class C                                                                                                      // yes
+{
+	this()                                                                                                   // yes
+	{
+		this(5);                                                                                             // no
+	}
+
+	private this()(int i)                                                                                    // yes
+	{
+		super(i);                                                                                            // no
+	}
+
+	~this() {}                                                                                               // yes
+}
+
 
 // no (performance)
 new PropertyInfo("id", "id", new NumberType(10,false,SqlType.INTEGER), 0, true, true, false, null, RelationType.None, null, null, null, null, null, null, null, null, null, null, null, null)
