@@ -198,7 +198,7 @@
 
     <scheme name="Date">
       <regexp match="/\b[0-3]?\d[\/\.\-][0-1]?\d[\/\.\-]\d\d(\d\d)?\b/" region="Date"/>
-      <regexp match="/\b\d{4}-(0\d|1[12])-([012]\d|3[01])\b/" region="def:Date"/>
+      <regexp match="/\b\d{4}-(0\d|1[012])-([012]\d|3[01])\b/" region="def:Date"/>
     </scheme>
 
     <scheme name="Time">
