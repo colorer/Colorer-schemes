@@ -1,3 +1,11 @@
+2014-01-02
+  Fixed:
+    - d: Multiple fixes (Vladimir Panteleev)
+    - default: Fix highlighting of ISO dates in October (Vladimir Panteleev)
+    - actionscript: Add generics (Vladimir Panteleev)
+    - jscript: Add back null and undefined (Vladimir Panteleev)
+    - powershell: update (Roman Kuzmin)
+
 2013-12-10
   Fixed:
     - csharp: add interface in outlined (Aidar)
