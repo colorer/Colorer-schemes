@@ -541,15 +541,15 @@
   </prototype>
   <prototype name="powershell" group="scripts" description="PowerShell">
     <filename>/\.(ps[dDmM]?1|psfconsole)$/i</filename>
-    <location link="scripts/farnet/powershell.hrc"/>
+    <location link="scripts/powershell.hrc"/>
   </prototype>
   <prototype name="r" group="scripts" description="R">
     <filename>/\.(R|Rhistory|Rprofile)$/i</filename>
-    <location link="scripts/farnet/r.hrc"/>
+    <location link="scripts/r.hrc"/>
   </prototype>
   <prototype name="markdown" group="scripts" description="markdown">
     <filename>/\.(text|md|markdown)$/i</filename>
-    <location link="scripts/farnet/markdown.hrc"/>
+    <location link="misc/markdown.hrc"/>
   </prototype>
 
 
