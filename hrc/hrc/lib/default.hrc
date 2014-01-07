@@ -168,7 +168,7 @@
            /( (\b mailto\s*\:\s*)? (<?) [A-Za-z\d][\w\.\~\-_#]*
             \@[\w\~\-_#]+? \. [\?\=\w\.\~\-_#]+ (>?) ) /x]]>
       </regexp>
-      <regexp match="/p\d{,3}\.f\d\.n\d{,4}\.z\d\.fidonet\.org/" region="EMail"/>
+      <regexp match="/p\d{0,3}\.f\d\.n\d{0,4}\.z\d\.fidonet\.org/" region="EMail"/>
     </scheme>
 
     <scheme name="NetFTN">

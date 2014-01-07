@@ -97,7 +97,7 @@
       </scheme>
 
       <scheme name="lyCompoundC">
-         <regexp match="/\B(\$[\$\d]{,2})/" region0="lySymbEx"/>
+         <regexp match="/\B(\$[\$\d]{0,2})/" region0="lySymbEx"/>
          <inherit scheme="PairedBrackets">
             <virtual scheme="PairedBrackets" subst-scheme="lyCompoundC"/>
          </inherit>
