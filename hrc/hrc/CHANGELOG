@@ -1,3 +1,8 @@
+2014-01-08
+  Fixed:
+    - assa: fix some syntax error
+    - default, text, lex : normalize interval
+
 2014-01-02
   Fixed:
     - d: Multiple fixes (Vladimir Panteleev)
