@@ -974,7 +974,7 @@
   </prototype>
   <prototype name="text" group="other" description="plain text">
     <location link="misc/text.hrc"/>
-    <filename>/(read\.?me|\.txt$|\.rus|\.nfo|\.log|install*|*ChangeLog*|AUTHORS|COPYING|FAQ|LICENSE|TODO$)/i</filename>
+    <filename>/(read\.?me|\.txt$|\.rus|\.nfo|\.log|.*install.*|.*ChangeLog.*|AUTHORS|COPYING|FAQ|LICENSE|TODO$)/i</filename>
     <filename>/\.spo/ix</filename>
   </prototype>
 
