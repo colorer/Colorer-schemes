@@ -1,4 +1,6 @@
 2014-01-09
+  New:
+    - Kotlin syntax (Alexander Udalov)
   Fixed:
     - java: remove non-existing 'threadsafe' keyword;
             add 'assert' (new in 1.4), 'enum' (new in 5.0)
