@@ -1,3 +1,8 @@
+2014-01-09
+  Fixed:
+    - java: remove non-existing 'threadsafe' keyword;
+            add 'assert' (new in 1.4), 'enum' (new in 5.0)
+
 2014-01-08
   Fixed:
     - assa: fix some syntax error

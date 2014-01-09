@@ -9,6 +9,7 @@
   </documentation><contributors><![CDATA[
     JULY <lubimovi@usa.net>
     Eugene Efremov <4mirror@mail.ru>
+    Alexander Udalov <dddenton@gmail.com>
   ]]></contributors>
   </annotation>
 
@@ -205,19 +206,21 @@
           <symb name="#"/><symb name="@"/>
        </keywords>
        <keywords region="def:Keyword">
+          <word name='assert'/>
           <word name="break"/>
-          <word name="catch"/>
           <word name="case"/>
+          <word name="catch"/>
           <word name="continue"/>
           <word name="default"/>
           <word name="do"/>
           <word name="else"/>
+          <word name="enum"/>
           <word name="false"/>
-          <word name="for"/>
           <word name="finally"/>
+          <word name="for"/>
           <word name="if"/>
-          <word name="interface"/>
           <word name="instanceof"/>
+          <word name="interface"/>
           <word name="new"/>
           <word name="null"/>
           <word name="return"/>
@@ -231,22 +234,21 @@
        </keywords>
        <keywords region="KeywordModifier">
           <word name='abstract'/>
+          <word name="extends"/>
           <word name='final'/>
+          <word name="implements"/>
           <word name='private'/>
           <word name='protected'/>
           <word name='public'/>
           <word name='static'/>
           <word name='strictfp'/>
           <word name="throws"/>
-          <word name="extends"/>
-          <word name="implements"/>
        </keywords>
        <keywords region="KeywordModifier">
           <word name='native'/>
           <word name='synchronized'/>
-          <word name='threadsafe'/>
-          <word name='volatile'/>
           <word name='transient'/>
+          <word name='volatile'/>
        </keywords>
        <keywords region="def:TypeKeyword">
           <word name='boolean'/>
