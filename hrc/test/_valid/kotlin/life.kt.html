@@ -1,0 +1,154 @@
+  0: <span class='def-CommentDoc def-Comment def-Syntax'>/**</span>
+  1: <span class='def-CommentDoc def-Comment def-Syntax'> </span><span class='def-CommentContent def-Comment def-Syntax'>*</span><span class='def-CommentDoc def-Comment def-Syntax'> This is a straightforward implementation of The Game of Life</span>
+  2: <span class='def-CommentDoc def-Comment def-Syntax'> </span><span class='def-CommentContent def-Comment def-Syntax'>*</span><span class='def-CommentDoc def-Comment def-Syntax'> See </span><span class='def-URL def-URI'>http://en.wikipedia.org/wiki/Conway</span><span class='def-CommentDoc def-Comment def-Syntax'>'s_Game_of_Life</span>
+  3: <span class='def-CommentDoc def-Comment def-Syntax'> */</span>
+  4: <span class='def-Keyword'>package</span> life
+  5: 
+  6: <span class='def-Keyword'>import</span> <span class='def-VarStrong def-Var'>java.util.Collections.*</span>
+  7: <span class='def-Keyword'>import</span> <span class='def-VarStrong def-Var'>java.util.*</span>
+  8: 
+  9: <span class='def-Comment def-Syntax'>/*</span>
+ 10: <span class='def-Comment def-Syntax'> * A field where cells live. Effectively immutable</span>
+ 11: <span class='def-Comment def-Syntax'> */</span>
+ 12: <span class='def-Keyword'>class</span> <span class='def-TypeKeyword def-Keyword'>Field</span><span class='def-Symbol'>(</span>
+ 13:   <span class='def-Keyword'>val</span> width <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>,</span>
+ 14:   <span class='def-Keyword'>val</span> height <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>,</span>
+ 15:   <span class='def-LineComment def-Comment def-Syntax'>// This function tells the constructor which cells are alive</span>
+ 16:   <span class='def-LineComment def-Comment def-Syntax'>// if init(i, j) is true, the cell (i, j) is alive</span>
+ 17:   init <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-Symbol'>(</span><span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>,</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-TypeKeyword def-Keyword'>Boolean</span>
+ 18: <span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 19:   <span class='def-Keyword'>private</span> <span class='def-Keyword'>val</span> live <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Array</span><span class='def-Symbol'>&lt;</span><span class='def-TypeKeyword def-Keyword'>Array</span><span class='def-Symbol'>&lt;</span><span class='def-TypeKeyword def-Keyword'>Boolean</span><span class='def-Symbol'>></span><span class='def-Symbol'>></span> <span class='def-Symbol'>=</span> <span class='def-TypeKeyword def-Keyword'>Array</span><span class='def-Symbol'>(</span>height<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>i <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-TypeKeyword def-Keyword'>Array</span><span class='def-Symbol'>(</span>width<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>j <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> init<span class='def-Symbol'>(</span>i<span class='def-Symbol'>,</span> j<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>}</span><span class='def-SymbolStrong def-Symbol'>}</span>
+ 20: 
+ 21:   <span class='def-Keyword'>private</span> <span class='def-Keyword'>fun</span> liveCount<span class='def-Symbol'>(</span>i <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>,</span> j <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>)</span>
+ 22:     <span class='def-Symbol'>=</span> <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>i <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>.</span><span class='def-Symbol'>.</span>height<span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>1</span> <span class='def-Symbol'>&amp;</span><span class='def-Symbol'>&amp;</span>
+ 23:           j <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>.</span><span class='def-Symbol'>.</span>width<span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>1</span> <span class='def-Symbol'>&amp;</span><span class='def-Symbol'>&amp;</span>
+ 24:           live<span class='def-Symbol'>[</span>i<span class='def-Symbol'>]</span><span class='def-Symbol'>[</span>j<span class='def-Symbol'>]</span><span class='def-Symbol'>)</span> <span class='def-NumberDec def-Number'>1</span> <span class='def-Keyword'>else</span> <span class='def-NumberDec def-Number'>0</span>
+ 25: 
+ 26:   <span class='def-LineComment def-Comment def-Syntax'>// How many neighbors of (i, j) are alive?</span>
+ 27:   <span class='def-Keyword'>fun</span> liveNeighbors<span class='def-Symbol'>(</span>i <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>,</span> j <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>=</span>
+ 28:     liveCount<span class='def-Symbol'>(</span>i <span class='def-Symbol'>-</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> j <span class='def-Symbol'>-</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span>
+ 29:     liveCount<span class='def-Symbol'>(</span>i <span class='def-Symbol'>-</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> j<span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span>
+ 30:     liveCount<span class='def-Symbol'>(</span>i <span class='def-Symbol'>-</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> j <span class='def-Symbol'>+</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span>
+ 31:     liveCount<span class='def-Symbol'>(</span>i<span class='def-Symbol'>,</span> j <span class='def-Symbol'>-</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span>
+ 32:     liveCount<span class='def-Symbol'>(</span>i<span class='def-Symbol'>,</span> j <span class='def-Symbol'>+</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span>
+ 33:     liveCount<span class='def-Symbol'>(</span>i <span class='def-Symbol'>+</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> j <span class='def-Symbol'>-</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span>
+ 34:     liveCount<span class='def-Symbol'>(</span>i <span class='def-Symbol'>+</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> j<span class='def-Symbol'>)</span> <span class='def-Symbol'>+</span>
+ 35:     liveCount<span class='def-Symbol'>(</span>i <span class='def-Symbol'>+</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> j <span class='def-Symbol'>+</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span>
+ 36: 
+ 37:   <span class='def-LineComment def-Comment def-Syntax'>// You can say field[i, j], and this function gets called</span>
+ 38:   <span class='def-Keyword'>fun</span> <span class='def-Keyword'>get</span><span class='def-Symbol'>(</span>i <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>,</span> j <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>=</span> live<span class='def-Symbol'>[</span>i<span class='def-Symbol'>]</span><span class='def-Symbol'>[</span>j<span class='def-Symbol'>]</span>
+ 39: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 40: 
+ 41: <span class='def-CommentDoc def-Comment def-Syntax'>/**</span>
+ 42: <span class='def-CommentDoc def-Comment def-Syntax'> </span><span class='def-CommentContent def-Comment def-Syntax'>*</span><span class='def-CommentDoc def-Comment def-Syntax'> This function takes the present state of the field</span>
+ 43: <span class='def-CommentDoc def-Comment def-Syntax'> </span><span class='def-CommentContent def-Comment def-Syntax'>*</span><span class='def-CommentDoc def-Comment def-Syntax'> and return a new field representing the next moment of time</span>
+ 44: <span class='def-CommentDoc def-Comment def-Syntax'> */</span>
+ 45: <span class='def-Keyword'>fun</span> next<span class='def-Symbol'>(</span>field <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Field</span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Field</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 46:   <span class='def-Keyword'>return</span> <span class='def-TypeKeyword def-Keyword'>Field</span><span class='def-Symbol'>(</span>field<span class='def-Symbol'>.</span>width<span class='def-Symbol'>,</span> field<span class='def-Symbol'>.</span>height<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>i<span class='def-Symbol'>,</span> j <span class='def-Symbol'>-</span><span class='def-Symbol'>></span>
+ 47:     <span class='def-Keyword'>val</span> n <span class='def-Symbol'>=</span> field<span class='def-Symbol'>.</span>liveNeighbors<span class='def-Symbol'>(</span>i<span class='def-Symbol'>,</span> j<span class='def-Symbol'>)</span>
+ 48:     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>field<span class='def-Symbol'>[</span>i<span class='def-Symbol'>,</span> j<span class='def-Symbol'>]</span><span class='def-Symbol'>)</span>
+ 49:       <span class='def-LineComment def-Comment def-Syntax'>// (i, j) is alive</span>
+ 50:       n <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>.</span><span class='def-NumberFloat def-Number'>.3</span> <span class='def-LineComment def-Comment def-Syntax'>// It remains alive iff it has 2 or 3 neighbors</span>
+ 51:     <span class='def-Keyword'>else</span>
+ 52:       <span class='def-LineComment def-Comment def-Syntax'>// (i, j) is dead</span>
+ 53:       n <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>3</span> <span class='def-LineComment def-Comment def-Syntax'>// A new cell is born if there are 3 neighbors alive</span>
+ 54:   <span class='def-SymbolStrong def-Symbol'>}</span>
+ 55: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 56: 
+ 57: <span class='def-CommentDoc def-Comment def-Syntax'>/** A few colony examples here */</span>
+ 58: <span class='def-Keyword'>fun</span> main<span class='def-Symbol'>(</span>args <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Array</span><span class='def-Symbol'>&lt;</span><span class='def-TypeKeyword def-Keyword'>String</span><span class='def-Symbol'>></span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 59:   <span class='def-LineComment def-Comment def-Syntax'>// Simplistic demo</span>
+ 60:   printField<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>***</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>)</span>
+ 61:   <span class='def-LineComment def-Comment def-Syntax'>// "Star burst"</span>
+ 62:   printField<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"""</span><span class='def-String'></span>
+ 63: <span class='def-String'>    __*__</span>
+ 64: <span class='def-String'>    _***_</span>
+ 65: <span class='def-String'>    __*__</span>
+ 66: <span class='def-String'>  </span><span class='def-StringEdge def-String'>"""</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>10</span><span class='def-Symbol'>)</span>
+ 67:   <span class='def-LineComment def-Comment def-Syntax'>// Stable colony</span>
+ 68:   printField<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"""</span><span class='def-String'></span>
+ 69: <span class='def-String'>    __*__</span>
+ 70: <span class='def-String'>    _*_*_</span>
+ 71: <span class='def-String'>    __*__</span>
+ 72: <span class='def-String'>  </span><span class='def-StringEdge def-String'>"""</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>)</span>
+ 73:   <span class='def-LineComment def-Comment def-Syntax'>// Stable from the step 2</span>
+ 74:   printField<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"""</span><span class='def-String'></span>
+ 75: <span class='def-String'>    __**__</span>
+ 76: <span class='def-String'>    __**__</span>
+ 77: <span class='def-String'>    __**__</span>
+ 78: <span class='def-String'>  </span><span class='def-StringEdge def-String'>"""</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>)</span>
+ 79:   <span class='def-LineComment def-Comment def-Syntax'>// Oscillating colony</span>
+ 80:   printField<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"""</span><span class='def-String'></span>
+ 81: <span class='def-String'>    __**__</span>
+ 82: <span class='def-String'>    __**__</span>
+ 83: <span class='def-String'>      __**__</span>
+ 84: <span class='def-String'>      __**__</span>
+ 85: <span class='def-String'>  </span><span class='def-StringEdge def-String'>"""</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>6</span><span class='def-Symbol'>)</span>
+ 86:   <span class='def-LineComment def-Comment def-Syntax'>// A fancier oscillating colony</span>
+ 87:   printField<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"""</span><span class='def-String'></span>
+ 88: <span class='def-String'>    ---------------</span>
+ 89: <span class='def-String'>    ---***---***---</span>
+ 90: <span class='def-String'>    ---------------</span>
+ 91: <span class='def-String'>    -*----*-*----*-</span>
+ 92: <span class='def-String'>    -*----*-*----*-</span>
+ 93: <span class='def-String'>    -*----*-*----*-</span>
+ 94: <span class='def-String'>    ---***---***---</span>
+ 95: <span class='def-String'>    ---------------</span>
+ 96: <span class='def-String'>    ---***---***---</span>
+ 97: <span class='def-String'>    -*----*-*----*-</span>
+ 98: <span class='def-String'>    -*----*-*----*-</span>
+ 99: <span class='def-String'>    -*----*-*----*-</span>
+100: <span class='def-String'>    ---------------</span>
+101: <span class='def-String'>    ---***---***---</span>
+102: <span class='def-String'>    ---------------</span>
+103: <span class='def-String'>  </span><span class='def-StringEdge def-String'>"""</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>10</span><span class='def-Symbol'>)</span>
+104: <span class='def-SymbolStrong def-Symbol'>}</span>
+105: 
+106: <span class='def-LineComment def-Comment def-Syntax'>// UTILITIES</span>
+107: 
+108: <span class='def-Keyword'>fun</span> printField<span class='def-Symbol'>(</span>s <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>String</span><span class='def-Symbol'>,</span> steps <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+109:   <span class='def-Keyword'>var</span> field <span class='def-Symbol'>=</span> makeField<span class='def-Symbol'>(</span>s<span class='def-Symbol'>)</span>
+110:   <span class='def-Keyword'>for</span> <span class='def-Symbol'>(</span>step <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>.</span><span class='def-Symbol'>.</span>steps<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+111:     println<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>Step: </span><span class='def-Insertion'>$step</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+112:     <span class='def-Keyword'>for</span> <span class='def-Symbol'>(</span>i <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>.</span><span class='def-Symbol'>.</span>field<span class='def-Symbol'>.</span>height<span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+113:       <span class='def-Keyword'>for</span> <span class='def-Symbol'>(</span>j <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>.</span><span class='def-Symbol'>.</span>field<span class='def-Symbol'>.</span>width<span class='def-Symbol'>-</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+114:         print<span class='def-Symbol'>(</span><span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>field<span class='def-Symbol'>[</span>i<span class='def-Symbol'>,</span> j<span class='def-Symbol'>]</span><span class='def-Symbol'>)</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>*</span><span class='def-StringEdge def-String'>"</span> <span class='def-Keyword'>else</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'> </span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+115:       <span class='def-SymbolStrong def-Symbol'>}</span>
+116:       println<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+117:     <span class='def-SymbolStrong def-Symbol'>}</span>
+118:     field <span class='def-Symbol'>=</span> next<span class='def-Symbol'>(</span>field<span class='def-Symbol'>)</span>
+119:   <span class='def-SymbolStrong def-Symbol'>}</span>
+120: <span class='def-SymbolStrong def-Symbol'>}</span>
+121: 
+122: <span class='def-Keyword'>fun</span> makeField<span class='def-Symbol'>(</span>s <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>String</span><span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Field</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+123:   <span class='def-Keyword'>val</span> lines <span class='def-Symbol'>=</span> s<span class='def-Symbol'>.</span>split<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-StringContent def-String'>\n</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+124:   <span class='def-Keyword'>val</span> w <span class='def-Symbol'>=</span> max<span class='def-Symbol'>&lt;</span><span class='def-TypeKeyword def-Keyword'>String</span><span class='def-Symbol'>></span><span class='def-Symbol'>(</span>lines<span class='def-Symbol'>.</span>toList<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>,</span> comparator<span class='def-Symbol'>&lt;</span><span class='def-TypeKeyword def-Keyword'>String</span><span class='def-Symbol'>?</span><span class='def-Symbol'>></span> <span class='def-SymbolStrong def-Symbol'>{</span>o1<span class='def-Symbol'>,</span> o2 <span class='def-Symbol'>-</span><span class='def-Symbol'>></span>
+125:           <span class='def-Keyword'>val</span> l1 <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>Int</span> <span class='def-Symbol'>=</span> o1<span class='def-Symbol'>?</span><span class='def-Symbol'>.</span>size <span class='def-Symbol'>?</span><span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-NumberDec def-Number'>0</span>
+126:           <span class='def-Keyword'>val</span> l2 <span class='def-Symbol'>=</span> o2<span class='def-Symbol'>?</span><span class='def-Symbol'>.</span>size <span class='def-Symbol'>?</span><span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-NumberDec def-Number'>0</span>
+127:           l1 <span class='def-Symbol'>-</span> l2
+128:   <span class='def-SymbolStrong def-Symbol'>}</span><span class='def-Symbol'>)</span>
+129:   <span class='def-Keyword'>val</span> data <span class='def-Symbol'>=</span> <span class='def-TypeKeyword def-Keyword'>Array</span><span class='def-Symbol'>(</span>lines<span class='def-Symbol'>.</span>size<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span><span class='def-TypeKeyword def-Keyword'>Array</span><span class='def-Symbol'>(</span>w<span class='def-Symbol'>.</span>size<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span><span class='def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>}</span><span class='def-SymbolStrong def-Symbol'>}</span>
+130: 
+131:   <span class='def-LineComment def-Comment def-Syntax'>// workaround</span>
+132:   <span class='def-Keyword'>for</span> <span class='def-Symbol'>(</span>i <span class='def-Keyword'>in</span> data<span class='def-Symbol'>.</span>indices<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+133:     data<span class='def-Symbol'>[</span>i<span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span> <span class='def-TypeKeyword def-Keyword'>Array</span><span class='def-Symbol'>(</span>w<span class='def-Symbol'>.</span>size<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span><span class='def-Keyword'>false</span><span class='def-SymbolStrong def-Symbol'>}</span>
+134:     <span class='def-Keyword'>for</span> <span class='def-Symbol'>(</span>j <span class='def-Keyword'>in</span> data<span class='def-Symbol'>[</span>i<span class='def-Symbol'>]</span><span class='def-Symbol'>.</span>indices<span class='def-Symbol'>)</span>
+135:       data<span class='def-Symbol'>[</span>i<span class='def-Symbol'>]</span><span class='def-Symbol'>[</span>j<span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span> <span class='def-Keyword'>false</span>
+136:   <span class='def-SymbolStrong def-Symbol'>}</span>
+137: 
+138:   <span class='def-Keyword'>for</span> <span class='def-Symbol'>(</span>line <span class='def-Keyword'>in</span> lines<span class='def-Symbol'>.</span>indices<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+139:     <span class='def-Keyword'>for</span> <span class='def-Symbol'>(</span>x <span class='def-Keyword'>in</span> lines<span class='def-Symbol'>[</span>line<span class='def-Symbol'>]</span><span class='def-Symbol'>.</span>indices<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+140:       <span class='def-Keyword'>val</span> c <span class='def-Symbol'>=</span> lines<span class='def-Symbol'>[</span>line<span class='def-Symbol'>]</span><span class='def-Symbol'>[</span>x<span class='def-Symbol'>]</span>
+141:       data<span class='def-Symbol'>[</span>line<span class='def-Symbol'>]</span><span class='def-Symbol'>[</span>x<span class='def-Symbol'>]</span> <span class='def-Symbol'>=</span> c <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> <span class='c-Character def-Character def-String'>'*'</span>
+142:     <span class='def-SymbolStrong def-Symbol'>}</span>
+143:   <span class='def-SymbolStrong def-Symbol'>}</span>
+144: 
+145:   <span class='def-Keyword'>return</span> <span class='def-TypeKeyword def-Keyword'>Field</span><span class='def-Symbol'>(</span>w<span class='def-Symbol'>.</span>size<span class='def-Symbol'>,</span> lines<span class='def-Symbol'>.</span>size<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>i<span class='def-Symbol'>,</span> j <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> data<span class='def-Symbol'>[</span>i<span class='def-Symbol'>]</span><span class='def-Symbol'>[</span>j<span class='def-Symbol'>]</span><span class='def-SymbolStrong def-Symbol'>}</span>
+146: <span class='def-SymbolStrong def-Symbol'>}</span>
+147: 
+148: 
+149: 
+150: <span class='def-LineComment def-Comment def-Syntax'>// An excerpt from the Standard Library</span>
+151: <span class='def-Keyword'>val</span> <span class='def-TypeKeyword def-Keyword'>String</span><span class='def-Symbol'>?</span><span class='def-Symbol'>.</span>indices <span class='def-SymbolStrong def-Symbol'>:</span> <span class='def-TypeKeyword def-Keyword'>IntRange</span> <span class='def-Keyword'>get</span><span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>=</span> <span class='def-TypeKeyword def-Keyword'>IntRange</span><span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>,</span> <span class='def-Keyword'>this</span><span class='def-Symbol'>!</span><span class='def-Symbol'>!</span><span class='def-Symbol'>.</span>size <span class='def-Symbol'>-</span> <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span>
+152: 
+153: 
