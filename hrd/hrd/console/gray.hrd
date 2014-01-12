@@ -8,6 +8,9 @@
   <assign name="def:CommentContent" fore="#8"/>
   <assign name="def:CommentDoc"     fore="#8"/>
 
+  <assign name="def:Constant" fore="#8"/>
+  <assign name="def:BooleanConstant" fore="#8"/>
+
   <assign name="def:OpenTag" fore="#8"/>
   <assign name="def:CloseTag" fore="#8"/>
 
