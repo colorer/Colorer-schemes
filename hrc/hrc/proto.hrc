@@ -100,9 +100,14 @@
     <filename>/\.ja(va|v|d)$/i</filename>
     <firstline weight='2'>/^\/\/ Decompiled by Jad/</firstline>
     <parameters>
-      <param name="j2se-classes" value="true" description="Use some common used J2SE class names"/>
       <param name="tabs-as-errors" value="false" description="Shows tabulation symbol as error"/>
       <param name="spaces-as-errors" value="false" description="Shows trailing spaces as error"/>
+      <param name="outlined-new" value="false" description="Outline creation of instances"/>
+      <param name="j2se-core-classes" value="true" description="Use names of J2SE core classes"/>
+      <param name="j2se-xml-classes" value="true" description="Use names of J2SE Xml classes"/>
+      <param name="j2se-javax-classes" value="false" description="Use names of J2SE javax.* classes"/>
+      <param name="j2se-gui-classes" value="false" description="Use names of J2SE applet, Awt and Swing classes"/>
+      <param name="j2se-omg-classes" value="false" description="Use names of J2SE org.omg.* classes"/>
     </parameters>
   </prototype>
   <prototype name="idl" group="main" description="IDL">
