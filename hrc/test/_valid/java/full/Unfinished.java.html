@@ -1,0 +1,26 @@
+ 0: <span class='def-Keyword'>package</span><span class='def-Directive'> com</span><span class='def-Symbol'>.</span><span class='def-Directive'>annotation</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 1:  
+ 2: <span class='def-Keyword'>import</span><span class='def-Directive'> java</span><span class='def-Symbol'>.</span><span class='def-Directive'>lang</span><span class='def-Symbol'>.</span><span class='def-Directive'>annotation</span><span class='def-Symbol'>.</span><span class='def-Directive'>Documented</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 3: <span class='def-Keyword'>import</span><span class='def-Directive'> java</span><span class='def-Symbol'>.</span><span class='def-Directive'>lang</span><span class='def-Symbol'>.</span><span class='def-Directive'>annotation</span><span class='def-Symbol'>.</span><span class='def-Directive'>ElementType</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 4: <span class='def-Keyword'>import</span><span class='def-Directive'> java</span><span class='def-Symbol'>.</span><span class='def-Directive'>lang</span><span class='def-Symbol'>.</span><span class='def-Directive'>annotation</span><span class='def-Symbol'>.</span><span class='def-Directive'>Inherited</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 5: <span class='def-Keyword'>import</span><span class='def-Directive'> java</span><span class='def-Symbol'>.</span><span class='def-Directive'>lang</span><span class='def-Symbol'>.</span><span class='def-Directive'>annotation</span><span class='def-Symbol'>.</span><span class='def-Directive'>Retention</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 6: <span class='def-Keyword'>import</span><span class='def-Directive'> java</span><span class='def-Symbol'>.</span><span class='def-Directive'>lang</span><span class='def-Symbol'>.</span><span class='def-Directive'>annotation</span><span class='def-Symbol'>.</span><span class='def-Directive'>RetentionPolicy</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 7: <span class='def-Keyword'>import</span><span class='def-Directive'> java</span><span class='def-Symbol'>.</span><span class='def-Directive'>lang</span><span class='def-Symbol'>.</span><span class='def-Directive'>annotation</span><span class='def-Symbol'>.</span><span class='def-Directive'>Target</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 8:  
+ 9: <span class='java-Annotation def-CommentContent def-Comment def-Syntax'>@Documented</span>
+10: <span class='java-Annotation def-CommentContent def-Comment def-Syntax'>@Retention(RetentionPolicy.RUNTIME)</span>
+11: <span class='java-Annotation def-CommentContent def-Comment def-Syntax'>@Target({ElementType.TYPE,ElementType.METHOD,</span>
+12:  ElementType.CONSTRUCTOR,ElementType.ANNOTATION_TYPE,
+13:  ElementType.PACKAGE,ElementType.FIELD,ElementType.LOCAL_VARIABLE})
+14: <span class='java-Annotation def-CommentContent def-Comment def-Syntax'>@Inherited</span>
+15:  
+16: <span class='java-KeywordModifier def-Keyword'>public</span> <span class='java-Annotation def-CommentContent def-Comment def-Syntax'>@interface</span> Unfinished <span class='def-SymbolStrong def-Symbol'>{</span>
+17:     <span class='java-KeywordModifier def-Keyword'>public</span> <span class='def-Keyword'>enum</span> Priority <span class='def-SymbolStrong def-Symbol'>{</span> LOW<span class='def-Symbol'>,</span> MEDIUM<span class='def-Symbol'>,</span> HIGH <span class='def-SymbolStrong def-Symbol'>}</span>
+18:     <span class='def-ClassKeyword def-Keyword'>String</span> value<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
+19:     <span class='def-ClassKeyword def-Keyword'>String</span><span class='def-Symbol'>[</span><span class='def-Symbol'>]</span> changedBy<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>default</span> <span class='def-String'>""</span><span class='def-SymbolStrong def-Symbol'>;</span>
+20:     <span class='def-ClassKeyword def-Keyword'>String</span><span class='def-Symbol'>[</span><span class='def-Symbol'>]</span> lastChangedBy<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>default</span> <span class='def-String'>""</span><span class='def-SymbolStrong def-Symbol'>;</span>
+21:     Priority priority<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>default</span> Priority<span class='def-Symbol'>.</span>MEDIUM<span class='def-SymbolStrong def-Symbol'>;</span>
+22:     <span class='def-ClassKeyword def-Keyword'>String</span> createdBy<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>default</span> <span class='def-String'>"James Gosling"</span><span class='def-SymbolStrong def-Symbol'>;</span>
+23:     <span class='def-ClassKeyword def-Keyword'>String</span> lastChanged<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>default</span> <span class='def-String'>"08/07/2011"</span><span class='def-SymbolStrong def-Symbol'>;</span>
+24: <span class='def-SymbolStrong def-Symbol'>}</span>
+25: 
