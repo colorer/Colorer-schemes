@@ -1,3 +1,13 @@
+2014-01-17
+  Fixed:
+   - java: When a method throws more than one exception, it is not outlined.
+           When a method declaration spans several lines, it is not always outlined.
+           Sometimes, the same method is listed multiple times in the outline.
+           Not all java number literals syntax is supported.
+           Annotations and some newer keywords are not recognized.
+           The suppoted syntax corresponds to J2SE ~1.2.
+            etc.
+
 2014-01-09
   New:
     - Kotlin syntax (Alexander Udalov)
