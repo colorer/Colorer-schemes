@@ -36,7 +36,7 @@
 
 <scheme name='virtual.comment'>
 	<inherit scheme='lead' />
-	<inherit scheme='d:comment' />
+	<inherit scheme='d:comment.flat' />
 </scheme>
 
 <scheme name='code'>
@@ -44,7 +44,7 @@
 		<virtual scheme='content'   subst-scheme='code' />
 	</inherit>
 	<inherit scheme='d:d.flat'>
-		<virtual scheme='d:comment' subst-scheme='virtual.comment' />
+		<virtual scheme='d:comment.flat' subst-scheme='virtual.comment' />
 	</inherit>
 </scheme>
 

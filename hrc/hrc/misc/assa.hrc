@@ -217,7 +217,7 @@ slow or ugly ( it works fine for me, that's enough :) .
 
 <scheme name="assEventsSection">
   <inherit scheme="assCommon"/>
-  <regexp match="/^(Format:)\s((Marked)|([^,]*)),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),(.?*)$/"
+  <regexp match="/^(Format:)\s((Marked)|([^,]*)),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),(.*?)$/"
     region1="assComment" region3="assKeyword" region4="assLabel" region5="assNumber" region6="assNumber"
     region7="assStyleName" region8="assComment"
     region9="assNumber" regiona="assNumber" regionb="assNumber"
@@ -311,7 +311,7 @@ slow or ugly ( it works fine for me, that's enough :) .
 
 <scheme name="assV4PlusMoreStyle">
 <!-- who says that 15 regions is enough? :) -->
-  <regexp match="/([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),(.?*)$/"
+  <regexp match="/([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),(.*?)$/"
     region1="assLabel" region2="assLabel"
     region3="assKeyword" region4="assNumber" region5="assNumber"
     region6="assLabel"
@@ -569,7 +569,7 @@ slow or ugly ( it works fine for me, that's enough :) .
 
 <!-- similar to assV4Plus*Style -->
 <scheme name="assV4MoreStyle">
-  <regexp match="/([^,]*),([^,]*),([^,]*),([^,]*),(.?*)$/"
+  <regexp match="/([^,]*),([^,]*),([^,]*),([^,]*),(.*?)$/"
     region1="assNumber" region2="assNumber" region3="assNumber"
     region4="assKeyword" region5="assStyle"
   />

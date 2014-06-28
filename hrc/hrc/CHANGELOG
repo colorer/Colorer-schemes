@@ -1,3 +1,47 @@
+2014-01-17
+  Fixed:
+   - java: When a method throws more than one exception, it is not outlined.
+           When a method declaration spans several lines, it is not always outlined.
+           Sometimes, the same method is listed multiple times in the outline.
+           Not all java number literals syntax is supported.
+           Annotations and some newer keywords are not recognized.
+           The suppoted syntax corresponds to J2SE ~1.2.
+            etc.
+
+2014-01-09
+  New:
+    - Kotlin syntax (Alexander Udalov)
+  Fixed:
+    - java: remove non-existing 'threadsafe' keyword;
+            add 'assert' (new in 1.4), 'enum' (new in 5.0)
+
+2014-01-08
+  Fixed:
+    - assa: fix some syntax error
+    - default, text, lex : normalize interval
+
+2014-01-02
+  Fixed:
+    - d: Multiple fixes (Vladimir Panteleev)
+    - default: Fix highlighting of ISO dates in October (Vladimir Panteleev)
+    - actionscript: Add generics (Vladimir Panteleev)
+    - jscript: Add back null and undefined (Vladimir Panteleev)
+    - powershell: update (Roman Kuzmin)
+
+2013-12-10
+  Fixed:
+    - csharp: add interface in outlined (Aidar)
+    - farhelp: fix page link (Aidar)
+    - powershell: update
+
+2013-11-13
+  Fixed:
+    - php: regexp modifiers changed
+
+2013-10-22
+  Fixed:
+    - php: regexp modifiers "u" and "J" added
+
 2013-10-08
   Fixed:
     - ActionScript: Property outliner, * in imports (Vladimir Panteleev)

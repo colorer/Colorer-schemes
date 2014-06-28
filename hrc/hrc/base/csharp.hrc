@@ -25,6 +25,8 @@ With help of:
 
       <region name="FuncOutline" parent="def:Outlined"/>
       <region name="ClassOutline" parent="def:Outlined"/>
+      <region name="IntfOutline" parent="def:Outlined"/>
+      <region name="DelegOutline" parent="def:Outlined"/>
       <region name="vbString" parent="def:String"/>
       <region name="string.quote" parent="def:StringEdge"/>
       <region name="string.escape" parent="def:StringContent"/>
@@ -69,11 +71,26 @@ With help of:
          ]]></regexp>
          <regexp><![CDATA[
            /\M
-           (?:class|struct) \s+
+           (?:class|struct|enum) \s+
            (?{ClassOutline}
             [\:\w]+ [\:\w\s]*? ([^;]|$)
            )/x
          ]]></regexp>
+         <regexp><![CDATA[
+           /\M
+           (?:interface) \s+
+           (?{IntfOutline}
+            [\:\w]+ [\:\w\s]*? ([^;]|$)
+           )/x
+         ]]></regexp>
+         <regexp><![CDATA[
+           /\M
+           (?:delegate) \s+
+           (?{DelegOutline}
+            [\:\w]+ [\:\w\s]*? ([^;]|$)
+           )/x
+         ]]></regexp>
+
          <keywords region="csSymbol">
             <symb name=";" region="csSymbolStrong"/>
             <symb name=":"/>

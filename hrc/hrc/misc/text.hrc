@@ -96,7 +96,7 @@
 <!-- inet address -->
          <inherit scheme="NetAddresses"/>
          <inherit scheme="Apost"/>
-         <regexp match="/^\s{,8} \M (\d[\d\.\-]* \s[^\d.]+) /x" region1="Section"/>
+         <regexp match="/^\s{0,8} \M (\d[\d\.\-]* \s[^\d.]+) /x" region1="Section"/>
 <!-- speedup by
         Andrzej Novosiolov <andrzej.Novosiolov@p4.f201.n463.z2.fidonet.org> :)
    -->
@@ -105,7 +105,7 @@
          <inherit scheme="Date"/>
          <inherit scheme="Time"/>
 <!-- Numbers -->
-         <regexp match="/\b(\d{,10}[\,\.]?\d{,10}([eE][\-\+]?\d+)?)\b/" region0="Number"/>
+         <regexp match="/\b(\d{0,10}[\,\.]?\d{0,10}([eE][\-\+]?\d+)?)\b/" region0="Number"/>
          <regexp match="/``.*?''/" region0="String"/>
          <inherit scheme="StandardString"/>
          <inherit scheme="LabelScheme"/>

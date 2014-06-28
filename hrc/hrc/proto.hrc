@@ -100,9 +100,14 @@
     <filename>/\.ja(va|v|d)$/i</filename>
     <firstline weight='2'>/^\/\/ Decompiled by Jad/</firstline>
     <parameters>
-      <param name="j2se-classes" value="true" description="Use some common used J2SE class names"/>
       <param name="tabs-as-errors" value="false" description="Shows tabulation symbol as error"/>
       <param name="spaces-as-errors" value="false" description="Shows trailing spaces as error"/>
+      <param name="outlined-new" value="false" description="Outline creation of instances"/>
+      <param name="j2se-core-classes" value="true" description="Use names of J2SE core classes"/>
+      <param name="j2se-xml-classes" value="true" description="Use names of J2SE Xml classes"/>
+      <param name="j2se-javax-classes" value="false" description="Use names of J2SE javax.* classes"/>
+      <param name="j2se-gui-classes" value="false" description="Use names of J2SE applet, Awt and Swing classes"/>
+      <param name="j2se-omg-classes" value="false" description="Use names of J2SE org.omg.* classes"/>
     </parameters>
   </prototype>
   <prototype name="idl" group="main" description="IDL">
@@ -173,6 +178,10 @@
     <parameters>
       <param name="tabs-as-errors" value="false" description="Shows tabulation symbol as error"/>
     </parameters>
+  </prototype>
+  <prototype name="kotlin" group="main" description="Kotlin">
+    <location link="base/kotlin.hrc"/>
+    <filename>/\.kt$/i</filename>
   </prototype>
 
   <!--  inet languages  -->
@@ -541,15 +550,15 @@
   </prototype>
   <prototype name="powershell" group="scripts" description="PowerShell">
     <filename>/\.(ps[dDmM]?1|psfconsole)$/i</filename>
-    <location link="scripts/farnet/powershell.hrc"/>
+    <location link="scripts/powershell.hrc"/>
   </prototype>
   <prototype name="r" group="scripts" description="R">
     <filename>/\.(R|Rhistory|Rprofile)$/i</filename>
-    <location link="scripts/farnet/r.hrc"/>
+    <location link="scripts/r.hrc"/>
   </prototype>
   <prototype name="markdown" group="scripts" description="markdown">
     <filename>/\.(text|md|markdown)$/i</filename>
-    <location link="scripts/farnet/markdown.hrc"/>
+    <location link="misc/markdown.hrc"/>
   </prototype>
 
 
@@ -974,7 +983,7 @@
   </prototype>
   <prototype name="text" group="other" description="plain text">
     <location link="misc/text.hrc"/>
-    <filename>/(read\.?me|\.txt$|\.rus|\.nfo|\.log|install*|*ChangeLog*|AUTHORS|COPYING|FAQ|LICENSE|TODO$)/i</filename>
+    <filename>/(read\.?me|\.txt$|\.rus|\.nfo|\.log|.*install.*|.*ChangeLog.*|AUTHORS|COPYING|FAQ|LICENSE|TODO$)/i</filename>
     <filename>/\.spo/ix</filename>
   </prototype>
 
