@@ -420,6 +420,8 @@
 	<keywords region='key.bool'>
 		<word name='true'/>
 		<word name='false'/>
+
+		<word name='__ctfe'/>
 	</keywords>
 </scheme>
 
@@ -555,7 +557,6 @@
 <scheme name='type'>
 	<keywords region='key.type'>
 		<word name='void'/>
-		<word name='bit'/>
 		<word name='bool'/>
 		<word name='byte'/>
 		<word name='ubyte'/>
@@ -581,6 +582,7 @@
 		<word name='dchar'/>
 
 		<word name='size_t'/>
+		<word name='sizediff_t'/>
 		<word name='hash_t'/>
 
 		<word name='string'/>
@@ -1401,7 +1403,6 @@
 <scheme name='keys.custom'>
 	<inherit scheme='d.property'/>
 	<keywords region='key.lib.function'>
-		<word name='print'/>
 		<word name='toString'/>
 		<word name='toHash'/>
 	</keywords>
