@@ -648,11 +648,19 @@
 
 
 <scheme name='tpl.fun.proxy'>
+	<block scheme='tpl.fun.proxy.content'>
+		<start match='/~/'/>
+		<end   match='/\)?#1/' />
+	</block>
+</scheme>
+
+<scheme name='tpl.fun.proxy.content'>
+	<inherit scheme='keys'/>
+	<inherit scheme='decl.fun.keywords'/>
 	<block scheme='decl.class.tpl'>
-		<start match='/(\()/' region0='symb.tpl' region1='def:PairStart' />
+		<start match='/\)?~1(\()/' region0='symb.tpl' region1='def:PairStart' />
 		<end   match='/(\))/' region0='symb.tpl' region1='def:PairEnd'   />
 	</block>
-	<inherit scheme='keys'/>
 </scheme>
 
 <scheme name='tpl.tpl.proxy'>
@@ -1046,8 +1054,8 @@
 	</regexp>
 
 	<block scheme='tpl.fun.proxy'>
-		<start match='/\M%id;\s*\([^\(\);]*?\)\s*\([^\);]*?\)[^;]*($|\{)/'/>
-		<end match='/\)?#1/'/>
+		<start match='/\M%id;\s*\([^\(\);]*?\)\s*\([^\);]*?\)[^;]*($|[;\{])/'/>
+		<end match='//'/>
 	</block>
 
 	<inherit scheme='decl.fun.keywords' />

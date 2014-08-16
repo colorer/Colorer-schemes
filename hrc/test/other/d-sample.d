@@ -465,3 +465,5 @@ enum foo : int {}
 enum MacroImpl[string] macros = 0;
 enum MacroImpl[string] macros(T) = 0;
 enum T!(olol) macros = 0;
+
+Duration opBinary(string op)(MonoTime o);
