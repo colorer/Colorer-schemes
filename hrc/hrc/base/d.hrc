@@ -1013,13 +1013,15 @@
 						return\b
 					|
 						new\b
-					|
+					)?!
+					\w*
+
+					(
 						\/[\/\*\+]
 					|
 						=
 					)?!
-					\S+
-					%typeseparator;+
+					\W
 				)+
 			)?
 			(?{fun.out}

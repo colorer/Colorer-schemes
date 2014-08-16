@@ -467,3 +467,5 @@ enum MacroImpl[string] macros(T) = 0;
 enum T!(olol) macros = 0;
 
 Duration opBinary(string op)(MonoTime o);
+
+*************************** // performance
