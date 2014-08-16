@@ -126,7 +126,7 @@
 </scheme>
 
 <scheme name='ddoc'>
-	<regexp match='/~\s*ditto\b/' region='ddoc.keyword'/>
+	<regexp match='/~\+*\s*(ditto)\b/i' region1='ddoc.keyword'/>
 	<regexp match='/%ddoc.lead;\m\w+:($|\s)/' region='ddoc:sectiontitle'/>
 	<inherit scheme='ddoc.content'/>
 </scheme>

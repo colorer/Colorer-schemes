@@ -182,7 +182,7 @@ goto label;
  */
 real sqrt(real x);
 float sqrt(float x); /// ditto
-double sqrt(double x); /++ ditto +/
+double sqrt(double x); /++ Ditto +/
 
 /++
     $(LI $(D filename) must not contain any of the following reserved
