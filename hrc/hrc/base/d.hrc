@@ -171,7 +171,7 @@
 		region00='def:PairStart'
 		region10='def:PairEnd'
 	/>
-	<block start='/[^()]\m/' end='/\M[()]|$/' scheme='comment.content' />
+	<block start='/[^()\*\/]\m/' end='/\M([()\*\/]|$)/' scheme='comment.content'/>
 </scheme>
 
 <scheme name='comment.flat'>
@@ -188,7 +188,7 @@
 	/>
 	<block scheme='comment.flat.parens' region='comment'>
 		<start match='/(\/\*)/' region0='comment.delim' region1='def:PairStart'/>
-		<end   match='/(\*\/|\M\))/' region0='comment.delim' region1='def:PairEnd'/>
+		<end   match='/(\*\/|\)?=)/' region0='comment.delim' region1='def:PairEnd'/>
 	</block>
 
 	<inherit scheme='comment.rec.block'/>

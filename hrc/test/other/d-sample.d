@@ -469,3 +469,14 @@ enum T!(olol) macros = 0;
 Duration opBinary(string op)(MonoTime o);
 
 *************************** // performance
+
+/**
+---
+/* aoeu */
+/+ aoeu +/
+void main() {}
+---
+
+**/
+
+/** $(D true /* aoeu() */ ) **/
