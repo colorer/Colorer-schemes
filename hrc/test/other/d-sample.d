@@ -436,3 +436,10 @@ x;  // this is now line 6 of file foo\bar
 
 auto EB_FE = { x : goto x; };           // delegate literals with labels (ambiguous with struct literals)
 //SomeStruct s = { x : 0 };            // struct literals (ambiguous with delegate literals)
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+// 2014-08-16
+
+enum KeepTerminator : bool { no, yes }
+enum DisconnectType {}
