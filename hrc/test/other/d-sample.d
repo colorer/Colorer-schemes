@@ -480,3 +480,6 @@ void main() {}
 **/
 
 /** $(D true /* aoeu() */ ) **/
+
+alias Foo(T) = Too;
+alias Too!(1) Foo;

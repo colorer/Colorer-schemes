@@ -944,6 +944,11 @@
 		<start match='/\b(interface)\b\s+\M(%id;)/' />
 		<end match='/[:\{]?=/' region1='symb.struct'/>
 	</block>
+
+	<block scheme='decl.class.decl'>
+		<start match='/\b(alias)\b\s+\M(%id;)\s*\(.*\)\s*=/' region1='key' />
+		<end match='/[=\{;]?=/' region1='symb.struct'/>
+	</block>
 </scheme>
 
 
