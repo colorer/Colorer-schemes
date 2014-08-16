@@ -455,3 +455,5 @@ MYMACRO = Macro definition
 */
 
 string[]fun(){}
+
+auto dg = void delegate() { }

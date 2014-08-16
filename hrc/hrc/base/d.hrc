@@ -995,7 +995,13 @@
 					|
 						debug\b
 					|
+						return\b
+					|
+						new\b
+					|
 						\/[\/\*\+]
+					|
+						=
 					)?!
 					\S+
 					%typeseparator;+
