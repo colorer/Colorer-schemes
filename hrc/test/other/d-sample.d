@@ -483,3 +483,6 @@ void main() {}
 
 alias Foo(T) = Too;
 alias Too!(1) Foo;
+
+auto r = regex(r"^begin [0-7]+ \S+$");
+auto r =  regex(`^begin [0-7]+ \S+$`);

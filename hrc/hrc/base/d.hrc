@@ -253,6 +253,18 @@
 </scheme>
 
 <scheme name='string.all'>
+	<!-- regex -->
+	<block scheme='regexp:hrc.regexp' region='string'>
+		<start match='/(?:regex\()?#6(r)(")/'
+			region0='string.delim' region1='string.pref' region2='def:PairStart'
+		/>
+		<end match='/(")%str.post;/' region0='string.delim' region1='def:PairEnd'/>
+	</block>
+	<block scheme='regexp:hrc.regexp' region='string'>
+		<start match='/(?:regex\()?#6(`)/' region0='string.delim' region1='def:PairStart'/>
+		<end   match='/(`)%str.post;/' region0='string.delim' region1='def:PairEnd'/>
+	</block>
+
 	<block scheme='def:empty' region='string'>
 		<start match='/(r)(")/'
 			region0='string.delim' region1='string.pref' region2='def:PairStart'
