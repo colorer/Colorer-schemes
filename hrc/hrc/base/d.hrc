@@ -896,6 +896,8 @@
 	<inherit scheme='tpl.tpl'/>
 </scheme>
 
+<entity name='enumtype' value='[^:(\{=;\s][\w\[\]]*' />
+
 <scheme name='decl.class'>
 	<!-- Heuristics template/outline search  -->
 	<!-- <block> seems to cause an unwanted indentation in the outliner, use <regexp> for outlining and <block> for highlighting -->
@@ -918,9 +920,14 @@
 		<end match='/\{?=/'/>
 	</block>
 
-	<regexp region1='key' region3='enum.out' match="/\M\b(enum)\s+(%id;\s+)?(%id;)\s*($|[:=;(\{])/" />
+	<!-- enum [ [VALUE-TYPE] NAME] [':' ENUM-TYPE] ['(' TEMPLATEOPTS ')'] { '{' VALUES... '}' | ['=' VALUE] ';' } -->
+	<regexp region1='key' region3='enum.out' match="/\M\b(enum)\s+(%enumtype;\s)?(%id;)\s*($|[:(\{=;])/" />
+	<block scheme='type'>
+		<start match='/\b(enum)\s+\M(%enumtype;\s)%id;\s*($|[:(\{=;])/' />
+		<end   match='/%id;\s*\M($|[:(\{=;])/'/>
+	</block>
 	<block scheme='decl.class.decl'>
-		<start match='/\b(enum)\b\s*\M(%id;|)\s*(%id;)(\s*\(.+?(\)|$))?/' />
+		<start match='/\b(enum)\s+(%enumtype;\s)?%id;\M(\s*\(.+?(\)|$))/' />
 		<end match='/[:=;\{]?=/'/>
 	</block>
 
@@ -1206,6 +1213,7 @@
 		<word name='default'/>
 		<word name='do'/>
 		<word name='else'/>
+		<word name='enum'/>
 		<word name='finally'/>
 		<word name='for'/>
 		<word name='foreach'/>
@@ -1221,7 +1229,7 @@
 		<word name='typedef'/>
 	</keywords>
 
-	<regexp match='/%id;\s*(:)/' region0='label' region1='label.mark'/>
+	<regexp match='/(enum\s)?~5%id;\s*(:)/x' region0='label' region2='label.mark'/>
 </scheme>
 
 

@@ -457,3 +457,11 @@ MYMACRO = Macro definition
 string[]fun(){}
 
 auto dg = void delegate() { }
+
+enum : int;
+enum : int {}
+enum foo : int;
+enum foo : int {}
+enum MacroImpl[string] macros = 0;
+enum MacroImpl[string] macros(T) = 0;
+enum T!(olol) macros = 0;
