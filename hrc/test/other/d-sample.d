@@ -453,3 +453,5 @@ void f(T)(T t) if (true)
 Macros:
 MYMACRO = Macro definition
 */
+
+string[]fun(){}

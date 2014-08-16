@@ -948,7 +948,8 @@
 <entity name='nestedparens2' value='(?:%noparens;(?:\(%nestedparens3;\)%noparens;)*)' />
 <entity name='nestedparens'  value='(?:%noparens;(?:\(%nestedparens2;\)%noparens;)*)' />
 
-<entity name='argument'      value='\w%nestedparens;\s+\w+\s*(=\s*%nestedparens;)?' />
+<entity name='typeseparator' value='[\s\*\[\]]' />
+<entity name='argument'      value='\w%nestedparens;%typeseparator;+\w+\s*(=\s*%nestedparens;)?' />
 
 <entity name='decl.fun.params' value='
 	(
@@ -997,7 +998,7 @@
 						\/[\/\*\+]
 					)?!
 					\S+
-					\s+
+					%typeseparator;+
 				)+
 			)?
 			(?{fun.out}
