@@ -443,3 +443,5 @@ auto EB_FE = { x : goto x; };           // delegate literals with labels (ambigu
 
 enum KeepTerminator : bool { no, yes }
 enum DisconnectType {}
+
+/// $(D_PARAM true)
