@@ -445,3 +445,6 @@ enum KeepTerminator : bool { no, yes }
 enum DisconnectType {}
 
 /// $(D_PARAM true)
+
+void f(T)(T t) if (true)
+{}
