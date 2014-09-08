@@ -280,8 +280,8 @@ Object obj;
 
 // *** additional keywords ***
 immutable typeof(this) thisType;
-__gshared pure nothrow shared immutable @property @safe @trusted @system @disable x; // attributes
-__gshared: pure: nothrow: shared: immutable: @property: @safe: @trusted: @system: @disable: // attribute sections
+__gshared pure nothrow shared immutable @property @safe @trusted @system @disable @nogc x; // attributes
+__gshared: pure: nothrow: shared: immutable: @property: @safe: @trusted: @system: @disable: @nogc: // attribute sections
 try {} catch {}
 void takesByReference(ref int x);
 enum b = __traits(isAbstractClass, T);

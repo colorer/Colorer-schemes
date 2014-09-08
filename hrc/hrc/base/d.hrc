@@ -894,6 +894,7 @@
 			| trusted
 			| system
 			| disable
+			| nogc
 		))\b\s*(:)?/x</regexp>
 </scheme>
 
