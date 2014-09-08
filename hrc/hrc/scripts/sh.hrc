@@ -59,11 +59,11 @@
 
  <block start="/\#/" end="/$/" region="def:Comment" scheme="def:Comment"/>
 
+ <inherit scheme="string.eval"/>
  <inherit scheme="shell.in"/>
 </scheme>
 
 <scheme name="shell.in">
- <inherit scheme="string.eval"/>
 
  <block start="/(\{)/" end="/(\})/" scheme="shell.in"
   region00="def:PairStart" region10="def:PairEnd"
