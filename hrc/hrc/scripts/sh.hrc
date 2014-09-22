@@ -149,7 +149,8 @@
 </scheme>
 
 <scheme name="string">
- <block start="/(&lt;&lt;\s*\\?)(EO\w+)/" end="/^(\y2)/"
+<!-- TODO: add support of single-quoted and double-quoted heredoc delimiter -->
+ <block start="/(&lt;&lt;-?\s*\\?)([\w-]+)/" end="/^(\y2)/"
   scheme="slash" region="perl:HereDoc"
   region00="def:PairStart" region10="def:PairEnd"
   region01="perl:HereDocLt" region02="perl:HereDocName"
