@@ -26,6 +26,7 @@
     <!-- TODO: support ECMA-262 ... 357 -->
 
     <import type="def"/>
+      <import type="java"/>
     <entity name="worddiv" value="[^\w$]" />
 
     <scheme name="jCommentContent">
@@ -49,6 +50,10 @@
     </scheme>
 
     <scheme name="jsComments">
+<!-- important comments /*! */ -->
+<block start="/\/\*!/" end="/\*\//" scheme="DocumentationComment" region="CommentContent" region00="PairStart" region10="PairEnd"/>
+
+          <inherit scheme='JavaComments'/>
 <!-- just ignore html comments -->
         <regexp match="/^\s* &lt;!--/x" region0="Comment"/>
         <regexp match="/^\s* --&gt;/x" region0="Comment"/>
