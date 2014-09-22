@@ -31,6 +31,7 @@ With help of:
       <region name="ntVarEnv" parent="Var"/>
 
       <entity name="label" value=":[\dA-Za-z]\w*"/>
+      <entity name="labelName" value="[a-zA-Z0-9`\-~@#$_\[\]\\\{\}'.\/]+"/>
 
 
       <scheme name="echo">
@@ -43,7 +44,7 @@ With help of:
          <block start="/(\()/" end="/(\))/" scheme="BatchInternal" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
          <block start="/(\[)/" end="/(\])/" scheme="BatchInternal" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
 <!-- Labels -->
-         <regexp match="/^\s*%label;\s*$/" region0="ntLabel"/>
+         <regexp match="/^\s*:%labelName;\s*(.*)$/" region0="ntLabel" region1="ntComment"/>
 <!-- Linear Comments -->
          <regexp match="/^\s*(REM\s+).*$/i" region0="ntComment" region1="ntCmd"/>
          <regexp match="/^\s*::.*$/" region0="ntComment"/>
@@ -56,17 +57,18 @@ With help of:
 <!-- Strings -->
          <regexp match="/\&#34;(\\.|[^\\&#34;])*?\&#34;/" region0="ntStr"/>
 <!--regexp match='/\%.*?\%/' region0="ntVarEnv"/-->
-         <regexp match="/(\%)[^\[\]]*?(\%)/" region0="ntVarEnv" region1="PairStart" region2="PairEnd"/>
+         <regexp match="/([%!])[^\[\]]*?(\1)/" region0="ntVarEnv" region1="PairStart" region2="PairEnd"/>
          <regexp match="/\[.*?\]/" region0="ntVarEnv"/>
          <regexp match="/&lt;.*?\&gt;/" region0="ntVarEnv"/>
 <!-- ECHO command -->
 <!--regexp match="/\b(echo)((\s*?on\s*?(>|$))|(\s*?off\s*?(>|$)))/i" region1="Keywords" region2="Keywords" -->
-         <regexp match="/\becho(\s*on\s*|\s*?off\s*)/i" region0="ntCmd"/>
+         <regexp match="/\becho(\s+on\s*|\s+off\s*)/i" region0="ntCmd"/>
          <block start="/\becho\M\W/i" end="/\M'|`|&lt;|&gt;|\||&amp;|$/" scheme="echo" region="ntStr" region00="ntCmd"/>
 <!-- GOTO command -->
-         <regexp match="/(goto\s)+(\w*\b)/i" region1="ntCmd" region2="ntLabel"/>
+         <regexp match="/goto(\s*:|\s+:?)EOF/i" region="ntCmd"/>
+         <regexp match="/(goto) \s+ (:?%labelName;)/ix" region1="ntCmd" region2="ntLabel"/>
 <!-- CALL command with label -->
-         <regexp match="/(call) \s+ (%label;\b)/ix" region1="ntCmd" region2="ntLabel"/>
+         <regexp match="/(call) \s+ (:%labelName;)/ix" region1="ntCmd" region2="ntLabel"/>
 
          <block start="/^\s*(\@)/" end="/$/" scheme="Batch" region="ntComment" region01="ntSpec"/>
          <keywords region="ntSpec">
