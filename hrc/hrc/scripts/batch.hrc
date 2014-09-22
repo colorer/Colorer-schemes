@@ -87,10 +87,12 @@ With help of:
             <symb name="?"/>
             <symb name="^"/>
          </keywords>
+         <regexp match="/setlocal(\s+(enable|disable)(extensions|delayedexpansion)\b)+/i" region0="ntCmd"/>
          <keywords ignorecase="yes" region="ntCmd">
             <word name="accdate"/>
             <word name="assoc"/>
             <word name="auto"/>
+            <word name="aux"/>
             <word name="break"/>
             <word name="buffers"/>
             <word name="buffershigh"/>
@@ -122,6 +124,7 @@ With help of:
             <word name="drivparm"/>
             <word name="echo"/>
             <word name="echoconfig"/>
+            <word name="else"/>
             <word name="endlocal"/>
             <word name="eof"/>
             <word name="equ"/>
