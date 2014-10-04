@@ -11,6 +11,7 @@
             improve var expansions: ${#...}, ${!...} (ildar-shaimordanov)
    - jscript: added more jsMethods for highlighting (ildar-shaimordanov)
               added support of important comments /status (ildar-shaimordanov)
+   - python: update octal and binary literals for Python 2.6 (techtonik)
 
 2014-01-17
   Fixed:
