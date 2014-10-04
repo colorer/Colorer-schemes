@@ -1,3 +1,10 @@
+2014-10-04
+  Fixed:
+   - D: Multiple fixes (Vladimir Panteleev)
+   - Batch: Improve numeric parameter highlighting (Vladimir Panteleev)
+   - Shell: Fix highlighting of array length expressions (Vladimir Panteleev)
+            Fix backtick expressions (fixup) (Vladimir Panteleev)
+
 2014-01-17
   Fixed:
    - java: When a method throws more than one exception, it is not outlined.
