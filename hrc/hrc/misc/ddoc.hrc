@@ -18,6 +18,8 @@
 <region name='quote' parent='def:Comment'/>
 <region name='sectiontitle' parent='def:String'/>
 <region name='macro' parent='ddoc'/>
+<region name='macro.def' parent='def:Outlined'/>
+<region name='macro.def.sym' parent='def:CommentDoc'/>
 <region name='macro.name' parent='def:Comment'/>
 <region name='macro.delim' parent='def:Comment'/>
 <region name='code' parent='def:Text'/>
@@ -56,12 +58,13 @@
 </scheme>
 
 <scheme name='content'>
+	<regexp match='/^(\w+)\s*(\=)/' region1='macro.def' region2='macro.def.sym' />
 	<block scheme='content'>
 		<start match='/(\()/' region1='def:PairStart'/>
 		<end   match='/(\))/' region1='def:PairEnd'/>
 	</block>
 	<block scheme='code' region='code'>
-		<start match='/(\$\()(D)\b/' region0='macro.delim' region1='def:PairStart' region2='macro.name'/>
+		<start match='/(\$\()(D|D_PARAM)\b/' region0='macro.delim' region1='def:PairStart' region2='macro.name'/>
 		<end   match='/(\))/' region0='macro.delim' region1='def:PairEnd'/>
 	</block>
 	<inherit scheme='macros' />

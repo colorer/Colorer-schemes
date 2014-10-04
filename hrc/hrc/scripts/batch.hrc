@@ -31,10 +31,17 @@ With help of:
       <region name="ntVarEnv" parent="Var"/>
 
       <entity name="label" value=":[\dA-Za-z]\w*"/>
+      <entity name="path-subst" value="(\~[fdpnxsatz]*(\$\w+\:)?)?"/>
 
+      <scheme name="BatchContent">
+         <regexp match="/\%\*/" region0="ntNumber"/>
+         <regexp match="/\%%path-subst;\d/i" region0="ntNumber"/>
+         <regexp match="/\%\%%path-subst;[a-z]/i" region0="ntNumber"/>
+      </scheme>
 
       <scheme name="echo">
          <regexp match="/\^(\||&amp;|&lt;|&gt;)/i" region0="ntStr"/>
+         <inherit scheme="BatchContent"/>
          <inherit scheme="Comment"/>
       </scheme>
 
@@ -51,8 +58,7 @@ With help of:
 <!-- Numbers -->
          <regexp match="/\b\d[0-9a-fA-F]*\b/" region0="ntNumber"/>
          <regexp match="/\%\@[^\[]+/" region0="ntNumber"/>
-         <regexp match="/\%(\d+|\*)/" region0="ntNumber"/>
-         <regexp match="/\%\~(f|d|p|n|x|s|a|t|z|(\$PATH\:)|dp|nx|(dp\$PATH\:)|ftza)?(\d+)/i" region0="ntNumber"/>
+         <inherit scheme="BatchContent"/>
 <!-- Strings -->
          <regexp match="/\&#34;(\\.|[^\\&#34;])*?\&#34;/" region0="ntStr"/>
 <!--regexp match='/\%.*?\%/' region0="ntVarEnv"/-->

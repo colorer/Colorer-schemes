@@ -126,7 +126,7 @@
 </scheme>
 
 <scheme name='ddoc'>
-	<regexp match='/~\s*ditto\b/' region='ddoc.keyword'/>
+	<regexp match='/~\+*\s*(ditto)\b/i' region1='ddoc.keyword'/>
 	<regexp match='/%ddoc.lead;\m\w+:($|\s)/' region='ddoc:sectiontitle'/>
 	<inherit scheme='ddoc.content'/>
 </scheme>
@@ -171,7 +171,7 @@
 		region00='def:PairStart'
 		region10='def:PairEnd'
 	/>
-	<block start='/[^()]\m/' end='/\M[()]|$/' scheme='comment.content' />
+	<block start='/[^()\*\/]\m/' end='/\M([()\*\/]|$)/' scheme='comment.content'/>
 </scheme>
 
 <scheme name='comment.flat'>
@@ -188,7 +188,7 @@
 	/>
 	<block scheme='comment.flat.parens' region='comment'>
 		<start match='/(\/\*)/' region0='comment.delim' region1='def:PairStart'/>
-		<end   match='/(\*\/|\M\))/' region0='comment.delim' region1='def:PairEnd'/>
+		<end   match='/(\*\/|\)?=)/' region0='comment.delim' region1='def:PairEnd'/>
 	</block>
 
 	<inherit scheme='comment.rec.block'/>
@@ -253,6 +253,18 @@
 </scheme>
 
 <scheme name='string.all'>
+	<!-- regex -->
+	<block scheme='regexp:hrc.regexp' region='string'>
+		<start match='/(?:regex\()?#6(r)(")/'
+			region0='string.delim' region1='string.pref' region2='def:PairStart'
+		/>
+		<end match='/(")%str.post;/' region0='string.delim' region1='def:PairEnd'/>
+	</block>
+	<block scheme='regexp:hrc.regexp' region='string'>
+		<start match='/(?:regex\()?#6(`)/' region0='string.delim' region1='def:PairStart'/>
+		<end   match='/(`)%str.post;/' region0='string.delim' region1='def:PairEnd'/>
+	</block>
+
 	<block scheme='def:empty' region='string'>
 		<start match='/(r)(")/'
 			region0='string.delim' region1='string.pref' region2='def:PairStart'
@@ -420,6 +432,8 @@
 	<keywords region='key.bool'>
 		<word name='true'/>
 		<word name='false'/>
+
+		<word name='__ctfe'/>
 	</keywords>
 </scheme>
 
@@ -555,7 +569,6 @@
 <scheme name='type'>
 	<keywords region='key.type'>
 		<word name='void'/>
-		<word name='bit'/>
 		<word name='bool'/>
 		<word name='byte'/>
 		<word name='ubyte'/>
@@ -581,6 +594,7 @@
 		<word name='dchar'/>
 
 		<word name='size_t'/>
+		<word name='sizediff_t'/>
 		<word name='hash_t'/>
 
 		<word name='string'/>
@@ -646,11 +660,19 @@
 
 
 <scheme name='tpl.fun.proxy'>
+	<block scheme='tpl.fun.proxy.content'>
+		<start match='/~/'/>
+		<end   match='/\)?#1/' />
+	</block>
+</scheme>
+
+<scheme name='tpl.fun.proxy.content'>
+	<inherit scheme='keys'/>
+	<inherit scheme='decl.fun.keywords'/>
 	<block scheme='decl.class.tpl'>
-		<start match='/(\()/' region0='symb.tpl' region1='def:PairStart' />
+		<start match='/\)?~1(\()/' region0='symb.tpl' region1='def:PairStart' />
 		<end   match='/(\))/' region0='symb.tpl' region1='def:PairEnd'   />
 	</block>
-	<inherit scheme='keys'/>
 </scheme>
 
 <scheme name='tpl.tpl.proxy'>
@@ -872,6 +894,7 @@
 			| trusted
 			| system
 			| disable
+			| nogc
 		))\b\s*(:)?/x</regexp>
 </scheme>
 
@@ -893,6 +916,8 @@
 	<inherit scheme='d.expr'/>
 	<inherit scheme='tpl.tpl'/>
 </scheme>
+
+<entity name='enumtype' value='[^:(\{=;\s][\w\[\]]*' />
 
 <scheme name='decl.class'>
 	<!-- Heuristics template/outline search  -->
@@ -916,16 +941,26 @@
 		<end match='/\{?=/'/>
 	</block>
 
-	<regexp region1='key' region3='enum.out' match="/\M\b(enum)\s+(%id;\s+)?(%id;)\s*($|[=;(])/" />
+	<!-- enum [ [VALUE-TYPE] NAME] [':' ENUM-TYPE] ['(' TEMPLATEOPTS ')'] { '{' VALUES... '}' | ['=' VALUE] ';' } -->
+	<regexp region1='key' region3='enum.out' match="/\M\b(enum)\s+(%enumtype;\s)?(%id;)\s*($|[:(\{=;])/" />
+	<block scheme='type'>
+		<start match='/\b(enum)\s+\M(%enumtype;\s)%id;\s*($|[:(\{=;])/' />
+		<end   match='/%id;\s*\M($|[:(\{=;])/'/>
+	</block>
 	<block scheme='decl.class.decl'>
-		<start match='/\b(enum)\b\s*\M(%id;|)\s*(%id;)(\s*\(.+?(\)|$))?/' />
-		<end match='/[:=;]?=/'/>
+		<start match='/\b(enum)\s+(%enumtype;\s)?%id;\M(\s*\(.+?(\)|$))/' />
+		<end match='/[:=;\{]?=/'/>
 	</block>
 
 	<regexp region1='key' region2='iface.out' match="/\M\b(interface)\s+(%id;)/" />
 	<block scheme='decl.class.decl'>
 		<start match='/\b(interface)\b\s+\M(%id;)/' />
 		<end match='/[:\{]?=/' region1='symb.struct'/>
+	</block>
+
+	<block scheme='decl.class.decl'>
+		<start match='/\b(alias)\b\s+\M(%id;)\s*\(.*\)\s*=/' region1='key' />
+		<end match='/[=\{;]?=/' region1='symb.struct'/>
 	</block>
 </scheme>
 
@@ -946,7 +981,8 @@
 <entity name='nestedparens2' value='(?:%noparens;(?:\(%nestedparens3;\)%noparens;)*)' />
 <entity name='nestedparens'  value='(?:%noparens;(?:\(%nestedparens2;\)%noparens;)*)' />
 
-<entity name='argument'      value='\w%nestedparens;\s+\w+\s*(=\s*%nestedparens;)?' />
+<entity name='typeseparator' value='[\s\*\[\]]' />
+<entity name='argument'      value='\w%nestedparens;%typeseparator;+\w+\s*(=\s*%nestedparens;)?' />
 
 <entity name='decl.fun.params' value='
 	(
@@ -969,7 +1005,7 @@
 		(\)|$)
 	)
 	[^;?:\{,()\/]*
-	($|\{|\/[\/\*\+])
+	($|\{|\bif\b|\/[\/\*\+])
 '/>
 
 <scheme name='decl.fun'>
@@ -992,10 +1028,18 @@
 					|
 						debug\b
 					|
-						\/[\/\*\+]
+						return\b
+					|
+						new\b
 					)?!
-					\S+
-					\s+
+					\w*
+
+					(
+						\/[\/\*\+]
+					|
+						=
+					)?!
+					\W
 				)+
 			)?
 			(?{fun.out}
@@ -1030,8 +1074,8 @@
 	</regexp>
 
 	<block scheme='tpl.fun.proxy'>
-		<start match='/\M%id;\s*\([^\(\);]*?\)\s*\([^\);]*?\)[^;]*($|\{)/'/>
-		<end match='/\)?#1/'/>
+		<start match='/\M%id;\s*\([^\(\);]*?\)\s*\([^\);]*?\)[^;]*($|[;\{])/'/>
+		<end match='//'/>
 	</block>
 
 	<inherit scheme='decl.fun.keywords' />
@@ -1197,6 +1241,7 @@
 		<word name='default'/>
 		<word name='do'/>
 		<word name='else'/>
+		<word name='enum'/>
 		<word name='finally'/>
 		<word name='for'/>
 		<word name='foreach'/>
@@ -1212,7 +1257,7 @@
 		<word name='typedef'/>
 	</keywords>
 
-	<regexp match='/%id;\s*(:)/' region0='label' region1='label.mark'/>
+	<regexp match='/(enum\s)?~5%id;\s*(:)/x' region0='label' region2='label.mark'/>
 </scheme>
 
 
@@ -1401,7 +1446,6 @@
 <scheme name='keys.custom'>
 	<inherit scheme='d.property'/>
 	<keywords region='key.lib.function'>
-		<word name='print'/>
 		<word name='toString'/>
 		<word name='toHash'/>
 	</keywords>

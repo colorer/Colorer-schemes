@@ -1,6 +1,8 @@
 	<keywords region='key.lib.alias'>
 		<!-- core.atomic -->
 		<word name='msync'/>
+		<!-- core.exception -->
+		<word name='AssertHandler'/>
 		<!-- core.simd -->
 		<word name='void16'/>
 		<word name='double2'/>
@@ -27,6 +29,7 @@
 		<!-- core.stdc.config -->
 		<word name='c_long'/>
 		<word name='c_ulong'/>
+		<word name='c_long_double'/>
 		<!-- core.stdc.math -->
 		<word name='float_t'/>
 		<word name='double_t'/>
@@ -76,10 +79,12 @@
 		<word name='INTMAX_C'/>
 		<word name='UINTMAX_C'/>
 		<!-- core.stdc.stdio -->
-		<word name='FILE'/>
 		<word name='fpos_t'/>
+		<word name='FILE'/>
 		<word name='snprintf'/>
 		<word name='vsnprintf'/>
+		<!-- core.stdc.stdlib -->
+		<word name='_compare_fp_t'/>
 		<!-- core.stdc.time -->
 		<word name='time_t'/>
 		<word name='clock_t'/>
@@ -109,6 +114,8 @@
 		<word name='PSYMBOL_REGISTERED_CALLBACK64'/>
 		<word name='SymRegisterCallback64Func'/>
 		<word name='ImagehlpApiVersionFunc'/>
+		<!-- core.sys.windows.stacktrace -->
+		<word name='RtlCaptureStackBackTraceFunc'/>
 		<!-- core.sys.windows.threadaux -->
 		<word name='getTEB'/>
 		<word name='getThreadStackBottom'/>
@@ -246,6 +253,7 @@
 		<word name='DRAWSTATEPROC'/>
 		<word name='PLARGE_INTEGER'/>
 		<word name='PULARGE_INTEGER'/>
+		<word name='LPOVERLAPPED'/>
 		<word name='PSECURITY_ATTRIBUTES'/>
 		<word name='LPSECURITY_ATTRIBUTES'/>
 		<word name='PFILETIME'/>
@@ -288,6 +296,9 @@
 		<word name='NPWNDCLASSA'/>
 		<word name='LPWNDCLASSA'/>
 		<word name='WNDCLASS'/>
+		<word name='PWNDCLASSW'/>
+		<word name='NPWNDCLASSW'/>
+		<word name='LPWNDCLASSW'/>
 		<word name='PMSG'/>
 		<word name='NPMSG'/>
 		<word name='LPMSG'/>
@@ -328,6 +339,7 @@
 		<word name='getpid'/>
 		<word name='ScanAllThreadsFn'/>
 		<word name='ScanAllThreadsTypeFn'/>
+		<word name='IsMarkedDg'/>
 		<!-- core.time -->
 		<word name='weeks'/>
 		<word name='days'/>
@@ -419,11 +431,11 @@
 		<word name='out_func'/>
 		<word name='gzFile'/>
 		<word name='z_off_t'/>
-		<!-- gc.gcalloc -->
-		<word name='pthread_t'/>
-		<!-- gc.gcx -->
+		<!-- gc.gc -->
 		<word name='gc_t'/>
 		<word name='Bins'/>
+		<!-- gc.os -->
+		<word name='pthread_t'/>
 		<!-- object -->
 		<word name='size_t'/>
 		<word name='ptrdiff_t'/>
@@ -438,9 +450,9 @@
 		<word name='TraceHandler'/>
 		<word name='IMonitor'/>
 		<word name='DEvent'/>
-		<word name='_dg_t'/>
-		<word name='_dg2_t'/>
 		<word name='clear'/>
+		<!-- std.array -->
+		<word name='splitter'/>
 		<!-- std.base64 -->
 		<word name='Base64'/>
 		<word name='Base64URL'/>
@@ -460,23 +472,6 @@
 		<word name='fd_set'/>
 		<word name='LPWSAOVERLAPPED'/>
 		<word name='LPWSAOVERLAPPED_COMPLETION_ROUTINE'/>
-		<!-- std.cpuid -->
-		<word name='vendor'/>
-		<word name='processor'/>
-		<word name='mmx'/>
-		<word name='fxsr'/>
-		<word name='sse'/>
-		<word name='sse2'/>
-		<word name='sse3'/>
-		<word name='ssse3'/>
-		<word name='amd3dnow'/>
-		<word name='amd3dnowExt'/>
-		<word name='amdMmx'/>
-		<word name='ia64'/>
-		<word name='amd64'/>
-		<word name='hyperThreading'/>
-		<word name='threadsPerCPU'/>
-		<word name='coresPerCPU'/>
 		<!-- std.datetime -->
 		<word name='DateTimeException'/>
 		<word name='DosFileTime'/>
@@ -488,19 +483,32 @@
 		<!-- std.digest.ripemd -->
 		<word name='RIPEMD160Digest'/>
 		<!-- std.digest.sha -->
+		<word name='SHA1'/>
+		<word name='SHA224'/>
+		<word name='SHA256'/>
+		<word name='SHA384'/>
+		<word name='SHA512'/>
+		<word name='SHA512_224'/>
+		<word name='SHA512_256'/>
 		<word name='SHA1Digest'/>
+		<word name='SHA224Digest'/>
+		<word name='SHA256Digest'/>
+		<word name='SHA384Digest'/>
+		<word name='SHA512Digest'/>
+		<word name='SHA512_224Digest'/>
+		<word name='SHA512_256Digest'/>
 		<!-- std.encoding -->
 		<word name='AsciiString'/>
 		<word name='Latin1String'/>
 		<word name='Windows1252String'/>
-		<!-- std.format -->
-		<word name='FormatError'/>
+		<!-- std.exception -->
+		<word name='pointsTo'/>
+		<!-- std.functional -->
+		<word name='curry'/>
 		<!-- std.internal.math.biguintcore -->
 		<word name='multibyteAdd'/>
 		<word name='multibyteSub'/>
 		<!-- std.internal.math.biguintnoasm -->
-		<word name='BigDigit'/>
-		<!-- std.internal.math.biguintx86 -->
 		<word name='BigDigit'/>
 		<!-- std.math -->
 		<word name='FP_ILOGB0'/>
@@ -517,7 +525,6 @@
 		<word name='P_WAIT'/>
 		<word name='P_NOWAIT'/>
 		<word name='getpid'/>
-		<word name='environment'/>
 		<!-- std.random -->
 		<word name='MinstdRand0'/>
 		<word name='MinstdRand'/>
@@ -532,9 +539,6 @@
 		<word name='Random'/>
 		<!-- std.signals -->
 		<word name='DisposeEvt'/>
-		<!-- std.socket -->
-		<word name='timeval'/>
-		<word name='linger'/>
 		<!-- std.stdio -->
 		<word name='FPUTC'/>
 		<word name='FPUTWC'/>
@@ -542,9 +546,15 @@
 		<word name='FGETWC'/>
 		<word name='FLOCK'/>
 		<word name='FUNLOCK'/>
-		<word name='_setmode'/>
-		<word name='fileno'/>
 		<word name='isStreamingDevice'/>
+		<!-- std.string -->
+		<word name='icmp'/>
+		<word name='toLower'/>
+		<word name='toLowerInPlace'/>
+		<word name='toUpper'/>
+		<word name='toUpperInPlace'/>
+		<word name='xformat'/>
+		<word name='xsformat'/>
 		<!-- std.traits -->
 		<word name='hasLocalAliasing'/>
 		<word name='hasRawLocalAliasing'/>
@@ -552,8 +562,8 @@
 		<word name='pointerTarget'/>
 		<!-- std.typetuple -->
 		<word name='IndexOf'/>
-		<!-- std.utf -->
-		<word name='UtfException'/>
+		<!-- std.uni -->
+		<word name='CodepointSet'/>
 		<!-- std.variant -->
 		<word name='Variant'/>
 	</keywords>
@@ -564,17 +574,40 @@
 		<word name='cas'/>
 		<word name='atomicLoad'/>
 		<word name='atomicStore'/>
+		<!-- core.demangle -->
+		<word name='mangle'/>
+		<word name='mangleFunc'/>
+		<!-- core.internal.convert -->
+		<word name='toUbyte'/>
+		<word name='floatFormat'/>
+		<!-- core.internal.hash -->
+		<word name='hashOf'/>
+		<!-- core.internal.traits -->
+		<word name='TypeTuple'/>
+		<word name='trustedCast'/>
+		<word name='Unconst'/>
+		<word name='Unqual'/>
+		<word name='externDFunc'/>
 		<!-- core.simd -->
 		<word name='Vector'/>
 		<word name='pcmpeq'/>
 		<!-- core.stdc.stdarg -->
 		<word name='va_start'/>
 		<word name='va_arg'/>
+		<!-- core.stdc.stdint -->
+		<word name='_typify'/>
 		<!-- core.time -->
 		<word name='dur'/>
 		<word name='convert'/>
 		<!-- object -->
 		<word name='AssociativeArray'/>
+		<word name='rehash'/>
+		<word name='dup'/>
+		<word name='byKey'/>
+		<word name='byValue'/>
+		<word name='keys'/>
+		<word name='values'/>
+		<word name='get'/>
 		<word name='destroy'/>
 		<word name='_isStaticArray'/>
 		<word name='capacity'/>
@@ -582,9 +615,11 @@
 		<word name='assumeSafeAppend'/>
 		<word name='_ArrayEq'/>
 		<word name='RTInfo'/>
+		<word name='idup'/>
 		<!-- std.algorithm -->
 		<word name='map'/>
 		<word name='reduce'/>
+		<word name='sum'/>
 		<word name='fill'/>
 		<word name='uninitializedFill'/>
 		<word name='initializeAll'/>
@@ -610,7 +645,6 @@
 		<word name='findSplitBefore'/>
 		<word name='findSplitAfter'/>
 		<word name='countUntil'/>
-		<word name='indexOf'/>
 		<word name='Until'/>
 		<word name='until'/>
 		<word name='startsWith'/>
@@ -624,10 +658,9 @@
 		<word name='balancedParens'/>
 		<word name='equal'/>
 		<word name='cmp'/>
-		<word name='MinType'/>
 		<word name='min'/>
-		<word name='MaxType'/>
 		<word name='max'/>
+		<word name='clamp'/>
 		<word name='minCount'/>
 		<word name='minPos'/>
 		<word name='mismatch'/>
@@ -637,6 +670,9 @@
 		<word name='copy'/>
 		<word name='swapRanges'/>
 		<word name='reverse'/>
+		<word name='strip'/>
+		<word name='stripLeft'/>
+		<word name='stripRight'/>
 		<word name='bringToFront'/>
 		<word name='remove'/>
 		<word name='partition'/>
@@ -655,10 +691,6 @@
 		<word name='canFind'/>
 		<word name='any'/>
 		<word name='all'/>
-		<word name='canFindSorted'/>
-		<word name='lowerBound'/>
-		<word name='upperBound'/>
-		<word name='equalRange'/>
 		<word name='topNCopy'/>
 		<word name='SetUnion'/>
 		<word name='setUnion'/>
@@ -675,6 +707,7 @@
 		<word name='nextPermutation'/>
 		<word name='nextEvenPermutation'/>
 		<word name='cartesianProduct'/>
+		<word name='among'/>
 		<!-- std.array -->
 		<word name='array'/>
 		<word name='assocArray'/>
@@ -692,7 +725,6 @@
 		<word name='sameTail'/>
 		<word name='replicate'/>
 		<word name='split'/>
-		<word name='splitter'/>
 		<word name='join'/>
 		<word name='replace'/>
 		<word name='replaceInto'/>
@@ -704,8 +736,13 @@
 		<word name='appender'/>
 		<word name='SimpleSlice'/>
 		<word name='SimpleSliceLvalue'/>
+		<!-- std.ascii -->
+		<word name='toLower'/>
+		<word name='toUpper'/>
 		<!-- std.base64 -->
 		<word name='Base64Impl'/>
+		<!-- std.bigint -->
+		<word name='absUnsign'/>
 		<!-- std.bitmanip -->
 		<word name='bitfields'/>
 		<word name='swapEndian'/>
@@ -717,12 +754,14 @@
 		<word name='read'/>
 		<word name='write'/>
 		<word name='append'/>
+		<word name='bitsSet'/>
 		<!-- std.c.windows.winsock -->
 		<word name='fd_set_custom'/>
 		<!-- std.complex -->
 		<word name='complex'/>
 		<word name='Complex'/>
 		<word name='abs'/>
+		<word name='sqAbs'/>
 		<word name='arg'/>
 		<word name='conj'/>
 		<word name='fromPolar'/>
@@ -739,15 +778,21 @@
 		<word name='receiveTimeout'/>
 		<!-- std.container -->
 		<word name='TotalContainer'/>
-		<word name='make'/>
-		<word name='SList'/>
-		<word name='DList'/>
+		<!-- std.container.array -->
 		<word name='Array'/>
+		<!-- std.container.binaryheap -->
 		<word name='BinaryHeap'/>
 		<word name='heapify'/>
+		<!-- std.container.dlist -->
+		<word name='DList'/>
+		<!-- std.container.rbtree -->
 		<word name='RBNode'/>
 		<word name='RedBlackTree'/>
 		<word name='redBlackTree'/>
+		<!-- std.container.slist -->
+		<word name='SList'/>
+		<!-- std.container.util -->
+		<word name='make'/>
 		<!-- std.conv -->
 		<word name='to'/>
 		<word name='toImpl'/>
@@ -764,6 +809,8 @@
 		<word name='isOctalLiteral'/>
 		<word name='emplace'/>
 		<word name='toTextRange'/>
+		<word name='unsigned'/>
+		<word name='signed'/>
 		<!-- std.csv -->
 		<word name='csvReader'/>
 		<word name='csvNextToken'/>
@@ -777,10 +824,10 @@
 		<word name='IntervalRange'/>
 		<word name='PosInfIntervalRange'/>
 		<word name='NegInfIntervalRange'/>
-		<word name='lengthof'/>
 		<word name='benchmark'/>
 		<word name='comparingBenchmark'/>
 		<word name='isTimePoint'/>
+		<word name='parseRFC822DateTime'/>
 		<word name='CmpTimeUnits'/>
 		<word name='valid'/>
 		<word name='enforceValid'/>
@@ -803,7 +850,14 @@
 		<!-- std.digest.ripemd -->
 		<word name='ripemd160Of'/>
 		<!-- std.digest.sha -->
+		<word name='SHA'/>
 		<word name='sha1Of'/>
+		<word name='sha224Of'/>
+		<word name='sha256Of'/>
+		<word name='sha384Of'/>
+		<word name='sha512Of'/>
+		<word name='sha512_224Of'/>
+		<word name='sha512_256Of'/>
 		<!-- std.encoding -->
 		<word name='EncoderFunctions'/>
 		<word name='CodePoints'/>
@@ -835,9 +889,9 @@
 		<word name='collectException'/>
 		<word name='collectExceptionMsg'/>
 		<word name='assumeUnique'/>
-		<word name='pointsTo'/>
-		<word name='structuralCast'/>
-		<word name='structurallyCompatible'/>
+		<word name='assumeWontThrow'/>
+		<word name='doesPointTo'/>
+		<word name='mayPointTo'/>
 		<word name='ifThrown'/>
 		<!-- std.file -->
 		<word name='readText'/>
@@ -857,9 +911,13 @@
 		<!-- std.functional -->
 		<word name='unaryFun'/>
 		<word name='binaryFun'/>
+		<word name='lessThan'/>
+		<word name='greaterThan'/>
+		<word name='equalTo'/>
+		<word name='reverseArgs'/>
 		<word name='binaryReverseArgs'/>
 		<word name='not'/>
-		<word name='curry'/>
+		<word name='partial'/>
 		<word name='adjoin'/>
 		<word name='compose'/>
 		<word name='pipe'/>
@@ -868,39 +926,34 @@
 		<!-- std.getopt -->
 		<word name='getopt'/>
 		<word name='handleOption'/>
+		<word name='defaultGetoptFormatter'/>
 		<!-- std.internal.math.biguintnoasm -->
-		<word name='multibyteAddSub'/>
-		<word name='multibyteIncrementAssign'/>
-		<word name='multibyteMulAdd'/>
-		<!-- std.internal.math.biguintx86 -->
 		<word name='multibyteAddSub'/>
 		<word name='multibyteIncrementAssign'/>
 		<word name='multibyteMulAdd'/>
 		<!-- std.internal.math.errorfunction -->
 		<word name='rationalPoly'/>
-		<!-- std.internal.uni -->
-		<word name='insertInPlaceAlt'/>
-		<word name='copyForwardAlt'/>
-		<word name='replaceInPlaceAlt'/>
-		<word name='CodepointTrie'/>
-		<word name='comparePropertyName'/>
-		<word name='propertyNameLess'/>
+		<!-- std.internal.scopebuffer -->
+		<word name='ScopeBuffer'/>
+		<word name='scopeBuffer'/>
+		<!-- std.internal.unicode_tables -->
+		<word name='TrieEntry'/>
 		<!-- std.json -->
 		<word name='parseJSON'/>
 		<!-- std.math -->
 		<word name='abs'/>
+		<word name='isNaN'/>
+		<word name='isFinite'/>
 		<word name='isNormal'/>
+		<word name='isSubnormal'/>
+		<word name='isInfinity'/>
+		<word name='signbit'/>
+		<word name='copysign'/>
 		<word name='sgn'/>
 		<word name='nextafter'/>
 		<word name='pow'/>
 		<word name='feqrel'/>
 		<word name='approxEqual'/>
-		<!-- std.metastrings -->
-		<word name='Format'/>
-		<word name='FormatString'/>
-		<word name='toStringNow'/>
-		<word name='parseUinteger'/>
-		<word name='parseInteger'/>
 		<!-- std.net.curl -->
 		<word name='download'/>
 		<word name='upload'/>
@@ -974,6 +1027,7 @@
 		<word name='MersenneTwisterEngine'/>
 		<word name='XorshiftEngine'/>
 		<word name='uniform'/>
+		<word name='uniform01'/>
 		<word name='uniformDistribution'/>
 		<word name='randomShuffle'/>
 		<word name='partialShuffle'/>
@@ -1021,7 +1075,6 @@
 		<word name='popBackExactly'/>
 		<word name='Repeat'/>
 		<word name='repeat'/>
-		<word name='replicate'/>
 		<word name='Cycle'/>
 		<word name='cycle'/>
 		<word name='Zip'/>
@@ -1067,6 +1120,7 @@
 		<word name='assumeSorted'/>
 		<word name='RefRange'/>
 		<word name='refRange'/>
+		<word name='tee'/>
 		<!-- std.regex -->
 		<word name='Regex'/>
 		<word name='SampleGenerator'/>
@@ -1077,9 +1131,14 @@
 		<word name='regexImpl'/>
 		<word name='ctRegex'/>
 		<word name='match'/>
+		<word name='matchFirst'/>
+		<word name='matchAll'/>
 		<word name='bmatch'/>
+		<word name='replaceFirst'/>
+		<word name='replaceFirstInto'/>
+		<word name='replaceAll'/>
+		<word name='replaceAllInto'/>
 		<word name='replace'/>
-		<word name='replaceFmt'/>
 		<word name='Splitter'/>
 		<word name='splitter'/>
 		<word name='split'/>
@@ -1096,17 +1155,17 @@
 		<word name='writef'/>
 		<word name='writefln'/>
 		<word name='readf'/>
+		<word name='readln'/>
 		<!-- std.stream -->
 		<word name='TArrayStream'/>
 		<!-- std.string -->
-		<word name='icmp'/>
 		<word name='indexOf'/>
 		<word name='lastIndexOf'/>
+		<word name='indexOfAny'/>
+		<word name='lastIndexOfAny'/>
+		<word name='indexOfNeither'/>
+		<word name='lastIndexOfNeither'/>
 		<word name='representation'/>
-		<word name='toLower'/>
-		<word name='toLowerInPlace'/>
-		<word name='toUpper'/>
-		<word name='toUpperInPlace'/>
 		<word name='capitalize'/>
 		<word name='splitLines'/>
 		<word name='stripLeft'/>
@@ -1123,8 +1182,6 @@
 		<word name='translate'/>
 		<word name='format'/>
 		<word name='sformat'/>
-		<word name='xformat'/>
-		<word name='xsformat'/>
 		<word name='inPattern'/>
 		<word name='countchars'/>
 		<word name='removechars'/>
@@ -1135,6 +1192,7 @@
 		<word name='column'/>
 		<word name='wrap'/>
 		<word name='outdent'/>
+		<word name='assumeUTF'/>
 		<!-- std.traits -->
 		<word name='packageName'/>
 		<word name='moduleName'/>
@@ -1171,12 +1229,16 @@
 		<word name='InterfacesTuple'/>
 		<word name='TransitiveBaseTypeTuple'/>
 		<word name='MemberFunctionsTuple'/>
+		<word name='TemplateOf'/>
+		<word name='TemplateArgsOf'/>
 		<word name='classInstanceAlignment'/>
 		<word name='CommonType'/>
 		<word name='ImplicitConversionTargets'/>
 		<word name='isImplicitlyConvertible'/>
 		<word name='isAssignable'/>
 		<word name='isCovariantWith'/>
+		<word name='rvalueOf'/>
+		<word name='lvalueOf'/>
 		<word name='BooleanTypeOf'/>
 		<word name='IntegralTypeOf'/>
 		<word name='FloatingPointTypeOf'/>
@@ -1206,6 +1268,7 @@
 		<word name='isArray'/>
 		<word name='isAssociativeArray'/>
 		<word name='isBuiltinType'/>
+		<word name='isSIMDVector'/>
 		<word name='isPointer'/>
 		<word name='PointerTarget'/>
 		<word name='isAggregateType'/>
@@ -1231,7 +1294,6 @@
 		<word name='Unsigned'/>
 		<word name='Largest'/>
 		<word name='Signed'/>
-		<word name='unsigned'/>
 		<word name='mostNegative'/>
 		<word name='mangledName'/>
 		<word name='Select'/>
@@ -1239,12 +1301,12 @@
 		<!-- std.typecons -->
 		<word name='Unique'/>
 		<word name='Tuple'/>
+		<word name='reverse'/>
 		<word name='tuple'/>
 		<word name='isTuple'/>
 		<word name='Rebindable'/>
 		<word name='rebindable'/>
 		<word name='alignForSize'/>
-		<word name='Ref'/>
 		<word name='Nullable'/>
 		<word name='NullableRef'/>
 		<word name='BlackHole'/>
@@ -1252,6 +1314,8 @@
 		<word name='AutoImplement'/>
 		<word name='generateEmptyFunction'/>
 		<word name='generateAssertTrap'/>
+		<word name='wrap'/>
+		<word name='unwrap'/>
 		<word name='RefCounted'/>
 		<word name='Proxy'/>
 		<word name='Typedef'/>
@@ -1275,10 +1339,46 @@
 		<word name='templateNot'/>
 		<word name='templateAnd'/>
 		<word name='templateOr'/>
+		<!-- std.uni -->
+		<word name='isCodepointSet'/>
+		<word name='isIntegralPair'/>
+		<word name='InversionList'/>
+		<word name='Trie'/>
+		<word name='codepointSetTrie'/>
+		<word name='CodepointSetTrie'/>
+		<word name='codepointTrie'/>
+		<word name='CodepointTrie'/>
+		<word name='cmpK0'/>
+		<word name='buildTrie'/>
+		<word name='isUtfMatcher'/>
+		<word name='utfMatcher'/>
+		<word name='toTrie'/>
+		<word name='toDelegate'/>
+		<word name='graphemeStride'/>
+		<word name='decodeGrapheme'/>
+		<word name='byGrapheme'/>
+		<word name='byCodePoint'/>
+		<word name='sicmp'/>
+		<word name='icmp'/>
+		<word name='decompose'/>
+		<word name='normalize'/>
+		<word name='allowedIn'/>
+		<word name='toLowerInPlace'/>
+		<word name='toUpperInPlace'/>
+		<word name='toLower'/>
+		<word name='toUpper'/>
+		<!-- std.uri -->
+		<word name='decode'/>
+		<word name='decodeComponent'/>
+		<word name='encode'/>
+		<word name='encodeComponent'/>
+		<word name='uriLength'/>
+		<word name='emailLength'/>
 		<!-- std.utf -->
 		<word name='stride'/>
 		<word name='strideBack'/>
 		<word name='toUCSindex'/>
+		<word name='toUTFindex'/>
 		<word name='decode'/>
 		<word name='decodeFront'/>
 		<word name='codeLength'/>
@@ -1286,6 +1386,10 @@
 		<word name='toUTFz'/>
 		<word name='toUTF16z'/>
 		<word name='count'/>
+		<word name='byCodeUnit'/>
+		<word name='byChar'/>
+		<word name='byWchar'/>
+		<word name='byDchar'/>
 		<!-- std.uuid -->
 		<word name='randomUUID'/>
 		<word name='parseUUID'/>
@@ -1362,6 +1466,8 @@
 		<word name='POINT'/>
 		<word name='WNDCLASSEXA'/>
 		<word name='WNDCLASSA'/>
+		<word name='WNDCLASSEXW'/>
+		<word name='WNDCLASSW'/>
 		<word name='MSG'/>
 		<word name='TEXTMETRICA'/>
 		<word name='OPENFILENAMEA'/>
@@ -1422,16 +1528,16 @@
 		<!-- etc.c.zlib -->
 		<word name='z_stream'/>
 		<word name='gz_header'/>
-		<!-- gc.gcbits -->
+		<!-- gc.bits -->
 		<word name='GCBits'/>
-		<!-- gc.gcstats -->
-		<word name='GCStats'/>
-		<!-- gc.gcx -->
-		<word name='BlkInfo'/>
+		<!-- gc.gc -->
 		<word name='List'/>
 		<word name='Range'/>
+		<word name='Root'/>
 		<word name='Gcx'/>
 		<word name='Pool'/>
+		<!-- gc.stats -->
+		<word name='GCStats'/>
 		<!-- object -->
 		<word name='Interface'/>
 		<word name='OffsetTypeInfo'/>
@@ -1475,26 +1581,28 @@
 		<word name='MD5'/>
 		<!-- std.digest.ripemd -->
 		<word name='RIPEMD160'/>
-		<!-- std.digest.sha -->
-		<word name='SHA1'/>
 		<!-- std.file -->
 		<word name='DirEntry'/>
 		<word name='DirIterator'/>
+		<!-- std.getopt -->
+		<word name='GetoptResult'/>
+		<word name='Option'/>
 		<!-- std.internal.math.biguintcore -->
 		<word name='BigUint'/>
-		<!-- std.internal.uni -->
-		<word name='Interval'/>
-		<word name='CodepointSet'/>
-		<!-- std.internal.uni_tab -->
-		<word name='CommonCaseEntry'/>
+		<!-- std.internal.unicode_tables -->
+		<word name='SimpleCaseEntry'/>
+		<word name='FullCaseEntry'/>
+		<word name='CompEntry'/>
 		<word name='UnicodeProperty'/>
+		<word name='uniProps'/>
+		<word name='blocks'/>
+		<word name='scripts'/>
+		<word name='hangul'/>
 		<!-- std.json -->
 		<word name='JSONValue'/>
 		<!-- std.math -->
 		<word name='IeeeFlags'/>
 		<word name='FloatingPointControl'/>
-		<!-- std.md5 -->
-		<word name='MD5_CTX'/>
 		<!-- std.net.curl -->
 		<word name='AutoProtocol'/>
 		<word name='AsyncChunkInputRange'/>
@@ -1506,6 +1614,11 @@
 		<word name='EmailStatus'/>
 		<!-- std.parallelism -->
 		<word name='SYSTEM_INFO'/>
+		<!-- std.process -->
+		<word name='Pipe'/>
+		<word name='ProcessPipes'/>
+		<!-- std.range -->
+		<word name='NullSink'/>
 		<!-- std.socket -->
 		<word name='AddressInfo'/>
 		<word name='TimeVal'/>
@@ -1514,10 +1627,15 @@
 		<word name='File'/>
 		<word name='LockingTextReader'/>
 		<word name='lines'/>
-		<word name='chunks'/>
 		<!-- std.typecons -->
 		<word name='Yes'/>
 		<word name='No'/>
+		<!-- std.uni -->
+		<word name='GcPolicy'/>
+		<word name='CodepointInterval'/>
+		<word name='MatcherConcept'/>
+		<word name='unicode'/>
+		<word name='Grapheme'/>
 		<!-- std.uuid -->
 		<word name='UUID'/>
 		<!-- std.variant -->
@@ -1561,13 +1679,14 @@
 		<word name='StackTrace'/>
 		<!-- core.thread -->
 		<word name='ThreadException'/>
+		<word name='ThreadError'/>
 		<word name='FiberException'/>
 		<word name='Thread'/>
 		<word name='ThreadGroup'/>
 		<word name='Fiber'/>
 		<!-- core.time -->
 		<word name='TimeException'/>
-		<!-- gc.gcx -->
+		<!-- gc.gc -->
 		<word name='GCMutex'/>
 		<word name='GC'/>
 		<!-- object -->
@@ -1640,6 +1759,8 @@
 		<word name='FileException'/>
 		<!-- std.format -->
 		<word name='FormatException'/>
+		<!-- std.getopt -->
+		<word name='GetOptException'/>
 		<!-- std.json -->
 		<word name='JSONException'/>
 		<!-- std.mmfile -->
@@ -1654,13 +1775,10 @@
 		<!-- std.parallelism -->
 		<word name='TaskPool'/>
 		<word name='ParallelForeachError'/>
-		<!-- std.perf -->
-		<word name='PerformanceCounter'/>
-		<word name='TickCounter'/>
-		<word name='ThreadTimesCounter'/>
-		<word name='ProcessTimesCounter'/>
 		<!-- std.process -->
-		<word name='Environment'/>
+		<word name='Pid'/>
+		<word name='ProcessException'/>
+		<word name='environment'/>
 		<!-- std.regex -->
 		<word name='RegexException'/>
 		<!-- std.socket -->
@@ -1710,7 +1828,7 @@
 		<!-- std.typecons -->
 		<word name='NotImplementedError'/>
 		<!-- std.uri -->
-		<word name='URIerror'/>
+		<word name='URIException'/>
 		<!-- std.utf -->
 		<word name='UTFException'/>
 		<!-- std.uuid -->
@@ -1782,6 +1900,7 @@
 		<word name='ADDRESS_MODE'/>
 		<!-- core.thread -->
 		<word name='ScanType'/>
+		<word name='IsMarked'/>
 		<!-- etc.c.curl -->
 		<word name='CurlFileType'/>
 		<word name='CurlFInfoFlagKnown'/>
@@ -1834,16 +1953,14 @@
 		<word name='CurlPoll'/>
 		<word name='CurlCSelect'/>
 		<word name='CurlMOption'/>
-		<!-- gc.gcx -->
-		<word name='BlkAttr'/>
-		<word name='IsMarked'/>
 		<!-- std.algorithm -->
 		<word name='OpenRight'/>
 		<word name='EditOp'/>
 		<word name='SwapStrategy'/>
 		<word name='SortOutput'/>
+		<!-- std.ascii -->
+		<word name='LetterCase'/>
 		<!-- std.concurrency -->
-		<word name='MsgType'/>
 		<word name='OnCrowding'/>
 		<!-- std.csv -->
 		<word name='Malformed'/>
@@ -1871,23 +1988,17 @@
 		<!-- std.net.isemail -->
 		<word name='CheckDns'/>
 		<word name='EmailStatusCode'/>
-		<word name='EmailPart'/>
-		<word name='AsciiToken'/>
 		<!-- std.numeric -->
 		<word name='CustomFloatFlags'/>
-		<!-- std.parallelism -->
-		<word name='TaskStatus'/>
 		<!-- std.path -->
 		<word name='CaseSensitive'/>
+		<!-- std.process -->
+		<word name='Config'/>
+		<word name='Redirect'/>
 		<!-- std.range -->
 		<word name='StoppingPolicy'/>
 		<word name='TransverseOptions'/>
 		<word name='SearchPolicy'/>
-		<!-- std.regex -->
-		<word name='IR'/>
-		<word name='RegexOption'/>
-		<word name='RegexInfo'/>
-		<word name='OneShot'/>
 		<!-- std.socket -->
 		<word name='socket_t'/>
 		<word name='AddressFamily'/>
@@ -1898,6 +2009,8 @@
 		<word name='SocketFlags'/>
 		<word name='SocketOptionLevel'/>
 		<word name='SocketOption'/>
+		<!-- std.stdio -->
+		<word name='LockType'/>
 		<!-- std.stream -->
 		<word name='SeekPos'/>
 		<word name='FileMode'/>
@@ -1914,12 +2027,17 @@
 		<word name='Variadic'/>
 		<!-- std.typecons -->
 		<word name='RefCountedAutoInitialize'/>
+		<!-- std.uni -->
+		<word name='UnicodeDecomposition'/>
+		<word name='NormalizationForm'/>
 		<!-- std.windows.registry -->
 		<word name='REGSAM'/>
 		<word name='REG_VALUE_TYPE'/>
 		<!-- std.xml -->
 		<word name='DecodeMode'/>
 		<word name='TagType'/>
+		<!-- std.zip -->
+		<word name='CompressionMethod'/>
 		<!-- std.zlib -->
 		<word name='HeaderFormat'/>
 	</keywords>
@@ -1961,6 +2079,8 @@
 		<word name='ERMS_BIT'/>
 		<word name='INVPCID_BIT'/>
 		<word name='RTM_BIT'/>
+		<word name='RDSEED_BIT'/>
+		<word name='SHA_BIT'/>
 		<word name='XF_FP_BIT'/>
 		<word name='XF_SSE_BIT'/>
 		<word name='XF_YMM_BIT'/>
@@ -2042,9 +2162,12 @@
 		<word name='ERROR_ACCESS_DENIED'/>
 		<word name='ERROR_INVALID_HANDLE'/>
 		<word name='ERROR_NO_MORE_FILES'/>
+		<word name='ERROR_LOCK_VIOLATION'/>
 		<word name='ERROR_INSUFFICIENT_BUFFER'/>
+		<word name='ERROR_ALREADY_EXISTS'/>
 		<word name='ERROR_MORE_DATA'/>
 		<word name='ERROR_NO_MORE_ITEMS'/>
+		<word name='ERROR_IO_PENDING'/>
 		<word name='DLL_PROCESS_ATTACH'/>
 		<word name='DLL_THREAD_ATTACH'/>
 		<word name='DLL_THREAD_DETACH'/>
@@ -2821,6 +2944,30 @@
 		<word name='PAN_MIDLINE_INDEX'/>
 		<word name='PAN_XHEIGHT_INDEX'/>
 		<word name='PAN_CULTURE_LATIN'/>
+		<word name='PFD_TYPE_RGBA'/>
+		<word name='PFD_TYPE_COLORINDEX'/>
+		<word name='PFD_MAIN_PLANE'/>
+		<word name='PFD_OVERLAY_PLANE'/>
+		<word name='PFD_UNDERLAY_PLANE'/>
+		<word name='PFD_DOUBLEBUFFER'/>
+		<word name='PFD_STEREO'/>
+		<word name='PFD_DRAW_TO_WINDOW'/>
+		<word name='PFD_DRAW_TO_BITMAP'/>
+		<word name='PFD_SUPPORT_GDI'/>
+		<word name='PFD_SUPPORT_OPENGL'/>
+		<word name='PFD_GENERIC_FORMAT'/>
+		<word name='PFD_NEED_PALETTE'/>
+		<word name='PFD_NEED_SYSTEM_PALETTE'/>
+		<word name='PFD_SWAP_EXCHANGE'/>
+		<word name='PFD_SWAP_COPY'/>
+		<word name='PFD_SWAP_LAYER_BUFFERS'/>
+		<word name='PFD_GENERIC_ACCELERATED'/>
+		<word name='PFD_SUPPORT_DIRECTDRAW'/>
+		<word name='PFD_DIRECT3D_ACCELERATED'/>
+		<word name='PFD_SUPPORT_COMPOSITION'/>
+		<word name='PFD_DEPTH_DONTCARE'/>
+		<word name='PFD_DOUBLEBUFFER_DONTCARE'/>
+		<word name='PFD_STEREO_DONTCARE'/>
 		<word name='TA_NOUPDATECP'/>
 		<word name='TA_UPDATECP'/>
 		<word name='TA_LEFT'/>
@@ -2942,6 +3089,22 @@
 		<word name='COLOR_BTNHILIGHT'/>
 		<word name='CW_USEDEFAULT'/>
 		<word name='HWND_DESKTOP'/>
+		<word name='SWP_ASYNCWINDOWPOS'/>
+		<word name='SWP_DEFERERASE'/>
+		<word name='SWP_DRAWFRAME'/>
+		<word name='SWP_FRAMECHANGED'/>
+		<word name='SWP_HIDEWINDOW'/>
+		<word name='SWP_NOACTIVATE'/>
+		<word name='SWP_NOCOPYBITS'/>
+		<word name='SWP_NOMOVE'/>
+		<word name='SWP_NOOWNERZORDER'/>
+		<word name='SWP_NOREDRAW'/>
+		<word name='SWP_NOREPOSITION'/>
+		<word name='SWP_NOSENDCHANGING'/>
+		<word name='SWP_NOSIZE'/>
+		<word name='SWP_NOZORDER'/>
+		<word name='SWP_SHOWWINDOW'/>
+		<word name='CP_UTF8'/>
 		<word name='WHITE_BRUSH'/>
 		<word name='LTGRAY_BRUSH'/>
 		<word name='GRAY_BRUSH'/>
@@ -3262,6 +3425,8 @@
 		<word name='STILL_ACTIVE'/>
 		<word name='STARTF_USESTDHANDLES'/>
 		<word name='CREATE_NO_WINDOW'/>
+		<word name='HANDLE_FLAG_INHERIT'/>
+		<word name='HANDLE_FLAG_PROTECT_FROM_CLOSE'/>
 		<!-- etc.c.zlib -->
 		<word name='Z_NO_FLUSH'/>
 		<word name='Z_PARTIAL_FLUSH'/>
@@ -3293,10 +3458,9 @@
 		<word name='Z_UNKNOWN'/>
 		<word name='Z_ASCII'/>
 		<word name='Z_DEFLATED'/>
-		<!-- gc.gcx -->
+		<!-- gc.gc -->
 		<word name='OPFAIL'/>
 		<word name='PAGESIZE'/>
-		<word name='COMMITSIZE'/>
 		<word name='POOLSIZE'/>
 		<word name='B_16'/>
 		<word name='B_32'/>
@@ -3309,7 +3473,6 @@
 		<word name='B_PAGE'/>
 		<word name='B_PAGEPLUS'/>
 		<word name='B_FREE'/>
-		<word name='B_UNCOMMITTED'/>
 		<word name='B_MAX'/>
 		<!-- object -->
 		<word name='MIctorstart'/>
@@ -3324,29 +3487,13 @@
 		<word name='MIunitTest'/>
 		<word name='MIimportedModules'/>
 		<word name='MIlocalClasses'/>
-		<word name='MInew'/>
-		<!-- std.ascii -->
-		<word name='_SPC'/>
-		<word name='_CTL'/>
-		<word name='_BLK'/>
-		<word name='_HEX'/>
-		<word name='_UC'/>
-		<word name='_LC'/>
-		<word name='_PNC'/>
-		<word name='_DIG'/>
-		<word name='_ALP'/>
+		<word name='MIname'/>
 		<!-- std.c.process -->
 		<word name='_P_WAIT'/>
 		<word name='_P_NOWAIT'/>
 		<word name='_P_OVERLAY'/>
 		<word name='WAIT_CHILD'/>
 		<word name='WAIT_GRANDCHILD'/>
-		<!-- std.c.stdio -->
-		<word name='FHND_APPEND'/>
-		<word name='FHND_DEVICE'/>
-		<word name='FHND_TEXT'/>
-		<word name='FHND_BYTE'/>
-		<word name='FHND_WCHAR'/>
 		<!-- std.c.windows.com -->
 		<word name='rmm'/>
 		<word name='rup'/>
@@ -3384,10 +3531,99 @@
 		<word name='NI_NAMEREQD'/>
 		<word name='NI_NUMERICSERV'/>
 		<word name='NI_DGRAM'/>
-		<word name='WSAEWOULDBLOCK'/>
 		<word name='WSAEINTR'/>
+		<word name='WSAEBADF'/>
+		<word name='WSAEACCES'/>
+		<word name='WSAEFAULT'/>
+		<word name='WSAEINVAL'/>
+		<word name='WSAEMFILE'/>
+		<word name='WSAEWOULDBLOCK'/>
+		<word name='WSAEINPROGRESS'/>
+		<word name='WSAEALREADY'/>
+		<word name='WSAENOTSOCK'/>
+		<word name='WSAEDESTADDRREQ'/>
+		<word name='WSAEMSGSIZE'/>
+		<word name='WSAEPROTOTYPE'/>
+		<word name='WSAENOPROTOOPT'/>
+		<word name='WSAEPROTONOSUPPORT'/>
+		<word name='WSAESOCKTNOSUPPORT'/>
+		<word name='WSAEOPNOTSUPP'/>
+		<word name='WSAEPFNOSUPPORT'/>
+		<word name='WSAEAFNOSUPPORT'/>
+		<word name='WSAEADDRINUSE'/>
+		<word name='WSAEADDRNOTAVAIL'/>
+		<word name='WSAENETDOWN'/>
+		<word name='WSAENETUNREACH'/>
+		<word name='WSAENETRESET'/>
+		<word name='WSAECONNABORTED'/>
+		<word name='WSAECONNRESET'/>
+		<word name='WSAENOBUFS'/>
+		<word name='WSAEISCONN'/>
+		<word name='WSAENOTCONN'/>
+		<word name='WSAESHUTDOWN'/>
+		<word name='WSAETOOMANYREFS'/>
+		<word name='WSAETIMEDOUT'/>
+		<word name='WSAECONNREFUSED'/>
+		<word name='WSAELOOP'/>
+		<word name='WSAENAMETOOLONG'/>
+		<word name='WSAEHOSTDOWN'/>
+		<word name='WSAEHOSTUNREACH'/>
+		<word name='WSAENOTEMPTY'/>
+		<word name='WSAEPROCLIM'/>
+		<word name='WSAEUSERS'/>
+		<word name='WSAEDQUOT'/>
+		<word name='WSAESTALE'/>
+		<word name='WSAEREMOTE'/>
+		<word name='WSASYSNOTREADY'/>
+		<word name='WSAVERNOTSUPPORTED'/>
+		<word name='WSANOTINITIALISED'/>
 		<word name='WSAHOST_NOT_FOUND'/>
+		<word name='HOST_NOT_FOUND'/>
+		<word name='WSATRY_AGAIN'/>
+		<word name='TRY_AGAIN'/>
+		<word name='WSANO_RECOVERY'/>
+		<word name='NO_RECOVERY'/>
 		<word name='WSANO_DATA'/>
+		<word name='NO_DATA'/>
+		<word name='WSANO_ADDRESS'/>
+		<word name='NO_ADDRESS'/>
+		<word name='EWOULDBLOCK'/>
+		<word name='EINPROGRESS'/>
+		<word name='EALREADY'/>
+		<word name='ENOTSOCK'/>
+		<word name='EDESTADDRREQ'/>
+		<word name='EMSGSIZE'/>
+		<word name='EPROTOTYPE'/>
+		<word name='ENOPROTOOPT'/>
+		<word name='EPROTONOSUPPORT'/>
+		<word name='ESOCKTNOSUPPORT'/>
+		<word name='EOPNOTSUPP'/>
+		<word name='EPFNOSUPPORT'/>
+		<word name='EAFNOSUPPORT'/>
+		<word name='EADDRINUSE'/>
+		<word name='EADDRNOTAVAIL'/>
+		<word name='ENETDOWN'/>
+		<word name='ENETUNREACH'/>
+		<word name='ENETRESET'/>
+		<word name='ECONNABORTED'/>
+		<word name='ECONNRESET'/>
+		<word name='ENOBUFS'/>
+		<word name='EISCONN'/>
+		<word name='ENOTCONN'/>
+		<word name='ESHUTDOWN'/>
+		<word name='ETOOMANYREFS'/>
+		<word name='ETIMEDOUT'/>
+		<word name='ECONNREFUSED'/>
+		<word name='ELOOP'/>
+		<word name='ENAMETOOLONG'/>
+		<word name='EHOSTDOWN'/>
+		<word name='EHOSTUNREACH'/>
+		<word name='ENOTEMPTY'/>
+		<word name='EPROCLIM'/>
+		<word name='EUSERS'/>
+		<word name='EDQUOT'/>
+		<word name='ESTALE'/>
+		<word name='EREMOTE'/>
 		<word name='EAI_NONAME'/>
 		<word name='AF_UNSPEC'/>
 		<word name='AF_UNIX'/>
@@ -3513,33 +3749,30 @@
 		<word name='AI_NON_AUTHORITATIVE'/>
 		<word name='AI_SECURE'/>
 		<word name='AI_RETURN_PREFERRED_NAMES'/>
-		<!-- std.cpuid -->
-		<word name='OTHER'/>
-		<word name='INTEL'/>
-		<word name='AMD'/>
-		<!-- std.ctype -->
-		<word name='_SPC'/>
-		<word name='_CTL'/>
-		<word name='_BLK'/>
-		<word name='_HEX'/>
-		<word name='_UC'/>
-		<word name='_LC'/>
-		<word name='_PNC'/>
-		<word name='_DIG'/>
-		<word name='_ALP'/>
 		<!-- std.internal.digest.sha_SSSE3 -->
-		<word name='STATE_OFS'/>
 		<word name='WI_PLUS_KI_PTR'/>
-		<word name='WI_PTR'/>
 		<!-- std.internal.math.biguintcore -->
 		<word name='LG2BIGDIGITBITS'/>
 		<word name='BIGDIGITSHIFTMASK'/>
 		<!-- std.internal.math.biguintnoasm -->
 		<word name='KARATSUBALIMIT'/>
 		<word name='KARATSUBASQUARELIMIT'/>
-		<!-- std.internal.math.biguintx86 -->
-		<word name='KARATSUBALIMIT'/>
-		<word name='KARATSUBASQUARELIMIT'/>
+		<!-- std.process -->
+		<word name='STDIN_FILENO'/>
+		<word name='STDOUT_FILENO'/>
+		<word name='STDERR_FILENO'/>
+		<!-- std.stdio -->
+		<word name='_O_RDONLY'/>
+		<word name='_O_APPEND'/>
+		<word name='_O_TEXT'/>
+		<word name='_O_BINARY'/>
+		<!-- std.uni -->
+		<word name='Canonical'/>
+		<word name='Compatibility'/>
+		<word name='NFC'/>
+		<word name='NFD'/>
+		<word name='NFKC'/>
+		<word name='NFKD'/>
 		<!-- std.uri -->
 		<word name='URI_Alpha'/>
 		<word name='URI_Reserved'/>
@@ -3685,6 +3918,7 @@
 		<word name='stdin'/>
 		<word name='stdout'/>
 		<word name='stderr'/>
+		<word name='_TWO_DIGIT_EXPONENT'/>
 		<!-- core.stdc.stdlib -->
 		<word name='EXIT_SUCCESS'/>
 		<word name='EXIT_FAILURE'/>
@@ -3699,6 +3933,10 @@
 		<word name='tlsCtorRun'/>
 		<!-- core.sys.windows.threadaux -->
 		<word name='_tls_index'/>
+		<!-- core.sys.windows.windows -->
+		<word name='CREATE_UNICODE_ENVIRONMENT'/>
+		<word name='LOCKFILE_FAIL_IMMEDIATELY'/>
+		<word name='LOCKFILE_EXCLUSIVE_LOCK'/>
 		<!-- etc.c.curl -->
 		<word name='LIBCURL_COPYRIGHT'/>
 		<word name='LIBCURL_VERSION'/>
@@ -3986,19 +4224,20 @@
 		<word name='ZLIB_VERSION'/>
 		<word name='ZLIB_VERNUM'/>
 		<word name='Z_NULL'/>
-		<!-- gc.gcx -->
+		<!-- gc.gc -->
 		<word name='GCVERSION'/>
 		<word name='binsize'/>
 		<word name='notbinsize'/>
 		<word name='SENTINEL_EXTRA'/>
 		<!-- std.ascii -->
-		<word name='hexDigits'/>
 		<word name='fullHexDigits'/>
+		<word name='hexDigits'/>
+		<word name='lowerHexDigits'/>
 		<word name='digits'/>
 		<word name='octalDigits'/>
-		<word name='lowercase'/>
 		<word name='letters'/>
 		<word name='uppercase'/>
+		<word name='lowercase'/>
 		<word name='whitespace'/>
 		<word name='newline'/>
 		<!-- std.c.stdio -->
@@ -4127,6 +4366,7 @@
 		<word name='FIONBIO'/>
 		<word name='NI_MAXHOST'/>
 		<word name='NI_MAXSERV'/>
+		<word name='WSABASEERR'/>
 		<word name='FD_SETSIZE'/>
 		<word name='IN6ADDR_ANY'/>
 		<word name='IN6ADDR_LOOPBACK'/>
@@ -4147,392 +4387,56 @@
 		<!-- std.file -->
 		<word name='FILE_ATTRIBUTE_REPARSE_POINT'/>
 		<word name='MOVEFILE_REPLACE_EXISTING'/>
-		<!-- std.format -->
-		<word name='__pfloatfmt'/>
 		<!-- std.getopt -->
 		<word name='optionChar'/>
 		<word name='endOfOptions'/>
 		<word name='assignChar'/>
+		<word name='arraySep'/>
 		<word name='autoIncrementChar'/>
 		<!-- std.internal.math.gammafunction -->
 		<word name='MAXGAMMA'/>
-		<!-- std.internal.uni_tab -->
-		<word name='commonCaseTable'/>
-		<word name='unicodeInCombining_Diacritical_Marks_Supplement'/>
-		<word name='unicodeInCJK_Radicals_Supplement'/>
-		<word name='unicodeInEthiopic_Supplement'/>
-		<word name='unicodeInPhags_pa'/>
-		<word name='unicodeInSyriac'/>
-		<word name='unicodeInGujarati'/>
-		<word name='unicodeOther_ID_Start'/>
-		<word name='unicodeInKharoshthi'/>
-		<word name='unicodeInHangul_Jamo'/>
-		<word name='unicodeRunic'/>
-		<word name='unicodeInKayah_Li'/>
-		<word name='unicodeOther_Default_Ignorable_Code_Point'/>
-		<word name='unicodeOld_Turkic'/>
-		<word name='unicodeInLydian'/>
-		<word name='unicodeIDS_Binary_Operator'/>
-		<word name='unicodeTai_Tham'/>
-		<word name='unicodeLinear_B'/>
-		<word name='unicodeInSupplemental_Arrows_A'/>
-		<word name='unicodeInMathematical_Alphanumeric_Symbols'/>
-		<word name='unicodeArmenian'/>
-		<word name='unicodeInBlock_Elements'/>
-		<word name='unicodeInSupplemental_Arrows_B'/>
-		<word name='unicodeInBalinese'/>
-		<word name='unicodeCyrillic'/>
-		<word name='unicodeInBamum_Supplement'/>
-		<word name='unicodeWhite_Space'/>
-		<word name='unicodeBatak'/>
-		<word name='unicodeDeprecated'/>
-		<word name='unicodeInUnified_Canadian_Aboriginal_Syllabics_Extended'/>
-		<word name='unicodeCherokee'/>
-		<word name='unicodeInInscriptional_Parthian'/>
-		<word name='unicodeHiragana'/>
-		<word name='unicodeInCJK_Compatibility_Ideographs'/>
-		<word name='unicodeInAncient_Symbols'/>
-		<word name='unicodeInOld_South_Arabian'/>
-		<word name='unicodePattern_Syntax'/>
-		<word name='unicodeNew_Tai_Lue'/>
-		<word name='unicodeASCII_Hex_Digit'/>
-		<word name='unicodeArabic'/>
-		<word name='unicodeInCuneiform_Numbers_and_Punctuation'/>
-		<word name='unicodeBrahmi'/>
-		<word name='unicodeInControl_Pictures'/>
-		<word name='unicodeOther_ID_Continue'/>
-		<word name='unicodeInOl_Chiki'/>
-		<word name='unicodeInArmenian'/>
-		<word name='unicodeInCyrillic'/>
-		<word name='unicodeInNew_Tai_Lue'/>
-		<word name='unicodeInHigh_Surrogates'/>
-		<word name='unicodeInHigh_Private_Use_Surrogates'/>
-		<word name='unicodeInAncient_Greek_Numbers'/>
-		<word name='unicodeQuotation_Mark'/>
-		<word name='unicodeTai_Le'/>
-		<word name='unicodeCc'/>
-		<word name='unicodeInCherokee'/>
-		<word name='unicodeCoptic'/>
-		<word name='unicodeInCyrillic_Supplement'/>
-		<word name='unicodeCf'/>
-		<word name='unicodeGothic'/>
-		<word name='unicodeInHiragana'/>
-		<word name='unicodeInIPA_Extensions'/>
-		<word name='unicodeOgham'/>
-		<word name='unicodeInCJK_Compatibility_Forms'/>
-		<word name='unicodeInShavian'/>
-		<word name='unicodeCn'/>
-		<word name='unicodeInPhaistos_Disc'/>
-		<word name='unicodeCo'/>
-		<word name='unicodeInKana_Supplement'/>
-		<word name='unicodeMath'/>
-		<word name='unicodeInLinear_B_Ideograms'/>
-		<word name='unicodeInYi_Syllables'/>
-		<word name='unicodeInInscriptional_Pahlavi'/>
-		<word name='unicodeCs'/>
-		<word name='unicodeInHangul_Jamo_Extended_A'/>
-		<word name='unicodeInGlagolitic'/>
-		<word name='unicodeInHangul_Jamo_Extended_B'/>
-		<word name='unicodeInSpecials'/>
-		<word name='unicodeBopomofo'/>
-		<word name='unicodeInBamum'/>
-		<word name='unicodeInPlaying_Cards'/>
-		<word name='unicodeInArabic'/>
-		<word name='unicodeVariation_Selector'/>
-		<word name='unicodeInMathematical_Operators'/>
-		<word name='unicodeInPhonetic_Extensions_Supplement'/>
-		<word name='unicodeInBrahmi'/>
-		<word name='unicodeMalayalam'/>
-		<word name='unicodeInCJK_Unified_Ideographs_Extension_A'/>
-		<word name='unicodeInCJK_Unified_Ideographs_Extension_B'/>
-		<word name='unicodeInYijing_Hexagram_Symbols'/>
-		<word name='unicodeInCJK_Unified_Ideographs_Extension_C'/>
-		<word name='unicodeInTibetan'/>
-		<word name='unicodeInImperial_Aramaic'/>
-		<word name='unicodeInCJK_Unified_Ideographs_Extension_D'/>
-		<word name='unicodeInAlchemical_Symbols'/>
-		<word name='unicodePattern_White_Space'/>
-		<word name='unicodeInEmoticons'/>
-		<word name='unicodeInYi_Radicals'/>
-		<word name='unicodeInBraille_Patterns'/>
-		<word name='unicodeInscriptional_Pahlavi'/>
-		<word name='unicodeInCoptic'/>
-		<word name='unicodeInGothic'/>
-		<word name='unicodeInDevanagari'/>
-		<word name='unicodeSTerm'/>
-		<word name='unicodeInTai_Viet'/>
-		<word name='unicodeInDeseret'/>
-		<word name='unicodeHebrew'/>
-		<word name='unicodeLisu'/>
-		<word name='unicodeInSupplementary_Private_Use_Area_A'/>
-		<word name='unicodeInSupplementary_Private_Use_Area_B'/>
-		<word name='unicodeUgaritic'/>
-		<word name='unicodeInMongolian'/>
-		<word name='unicodeInBopomofo'/>
-		<word name='unicodeOld_Persian'/>
-		<word name='unicodeInCJK_Compatibility_Ideographs_Supplement'/>
-		<word name='unicodeInMahjong_Tiles'/>
-		<word name='unicodePhoenician'/>
-		<word name='unicodeEgyptian_Hieroglyphs'/>
-		<word name='unicodeInVariation_Selectors_Supplement'/>
-		<word name='unicodeInLisu'/>
-		<word name='unicodeInLow_Surrogates'/>
-		<word name='unicodeInUgaritic'/>
-		<word name='unicodeInAncient_Greek_Musical_Notation'/>
-		<word name='unicodeInSupplemental_Punctuation'/>
-		<word name='unicodeInTamil'/>
-		<word name='unicodeBidi_Control'/>
-		<word name='unicodeKatakana'/>
-		<word name='unicodeInKanbun'/>
-		<word name='unicodeInHebrew'/>
-		<word name='unicodeTai_Viet'/>
-		<word name='unicodeShavian'/>
-		<word name='unicodeInHanunoo'/>
-		<word name='unicodeOther_Lowercase'/>
-		<word name='unicodeDash'/>
-		<word name='unicodeInSinhala'/>
-		<word name='unicodeKaithi'/>
-		<word name='unicodeInSundanese'/>
-		<word name='unicodeInEthiopic_Extended_A'/>
-		<word name='unicodeInAegean_Numbers'/>
-		<word name='unicodeTibetan'/>
-		<word name='unicodeSamaritan'/>
-		<word name='unicodeInOptical_Character_Recognition'/>
-		<word name='unicodeInKatakana'/>
-		<word name='unicodeInVariation_Selectors'/>
-		<word name='unicodeOld_Italic'/>
-		<word name='unicodeInEnclosed_CJK_Letters_and_Months'/>
-		<word name='unicodeInLatin_1_Supplement'/>
-		<word name='unicodeHan'/>
-		<word name='unicodeDeseret'/>
-		<word name='unicodeInMyanmar'/>
-		<word name='unicodeLl'/>
-		<word name='unicodeSaurashtra'/>
-		<word name='unicodeInLinear_B_Syllabary'/>
-		<word name='unicodeLm'/>
-		<word name='unicodeInKannada'/>
-		<word name='unicodeInLimbu'/>
-		<word name='unicodeInByzantine_Musical_Symbols'/>
-		<word name='unicodeMc'/>
-		<word name='unicodeLo'/>
-		<word name='unicodeMe'/>
-		<word name='unicodeInMeetei_Mayek'/>
-		<word name='unicodeLt'/>
-		<word name='unicodeInKhmer'/>
-		<word name='unicodeInEthiopic_Extended'/>
-		<word name='unicodeLu'/>
-		<word name='unicodeCarian'/>
-		<word name='unicodeInKaithi'/>
-		<word name='unicodeInVedic_Extensions'/>
-		<word name='unicodeMn'/>
-		<word name='unicodeNd'/>
-		<word name='unicodeBamum'/>
-		<word name='unicodeJavanese'/>
-		<word name='unicodeTifinagh'/>
-		<word name='unicodeInHalfwidth_and_Fullwidth_Forms'/>
-		<word name='unicodeInDevanagari_Extended'/>
-		<word name='unicodeInIdeographic_Description_Characters'/>
-		<word name='unicodeInCuneiform'/>
-		<word name='unicodeNl'/>
-		<word name='unicodeInHangul_Compatibility_Jamo'/>
-		<word name='unicodeNo'/>
-		<word name='unicodeInOriya'/>
-		<word name='unicodeLogical_Order_Exception'/>
-		<word name='unicodeInscriptional_Parthian'/>
-		<word name='unicodeSyloti_Nagri'/>
-		<word name='unicodeInBengali'/>
-		<word name='unicodeInTagalog'/>
-		<word name='unicodeInMyanmar_Extended_A'/>
-		<word name='unicodeInAvestan'/>
-		<word name='unicodePc'/>
-		<word name='unicodeInCyrillic_Extended_A'/>
-		<word name='unicodePd'/>
-		<word name='unicodeInCyrillic_Extended_B'/>
-		<word name='unicodeInBasic_Latin'/>
-		<word name='unicodePe'/>
-		<word name='unicodeHanunoo'/>
-		<word name='unicodePf'/>
-		<word name='unicodePi'/>
-		<word name='unicodeSinhala'/>
-		<word name='unicodeInJavanese'/>
-		<word name='unicodeInCarian'/>
-		<word name='unicodeInDomino_Tiles'/>
-		<word name='unicodeInTifinagh'/>
-		<word name='unicodeLycian'/>
-		<word name='unicodeInGeometric_Shapes'/>
-		<word name='unicodeInArabic_Presentation_Forms_A'/>
-		<word name='unicodeInArabic_Presentation_Forms_B'/>
-		<word name='unicodePo'/>
-		<word name='unicodeTerminal_Punctuation'/>
-		<word name='unicodePs'/>
-		<word name='unicodeInSpacing_Modifier_Letters'/>
-		<word name='unicodeOther_Alphabetic'/>
-		<word name='unicodeLepcha'/>
-		<word name='unicodeKayah_Li'/>
-		<word name='unicodeInCounting_Rod_Numerals'/>
-		<word name='unicodeNko'/>
-		<word name='unicodeInOld_Turkic'/>
-		<word name='unicodeInMiscellaneous_Symbols_And_Pictographs'/>
-		<word name='unicodeInLao'/>
-		<word name='unicodeInNKo'/>
-		<word name='unicodeInGreek_and_Coptic'/>
-		<word name='unicodePhags_Pa'/>
-		<word name='unicodeCypriot'/>
-		<word name='unicodeInModifier_Tone_Letters'/>
-		<word name='unicodeTamil'/>
-		<word name='unicodeMyanmar'/>
-		<word name='unicodeSc'/>
-		<word name='unicodeInPrivate_Use_Area'/>
-		<word name='unicodeKannada'/>
-		<word name='unicodeInPhonetic_Extensions'/>
-		<word name='unicodeInEgyptian_Hieroglyphs'/>
-		<word name='unicodeTelugu'/>
-		<word name='unicodeInCombining_Diacritical_Marks'/>
-		<word name='unicodeCham'/>
-		<word name='unicodeInArabic_Supplement'/>
-		<word name='unicodeSk'/>
-		<word name='unicodeImperial_Aramaic'/>
-		<word name='unicodeSm'/>
-		<word name='unicodeKharoshthi'/>
-		<word name='unicodeInLycian'/>
-		<word name='unicodeInCombining_Half_Marks'/>
-		<word name='unicodeSo'/>
-		<word name='unicodeInEnclosed_Alphanumeric_Supplement'/>
-		<word name='unicodeInTai_Le'/>
-		<word name='unicodeInMandaic'/>
-		<word name='unicodeInLepcha'/>
-		<word name='unicodeCanadian_Aboriginal'/>
-		<word name='unicodeInGreek_Extended'/>
-		<word name='unicodeInCJK_Unified_Ideographs'/>
-		<word name='unicodeIDS_Trinary_Operator'/>
-		<word name='unicodeInMiscellaneous_Symbols'/>
-		<word name='unicodeLao'/>
-		<word name='unicodeInLatin_Extended_Additional'/>
-		<word name='unicodeRadical'/>
-		<word name='unicodeMongolian'/>
-		<word name='unicodeInVai'/>
-		<word name='unicodeBengali'/>
-		<word name='unicodeLatin'/>
-		<word name='unicodeTagalog'/>
-		<word name='unicodeRejang'/>
-		<word name='unicodeInCombining_Diacritical_Marks_for_Symbols'/>
-		<word name='unicodeInSupplemental_Mathematical_Operators'/>
-		<word name='unicodeInCham'/>
-		<word name='unicodeAvestan'/>
-		<word name='unicodeInMiscellaneous_Mathematical_Symbols_A'/>
-		<word name='unicodeInMiscellaneous_Mathematical_Symbols_B'/>
-		<word name='unicodeInTelugu'/>
-		<word name='unicodeLimbu'/>
-		<word name='unicodeInGeneral_Punctuation'/>
-		<word name='unicodeUnified_Ideograph'/>
-		<word name='unicodeInPhoenician'/>
-		<word name='unicodeOld_South_Arabian'/>
-		<word name='unicodeInBuhid'/>
-		<word name='unicodeKhmer'/>
-		<word name='unicodeInLatin_Extended_A'/>
-		<word name='unicodeInLatin_Extended_B'/>
-		<word name='unicodeInLatin_Extended_C'/>
-		<word name='unicodeInLatin_Extended_D'/>
-		<word name='unicodeGurmukhi'/>
-		<word name='unicodeInOsmanya'/>
-		<word name='unicodeInCJK_Compatibility'/>
-		<word name='unicodeOriya'/>
-		<word name='unicodeBuginese'/>
-		<word name='unicodeInGeorgian_Supplement'/>
-		<word name='unicodeInCJK_Strokes'/>
-		<word name='unicodeVai'/>
-		<word name='unicodeHangul'/>
-		<word name='unicodeInRejang'/>
-		<word name='unicodeInMiscellaneous_Technical'/>
-		<word name='unicodeInTransport_And_Map_Symbols'/>
-		<word name='unicodeHyphen'/>
-		<word name='unicodeThai'/>
-		<word name='unicodeSundanese'/>
-		<word name='unicodeInRunic'/>
-		<word name='unicodeDiacritic'/>
-		<word name='unicodeYi'/>
-		<word name='unicodeInAlphabetic_Presentation_Forms'/>
-		<word name='unicodeExtender'/>
-		<word name='unicodeGlagolitic'/>
-		<word name='unicodeInSuperscripts_and_Subscripts'/>
-		<word name='unicodeInMalayalam'/>
-		<word name='unicodeJoin_Control'/>
-		<word name='unicodeInBatak'/>
-		<word name='unicodeThaana'/>
-		<word name='unicodeSoft_Dotted'/>
-		<word name='unicodeBraille'/>
-		<word name='unicodeInGurmukhi'/>
-		<word name='unicodeMandaic'/>
-		<word name='unicodeInUnified_Canadian_Aboriginal_Syllabics'/>
-		<word name='unicodeInDingbats'/>
-		<word name='unicodeZl'/>
-		<word name='unicodeInMusical_Symbols'/>
-		<word name='unicodeInBuginese'/>
-		<word name='unicodeInSaurashtra'/>
-		<word name='unicodeInCJK_Symbols_and_Punctuation'/>
-		<word name='unicodeInKangxi_Radicals'/>
-		<word name='unicodeZp'/>
-		<word name='unicodeHex_Digit'/>
-		<word name='unicodeZs'/>
-		<word name='unicodeInThai'/>
-		<word name='unicodeDevanagari'/>
-		<word name='unicodeInArrows'/>
-		<word name='unicodeEthiopic'/>
-		<word name='unicodeInCurrency_Symbols'/>
-		<word name='unicodeInOld_Persian'/>
-		<word name='unicodeInRumi_Numeral_Symbols'/>
-		<word name='unicodeInTags'/>
-		<word name='unicodeGreek'/>
-		<word name='unicodeOl_Chiki'/>
-		<word name='unicodeTagbanwa'/>
-		<word name='unicodeOther_Uppercase'/>
-		<word name='unicodeInOgham'/>
-		<word name='unicodeInThaana'/>
-		<word name='unicodeInEnclosed_Ideographic_Supplement'/>
-		<word name='unicodeInKhmer_Symbols'/>
-		<word name='unicodeCommon'/>
-		<word name='unicodeInCommon_Indic_Number_Forms'/>
-		<word name='unicodeInSmall_Form_Variants'/>
-		<word name='unicodeIdeographic'/>
-		<word name='unicodeGeorgian'/>
-		<word name='unicodeOsmanya'/>
-		<word name='unicodeInEthiopic'/>
-		<word name='unicodeInEnclosed_Alphanumerics'/>
-		<word name='unicodeCuneiform'/>
-		<word name='unicodeSyriac'/>
-		<word name='unicodeInVertical_Forms'/>
-		<word name='unicodeInTai_Xuan_Jing_Symbols'/>
-		<word name='unicodeNoncharacter_Code_Point'/>
-		<word name='unicodeInMiscellaneous_Symbols_and_Arrows'/>
-		<word name='unicodeInOld_Italic'/>
-		<word name='unicodeMeetei_Mayek'/>
-		<word name='unicodeOther_Grapheme_Extend'/>
-		<word name='unicodeOther_Math'/>
-		<word name='unicodeGujarati'/>
-		<word name='unicodeInBox_Drawing'/>
-		<word name='unicodeInTagbanwa'/>
-		<word name='unicodeInHangul_Syllables'/>
-		<word name='unicodeLydian'/>
-		<word name='unicodeInKatakana_Phonetic_Extensions'/>
-		<word name='unicodeInTai_Tham'/>
-		<word name='unicodeInNumber_Forms'/>
-		<word name='unicodeInBopomofo_Extended'/>
-		<word name='unicodeInherited'/>
-		<word name='unicodeInLetterlike_Symbols'/>
-		<word name='unicodeBuhid'/>
-		<word name='unicodeInCypriot_Syllabary'/>
-		<word name='unicodeInSyloti_Nagri'/>
-		<word name='unicodeInSamaritan'/>
-		<word name='unicodeInGeorgian'/>
-		<word name='unicodeAlphabetic'/>
-		<word name='unicodeBalinese'/>
-		<word name='unicodeProperties'/>
-		<word name='NFC_QCN'/>
-		<word name='NFC_QCM'/>
+		<!-- std.internal.unicode_comp -->
+		<word name='combiningClassTrieEntries'/>
+		<word name='composeIdxMask'/>
+		<word name='composeCntShift'/>
+		<word name='compositionJumpTrieEntries'/>
+		<!-- std.internal.unicode_decomp -->
+		<word name='compatMappingTrieEntries'/>
+		<word name='canonMappingTrieEntries'/>
+		<!-- std.internal.unicode_grapheme -->
+		<word name='hangulLVTrieEntries'/>
+		<word name='hangulLVTTrieEntries'/>
+		<word name='mcTrieEntries'/>
+		<word name='graphemeExtendTrieEntries'/>
+		<!-- std.internal.unicode_norm -->
+		<word name='nfcQCTrieEntries'/>
+		<word name='nfdQCTrieEntries'/>
+		<word name='nfkcQCTrieEntries'/>
+		<word name='nfkdQCTrieEntries'/>
+		<!-- std.internal.unicode_tables -->
+		<word name='lowerCaseTrieEntries'/>
+		<word name='upperCaseTrieEntries'/>
+		<word name='simpleCaseTrieEntries'/>
+		<word name='fullCaseTrieEntries'/>
+		<word name='alphaTrieEntries'/>
+		<word name='markTrieEntries'/>
+		<word name='numberTrieEntries'/>
+		<word name='punctuationTrieEntries'/>
+		<word name='symbolTrieEntries'/>
+		<word name='graphicalTrieEntries'/>
+		<word name='nonCharacterTrieEntries'/>
+		<word name='MAX_SIMPLE_LOWER'/>
+		<word name='MAX_SIMPLE_UPPER'/>
+		<word name='MAX_SIMPLE_TITLE'/>
+		<word name='toUpperIndexTrieEntries'/>
+		<word name='toLowerIndexTrieEntries'/>
+		<word name='toTitleIndexTrieEntries'/>
+		<word name='toUpperSimpleIndexTrieEntries'/>
+		<word name='toLowerSimpleIndexTrieEntries'/>
+		<word name='toTitleSimpleIndexTrieEntries'/>
 		<!-- std.internal.windows.advapi32 -->
 		<word name='isWow64'/>
 		<word name='hAdvapi32'/>
-		<word name='pRegDeleteKeyExA'/>
 		<word name='pRegDeleteKeyExW'/>
 		<!-- std.math -->
 		<word name='E'/>
@@ -4559,7 +4463,6 @@
 		<!-- std.range -->
 		<word name='dummyRanges'/>
 		<!-- std.stdio -->
-		<word name='_O_BINARY'/>
 		<word name='stdin'/>
 		<word name='stdout'/>
 		<word name='stderr'/>
@@ -4572,9 +4475,20 @@
 		<!-- std.uni -->
 		<word name='lineSep'/>
 		<word name='paraSep'/>
+		<word name='jamoSBase'/>
+		<word name='jamoLBase'/>
+		<word name='jamoVBase'/>
+		<word name='jamoTBase'/>
+		<word name='jamoLCount'/>
+		<word name='jamoVCount'/>
+		<word name='jamoTCount'/>
+		<word name='jamoNCount'/>
+		<word name='jamoSCount'/>
 		<!-- std.uri -->
 		<word name='hex2ascii'/>
 		<word name='uri_flags'/>
+		<!-- std.utf -->
+		<word name='replacementDchar'/>
 		<!-- std.uuid -->
 		<word name='dnsNamespace'/>
 		<word name='urlNamespace'/>
@@ -4604,6 +4518,14 @@
 		<word name='outpl'/>
 		<word name='popcnt'/>
 		<word name='bitswap'/>
+		<!-- core.checkedint -->
+		<word name='adds'/>
+		<word name='addu'/>
+		<word name='subs'/>
+		<word name='subu'/>
+		<word name='negs'/>
+		<word name='muls'/>
+		<word name='mulu'/>
 		<!-- core.cpuid -->
 		<word name='dataCaches'/>
 		<word name='vendor'/>
@@ -4628,6 +4550,8 @@
 		<word name='avx2'/>
 		<word name='hle'/>
 		<word name='rtm'/>
+		<word name='hasRdseed'/>
+		<word name='hasSha'/>
 		<word name='amd3dnow'/>
 		<word name='amd3dnowExt'/>
 		<word name='amdMmx'/>
@@ -4655,6 +4579,7 @@
 		<word name='demangleType'/>
 		<word name='decodeDmdString'/>
 		<!-- core.exception -->
+		<word name='assertHandler'/>
 		<word name='setAssertHandler'/>
 		<word name='onAssertError'/>
 		<word name='onAssertErrorMsg'/>
@@ -4666,6 +4591,18 @@
 		<word name='onInvalidMemoryOperationError'/>
 		<word name='onSwitchError'/>
 		<word name='onUnicodeError'/>
+		<word name='_d_assertm'/>
+		<word name='_d_assert_msg'/>
+		<word name='_d_assert'/>
+		<word name='_d_unittestm'/>
+		<word name='_d_unittest_msg'/>
+		<word name='_d_unittest'/>
+		<word name='_d_array_bounds'/>
+		<word name='_d_arraybounds'/>
+		<word name='_d_switch_error'/>
+		<word name='_d_hidden_func'/>
+		<!-- core.internal.hash -->
+		<word name='bytesHash'/>
 		<!-- core.math -->
 		<word name='cos'/>
 		<word name='sin'/>
@@ -4678,6 +4615,11 @@
 		<word name='yl2x'/>
 		<word name='yl2xp1'/>
 		<!-- core.runtime -->
+		<word name='rt_loadLibrary'/>
+		<word name='rt_loadLibraryW'/>
+		<word name='rt_unloadLibrary'/>
+		<word name='rt_init'/>
+		<word name='rt_term'/>
 		<word name='_staticCtor2'/>
 		<word name='runModuleUnitTests'/>
 		<word name='defaultTraceHandler'/>
@@ -4945,14 +4887,19 @@
 		<word name='fileno'/>
 		<word name='_snprintf'/>
 		<word name='_vsnprintf'/>
+		<word name='_set_output_format'/>
 		<word name='_filbuf'/>
 		<word name='_flsbuf'/>
 		<word name='_fputc_nolock'/>
 		<word name='_fgetc_nolock'/>
 		<word name='_lock_file'/>
 		<word name='_unlock_file'/>
+		<word name='_get_osfhandle'/>
+		<word name='_open_osfhandle'/>
 		<word name='perror'/>
 		<!-- core.stdc.stdlib -->
+		<word name='bsearch'/>
+		<word name='qsort'/>
 		<word name='atof'/>
 		<word name='atoi'/>
 		<word name='atol'/>
@@ -4976,8 +4923,6 @@
 		<word name='_Exit'/>
 		<word name='getenv'/>
 		<word name='system'/>
-		<word name='bsearch'/>
-		<word name='qsort'/>
 		<word name='abs'/>
 		<word name='labs'/>
 		<word name='llabs'/>
@@ -4998,6 +4943,7 @@
 		<word name='memchr'/>
 		<word name='memcmp'/>
 		<word name='memcpy'/>
+		<word name='memicmp'/>
 		<word name='memmove'/>
 		<word name='memset'/>
 		<word name='strcpy'/>
@@ -5102,15 +5048,15 @@
 		<word name='dll_fixTLS'/>
 		<word name='dll_process_attach'/>
 		<word name='dll_process_detach'/>
-		<word name='_staticCtor9'/>
-		<word name='_staticDtor10'/>
+		<word name='_staticCtor10'/>
+		<word name='_staticDtor11'/>
 		<word name='dll_thread_attach'/>
 		<word name='dll_thread_detach'/>
 		<!-- core.sys.windows.stacktrace -->
 		<word name='RtlCaptureContext'/>
 		<word name='GetEnvironmentVariableA'/>
 		<word name='FixupDebugHeader'/>
-		<word name='_sharedStaticCtor11'/>
+		<word name='_sharedStaticCtor12'/>
 		<!-- core.sys.windows.threadaux -->
 		<word name='OpenThread'/>
 		<word name='rt_moduleTlsCtor'/>
@@ -5158,12 +5104,15 @@
 		<word name='MoveFileA'/>
 		<word name='MoveFileW'/>
 		<word name='ReadFile'/>
+		<word name='SetFileAttributesA'/>
+		<word name='SetFileAttributesW'/>
 		<word name='SetFilePointer'/>
 		<word name='WriteFile'/>
 		<word name='GetModuleFileNameA'/>
 		<word name='GetModuleFileNameW'/>
 		<word name='GetStdHandle'/>
 		<word name='SetStdHandle'/>
+		<word name='GetConsoleWindow'/>
 		<word name='LoadLibraryA'/>
 		<word name='LoadLibraryW'/>
 		<word name='GetProcAddress'/>
@@ -5346,6 +5295,8 @@
 		<word name='SetPixel'/>
 		<word name='SetPixelV'/>
 		<word name='SetPixelFormat'/>
+		<word name='ChoosePixelFormat'/>
+		<word name='SwapBuffers'/>
 		<word name='SetPolyFillMode'/>
 		<word name='StretchBlt'/>
 		<word name='SetRectRgn'/>
@@ -5372,12 +5323,21 @@
 		<word name='LoadCursorW'/>
 		<word name='RegisterClassA'/>
 		<word name='RegisterClassExA'/>
+		<word name='RegisterClassW'/>
+		<word name='RegisterClassExW'/>
 		<word name='CreateWindowExA'/>
 		<word name='CreateWindowA'/>
+		<word name='CreateWindowExW'/>
+		<word name='CreateWindowW'/>
+		<word name='DestroyWindow'/>
+		<word name='SetWindowPos'/>
 		<word name='GetMessageA'/>
+		<word name='GetMessageW'/>
 		<word name='TranslateMessage'/>
 		<word name='DispatchMessageA'/>
+		<word name='DispatchMessageW'/>
 		<word name='PeekMessageA'/>
+		<word name='PeekMessageW'/>
 		<word name='GetFocus'/>
 		<word name='GetEnvironmentStringsW'/>
 		<word name='FreeEnvironmentStringsW'/>
@@ -5413,6 +5373,11 @@
 		<word name='ScrollWindow'/>
 		<word name='ScrollDC'/>
 		<word name='ScrollWindowEx'/>
+		<word name='GetKeyState'/>
+		<word name='GetAsyncKeyState'/>
+		<word name='GetKeyboardState'/>
+		<word name='SetKeyboardState'/>
+		<word name='MapVirtualKey'/>
 		<word name='SendMessageA'/>
 		<word name='GetOpenFileNameA'/>
 		<word name='GetOpenFileNameW'/>
@@ -5558,8 +5523,31 @@
 		<word name='ShellExecuteW'/>
 		<word name='SetTimer'/>
 		<word name='KillTimer'/>
+		<word name='GetHandleInformation'/>
+		<word name='SetHandleInformation'/>
+		<word name='TerminateProcess'/>
+		<word name='CommandLineToArgvW'/>
+		<word name='GetCommandLineW'/>
+		<word name='LockFile'/>
+		<word name='UnlockFile'/>
+		<word name='LockFileEx'/>
+		<word name='UnlockFileEx'/>
+		<word name='IsDebuggerPresent'/>
+		<word name='lstrcatA'/>
+		<word name='lstrcatW'/>
+		<word name='lstrcmpA'/>
+		<word name='lstrcmpW'/>
+		<word name='lstrcmpiA'/>
+		<word name='lstrcmpiW'/>
+		<word name='lstrcpyA'/>
+		<word name='lstrcpyW'/>
+		<word name='lstrcpynA'/>
+		<word name='lstrcpynW'/>
+		<word name='lstrlenA'/>
+		<word name='lstrlenW'/>
 		<!-- core.thread -->
 		<word name='thread_init'/>
+		<word name='thread_term'/>
 		<word name='thread_isMainThread'/>
 		<word name='thread_attachThis'/>
 		<word name='thread_attachByAddr'/>
@@ -5583,10 +5571,6 @@
 		<word name='_sharedStaticCtor5'/>
 		<!-- core.time -->
 		<word name='abs'/>
-		<!-- crc32 -->
-		<word name='init_crc32'/>
-		<word name='update_crc32'/>
-		<word name='strcrc32'/>
 		<!-- etc.c.curl -->
 		<word name='curl_strequal'/>
 		<word name='curl_strnequal'/>
@@ -5891,6 +5875,15 @@
 		<word name='inflateSyncPoint'/>
 		<word name='get_crc_table'/>
 		<!-- gc.gc -->
+		<word name='sentinel_init'/>
+		<word name='sentinel_Invariant'/>
+		<word name='sentinel_add'/>
+		<word name='sentinel_sub'/>
+		<!-- gc.os -->
+		<word name='pthread_self'/>
+		<word name='os_mem_map'/>
+		<word name='os_mem_unmap'/>
+		<!-- gc.proxy -->
 		<word name='gc_init'/>
 		<word name='gc_term'/>
 		<word name='gc_enable'/>
@@ -5915,20 +5908,10 @@
 		<word name='gc_addRange'/>
 		<word name='gc_removeRoot'/>
 		<word name='gc_removeRange'/>
+		<word name='gc_runFinalizers'/>
 		<word name='gc_getProxy'/>
 		<word name='gc_setProxy'/>
 		<word name='gc_clrProxy'/>
-		<!-- gc.gcalloc -->
-		<word name='pthread_self'/>
-		<word name='os_mem_map'/>
-		<word name='os_mem_commit'/>
-		<word name='os_mem_decommit'/>
-		<word name='os_mem_unmap'/>
-		<!-- gc.gcx -->
-		<word name='sentinel_init'/>
-		<word name='sentinel_Invariant'/>
-		<word name='sentinel_add'/>
-		<word name='sentinel_sub'/>
 		<!-- object -->
 		<word name='opEquals'/>
 		<word name='rt_setTraceHandler'/>
@@ -5947,19 +5930,18 @@
 		<word name='_d_monitor_devt'/>
 		<word name='rt_attachDisposeEvent'/>
 		<word name='rt_detachDisposeEvent'/>
-		<word name='_aaLen'/>
-		<word name='_aaGet'/>
-		<word name='_aaGetRvalue'/>
-		<word name='_aaIn'/>
-		<word name='_aaDel'/>
 		<word name='_aaValues'/>
 		<word name='_aaKeys'/>
 		<word name='_aaRehash'/>
-		<word name='_aaApply'/>
-		<word name='_aaApply2'/>
-		<word name='_d_assocarrayliteralT'/>
+		<word name='_aaRange'/>
+		<word name='_aaRangeEmpty'/>
+		<word name='_aaRangeFrontKey'/>
+		<word name='_aaRangeFrontValue'/>
+		<word name='_aaRangePopFront'/>
+		<word name='_aaEqual'/>
 		<word name='_aaGetHash'/>
 		<word name='_xopEquals'/>
+		<word name='_xopCmp'/>
 		<!-- std.ascii -->
 		<word name='isAlphaNum'/>
 		<word name='isAlpha'/>
@@ -5974,11 +5956,11 @@
 		<word name='isGraphical'/>
 		<word name='isPrintable'/>
 		<word name='isASCII'/>
-		<word name='toLower'/>
-		<word name='toUpper'/>
 		<!-- std.bigint -->
 		<word name='toDecimalString'/>
 		<word name='toHex'/>
+		<!-- std.bitmanip -->
+		<word name='_arraySliceComSliceAssign_m'/>
 		<!-- std.c.process -->
 		<word name='exit'/>
 		<word name='_c_exit'/>
@@ -6030,8 +6012,6 @@
 		<!-- std.c.stdlib -->
 		<word name='setenv'/>
 		<word name='unsetenv'/>
-		<!-- std.c.string -->
-		<word name='memicmp'/>
 		<!-- std.c.windows.com -->
 		<word name='CoBuildVersion'/>
 		<word name='StringFromGUID2'/>
@@ -6098,7 +6078,6 @@
 		<!-- std.complex -->
 		<word name='expi'/>
 		<!-- std.concurrency -->
-		<word name='_sharedStaticCtor10'/>
 		<word name='_staticDtor11'/>
 		<word name='thisTid'/>
 		<word name='ownerTid'/>
@@ -6111,31 +6090,8 @@
 		<!-- std.conv -->
 		<word name='strippedOctalLiteral'/>
 		<word name='isOctalLiteralString'/>
-		<!-- std.cpuid -->
-		<word name='toString'/>
-		<word name='intel'/>
-		<word name='amd'/>
-		<word name='stepping'/>
-		<word name='model'/>
-		<word name='family'/>
-		<word name='_sharedStaticCtor9'/>
 		<!-- std.cstream -->
-		<word name='_sharedStaticCtor19'/>
-		<!-- std.ctype -->
-		<word name='isalnum'/>
-		<word name='isalpha'/>
-		<word name='iscntrl'/>
-		<word name='isdigit'/>
-		<word name='islower'/>
-		<word name='ispunct'/>
-		<word name='isspace'/>
-		<word name='isupper'/>
-		<word name='isxdigit'/>
-		<word name='isgraph'/>
-		<word name='isprint'/>
-		<word name='isascii'/>
-		<word name='tolower'/>
-		<word name='toupper'/>
+		<word name='_sharedStaticCtor24'/>
 		<!-- std.datetime -->
 		<word name='tzDatabaseNameToWindowsTZName'/>
 		<word name='windowsTZNameToTZDatabaseName'/>
@@ -6172,6 +6128,7 @@
 		<word name='exists'/>
 		<word name='getAttributes'/>
 		<word name='getLinkAttributes'/>
+		<word name='setAttributes'/>
 		<word name='isDir'/>
 		<word name='attrIsDir'/>
 		<word name='isFile'/>
@@ -6182,6 +6139,7 @@
 		<word name='mkdirRecurse'/>
 		<word name='rmdir'/>
 		<word name='getcwd'/>
+		<word name='thisExePath'/>
 		<word name='copy'/>
 		<word name='rmdirRecurse'/>
 		<word name='dirEntries'/>
@@ -6189,10 +6147,13 @@
 		<word name='tempDir'/>
 		<!-- std.format -->
 		<word name='doFormat'/>
+		<!-- std.getopt -->
+		<word name='splitAndGet'/>
+		<word name='defaultGetoptPrinter'/>
 		<!-- std.internal.digest.sha_SSSE3 -->
 		<word name='transformSSSE3'/>
 		<!-- std.internal.math.biguintcore -->
-		<word name='_sharedStaticCtor29'/>
+		<word name='_sharedStaticCtor42'/>
 		<word name='removeLeadingZeros'/>
 		<!-- std.internal.math.biguintnoasm -->
 		<word name='multibyteShl'/>
@@ -6202,20 +6163,6 @@
 		<word name='multibyteDivAssign'/>
 		<word name='multibyteAddDiagonalSquares'/>
 		<word name='multibyteTriangleAccumulate'/>
-		<word name='multibyteSquare'/>
-		<!-- std.internal.math.biguintx86 -->
-		<word name='multibyteShlNoMMX'/>
-		<word name='multibyteShl'/>
-		<word name='multibyteShr'/>
-		<word name='multibyteShrNoMMX'/>
-		<word name='multibyteMul'/>
-		<word name='asmMulAdd_innerloop'/>
-		<word name='asmMulAdd_enter_odd'/>
-		<word name='multibyteMultiplyAccumulate'/>
-		<word name='multibyteDivAssign'/>
-		<word name='multibyteAddDiagonalSquares'/>
-		<word name='multibyteTriangleAccumulateD'/>
-		<word name='multibyteTriangleAccumulateAsm'/>
 		<word name='multibyteSquare'/>
 		<!-- std.internal.math.errorfunction -->
 		<word name='erfc'/>
@@ -6232,13 +6179,28 @@
 		<word name='gammaIncompleteCompl'/>
 		<word name='gammaIncompleteComplInv'/>
 		<word name='digamma'/>
-		<!-- std.internal.uni -->
-		<word name='getCommonCasing'/>
-		<word name='caseEnclose'/>
+		<!-- std.internal.unicode_comp -->
+		<word name='compositionTable'/>
+		<!-- std.internal.unicode_decomp -->
+		<word name='decompCanonTable'/>
+		<word name='decompCompatTable'/>
+		<!-- std.internal.unicode_tables -->
+		<word name='simpleCaseTable'/>
+		<word name='fullCaseTable'/>
+		<word name='isFormatGen'/>
+		<word name='isControlGen'/>
+		<word name='isSpaceGen'/>
+		<word name='isWhiteGen'/>
+		<word name='isHangL'/>
+		<word name='isHangV'/>
+		<word name='isHangT'/>
+		<word name='toUpperTable'/>
+		<word name='toLowerTable'/>
+		<word name='toTitleTable'/>
 		<!-- std.internal.windows.advapi32 -->
-		<word name='_sharedStaticCtor31'/>
+		<word name='_sharedStaticCtor45'/>
 		<word name='loadAdvapi32'/>
-		<word name='_staticDtor32'/>
+		<word name='_staticDtor46'/>
 		<!-- std.json -->
 		<word name='toJSON'/>
 		<!-- std.math -->
@@ -6289,13 +6251,7 @@
 		<word name='remquo'/>
 		<word name='resetIeeeFlags'/>
 		<word name='ieeeFlags'/>
-		<word name='isNaN'/>
-		<word name='isFinite'/>
-		<word name='isSubnormal'/>
-		<word name='isInfinity'/>
 		<word name='isIdentical'/>
-		<word name='signbit'/>
-		<word name='copysign'/>
 		<word name='NaN'/>
 		<word name='getNaNPayload'/>
 		<word name='nextUp'/>
@@ -6322,19 +6278,15 @@
 		<word name='erfc'/>
 		<word name='normalDistribution'/>
 		<word name='normalDistributionInverse'/>
-		<!-- std.md5 -->
-		<word name='sum'/>
-		<word name='digestToString'/>
-		<word name='getDigestString'/>
 		<!-- std.net.curl -->
 		<word name='exit'/>
 		<!-- std.net.isemail -->
 		<word name='statusCodeDescription'/>
 		<!-- std.parallelism -->
-		<word name='_sharedStaticCtor20'/>
-		<word name='_sharedStaticDtor23'/>
-		<word name='taskPool'/>
 		<word name='_sharedStaticCtor25'/>
+		<word name='_sharedStaticDtor29'/>
+		<word name='taskPool'/>
+		<word name='_sharedStaticCtor31'/>
 		<word name='defaultPoolThreads'/>
 		<word name='foreachErr'/>
 		<!-- std.path -->
@@ -6342,6 +6294,21 @@
 		<word name='absolutePath'/>
 		<word name='expandTilde'/>
 		<!-- std.process -->
+		<word name='spawnProcess'/>
+		<word name='spawnShell'/>
+		<word name='wait'/>
+		<word name='tryWait'/>
+		<word name='kill'/>
+		<word name='pipe'/>
+		<word name='pipeProcess'/>
+		<word name='pipeShell'/>
+		<word name='execute'/>
+		<word name='executeShell'/>
+		<word name='userShell'/>
+		<word name='thisProcessID'/>
+		<word name='escapeShellCommand'/>
+		<word name='escapeWindowsArgument'/>
+		<word name='escapeShellFileName'/>
 		<word name='system'/>
 		<word name='spawnvp'/>
 		<word name='execv'/>
@@ -6350,12 +6317,7 @@
 		<word name='execvpe'/>
 		<word name='shell'/>
 		<word name='getenv'/>
-		<word name='ShellExecuteA'/>
 		<word name='browse'/>
-		<word name='escapeWindowsArgument'/>
-		<word name='escapeWindowsShellCommand'/>
-		<word name='escapeShellCommand'/>
-		<word name='escapeShellFileName'/>
 		<!-- std.random -->
 		<word name='unpredictableSeed'/>
 		<word name='rndGen'/>
@@ -6368,22 +6330,23 @@
 		<word name='formatSocketError'/>
 		<word name='lastSocketError'/>
 		<word name='wouldHaveBlocked'/>
-		<word name='_sharedStaticCtor15'/>
-		<word name='_sharedStaticDtor16'/>
+		<word name='_sharedStaticCtor21'/>
+		<word name='_sharedStaticDtor22'/>
 		<word name='getAddress'/>
 		<word name='parseAddress'/>
 		<word name='socketPair'/>
 		<!-- std.stdio -->
 		<word name='_wfopen'/>
-		<word name='_fputc_nlock'/>
-		<word name='_fputwc_nlock'/>
-		<word name='_fgetc_nlock'/>
-		<word name='_fgetwc_nlock'/>
-		<word name='__fp_lock'/>
-		<word name='__fp_unlock'/>
-		<word name='setmode'/>
+		<word name='_fputc_nolock'/>
+		<word name='_fputwc_nolock'/>
+		<word name='_fgetc_nolock'/>
+		<word name='_fgetwc_nolock'/>
+		<word name='_lock_file'/>
+		<word name='_unlock_file'/>
+		<word name='_setmode'/>
 		<word name='_fileno'/>
-		<word name='readln'/>
+		<word name='_fdopen'/>
+		<word name='chunks'/>
 		<word name='std_stdio_static_this'/>
 		<!-- std.stdiobase -->
 		<word name='std_stdio_static_this'/>
@@ -6394,16 +6357,30 @@
 		<!-- std.string -->
 		<word name='wcslen'/>
 		<word name='wcscmp'/>
+		<word name='fromStringz'/>
 		<word name='toStringz'/>
 		<word name='makeTrans'/>
 		<word name='isNumeric'/>
 		<word name='soundex'/>
 		<word name='abbrev'/>
 		<!-- std.uni -->
+		<word name='sicmp'/>
+		<word name='icmp'/>
+		<word name='combiningClass'/>
+		<word name='compose'/>
+		<word name='isJamoL'/>
+		<word name='isJamoT'/>
+		<word name='isJamoV'/>
+		<word name='hangulSyllableIndex'/>
+		<word name='hangulRecompose'/>
+		<word name='decomposeHangul'/>
+		<word name='composeJamo'/>
 		<word name='isWhite'/>
 		<word name='isLower'/>
 		<word name='isUpper'/>
 		<word name='toLower'/>
+		<word name='toLowerInPlace'/>
+		<word name='toUpperInPlace'/>
 		<word name='toUpper'/>
 		<word name='isAlpha'/>
 		<word name='isMark'/>
@@ -6420,17 +6397,10 @@
 		<word name='isSurrogateLo'/>
 		<word name='isNonCharacter'/>
 		<!-- std.uri -->
-		<word name='_sharedStaticCtor2'/>
+		<word name='_sharedStaticCtor3'/>
 		<word name='ascii2hex'/>
-		<word name='decode'/>
-		<word name='decodeComponent'/>
-		<word name='encode'/>
-		<word name='encodeComponent'/>
-		<word name='uriLength'/>
-		<word name='emailLength'/>
 		<!-- std.utf -->
 		<word name='isValidDchar'/>
-		<word name='toUTFindex'/>
 		<word name='encode'/>
 		<word name='toUTF8'/>
 		<word name='toUTF16'/>
@@ -6438,6 +6408,7 @@
 		<!-- std.uuid -->
 		<word name='md5UUID'/>
 		<word name='sha1UUID'/>
+		<word name='randomUUID'/>
 		<!-- std.windows.charset -->
 		<word name='toMBSz'/>
 		<word name='fromMBSz'/>
