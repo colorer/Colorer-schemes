@@ -26,6 +26,7 @@
     <!-- TODO: support ECMA-262 ... 357 -->
 
     <import type="def"/>
+      <import type="java"/>
     <entity name="worddiv" value="[^\w$]" />
 
     <scheme name="jCommentContent">
@@ -49,6 +50,10 @@
     </scheme>
 
     <scheme name="jsComments">
+<!-- important comments /*! */ -->
+<block start="/\/\*!/" end="/\*\//" scheme="DocumentationComment" region="CommentContent" region00="PairStart" region10="PairEnd"/>
+
+          <inherit scheme='JavaComments'/>
 <!-- just ignore html comments -->
         <regexp match="/^\s* &lt;!--/x" region0="Comment"/>
         <regexp match="/^\s* --&gt;/x" region0="Comment"/>
@@ -253,6 +258,50 @@
             <word name="unescape"/>
             <word name="UTC"/>
             <word name="valueOf"/>
+<!-- Array -->
+            <word name="shift"/>
+            <word name="unshift"/>
+
+            <word name="isArray"/>
+            <word name="every"/>
+            <word name="filter"/>
+            <word name="forEach"/>
+            <word name="map"/>
+            <word name="reduce"/>
+            <word name="reduceRight"/>
+            <word name="some"/>
+<!-- String -->
+            <word name="contains"/>
+            <word name="endsWith"/>
+            <word name="repeat"/>
+            <word name="startsWith"/>
+            <word name="trim"/>
+            <word name="trimLeft"/>
+            <word name="trimRight"/>
+<!-- Math -->
+            <word name="log10"/>
+            <word name="log2"/>
+            <word name="log1p"/>
+            <word name="expm1"/>
+            <word name="cosh"/>
+            <word name="sinh"/>
+            <word name="tanh"/>
+            <word name="acosh"/>
+            <word name="asinh"/>
+            <word name="atanh"/>
+            <word name="hypot"/>
+            <word name="trunc"/>
+            <word name="sign"/>
+<!-- JSON -->
+            <word name="stringify"/>
+<!-- Function -->
+            <word name="bind"/>
+<!-- Object -->
+            <word name="apply"/>
+            <word name="call"/>
+            <word name="keys"/>
+<!-- Global -->
+            <word name="void"/>
          </keywords>
       </scheme>
 
@@ -302,6 +351,9 @@
              <word name="TextStream"/>
              <word name="VBArray"/>
              <word name="With"/>
+<!-- New Global Objects -->
+            <word name="JSON"/>
+            <word name="XMLHttpRequest"/>
           </keywords>
       </scheme>
 
