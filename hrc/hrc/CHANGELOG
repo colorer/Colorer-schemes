@@ -2,8 +2,15 @@
   Fixed:
    - D: Multiple fixes (Vladimir Panteleev)
    - Batch: Improve numeric parameter highlighting (Vladimir Panteleev)
+            added more keywords to be hightlighted (ildar-shaimordanov)
+            improve colorizing of :label, goto/call :label (ildar-shaimordanov) 
    - Shell: Fix highlighting of array length expressions (Vladimir Panteleev)
             Fix backtick expressions (fixup) (Vladimir Panteleev)
+            improvements to heredoc (ildar-shaimordanov)
+            added processing novaday brackets (( )) and [[ ]] (ildar-shaimordanov)
+            improve var expansions: ${#...}, ${!...} (ildar-shaimordanov)
+   - jscript: added more jsMethods for highlighting (ildar-shaimordanov)
+              added support of important comments /status (ildar-shaimordanov)
 
 2014-01-17
   Fixed:
