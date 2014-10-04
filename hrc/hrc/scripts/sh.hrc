@@ -69,16 +69,24 @@
   region00="def:PairStart" region10="def:PairEnd"
   region01="symb.struct" region11="symb.struct"
  />
- <block start="/(\$\{)/" end="/(\})/" scheme="shell.in"
+ <block start="/(\$\{[!#]?)/" end="/(\})/" scheme="shell.in"
   region00="def:PairStart" region10="def:PairEnd"
   region01="var" region11="var"
  />
  <regexp match="/^(%var;)(\(\))/" region1="def:Outlined" region2="symb"/>
+ <block start="/(\(\()/" end="/(\)\))/" scheme="shell.in"
+  region00="def:PairStart" region10="def:PairEnd"
+  region01="symb.struct" region11="symb.struct"
+ />
  <block start="/(\()/" end="/(\))/" scheme="shell.in"
   region00="def:PairStart" region10="def:PairEnd"
   region01="symb.struct" region11="symb.struct"
  />
- <block start="/ (\[) /" end="/ (\])/" scheme="shell.in"
+ <block start="/(?:^|\s)(\[\[) /" end="/ (\]\[)/" scheme="shell.in"
+  region00="def:PairStart" region10="def:PairEnd"
+  region01="symb" region11="symb"
+ />
+ <block start="/(?:^|\s)(\[) /" end="/ (\])/" scheme="shell.in"
   region00="def:PairStart" region10="def:PairEnd"
   region01="symb" region11="symb"
  />
@@ -142,6 +150,13 @@
 </scheme>
 
 <scheme name="string">
+<!-- TODO: add support of single-quoted and double-quoted heredoc delimiter -->
+ <block start="/(&lt;&lt;-\s*\\?)([\w-]+)/" end="/^\s*(\y2)/"
+  scheme="slash" region="perl:HereDoc"
+  region00="def:PairStart" region10="def:PairEnd"
+  region01="perl:HereDocLt" region02="perl:HereDocName"
+  region11="perl:HereDocName"
+ />
  <block start="/(&lt;&lt;\s*\\?)(EO\w+)/" end="/^(\y2)/"
   scheme="slash" region="perl:HereDoc"
   region00="def:PairStart" region10="def:PairEnd"
