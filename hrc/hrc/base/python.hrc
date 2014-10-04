@@ -433,8 +433,7 @@
    <!-- binary -->
    <regexp match="/\b(0b[01]*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
    <!-- octal -->
-   <regexp match="/\b(0o[0-7]*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
-   <regexp match="/\b(0[0-7]*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
+   <regexp match="/\b(0o?[0-7]*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
    <!-- decimal -->
    <regexp match="/\b([1-9]\d*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
 
