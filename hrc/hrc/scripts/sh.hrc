@@ -82,7 +82,7 @@
   region00="def:PairStart" region10="def:PairEnd"
   region01="symb.struct" region11="symb.struct"
  />
- <block start="/(?:^|\s)(\[\[) /" end="/ (\]\[)/" scheme="shell.in"
+ <block start="/(?:^|\s)(\[\[) /" end="/ (\]\])/" scheme="shell.in"
   region00="def:PairStart" region10="def:PairEnd"
   region01="symb" region11="symb"
  />
