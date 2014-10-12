@@ -969,7 +969,8 @@
     <filename>/\.(diff.*|patch|rej(ect)?)$/i</filename>
     <firstline weight='2'>/^(diff|Index|---|\+\+\+|\*\*\*)/si</firstline>
     <firstline>/^(\d+,\d+\w\d+ | \d+\w\d+)/i</firstline>
-    <firstline>/^cvs/i</firstline>
+     <!-- mercurial `hg inc -p` format detection -->
+    <firstline>/^comparing with/</firstline>
     <parameters>
       <param name="trailing-space"      value="false" description="Mark trailing spaces as errors"/>
       <param name="space-before-tab"    value="false" description="Mark leading spaces before tabs as errors"/>
