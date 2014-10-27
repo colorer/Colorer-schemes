@@ -71,10 +71,10 @@ With help of:
          <regexp match="/\becho(\s+on\s*|\s+off\s*)/i" region0="ntCmd"/>
          <block start="/\becho\M\W/i" end="/\M'|`|&lt;|&gt;|\||&amp;|$/" scheme="echo" region="ntStr" region00="ntCmd"/>
 <!-- GOTO command -->
-         <regexp match="/goto(\s*:|\s+:?)EOF/i" region="ntCmd"/>
-         <regexp match="/(goto) \s+ (:?%labelName;)/ix" region1="ntCmd" region2="ntLabel"/>
+         <regexp match="/goto\s*:EOF\b/i" region="ntCmd"/>
+         <regexp match="/(goto) ( (\s*:|\s+:?) %labelName;)/ix" region1="ntCmd" region2="ntLabel"/>
 <!-- CALL command with label -->
-         <regexp match="/(call) \s+ (:%labelName;)/ix" region1="ntCmd" region2="ntLabel"/>
+         <regexp match="/(call) \s* (:%labelName;)/ix" region1="ntCmd" region2="ntLabel"/>
 
          <block start="/^\s*(\@)/" end="/$/" scheme="Batch" region="ntComment" region01="ntSpec"/>
          <keywords region="ntSpec">
