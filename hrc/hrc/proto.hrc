@@ -140,7 +140,7 @@
   </prototype>
   <prototype name="fortran" group="main" description="Fortran">
     <location link="base/fortran.hrc"/>
-    <filename>/\.(for|f(90)?)$/i</filename>
+    <filename>/\.(for|f90|f95|f3?)$/i</filename>
   </prototype>
   <prototype name="vbasic" group="main" description="Visual Basic">
     <location link="base/vbasic.hrc"/>
