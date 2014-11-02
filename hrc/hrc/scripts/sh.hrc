@@ -55,15 +55,12 @@
  />
 </scheme>
 <scheme name="shell">
- <inherit scheme="def:unixCommentDirective"/>
-
- <block start="/\#/" end="/$/" region="def:Comment" scheme="def:Comment"/>
-
  <inherit scheme="string.eval"/>
  <inherit scheme="shell.in"/>
 </scheme>
 
 <scheme name="shell.in">
+ <block start="/\#/" end="/$/" region="def:Comment" scheme="def:Comment"/>
 
  <block start="/(\{)/" end="/(\})/" scheme="shell"
   region00="def:PairStart" region10="def:PairEnd"
