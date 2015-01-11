@@ -35,12 +35,14 @@
 
 
   <scheme name="RawStringSingle"> <!-- single-quoted strings should end with slash if span multiple lines -->
-    <regexp match="/[^\\']$/" region="def:Error" />
-    <regexp match="/\\$/" region="pyStringEscape" />
+    <regexp match="/[^\\']$/" region="def:Error" />   <!-- error if end of line is not quote or escape -->
+    <regexp match="/\\$/" region="pyStringEscape" />  <!-- highlight escape at end of line -->
+    <regexp match="/\\'/" region="pyStringEscape" />  <!-- highlight escape quoted in the middle -->
   </scheme>
   <scheme name="RawStringDouble">
     <regexp match="/[^\\&quot;]$/" region="def:Error" />
     <regexp match="/\\$/" region="pyStringEscape" />
+    <regexp match="/\\&quot;/" region="pyStringEscape" />
   </scheme>
   <!-- highlight non-raw string contents -->
   <scheme name="StringCommon">
@@ -48,14 +50,12 @@
   </scheme>
   <scheme name="StringSingle"> <!-- single-quoted strings should end with slash if span multiple lines -->
     <regexp match="/(\\).$/" region="def:Error" region1="pyStringEscape" />
-    <regexp match="/[^\\']$/" region="def:Error" />
-    <regexp match="/\\$/" region="pyStringEscape" />
+    <inherit scheme="RawStringSingle" />
     <inherit scheme="StringCommon" />
   </scheme>
   <scheme name="StringDouble"> <!-- double-quoted strings should also end with slash to span multiple lines -->
     <regexp match="/(\\).$/" region="def:Error" region1="pyStringEscape" />
-    <regexp match="/[^\\&quot;]$/" region="def:Error" />
-    <regexp match="/\\$/" region="pyStringEscape" />
+    <inherit scheme="RawStringDouble" />
     <inherit scheme="StringCommon" />
   </scheme>
 
