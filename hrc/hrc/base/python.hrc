@@ -34,19 +34,28 @@
   <region name="pyFunction" parent="def:FunctionKeyword"/>
 
 
-  <scheme name="StringCommon"> <!-- common escapes for all types of Python strings -->
+  <scheme name="RawStringSingle"> <!-- single-quoted strings should end with slash if span multiple lines -->
+    <regexp match="/[^\\']$/" region="def:Error" />   <!-- error if end of line is not quote or escape -->
+    <regexp match="/\\$/" region="pyStringEscape" />  <!-- highlight escape at end of line -->
+    <regexp match="/\\'/" region="pyStringEscape" />  <!-- highlight escape quoted in the middle -->
+  </scheme>
+  <scheme name="RawStringDouble">
+    <regexp match="/[^\\&quot;]$/" region="def:Error" />
+    <regexp match="/\\$/" region="pyStringEscape" />
+    <regexp match="/\\&quot;/" region="pyStringEscape" />
+  </scheme>
+  <!-- highlight non-raw string contents -->
+  <scheme name="StringCommon">
     <regexp match="/\\./" region="pyStringEscape" />
   </scheme>
   <scheme name="StringSingle"> <!-- single-quoted strings should end with slash if span multiple lines -->
     <regexp match="/(\\).$/" region="def:Error" region1="pyStringEscape" />
-    <regexp match="/[^\\']$/" region="def:Error" />
-    <regexp match="/\\$/" region="pyStringEscape" />
+    <inherit scheme="RawStringSingle" />
     <inherit scheme="StringCommon" />
   </scheme>
   <scheme name="StringDouble"> <!-- double-quoted strings should also end with slash to span multiple lines -->
     <regexp match="/(\\).$/" region="def:Error" region1="pyStringEscape" />
-    <regexp match="/[^\\&quot;]$/" region="def:Error" />
-    <regexp match="/\\$/" region="pyStringEscape" />
+    <inherit scheme="RawStringDouble" />
     <inherit scheme="StringCommon" />
   </scheme>
 
@@ -415,10 +424,14 @@
       scheme="def:Comment" region="pyComment" />
       <!-- TODO: better scheme for multiline comments/docstrings -->
       <!-- scheme="StringCommon" region="pyString" /> -->
-   <block start="/(u|U)?(r|R)?(&apos;)/"              end="/\y3/"
+   <block start="/(u|U)?(&apos;)/"              end="/\y2/"
       region00="def:PairStart" region10="def:PairEnd" scheme="StringSingle" region="pyString" />
-   <block start="/(u|U)?(r|R)?(&quot;)/"              end="/\y3/"
+   <block start="/(u|U)?(&quot;)/"              end="/\y2/"
       region00="def:PairStart" region10="def:PairEnd" scheme="StringDouble" region="pyString" />
+   <block start="/(u|U)?(r|R)(&apos;)/"  end="/\y3/"
+      region00="def:PairStart" region10="def:PairEnd" scheme="RawStringSingle" region="pyString" />
+   <block start="/(u|U)?(r|R)(&quot;)/"  end="/\y3/"
+      region00="def:PairStart" region10="def:PairEnd" scheme="RawStringDouble" region="pyString" />
 
    <!-- python floats and imaginary numbers : http://docs.python.org/ref/floating.html -->
    <!-- placed before integers to avoid confusion with octals, where exponent will get an error -->
