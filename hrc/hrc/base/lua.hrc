@@ -368,7 +368,7 @@
         end="/\b(then)\b/" scheme="LuaBody"
         region00="Operator"  region10="Operator"
         region01="PairStart" region11="PairEnd"/>
-    <block start="/(\bif)?#2(\s+)/"
+    <block start="/(\bif)?#2(\s*)/"
         end="/\b(then)\b/" scheme="LuaBody"
         region00="Operator"  region10="Operator"
         region02="PairStart" region11="PairEnd"/>
