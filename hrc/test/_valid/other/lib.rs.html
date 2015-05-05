@@ -1,0 +1,364 @@
+  0: <span class='def-LineComment def-Comment def-Syntax'>// Copyright 2014 The Rust Project Developers. See the COPYRIGHT</span>
+  1: <span class='def-LineComment def-Comment def-Syntax'>// file at the top-level directory of this distribution and at</span>
+  2: <span class='def-LineComment def-Comment def-Syntax'>// </span><span class='def-URL def-URI'>http://rust-lang.org/COPYRIGHT</span><span class='def-LineComment def-Comment def-Syntax'>.</span>
+  3: <span class='def-LineComment def-Comment def-Syntax'>//</span>
+  4: <span class='def-LineComment def-Comment def-Syntax'>// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
+  5: <span class='def-LineComment def-Comment def-Syntax'>// </span><span class='def-URL def-URI'>http://www.apache.org/licenses/LICENSE-2.0</span><span class='def-LineComment def-Comment def-Syntax'>> or the MIT license</span>
+  6: <span class='def-LineComment def-Comment def-Syntax'>// &lt;LICENSE-MIT or </span><span class='def-URL def-URI'>http://opensource.org/licenses/MIT</span><span class='def-LineComment def-Comment def-Syntax'>>, at your</span>
+  7: <span class='def-LineComment def-Comment def-Syntax'>// option. This file may not be copied, modified, or distributed</span>
+  8: <span class='def-LineComment def-Comment def-Syntax'>// except according to those terms.</span>
+  9: 
+ 10: <span class='def-LineComment def-Comment def-Syntax'>//! Abstraction of a thread pool for basic parallelism.</span>
+ 11: 
+ 12: <span class='def-Symbol'>#</span>!<span class='def-Symbol'>[</span>cfg_attr<span class='def-Symbol'>(</span>feature = "scoped-pool"<span class='def-Symbol'>,</span> feature<span class='def-Symbol'>(</span>scoped<span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>]</span>
+ 13: 
+ 14: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+ 15: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>mem<span class='def-Symbol'>;</span>
+ 16: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span>mpsc<span class='def-Symbol'>::</span><span class='def-Symbol'>{</span>channel<span class='def-Symbol'>,</span> Sender<span class='def-Symbol'>,</span> Receiver<span class='def-Symbol'>}</span><span class='def-Symbol'>;</span>
+ 17: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span><span class='def-Symbol'>{</span>Arc<span class='def-Symbol'>,</span> Mutex<span class='def-Symbol'>}</span><span class='def-Symbol'>;</span>
+ 18: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>thread<span class='def-Symbol'>;</span>
+ 19: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+ 20: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>thread<span class='def-Symbol'>::</span>JoinGuard<span class='def-Symbol'>;</span>
+ 21: 
+ 22: <span class='def-Keyword'>trait</span> FnBox <span class='def-Symbol'>{</span>
+ 23:     <span class='def-Keyword'>fn</span> call_box<span class='def-Symbol'>(</span><span class='def-Keyword'>self</span>: Box&lt;Self><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 24: <span class='def-Symbol'>}</span>
+ 25: 
+ 26: <span class='def-Keyword'>impl</span>&lt;F: FnOnce<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>> FnBox <span class='def-Keyword'>for</span> F <span class='def-Symbol'>{</span>
+ 27:     <span class='def-Keyword'>fn</span> call_box<span class='def-Symbol'>(</span><span class='def-Keyword'>self</span>: Box&lt;F><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+ 28:         <span class='def-Symbol'>(</span>*<span class='def-Keyword'>self</span><span class='def-Symbol'>)</span><span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+ 29:     <span class='def-Symbol'>}</span>
+ 30: <span class='def-Symbol'>}</span>
+ 31: 
+ 32: <span class='def-Keyword'>type</span> Thunk&lt;'a> = Box&lt;FnBox + Send + 'a><span class='def-Symbol'>;</span>
+ 33: 
+ 34: <span class='def-Keyword'>struct</span> Sentinel&lt;'a> <span class='def-Symbol'>{</span>
+ 35:     jobs: &amp;'a Arc&lt;Mutex&lt;Receiver&lt;Thunk&lt;'<span class='def-Keyword'>static</span>>>>><span class='def-Symbol'>,</span>
+ 36:     active: bool
+ 37: <span class='def-Symbol'>}</span>
+ 38: 
+ 39: <span class='def-Keyword'>impl</span>&lt;'a> Sentinel&lt;'a> <span class='def-Symbol'>{</span>
+ 40:     <span class='def-Keyword'>fn</span> new<span class='def-Symbol'>(</span>jobs: &amp;'a Arc&lt;Mutex&lt;Receiver&lt;Thunk&lt;'<span class='def-Keyword'>static</span>>>>><span class='def-Symbol'>)</span> <span class='def-Symbol'>-></span> Sentinel&lt;'a> <span class='def-Symbol'>{</span>
+ 41:         Sentinel <span class='def-Symbol'>{</span>
+ 42:             jobs: jobs<span class='def-Symbol'>,</span>
+ 43:             active: <span class='def-Keyword'>true</span>
+ 44:         <span class='def-Symbol'>}</span>
+ 45:     <span class='def-Symbol'>}</span>
+ 46: 
+ 47:     <span class='def-LineComment def-Comment def-Syntax'>// Cancel and destroy this sentinel.</span>
+ 48:     <span class='def-Keyword'>fn</span> cancel<span class='def-Symbol'>(</span><span class='def-Keyword'>mut</span> <span class='def-Keyword'>self</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+ 49:         <span class='def-Keyword'>self</span>.active = <span class='def-Keyword'>false</span><span class='def-Symbol'>;</span>
+ 50:     <span class='def-Symbol'>}</span>
+ 51: <span class='def-Symbol'>}</span>
+ 52: 
+ 53: <span class='def-Keyword'>impl</span>&lt;'a> Drop <span class='def-Keyword'>for</span> Sentinel&lt;'a> <span class='def-Symbol'>{</span>
+ 54:     <span class='def-Keyword'>fn</span> drop<span class='def-Symbol'>(</span>&amp;<span class='def-Keyword'>mut</span> <span class='def-Keyword'>self</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+ 55:         <span class='def-Keyword'>if</span> <span class='def-Keyword'>self</span>.active <span class='def-Symbol'>{</span>
+ 56:             spawn_in_pool<span class='def-Symbol'>(</span><span class='def-Keyword'>self</span>.jobs.clone<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span>
+ 57:         <span class='def-Symbol'>}</span>
+ 58:     <span class='def-Symbol'>}</span>
+ 59: <span class='def-Symbol'>}</span>
+ 60: 
+ 61: <span class='def-CommentDoc def-Comment def-Syntax'>/// A thread pool used to execute functions in parallel.</span>
+ 62: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+ 63: <span class='def-CommentDoc def-Comment def-Syntax'>/// Spawns `n` worker threads and replenishes the pool if any worker threads</span>
+ 64: <span class='def-CommentDoc def-Comment def-Syntax'>/// panic.</span>
+ 65: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+ 66: <span class='def-CommentDoc def-Comment def-Syntax'>/// # Example</span>
+ 67: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+ 68: <span class='def-CommentDoc def-Comment def-Syntax'>/// ```rust</span>
+ 69: <span class='def-CommentDoc def-Comment def-Syntax'>/// use threadpool::ThreadPool;</span>
+ 70: <span class='def-CommentDoc def-Comment def-Syntax'>/// use std::sync::mpsc::channel;</span>
+ 71: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+ 72: <span class='def-CommentDoc def-Comment def-Syntax'>/// let pool = ThreadPool::new(4);</span>
+ 73: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+ 74: <span class='def-CommentDoc def-Comment def-Syntax'>/// let (tx, rx) = channel();</span>
+ 75: <span class='def-CommentDoc def-Comment def-Syntax'>/// for i in 0..8 {</span>
+ 76: <span class='def-CommentDoc def-Comment def-Syntax'>///     let tx = tx.clone();</span>
+ 77: <span class='def-CommentDoc def-Comment def-Syntax'>///     pool.execute(move|| {</span>
+ 78: <span class='def-CommentDoc def-Comment def-Syntax'>///         tx.send(i).unwrap();</span>
+ 79: <span class='def-CommentDoc def-Comment def-Syntax'>///     });</span>
+ 80: <span class='def-CommentDoc def-Comment def-Syntax'>/// }</span>
+ 81: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+ 82: <span class='def-CommentDoc def-Comment def-Syntax'>/// assert_eq!(rx.iter().take(8).fold(0, |a, b| a + b), 28);</span>
+ 83: <span class='def-CommentDoc def-Comment def-Syntax'>/// ```</span>
+ 84: <span class='def-Keyword'>pub</span> <span class='def-Keyword'>struct</span> ThreadPool <span class='def-Symbol'>{</span>
+ 85:     <span class='def-LineComment def-Comment def-Syntax'>// How the threadpool communicates with subthreads.</span>
+ 86:     <span class='def-LineComment def-Comment def-Syntax'>//</span>
+ 87:     <span class='def-LineComment def-Comment def-Syntax'>// This is the only such Sender, so when it is dropped all subthreads will</span>
+ 88:     <span class='def-LineComment def-Comment def-Syntax'>// quit.</span>
+ 89:     jobs: Sender&lt;Thunk&lt;'<span class='def-Keyword'>static</span>>>
+ 90: <span class='def-Symbol'>}</span>
+ 91: 
+ 92: <span class='def-Keyword'>impl</span> ThreadPool <span class='def-Symbol'>{</span>
+ 93:     <span class='def-CommentDoc def-Comment def-Syntax'>/// Spawns a new thread pool with `threads` threads.</span>
+ 94:     <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+ 95:     <span class='def-CommentDoc def-Comment def-Syntax'>/// # Panics</span>
+ 96:     <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+ 97:     <span class='def-CommentDoc def-Comment def-Syntax'>/// This function will panic if `threads` is 0.</span>
+ 98:     <span class='def-Keyword'>pub</span> <span class='def-Keyword'>fn</span> new<span class='def-Symbol'>(</span>threads: usize<span class='def-Symbol'>)</span> <span class='def-Symbol'>-></span> ThreadPool <span class='def-Symbol'>{</span>
+ 99:         assert!<span class='def-Symbol'>(</span>threads >= <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+100: 
+101:         <span class='def-Keyword'>let</span> <span class='def-Symbol'>(</span>tx<span class='def-Symbol'>,</span> rx<span class='def-Symbol'>)</span> = channel<span class='def-Symbol'>::</span>&lt;Thunk&lt;'<span class='def-Keyword'>static</span>>><span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+102:         <span class='def-Keyword'>let</span> rx = Arc<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>Mutex<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>rx<span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+103: 
+104:         <span class='def-LineComment def-Comment def-Syntax'>// Threadpool threads</span>
+105:         <span class='def-Keyword'>for</span> _ <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span>..threads <span class='def-Symbol'>{</span>
+106:             spawn_in_pool<span class='def-Symbol'>(</span>rx.clone<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+107:         <span class='def-Symbol'>}</span>
+108: 
+109:         ThreadPool <span class='def-Symbol'>{</span> jobs: tx <span class='def-Symbol'>}</span>
+110:     <span class='def-Symbol'>}</span>
+111: 
+112:     <span class='def-CommentDoc def-Comment def-Syntax'>/// Executes the function `job` on a thread in the pool.</span>
+113:     <span class='def-Keyword'>pub</span> <span class='def-Keyword'>fn</span> execute&lt;F><span class='def-Symbol'>(</span>&amp;<span class='def-Keyword'>self</span><span class='def-Symbol'>,</span> job: F<span class='def-Symbol'>)</span>
+114:         <span class='def-Keyword'>where</span> F : FnOnce<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> + Send + '<span class='def-Keyword'>static</span>
+115:     <span class='def-Symbol'>{</span>
+116:         <span class='def-Keyword'>self</span>.jobs.send<span class='def-Symbol'>(</span>Box<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span> || job<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span>.unwrap<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+117:     <span class='def-Symbol'>}</span>
+118: <span class='def-Symbol'>}</span>
+119: 
+120: <span class='def-Keyword'>fn</span> spawn_in_pool<span class='def-Symbol'>(</span>jobs: Arc&lt;Mutex&lt;Receiver&lt;Thunk&lt;'<span class='def-Keyword'>static</span>>>>><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+121:     thread<span class='def-Symbol'>::</span>spawn<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span> || <span class='def-Symbol'>{</span>
+122:         <span class='def-LineComment def-Comment def-Syntax'>// Will spawn a new thread on panic unless it is cancelled.</span>
+123:         <span class='def-Keyword'>let</span> sentinel = Sentinel<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>&amp;jobs<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+124: 
+125:         <span class='def-Keyword'>loop</span> <span class='def-Symbol'>{</span>
+126:             <span class='def-Keyword'>let</span> message = <span class='def-Symbol'>{</span>
+127:                 <span class='def-LineComment def-Comment def-Syntax'>// Only lock jobs for the time it takes</span>
+128:                 <span class='def-LineComment def-Comment def-Syntax'>// to get a job, not run it.</span>
+129:                 <span class='def-Keyword'>let</span> lock = jobs.lock<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.unwrap<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+130:                 lock.recv<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+131:             <span class='def-Symbol'>}</span><span class='def-Symbol'>;</span>
+132: 
+133:             <span class='def-Keyword'>match</span> message <span class='def-Symbol'>{</span>
+134:                 Ok<span class='def-Symbol'>(</span>job<span class='def-Symbol'>)</span> => job.call_box<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>,</span>
+135: 
+136:                 <span class='def-LineComment def-Comment def-Syntax'>// The Threadpool was dropped.</span>
+137:                 Err<span class='def-Symbol'>(</span>..<span class='def-Symbol'>)</span> => <span class='def-Keyword'>break</span>
+138:             <span class='def-Symbol'>}</span>
+139:         <span class='def-Symbol'>}</span>
+140: 
+141:         sentinel.cancel<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+142:     <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+143: <span class='def-Symbol'>}</span>
+144: 
+145: <span class='def-CommentDoc def-Comment def-Syntax'>/// A scoped thread pool used to execute functions in parallel.</span>
+146: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+147: <span class='def-CommentDoc def-Comment def-Syntax'>/// `ScopedPool` is different from `ThreadPool` in that:</span>
+148: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+149: <span class='def-CommentDoc def-Comment def-Syntax'>/// * When dropped, it propagates panics that occur in the worker threads.</span>
+150: <span class='def-CommentDoc def-Comment def-Syntax'>/// * It doesn't require the `'static` bound on the functions that are executed.</span>
+151: <span class='def-CommentDoc def-Comment def-Syntax'>/// * Worker threads are joined when the `ScopedPool` is dropped.</span>
+152: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+153: <span class='def-CommentDoc def-Comment def-Syntax'>/// # Example</span>
+154: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+155: <span class='def-CommentDoc def-Comment def-Syntax'>/// ```rust</span>
+156: <span class='def-CommentDoc def-Comment def-Syntax'>/// use threadpool::ScopedPool;</span>
+157: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+158: <span class='def-CommentDoc def-Comment def-Syntax'>/// let mut numbers: &amp;mut [u32] = &amp;mut [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];</span>
+159: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+160: <span class='def-CommentDoc def-Comment def-Syntax'>/// // We need an extra scope to shorten the lifetime of the pool</span>
+161: <span class='def-CommentDoc def-Comment def-Syntax'>/// {</span>
+162: <span class='def-CommentDoc def-Comment def-Syntax'>///     let pool = ScopedPool::new(4);</span>
+163: <span class='def-CommentDoc def-Comment def-Syntax'>///     for x in &amp;mut numbers[..] {</span>
+164: <span class='def-CommentDoc def-Comment def-Syntax'>///         pool.execute(move|| {</span>
+165: <span class='def-CommentDoc def-Comment def-Syntax'>///             *x += 1;</span>
+166: <span class='def-CommentDoc def-Comment def-Syntax'>///         });</span>
+167: <span class='def-CommentDoc def-Comment def-Syntax'>///     }</span>
+168: <span class='def-CommentDoc def-Comment def-Syntax'>/// }</span>
+169: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+170: <span class='def-CommentDoc def-Comment def-Syntax'>/// assert_eq!(numbers, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);</span>
+171: <span class='def-CommentDoc def-Comment def-Syntax'>/// ```</span>
+172: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+173: <span class='def-Keyword'>pub</span> <span class='def-Keyword'>struct</span> ScopedPool&lt;'pool> <span class='def-Symbol'>{</span>
+174:     sender: Option&lt;Sender&lt;Thunk&lt;'pool>>><span class='def-Symbol'>,</span>
+175:     _guards: Vec&lt;JoinGuard&lt;'pool<span class='def-Symbol'>,</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>>>
+176: <span class='def-Symbol'>}</span>
+177: 
+178: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+179: <span class='def-Keyword'>impl</span>&lt;'pool> ScopedPool&lt;'pool> <span class='def-Symbol'>{</span>
+180:     <span class='def-CommentDoc def-Comment def-Syntax'>/// Spawns a new thread pool with `threads` threads.</span>
+181:     <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+182:     <span class='def-CommentDoc def-Comment def-Syntax'>/// # Panics</span>
+183:     <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
+184:     <span class='def-CommentDoc def-Comment def-Syntax'>/// This function will panic if `threads` is 0.</span>
+185:     <span class='def-Keyword'>pub</span> <span class='def-Keyword'>fn</span> new<span class='def-Symbol'>(</span>threads: usize<span class='def-Symbol'>)</span> <span class='def-Symbol'>-></span> ScopedPool&lt;'pool> <span class='def-Symbol'>{</span>
+186:         assert!<span class='def-Symbol'>(</span>threads >= <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+187: 
+188:         <span class='def-Keyword'>let</span> <span class='def-Symbol'>(</span>sender<span class='def-Symbol'>,</span> receiver<span class='def-Symbol'>)</span> = channel<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+189:         <span class='def-Keyword'>let</span> receiver = Arc<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>Mutex<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>receiver<span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+190: 
+191:         <span class='def-Keyword'>let</span> <span class='def-Keyword'>mut</span> guards = Vec<span class='def-Symbol'>::</span>with_capacity<span class='def-Symbol'>(</span>threads<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+192:         <span class='def-Keyword'>for</span> _ <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span>..threads <span class='def-Symbol'>{</span>
+193:             guards.push<span class='def-Symbol'>(</span>spawn_scoped_in_pool<span class='def-Symbol'>(</span>receiver.clone<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+194:         <span class='def-Symbol'>}</span>
+195: 
+196:         ScopedPool <span class='def-Symbol'>{</span> sender: Some<span class='def-Symbol'>(</span>sender<span class='def-Symbol'>)</span><span class='def-Symbol'>,</span> _guards: guards <span class='def-Symbol'>}</span>
+197:     <span class='def-Symbol'>}</span>
+198: 
+199:     <span class='def-CommentDoc def-Comment def-Syntax'>/// Executes the function `job` on a thread in the pool.</span>
+200:     <span class='def-Keyword'>pub</span> <span class='def-Keyword'>fn</span> execute&lt;F><span class='def-Symbol'>(</span>&amp;<span class='def-Keyword'>self</span><span class='def-Symbol'>,</span> job: F<span class='def-Symbol'>)</span>
+201:         <span class='def-Keyword'>where</span> F: FnOnce<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> + Send + 'pool
+202:     <span class='def-Symbol'>{</span>
+203:         <span class='def-Keyword'>self</span>.sender.as_ref<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.unwrap<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.send<span class='def-Symbol'>(</span>Box<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>job<span class='def-Symbol'>)</span><span class='def-Symbol'>)</span>.unwrap<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+204:     <span class='def-Symbol'>}</span>
+205: <span class='def-Symbol'>}</span>
+206: 
+207: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+208: <span class='def-Keyword'>impl</span>&lt;'a> Drop <span class='def-Keyword'>for</span> ScopedPool&lt;'a> <span class='def-Symbol'>{</span>
+209:     <span class='def-Keyword'>fn</span> drop<span class='def-Symbol'>(</span>&amp;<span class='def-Keyword'>mut</span> <span class='def-Keyword'>self</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+210:         <span class='def-LineComment def-Comment def-Syntax'>// We need to ensure that the sender is dropped before the JoinGuards</span>
+211:         <span class='def-LineComment def-Comment def-Syntax'>// Otherwise the threads will be joined and wait forever in the loop</span>
+212:         mem<span class='def-Symbol'>::</span>replace<span class='def-Symbol'>(</span>&amp;<span class='def-Keyword'>mut</span> <span class='def-Keyword'>self</span>.sender<span class='def-Symbol'>,</span> None<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+213:     <span class='def-Symbol'>}</span>
+214: <span class='def-Symbol'>}</span>
+215: 
+216: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+217: <span class='def-Keyword'>fn</span> spawn_scoped_in_pool&lt;'a><span class='def-Symbol'>(</span>jobs: Arc&lt;Mutex&lt;Receiver&lt;Thunk&lt;'a>>>><span class='def-Symbol'>)</span> <span class='def-Symbol'>-></span> JoinGuard&lt;'a<span class='def-Symbol'>,</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>>
+218: <span class='def-Symbol'>{</span>
+219:     thread<span class='def-Symbol'>::</span>scoped<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span> || <span class='def-Symbol'>{</span>
+220:         <span class='def-Keyword'>loop</span> <span class='def-Symbol'>{</span>
+221:             <span class='def-Keyword'>let</span> message = <span class='def-Symbol'>{</span>
+222:                 <span class='def-LineComment def-Comment def-Syntax'>// Only lock jobs for the time it takes</span>
+223:                 <span class='def-LineComment def-Comment def-Syntax'>// to get a job, not run it.</span>
+224:                 <span class='def-Keyword'>let</span> lock = jobs.lock<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.unwrap<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+225:                 lock.recv<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+226:             <span class='def-Symbol'>}</span><span class='def-Symbol'>;</span>
+227: 
+228:             <span class='def-Keyword'>match</span> message <span class='def-Symbol'>{</span>
+229:                 Ok<span class='def-Symbol'>(</span>job<span class='def-Symbol'>)</span> => job.call_box<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>,</span>
+230: 
+231:                 <span class='def-LineComment def-Comment def-Syntax'>// The pool was dropped.</span>
+232:                 Err<span class='def-Symbol'>(</span>..<span class='def-Symbol'>)</span> => <span class='def-Keyword'>break</span>
+233:             <span class='def-Symbol'>}</span>
+234:         <span class='def-Symbol'>}</span>
+235:     <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span>
+236: <span class='def-Symbol'>}</span>
+237: 
+238: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>test</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+239: <span class='def-Keyword'>mod</span> test <span class='def-Symbol'>{</span>
+240:     <span class='def-Keyword'>use</span> <span class='def-Keyword'>super</span><span class='def-Symbol'>::</span>ThreadPool<span class='def-Symbol'>;</span>
+241:     <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span>mpsc<span class='def-Symbol'>::</span>channel<span class='def-Symbol'>;</span>
+242:     <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span><span class='def-Symbol'>{</span>Arc<span class='def-Symbol'>,</span> Barrier<span class='def-Symbol'>}</span><span class='def-Symbol'>;</span>
+243: 
+244:     <span class='def-Keyword'>const</span> TEST_TASKS: usize = <span class='def-NumberDec def-Number'>4</span><span class='def-Symbol'>;</span>
+245: 
+246: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+247:     <span class='def-Keyword'>fn</span> test_works<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+248:         <span class='def-Keyword'>let</span> pool = ThreadPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+249: 
+250:         <span class='def-Keyword'>let</span> <span class='def-Symbol'>(</span>tx<span class='def-Symbol'>,</span> rx<span class='def-Symbol'>)</span> = channel<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+251:         <span class='def-Keyword'>for</span> _ <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span>..TEST_TASKS <span class='def-Symbol'>{</span>
+252:             <span class='def-Keyword'>let</span> tx = tx.clone<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+253:             pool.execute<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span>|| <span class='def-Symbol'>{</span>
+254:                 tx.send<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span>.unwrap<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+255:             <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+256:         <span class='def-Symbol'>}</span>
+257: 
+258:         assert_eq!<span class='def-Symbol'>(</span>rx.iter<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.take<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span>.fold<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>,</span> |a<span class='def-Symbol'>,</span> b| a + b<span class='def-Symbol'>)</span><span class='def-Symbol'>,</span> TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+259:     <span class='def-Symbol'>}</span>
+260: 
+261: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+262: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+263:     <span class='def-Keyword'>fn</span> test_zero_tasks_panic<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+264:         ThreadPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+265:     <span class='def-Symbol'>}</span>
+266: 
+267: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+268:     <span class='def-Keyword'>fn</span> test_recovery_from_subtask_panic<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+269:         <span class='def-Keyword'>let</span> pool = ThreadPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+270: 
+271:         <span class='def-LineComment def-Comment def-Syntax'>// Panic all the existing threads.</span>
+272:         <span class='def-Keyword'>for</span> _ <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span>..TEST_TASKS <span class='def-Symbol'>{</span>
+273:             pool.execute<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span>|| <span class='def-Symbol'>-></span> <span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span> panic!<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+274:         <span class='def-Symbol'>}</span>
+275: 
+276:         <span class='def-LineComment def-Comment def-Syntax'>// Ensure new threads were spawned to compensate.</span>
+277:         <span class='def-Keyword'>let</span> <span class='def-Symbol'>(</span>tx<span class='def-Symbol'>,</span> rx<span class='def-Symbol'>)</span> = channel<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+278:         <span class='def-Keyword'>for</span> _ <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span>..TEST_TASKS <span class='def-Symbol'>{</span>
+279:             <span class='def-Keyword'>let</span> tx = tx.clone<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+280:             pool.execute<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span>|| <span class='def-Symbol'>{</span>
+281:                 tx.send<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span>.unwrap<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+282:             <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+283:         <span class='def-Symbol'>}</span>
+284: 
+285:         assert_eq!<span class='def-Symbol'>(</span>rx.iter<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.take<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span>.fold<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>,</span> |a<span class='def-Symbol'>,</span> b| a + b<span class='def-Symbol'>)</span><span class='def-Symbol'>,</span> TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+286:     <span class='def-Symbol'>}</span>
+287: 
+288: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+289:     <span class='def-Keyword'>fn</span> test_should_not_panic_on_drop_if_subtasks_panic_after_drop<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+290: 
+291:         <span class='def-Keyword'>let</span> pool = ThreadPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+292:         <span class='def-Keyword'>let</span> waiter = Arc<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>Barrier<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS + <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+293: 
+294:         <span class='def-LineComment def-Comment def-Syntax'>// Panic all the existing threads in a bit.</span>
+295:         <span class='def-Keyword'>for</span> _ <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span>..TEST_TASKS <span class='def-Symbol'>{</span>
+296:             <span class='def-Keyword'>let</span> waiter = waiter.clone<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+297:             pool.execute<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span>|| <span class='def-Symbol'>{</span>
+298:                 waiter.wait<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+299:                 panic!<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+300:             <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+301:         <span class='def-Symbol'>}</span>
+302: 
+303:         drop<span class='def-Symbol'>(</span>pool<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+304: 
+305:         <span class='def-LineComment def-Comment def-Syntax'>// Kick off the failure.</span>
+306:         waiter.wait<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+307:     <span class='def-Symbol'>}</span>
+308: <span class='def-Symbol'>}</span>
+309: 
+310: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>all</span><span class='def-Symbol'>(</span><span class='def-Directive'>test</span><span class='def-Symbol'>,</span><span class='def-Directive'> feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+311: <span class='def-Keyword'>mod</span> test_scoped <span class='def-Symbol'>{</span>
+312:     <span class='def-Keyword'>use</span> <span class='def-Keyword'>super</span><span class='def-Symbol'>::</span>ScopedPool<span class='def-Symbol'>;</span>
+313:     <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span>mpsc<span class='def-Symbol'>::</span>channel<span class='def-Symbol'>;</span>
+314: 
+315:     <span class='def-Keyword'>const</span> TEST_TASKS: usize = <span class='def-NumberDec def-Number'>4</span><span class='def-Symbol'>;</span>
+316: 
+317: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+318:     <span class='def-Keyword'>fn</span> test_works_1<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+319:         <span class='def-Keyword'>let</span> pool = ScopedPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+320: 
+321:         <span class='def-Keyword'>let</span> <span class='def-Symbol'>(</span>tx<span class='def-Symbol'>,</span> rx<span class='def-Symbol'>)</span> = channel<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+322:         <span class='def-Keyword'>for</span> _ <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span>..TEST_TASKS <span class='def-Symbol'>{</span>
+323:             <span class='def-Keyword'>let</span> tx = tx.clone<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+324:             pool.execute<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span>|| <span class='def-Symbol'>{</span>
+325:                 tx.send<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>)</span>.unwrap<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+326:             <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+327:         <span class='def-Symbol'>}</span>
+328: 
+329:         assert_eq!<span class='def-Symbol'>(</span>rx.iter<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.take<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span>.fold<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>,</span> |a<span class='def-Symbol'>,</span> b| a + b<span class='def-Symbol'>)</span><span class='def-Symbol'>,</span> TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+330:     <span class='def-Symbol'>}</span>
+331: 
+332: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+333:     <span class='def-Keyword'>fn</span> test_works_2<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+334:         <span class='def-Keyword'>let</span> <span class='def-Keyword'>mut</span> numbers: &amp;<span class='def-Keyword'>mut</span> <span class='def-Symbol'>[</span>u32<span class='def-Symbol'>]</span> = &amp;<span class='def-Keyword'>mut</span> <span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>4</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>5</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>6</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>7</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>8</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>9</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>10</span><span class='def-Symbol'>]</span><span class='def-Symbol'>;</span>
+335:         <span class='def-Symbol'>{</span>
+336:             <span class='def-Keyword'>let</span> pool = ScopedPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+337:             <span class='def-Keyword'>for</span> x <span class='def-Keyword'>in</span> numbers.iter_mut<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+338:                 pool.execute<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span> || <span class='def-Symbol'>{</span>
+339:                     *x += <span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>;</span>
+340:                 <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+341:             <span class='def-Symbol'>}</span>
+342:         <span class='def-Symbol'>}</span>
+343:         assert_eq!<span class='def-Symbol'>(</span>numbers<span class='def-Symbol'>,</span> <span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>4</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>5</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>6</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>7</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>8</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>9</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>10</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>11</span><span class='def-Symbol'>]</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+344:     <span class='def-Symbol'>}</span>
+345: 
+346: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+347: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+348:     <span class='def-Keyword'>fn</span> test_zero_tasks_panic<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+349:         ScopedPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+350:     <span class='def-Symbol'>}</span>
+351: 
+352: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+353: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+354:     <span class='def-Keyword'>fn</span> test_panic_propagation<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
+355:         <span class='def-Keyword'>let</span> pool = ScopedPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+356: 
+357:         <span class='def-LineComment def-Comment def-Syntax'>// Panic all the existing threads.</span>
+358:         <span class='def-Keyword'>for</span> _ <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span>..TEST_TASKS <span class='def-Symbol'>{</span>
+359:             pool.execute<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span>|| <span class='def-Symbol'>-></span> <span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span> panic!<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+360:         <span class='def-Symbol'>}</span>
+361:     <span class='def-Symbol'>}</span>
+362: <span class='def-Symbol'>}</span>
+363: 

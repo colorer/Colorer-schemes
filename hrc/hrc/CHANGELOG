@@ -1,3 +1,16 @@
+2015-05-05
+  New:
+    - Rust syntax (Max Galkin)
+
+2015-11-04
+  Fixed:
+   - Lua: if then end" colorizing fixed (ildar-shaimordanov)
+   - Sh: process redirection and few descriptive comments (ildar-shaimordanov)
+
+2015-17-01
+  Fixed:
+   - python: Handle raw strings separately (techtonik)
+   
 2014-11-01
   Fixed:
    - Fortan: add file extension
