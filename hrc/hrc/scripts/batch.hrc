@@ -61,7 +61,7 @@ Internal usage: call :heredoc :LABEL & goto :LABEL
 -->
 <scheme name="nt_heredoc">
 	<block
-		start="/^\s*(call)\s+(:?heredoc\s+:?(%labelName;))/i" 
+		start="/^[\s@]*(call)\s+(:?heredoc\s+:?(%labelName;))/i" 
 		end="/^(:\y3)$/"
 		scheme="def:def"
 		region="ntHereDoc"
