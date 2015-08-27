@@ -30,6 +30,8 @@ With help of:
       <region name="ntStr" parent="String"/>
       <region name="ntVarEnv" parent="Var"/>
 
+      <region name="ntHereDoc" parent="String"/>
+
       <entity name="label" value=":[\dA-Za-z]\w*"/>
       <entity name="path-subst" value="(\~[fdpnxsatz]*(\$\w+\:)?)?"/>
       <entity name="labelName" value="[a-zA-Z0-9`\-~@#$_\[\]\\\{\}'.\/]+"/>
@@ -46,7 +48,33 @@ With help of:
          <inherit scheme="Comment"/>
       </scheme>
 
+<!--
+
+Experimental feature: heredoc in the batch file
+
+http://stackoverflow.com/a/29329912/3627676
+http://forum.script-coding.com/viewtopic.php?id=10536
+
+External usage: call heredoc :LABEL & goto :LABEL
+Internal usage: call :heredoc :LABEL & goto :LABEL
+
+-->
+<scheme name="nt_heredoc">
+	<block
+		start="/^[\s@]*(call)\s+(:?heredoc\s+:?(%labelName;))/i" 
+		end="/^(:\y3)$/"
+		scheme="def:def"
+		region="ntHereDoc"
+		region00="def:PairStart" 
+		region01="ntCmd" 
+		region02="perl:HereDocName" 
+		region10="def:PairEnd"
+		region11="perl:HereDocName"
+	/>
+</scheme>
+
       <scheme name="BatchInternal">
+      	<inherit scheme="nt_heredoc" />
          <block start="/(\{)/" end="/(\})/" scheme="BatchInternal" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
          <block start="/(\()/" end="/(\))/" scheme="BatchInternal" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
          <block start="/(\[)/" end="/(\])/" scheme="BatchInternal" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
