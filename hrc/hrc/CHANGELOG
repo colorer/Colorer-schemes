@@ -1,3 +1,7 @@
+2015-08-29
+  Fixed:
+   - Batch: heredoc highlighting (ildar-shaimordanov)
+
 2015-05-05
   New:
     - Rust syntax (Max Galkin)
