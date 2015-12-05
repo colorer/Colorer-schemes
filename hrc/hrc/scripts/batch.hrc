@@ -30,20 +30,56 @@ With help of:
       <region name="ntStr" parent="String"/>
       <region name="ntVarEnv" parent="Var"/>
 
-      <entity name="label" value=":[\dA-Za-z]\w*"/>
+      <region name="ntHereDoc" parent="String"/>
 
+      <entity name="label" value=":[\dA-Za-z]\w*"/>
+      <entity name="path-subst" value="(\~[fdpnxsatz]*(\$\w+\:)?)?"/>
+      <entity name="labelName" value="[a-zA-Z0-9`\-~@#$_\[\]\\\{\}'.\/]+"/>
+
+      <scheme name="BatchContent">
+         <regexp match="/\%\*/" region0="ntNumber"/>
+         <regexp match="/\%%path-subst;\d/i" region0="ntNumber"/>
+         <regexp match="/\%\%%path-subst;[a-z]/i" region0="ntNumber"/>
+      </scheme>
 
       <scheme name="echo">
          <regexp match="/\^(\||&amp;|&lt;|&gt;)/i" region0="ntStr"/>
+         <inherit scheme="BatchContent"/>
          <inherit scheme="Comment"/>
       </scheme>
 
+<!--
+
+Experimental feature: heredoc in the batch file
+
+http://stackoverflow.com/a/29329912/3627676
+http://forum.script-coding.com/viewtopic.php?id=10536
+
+External usage: call heredoc :LABEL & goto :LABEL
+Internal usage: call :heredoc :LABEL & goto :LABEL
+
+-->
+<scheme name="nt_heredoc">
+	<block
+		start="/^[\s@]*(call)\s+(:?heredoc\s+:?(%labelName;))/i" 
+		end="/^(:\y3)$/"
+		scheme="def:def"
+		region="ntHereDoc"
+		region00="def:PairStart" 
+		region01="ntCmd" 
+		region02="perl:HereDocName" 
+		region10="def:PairEnd"
+		region11="perl:HereDocName"
+	/>
+</scheme>
+
       <scheme name="BatchInternal">
+      	<inherit scheme="nt_heredoc" />
          <block start="/(\{)/" end="/(\})/" scheme="BatchInternal" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
          <block start="/(\()/" end="/(\))/" scheme="BatchInternal" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
          <block start="/(\[)/" end="/(\])/" scheme="BatchInternal" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
 <!-- Labels -->
-         <regexp match="/^\s*%label;\s*$/" region0="ntLabel"/>
+         <regexp match="/^\s*:%labelName;\s*(.*)$/" region0="ntLabel" region1="ntComment"/>
 <!-- Linear Comments -->
          <regexp match="/^\s*(REM\s+).*$/i" region0="ntComment" region1="ntCmd"/>
          <regexp match="/^\s*::.*$/" region0="ntComment"/>
@@ -51,22 +87,22 @@ With help of:
 <!-- Numbers -->
          <regexp match="/\b\d[0-9a-fA-F]*\b/" region0="ntNumber"/>
          <regexp match="/\%\@[^\[]+/" region0="ntNumber"/>
-         <regexp match="/\%(\d+|\*)/" region0="ntNumber"/>
-         <regexp match="/\%\~(f|d|p|n|x|s|a|t|z|(\$PATH\:)|dp|nx|(dp\$PATH\:)|ftza)?(\d+)/i" region0="ntNumber"/>
+         <inherit scheme="BatchContent"/>
 <!-- Strings -->
          <regexp match="/\&#34;(\\.|[^\\&#34;])*?\&#34;/" region0="ntStr"/>
 <!--regexp match='/\%.*?\%/' region0="ntVarEnv"/-->
-         <regexp match="/(\%)[^\[\]]*?(\%)/" region0="ntVarEnv" region1="PairStart" region2="PairEnd"/>
+         <regexp match="/([%!])[^\[\]]*?(\1)/" region0="ntVarEnv" region1="PairStart" region2="PairEnd"/>
          <regexp match="/\[.*?\]/" region0="ntVarEnv"/>
          <regexp match="/&lt;.*?\&gt;/" region0="ntVarEnv"/>
 <!-- ECHO command -->
 <!--regexp match="/\b(echo)((\s*?on\s*?(>|$))|(\s*?off\s*?(>|$)))/i" region1="Keywords" region2="Keywords" -->
-         <regexp match="/\becho(\s*on\s*|\s*?off\s*)/i" region0="ntCmd"/>
+         <regexp match="/\becho(\s+on\s*|\s+off\s*)/i" region0="ntCmd"/>
          <block start="/\becho\M\W/i" end="/\M'|`|&lt;|&gt;|\||&amp;|$/" scheme="echo" region="ntStr" region00="ntCmd"/>
 <!-- GOTO command -->
-         <regexp match="/(goto\s)+(\w*\b)/i" region1="ntCmd" region2="ntLabel"/>
+         <regexp match="/goto\s*:EOF\b/i" region="ntCmd"/>
+         <regexp match="/(goto) ( (\s*:|\s+:?) %labelName;)/ix" region1="ntCmd" region2="ntLabel"/>
 <!-- CALL command with label -->
-         <regexp match="/(call) \s+ (%label;\b)/ix" region1="ntCmd" region2="ntLabel"/>
+         <regexp match="/(call) \s* (:%labelName;)/ix" region1="ntCmd" region2="ntLabel"/>
 
          <block start="/^\s*(\@)/" end="/$/" scheme="Batch" region="ntComment" region01="ntSpec"/>
          <keywords region="ntSpec">
@@ -87,10 +123,12 @@ With help of:
             <symb name="?"/>
             <symb name="^"/>
          </keywords>
+         <regexp match="/setlocal(\s+(enable|disable)(extensions|delayedexpansion)\b)+/i" region0="ntCmd"/>
          <keywords ignorecase="yes" region="ntCmd">
             <word name="accdate"/>
             <word name="assoc"/>
             <word name="auto"/>
+            <word name="aux"/>
             <word name="break"/>
             <word name="buffers"/>
             <word name="buffershigh"/>
@@ -122,6 +160,7 @@ With help of:
             <word name="drivparm"/>
             <word name="echo"/>
             <word name="echoconfig"/>
+            <word name="else"/>
             <word name="endlocal"/>
             <word name="eof"/>
             <word name="equ"/>

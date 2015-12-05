@@ -140,7 +140,7 @@
   </prototype>
   <prototype name="fortran" group="main" description="Fortran">
     <location link="base/fortran.hrc"/>
-    <filename>/\.(for|f(90)?)$/i</filename>
+    <filename>/\.(for|f90|f95|f3?)$/i</filename>
   </prototype>
   <prototype name="vbasic" group="main" description="Visual Basic">
     <location link="base/vbasic.hrc"/>
@@ -182,6 +182,11 @@
   <prototype name="kotlin" group="main" description="Kotlin">
     <location link="base/kotlin.hrc"/>
     <filename>/\.kt$/i</filename>
+  </prototype>
+
+  <prototype name="rust" group="main" description="Rust">
+    <location link="base/rust.hrc"/>
+    <filename>/\.rs$/i</filename>
   </prototype>
 
   <!--  inet languages  -->
@@ -969,7 +974,8 @@
     <filename>/\.(diff.*|patch|rej(ect)?)$/i</filename>
     <firstline weight='2'>/^(diff|Index|---|\+\+\+|\*\*\*)/si</firstline>
     <firstline>/^(\d+,\d+\w\d+ | \d+\w\d+)/i</firstline>
-    <firstline>/^cvs/i</firstline>
+     <!-- mercurial `hg inc -p` format detection -->
+    <firstline>/^comparing with/</firstline>
     <parameters>
       <param name="trailing-space"      value="false" description="Mark trailing spaces as errors"/>
       <param name="space-before-tab"    value="false" description="Mark leading spaces before tabs as errors"/>

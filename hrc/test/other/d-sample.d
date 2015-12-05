@@ -182,7 +182,7 @@ goto label;
  */
 real sqrt(real x);
 float sqrt(float x); /// ditto
-double sqrt(double x); /++ ditto +/
+double sqrt(double x); /++ Ditto +/
 
 /++
     $(LI $(D filename) must not contain any of the following reserved
@@ -280,8 +280,8 @@ Object obj;
 
 // *** additional keywords ***
 immutable typeof(this) thisType;
-__gshared pure nothrow shared immutable @property @safe @trusted @system @disable x; // attributes
-__gshared: pure: nothrow: shared: immutable: @property: @safe: @trusted: @system: @disable: // attribute sections
+__gshared pure nothrow shared immutable @property @safe @trusted @system @disable @nogc x; // attributes
+__gshared: pure: nothrow: shared: immutable: @property: @safe: @trusted: @system: @disable: @nogc: // attribute sections
 try {} catch {}
 void takesByReference(ref int x);
 enum b = __traits(isAbstractClass, T);
@@ -436,3 +436,53 @@ x;  // this is now line 6 of file foo\bar
 
 auto EB_FE = { x : goto x; };           // delegate literals with labels (ambiguous with struct literals)
 //SomeStruct s = { x : 0 };            // struct literals (ambiguous with delegate literals)
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+// 2014-08-16
+
+enum KeepTerminator : bool { no, yes }
+enum DisconnectType {}
+
+/// $(D_PARAM true)
+
+void f(T)(T t) if (true)
+{}
+
+/**
+Macros:
+MYMACRO = Macro definition
+*/
+
+string[]fun(){}
+
+auto dg = void delegate() { }
+
+enum : int;
+enum : int {}
+enum foo : int;
+enum foo : int {}
+enum MacroImpl[string] macros = 0;
+enum MacroImpl[string] macros(T) = 0;
+enum T!(olol) macros = 0;
+
+Duration opBinary(string op)(MonoTime o);
+
+*************************** // performance
+
+/**
+---
+/* aoeu */
+/+ aoeu +/
+void main() {}
+---
+
+**/
+
+/** $(D true /* aoeu() */ ) **/
+
+alias Foo(T) = Too;
+alias Too!(1) Foo;
+
+auto r = regex(r"^begin [0-7]+ \S+$");
+auto r =  regex(`^begin [0-7]+ \S+$`);

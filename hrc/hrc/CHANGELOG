@@ -1,3 +1,40 @@
+2015-08-29
+  Fixed:
+   - Batch: heredoc highlighting (ildar-shaimordanov)
+
+2015-05-05
+  New:
+    - Rust syntax (Max Galkin)
+
+2015-11-04
+  Fixed:
+   - Lua: if then end" colorizing fixed (ildar-shaimordanov)
+   - Sh: process redirection and few descriptive comments (ildar-shaimordanov)
+
+2015-17-01
+  Fixed:
+   - python: Handle raw strings separately (techtonik)
+   
+2014-11-01
+  Fixed:
+   - Fortan: add file extension
+   - Batch: minor improvement (ildar-shaimordanov)
+
+2014-10-04
+  Fixed:
+   - D: Multiple fixes (Vladimir Panteleev)
+   - Batch: Improve numeric parameter highlighting (Vladimir Panteleev)
+            added more keywords to be hightlighted (ildar-shaimordanov)
+            improve colorizing of :label, goto/call :label (ildar-shaimordanov) 
+   - Shell: Fix highlighting of array length expressions (Vladimir Panteleev)
+            Fix backtick expressions (fixup) (Vladimir Panteleev)
+            improvements to heredoc (ildar-shaimordanov)
+            added processing novaday brackets (( )) and [[ ]] (ildar-shaimordanov)
+            improve var expansions: ${#...}, ${!...} (ildar-shaimordanov)
+   - jscript: added more jsMethods for highlighting (ildar-shaimordanov)
+              added support of important comments /status (ildar-shaimordanov)
+   - python: update octal and binary literals for Python 2.6 (techtonik)
+
 2014-01-17
   Fixed:
    - java: When a method throws more than one exception, it is not outlined.
