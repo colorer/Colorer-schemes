@@ -378,6 +378,7 @@ virtual -- Perform an Apache sub-request
      <!-- II. Array Functions -->
 array_change_key_case -- Returns an array with all string keys lowercased or uppercased
 array_chunk -- Split an array into chunks
+array_column -- Return the values from a single column in the input array
 array_combine --  Creates an array by using one array for keys and another for its values 
 array_count_values -- Counts all the values of an array
 array_diff_assoc -- Computes the difference of arrays with additional index check
@@ -391,8 +392,9 @@ array_filter --  Filters elements of an array using a callback function
 array_flip -- Exchanges all keys with their associated values in an array
 array_intersect_assoc -- Computes the intersection of arrays with additional index check
 array_intersect_key -- Computes the intersection of arrays using keys for comparison
-array_intersect -- Computes the intersection of arrays
+array_intersect_uassoc -- Computes the intersection of arrays with additional index check, compares indexes by a callback function
 array_intersect_ukey -- Computes the intersection of arrays using keys for comparison
+array_intersect -- Computes the intersection of arrays
 array_key_exists -- Checks if the given key or index exists in the array
 array_keys -- Return all the keys of an array
 array_map --  Applies the callback to the elements of the given arrays 
@@ -433,6 +435,7 @@ each --  Return the current key and value pair from an array and advance the arr
 end --  Set the internal pointer of an array to its last element 
 extract --  Import variables into the current symbol table from an array 
 in_array -- Checks if a value exists in an array
+key_exists -- Alias of array_key_exists
 key -- Fetch a key from an associative array
 krsort -- Sort an array by key in reverse order
 ksort -- Sort an array by key
@@ -451,6 +454,8 @@ uasort --  Sort an array with a user-defined comparison function and maintain in
 uksort --  Sort an array by keys using a user-defined comparison function 
 usort --  Sort an array 
 
+ARRAY_FILTER_USE_KEY (integer)
+ARRAY_FILTER_USE_BOTH (integer)
 CASE_LOWER (integer)
 CASE_UPPER (integer)
 COUNT_NORMAL (integer)
@@ -1685,6 +1690,7 @@ flock -- Portable advisory file locking
 fnmatch -- Match filename against a pattern
 fopen -- Opens file or URL
 fpassthru -- Output all remaining data on a file pointer
+fputcsv -- Format line as CSV and write to file pointer
 fputs -- Alias of fwrite()
 fread -- Binary-safe file read
 fscanf -- Parses input from a file according to a format
@@ -1702,17 +1708,22 @@ is_readable -- Tells whether the filename is readable
 is_uploaded_file -- Tells whether the file was uploaded via HTTP POST
 is_writable -- Tells whether the filename is writable
 is_writeable -- Alias of is_writable()
+lchgrp -- Changes group ownership of symlink
+lchown -- Changes user ownership of symlink
 link -- Create a hard link
 linkinfo -- Gets information about a link
 lstat -- Gives information about a file or symbolic link
 mkdir -- Makes directory
 move_uploaded_file -- Moves an uploaded file to a new location
 parse_ini_file -- Parse a configuration file
+parse_ini_string -- Parse a configuration string
 pathinfo -- Returns information about a file path
 pclose -- Closes process file pointer
 popen -- Opens process file pointer
 readfile -- Outputs a file
 readlink -- Returns the target of a symbolic link
+realpath_cache_get -- Get realpath cache entries
+realpath_cache_size -- Get realpath cache size
 realpath -- Returns canonicalized absolute pathname
 rename -- Renames a file or directory
 rewind -- Rewind the position of a file pointer
@@ -7262,3 +7273,18 @@ SQLSRV_ENCODING_UTF8 (integer)
 SQLSRV_ENCODING_DEFAULT (integer)
 SQLSRV_ATTR_QUERY_TIMEOUT (integer)
 SQLSRV_ATTR_DIRECT_QUERY (integer)
+
+   <!-- XXX. Hash Functions -->
+hash_algos -- Return a list of registered hashing algorithms
+hash_copy -- Copy hashing context
+hash_file -- Generate a hash value using the contents of a given file
+hash_final -- Finalize an incremental hash and return resulting digest
+hash_hmac_file -- Generate a keyed hash value using the HMAC method and the contents of a given file
+hash_hmac -- Generate a keyed hash value using the HMAC method
+hash_init -- Initialize an incremental hashing context
+hash_update_file -- Pump data into an active hashing context from a file
+hash_update_stream -- Pump data into an active hashing context from an open stream
+hash_update -- Pump data into an active hashing context
+hash -- Generate a hash value (message digest)
+
+HASH_HMAC (integer) 
