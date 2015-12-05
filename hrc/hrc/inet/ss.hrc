@@ -39,7 +39,7 @@
 			<regexp match="/&lt;%-- (.(--%&gt;)?!)* $/x"
 				region="def:Error"
 			/>
-			<block start="/(&lt;%--\s)/" end="/\s?#1(--%&gt;)/" scheme="Comment"
+			<block start="/(&lt;%--)/" end="/(--%&gt;)/" scheme="Comment"
 				region01="PairStart"
 				region11="PairEnd"
 				region="def:Comment"
@@ -173,23 +173,23 @@
 			</keywords>
 		</scheme>
 		<scheme name="Script">
-			<block start="/(&lt;%)?#2\s+((cached|control|with|loop|uncached))/" end="/(end_\Y3)/"
+			<block start="/(&lt;%)?#2\s*((cached|control|with|loop|uncached))/" end="/(end_\Y3)/"
 				region02="PairStart" region10="PairEnd"
 				region03="ssTagName" region11="ssTagName"
 				scheme="Script" priority="low"
 			/>
-			<block start="/(((&lt;%\s)?#3\s*if|(el)?#2se|(else)?#4_if))/" end="/(&lt;%)?#2\s+((else(_if)?=|el(se)?=|end_if))/"
+			<block start="/(((&lt;%)?#2\s*if|(el)?#2se|(else)?#4_if))/" end="/(&lt;%)?#2\s*((else(_if)?=|el(se)?=|end_if))/"
 				region01="PairStart" region12="PairEnd"
 				region02="ssTagName" region13="ssTagName"
 				scheme="Script" priority="low"
 			/>
-			<block start="/(&lt;%)?#2\s+ (_t) ((\())/x" end="/(\))/x"
+			<block start="/(&lt;%)?#2\s* (_t) ((\())/x" end="/(\))/x"
 				scheme="ss_t"
 				region02="ssTagName"
 				region03="PairStart" region10="PairEnd"
 				region04="Symbol" region11="Symbol"
 			/>
-			<block start="/(&lt;%)?#2\s+ (sprintf) ((\()) (_t) ((\())/x" end="/((\))) (,) ([^\)]+) ((\)))/x"
+			<block start="/(&lt;%)?#2\s* (sprintf) ((\()) (_t) ((\())/x" end="/((\))) (,) ([^\)]+) ((\)))/x"
 				scheme="ss_t"
 				region02="ssTagName"
 				region03="PairStart" region11="PairEnd"
@@ -200,15 +200,15 @@
 				region06="PairStart" region15="PairEnd"
 				region07="Symbol" region16="Symbol"
 			/>
-			<block start="/(&lt;%)?#2\s+ (require) \s+ (\w+) \s* ((\())/x" end="/(\))/x"
+			<block start="/(&lt;%)?#2\s* (require) \s+ (\w+) \s* ((\())/x" end="/(\))/x"
 				scheme="ss_t"
 				region02="ssTagName"
 				region04="PairStart" region10="PairEnd"
 				region05="Symbol" region11="Symbol"
 			/>
-			<regexp match="/(&lt;%)?#2\s+ (include|require) \s+ ([\w]+)/x" region2="ssTagName" region3="IncludeFile" />
-			<regexp match="/(&lt;%)?#2\s+ (base_tag|current_page) /x" region2="ssTagName" />
-			<regexp match="/(&lt;%)?#2\s+ (end_(cached|control|loop|if|uncached|width)) /x" region2="def:Error" priority="low" />
+			<regexp match="/(&lt;%)?#2\s* (include|require) \s+ ([\w]+)/x" region2="ssTagName" region3="IncludeFile" />
+			<regexp match="/(&lt;%)?#2\s* (base_tag|current_page) /x" region2="ssTagName" />
+			<regexp match="/(&lt;%)?#2\s* (end_(cached|control|loop|if|uncached|width)) /x" region2="def:Error" priority="low" />
 			<keywords region="Symbol">
 				<symb name="||"/>
 				<symb name="&amp;&amp;"/>
@@ -230,7 +230,14 @@
 				region00="PairStart" region10="PairEnd"
 				region01="Symbol" region11="Symbol"
 			/>
-
+			<regexp match="/((&quot;))[^&quot;]*((&quot;))/" region="def:String"
+				region1="PairStart"  region3="PairEnd"
+				region2="StringEdge" region4="StringEdge"
+			/>
+			<regexp match="/((&apos;))[^&apos;]*((&apos;))/" region="def:String"
+				region1="PairStart"  region3="PairEnd"
+				region2="StringEdge" region4="StringEdge"
+			/>
 		</scheme>
 
 
@@ -277,7 +284,7 @@
 		<scheme name="Insertion">
 			<inherit scheme="ssComment" />
 			<inherit scheme="Variables" />
-			<block start="/(&lt;%)(\s+)?=/" end="/(\s)?#1(%&gt;)/" 
+			<block start="/(&lt;%)/" end="/(%&gt;)/" 
 				priority="low" content-priority="low"
 				scheme="ssScript" region="Insertion" 
 				region00="OpenTag" region10="OpenTag" 
@@ -286,10 +293,10 @@
 
 
 		<scheme name="InverseInsertion">
-			<block start="/(\s)?#1((%&gt;))/" end="/((&lt;%(\s+)?=))/" scheme="html"
+			<block start="/(%&gt;)/" end="/(&lt;%)/" scheme="html"
 				priority="low" region="Text" inner-region="yes"
 				region00="Insertion" region10="Insertion" 
-				region03="OpenTag"   region12="OpenTag" 
+				region01="OpenTag"   region11="OpenTag" 
 			/>
 		</scheme>
 
