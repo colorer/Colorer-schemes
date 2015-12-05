@@ -484,6 +484,7 @@
 			<word name="sub"/>
 			<word name="summary"/>
 			<word name="sup"/>
+			<word name="svg"/>
 			<word name="table"/>
 			<word name="tbody"/>
 			<word name="td"/>
