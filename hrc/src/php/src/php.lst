@@ -2183,6 +2183,7 @@ imagesetstyle -- Set the style for line drawing
 imagesetthickness -- Set the thickness for line drawing
 imagesettile -- Set the tile image for filling
 imagestring -- Draw a string horizontally
+image_type_to_extension -- Get file extension for image type
 imagestringup -- Draw a string vertically
 imagesx -- Get image width
 imagesy -- Get image height
