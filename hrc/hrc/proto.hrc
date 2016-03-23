@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding='Windows-1251'?>
 <!DOCTYPE hrc PUBLIC
   "-//Cail Lomecb//DTD Colorer HRC take5//EN"
-  "http://colorer.sf.net/2003/hrc.dtd"p
+  "http://colorer.sf.net/2003/hrc.dtd"
 [
   <!-- include -->
   <!ENTITY scripts-colorer-protos  SYSTEM "scripts.colorer.ent.hrc">
