@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding='Windows-1251'?>
 <!DOCTYPE hrc PUBLIC
   "-//Cail Lomecb//DTD Colorer HRC take5//EN"
-  "http://colorer.sf.net/2003/hrc.dtd"
+  "http://colorer.sf.net/2003/hrc.dtd"p
 [
   <!-- include -->
   <!ENTITY scripts-colorer-protos  SYSTEM "scripts.colorer.ent.hrc">
@@ -68,7 +68,7 @@
   <prototype name="d" group="main" description="D">
     <location link="base/d.hrc"/>
     <filename>/\.di?$/i</filename>
-    <firstline>/^\s*(module|import)\b/xi</firstline>
+    <firstline>/^\s*(module|import) .*;/</firstline>
     <parameters>
       <param name="format-str" value="true" description="Highlight printf-like %format in strings"/>
       <param name="use_phobos" value="true" description="Use Phobos library keywords"/>
@@ -151,6 +151,7 @@
     <location link="base/python.hrc"/>
     <filename>/\.(py|pyw|pys)$/i</filename>
     <firstline weight='2'>/^\#!\S*.+python/</firstline>
+    <firstline>/^("""|import)/</firstline>
   </prototype>
   <prototype name="lua" group="main" description="Lua">
     <location link="base/lua.hrc"/>
