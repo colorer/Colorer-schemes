@@ -28,6 +28,7 @@
 		<region name="OpenTag"   parent="asp:OpenTag"/>
 		<region name="CloseTag"  parent="asp:CloseTag"/>
 
+		<entity  name="TwigOpenTag" value="(?:(?:\{%)?#2|(?:\{%-)?#3)\s+"/>
 		<scheme name="twigComment">
 			<block start="/\{#/" end="/#\}/" scheme="Comment"
 				region="def:Comment"
@@ -40,10 +41,18 @@
 			<keywords region="def:Keyword">
 				<word name="and"/>
 				<word name="as"/>
+				<word name="defined"/>
+				<word name="empty"/>
+				<word name="false"/>
 				<word name="import"/>
 				<word name="in"/>
+				<word name="is"/>
 				<word name="not"/>
+				<word name="null"/>
 				<word name="or"/>
+				<word name="same"/>
+				<word name="true"/>
+				<word name="with"/>
 			</keywords>
 		</scheme>
 		<scheme name="Parenthes">
@@ -96,32 +105,32 @@
 			<inherit scheme="Parenthes" />
 		</scheme>
 		<scheme name="Script">
-			<block start="/(\{%)?#2\s+((autoescape|block|filter|for|macro|spaceless))/" end="/(end\Y3)/"
-				region02="PairStart"   region10="PairEnd"
-				region03="def:Keyword" region11="def:Keyword"
+			<block start="/%TwigOpenTag;((autoescape|block|filter|for|macro|spaceless))/" end="/((end\Y2))/"
+				region01="PairStart"   region11="PairEnd"
+				region02="def:Keyword" region12="def:Keyword"
 				scheme="Script" priority="low"
 			/>
-			<block start="/(((\{%\s)?#3\s*if|(el)?#2se|(else)?#4if))/" end="/(\{%)?#2\s+((else(if)?=|el(se)?=|endif))/"
-				region01="PairStart" region12="PairEnd"
-				region02="def:Keyword" region13="def:Keyword"
+			<block start="/((%TwigOpenTag;if|(el)?#2se|(else)?#4if))/" end="/%TwigOpenTag; ((else(if)?=|el(se)?=|endif))/x"
+				region01="PairStart" region11="PairEnd"
+				region02="def:Keyword" region12="def:Keyword"
 				scheme="Script" priority="low"
 			/>
-			<regexp match="/(\{%)?#2\s+ (extends|from|import|include|set)/x"
-				region2="def:Keyword"
+			<regexp match="/%TwigOpenTag; (extends|from|import|include|set)/x"
+				region1="def:Keyword"
 			/>
 			<inherit scheme="Expressions" />
-			<regexp match="/(\{%)?#2\s+ (endautoescape|else|elseif|endblock|endif|endfilter|endfor|endif|endmacro|endspaceless) /x" region2="def:Error" priority="low" />
+			<regexp match="/%TwigOpenTag; (endautoescape|else|elseif|endblock|endif|endfilter|endfor|endif|endmacro|endspaceless) /x" region2="def:Error" priority="low" />
 		</scheme>
 
 
 		<scheme name="Insertion">
 			<inherit scheme="twigComment" />
-			<block start="/((\{\{))\s?=/" end="/\s?#1((\}\}))/"
+			<block start="/(\{\{-?)\s?=/" end="/\s?#1(-?\}\})/"
 				region00="PairStart" region10="OpenTag" 
 				region01="OpenTag" region11="PairEnd" 
 				scheme="Expressions" region="def:Text"
 			/>
-			<block start="/(\{%)(\s+)?=/" end="/(\s)?#1(%\})/" 
+			<block start="/\{%-?\s?=/" end="/\s?#1-?%\}/" 
 				priority="low" content-priority="low"
 				scheme="twigScript" region="Insertion" 
 				region00="OpenTag" region10="OpenTag" 
@@ -130,10 +139,10 @@
 
 
 		<scheme name="InverseInsertion">
-			<block start="/(\s)?#1((%\}))/" end="/((\{%(\s+)?=))/" scheme="html"
+			<block start="/(\s?#1-?%\})/" end="/(\{%-?\s?=)/" scheme="html"
 				priority="low" region="Text" inner-region="yes"
 				region00="Insertion" region10="Insertion" 
-				region03="OpenTag"   region12="OpenTag" 
+				region01="OpenTag"   region11="OpenTag" 
 			/>
 		</scheme>
 
