@@ -1315,6 +1315,14 @@ SCANDIR_SORT_NONE (integer)
 DomAttribute->name --  Returns name of attribute 
 DomAttribute->specified --  Checks if attribute is specified 
 DomAttribute->value --  Returns value of attribute 
+DOMAttr::isId -- Checks if attribute is a defined ID
+DOMCdataSection::__construct -- Constructs a new DOMCdataSection object
+DOMCharacterData::appendData -- Append the string to the end of the character data of the node
+DOMCharacterData::deleteData -- Remove a range of characters from the node
+DOMCharacterData::insertData -- Insert a string at the specified 16-bit unit offset
+DOMCharacterData::replaceData -- Replace a substring within the DOMCharacterData node
+DOMCharacterData::substringData -- Extracts a range of data from the node
+DOMComment::__construct -- Creates a new DOMComment object
 DOMDocument::createAttribute -- Create new attribute
 DOMDocument::createAttributeNS -- Create new attribute node with an associated namespace
 DOMDocument::createCDATASection -- Create new cdata node
@@ -1362,6 +1370,10 @@ DomDocument->get_element_by_id --  Searches for an element with a certain id
 DomDocument->get_elements_by_tagname --  
 DomDocument->html_dump_mem --  Dumps the internal XML tree back into a string as HTML 
 DomDocument->xinclude --  Substitutes XIncludes in a DomDocument Object. 
+DOMDocumentFragment::appendXML -- Append raw XML data
+DOMDocumentType::__construct -- The DOMDocumentType class
+DOMEntity::__construct -- The DOMEntity class
+DOMEntityReference::__construct -- Creates a new DOMEntityReference object
 DomDocumentType->entities --  Returns list of entities 
 DomDocumentType->internal_subset --  Returns internal subset 
 DomDocumentType->name --  Returns name of document type 
@@ -1376,6 +1388,12 @@ DomElement->remove_attribute --  Removes attribute
 DomElement->set_attribute --  Adds new attribute 
 DomElement->tagname --  Returns name of element 
 DOMException::getMessage --
+DOMImplementation::createDocument -- Creates a DOMDocument object of the specified type with its document element
+DOMImplementation::createDocumentType -- Creates an empty DOMDocumentType object
+DOMImplementation::hasFeature -- Test if the DOM implementation implements a specific feature
+DOMNamedNodeMap::getNamedItem -- Retrieves a node specified by name
+DOMNamedNodeMap::getNamedItemNS -- Retrieves a node specified by local name and namespace URI
+DOMNamedNodeMap::item -- Retrieves a node specified by index
 DOMNode::appendChild -- Adds new child at the end of the children
 DOMNode::C14N -- Canonicalize nodes to a string
 DOMNode::C14NFile -- Canonicalize nodes to a file
@@ -1422,11 +1440,20 @@ DomNode->set_content --  Sets content of node
 DomNode->set_name --  Sets name of node 
 DomNode->set_namespace --  Sets namespace of a node. 
 DomNode->unlink_node --  Deletes node 
+DOMNodeList::__construct -- The DOMNodeList class•DOMNodelist::item — Retrieves a node specified by index
+DOMNotation::__construct -- The DOMNotation class
 DomProcessingInstruction->data --  Returns data of pi node 
 DomProcessingInstruction->target --  Returns target of pi node 
+DOMText::isWhitespaceInElementContent -- Indicates whether this text node contains whitespace
+DOMText::splitText -- Breaks this node into two nodes at the specified offset
+DOMXPath::evaluate -- Evaluates the given XPath expression and returns a typed result if possible
+DOMXPath::query -- Evaluates the given XPath expression
+DOMXPath::registerNamespace -- Registers the namespace with the DOMXPath object
+DOMXPath::registerPhpFunctions -- Register PHP functions as XPath functions
 DomXsltStylesheet->process --  Applies the XSLT-Transformation on a DomDocument Object. 
 DomXsltStylesheet->result_dump_file --  Dumps the result from a XSLT-Transformation into a file 
 DomXsltStylesheet->result_dump_mem --  Dumps the result from a XSLT-Transformation back into a string 
+dom_import_simplexml -- Gets a DOMElement object from a SimpleXMLElement object
 domxml_new_doc --  Creates new empty XML document 
 domxml_open_file -- Creates a DOM object from XML file
 domxml_open_mem -- Creates a DOM object of an XML document
