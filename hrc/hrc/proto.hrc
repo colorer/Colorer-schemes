@@ -863,7 +863,7 @@
   </prototype>
   <prototype name="haskell" group="rare" description="Haskell">
     <location link="haskell.hrc"/>
-    <filename>/\.(hs|cf)$/i</filename>
+    <filename>/\.hs$/i</filename>
   </prototype>
   <prototype name="ocaml" group="rare" description="OCaml">
     <location link="rare/ocaml.hrc"/>
