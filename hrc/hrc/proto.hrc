@@ -861,6 +861,10 @@
     <location link="rare/sml.hrc"/>
     <filename>/\.(sml|sig)$/i</filename>
   </prototype>
+  <prototype name="haskell" group="rare" description="Haskell">
+    <location link="haskell.hrc"/>
+    <filename>/\.hs$/i</filename>
+  </prototype>
   <prototype name="ocaml" group="rare" description="OCaml">
     <location link="rare/ocaml.hrc"/>
     <filename>/\.ml[ilpy]?$/i</filename>
