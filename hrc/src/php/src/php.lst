@@ -624,6 +624,7 @@ is_subclass_of --  Returns TRUE if the object has this class as one of its paren
 method_exists -- Checks if the class method exists
 property_exists -- Checks if the object or class has a property
 trait_exists -- Checks if the trait exists
+interface_exists -- Checks if the interface exists
      <!-- X. ClibPDF Functions -->
 cpdf_add_annotation -- Adds annotation
 cpdf_add_outline -- Adds bookmark for current page
@@ -7316,3 +7317,185 @@ hash_update -- Pump data into an active hashing context
 hash -- Generate a hash value (message digest)
 
 HASH_HMAC (integer) 
+
+   <!-- XXX. APC Functions -->
+apc_add -- Cache a new variable in the data store
+apc_bin_dump -- Get a binary dump of the given files and user variables
+apc_bin_dumpfile -- Output a binary dump of cached files and user variables to a file
+apc_bin_load -- Load a binary dump into the APC file/user cache
+apc_bin_loadfile -- Load a binary dump from a file into the APC file/user cache
+apc_cache_info -- Retrieves cached information from APC's data store
+apc_cas -- Updates an old value with a new value
+apc_clear_cache -- Clears the APC cache
+apc_compile_file -- Stores a file in the bytecode cache, bypassing all filters.
+apc_dec -- Decrease a stored number
+apc_define_constants -- Defines a set of constants for retrieval and mass-definition
+apc_delete_file -- Deletes files from the opcode cache
+apc_delete -- Removes a stored variable from the cache
+apc_exists -- Checks if APC key exists
+apc_fetch -- Fetch a stored variable from the cache
+apc_inc -- Increase a stored number
+apc_load_constants -- Loads a set of constants from the cache
+apc_sma_info -- Retrieves APC's Shared Memory Allocation information
+apc_store -- Cache a variable in the data store
+
+APC_BIN_VERIFY_CRC32 (integer)
+APC_BIN_VERIFY_MD5 (integer)
+APC_ITER_ALL (integer)
+APC_ITER_ATIME (integer)
+APC_ITER_CTIME (integer)
+APC_ITER_DEVICE (integer)
+APC_ITER_DTIME (integer)
+APC_ITER_FILENAME (integer)
+APC_ITER_INODE (integer)
+APC_ITER_KEY (integer)
+APC_ITER_MD5 (integer)
+APC_ITER_MEM_SIZE (integer)
+APC_ITER_MTIME (integer)
+APC_ITER_NONE (integer)
+APC_ITER_NUM_HITS (integer)
+APC_ITER_REFCOUNT (integer)
+APC_ITER_TTL (integer)
+APC_ITER_TYPE (integer)
+APC_ITER_VALUE (integer)
+APC_LIST_ACTIVE (integer)
+APC_LIST_DELETED (integer) 
+
+   <!-- XXX. Memcache Functions -->
+Memcache::add -- Add an item to the server
+Memcache::addServer -- Add a memcached server to connection pool
+Memcache::close -- Close memcached server connection
+Memcache::connect -- Open memcached server connection
+Memcache::decrement -- Decrement item's value
+Memcache::delete -- Delete item from the server
+Memcache::flush -- Flush all existing items at the server
+Memcache::get -- Retrieve item from the server
+Memcache::getExtendedStats -- Get statistics from all servers in pool
+Memcache::getServerStatus -- Returns server status
+Memcache::getStats -- Get statistics of the server
+Memcache::getVersion -- Return version of the server
+Memcache::increment -- Increment item's value
+Memcache::pconnect -- Open memcached server persistent connection
+Memcache::replace -- Replace value of the existing item
+Memcache::set -- Store data at the server
+Memcache::setCompressThreshold -- Enable automatic compression of large values
+Memcache::setServerParams -- Changes server parameters and status at runtime
+memcache_debug -- Turn debug output on/off
+
+MEMCACHE_COMPRESSED (integer)
+MEMCACHE_HAVE_SESSION (integer)
+MEMCACHE_USER1 (integer)
+MEMCACHE_USER2 (integer)
+MEMCACHE_USER3 (integer)
+MEMCACHE_USER4 (integer)  
+
+   <!-- XXX. Memcached Functions -->
+Memcached::add -- Add an item under a new key
+Memcached::addByKey -- Add an item under a new key on a specific server
+Memcached::addServer -- Add a server to the server pool
+Memcached::addServers -- Add multiple servers to the server pool
+Memcached::append -- Append data to an existing item
+Memcached::appendByKey -- Append data to an existing item on a specific server
+Memcached::cas -- Compare and swap an item
+Memcached::casByKey -- Compare and swap an item on a specific server
+Memcached::__construct -- Create a Memcached instance
+Memcached::decrement -- Decrement numeric item's value
+Memcached::decrementByKey -- Decrement numeric item's value, stored on a specific server
+Memcached::delete -- Delete an item
+Memcached::deleteByKey -- Delete an item from a specific server
+Memcached::deleteMulti -- Delete multiple items
+Memcached::deleteMultiByKey -- Delete multiple items from a specific server
+Memcached::fetch -- Fetch the next result
+Memcached::fetchAll -- Fetch all the remaining results
+Memcached::flush -- Invalidate all items in the cache
+Memcached::get -- Retrieve an item
+Memcached::getAllKeys -- Gets the keys stored on all the servers
+Memcached::getByKey -- Retrieve an item from a specific server
+Memcached::getDelayed -- Request multiple items
+Memcached::getDelayedByKey -- Request multiple items from a specific server
+Memcached::getMulti -- Retrieve multiple items
+Memcached::getMultiByKey -- Retrieve multiple items from a specific server
+Memcached::getOption -- Retrieve a Memcached option value
+Memcached::getResultCode -- Return the result code of the last operation
+Memcached::getResultMessage -- Return the message describing the result of the last operation
+Memcached::getServerByKey -- Map a key to a server
+Memcached::getServerList -- Get the list of the servers in the pool
+Memcached::getStats -- Get server pool statistics
+Memcached::getVersion -- Get server pool version info
+Memcached::increment -- Increment numeric item's value
+Memcached::incrementByKey -- Increment numeric item's value, stored on a specific server
+Memcached::isPersistent -- Check if a persitent connection to memcache is being used
+Memcached::isPristine -- Check if the instance was recently created
+Memcached::prepend -- Prepend data to an existing item
+Memcached::prependByKey -- Prepend data to an existing item on a specific server
+Memcached::quit -- Close any open connections
+Memcached::replace -- Replace the item under an existing key
+Memcached::replaceByKey -- Replace the item under an existing key on a specific server
+Memcached::resetServerList -- Clears all servers from the server list
+Memcached::set -- Store an item
+Memcached::setByKey -- Store an item on a specific server
+Memcached::setMulti -- Store multiple items
+Memcached::setMultiByKey -- Store multiple items on a specific server
+Memcached::setOption -- Set a Memcached option
+Memcached::setOptions -- Set Memcached options
+Memcached::setSaslAuthData -- Set the credentials to use for authentication
+Memcached::touch -- Set a new expiration on an item
+Memcached::touchByKey -- Set a new expiration on an item on a specific server
+
+Memcached::OPT_COMPRESSION (boolean)
+Memcached::OPT_SERIALIZER (integer)
+Memcached::SERIALIZER_PHP (integer)
+Memcached::SERIALIZER_IGBINARY (integer)
+Memcached::SERIALIZER_JSON (integer)
+Memcached::OPT_PREFIX_KEY (integer)
+Memcached::OPT_HASH (integer)
+Memcached::HASH_DEFAULT (integer)
+Memcached::HASH_MD5 (integer)
+Memcached::HASH_CRC (integer)
+Memcached::HASH_FNV1_64 (integer)
+Memcached::HASH_FNV1A_64 (integer)
+Memcached::HASH_FNV1_32 (integer)
+Memcached::HASH_FNV1A_32 (integer)
+Memcached::HASH_HSIEH (integer)
+Memcached::HASH_MURMUR (integer)
+Memcached::OPT_DISTRIBUTION (integer)
+Memcached::DISTRIBUTION_MODULA (integer)
+Memcached::DISTRIBUTION_CONSISTENT (integer)
+Memcached::OPT_LIBKETAMA_COMPATIBLE (boolean)
+Memcached::OPT_BUFFER_WRITES (boolean)
+Memcached::OPT_BINARY_PROTOCOL (boolean)
+Memcached::OPT_NO_BLOCK (boolean)
+Memcached::OPT_TCP_NODELAY (boolean)
+Memcached::OPT_SOCKET_SEND_SIZE (integer)
+Memcached::OPT_SOCKET_RECV_SIZE (integer)
+Memcached::OPT_CONNECT_TIMEOUT (integer)
+Memcached::OPT_RETRY_TIMEOUT (integer)
+Memcached::OPT_SEND_TIMEOUT (integer)
+Memcached::OPT_RECV_TIMEOUT (integer)
+Memcached::OPT_POLL_TIMEOUT (integer)
+Memcached::OPT_CACHE_LOOKUPS (integer)
+Memcached::OPT_SERVER_FAILURE_LIMIT (integer)
+Memcached::HAVE_IGBINARY (integer)
+Memcached::HAVE_JSON (boolean)
+Memcached::GET_PRESERVE_ORDER (integer)
+Memcached::RES_SUCCESS (integer)
+Memcached::RES_FAILURE (integer)
+Memcached::RES_HOST_LOOKUP_FAILURE (integer)
+Memcached::RES_UNKNOWN_READ_FAILURE (integer)
+Memcached::RES_PROTOCOL_ERROR (integer)
+Memcached::RES_CLIENT_ERROR (integer)
+Memcached::RES_SERVER_ERROR (integer)
+Memcached::RES_WRITE_FAILURE (integer)
+Memcached::RES_DATA_EXISTS (integer)
+Memcached::RES_NOTSTORED (integer)
+Memcached::RES_NOTFOUND (integer)
+Memcached::RES_PARTIAL_READ (integer)
+Memcached::RES_SOME_ERRORS (integer)
+Memcached::RES_NO_SERVERS (integer)
+Memcached::RES_END (integer)
+Memcached::RES_ERRNO (integer)
+Memcached::RES_BUFFERED (integer)
+Memcached::RES_TIMEOUT (integer)
+Memcached::RES_BAD_KEY_PROVIDED (integer)
+Memcached::RES_CONNECTION_SOCKET_CREATE_FAILURE (integer)
+Memcached::RES_PAYLOAD_FAILURE (integer)
