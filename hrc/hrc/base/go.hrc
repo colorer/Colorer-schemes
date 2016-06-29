@@ -9,6 +9,8 @@
  <annotation>
  <documentation>
     Go syntax description
+    
+    https://golang.org/ref/spec
  </documentation><contributors><![CDATA[
     Mikhail Kupchik <Mikhail.Kupchik@gmail.com>
     anatoly techtonik <techtonik@gmail.com>
