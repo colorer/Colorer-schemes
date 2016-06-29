@@ -11,6 +11,7 @@
     Go syntax description
  </documentation><contributors><![CDATA[
     Mikhail Kupchik <Mikhail.Kupchik@gmail.com>
+    anatoly techtonik <techtonik@gmail.com>
  ]]></contributors>
  </annotation>
 
@@ -55,6 +56,11 @@
    <inherit scheme="TabsAsErrors"/>
   </scheme>
 
+  <!-- https://golang.org/ref/spec#String_literals -->
+  <scheme name="RawString">
+    <block start="/(`)/" end="/(`)/" scheme="def:empty" region="def:String" region01="def:PairStart" region10="def:PairEnd"/>
+  </scheme>
+
   <scheme name="TabsAsErrors" if="tabs-as-errors">
     <regexp match="/\t+/" region='def:Error'/>
   </scheme>
@@ -74,6 +80,7 @@
    
    <inherit scheme="Character"/>
    <inherit scheme="String"/>
+   <inherit scheme="RawString"/>
 
    <!-- Numbers -->
    <inherit scheme="def:Number"/>
