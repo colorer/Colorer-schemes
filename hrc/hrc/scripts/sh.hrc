@@ -158,19 +158,20 @@
 </scheme>
 
 <scheme name="string">
-<!-- TODO: add support of single-quoted and double-quoted heredoc delimiter -->
- <block start="/(&lt;&lt;-\s*\\?)([\w-]+)/" end="/^\s*(\y2)/"
+<!-- Do support of single-quoted heredoc delimiter: common form is <<-? '?HEREDOC'? -->
+ <block start="/(&lt;&lt;-\s*\\?)('?)([\w-]+)\2/" end="/^\s*(\y3)/"
   scheme="slash" region="perl:HereDoc"
   region00="def:PairStart" region10="def:PairEnd"
-  region01="perl:HereDocLt" region02="perl:HereDocName"
+  region01="perl:HereDocLt" region03="perl:HereDocName"
   region11="perl:HereDocName"
  />
- <block start="/(&lt;&lt;\s*\\?)([\w-]+)/" end="/^(\y2)/"
+ <block start="/(&lt;&lt;\s*\\?)('?)([\w-]+)\2/" end="/^(\y3)/"
   scheme="slash" region="perl:HereDoc"
   region00="def:PairStart" region10="def:PairEnd"
-  region01="perl:HereDocLt" region02="perl:HereDocName"
+  region01="perl:HereDocLt" region03="perl:HereDocName"
   region11="perl:HereDocName"
  />
+
  <block start="/(&apos;|&quot;)\Ms[^\w\s]/" end="/\y1/"
   scheme="s.re.blocks.r" region="string"
   region00="def:PairStart" region10="def:PairEnd"
