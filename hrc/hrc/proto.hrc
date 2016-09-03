@@ -125,6 +125,10 @@
     <location link="base/csharp.hrc"/>
     <filename>/\.cs$/i</filename>
   </prototype>
+  <prototype name="fsharp" group="main" description="F#">
+    <location link="base/fsharp.hrc"/>
+    <filename>/\.fs(i|l|x|y|script)?$/i</filename>
+  </prototype>
   <prototype name="jsnet" group="main" description="JS.NET">
     <location link="base/js.net.hrc"/>
     <filename weight="0.5">/\.js$/i</filename>
