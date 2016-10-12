@@ -559,7 +559,7 @@
     <firstline>/^# gawk/i</firstline>
   </prototype>
   <prototype name="powershell" group="scripts" description="PowerShell">
-    <filename>/\.(ps[dDmM]?1|psfconsole)$/i</filename>
+    <filename>/\.ps(m|d)?1$/i</filename>
     <location link="scripts/powershell.hrc"/>
   </prototype>
   <prototype name="r" group="scripts" description="R">
