@@ -5,8 +5,8 @@
 
 <annotation>
  <documentation>
-  Simple scheme for support
-  "Extended selection case" plugin by Ivan Sintyurin (spinoza@mail.ru)
+  Simple scheme for "[ESC] Editor's settings changer"
+  plugin by Ivan Sintyurin (spinoza@mail.ru)
 
   Note. 'uri:esc' is fictive namespace.
 

@@ -127,7 +127,7 @@
   </prototype>
   <prototype name="fsharp" group="main" description="F#">
     <location link="base/fsharp.hrc"/>
-    <filename>/\.fs(i|l|x|y|script)?$/i</filename>
+    <filename weight="9">/\.fs(i|l|x|y|script)?$/i</filename>
   </prototype>
   <prototype name="jsnet" group="main" description="JS.NET">
     <location link="base/js.net.hrc"/>
@@ -559,7 +559,7 @@
     <firstline>/^# gawk/i</firstline>
   </prototype>
   <prototype name="powershell" group="scripts" description="PowerShell">
-    <filename>/\.(ps[dDmM]?1|psfconsole)$/i</filename>
+    <filename>/\.ps(m|d)?1$/i</filename>
     <location link="scripts/powershell.hrc"/>
   </prototype>
   <prototype name="r" group="scripts" description="R">
