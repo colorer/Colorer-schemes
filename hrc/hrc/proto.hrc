@@ -866,7 +866,7 @@
     <filename>/\.(sml|sig)$/i</filename>
   </prototype>
   <prototype name="haskell" group="rare" description="Haskell">
-    <location link="haskell.hrc"/>
+    <location link="rare/haskell.hrc"/>
     <filename>/\.hs$/i</filename>
   </prototype>
   <prototype name="ocaml" group="rare" description="OCaml">
