@@ -29,15 +29,21 @@ To build the library of schemes, you will need:
 
 Download the source from git repository:
 
-    git clone https://github.com/colorer/Colorer-schemes.git
+```sh
+git clone https://github.com/colorer/Colorer-schemes.git
+```
 
 or update git repository:
 
-    git pull
+```sh
+git pull
+```
 
 Run build
 
-    build.cmd target
+```sh
+build.cmd target
+```
 
 where the *target* is one of the values
 
@@ -51,8 +57,10 @@ where the *target* is one of the values
 Before starting the build scripts, make sure that the *PATH* environment variable contains the path to the jdk and ant.
 The same must be set the environment variable *JAVA_HOME*. For example:
 
-    set PATH=v:\apps\jdk\bin;v:\apps\ant\bin;%PATH%
-    set JAVA_HOME=v:\apps\jdk
+```cmd
+set PATH=v:\apps\jdk\bin;v:\apps\ant\bin;%PATH%
+set JAVA_HOME=v:\apps\jdk
+```
 
 ### Features of build under Linux ###
 
@@ -60,18 +68,22 @@ On the example of Debian Wheezy.
 
 Install ant and jdk
 
-    apt-get install ant openjdk-6-jdk
+```sh
+apt-get install ant openjdk-6-jdk
+```
 
 If specified in the apt config `APT::Install-Recommends "False";`, you must also install `ant-optional`.
 
 In the file */usr/share/ant/bin/ant* commenting lines
 
-    # Add the Xerces 2 XML parser in the Debian version
-    if [ -z "$LOCALCLASSPATH" ] ; then
-      LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar"
-    else
-      LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar:$LOCALCLASSPATH"
-    fi
+```sh
+# Add the Xerces 2 XML parser in the Debian version
+if [ -z "$LOCALCLASSPATH" ] ; then
+  LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar"
+else
+  LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar:$LOCALCLASSPATH"
+fi
+```
 
 This action corrects the error `Warning: XML resolver not found; external catalogs will be ignored`  when building schemes.
 A more detailed description of the error [in Debian bug-tracker](http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=552032).
