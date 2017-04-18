@@ -18,7 +18,7 @@ Structure
 How to build from source
 ------------------------
 
-###Common###
+### Common ###
 
 To build the library of schemes, you will need:
 
@@ -46,7 +46,7 @@ where the *target* is one of the values
   * base.far    - build the schema library for distribution with FarColorer distribution kit. Folder build/basefar
   * base.update - archive base.pack. Folder build
 
-###Features of build under Windows###
+### Features of build under Windows ###
 
 Before starting the build scripts, make sure that the *PATH* environment variable contains the path to the jdk and ant.
 The same must be set the environment variable *JAVA_HOME*. For example:
@@ -54,7 +54,7 @@ The same must be set the environment variable *JAVA_HOME*. For example:
     set PATH=v:\apps\jdk\bin;v:\apps\ant\bin;%PATH%
     set JAVA_HOME=v:\apps\jdk
 
-###Features of build under Linux###
+### Features of build under Linux ###
 
 On the example of Debian Wheezy.
 
@@ -76,7 +76,7 @@ In the file */usr/share/ant/bin/ant* commenting lines
 This action corrects the error `Warning: XML resolver not found; external catalogs will be ignored`  when building schemes.
 A more detailed description of the error [in Debian bug-tracker](http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=552032).
 
-##Develop##
+## Develop ##
 
 Descriptions of syntaxes (scheme) divided into static and generated. Static there are in a directory hrc/hrc, generated in hrc/src.
 
