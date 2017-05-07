@@ -14,7 +14,7 @@
 Сборка библиотеки схем
 ------------------------
 
-###Общее###
+### Общее ###
 
 Для сборки библиотеки схем необходимо
 
@@ -25,15 +25,21 @@
 
 Скачиваем последние исходники с github
 
-    git clone https://github.com/colorer/Colorer-schemes.git
+```sh
+git clone https://github.com/colorer/Colorer-schemes.git
+```
 
 или обновляем репозиторий
 
-    git pull
+```sh
+git pull
+```
 
 Запускаем сборку
 
-    build.cmd цель
+```sh
+build.cmd цель
+```
 
 где *цель* одно из значений
 
@@ -42,37 +48,43 @@
   * base.far    - сборка библиотеки схем для распространения с дистрибутивом FarColorer. Папка build/basefar
   * base.update - архив с base.pack. Папка build
 
-###Особенности сборки под Windows###
+### Особенности сборки под Windows ###
 
 Перед запуском скриптов сборки необходимо убедиться, что в переменной окружения *PATH* есть пути до jdk и ant.
 Так же должна быть задана переменная окружения *JAVA_HOME*. Например:
 
-    set PATH=v:\apps\jdk\bin;v:\apps\ant\bin;%PATH%
-    set JAVA_HOME=v:\apps\jdk
+```cmd
+set PATH=v:\apps\jdk\bin;v:\apps\ant\bin;%PATH%
+set JAVA_HOME=v:\apps\jdk
+```
 
-###Особенности сборки под Linux###
+### Особенности сборки под Linux ###
 
 На примере Debian Wheezy.
 
 Устанавливаем ant и jdk
 
-    apt-get install ant openjdk-6-jdk
+```sh
+apt-get install ant openjdk-6-jdk
+```
 
 Если в конфигах apt указано `APT::Install-Recommends "False";`, то необходимо так же установить `ant-optional`.
 
 В файле */usr/share/ant/bin/ant* комментируем строки
 
-    # Add the Xerces 2 XML parser in the Debian version
-    if [ -z "$LOCALCLASSPATH" ] ; then
-      LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar"
-    else
-      LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar:$LOCALCLASSPATH"
-    fi
+```sh
+# Add the Xerces 2 XML parser in the Debian version
+if [ -z "$LOCALCLASSPATH" ] ; then
+  LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar"
+else
+  LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar:$LOCALCLASSPATH"
+fi
+```
 
 Данное действие исправляет ошибку `Warning: XML resolver not found; external catalogs will be ignored` при сборке схем.
 Более подробное описание ошибки [в багтрекере Debian](http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=552032)
 
-##Разработка##
+## Разработка ##
 
 Описания синтаксисов (схемы) делятся на статичные и генерируемые. Статичные находятся в директории hrc/hrc, генерируемые в hrc/src.
 
