@@ -170,7 +170,7 @@
   </prototype>
   <prototype name="scala" group="main" description="Scala">
     <location link="base/scala.hrc"/>
-    <filename>/\.scala$/i</filename>
+    <filename>/\.(scala|sc|sbt)$/i</filename>
   </prototype>
   <prototype name="tcltk" group="main" description="Tcl/Tk/Expect">
     <location link="base/tcltk.hrc"/>
