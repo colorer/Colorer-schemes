@@ -168,6 +168,10 @@
     <firstline weight='4'>/-\*- ruby -\*-/i</firstline>
     <firstline>/bin\/ruby/i</firstline>
   </prototype>
+  <prototype name="haxe" group="main" description="Haxe">
+    <location link="base/haxe.hrc"/>
+    <filename>/\.hx$/i</filename>
+  </prototype>
   <prototype name="scala" group="main" description="Scala">
     <location link="base/scala.hrc"/>
     <filename>/\.scala$/i</filename>
