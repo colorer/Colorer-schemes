@@ -168,6 +168,14 @@
     <firstline weight='4'>/-\*- ruby -\*-/i</firstline>
     <firstline>/bin\/ruby/i</firstline>
   </prototype>
+  <prototype name="nix" group="main" description="Nix">
+    <location link="base/nix.hrc"/>
+    <filename>/\.(nix)$/i</filename>
+    <parameters>
+      <param name="tabs-as-errors" value="true" description="Shows tabulation symbol as error"/>
+      <param name="spaces-as-errors" value="true" description="Shows trailing spaces as error"/>
+    </parameters>
+  </prototype>
   <prototype name="scala" group="main" description="Scala">
     <location link="base/scala.hrc"/>
     <filename>/\.scala$/i</filename>
