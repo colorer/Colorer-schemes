@@ -53,6 +53,7 @@
       <inherit scheme="SpacesAsErrors"/>
 
       <regexp match="/&apos;&apos;\$/"                                          region0="StringEscape"/>
+      <regexp match="/&apos;&apos;&apos;/"                                      region0="StringEscape"/>
       <block start="/(\$\{)/" end="/(\})/" scheme="NixExpression" region="Code" region00="Interpolation" region01="PairStart" region10="Interpolation" region11="PairEnd"/>
     </scheme>
 
