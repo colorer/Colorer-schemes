@@ -9,12 +9,11 @@
 
     <annotation><documentation>
         Nix
-        Based on: ActionScript
     </documentation></annotation>
 
     <import type="def"/>
 
-    <region name="Code" parent="def:Text"/> <!-- ??? -->
+    <region name="Code" parent="def:Text"/>
     <region name="StringEscape" parent="def:StringContent"/>
     <region name='Import' parent='def:Directive'/>
     <region name='ImportOutline' parent='def:Outlined'/>
@@ -22,7 +21,6 @@
     <region name="URL"      parent="def:String"/>
     <region name="LiteralKeyword" parent="def:Keyword"/>
     <region name='Interpolation' parent='def:StringEdge'/>
-    
     <region name="Ident" parent="def:Identifier"/> <!-- Label  -->
 
     <scheme name="TabsAsErrors" if="tabs-as-errors">
@@ -32,7 +30,6 @@
     <scheme name="SpacesAsErrors" if="spaces-as-errors">
       <regexp match="/\x20+$/" region='def:Error'/>
     </scheme>
-
     
     <scheme name="NotNestedComment">
       <inherit scheme="TabsAsErrors"/>
@@ -57,7 +54,6 @@
       <block start="/(\$\{)/" end="/(\})/" scheme="NixExpression" region="Code" region00="Interpolation" region01="PairStart" region10="Interpolation" region11="PairEnd"/>
     </scheme>
 
-
     <scheme name="NixIdent">
       <regexp match="/\w[\w\d-]*'*/"           region0="Ident"/>
     </scheme>
@@ -75,9 +71,9 @@
       <block start="/(\()/"   end="/(\))/" scheme="NixExpression" region00="Symbol"        region01="PairStart" region10="Symbol"        region11="PairEnd"/>
       <block start="/(\[)/"   end="/(\])/" scheme="NixExpression" region00="Symbol"        region01="PairStart" region10="Symbol"        region11="PairEnd"/>
 
-      <regexp match="/(\.\.|\.|\~|)\/[\w\d.-]+(\/[\w\d.-]+)*/"                 region0="Path"/>
-      <regexp match="/&lt;[\w\d\/.-]+&gt;/"                                    region0="Path"/>
-      <regexp match="/(ftp|mirror|http|https|git):\/\/[\w\d\/.~-]+/"           region0="URL"/>
+      <regexp match="/(\.\.|\.|\~|)\/[\w\d.+-]+(\/[\w\d.+=?-]+)*/"              region0="Path"/>
+      <regexp match="/&lt;[\w\d\/.-]+&gt;/"                                     region0="Path"/>
+      <regexp match="/(ftp|mirror|http|https|git):\/\/[\w\d\/:?=&amp;.~-]+/"    region0="URL"/>
       <block start="/(&quot;)/"       end="/(&quot;)/"       scheme="String"      region="String" region00="def:StringEdge" region01="def:PairStart" region10="def:StringEdge" region11="def:PairEnd"/>
       <block start="/(&apos;&apos;)/" end="/(&apos;&apos;)/" scheme="BlockString" region="String" region00="def:StringEdge" region01="def:PairStart" region10="def:StringEdge" region11="def:PairEnd"/>
 
@@ -89,7 +85,6 @@
         <word name="inherit"/>
         <word name="import"/>
         <word name="let"/>
-        <word name="or"/>
         <word name="rec"/>
         <word name="then"/>
         <word name="throw"/>
