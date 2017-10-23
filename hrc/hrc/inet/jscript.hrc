@@ -487,6 +487,8 @@
          <inherit scheme="PairedBrackets">
             <virtual scheme="PairedBrackets" subst-scheme="jScript"/>
          </inherit>
+<!-- Labels -->
+         <regexp match="/^\s*(\w+\:)$/" region1="Label"/>
 <!-- Numbers -->
          <inherit scheme="def:Number"/>
 <!-- Strings -->

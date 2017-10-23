@@ -4396,7 +4396,7 @@ OAuthProvider::setParam -- Set a parameter
 OAuthProvider::setRequestTokenPath -- Set request token path
 OAuthProvider::timestampNonceHandler -- Set the timestampNonceHandler handler callback
 OAuthProvider::tokenHandler -- Set the tokenHandler handler callback
-OAuthException::__contruct -- dumb constructor
+OAuthException::__construct -- dumb constructor
 oauth_get_sbs -- Generate a Signature Base String
 oauth_urlencode -- Encode a URI to RFC 3986
 
