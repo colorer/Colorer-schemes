@@ -554,6 +554,8 @@
     <location link="scripts/sh.hrc"/>
     <filename>/\.(sh|spec)$/i</filename>
     <filename>/^PKGBUILD$/i</filename>
+    <filename>/\.(bash_|z)?profile/</filename>
+    <filename>/\.(ba|k|z)?shrc/</filename>
     <firstline weight='2'>/^\#(!\s*.+sh\b)/</firstline>
   </prototype>
   <prototype name="avisynth" group="scripts" description="AviSynth">
