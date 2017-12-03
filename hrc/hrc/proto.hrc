@@ -168,9 +168,21 @@
     <firstline weight='4'>/-\*- ruby -\*-/i</firstline>
     <firstline>/bin\/ruby/i</firstline>
   </prototype>
+  <prototype name="nix" group="main" description="Nix">
+    <location link="base/nix.hrc"/>
+    <filename>/\.(nix)$/i</filename>
+    <parameters>
+      <param name="tabs-as-errors" value="true" description="Shows tabulation symbol as error"/>
+      <param name="spaces-as-errors" value="true" description="Shows trailing spaces as error"/>
+    </parameters>
+  </prototype>
+  <prototype name="haxe" group="main" description="Haxe">
+    <location link="base/haxe.hrc"/>
+    <filename>/\.hx$/i</filename>
+  </prototype>
   <prototype name="scala" group="main" description="Scala">
     <location link="base/scala.hrc"/>
-    <filename>/\.scala$/i</filename>
+    <filename>/\.(scala|sc|sbt)$/i</filename>
   </prototype>
   <prototype name="tcltk" group="main" description="Tcl/Tk/Expect">
     <location link="base/tcltk.hrc"/>
@@ -373,7 +385,7 @@
   <!--  xml types  -->
   <prototype name="xml" group="xml" description="xml">
     <location link="xml/xml.hrc"/>
-    <filename>/\.(xml|gi2|gpr|ui)$/i</filename>
+    <filename>/\.(xml|\w*proj|gi2|gpr|ui)$/i</filename>
     <filename>/\.(wxs|fb2)$/i</filename>
     <firstline>/^&lt;\?xml | &lt;\!DOCTYPE | xmlns /x</firstline>
     <firstline>/^\s*&lt;\w+&gt;\s*/</firstline><!-- (\s+\w+\s*=\*([&quot;&apos;]).+?\2)*\s* -->
@@ -542,6 +554,8 @@
     <location link="scripts/sh.hrc"/>
     <filename>/\.(sh|spec)$/i</filename>
     <filename>/^PKGBUILD$/i</filename>
+    <filename>/\.(bash_|z)?profile/</filename>
+    <filename>/\.(ba|k|z)?shrc/</filename>
     <firstline weight='2'>/^\#(!\s*.+sh\b)/</firstline>
   </prototype>
   <prototype name="avisynth" group="scripts" description="AviSynth">
