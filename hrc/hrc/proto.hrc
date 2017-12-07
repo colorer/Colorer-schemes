@@ -200,6 +200,19 @@
     <location link="base/kotlin.hrc"/>
     <filename>/\.kt$/i</filename>
   </prototype>
+  <prototype name="groovy" group="main" description="Groovy">
+    <location link="base/groovy.hrc"/>
+    <filename>/\.groovy$/i</filename>
+    <filename>/\.gdsl$/i</filename>
+    <filename>/Jenkinsfile/i</filename>
+    <firstline>/^import/</firstline>
+    <firstline>/^#!groovy/</firstline>
+    <parameters>
+      <param name="j2se-classes" value="true" description="Use some common used J2SE class names"/>
+      <param name="tabs-as-errors" value="false" description="Shows tabulation symbol as error"/>
+      <param name="spaces-as-errors" value="false" description="Shows trailing spaces as error"/>
+    </parameters>
+  </prototype>
 
   <prototype name="rust" group="main" description="Rust">
     <location link="base/rust.hrc"/>
@@ -273,6 +286,10 @@
   <prototype name="jsp" group="inet" description="jsp">
     <location link="inet/jsp.hrc"/>
     <filename>/\.(jspf?|tag)$/i</filename>
+  </prototype>
+  <prototype name="gsp" group="inet" description="gsp">
+   <location link="inet/gsp.hrc"/>
+   <filename>/\.gsp$/i</filename>
   </prototype>
 
   <prototype name="php" group="inet" description="php">
