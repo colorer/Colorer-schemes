@@ -74,6 +74,8 @@
 			<regexp match="/\t+/" region='def:Error'/>
 		</scheme>
 
+		<entity name="Sep" value="(?:[\s\r\n])" />
+
 		<!-- CMakeKeywords, CMakeVariables, CMakeFunctions -->
 		&cmake-dict;
 
@@ -91,73 +93,20 @@
 				<word name="CACHE"/>
 				<word name="PATH"/>
 				<word name="FORCE"/>
-				<!-- FILE -->
-				<word name="GLOB"/>
-				<word name="GLOB_RECURSE"/>
-				<!-- STRING -->
-				<word name="TOUPPER"/>
-				<word name="TOLOWER"/>
-				<!-- MESSAGE -->
-				<word name="FATAL_ERROR"/>
 				<!-- FIND_PACKAGE -->
 				<word name="CONFIG"/>
 				<word name="PATHS"/>
 				<word name="NO_DEFAULT_PATH"/>
 				<!-- ADD_LIBRARY -->
 				<word name="ALIAS"/>
-				<!-- INSTALL -->
-				<word name="TARGETS"/>
-				<word name="EXPORT"/>
-				<word name="RUNTIME"/>
-				<word name="LIBRARY"/>
-				<word name="ARCHIVE"/>
-				<word name="INCLUDES"/>
-				<word name="PUBLIC_HEADER"/>
-				<word name="DESTINATION"/>
 				<!-- EXPORT -->
 				<word name="FILE"/>
 				<word name="NAMESPACE"/>
 			</keywords>
 		</scheme>
 
-		<scheme name="Keywords_If">
-			<keywords region="cmake_operators" ignorecase="yes">
-				<word name="NOT"/>
-				<word name="AND"/>
-				<word name="OR"/>
-				<word name="COMMAND"/>
-				<word name="POLICY"/>
-				<word name="TARGET"/>
-				<word name="TEST"/>
-				<word name="EXISTS"/>
-				<word name="IS_NEWER_THAN"/>
-				<word name="IS_DIRECTORY"/>
-				<word name="IS_SYMLINK"/>
-				<word name="IS_ABSOLUTE"/>
-				<word name="MATCHES"/>
-				<word name="LESS"/>
-				<word name="GREATER"/>
-				<word name="EQUAL"/>
-				<word name="LESS_EQUAL"/>
-				<word name="GREATER_EQUAL"/>
-				<word name="STRLESS"/>
-				<word name="STRGREATER"/>
-				<word name="STREQUAL"/>
-				<word name="STRLESS_EQUAL"/>
-				<word name="STRGREATER_EQUAL"/>
-				<word name="VERSION_LESS"/>
-				<word name="VERSION_GREATER"/>
-				<word name="VERSION_EQUAL"/>
-				<word name="VERSION_LESS_EQUAL"/>
-				<word name="VERSION_GREATER_EQUAL "/>
-				<word name="IN_LIST"/>
-				<word name="DEFINED"/>
-			</keywords>
-			<inherit scheme="Variables" />
-		</scheme>
-
 		<scheme name="If">
-			<block start="/(?:if)?#2(\()/" end="/(\))/" scheme="Keywords_If"
+			<block start="/(?:if)?#2(\()/" end="/(\))/" scheme="Keywords_if"
            region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd" inner-region="yes"/>
 			<inherit scheme="Expressions" />
 		</scheme>
@@ -193,8 +142,23 @@
 		<scheme name="Expressions">
 			<inherit scheme="CompositeExpression" />
 
-			<block start="/(\b%CMakeFunctions;\b\s*\()/ix" end="/(\))/i" scheme="Function"
+			<block start="/(\bstring\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_string"
           region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/(\blist\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_list"
+          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/(\bfile\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_file"
+          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/(\bmessage\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_message"
+          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/(\binstall\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_install"
+          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/(\bset_property\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_set_property"
+          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/(\bexecute_process\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_execute_process"
+          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+
+			<block start="/(\b%CMakeFunctions;\b%Sep;*\()/ix" end="/(\))/" scheme="Function"
+          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd" priority="low"/>
 			<block start="/(\()/" end="/(\))/" scheme="Expressions"
           region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
 
