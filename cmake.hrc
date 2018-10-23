@@ -123,7 +123,7 @@
 		</scheme>
 
 		<scheme name="Variables">
-			<block start="/(\$\{)/" end="/(\})/" scheme="CompositeExpression"
+			<block start="/(\$(?:ENV)?\{)/" end="/(\})/" scheme="CompositeExpression"
           region="def:String" region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
 
 			<block start="/(\$&lt;)\M([^\:]+)(\:)/" end="/(&gt;)/" scheme="CompositeExpression"
