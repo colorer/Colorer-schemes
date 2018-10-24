@@ -52,7 +52,7 @@
 
 		<scheme name="Strings">
 			<block start="/(?{def:StringEdge}[Ll]?&#34;)/" end="/(?{def:StringEdge}&#34;)/"
-          scheme="StringContent" region="def:String" inner-region="yes" region00="def:PairStart" region10="def:PairEnd" />
+				scheme="StringContent" region="def:String" inner-region="yes" region00="def:PairStart" region10="def:PairEnd" />
 		</scheme>
 
 		<scheme name="StringContent">
@@ -73,8 +73,6 @@
 		<scheme name="TabsAsErrors" if="tabs-as-errors">
 			<regexp match="/\t+/" region='def:Error'/>
 		</scheme>
-
-		<entity name="Sep" value="(?:[\s\r\n])" />
 
 		<!-- CMakeKeywords, CMakeVariables, CMakeFunctions, etc... -->
 		&cmake-dict;
@@ -107,7 +105,7 @@
 
 		<scheme name="If">
 			<block start="/(?:if)?#2(\()/" end="/(\))/" scheme="Keywords_if"
-           region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd" inner-region="yes"/>
+				 region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd" inner-region="yes"/>
 			<inherit scheme="Expressions" />
 		</scheme>
 
@@ -118,16 +116,16 @@
 
 		<scheme name="Comments">
 			<block start="/#\[(?{id}.*?)\[/" end="/\](\y{id})\]/" scheme="def:Comment" region="def:CommentContent"
-          region00="def:PairStart" region10="def:PairEnd"/>
+				region00="def:PairStart" region10="def:PairEnd"/>
 			<regexp match="/\m\#.*$/" region="def:CommentContent" />
 		</scheme>
 
 		<scheme name="Variables">
 			<block start="/(\$(?:ENV)?\{)/" end="/(\})/" scheme="CompositeExpression"
-          region="def:String" region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+				region="def:String" region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
 
 			<block start="/(\$&lt;)\M([^\:]+)(\:)/" end="/(&gt;)/" scheme="CompositeExpression"
-          region="def:String" region00="def:Symbol" region01="def:PairStart" region02="def:String" region03="def:Symbol" region10="def:Symbol" region11="def:PairEnd"/>
+				region="def:String" region00="def:Symbol" region01="def:PairStart" region02="def:String" region03="def:Symbol" region10="def:Symbol" region11="def:PairEnd"/>
 
 			<inherit scheme="CMakeVariables" />
 		</scheme>
@@ -137,46 +135,57 @@
 		</scheme>
 
 		<scheme name="CompositeExpression">
-            <inherit scheme="Comments" />
+			<inherit scheme="Comments" />
 			<inherit scheme="Strings" />
 			<inherit scheme="Variables" />
 			<inherit scheme="CMakeKeywords" />
 		</scheme>
 
+		<entity name="Sep" value="(?:[\s\r\n]*)" />
+		<entity name="ArgsFirst" value="(?:%Sep;\(&Sep;*(?{First}[^\)\s]*)[^\)]*\))" />
+		<entity name="ArgsMatch" value="(?:%Sep;\(%Sep;(?:\y{First}||(?{def:Error}.+))%Sep;\))" />
+
 		<scheme name="Expressions">
 			<inherit scheme="CompositeExpression" />
 
-			<block start="/(\bstring\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_string"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/(\blist\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_list"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/(\bfile\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_file"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/(\bmessage\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_message"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/(\binstall\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_install"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/(\bset_property\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_set_property"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/(\bexecute_process\b%Sep;*\()/ix" end="/(\))/" scheme="Keywords_execute_process"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(string\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_string"
+				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(list)\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_list"
+				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(file\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_file"
+				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(message\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_message"
+				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(install\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_install"
+				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(set_property\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_set_property"
+				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(execute_process\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_execute_process"
+				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
 
-			<block start="/(\b%CMakeFunctions;\b%Sep;*\()/ix" end="/(\))/" scheme="Function"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd" priority="low"/>
+			<block start="/\b(%CMakeFunctions;\b%Sep;\()/ix" end="/(\))/" scheme="Function"
+				region00="def:Symbol" region01="def:PairStart"
+				region10="def:Symbol" region11="def:PairEnd" priority="low"/>
 			<block start="/(\()/" end="/(\))/" scheme="Expressions"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+				region00="def:Symbol" region01="def:PairStart"
+				region10="def:Symbol" region11="def:PairEnd"/>
 
-			<block start="/\b(if)\b\M(\s*\(.*\))/i" end="/\b(endif)\b/i" scheme="If"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(if)\b\M%Sep;(\(.*\))/i" end="/\b(endif)\b/i" scheme="If"
+				region00="def:Symbol" region01="def:PairStart"
+				region10="def:Symbol" region11="def:PairEnd"/>
 
-			<block start="/\b(foreach)\b/i" end="/\b(endforeach)\b/i" scheme="Expressions"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(function)\b/i" end="/\b(endfunction)\b/i" scheme="Expressions"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(macro)\b/i" end="/\b(endmacro)\b/i" scheme="Expressions"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(while)\b/i" end="/\b(endwhile)\b/i" scheme="Expressions"
-          region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(foreach)\b\M%ArgsFirst;/i" end="/\b(endforeach)\b%ArgsMatch;/i" scheme="Expressions"
+				region00="def:Symbol" region01="def:PairStart"
+				region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(function)\b\M%ArgsFirst;/i" end="/\b(endfunction)\b%ArgsMatch;/i" scheme="Expressions"
+				region00="def:Symbol" region01="def:PairStart"
+				region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(macro)\b\M%ArgsFirst;/i" end="/\b(endmacro)\b%ArgsMatch;/i" scheme="Expressions"
+				region00="def:Symbol" region01="def:PairStart"
+				region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(while)\b\M%ArgsFirst;/i" end="/\b(endwhile)\b%ArgsMatch;/i" scheme="Expressions"
+				region00="def:Symbol" region01="def:PairStart"
+				region10="def:Symbol" region11="def:PairEnd"/>
 		</scheme>
 	</type>
 </hrc>
