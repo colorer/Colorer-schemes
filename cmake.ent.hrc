@@ -692,7 +692,7 @@ add_compile_definitions
 		<word name="IN_LIST"/>
 		<word name="DEFINED"/>
 	</keywords>
-	<inherit scheme="Variables" />
+	<inherit scheme="Arguments" />
 </scheme>
 
 <scheme name="_HASH_">
@@ -746,7 +746,7 @@ add_compile_definitions
 		<!-- Locking -->
 		<word name="LOCK"/>
 	</keywords>
-	<inherit scheme="Variables" />
+	<inherit scheme="Arguments" />
 </scheme>
 
 <scheme name="Keywords_string">
@@ -783,7 +783,7 @@ add_compile_definitions
 		<word name="UTC"/>
 		<word name="UUID"/>
 	</keywords>
-	<inherit scheme="Variables" />
+	<inherit scheme="Arguments" />
 </scheme>
 
 <scheme name="Keywords_list">
@@ -807,7 +807,7 @@ add_compile_definitions
 		<word name="REVERSE"/>
 		<word name="SORT"/>
 	</keywords>
-	<inherit scheme="Variables" />
+	<inherit scheme="Arguments" />
 </scheme>
 
 <scheme name="Keywords_set_property">
@@ -822,7 +822,7 @@ add_compile_definitions
 		<word name="APPEND"/> <word name="APPEND_STRING"/>
 		<word name="PROPERTY"/>
 	</keywords>
-	<inherit scheme="Variables" />
+	<inherit scheme="Arguments" />
 </scheme>
 
 <scheme name="Keywords_message">
@@ -834,7 +834,7 @@ add_compile_definitions
 		<word name="FATAL_ERROR"/>
 		<word name="DEPRECATION"/>
 	</keywords>
-	<inherit scheme="Variables" />
+	<inherit scheme="Arguments" />
 </scheme>
 
 <scheme name="Keywords_install">
@@ -883,7 +883,7 @@ add_compile_definitions
 		<word name="COMPONENT"/>
 		<word name="EXPORT_LINK_INTERFACE_LIBRARIES"/>
 	</keywords>
-	<inherit scheme="Variables" />
+	<inherit scheme="Arguments" />
 </scheme>
 
 <scheme name="Keywords_execute_process">
@@ -904,5 +904,5 @@ add_compile_definitions
 		<word name="ERROR_STRIP_TRAILING_WHITESPACE"/>
 		<word name="ENCODING"/>
 	</keywords>
-	<inherit scheme="Variables" />
+	<inherit scheme="Arguments" />
 </scheme>

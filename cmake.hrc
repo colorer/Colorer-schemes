@@ -76,7 +76,7 @@
 
 		<entity name="Sep" value="(?:[\s\r\n])" />
 
-		<!-- CMakeKeywords, CMakeVariables, CMakeFunctions -->
+		<!-- CMakeKeywords, CMakeVariables, CMakeFunctions, etc... -->
 		&cmake-dict;
 
 		<scheme name="FunctionArguments">
@@ -130,6 +130,10 @@
           region="def:String" region00="def:Symbol" region01="def:PairStart" region02="def:String" region03="def:Symbol" region10="def:Symbol" region11="def:PairEnd"/>
 
 			<inherit scheme="CMakeVariables" />
+		</scheme>
+
+		<scheme name="Arguments">
+			<inherit scheme="CompositeExpression" />
 		</scheme>
 
 		<scheme name="CompositeExpression">
