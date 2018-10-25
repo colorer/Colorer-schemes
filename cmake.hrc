@@ -50,9 +50,16 @@
 			<inherit scheme="Expressions" />
 		</scheme>
 
+		<scheme name="RegexContent">
+			<inherit scheme="regexp:std.regexp" />
+		</scheme>
+
 		<scheme name="Strings">
-			<block start="/(?{def:StringEdge}[Ll]?&#34;)/" end="/(?{def:StringEdge}&#34;)/"
-				scheme="StringContent" region="def:String" inner-region="yes" region00="def:PairStart" region10="def:PairEnd" />
+			<block start="/(?{def:StringEdge}[Ll]?&#34;)/" end="/(?{def:StringEdge}&#34;)/" scheme="StringContent" region="def:String" inner-region="yes"
+				region00="def:PairStart" region10="def:PairEnd" />
+
+			<block start="/(?{def:StringEdge}\[\[)/" end="/(?{def:StringEdge}\]\])/" scheme="RegexContent" inner-region="yes"
+				region00="def:PairStart" region10="def:PairEnd" />
 		</scheme>
 
 		<scheme name="StringContent">
