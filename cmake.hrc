@@ -81,35 +81,6 @@
 			<regexp match="/\t+/" region='def:Error'/>
 		</scheme>
 
-		<!-- CMakeKeywords, CMakeVariables, CMakeFunctions, etc... -->
-		&cmake-dict;
-
-		<scheme name="FunctionArguments">
-			<keywords region="cmake_parameters" ignorecase="no">
-				<word name="FILES"/>
-				<word name="QUIET"/>
-				<word name="REQUIRED"/>
-				<word name="PROPERTIES"/>
-				<word name="PRIVATE"/>
-				<word name="INTERFACE"/>
-				<word name="PUBLIC"/>
-				<word name="PROPERTY"/>
-				<!-- SET -->
-				<word name="CACHE"/>
-				<word name="PATH"/>
-				<word name="FORCE"/>
-				<!-- FIND_PACKAGE -->
-				<word name="CONFIG"/>
-				<word name="PATHS"/>
-				<word name="NO_DEFAULT_PATH"/>
-				<!-- ADD_LIBRARY -->
-				<word name="ALIAS"/>
-				<!-- EXPORT -->
-				<word name="FILE"/>
-				<word name="NAMESPACE"/>
-			</keywords>
-		</scheme>
-
 		<scheme name="If">
 			<block start="/(?:if)?#2(\()/" end="/(\))/" scheme="Keywords_if"
 				 region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd" inner-region="yes"/>
@@ -122,7 +93,7 @@
 			<inherit scheme="Expressions" />
 		</scheme>
 
-		<scheme name="Function">
+		<scheme name="Command">
 			<inherit scheme="FunctionArguments" />
 			<inherit scheme="CompositeExpression" />
 		</scheme>
@@ -159,25 +130,15 @@
 		<entity name="ArgsMatch1" value="(?:%Sep;\(%Sep;(?:\y{First}||(?{def:Error}.+))%Sep;\))" />
 		<entity name="ArgsMatch0" value="(?:%Sep;\(%Sep;(?:\y{All}||(?{def:Error}.+))%Sep;\))" />
 
+		<!-- CMakeKeywords, CMakeVariables, CMakeCommands, etc... -->
+		&cmake-dict;
+
 		<scheme name="Expressions">
 			<inherit scheme="CompositeExpression" />
 
-			<block start="/\b(string\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_string"
-				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(list\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_list"
-				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(file\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_file"
-				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(message\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_message"
-				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(install\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_install"
-				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(set_property\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_set_property"
-				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(execute_process\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_execute_process"
-				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+			<inherit scheme="CMakeCommands" />
 
-			<block start="/\b(%CMakeFunctions;\b%Sep;\()/ix" end="/(\))/" scheme="Function"
+			<block start="/\b(%CMakeCommands;\b%Sep;\()/ix" end="/(\))/" scheme="Command"
 				region00="def:Symbol" region01="def:PairStart"
 				region10="def:Symbol" region11="def:PairEnd" priority="low"/>
 			<block start="/(\()/" end="/(\))/" scheme="Expressions"

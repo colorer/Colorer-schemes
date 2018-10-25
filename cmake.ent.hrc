@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="windows-1251"?>
 
+<scheme name="FunctionArguments">
+	<keywords region="cmake_parameters" ignorecase="no">
+		<word name="FILES"/>
+		<word name="QUIET"/>
+		<word name="REQUIRED"/>
+		<word name="PROPERTIES"/>
+		<word name="PRIVATE"/>
+		<word name="INTERFACE"/>
+		<word name="PUBLIC"/>
+		<word name="PROPERTY"/>
+		<!-- SET -->
+		<word name="CACHE"/>
+		<word name="PATH"/>
+		<word name="FORCE"/>
+		<!-- FIND_PACKAGE -->
+		<word name="CONFIG"/>
+		<word name="PATHS"/>
+		<word name="NO_DEFAULT_PATH"/>
+		<!-- ADD_LIBRARY -->
+		<word name="ALIAS"/>
+		<!-- EXPORT -->
+		<word name="FILE"/>
+		<word name="NAMESPACE"/>
+	</keywords>
+</scheme>
+
 <scheme name="CMakeKeywords">
 	<keywords region="cmake_keywords" ignorecase="no">
 	</keywords>
@@ -549,7 +575,7 @@
 			endforeach, endfunction, else, elseif, endif, endmacro, endwhile
 	</documentation>
 </annotation>
-<entity name="CMakeFunctions" value="(?:
+<entity name="CMakeCommands" value="(?:
 add_compile_definitions
 |add_compile_options
 |add_custom_command
@@ -905,4 +931,21 @@ add_compile_definitions
 		<word name="ENCODING"/>
 	</keywords>
 	<inherit scheme="Arguments" />
+</scheme>
+
+<scheme name="CMakeCommands">
+	<block start="/\b(string\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_string"
+		region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+	<block start="/\b(list\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_list"
+		region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+	<block start="/\b(file\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_file"
+		region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+	<block start="/\b(message\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_message"
+		region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+	<block start="/\b(install\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_install"
+		region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+	<block start="/\b(set_property\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_set_property"
+		region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
+	<block start="/\b(execute_process\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_execute_process"
+		region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
 </scheme>
