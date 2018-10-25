@@ -109,6 +109,12 @@
 			<inherit scheme="Expressions" />
 		</scheme>
 
+		<scheme name="While">
+			<block start="/(?:while)?#5(\()/" end="/(\))/" scheme="Keywords_if"
+				 region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd" inner-region="yes"/>
+			<inherit scheme="Expressions" />
+		</scheme>
+
 		<scheme name="Function">
 			<inherit scheme="FunctionArguments" />
 			<inherit scheme="CompositeExpression" />
@@ -142,15 +148,16 @@
 		</scheme>
 
 		<entity name="Sep" value="(?:[\s\r\n]*)" />
-		<entity name="ArgsFirst" value="(?:%Sep;\(&Sep;*(?{First}[^\)\s]*)[^\)]*\))" />
-		<entity name="ArgsMatch" value="(?:%Sep;\(%Sep;(?:\y{First}||(?{def:Error}.+))%Sep;\))" />
+		<entity name="Args" value="(?:%Sep;\(&Sep;(?{All}(?{First}[^\)\s]*)[^\)]*)\))" />
+		<entity name="ArgsMatch1" value="(?:%Sep;\(%Sep;(?:\y{First}||(?{def:Error}.+))%Sep;\))" />
+		<entity name="ArgsMatch0" value="(?:%Sep;\(%Sep;(?:\y{All}||(?{def:Error}.+))%Sep;\))" />
 
 		<scheme name="Expressions">
 			<inherit scheme="CompositeExpression" />
 
 			<block start="/\b(string\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_string"
 				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(list)\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_list"
+			<block start="/\b(list\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_list"
 				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
 			<block start="/\b(file\b%Sep;\()/ix" end="/(\))/" scheme="Keywords_file"
 				region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd"/>
@@ -170,20 +177,20 @@
 				region00="def:Symbol" region01="def:PairStart"
 				region10="def:Symbol" region11="def:PairEnd"/>
 
-			<block start="/\b(if)\b\M%Sep;(\(.*\))/i" end="/\b(endif)\b/i" scheme="If"
+			<block start="/\b(if)\b\M%Args;/i" end="/\b(endif)\b%ArgsMatch0;/i" scheme="If"
+				region00="def:Symbol" region01="def:PairStart"
+				region10="def:Symbol" region11="def:PairEnd"/>
+			<block start="/\b(while)\b\M%Args;/i" end="/\b(endwhile)\b%ArgsMatch0;/i" scheme="While"
 				region00="def:Symbol" region01="def:PairStart"
 				region10="def:Symbol" region11="def:PairEnd"/>
 
-			<block start="/\b(foreach)\b\M%ArgsFirst;/i" end="/\b(endforeach)\b%ArgsMatch;/i" scheme="Expressions"
+			<block start="/\b(foreach)\b\M%Args;/i" end="/\b(endforeach)\b%ArgsMatch1;/i" scheme="Expressions"
 				region00="def:Symbol" region01="def:PairStart"
 				region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(function)\b\M%ArgsFirst;/i" end="/\b(endfunction)\b%ArgsMatch;/i" scheme="Expressions"
+			<block start="/\b(function)\b\M%Args;/i" end="/\b(endfunction)\b%ArgsMatch1;/i" scheme="Expressions"
 				region00="def:Symbol" region01="def:PairStart"
 				region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(macro)\b\M%ArgsFirst;/i" end="/\b(endmacro)\b%ArgsMatch;/i" scheme="Expressions"
-				region00="def:Symbol" region01="def:PairStart"
-				region10="def:Symbol" region11="def:PairEnd"/>
-			<block start="/\b(while)\b\M%ArgsFirst;/i" end="/\b(endwhile)\b%ArgsMatch;/i" scheme="Expressions"
+			<block start="/\b(macro)\b\M%Args;/i" end="/\b(endmacro)\b%ArgsMatch1;/i" scheme="Expressions"
 				region00="def:Symbol" region01="def:PairStart"
 				region10="def:Symbol" region11="def:PairEnd"/>
 		</scheme>
