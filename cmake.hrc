@@ -2,6 +2,7 @@
 <!DOCTYPE hrc PUBLIC "-//Cail Lomecb//DTD Colorer HRC take5//EN"
   "http://colorer.sf.net/2003/hrc.dtd"[
 <!ENTITY cmake-dict SYSTEM "cmake.ent.hrc">
+<!ENTITY cmake-auto SYSTEM "cmake-auto.ent.hrc">
 ]>
 
 
@@ -36,6 +37,9 @@
 
 	<package name="cmake-dict">
 		<location link="cmake.ent.hrc"/>
+	</package>
+	<package name="cmake-auto">
+		<location link="cmake-auto.ent.hrc"/>
 	</package>
 
 	<type name="cmake">
@@ -81,6 +85,15 @@
 			<regexp match="/\t+/" region='def:Error'/>
 		</scheme>
 
+		<entity name="Sep" value="(?:[\s\r\n]*)" />
+		<entity name="Args" value="(?:%Sep;\(&Sep;(?{All}(?{First}[^\)\s]*)[^\)]*)\))" />
+		<entity name="ArgsMatch1" value="(?:%Sep;\(%Sep;(?:\y{First}||(?{def:Error}.+))%Sep;\))" />
+		<entity name="ArgsMatch0" value="(?:%Sep;\(%Sep;(?:\y{All}||(?{def:Error}.+))%Sep;\))" />
+
+		<!-- CMakeKeywords, CMakeVariables, CMakeCommands, etc... -->
+		&cmake-dict;
+		&cmake-auto;
+
 		<scheme name="If">
 			<block start="/(?:if)?#2(\()/" end="/(\))/" scheme="Keywords_if"
 				 region00="def:Symbol" region01="def:PairStart" region10="def:Symbol" region11="def:PairEnd" inner-region="yes"/>
@@ -124,14 +137,6 @@
 			<inherit scheme="Variables" />
 			<inherit scheme="CMakeKeywords" />
 		</scheme>
-
-		<entity name="Sep" value="(?:[\s\r\n]*)" />
-		<entity name="Args" value="(?:%Sep;\(&Sep;(?{All}(?{First}[^\)\s]*)[^\)]*)\))" />
-		<entity name="ArgsMatch1" value="(?:%Sep;\(%Sep;(?:\y{First}||(?{def:Error}.+))%Sep;\))" />
-		<entity name="ArgsMatch0" value="(?:%Sep;\(%Sep;(?:\y{All}||(?{def:Error}.+))%Sep;\))" />
-
-		<!-- CMakeKeywords, CMakeVariables, CMakeCommands, etc... -->
-		&cmake-dict;
 
 		<scheme name="Expressions">
 			<inherit scheme="CompositeExpression" />
