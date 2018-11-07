@@ -31,12 +31,6 @@
 	</keywords>
 </scheme>
 
-<scheme name="CMakeVariables">
-	<!-- https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html -->
-	<keywords region="cmake_variables" ignorecase="yes">
-	</keywords>
-</scheme>
-
 <scheme name="Keywords_if">
 	<keywords region="cmake_operators" ignorecase="yes">
 		<word name="NOT"/>
