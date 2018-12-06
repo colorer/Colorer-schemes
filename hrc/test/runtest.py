@@ -143,8 +143,12 @@ def run_one_test(test):
   outdir = dirname(outname)
 
   if not os.path.exists(outdir):
-    # print creating
-    os.makedirs(outdir)
+    try:
+      # print creating
+      os.makedirs(outdir)
+    except OSError, e:
+      if e.errno != os.errno.EEXIST:
+        raise
 
   args = ["-ht", test, "-dc", "-dh", "-ln", "-o", outname]
   cmd = [colorer] + colorer_opts + args
