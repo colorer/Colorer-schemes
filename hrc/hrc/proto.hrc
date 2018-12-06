@@ -623,6 +623,12 @@
     <location link="scripts/qmake.hrc"/>
     <filename>/\.pr[oif]$/i</filename>
   </prototype>
+  <prototype name="cmake" group="scripts" description="CMake script">
+    <location link="scripts/cmake/cmake.hrc"/>
+    <filename>/(\.cmake)$/i</filename>
+    <filename weight="3">/(^CMakeLists\.txt)$/i</filename>
+    <firstline weight="2">/^cmake_minimum_required/xi</firstline>
+  </prototype>
   <prototype name="solution" group="scripts" description="Microsoft Visual Studio Solution File">
     <location link="scripts/solution.hrc"/>
     <filename>/\.sln$/</filename>
