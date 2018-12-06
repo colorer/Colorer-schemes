@@ -1,10 +1,19 @@
+2018-12-06
+  Fixed:
+   - nix: minor fixes (volth)
+   - php: remove stray BOM (AnrDaemon)
+   - markdown: support fenced code blocks with language names (Roman Kuzmin)
+  New:
+   - CMake syntax (extrunder)
+   - Groovy syntax (vlad-ro)   
+
 2015-08-29
   Fixed:
    - Batch: heredoc highlighting (ildar-shaimordanov)
 
 2015-05-05
   New:
-    - Rust syntax (Max Galkin)
+   - Rust syntax (Max Galkin)
 
 2015-11-04
   Fixed:
