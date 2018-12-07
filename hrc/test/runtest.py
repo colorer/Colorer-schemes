@@ -20,12 +20,10 @@ import copy
 import difflib
 import optparse
 import subprocess
-import unittest
 import fnmatch
-import threading
 import multiprocessing.pool
 from datetime import datetime
-from os.path import abspath, dirname, join, normpath
+from os.path import dirname, join, normpath
 
 
 # -- path setup --
@@ -48,7 +46,7 @@ css = "%s/css/%s.css" % (hrd_path, hrd)
 if not os.path.isfile(css):
   print("Warning: Stylesheet %s does not exist" % css)
 
-colorer_exe = "colorer.exe";
+colorer_exe = "colorer.exe"
 colorer = join(colorer_path, colorer_exe)
 if not os.path.isfile(colorer):
   sys.exit("Error: No %s in %s" % (colorer_exe, colorer_path))
@@ -182,7 +180,6 @@ for test, ret, origname, outname in results:
       fw.writelines(lines)
 
   if os.path.isfile(origname):
-    print(origname)
     diff = filediff(origname, outname)
     if len(diff):
       changed += 1
