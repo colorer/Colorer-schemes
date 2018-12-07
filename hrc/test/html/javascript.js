@@ -44,3 +44,6 @@ a /= 5; // incorrect
 
 // ES6
 let x = 5;
+
+console.log(`Fifteen is ${a + b} and not ${2 * a + b}.`);
+const classes = `header ${ isLargeScreen() ? '' :  `icon-${item.isCollapsed ? 'expander' : 'collapser'}` }`;
