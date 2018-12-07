@@ -1,3 +1,8 @@
+2018-12-07
+  Fixed:
+   - php: null is constant (AnrDaemon)
+   - js: Template literal (d07RiV)
+
 2018-12-06
   Fixed:
    - nix: minor fixes (volth)
