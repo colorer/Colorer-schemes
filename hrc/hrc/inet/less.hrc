@@ -41,6 +41,8 @@
 			/>
 		</scheme>
 
+		<scheme name="EmptyScheme">
+		</scheme>
 		<scheme name="StringContent">
 			<regexp match="/\\&quot;/" region="SymbolStrong" />
 			<inherit scheme="EscapedVar" />
@@ -117,6 +119,7 @@
 		<scheme name="jScript">
 			<inherit scheme="jScript:jScript">
 				<virtual scheme="jScript:String" subst-scheme="StringContentJS" />
+				<virtual scheme="jScript:TemplateString" subst-scheme="EmptyScheme" />
 			</inherit>
 		</scheme>
 		<scheme name="Property">

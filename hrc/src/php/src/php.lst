@@ -54,7 +54,6 @@ var
 while
 yield
 
-null
 interface
 public
 private
@@ -100,6 +99,7 @@ __NAMESPACE__
 
 
      <!-- PHP Core Predefined Constants -->
+null
 PHP_VERSION (string)
 PHP_MAJOR_VERSION ( integer ) 
 PHP_MINOR_VERSION ( integer ) 

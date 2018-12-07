@@ -73,7 +73,7 @@
 
     <scheme name="jsMETA">
         <inherit scheme='jsQuote'/>
-        <regexp match="/\\[&quot;&apos;]/" region0="StringContent"/>
+        <regexp match="/\\[&quot;&apos;&#96;]/" region0="StringContent"/>
         <inherit scheme="html-entity:html-entity"/>
     </scheme>
 
@@ -105,10 +105,26 @@
            region10='StringEdge' region11='PairEnd'
          />
       </scheme>
+      <scheme name="TemplateStringContent">
+         <inherit scheme="String"/>
+         <block start='/(\$\{)/' end='/(\})/'
+           scheme="jScript" region="def:Var"
+           region00='StringEdge' region01='PairStart'
+           region10='StringEdge' region11='PairEnd'
+         />
+      </scheme>
+      <scheme name="TemplateString">
+         <block start='/(?:\b(\w+)\s*)?(`)/' end='/(`)/'
+           scheme="TemplateStringContent" region="String"
+           region00='StringEdge' region01='Keyword' region02='PairStart'
+           region10='StringEdge' region11='PairEnd'
+         />
+      </scheme>
       
       <scheme name="jString">
          <inherit scheme="AposString"/>
          <inherit scheme="QuotString"/>
+         <inherit scheme="TemplateString"/>
       </scheme>
       
       <scheme name="AposScript">
@@ -119,6 +135,11 @@
       <scheme name="QuotScript">
          <inherit scheme="jScript">
             <virtual scheme="jString" subst-scheme="QuotString"/>
+         </inherit>
+      </scheme>
+      <scheme name="TemplateScript">
+         <inherit scheme="jScript">
+            <virtual scheme="jString" subst-scheme="TemplateString"/>
          </inherit>
       </scheme>
 

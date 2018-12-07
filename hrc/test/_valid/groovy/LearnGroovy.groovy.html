@@ -1,0 +1,401 @@
+  0: <span class='def-Comment def-Syntax'>/*</span>
+  1: <span class='def-Comment def-Syntax'>  Set yourself up:</span>
+  2: <span class='def-Comment def-Syntax'></span>
+  3: <span class='def-Comment def-Syntax'>  1) Install SDKMAN - </span><span class='def-URL def-URI'>http://sdkman.io/</span><span class='def-Comment def-Syntax'></span>
+  4: <span class='def-Comment def-Syntax'>  2) Install Groovy: sdk install groovy</span>
+  5: <span class='def-Comment def-Syntax'>  3) Start the groovy console by typing: groovyConsole</span>
+  6: <span class='def-Comment def-Syntax'></span>
+  7: <span class='def-Comment def-Syntax'>*/</span>
+  8: 
+  9: <span class='def-LineComment def-Comment def-Syntax'>//  Single line comments start with two forward slashes</span>
+ 10: <span class='def-Comment def-Syntax'>/*</span>
+ 11: <span class='def-Comment def-Syntax'>Multi line comments look like this.</span>
+ 12: <span class='def-Comment def-Syntax'>*/</span>
+ 13: 
+ 14: <span class='def-LineComment def-Comment def-Syntax'>// Hello World</span>
+ 15: <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Hello world!</span><span class='def-StringEdge def-String'>"</span>
+ 16: 
+ 17: <span class='def-Comment def-Syntax'>/*</span>
+ 18: <span class='def-Comment def-Syntax'>  Variables:</span>
+ 19: <span class='def-Comment def-Syntax'></span>
+ 20: <span class='def-Comment def-Syntax'>  You can assign values to variables for later use</span>
+ 21: <span class='def-Comment def-Syntax'>*/</span>
+ 22: 
+ 23: <span class='def-Keyword'>def</span> x <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+ 24: <span class='def-FunctionKeyword def-Keyword'>println</span> x
+ 25: 
+ 26: x <span class='def-Symbol'>=</span> <span class='def-Keyword'>new</span> java<span class='def-Symbol'>.</span>util<span class='def-Symbol'>.</span>Date<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 27: <span class='def-FunctionKeyword def-Keyword'>println</span> x
+ 28: 
+ 29: x <span class='def-Symbol'>=</span> <span class='def-Symbol'>-</span><span class='def-NumberFloat def-Number'>3.1499392</span>
+ 30: <span class='def-FunctionKeyword def-Keyword'>println</span> x
+ 31: 
+ 32: x <span class='def-Symbol'>=</span> <span class='def-Keyword'>false</span>
+ 33: <span class='def-FunctionKeyword def-Keyword'>println</span> x
+ 34: 
+ 35: x <span class='def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Groovy!</span><span class='def-StringEdge def-String'>"</span>
+ 36: <span class='def-FunctionKeyword def-Keyword'>println</span> x
+ 37: 
+ 38: <span class='def-Comment def-Syntax'>/*</span>
+ 39: <span class='def-Comment def-Syntax'>  Collections and maps</span>
+ 40: <span class='def-Comment def-Syntax'>*/</span>
+ 41: 
+ 42: <span class='def-LineComment def-Comment def-Syntax'>//Creating an empty list</span>
+ 43: <span class='def-Keyword'>def</span> technologies <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>[</span><span class='def-SymbolStrong def-Symbol'>]</span>
+ 44: 
+ 45: <span class='def-Comment def-Syntax'>/*** Adding a elements to the list ***/</span>
+ 46: 
+ 47: <span class='def-LineComment def-Comment def-Syntax'>// As with Java</span>
+ 48: technologies<span class='def-Symbol'>.</span>add<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>Grails</span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 49: 
+ 50: <span class='def-LineComment def-Comment def-Syntax'>// Left shift adds, and returns the list</span>
+ 51: technologies <span class='def-Symbol'>&lt;</span><span class='def-Symbol'>&lt;</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Groovy</span><span class='def-StringEdge def-String'>"</span>
+ 52: 
+ 53: <span class='def-LineComment def-Comment def-Syntax'>// Add multiple elements</span>
+ 54: technologies<span class='def-Symbol'>.</span>addAll<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>[</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>Gradle</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>,</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>Griffon</span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>]</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 55: 
+ 56: <span class='def-Comment def-Syntax'>/*** Removing elements from the list ***/</span>
+ 57: 
+ 58: <span class='def-LineComment def-Comment def-Syntax'>// As with Java</span>
+ 59: technologies<span class='def-Symbol'>.</span>remove<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>Griffon</span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 60: 
+ 61: <span class='def-LineComment def-Comment def-Syntax'>// Subtraction works also</span>
+ 62: technologies <span class='def-Symbol'>=</span> technologies <span class='def-Symbol'>-</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Grails</span><span class='def-StringEdge def-String'>'</span>
+ 63: 
+ 64: <span class='def-Comment def-Syntax'>/*** Iterating Lists ***/</span>
+ 65: 
+ 66: <span class='def-LineComment def-Comment def-Syntax'>// Iterate over elements of a list</span>
+ 67: technologies<span class='def-Symbol'>.</span><span class='def-FunctionKeyword def-Keyword'>each</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Technology: </span><span class='def-VarStrong def-Var'>$it</span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>}</span>
+ 68: technologies<span class='def-Symbol'>.</span>eachWithIndex <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-FunctionKeyword def-Keyword'>it</span><span class='def-Symbol'>,</span> i <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-VarStrong def-Var'>$i</span><span class='def-String'>: </span><span class='def-VarStrong def-Var'>$it</span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>}</span>
+ 69: 
+ 70: <span class='def-Comment def-Syntax'>/*** Checking List contents ***/</span>
+ 71: 
+ 72: <span class='def-LineComment def-Comment def-Syntax'>//Evaluate if a list contains element(s) (boolean)</span>
+ 73: contained <span class='def-Symbol'>=</span> technologies<span class='def-Symbol'>.</span>contains<span class='def-SymbolStrong def-Symbol'>(</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Groovy</span><span class='def-StringEdge def-String'>'</span> <span class='def-SymbolStrong def-Symbol'>)</span>
+ 74: 
+ 75: <span class='def-LineComment def-Comment def-Syntax'>// Or</span>
+ 76: contained <span class='def-Symbol'>=</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Groovy</span><span class='def-StringEdge def-String'>'</span> <span class='def-Keyword'>in</span> technologies
+ 77: 
+ 78: <span class='def-LineComment def-Comment def-Syntax'>// Check for multiple contents</span>
+ 79: technologies<span class='def-Symbol'>.</span>containsAll<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>[</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Groovy</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Grails</span><span class='def-StringEdge def-String'>'</span><span class='def-SymbolStrong def-Symbol'>]</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 80: 
+ 81: <span class='def-Comment def-Syntax'>/*** Sorting Lists ***/</span>
+ 82: 
+ 83: <span class='def-LineComment def-Comment def-Syntax'>// Sort a list (mutates original list)</span>
+ 84: technologies<span class='def-Symbol'>.</span>sort<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 85: 
+ 86: <span class='def-LineComment def-Comment def-Syntax'>// To sort without mutating original, you can do:</span>
+ 87: sortedTechnologies <span class='def-Symbol'>=</span> technologies<span class='def-Symbol'>.</span>sort<span class='def-SymbolStrong def-Symbol'>(</span> <span class='def-Keyword'>false</span> <span class='def-SymbolStrong def-Symbol'>)</span>
+ 88: 
+ 89: <span class='def-Comment def-Syntax'>/*** Manipulating Lists ***/</span>
+ 90: 
+ 91: <span class='def-LineComment def-Comment def-Syntax'>//Replace all elements in the list</span>
+ 92: Collections<span class='def-Symbol'>.</span>replaceAll<span class='def-SymbolStrong def-Symbol'>(</span>technologies<span class='def-Symbol'>,</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Gradle</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>gradle</span><span class='def-StringEdge def-String'>'</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 93: 
+ 94: <span class='def-LineComment def-Comment def-Syntax'>//Shuffle a list</span>
+ 95: Collections<span class='def-Symbol'>.</span>shuffle<span class='def-SymbolStrong def-Symbol'>(</span>technologies<span class='def-Symbol'>,</span> <span class='def-Keyword'>new</span> Random<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 96: 
+ 97: <span class='def-LineComment def-Comment def-Syntax'>//Clear a list</span>
+ 98: technologies<span class='def-Symbol'>.</span>clear<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+ 99: 
+100: <span class='def-LineComment def-Comment def-Syntax'>//Creating an empty map</span>
+101: <span class='def-Keyword'>def</span> devMap <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>[</span><span class='def-Symbol'>:</span><span class='def-SymbolStrong def-Symbol'>]</span>
+102: 
+103: <span class='def-LineComment def-Comment def-Syntax'>//Add values</span>
+104: devMap <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>[</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>name</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>:</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Roberto</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>framework</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>:</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Grails</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>language</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>:</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Groovy</span><span class='def-StringEdge def-String'>'</span><span class='def-SymbolStrong def-Symbol'>]</span>
+105: devMap<span class='def-Symbol'>.</span>put<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>lastName</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Perez</span><span class='def-StringEdge def-String'>'</span><span class='def-SymbolStrong def-Symbol'>)</span>
+106: 
+107: <span class='def-LineComment def-Comment def-Syntax'>//Iterate over elements of a map</span>
+108: devMap<span class='def-Symbol'>.</span><span class='def-FunctionKeyword def-Keyword'>each</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-VarStrong def-Var'>$it</span><span class='def-String'>.key: </span><span class='def-VarStrong def-Var'>$it</span><span class='def-String'>.value</span><span class='def-StringEdge def-String'>"</span> <span class='def-SymbolStrong def-Symbol'>}</span>
+109: devMap<span class='def-Symbol'>.</span>eachWithIndex <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-FunctionKeyword def-Keyword'>it</span><span class='def-Symbol'>,</span> i <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-VarStrong def-Var'>$i</span><span class='def-String'>: </span><span class='def-VarStrong def-Var'>$it</span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>}</span>
+110: 
+111: <span class='def-LineComment def-Comment def-Syntax'>//Evaluate if a map contains a key</span>
+112: <span class='def-Keyword'>assert</span> devMap<span class='def-Symbol'>.</span>containsKey<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>name</span><span class='def-StringEdge def-String'>'</span><span class='def-SymbolStrong def-Symbol'>)</span>
+113: 
+114: <span class='def-LineComment def-Comment def-Syntax'>//Evaluate if a map contains a value</span>
+115: <span class='def-Keyword'>assert</span> devMap<span class='def-Symbol'>.</span>containsValue<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Roberto</span><span class='def-StringEdge def-String'>'</span><span class='def-SymbolStrong def-Symbol'>)</span>
+116: 
+117: <span class='def-LineComment def-Comment def-Syntax'>//Get the keys of a map</span>
+118: <span class='def-FunctionKeyword def-Keyword'>println</span> devMap<span class='def-Symbol'>.</span>keySet<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+119: 
+120: <span class='def-LineComment def-Comment def-Syntax'>//Get the values of a map</span>
+121: <span class='def-FunctionKeyword def-Keyword'>println</span> devMap<span class='def-Symbol'>.</span>values<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+122: 
+123: <span class='def-Comment def-Syntax'>/*</span>
+124: <span class='def-Comment def-Syntax'>  Groovy Beans</span>
+125: <span class='def-Comment def-Syntax'></span>
+126: <span class='def-Comment def-Syntax'>  GroovyBeans are JavaBeans but using a much simpler syntax</span>
+127: <span class='def-Comment def-Syntax'></span>
+128: <span class='def-Comment def-Syntax'>  When Groovy is compiled to bytecode, the following rules are used.</span>
+129: <span class='def-Comment def-Syntax'></span>
+130: <span class='def-Comment def-Syntax'>    * If the name is declared with an access modifier (public, private or</span>
+131: <span class='def-Comment def-Syntax'>      protected) then a field is generated.</span>
+132: <span class='def-Comment def-Syntax'></span>
+133: <span class='def-Comment def-Syntax'>    * A name declared with no access modifier generates a private field with</span>
+134: <span class='def-Comment def-Syntax'>      public getter and setter (i.e. a property).</span>
+135: <span class='def-Comment def-Syntax'></span>
+136: <span class='def-Comment def-Syntax'>    * If a property is declared final the private field is created final and no</span>
+137: <span class='def-Comment def-Syntax'>      setter is generated.</span>
+138: <span class='def-Comment def-Syntax'></span>
+139: <span class='def-Comment def-Syntax'>    * You can declare a property and also declare your own getter or setter.</span>
+140: <span class='def-Comment def-Syntax'></span>
+141: <span class='def-Comment def-Syntax'>    * You can declare a property and a field of the same name, the property will</span>
+142: <span class='def-Comment def-Syntax'>      use that field then.</span>
+143: <span class='def-Comment def-Syntax'></span>
+144: <span class='def-Comment def-Syntax'>    * If you want a private or protected property you have to provide your own</span>
+145: <span class='def-Comment def-Syntax'>      getter and setter which must be declared private or protected.</span>
+146: <span class='def-Comment def-Syntax'></span>
+147: <span class='def-Comment def-Syntax'>    * If you access a property from within the class the property is defined in</span>
+148: <span class='def-Comment def-Syntax'>      at compile time with implicit or explicit this (for example this.foo, or</span>
+149: <span class='def-Comment def-Syntax'>      simply foo), Groovy will access the field directly instead of going though</span>
+150: <span class='def-Comment def-Syntax'>      the getter and setter.</span>
+151: <span class='def-Comment def-Syntax'></span>
+152: <span class='def-Comment def-Syntax'>    * If you access a property that does not exist using the explicit or</span>
+153: <span class='def-Comment def-Syntax'>      implicit foo, then Groovy will access the property through the meta class,</span>
+154: <span class='def-Comment def-Syntax'>      which may fail at runtime.</span>
+155: <span class='def-Comment def-Syntax'></span>
+156: <span class='def-Comment def-Syntax'>*/</span>
+157: 
+158: <span class='def-Keyword'>class</span> Foo <span class='def-SymbolStrong def-Symbol'>{</span>
+159:     <span class='def-LineComment def-Comment def-Syntax'>// read only property</span>
+160:     <span class='def-Keyword'>final</span> <span class='def-FunctionKeyword def-Keyword'>String</span> name <span class='def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Roberto</span><span class='def-StringEdge def-String'>"</span>
+161: 
+162:     <span class='def-LineComment def-Comment def-Syntax'>// read only property with public getter and protected setter</span>
+163:     <span class='def-FunctionKeyword def-Keyword'>String</span> language
+164:     <span class='def-Keyword'>protected</span> <span class='def-Keyword'>void</span> setLanguage<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-FunctionKeyword def-Keyword'>String</span> language<span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-Keyword'>this</span><span class='def-Symbol'>.</span>language <span class='def-Symbol'>=</span> language <span class='def-SymbolStrong def-Symbol'>}</span>
+165: 
+166:     <span class='def-LineComment def-Comment def-Syntax'>// dynamically typed property</span>
+167:     <span class='def-Keyword'>def</span> lastName
+168: <span class='def-SymbolStrong def-Symbol'>}</span>
+169: 
+170: <span class='def-Comment def-Syntax'>/*</span>
+171: <span class='def-Comment def-Syntax'>  Logical Branching and Looping</span>
+172: <span class='def-Comment def-Syntax'>*/</span>
+173: 
+174: <span class='def-LineComment def-Comment def-Syntax'>//Groovy supports the usual if - else syntax</span>
+175: <span class='def-Keyword'>def</span> x <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>3</span>
+176: 
+177: <span class='def-Keyword'>if</span><span class='def-SymbolStrong def-Symbol'>(</span>x<span class='def-Symbol'>=</span><span class='def-Symbol'>=</span><span class='def-NumberDec def-Number'>1</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+178:     <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>One</span><span class='def-StringEdge def-String'>"</span>
+179: <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-Keyword'>else</span> <span class='def-Keyword'>if</span><span class='def-SymbolStrong def-Symbol'>(</span>x<span class='def-Symbol'>=</span><span class='def-Symbol'>=</span><span class='def-NumberDec def-Number'>2</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+180:     <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Two</span><span class='def-StringEdge def-String'>"</span>
+181: <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-Keyword'>else</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+182:     <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>X greater than Two</span><span class='def-StringEdge def-String'>"</span>
+183: <span class='def-SymbolStrong def-Symbol'>}</span>
+184: 
+185: <span class='def-LineComment def-Comment def-Syntax'>//Groovy also supports the ternary operator:</span>
+186: <span class='def-Keyword'>def</span> y <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>10</span>
+187: <span class='def-Keyword'>def</span> x <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>(</span>y <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>1</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-Symbol'>?</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>worked</span><span class='def-StringEdge def-String'>"</span> <span class='def-Symbol'>:</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>failed</span><span class='def-StringEdge def-String'>"</span>
+188: <span class='def-Keyword'>assert</span> x <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>worked</span><span class='def-StringEdge def-String'>"</span>
+189: 
+190: <span class='def-LineComment def-Comment def-Syntax'>//Groovy supports 'The Elvis Operator' too!</span>
+191: <span class='def-LineComment def-Comment def-Syntax'>//Instead of using the ternary operator:</span>
+192: 
+193: displayName <span class='def-Symbol'>=</span> user<span class='def-Symbol'>.</span>name <span class='def-Symbol'>?</span> user<span class='def-Symbol'>.</span>name <span class='def-Symbol'>:</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Anonymous</span><span class='def-StringEdge def-String'>'</span>
+194: 
+195: <span class='def-LineComment def-Comment def-Syntax'>//We can write it:</span>
+196: displayName <span class='def-Symbol'>=</span> user<span class='def-Symbol'>.</span>name <span class='def-Symbol'>?</span><span class='def-Symbol'>:</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Anonymous</span><span class='def-StringEdge def-String'>'</span>
+197: 
+198: <span class='def-LineComment def-Comment def-Syntax'>//For loop</span>
+199: <span class='def-LineComment def-Comment def-Syntax'>//Iterate over a range</span>
+200: <span class='def-Keyword'>def</span> x <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span>
+201: <span class='def-Keyword'>for</span> <span class='def-SymbolStrong def-Symbol'>(</span>i <span class='def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span> <span class='def-Symbol'>.</span><span class='def-Symbol'>.</span> <span class='def-NumberDec def-Number'>30</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+202:     x <span class='def-Symbol'>+</span><span class='def-Symbol'>=</span> i
+203: <span class='def-SymbolStrong def-Symbol'>}</span>
+204: 
+205: <span class='def-LineComment def-Comment def-Syntax'>//Iterate over a list</span>
+206: x <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span>
+207: <span class='def-Keyword'>for</span><span class='def-SymbolStrong def-Symbol'>(</span> i <span class='def-Keyword'>in</span> <span class='def-SymbolStrong def-Symbol'>[</span><span class='def-NumberDec def-Number'>5</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>1</span><span class='def-SymbolStrong def-Symbol'>]</span> <span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+208:     x <span class='def-Symbol'>+</span><span class='def-Symbol'>=</span> i
+209: <span class='def-SymbolStrong def-Symbol'>}</span>
+210: 
+211: <span class='def-LineComment def-Comment def-Syntax'>//Iterate over an array</span>
+212: array <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>.</span><span class='def-NumberFloat def-Number'>.20</span><span class='def-SymbolStrong def-Symbol'>)</span><span class='def-Symbol'>.</span>toArray<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+213: x <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span>
+214: <span class='def-Keyword'>for</span> <span class='def-SymbolStrong def-Symbol'>(</span>i <span class='def-Keyword'>in</span> array<span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+215:     x <span class='def-Symbol'>+</span><span class='def-Symbol'>=</span> i
+216: <span class='def-SymbolStrong def-Symbol'>}</span>
+217: 
+218: <span class='def-LineComment def-Comment def-Syntax'>//Iterate over a map</span>
+219: <span class='def-Keyword'>def</span> map <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>[</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>name</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>:</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Roberto</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>framework</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>:</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Grails</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>language</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>:</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Groovy</span><span class='def-StringEdge def-String'>'</span><span class='def-SymbolStrong def-Symbol'>]</span>
+220: x <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span>
+221: <span class='def-Keyword'>for</span> <span class='def-SymbolStrong def-Symbol'>(</span> e <span class='def-Keyword'>in</span> map <span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+222:     x <span class='def-Symbol'>+</span><span class='def-Symbol'>=</span> e<span class='def-Symbol'>.</span>value
+223: <span class='def-SymbolStrong def-Symbol'>}</span>
+224: 
+225: <span class='def-Comment def-Syntax'>/*</span>
+226: <span class='def-Comment def-Syntax'>  Operators</span>
+227: <span class='def-Comment def-Syntax'></span>
+228: <span class='def-Comment def-Syntax'>  Operator Overloading for a list of the common operators that Groovy supports:</span>
+229: <span class='def-Comment def-Syntax'>  </span><span class='def-URL def-URI'>http://www.groovy-lang.org/operators.html#Operator-Overloading</span><span class='def-Comment def-Syntax'></span>
+230: <span class='def-Comment def-Syntax'></span>
+231: <span class='def-Comment def-Syntax'>  Helpful groovy operators</span>
+232: <span class='def-Comment def-Syntax'>*/</span>
+233: <span class='def-LineComment def-Comment def-Syntax'>//Spread operator:  invoke an action on all items of an aggregate object.</span>
+234: <span class='def-Keyword'>def</span> technologies <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>[</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Groovy</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Grails</span><span class='def-StringEdge def-String'>'</span><span class='def-Symbol'>,</span><span class='def-StringEdge def-String'>'</span><span class='def-String'>Gradle</span><span class='def-StringEdge def-String'>'</span><span class='def-SymbolStrong def-Symbol'>]</span>
+235: technologies<span class='def-Symbol'>*</span><span class='def-Symbol'>.</span>toUpperCase<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-LineComment def-Comment def-Syntax'>// = to technologies.collect { it?.toUpperCase() }</span>
+236: 
+237: <span class='def-LineComment def-Comment def-Syntax'>//Safe navigation operator: used to avoid a NullPointerException.</span>
+238: <span class='def-Keyword'>def</span> user <span class='def-Symbol'>=</span> User<span class='def-Symbol'>.</span>get<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>1</span><span class='def-SymbolStrong def-Symbol'>)</span>
+239: <span class='def-Keyword'>def</span> username <span class='def-Symbol'>=</span> user<span class='def-Symbol'>?</span><span class='def-Symbol'>.</span>username
+240: 
+241: 
+242: <span class='def-Comment def-Syntax'>/*</span>
+243: <span class='def-Comment def-Syntax'>  Closures</span>
+244: <span class='def-Comment def-Syntax'>  A Groovy Closure is like a "code block" or a method pointer. It is a piece of</span>
+245: <span class='def-Comment def-Syntax'>  code that is defined and then executed at a later point.</span>
+246: <span class='def-Comment def-Syntax'></span>
+247: <span class='def-Comment def-Syntax'>  More info at: </span><span class='def-URL def-URI'>http://www.groovy-lang.org/closures.html</span><span class='def-Comment def-Syntax'></span>
+248: <span class='def-Comment def-Syntax'>*/</span>
+249: <span class='def-LineComment def-Comment def-Syntax'>//Example:</span>
+250: <span class='def-Keyword'>def</span> clos <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Hello World!</span><span class='def-StringEdge def-String'>"</span> <span class='def-SymbolStrong def-Symbol'>}</span>
+251: 
+252: <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Executing the Closure:</span><span class='def-StringEdge def-String'>"</span>
+253: clos<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+254: 
+255: <span class='def-LineComment def-Comment def-Syntax'>//Passing parameters to a closure</span>
+256: <span class='def-Keyword'>def</span> sum <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span> a<span class='def-Symbol'>,</span> b <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-FunctionKeyword def-Keyword'>println</span> a<span class='def-Symbol'>+</span>b <span class='def-SymbolStrong def-Symbol'>}</span>
+257: sum<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>4</span><span class='def-SymbolStrong def-Symbol'>)</span>
+258: 
+259: <span class='def-LineComment def-Comment def-Syntax'>//Closures may refer to variables not listed in their parameter list.</span>
+260: <span class='def-Keyword'>def</span> x <span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>5</span>
+261: <span class='def-Keyword'>def</span> multiplyBy <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span> num <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> num <span class='def-Symbol'>*</span> x <span class='def-SymbolStrong def-Symbol'>}</span>
+262: <span class='def-FunctionKeyword def-Keyword'>println</span> multiplyBy<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>10</span><span class='def-SymbolStrong def-Symbol'>)</span>
+263: 
+264: <span class='def-LineComment def-Comment def-Syntax'>// If you have a Closure that takes a single argument, you may omit the</span>
+265: <span class='def-LineComment def-Comment def-Syntax'>// parameter definition of the Closure</span>
+266: <span class='def-Keyword'>def</span> clos <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span> <span class='def-FunctionKeyword def-Keyword'>print</span> <span class='def-FunctionKeyword def-Keyword'>it</span> <span class='def-SymbolStrong def-Symbol'>}</span>
+267: clos<span class='def-SymbolStrong def-Symbol'>(</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>hi</span><span class='def-StringEdge def-String'>"</span> <span class='def-SymbolStrong def-Symbol'>)</span>
+268: 
+269: <span class='def-Comment def-Syntax'>/*</span>
+270: <span class='def-Comment def-Syntax'>  Groovy can memoize closure results [1][2][3]</span>
+271: <span class='def-Comment def-Syntax'>*/</span>
+272: <span class='def-Keyword'>def</span> cl <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span>a<span class='def-Symbol'>,</span> b <span class='def-Symbol'>-</span><span class='def-Symbol'>></span>
+273:     sleep<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>3000</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-LineComment def-Comment def-Syntax'>// simulate some time consuming processing</span>
+274:     a <span class='def-Symbol'>+</span> b
+275: <span class='def-SymbolStrong def-Symbol'>}</span>
+276: 
+277: mem <span class='def-Symbol'>=</span> cl<span class='def-Symbol'>.</span>memoize<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+278: 
+279: <span class='def-Keyword'>def</span> callClosure<span class='def-SymbolStrong def-Symbol'>(</span>a<span class='def-Symbol'>,</span> b<span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+280:     <span class='def-Keyword'>def</span> start <span class='def-Symbol'>=</span> System<span class='def-Symbol'>.</span>currentTimeMillis<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+281:     mem<span class='def-SymbolStrong def-Symbol'>(</span>a<span class='def-Symbol'>,</span> b<span class='def-SymbolStrong def-Symbol'>)</span>
+282:     <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Inputs(a = </span><span class='def-VarStrong def-Var'>$a</span><span class='def-String'>, b = </span><span class='def-VarStrong def-Var'>$b</span><span class='def-String'>) - took </span><span class='def-VarStrong def-Var'>${System.currentTimeMillis() - start}</span><span class='def-String'> msecs.</span><span class='def-StringEdge def-String'>"</span>
+283: <span class='def-SymbolStrong def-Symbol'>}</span>
+284: 
+285: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>2</span><span class='def-SymbolStrong def-Symbol'>)</span>
+286: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>2</span><span class='def-SymbolStrong def-Symbol'>)</span>
+287: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-SymbolStrong def-Symbol'>)</span>
+288: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-SymbolStrong def-Symbol'>)</span>
+289: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>4</span><span class='def-SymbolStrong def-Symbol'>)</span>
+290: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>4</span><span class='def-SymbolStrong def-Symbol'>)</span>
+291: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>2</span><span class='def-SymbolStrong def-Symbol'>)</span>
+292: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-SymbolStrong def-Symbol'>)</span>
+293: callClosure<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>4</span><span class='def-SymbolStrong def-Symbol'>)</span>
+294: 
+295: <span class='def-Comment def-Syntax'>/*</span>
+296: <span class='def-Comment def-Syntax'>  Expando</span>
+297: <span class='def-Comment def-Syntax'></span>
+298: <span class='def-Comment def-Syntax'>  The Expando class is a dynamic bean so we can add properties and we can add</span>
+299: <span class='def-Comment def-Syntax'>  closures as methods to an instance of this class</span>
+300: <span class='def-Comment def-Syntax'></span>
+301: <span class='def-Comment def-Syntax'>  </span><span class='def-URL def-URI'>http://mrhaki.blogspot.mx/2009/10/groovy-goodness-expando-as-dynamic-bean.html</span><span class='def-Comment def-Syntax'></span>
+302: <span class='def-Comment def-Syntax'>*/</span>
+303:   <span class='def-Keyword'>def</span> user <span class='def-Symbol'>=</span> <span class='def-Keyword'>new</span> Expando<span class='def-SymbolStrong def-Symbol'>(</span>name<span class='def-Symbol'>:</span><span class='def-StringEdge def-String'>"</span><span class='def-String'>Roberto</span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>)</span>
+304:   <span class='def-Keyword'>assert</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Roberto</span><span class='def-StringEdge def-String'>'</span> <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> user<span class='def-Symbol'>.</span>name
+305: 
+306:   user<span class='def-Symbol'>.</span>lastName <span class='def-Symbol'>=</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Pérez</span><span class='def-StringEdge def-String'>'</span>
+307:   <span class='def-Keyword'>assert</span> <span class='def-StringEdge def-String'>'</span><span class='def-String'>Pérez</span><span class='def-StringEdge def-String'>'</span> <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> user<span class='def-Symbol'>.</span>lastName
+308: 
+309:   user<span class='def-Symbol'>.</span>showInfo <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span> out <span class='def-Symbol'>-</span><span class='def-Symbol'>></span>
+310:       out <span class='def-Symbol'>&lt;</span><span class='def-Symbol'>&lt;</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Name: </span><span class='def-VarStrong def-Var'>$name</span><span class='def-StringEdge def-String'>"</span>
+311:       out <span class='def-Symbol'>&lt;</span><span class='def-Symbol'>&lt;</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>, Last name: </span><span class='def-VarStrong def-Var'>$lastName</span><span class='def-StringEdge def-String'>"</span>
+312:   <span class='def-SymbolStrong def-Symbol'>}</span>
+313: 
+314:   <span class='def-Keyword'>def</span> sw <span class='def-Symbol'>=</span> <span class='def-Keyword'>new</span> StringWriter<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+315:   <span class='def-FunctionKeyword def-Keyword'>println</span> user<span class='def-Symbol'>.</span>showInfo<span class='def-SymbolStrong def-Symbol'>(</span>sw<span class='def-SymbolStrong def-Symbol'>)</span>
+316: 
+317: 
+318: <span class='def-Comment def-Syntax'>/*</span>
+319: <span class='def-Comment def-Syntax'>  Metaprogramming (MOP)</span>
+320: <span class='def-Comment def-Syntax'>*/</span>
+321: 
+322: <span class='def-LineComment def-Comment def-Syntax'>//Using ExpandoMetaClass to add behaviour</span>
+323: <span class='def-FunctionKeyword def-Keyword'>String</span><span class='def-Symbol'>.</span>metaClass<span class='def-Symbol'>.</span>testAdd <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+324:     <span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>we added this</span><span class='def-StringEdge def-String'>"</span>
+325: <span class='def-SymbolStrong def-Symbol'>}</span>
+326: 
+327: <span class='def-FunctionKeyword def-Keyword'>String</span> x <span class='def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>test</span><span class='def-StringEdge def-String'>"</span>
+328: x<span class='def-Symbol'>?</span><span class='def-Symbol'>.</span>testAdd<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+329: 
+330: <span class='def-LineComment def-Comment def-Syntax'>//Intercepting method calls</span>
+331: <span class='def-Keyword'>class</span> Test <span class='def-Keyword'>implements</span> GroovyInterceptable <span class='def-SymbolStrong def-Symbol'>{</span>
+332:     <span class='def-Keyword'>def</span> sum<span class='def-SymbolStrong def-Symbol'>(</span>Integer x<span class='def-Symbol'>,</span> Integer y<span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> x <span class='def-Symbol'>+</span> y <span class='def-SymbolStrong def-Symbol'>}</span>
+333: 
+334:     <span class='def-Keyword'>def</span> invokeMethod<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-FunctionKeyword def-Keyword'>String</span> name<span class='def-Symbol'>,</span> args<span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+335:         System<span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span><span class='def-FunctionKeyword def-Keyword'>println</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Invoke method </span><span class='def-VarStrong def-Var'>$name</span><span class='def-String'> with args: </span><span class='def-VarStrong def-Var'>$args</span><span class='def-StringEdge def-String'>"</span>
+336:     <span class='def-SymbolStrong def-Symbol'>}</span>
+337: <span class='def-SymbolStrong def-Symbol'>}</span>
+338: 
+339: <span class='def-Keyword'>def</span> test <span class='def-Symbol'>=</span> <span class='def-Keyword'>new</span> Test<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+340: test<span class='def-Symbol'>?</span><span class='def-Symbol'>.</span>sum<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>3</span><span class='def-SymbolStrong def-Symbol'>)</span>
+341: test<span class='def-Symbol'>?</span><span class='def-Symbol'>.</span>multiply<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>3</span><span class='def-SymbolStrong def-Symbol'>)</span>
+342: 
+343: <span class='def-LineComment def-Comment def-Syntax'>//Groovy supports propertyMissing for dealing with property resolution attempts.</span>
+344: <span class='def-Keyword'>class</span> Foo <span class='def-SymbolStrong def-Symbol'>{</span>
+345:    <span class='def-Keyword'>def</span> propertyMissing<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-FunctionKeyword def-Keyword'>String</span> name<span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span> name <span class='def-SymbolStrong def-Symbol'>}</span>
+346: <span class='def-SymbolStrong def-Symbol'>}</span>
+347: <span class='def-Keyword'>def</span> f <span class='def-Symbol'>=</span> <span class='def-Keyword'>new</span> Foo<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+348: 
+349: assertEquals <span class='def-StringEdge def-String'>"</span><span class='def-String'>boo</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>,</span> f<span class='def-Symbol'>.</span>boo
+350: 
+351: <span class='def-Comment def-Syntax'>/*</span>
+352: <span class='def-Comment def-Syntax'>  TypeChecked and CompileStatic</span>
+353: <span class='def-Comment def-Syntax'>  Groovy, by nature, is and will always be a dynamic language but it supports</span>
+354: <span class='def-Comment def-Syntax'>  typechecked and compilestatic</span>
+355: <span class='def-Comment def-Syntax'></span>
+356: <span class='def-Comment def-Syntax'>  More info: </span><span class='def-URL def-URI'>http://www.infoq.com/articles/new-groovy-20</span><span class='def-Comment def-Syntax'></span>
+357: <span class='def-Comment def-Syntax'>*/</span>
+358: <span class='def-LineComment def-Comment def-Syntax'>//TypeChecked</span>
+359: <span class='def-Keyword'>import</span> groovy<span class='def-Symbol'>.</span>transform<span class='def-Symbol'>.</span>TypeChecked
+360: 
+361: <span class='def-Keyword'>void</span> testMethod<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span><span class='def-SymbolStrong def-Symbol'>}</span>
+362: 
+363: <span class='def-Symbol'>@</span>TypeChecked
+364: <span class='def-Keyword'>void</span> test<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+365:     testMeethod<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span>
+366: 
+367:     <span class='def-Keyword'>def</span> name <span class='def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Roberto</span><span class='def-StringEdge def-String'>"</span>
+368: 
+369:     <span class='def-FunctionKeyword def-Keyword'>println</span> naameee
+370: 
+371: <span class='def-SymbolStrong def-Symbol'>}</span>
+372: 
+373: <span class='def-LineComment def-Comment def-Syntax'>//Another example:</span>
+374: <span class='def-Keyword'>import</span> groovy<span class='def-Symbol'>.</span>transform<span class='def-Symbol'>.</span>TypeChecked
+375: 
+376: <span class='def-Symbol'>@</span>TypeChecked
+377: Integer test<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+378:     Integer num <span class='def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>1</span><span class='def-StringEdge def-String'>"</span>
+379: 
+380:     Integer<span class='def-SymbolStrong def-Symbol'>[</span><span class='def-SymbolStrong def-Symbol'>]</span> numbers <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>4</span><span class='def-SymbolStrong def-Symbol'>]</span>
+381: 
+382:     Date date <span class='def-Symbol'>=</span> numbers<span class='def-SymbolStrong def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-SymbolStrong def-Symbol'>]</span>
+383: 
+384:     <span class='def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Test</span><span class='def-StringEdge def-String'>"</span>
+385: 
+386: <span class='def-SymbolStrong def-Symbol'>}</span>
+387: 
+388: <span class='def-LineComment def-Comment def-Syntax'>//CompileStatic example:</span>
+389: <span class='def-Keyword'>import</span> groovy<span class='def-Symbol'>.</span>transform<span class='def-Symbol'>.</span>CompileStatic
+390: 
+391: <span class='def-Symbol'>@</span>CompileStatic
+392: <span class='def-Keyword'>int</span> sum<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-Keyword'>int</span> x<span class='def-Symbol'>,</span> <span class='def-Keyword'>int</span> y<span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+393:     x <span class='def-Symbol'>+</span> y
+394: <span class='def-SymbolStrong def-Symbol'>}</span>
+395: 
+396: <span class='def-Keyword'>assert</span> sum<span class='def-SymbolStrong def-Symbol'>(</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span><span class='def-NumberDec def-Number'>5</span><span class='def-SymbolStrong def-Symbol'>)</span> <span class='def-Symbol'>=</span><span class='def-Symbol'>=</span> <span class='def-NumberDec def-Number'>7</span>
+397: 
+398: 
+399: 
+400: 
