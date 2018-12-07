@@ -10,8 +10,12 @@ Advantage over Perl version:
 placed in public domain by techtonik // rainforce.org
 """
 
+import sys
+if sys.version_info < (3, 0):
+    sys.stdout.write("Sorry, requires Python 3.x, not Python 2.x\n")
+    sys.exit(1)
 
-import os, sys
+import os
 import copy
 import difflib
 import optparse
@@ -34,7 +38,7 @@ with open(join(root_path, "path.properties")) as pf:
         for line in pf
           if line.startswith("path.")]
   )
-# print prop_path
+# print(prop_path)
 
 colorer_path = join(root_path, normpath(prop_path["colorer"]))
 catalog_path = join(root_path, normpath(prop_path["catalog"]))
@@ -42,7 +46,7 @@ hrd_path     = join(root_path, normpath(prop_path["build-dir"]), prop_path["base
 hrd = os.getenv('COLORER5HRD', 'white')
 css = "%s/css/%s.css" % (hrd_path, hrd)
 if not os.path.isfile(css):
-  print "Warning: Stylesheet %s does not exist" % css
+  print("Warning: Stylesheet %s does not exist" % css)
 
 colorer_exe = "colorer.exe";
 colorer = join(colorer_path, colorer_exe)
@@ -70,7 +74,7 @@ opt.add_option("--help", action="store_true")
 (options, args) = opt.parse_args()
 
 if options.help:
-  print __doc__
+  print(__doc__)
   opt.print_help()
   sys.exit(0)
 
@@ -79,15 +83,15 @@ if options.help:
 
 def filediff(oldpath, newpath):
   """return diff output or empty string"""
-  with open(oldpath, "rb") as of:
+  with open(oldpath, "r", errors="surrogateescape") as of:
     ol = of.readlines()
-  with open(newpath, "rb") as nf:
+  with open(newpath, "r", errors="surrogateescape") as nf:
     nl = nf.readlines()
   diff = difflib.unified_diff(ol, nl, oldpath, newpath, n=1)
   return list(diff)
 
 
-print "Running tests"
+print("Running tests")
 
 fail_log = open(join(current_dir, "fails.html"), "w")
 fail_log.write(
@@ -135,7 +139,7 @@ def run_one_test(test):
   global no
   with lock:
     no += 1
-    print "Processing (%s/%s) %s" % (no, len(test_list), test)
+    print("Processing (%s/%s) %s" % (no, len(test_list), test))
 
   filename = "%s.html" % test
   origname = join(  valid_dir, filename)
@@ -143,28 +147,25 @@ def run_one_test(test):
   outdir = dirname(outname)
 
   if not os.path.exists(outdir):
-    try:
-      # print creating
-      os.makedirs(outdir)
-    except OSError, e:
-      if e.errno != os.errno.EEXIST:
-        raise
+    #print(outdir)
+    os.makedirs(outdir, exist_ok=True)
 
   args = ["-ht", test, "-dc", "-dh", "-ln", "-o", outname]
   cmd = [colorer] + colorer_opts + args
-  # print cmd
+  # print(cmd)
   ret = subprocess.call(cmd)
   return (test, ret, origname, outname)
 
 pool = multiprocessing.pool.ThreadPool()
 results = pool.map(run_one_test, test_list)
 
+print("Generating report...")
 for test, ret, origname, outname in results:
   fail_log.write('<div><pre class="testname">%s</pre><pre>' % test)
 
   if ret != 0:
     failed += 1
-    print "Failed: colorer returned %s" % ret
+    print("Failed: colorer returned %s" % ret)
     fail_log.write("Failed: colorer returned %s" % ret)
     # BUG: colorer doesn't return any error codes in some error cases
     #      like absent hrd catalogs or 
@@ -181,6 +182,7 @@ for test, ret, origname, outname in results:
       fw.writelines(lines)
 
   if os.path.isfile(origname):
+    print(origname)
     diff = filediff(origname, outname)
     if len(diff):
       changed += 1
@@ -194,10 +196,10 @@ for test, ret, origname, outname in results:
 
 fail_log.write('</body></html>')
 fail_log.close()
-print "Executed: %s, Failed: %s (%1.2f%%), Changed: %s (%1.2f%%)" % (len(test_list),
+print("Executed: %s, Failed: %s (%1.2f%%), Changed: %s (%1.2f%%)" % (len(test_list),
   failed , (float(failed )/len(test_list)*100),
   changed, (float(changed)/len(test_list)*100),
-)
+))
 
 
 """
