@@ -1,3 +1,8 @@
+2018-12-08
+  Fixed:
+   - twig: fix 'error' region
+   - default: Added missing Subversion expansion keywords (AnrDaemon)
+
 2018-12-07
   Fixed:
    - php: null is constant (AnrDaemon)
