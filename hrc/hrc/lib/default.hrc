@@ -209,6 +209,9 @@
       <regexp region="Directive"><![CDATA[
         /\$(Archive|Author|Date|Header|Id|Locker|Log|RCSfile|Revision|Source|State)(: .*?)?\$/]]>
       </regexp>
+      <regexp region="Directive"><![CDATA[
+        /\$(HeadURL|LastChangedBy|LastChangedDate|LastChangedRevision|Rev|URL)(: .*?)?\$/
+      ]]></regexp>
       <regexp match="/^&lt;{7,}.*$/" region="TODO"/>
       <regexp match="/^={7,}$/" region="TODO"/>
       <regexp match="/^&gt;{7,}.*$/" region="TODO"/>
