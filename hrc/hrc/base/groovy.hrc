@@ -79,7 +79,7 @@
            region00="StringEdge" region01="PairStart" region10="StringEdge" region11="PairEnd"/>-->
 
 <!-- Numbers  -->
-        <regexp match="/\B(\$[\da-fA-F]+)\b/" region0="pNumb"/>
+        <regexp match="/\B(\$[\da-fA-F]+)\b/" region0="def:Number"/>
         <inherit scheme="FloatNumber"/>
         <inherit scheme="DecNumber"/>
         <regexp match="/\B(\$[\da-fA-F]*?([^\s\W\da-fA-F]).*?)\b/" region0="Error"/>

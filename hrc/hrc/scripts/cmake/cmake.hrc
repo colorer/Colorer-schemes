@@ -68,7 +68,7 @@
 
 		<scheme name="StringContent">
 			<regexp match="/\\\\$/" region="def:Error"/>
-			<regexp match="/(\%)\w+(\%)/" region="def:Const" region1="def:PairStart" region2="def:PairEnd"/>
+			<regexp match="/(\%)\w+(\%)/" region="def:Constant" region1="def:PairStart" region2="def:PairEnd"/>
 			<regexp match="/\\[^xX\d]/" region="def:StringContent"/>
 			<regexp match="/\\$/" region="def:StringContent"/>
 			<regexp match="/\\x[\da-fA-F]{1,8}/i" region="def:StringContent"/>
