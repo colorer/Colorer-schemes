@@ -3,6 +3,7 @@
 
 <property name="target" value="all" description="default subproject target"/>
 <property file='path.properties'/>
+<property name='catalog-file' value='catalog.xml_'/>
 
 
 <target name='hrd'>
@@ -14,7 +15,7 @@
 </target>
 
 <target name='catalog'>
-	<copy file='catalog.xml_' tofile='${path.build-dir}/${path.base-dir}/catalog.xml'  overwrite='true'/>
+	<copy file='${catalog-file}' tofile='${path.build-dir}/${path.base-dir}/catalog.xml'  overwrite='true'/>
 </target>
 
 <target name='all' depends="catalog, hrc, hrd"/>
@@ -33,6 +34,7 @@
 
 	<antcall target='default.pack-dir'>
 		<param name='target-dir' value='${base.pack_dir}'/>
+		<param name='catalog-file' value='catalog.xml_'/>
 	</antcall>
 </target>
 
@@ -45,8 +47,10 @@
 
 	<antcall target='default.pack-dir'>
 		<param name='target-dir' value='${base.far_dir}'/>
+		<param name='catalog-file' value='catalog.xml.far'/>
 	</antcall>
 	<copy file='hrc/hrc/CHANGELOG' todir='${base.far_dir}/hrc'/>
+	<delete file="${base.far_dir}/hrd/catalog-user.xml" />
 </target>
 
 <target name="base.far.clean">
