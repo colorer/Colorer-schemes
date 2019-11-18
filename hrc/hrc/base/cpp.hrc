@@ -79,6 +79,9 @@
    region11="c:StructureSymbol"
   />
   
+  <!-- Hack for lambdas and list initialization -->
+  <block start="/(\{)/" end="/(\})/" scheme="Expression"
+        region00="def:SymbolStrong" region01="def:PairStart" region10="def:SymbolStrong" region11="def:PairEnd"/>
 
   <!-- !!EE: Block #2 template support -->
   <!-- Colorer 4:
