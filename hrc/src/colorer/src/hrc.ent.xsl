@@ -7,7 +7,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
  >
 
-<xsl:output indent="yes" method="xml"/>
+<xsl:output indent="yes" method="xml" encoding="utf-8"/>
 
 <xsl:key name="type" match="xs:element[@type]" use="@name"/>
 

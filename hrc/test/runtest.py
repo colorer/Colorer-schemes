@@ -46,7 +46,7 @@ css = "%s/css/%s.css" % (hrd_path, hrd)
 if not os.path.isfile(css):
   print("Warning: Stylesheet %s does not exist" % css)
 
-colorer_exe = "colorer.exe"
+colorer_exe = "colorer"
 colorer = join(colorer_path, colorer_exe)
 if not os.path.isfile(colorer):
   sys.exit("Error: No %s in %s" % (colorer_exe, colorer_path))

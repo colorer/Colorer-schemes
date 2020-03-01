@@ -8,7 +8,7 @@ open(FILE, $ARGV[0]) or die "Could not open file $ARGV[0]";
 local $/;
 my $data = <FILE>;
 close(FILE);
-$data =~ s/ encoding="windows-1251"//;
+$data =~ s/ encoding="UTF-8"//;
 $data =~ s/\xFF//g;
 
 print "/* Generated with hrd2css.pl from $ARGV[0] */\n\n";

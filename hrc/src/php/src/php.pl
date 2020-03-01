@@ -11,7 +11,7 @@ my ($class, $method, $dl, $depr);
 my %rep=('<' => '&lt;', '>' => '&gt;', '&' => '&amp;', '"' => '&quot;', "'" => '&apos;');
 
 print <<XMLS;
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <php>
 XMLS
 

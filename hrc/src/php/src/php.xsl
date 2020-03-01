@@ -4,7 +4,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
  >
 
-<xsl:output indent="yes" method="xml" encoding="Windows-1251"/>
+<xsl:output indent="yes" method="xml" encoding="UTF-8"/>
 
 <xsl:template match="php">
 	<!--region name="php.keyword" parent="def:Keyword"/-->

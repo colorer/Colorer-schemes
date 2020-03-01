@@ -39,7 +39,7 @@ function processLanguage(src, name){
 };
 
 function printHeader(name){
-  WScript.echo("<?xml version=\"1.0\" encoding=\"Windows-1251\"?>");
+  WScript.echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
   WScript.echo("<!DOCTYPE hrc SYSTEM \"../hrc.dtd\">");
   WScript.echo("<?xml-stylesheet type=\"text/xsl\" href=\"../hrc.xsl\"?>");
   WScript.echo("<hrc version=\"take5\">");

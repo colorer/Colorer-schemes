@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xsl:stylesheet [
   <!ENTITY separate "<xsl:text>&#10;</xsl:text>">
   <!ENTITY tab "<xsl:text>&#09;</xsl:text>">
@@ -15,7 +15,7 @@ Written by Eugene Efremov <4mirror@mail.ru>
      xmlns="http://colorer.sf.net/2003/hrc"
      xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:output method="xml" indent="yes" encoding="windows-1251"/>
+<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 <xsl:strip-space elements="*"/>
 
 <xsl:include href="bracket.blockcase.xsl"/>
