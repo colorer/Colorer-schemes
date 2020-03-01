@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <custom xmlns="uri:colorer:custom">
 
@@ -136,8 +136,8 @@
     </inherit>
     <inherit scheme="xmlschema:string-content"/>
    </scheme>
-   <!-- Зря я эту фигню приделал. 
-        Все равно оно работает как mixed="true"...  -->
+   <!-- Р—СЂСЏ СЏ СЌС‚Сѓ С„РёРіРЅСЋ РїСЂРёРґРµР»Р°Р». 
+        Р’СЃРµ СЂР°РІРЅРѕ РѕРЅРѕ СЂР°Р±РѕС‚Р°РµС‚ РєР°Рє mixed="true"...  -->
 
    
    

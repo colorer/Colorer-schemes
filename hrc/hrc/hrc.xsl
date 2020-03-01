@@ -5,7 +5,7 @@
      xmlns:hrc="http://colorer.sf.net/2003/hrc"
      xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:output indent="yes" method="html" encoding="Windows-1251"/>
+<xsl:output indent="yes" method="html" encoding="UTF-8"/>
 
 <xsl:template match="/">
  <html>

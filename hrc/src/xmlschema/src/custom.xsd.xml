@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <custom xmlns="uri:colorer:custom" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <!-- XML Schema magic simple types definition -->
@@ -213,7 +213,7 @@
         <regexp match="/\b (?{}%xml:NCName;(\:))?%xml:NCName; \b/ix" region1="Attribute.nsprefix"/>
       </scheme>-->
       <scheme name="NOTATION-content">
-        <!-- It is an ·error· for NOTATION to be used directly in a schema. Only datatypes that are ·derived· from NOTATION by specifying a value for ·enumeration· can be used in a schema. -->
+        <!-- It is an В·errorВ· for NOTATION to be used directly in a schema. Only datatypes that are В·derivedВ· from NOTATION by specifying a value for В·enumerationВ· can be used in a schema. -->
       </scheme>
 
 

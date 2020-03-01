@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE custom [
     <!ENTITY hrc SYSTEM "entity.j2ee.hrc">
     <!ENTITY cst SYSTEM "entity.web-app.xml">

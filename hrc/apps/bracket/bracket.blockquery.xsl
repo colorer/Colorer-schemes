@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xsl:stylesheet [
   <!ENTITY separate "<xsl:text>&#10;</xsl:text>">
   <!ENTITY tab "<xsl:text>&#09;</xsl:text>">
