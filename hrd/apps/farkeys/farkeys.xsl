@@ -5,7 +5,7 @@
 	xmlns:l='urn:local'
 >
 
-<xsl:output method="text" encoding="windows-1251" indent="no"/>
+<xsl:output method="text" encoding="UTF-8" indent="no"/>
 <xsl:strip-space elements="*"/>
 
 
