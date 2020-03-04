@@ -1,6 +1,5 @@
 #
 # (c) Victor Zhumatii, OSPU
-# Он╠┐ код ╟┬пе╔но │╩е╫ п┴о┬╫╠е ┌│┬лЪ ┬╫ол═ м│л╠м│ к┴│п╫ог┴Ъ─Ъм ме╫одЪм│
 #
 
 procedure randoms (n, k) # n times random in 1..k
@@ -9,9 +8,9 @@ end
 
 procedure pow(a, b, modLimit) # long a^b version
     powers := list()
-    powers |||:= [a] # 0-╨ ┬╫епен═
+    powers |||:= [a] # 0-├Р ├В├Ч┬е┬п┬е┬н├Н
 
-    while (2 ^ (*powers -1) ) <= b do { # ПокЪ дЪннЪ╨ ┬╫епен═ нЪм може╫ понЪдоб│╫═┬╨
+    while (2 ^ (*powers -1) ) <= b do { 
         last := powers[*powers];
         powers |||:= [(last*last) % modLimit]
     }
@@ -33,9 +32,6 @@ procedure isPrime(p) #p mayBePrime
     every pows ++:= set([pow (randoms(40, p-1), p-1, p)])
     if *pows = 1 & !pows = 1 then return p;
 
-    # кЪждЪ╨ ┬╫епен═ ┬л╟┌Ъ┐н╠┼ ┌│┬ел ┌│┬лом 20 │з │н╫е┴вЪлЪ 1..p-1 по мод╟л╧ p
-    # поме╩Ъе╫┬╨ в множ┬╫во
-    # е┬л│ в множе┬╫ве е┬╫═ ╫ол═ко 1, ве┴н╟╫═ p
 end
 
 procedure main()

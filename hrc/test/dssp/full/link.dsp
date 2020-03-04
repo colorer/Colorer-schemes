@@ -1,30 +1,30 @@
 PROGRAM $IBM-DVK USE SYSTEM B16 ."
-Работа с дисками DEC-машин по линии связи RS-232 - УПО" [."
-Используются библиотечные программы: RS232.DSP SCRWORK1.DSP MENU4.DSP
- Вызов: PDP
-При вводе имени IBM-файла допускается задавать символы * и ?.
-При вводе имени PDP-файла посылка пустой строки означает выдачу на экран
-директория диска и возможность выбора из него нужного имени"]
+╨а╨░╨▒╨╛╤В╨░ ╤Б ╨┤╨╕╤Б╨║╨░╨╝╨╕ DEC-╨╝╨░╤И╨╕╨╜ ╨┐╨╛ ╨╗╨╕╨╜╨╕╨╕ ╤Б╨▓╤П╨╖╨╕ RS-232 - ╨г╨Я╨Ю" [."
+╨Ш╤Б╨┐╨╛╨╗╤М╨╖╤Г╤О╤В╤Б╤П ╨▒╨╕╨▒╨╗╨╕╨╛╤В╨╡╤З╨╜╤Л╨╡ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л: RS232.DSP SCRWORK1.DSP MENU4.DSP
+ ╨Т╤Л╨╖╨╛╨▓: PDP
+╨Я╤А╨╕ ╨▓╨▓╨╛╨┤╨╡ ╨╕╨╝╨╡╨╜╨╕ IBM-╤Д╨░╨╣╨╗╨░ ╨┤╨╛╨┐╤Г╤Б╨║╨░╨╡╤В╤Б╤П ╨╖╨░╨┤╨░╨▓╨░╤В╤М ╤Б╨╕╨╝╨▓╨╛╨╗╤Л * ╨╕ ?.
+╨Я╤А╨╕ ╨▓╨▓╨╛╨┤╨╡ ╨╕╨╝╨╡╨╜╨╕ PDP-╤Д╨░╨╣╨╗╨░ ╨┐╨╛╤Б╤Л╨╗╨║╨░ ╨┐╤Г╤Б╤В╨╛╨╣ ╤Б╤В╤А╨╛╨║╨╕ ╨╛╨╖╨╜╨░╤З╨░╨╡╤В ╨▓╤Л╨┤╨░╤З╤Г ╨╜╨░ ╤Н╨║╤А╨░╨╜
+╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤П ╨┤╨╕╤Б╨║╨░ ╨╕ ╨▓╨╛╨╖╨╝╨╛╨╢╨╜╨╛╤Б╤В╤М ╨▓╤Л╨▒╨╛╤А╨░ ╨╕╨╖ ╨╜╨╡╨│╨╛ ╨╜╤Г╨╢╨╜╨╛╨│╨╛ ╨╕╨╝╨╡╨╜╨╕"]
 
-     LONG VAR  AIBUF  [адрес буфера ввода]
-     LONG VAR  AOBUF  [адрес буфера вывода]
-     BYTE VAR  COMIN  [полученная команда]
-     BYTE VAR  COMOUT [команда для передачи]
-          VAR  DLIBL  [длина введенного блока]
-          VAR  DLOBL  [длина блока для вывода]
-     BYTE VAR  YBL    [признак: 1 - блок получен; 0 - нет]
-          VAR  KSUM   [контрольная сумма]
-100      VALUE LBUF   [длина буферов ввода и вывода]
-LBUF BYTE VCTR IBUF   [буфер ввода]
-LBUF BYTE VCTR OBUF   [буфер вывода]
-100  BYTE VCTR DNAM   [имена существующих дисководов]
-     BYTE  VAR NDISC  [количество существующих дисководов]
+     LONG VAR  AIBUF  [╨░╨┤╤А╨╡╤Б ╨▒╤Г╤Д╨╡╤А╨░ ╨▓╨▓╨╛╨┤╨░]
+     LONG VAR  AOBUF  [╨░╨┤╤А╨╡╤Б ╨▒╤Г╤Д╨╡╤А╨░ ╨▓╤Л╨▓╨╛╨┤╨░]
+     BYTE VAR  COMIN  [╨┐╨╛╨╗╤Г╤З╨╡╨╜╨╜╨░╤П ╨║╨╛╨╝╨░╨╜╨┤╨░]
+     BYTE VAR  COMOUT [╨║╨╛╨╝╨░╨╜╨┤╨░ ╨┤╨╗╤П ╨┐╨╡╤А╨╡╨┤╨░╤З╨╕]
+          VAR  DLIBL  [╨┤╨╗╨╕╨╜╨░ ╨▓╨▓╨╡╨┤╨╡╨╜╨╜╨╛╨│╨╛ ╨▒╨╗╨╛╨║╨░]
+          VAR  DLOBL  [╨┤╨╗╨╕╨╜╨░ ╨▒╨╗╨╛╨║╨░ ╨┤╨╗╤П ╨▓╤Л╨▓╨╛╨┤╨░]
+     BYTE VAR  YBL    [╨┐╤А╨╕╨╖╨╜╨░╨║: 1 - ╨▒╨╗╨╛╨║ ╨┐╨╛╨╗╤Г╤З╨╡╨╜; 0 - ╨╜╨╡╤В]
+          VAR  KSUM   [╨║╨╛╨╜╤В╤А╨╛╨╗╤М╨╜╨░╤П ╤Б╤Г╨╝╨╝╨░]
+100      VALUE LBUF   [╨┤╨╗╨╕╨╜╨░ ╨▒╤Г╤Д╨╡╤А╨╛╨▓ ╨▓╨▓╨╛╨┤╨░ ╨╕ ╨▓╤Л╨▓╨╛╨┤╨░]
+LBUF BYTE VCTR IBUF   [╨▒╤Г╤Д╨╡╤А ╨▓╨▓╨╛╨┤╨░]
+LBUF BYTE VCTR OBUF   [╨▒╤Г╤Д╨╡╤А ╨▓╤Л╨▓╨╛╨┤╨░]
+100  BYTE VCTR DNAM   [╨╕╨╝╨╡╨╜╨░ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╤Г╤О╤Й╨╕╤Е ╨┤╨╕╤Б╨║╨╛╨▓╨╛╨┤╨╛╨▓]
+     BYTE  VAR NDISC  [╨║╨╛╨╗╨╕╤З╨╡╤Б╤В╨▓╨╛ ╤Б╤Г╤Й╨╡╤Б╤В╨▓╤Г╤О╤Й╨╕╤Е ╨┤╨╕╤Б╨║╨╛╨▓╨╛╨┤╨╛╨▓]
 
 FIX 40 STRING IBFNAME "*.DSP" ! IBFNAME
-EMPTY 0FF00 BYTE VCTR [SegDATA] PFILE [файл с PDP]
-LONG        VAR LFIL  [длина файла]
+EMPTY 0FF00 BYTE VCTR [SegDATA] PFILE [╤Д╨░╨╣╨╗ ╤Б PDP]
+LONG        VAR LFIL  [╨┤╨╗╨╕╨╜╨░ ╤Д╨░╨╣╨╗╨░]
 
-[добавление и исправление к сетевым программам]
+[╨┤╨╛╨▒╨░╨▓╨╗╨╡╨╜╨╕╨╡ ╨╕ ╨╕╤Б╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╨╡ ╨║ ╤Б╨╡╤В╨╡╨▓╤Л╨╝ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╨░╨╝]
 COPYW LOB LOB0
 : LOB [b] C LOB0 KSUM + ! KSUM [] ;
 : LIW [] LIB LIB SWB + [w] ;
@@ -43,26 +43,26 @@ FIX WORD VAR MM.LJV  0 ! MM.LJV
 
 B16
 :: : PDP [] [LINIT 0 LOB] PDP1 DELWIND [] ;
-   : PDP1 [] "ДССП PDP (С ФС) <--> ДССП IBM" ON ?SPALL 3 EON MESC NOP
+   : PDP1 [] "╨Ф╨б╨б╨Я PDP (╨б ╨д╨б) <--> ╨Ф╨б╨б╨Я IBM" ON ?SPALL 3 EON MESC NOP
      '' PV1 '' TV1 '' NOP MM.I MM.J MM.LI MM.LJT MM.LJV GLBMENU [] ;
    : PV1 [i] BR 1 PDPDIR   2 CN.D-I    3 CT.D-I    4 CN.I-D    5 CT.I-D
      6 NEWDISK  7 SHDVKFIL  8 SHIBMFIL  9 SETPORT  ELSE NOP [] ;
-   : TV1 [i] BR 1 "Каталог PDP"
-                2 "Копирование двоичного  файла с PDP на IBM"
-                3 "Копирование текстового файла с PDP на IBM"
-                4 "Копирование двоичного  файла с IBM на PDP"
-                5 "Копирование текстового файла с IBM на PDP"
-                6 "Выбор дисковода на PDP-машине"
-                7 "Показ текстового файла на ДВК"
-                8 "Показ текстового файла на IBM"
-                9 "Выбор порта COMi"
+   : TV1 [i] BR 1 "╨Ъ╨░╤В╨░╨╗╨╛╨│ PDP"
+                2 "╨Ъ╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╨┤╨▓╨╛╨╕╤З╨╜╨╛╨│╨╛  ╤Д╨░╨╣╨╗╨░ ╤Б PDP ╨╜╨░ IBM"
+                3 "╨Ъ╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤В╨╡╨║╤Б╤В╨╛╨▓╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╤Б PDP ╨╜╨░ IBM"
+                4 "╨Ъ╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╨┤╨▓╨╛╨╕╤З╨╜╨╛╨│╨╛  ╤Д╨░╨╣╨╗╨░ ╤Б IBM ╨╜╨░ PDP"
+                5 "╨Ъ╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤В╨╡╨║╤Б╤В╨╛╨▓╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╤Б IBM ╨╜╨░ PDP"
+                6 "╨Т╤Л╨▒╨╛╤А ╨┤╨╕╤Б╨║╨╛╨▓╨╛╨┤╨░ ╨╜╨░ PDP-╨╝╨░╤И╨╕╨╜╨╡"
+                7 "╨Я╨╛╨║╨░╨╖ ╤В╨╡╨║╤Б╤В╨╛╨▓╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╨╜╨░ ╨Ф╨Т╨Ъ"
+                8 "╨Я╨╛╨║╨░╨╖ ╤В╨╡╨║╤Б╤В╨╛╨▓╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╨╜╨░ IBM"
+                9 "╨Т╤Л╨▒╨╛╤А ╨┐╨╛╤А╤В╨░ COMi"
            ELSE EMSTR [A,L] ;
 : SETPORT [] ;
 
-[формат блока, передаваемого по линии связи:
- <команда (1б)> <длина (2б)> <информация (Nб)> <контр.сумма (1б)> ]
+[╤Д╨╛╤А╨╝╨░╤В ╨▒╨╗╨╛╨║╨░, ╨┐╨╡╤А╨╡╨┤╨░╨▓╨░╨╡╨╝╨╛╨│╨╛ ╨┐╨╛ ╨╗╨╕╨╜╨╕╨╕ ╤Б╨▓╤П╨╖╨╕:
+ <╨║╨╛╨╝╨░╨╜╨┤╨░ (1╨▒)> <╨┤╨╗╨╕╨╜╨░ (2╨▒)> <╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╤П (N╨▒)> <╨║╨╛╨╜╤В╤А.╤Б╤Г╨╝╨╝╨░ (1╨▒)> ]
 
-[ввод блока с линии в память с адреса AIBUF]
+[╨▓╨▓╨╛╨┤ ╨▒╨╗╨╛╨║╨░ ╤Б ╨╗╨╕╨╜╨╕╨╕ ╨▓ ╨┐╨░╨╝╤П╤В╤М ╤Б ╨░╨┤╤А╨╡╤Б╨░ AIBUF]
 : INBLOCK [] 0 ! YBL 4 LOB LIB BR 1 INBL0 7 LERR ELSE RESTART [] ;
   : INBL0 [] LIB ! COMIN  LIW C ! DLIBL AIBUF E2 LIS LIB [KS]
     DLIBL 0FF & DLIBL SWB 0FF & + COMIN + AIBUF DLIBL KS 0FF &
@@ -73,7 +73,7 @@ B16
  : KS [ks0,a,l] DO KS1 D [KS] ;
    : KS1 [ks,a] C @B C3 + E3 D 1+ [ks',a+1] ;
 
-[передача блока (AOBUF,DLOBL) в линию]
+[╨┐╨╡╤А╨╡╨┤╨░╤З╨░ ╨▒╨╗╨╛╨║╨░ (AOBUF,DLOBL) ╨▓ ╨╗╨╕╨╜╨╕╤О]
 : OUTBLOCK [] RP OBL1 [] ;
   : OBL1 [] LIB  BR 1 EX  2 OBL2  4 OBL2  7 LERR ELSE RESTART [] ;
   : OBL2 [] OK! 0 ! KSUM COMOUT LOB DLOBL LOW AOBUF DLOBL LOS KSUM LOB [] ;
@@ -83,76 +83,76 @@ B16
     MM.J 3-               [=J]
     5                     [=LI]
     2+ MM.LJT MM.LJV + 3+ [=LJ] GENINF [] 5 DO BELL TRB D DELWIND ;
-    : ERRRT BR 4 "Ошибка диска! Нажмите любую клавишу." ELSE EMSTR ;
+    : ERRRT BR 4 "╨Ю╤И╨╕╨▒╨║╨░ ╨┤╨╕╤Б╨║╨░! ╨Э╨░╨╢╨╝╨╕╤В╨╡ ╨╗╤О╨▒╤Г╤О ╨║╨╗╨░╨▓╨╕╤И╤Г." ELSE EMSTR ;
 
  : WAITI '' WAITIT WINFORM [] ;
- : WAITIT BR 4 "Идет процесс обмена информацией" ELSE EMSTR ;
+ : WAITIT BR 4 "╨Ш╨┤╨╡╤В ╨┐╤А╨╛╤Ж╨╡╤Б╤Б ╨╛╨▒╨╝╨╡╨╜╨░ ╨╕╨╜╤Д╨╛╤А╨╝╨░╤Ж╨╕╨╡╨╣" ELSE EMSTR ;
 
  : WAITS '' WAITST WINFORM [] ;
- : WAITST BR 4 "Процесс считывания/сохранения файла" ELSE EMSTR ;
+ : WAITST BR 4 "╨Я╤А╨╛╤Ж╨╡╤Б╤Б ╤Б╤З╨╕╤В╤Л╨▓╨░╨╜╨╕╤П/╤Б╨╛╤Е╤А╨░╨╜╨╡╨╜╨╕╤П ╤Д╨░╨╣╨╗╨░" ELSE EMSTR ;
 
  : WINFORM [''P] ON ?SPALL 3
    MM.I 2- MM.J 3- MM.LI 2+ MM.LJT MM.LJV + 3+ GENINF [] ;
 
-[прием строки с линии и запись ее на диск]
+[╨┐╤А╨╕╨╡╨╝ ╤Б╤В╤А╨╛╨║╨╕ ╤Б ╨╗╨╕╨╜╨╕╨╕ ╨╕ ╨╖╨░╨┐╨╕╤Б╤М ╨╡╨╡ ╨╜╨░ ╨┤╨╕╤Б╨║]
 : STOD [] EON DERR ABEND @WIBUF [L] 0 ' IBUF ! AIBUF RP STOD1 D [] ;
   : STOD1 [L] INBLOCK YBL IF+ STOD2 [L'] ;
   : STOD2 [L] AIBUF DLIBL OS CH  DLIBL - [L-DLIBL] C EX0 [L'] ;
   : ABEND [] 7 LOB [] ;
   : @WIBUF 0 IBUF 1 IBUF SWB + [w] ;
 
-[чтение строки с диска и передача ее в линию;
- в буфере ввода длина строки (2б)]
+[╤З╤В╨╡╨╜╨╕╨╡ ╤Б╤В╤А╨╛╨║╨╕ ╤Б ╨┤╨╕╤Б╨║╨░ ╨╕ ╨┐╨╡╤А╨╡╨┤╨░╤З╨░ ╨╡╨╡ ╨▓ ╨╗╨╕╨╜╨╕╤О;
+ ╨▓ ╨▒╤Г╤Д╨╡╤А╨╡ ╨▓╨▓╨╛╨┤╨░ ╨┤╨╗╨╕╨╜╨░ ╤Б╤В╤А╨╛╨║╨╕ (2╨▒)]
 : STOL [] EON DERR ABEND1  0 ' OBUF ! AOBUF
   @WIBUF [L] C LBUF / IF+ 1+ [L,NBL] DO STOL1 D [] ;
   : STOL1 [L] C LBUF MIN ! DLOBL AOBUF DLOBL IS CH OUTBLOCK
     [L] DLOBL - [L'] ;
   : ABEND1 [] LIB BR  4 ABEND ELSE NOP [] ;
 
-[выбор дисковода]
-: NEWDISK [] 4 ! COMOUT [дай список дисков] 0 ! DLOBL OUTBLOCK
+[╨▓╤Л╨▒╨╛╤А ╨┤╨╕╤Б╨║╨╛╨▓╨╛╨┤╨░]
+: NEWDISK [] 4 ! COMOUT [╨┤╨░╨╣ ╤Б╨┐╨╕╤Б╨╛╨║ ╨┤╨╕╤Б╨║╨╛╨▓] 0 ! DLOBL OUTBLOCK
   0 ' IBUF ! AIBUF  INBLOCK  AIBUF DLIBL  0 ' DNAM !SB
   DLIBL -3 SHT ! NDISC NE1 [] ;
-  [меню выбора дисковода]
-  : NE1 [] "Дисководы"
+  [╨╝╨╡╨╜╤О ╨▓╤Л╨▒╨╛╤А╨░ ╨┤╨╕╤Б╨║╨╛╨▓╨╛╨┤╨░]
+  : NE1 [] "╨Ф╨╕╤Б╨║╨╛╨▓╨╛╨┤╤Л"
     '' PV2 '' TV2 '' NOP 5 0A NDISC 10 MIN 9 0 NDISC GLBMEN2 [] ;
   : TV2 [i] 1- 3 SHT ' DNAM 8 [a,8] ;
   : PV2 [i] 1- 3 SHT ' DNAM ! AOBUF 8 ! DLOBL 1 ! COMOUT OUTBLOCK
     LIB 1 = IF0 LERR DELWIND [] ;
 
-  [установка на файл A,L]
+  [╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨╜╨░ ╤Д╨░╨╣╨╗ A,L]
   : SFIL [A,L] !SOBUF 41 ! COMOUT 0 ' OBUF ! AOBUF
     OUTBLOCK LIB 1 = IF0 LERR [] ;
 
     : !SOBUF [A,L] E2 C2 0 ' OBUF !SB  ! DLOBL [] ;
     : !WOBUF [w] C 0 ! OBUF SWB 1 ! OBUF [] 2 ! DLOBL [] ;
 
-[взять длину файла]
+[╨▓╨╖╤П╤В╤М ╨┤╨╗╨╕╨╜╤Г ╤Д╨░╨╣╨╗╨░]
 : GDLFIL [] 44 WCALLFS [L] ;
-[открыть файл]
+[╨╛╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗]
 : OPFIL  []  42 CALLFS [] ;
-[открыть файл]
+[╨╛╤В╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗]
 : WOPFIL []  4A CALLFS [] ;
-[закрыть файл]
+[╨╖╨░╨║╤А╤Л╤В╤М ╤Д╨░╨╣╨╗]
 : CLFIL  []  43 CALLFS [] ;
-[обрезать файл]
+[╨╛╨▒╤А╨╡╨╖╨░╤В╤М ╤Д╨░╨╣╨╗]
 : CUTFIL []  4B CALLFS [] ;
 
-[обратиться к команде файловой системы]
+[╨╛╨▒╤А╨░╤В╨╕╤В╤М╤Б╤П ╨║ ╨║╨╛╨╝╨░╨╜╨┤╨╡ ╤Д╨░╨╣╨╗╨╛╨▓╨╛╨╣ ╤Б╨╕╤Б╤В╨╡╨╝╤Л]
 : CALLFS [kop] ! COMOUT [] 0 ! DLOBL OUTBLOCK LIB 1 = IF0 LERR [] ;
 
-[обратиттся к команде файловой системы и получить одно слово]
+[╨╛╨▒╤А╨░╤В╨╕╤В╤В╤Б╤П ╨║ ╨║╨╛╨╝╨░╨╜╨┤╨╡ ╤Д╨░╨╣╨╗╨╛╨▓╨╛╨╣ ╤Б╨╕╤Б╤В╨╡╨╝╤Л ╨╕ ╨┐╨╛╨╗╤Г╤З╨╕╤В╤М ╨╛╨┤╨╜╨╛ ╤Б╨╗╨╛╨▓╨╛]
 : WCALLFS [kop] CALLFS 0 ' IBUF ! AIBUF INBLOCK @WIBUF [W] ;
 
-[получить строку с диска длиной l и записать ее по адресу a]
+[╨┐╨╛╨╗╤Г╤З╨╕╤В╤М ╤Б╤В╤А╨╛╨║╤Г ╤Б ╨┤╨╕╤Б╨║╨░ ╨┤╨╗╨╕╨╜╨╛╨╣ l ╨╕ ╨╖╨░╨┐╨╕╤Б╨░╤В╤М ╨╡╨╡ ╨┐╨╛ ╨░╨┤╤А╨╡╤Б╤Г a]
 : GSTR [a,l] C !WOBUF 47 ! COMOUT 0 ' OBUF ! AOBUF
   OUTBLOCK [a,l] LBUF / IF+ 1+ DO GST1 D [] ;
   : GST1 [a] C ! AIBUF INBLOCK DLIBL + [a+DLIBL] ;
 
-[показ файла на экране]
+[╨┐╨╛╨║╨░╨╖ ╤Д╨░╨╣╨╗╨░ ╨╜╨░ ╤Н╨║╤А╨░╨╜╨╡]
 USE $SCRWORK
 
-[показ DVK - файла]
+[╨┐╨╛╨║╨░╨╖ DVK - ╤Д╨░╨╣╨╗╨░]
 : SHDVKFIL [] EON LERR SFERRR EON ESCR WSCOFF
   VVNOMF [a,l] C BR+ SHDFL1 DD [] ;
 : SHDFL1 [a,l] CT10 [] 0 0 19 50 SAVEWIN CLS SCON EON ESCR WSCOFF
@@ -161,20 +161,20 @@ USE $SCRWORK
 : SFERRR WSCOFF ERRR ;
 : WSCOFF SCOFF LOADWIN ;
 
-[показ IBM-файла]
+[╨┐╨╛╨║╨░╨╖ IBM-╤Д╨░╨╣╨╗╨░]
 : SHIBMFIL [] EON DERR SFERRR VVNAMF [a,l] C BR+ SHIFL1 DD [] ;
 : SHIFL1 [a,l] SAVESCR CLS 0 ' COMBUF [A,L,AT] "TYPE " C3 !SB [A,L,AT]
   C3 C3 C3 5 + !SB E3 D 5 + TEXEC [] CONT TRB D LOADWIN [] ;
 
-MLPATHNAME 5 + BYTE VCTR COMBUF [буфер для формирования команды]
-: CONT CR ."               *$ Нажмите любую клавишу для продолжения $*" ;
+MLPATHNAME 5 + BYTE VCTR COMBUF [╨▒╤Г╤Д╨╡╤А ╨┤╨╗╤П ╤Д╨╛╤А╨╝╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╨║╨╛╨╝╨░╨╜╨┤╤Л]
+: CONT CR ."               *$ ╨Э╨░╨╢╨╝╨╕╤В╨╡ ╨╗╤О╨▒╤Г╤О ╨║╨╗╨░╨▓╨╕╤И╤Г ╨┤╨╗╤П ╨┐╤А╨╛╨┤╨╛╨╗╨╢╨╡╨╜╨╕╤П $*" ;
 
-[перекодировка КОИ-8 -> АЛЬТЕРНАТИВНАЯ]
+[╨┐╨╡╤А╨╡╨║╨╛╨┤╨╕╤А╨╛╨▓╨║╨░ ╨Ъ╨Ю╨Ш-8 -> ╨Р╨Ы╨м╨в╨Х╨а╨Э╨Р╨в╨Ш╨Т╨Э╨Р╨п]
 : KOI-ALT [a,l] DO KO1 D [] ;
   : KO1 [a] C @B  0C0 0FF SEG IF+ KO2  1+ [a+1] ;
     : KO2 [a] C @B 0C0 - TALT [a,c] C2 !TB [a] ;
 
-[перекодировка АЛЬТЕРНАТИВНАЯ -> КОИ-8]
+[╨┐╨╡╤А╨╡╨║╨╛╨┤╨╕╤А╨╛╨▓╨║╨░ ╨Р╨Ы╨м╨в╨Х╨а╨Э╨Р╨в╨Ш╨Т╨Э╨Р╨п -> ╨Ъ╨Ю╨Ш-8]
 : ALT-KOI [a,l] DO ALT1 D [] ;
   : ALT1 [a] C @B [a,k] C 80 0AF SEG BR+ ALT2 ALT3 1+ [a+1] ;
     : ALT2 [a,k] 80 - TKOI1 C2 !TB [a] ;
@@ -195,32 +195,32 @@ BYTE CNST TKOI2
 210 211 212 213 198 200 195 222 219 221 233 217 216 220 192 209 ;
 
 B16
-[копирование двоичного файла с PDP на IBM]
+[╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╨┤╨▓╨╛╨╕╤З╨╜╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╤Б PDP ╨╜╨░ IBM]
 : CN.D-I [] EON LERR ERRR  EON MESC NOP  VVNOMF [a,l] C BR+ CN1 DD [] ;
   : CN1 [a,l] WAITI SFIL OPFIL GDLFIL [L] ! LFIL 0 ' PFILE LFIL GSTR CLFIL
     DELWIND VVNAMF [a,l] C BR+ CN2 DD [] ;
     : CN2 [a,l] WAITS CONNECT CH  WOPEN CH
       0 ' PFILE LFIL OS CH CLOSE CH DELWIND [] ;
 
-[ввод имени файла IBM]
+[╨▓╨▓╨╛╨┤ ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░ IBM]
 : VVNAMF [] ON ?SPALL 24 '' TV4  8 10 1 20 GENVVOD IBFNAME
   IBFNAME C IF0 DD*.* [A,L] SEL [A,L] ;
-  : TV4 [i] D "Введите имя файла IBM" [A,L] ;
+  : TV4 [i] D "╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨╕╨╝╤П ╤Д╨░╨╣╨╗╨░ IBM" [A,L] ;
   : DD*.* DD "*.DSP" ;
 
- [ввод имени файла PDP]
+ [╨▓╨▓╨╛╨┤ ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░ PDP]
  : VVNOMF [] ON ?SPALL 25 '' TV3  8 10 1 20 GENVVOD PBFNAME
    PBFNAME [a,l] C IF0 DDPDIR0 ;
-   : TV3 [i] D "Введите имя файла DVK" [A,L] ;
+   : TV3 [i] D "╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨╕╨╝╤П ╤Д╨░╨╣╨╗╨░ DVK" [A,L] ;
    : DDPDIR0 DD PDPDIR0 ;
 
 FIX 40 STRING PBFNAME
 
-[копирование текстового файла с PDP на IBM]
+[╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤В╨╡╨║╤Б╤В╨╛╨▓╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╤Б PDP ╨╜╨░ IBM]
 : CT.D-I [] EON LERR ERRR EON MESC NOP
   VVNOMF [a,l] C BR+ CT1 DD [] ;
   : CT1 [a,l] CT10 VVNAMF [a,l] C BR+ CT2 DD [] ;
-[CT10 - ввод текстового файла в буфер]
+[CT10 - ╨▓╨▓╨╛╨┤ ╤В╨╡╨║╤Б╤В╨╛╨▓╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╨▓ ╨▒╤Г╤Д╨╡╤А]
 : CT10 [a,l] WAITI
   SFIL  OPFIL GDLFIL [L] ! LFIL 0 ' PFILE LFIL GSTR CLFIL DELWIND [] ;
   : CT2 [a,l] WAITS CONNECT CH  WOPEN CH
@@ -228,7 +228,7 @@ FIX 40 STRING PBFNAME
   : CT3 [a] C @B C 0A = IF+ CT4 OB CH 1+ [a+1] ;
   : CT4 [] 0D OB CH [] ;
 
-[копирование текстового файла с IBM на DEC]
+[╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤В╨╡╨║╤Б╤В╨╛╨▓╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╤Б IBM ╨╜╨░ DEC]
 : CT.I-D [] EON LERR ERRR EON MESC NOP
   VVNAMF [a,l] C BR+ CNN2 DD [] ;
   : CNN2 [a,l] WAITS CONNECT CH  OPEN CH 0 ' PFILE  LENB CH ! LFIL
@@ -241,13 +241,13 @@ FIX 40 STRING PBFNAME
  : CNN5 [a,k] C2 !TB 1+ [a+1] ;
  : CNN6 [a,9] D #   CNN5 [a+1] ;
 
-[передача строки в линию поблочно для записи на диск]
+[╨┐╨╡╤А╨╡╨┤╨░╤З╨░ ╤Б╤В╤А╨╛╨║╨╕ ╨▓ ╨╗╨╕╨╜╨╕╤О ╨┐╨╛╨▒╨╗╨╛╤З╨╜╨╛ ╨┤╨╗╤П ╨╖╨░╨┐╨╕╤Б╨╕ ╨╜╨░ ╨┤╨╕╤Б╨║]
 : SSTR [A,L] C LBUF / IF+ 1+ [A,L,NBL] DO SSTR1 DD [] ;
   : SSTR1 [A,L] C LBUF MIN ! DLOBL C2 ! AOBUF [A,L]
     48 ! COMOUT OUTBLOCK  LIB 1 = IF0 LERR
     [A,L] DLOBL - [A,L'] E2 DLOBL + E2 [A',L'] ;
 
-[копирование двоичного файла с IBM на DEC]
+[╨║╨╛╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╨┤╨▓╨╛╨╕╤З╨╜╨╛╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╤Б IBM ╨╜╨░ DEC]
 : CN.I-D [] S( XORD YORD ) EON MESC NOP EON LERR ERRR
   ON ?SPALL 2 2 ! YORD 2 ! XORD "*.*" SEL [a,l] C BR+ CTN2 DD [] ;
   : CTN2 [a,l] WAITS CONNECT CH  OPEN CH
@@ -263,59 +263,59 @@ FIX 40 STRING PBFNAME
 B10
 : PDPDIR PDPDIR0 DD [] ;
 
-[PDPDIR0 - получение списка имен файлов на ДВК]
+[PDPDIR0 - ╨┐╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╤Б╨┐╨╕╤Б╨║╨░ ╨╕╨╝╨╡╨╜ ╤Д╨░╨╣╨╗╨╛╨▓ ╨╜╨░ ╨Ф╨Т╨Ъ]
 : PDPDIR0 [] EON NOF NOP 0 CALLFS !0 QFILES MFS0 MFS1 MFS2 MFS3 [A,L] ;
 
 [**********************************************]
 
-[MFS0 - поиск первого вхождения, если нет - NOF]
+[MFS0 - ╨┐╨╛╨╕╤Б╨║ ╨┐╨╡╤А╨▓╨╛╨│╨╛ ╨▓╤Е╨╛╨╢╨┤╨╡╨╜╨╕╤П, ╨╡╤Б╨╗╨╕ ╨╜╨╡╤В - NOF]
 : MFS0 [] 0 ' IBUF ! AIBUF INBLOCK DLIBL IF0 NOF [] ;
 
-[MFS1 - просмотр директория, заполнение данных]
+[MFS1 - ╨┐╤А╨╛╤Б╨╝╨╛╤В╤А ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤П, ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ ╨┤╨░╨╜╨╜╤Л╤Е]
 : MFS1 [] MQFILES DO MFS11 [] ;
 
-[MFS2 - сортировка имен файлов методом пузырька]
+[MFS2 - ╤Б╨╛╤А╤В╨╕╤А╨╛╨▓╨║╨░ ╨╕╨╝╨╡╨╜ ╤Д╨░╨╣╨╗╨╛╨▓ ╨╝╨╡╤В╨╛╨┤╨╛╨╝ ╨┐╤Г╨╖╤Л╤А╤М╨║╨░]
 : MFS2 [] QFILES C 1- DO MFS20 D [] ;
 
-[MFS3 - выдача меню ]
-: MFS3 [] " Выберите файл" '' MFS3P '' MFS3T 0 14 27 10 L1PFILE 10 + 0 QFILES
+[MFS3 - ╨▓╤Л╨┤╨░╤З╨░ ╨╝╨╡╨╜╤О ]
+: MFS3 [] " ╨Т╤Л╨▒╨╡╤А╨╕╤В╨╡ ╤Д╨░╨╣╨╗" '' MFS3P '' MFS3T 0 14 27 10 L1PFILE 10 + 0 QFILES
   GLBMEN2 [] NOMFILE AFNAME [Aname] SP C2 L1PFILE SRCHB [Aname,Lname] ;
 
 [**********************************************]
 B10
-[MFS11 - заполнение массива с файловыми именами]
-: MFS11 [] [заполненный DTA]  QFILES L1PFILE * [index]
+[MFS11 - ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ ╨╝╨░╤Б╤Б╨╕╨▓╨░ ╤Б ╤Д╨░╨╣╨╗╨╛╨▓╤Л╨╝╨╕ ╨╕╨╝╨╡╨╜╨░╨╝╨╕]
+: MFS11 [] [╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╜╤Л╨╣ DTA]  QFILES L1PFILE * [index]
   !1+ QFILES [] QFILES ! FLSPTR [] MFS2NAME [] SRCHNXT [] ;
 
-[MFS2NAME - пересылка имени]
+[MFS2NAME - ╨┐╨╡╤А╨╡╤Б╤Л╨╗╨║╨░ ╨╕╨╝╨╡╨╜╨╕]
 : MFS2NAME [] SP QFILES AFNAME L1PFILE !!!MB []
-  AIBUF [Адрес имени] DLIBL [A,L] QFILES AFNAME !SB [] ;
+  AIBUF [╨Р╨┤╤А╨╡╤Б ╨╕╨╝╨╡╨╜╨╕] DLIBL [A,L] QFILES AFNAME !SB [] ;
 
 B16
-[SRCHNXT - поиск следующего входа и заполнение DTA, выход если нет]
+[SRCHNXT - ╨┐╨╛╨╕╤Б╨║ ╤Б╨╗╨╡╨┤╤Г╤О╤Й╨╡╨│╨╛ ╨▓╤Е╨╛╨┤╨░ ╨╕ ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ DTA, ╨▓╤Л╤Е╨╛╨┤ ╨╡╤Б╨╗╨╕ ╨╜╨╡╤В]
 : SRCHNXT [] 0 ' IBUF ! AIBUF INBLOCK DLIBL EX0 [] ;
 
 [**********************************************]
 B10
-[MFS20 - булыжник тонет (последнее по алфавиту имя) на глубину fdeep]
+[MFS20 - ╨▒╤Г╨╗╤Л╨╢╨╜╨╕╨║ ╤В╨╛╨╜╨╡╤В (╨┐╨╛╤Б╨╗╨╡╨┤╨╜╨╡╨╡ ╨┐╨╛ ╨░╨╗╤Д╨░╨▓╨╕╤В╤Г ╨╕╨╝╤П) ╨╜╨░ ╨│╨╗╤Г╨▒╨╕╨╜╤Г fdeep]
 : MFS20 [fdeep] 1 C2 1- DO MFS21 D 1- [fdeep-1] ;
 
-[MFS21 - упорядочение двух имен с глубины cdeep и cdeep-1]
+[MFS21 - ╤Г╨┐╨╛╤А╤П╨┤╨╛╤З╨╡╨╜╨╕╨╡ ╨┤╨▓╤Г╤Е ╨╕╨╝╨╡╨╜ ╤Б ╨│╨╗╤Г╨▒╨╕╨╜╤Л cdeep ╨╕ cdeep-1]
 : MFS21 [cdeep] 1+ [cdeep+1] CMP-1 IF0 XCHG-1 [cdeep+1] ;
 
-[CMP-1 - сравнение i-го и i-1-го имени, 1-упорядочены, 0-иначе]
+[CMP-1 - ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╨╡ i-╨│╨╛ ╨╕ i-1-╨│╨╛ ╨╕╨╝╨╡╨╜╨╕, 1-╤Г╨┐╨╛╤А╤П╨┤╨╛╤З╨╡╨╜╤Л, 0-╨╕╨╜╨░╤З╨╡]
 : CMP-1 [i] 1 C2 AFNAME C3 1- AFNAME [i,1,Ai,Ai-1]
   L1PFILE DO CMP12 DD [i,1/0] ;
 : CMP12 [1,Ai,Ai-1] C @B #  = EX+
   C2 @B C2 @B - BRS CMP13 NOP EX E2 1+ E2 1+ [,,] ;
 : CMP13 T0 E3 [0,*,*] EX ;
 
-[XCHG-1 - обмен i-го и i-1-го имени]
+[XCHG-1 - ╨╛╨▒╨╝╨╡╨╜ i-╨│╨╛ ╨╕ i-1-╨│╨╛ ╨╕╨╝╨╡╨╜╨╕]
 : XCHG-1 [i] C FLSPTR C2 1- FLSPTR C3 ! FLSPTR C2 1- ! FLSPTR [i] ;
 
 [**********************************************]
 B10
-[MFS3P - выбрано i-е имя файла]
+[MFS3P - ╨▓╤Л╨▒╤А╨░╨╜╨╛ i-╨╡ ╨╕╨╝╤П ╤Д╨░╨╣╨╗╨░]
 : MFS3P [i] ! NOMFILE DELWIND [] ;
 
 [ WORD VAR NOMFILE ]
@@ -323,27 +323,27 @@ B10
   NOMFILE AFNAME L1PFILE [A,L,Aname,Lname] C4 4+ !SB [A,L] ;
 
 [**********************************************]
-[AFNAME - получение адреса имени файла в FLSNAME для файла i]
+[AFNAME - ╨┐╨╛╨╗╤Г╤З╨╡╨╜╨╕╨╡ ╨░╨┤╤А╨╡╤Б╨░ ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░ ╨▓ FLSNAME ╨┤╨╗╤П ╤Д╨░╨╣╨╗╨░ i]
 : AFNAME [i] FLSPTR ' FLSNAME [A] ;
 [**********************************************]
 
-B10 [ДАННЫЕ]
-[MQFILES - максимально допустимое число файлов]
+B10 [╨Ф╨Р╨Э╨Э╨л╨Х]
+[MQFILES - ╨╝╨░╨║╤Б╨╕╨╝╨░╨╗╤М╨╜╨╛ ╨┤╨╛╨┐╤Г╤Б╤В╨╕╨╝╨╛╨╡ ╤З╨╕╤Б╨╗╨╛ ╤Д╨░╨╣╨╗╨╛╨▓]
 200 VALUE MQFILES
 
-[QFILES - текущее число обрабатываемых или найденных имен файлов]
+[QFILES - ╤В╨╡╨║╤Г╤Й╨╡╨╡ ╤З╨╕╤Б╨╗╨╛ ╨╛╨▒╤А╨░╨▒╨░╤В╤Л╨▓╨░╨╡╨╝╤Л╤Е ╨╕╨╗╨╕ ╨╜╨░╨╣╨┤╨╡╨╜╨╜╤Л╤Е ╨╕╨╝╨╡╨╜ ╤Д╨░╨╣╨╗╨╛╨▓]
 WORD VAR QFILES
 
-[L1PFILE - число байтов, отводимое под один файл]
-[7 - длина имени]
-7 VALUE L1PFILE [только имя] ;
+[L1PFILE - ╤З╨╕╤Б╨╗╨╛ ╨▒╨░╨╣╤В╨╛╨▓, ╨╛╤В╨▓╨╛╨┤╨╕╨╝╨╛╨╡ ╨┐╨╛╨┤ ╨╛╨┤╨╕╨╜ ╤Д╨░╨╣╨╗]
+[7 - ╨┤╨╗╨╕╨╜╨░ ╨╕╨╝╨╡╨╜╨╕]
+7 VALUE L1PFILE [╤В╨╛╨╗╤М╨║╨╛ ╨╕╨╝╤П] ;
 
-[FLSNAME - вектор, где хранятся имена файлов, всего QFILES < MQFILES,
-           на каждый файл отводится L1PFILE (от 0)]
+[FLSNAME - ╨▓╨╡╨║╤В╨╛╤А, ╨│╨┤╨╡ ╤Е╤А╨░╨╜╤П╤В╤Б╤П ╨╕╨╝╨╡╨╜╨░ ╤Д╨░╨╣╨╗╨╛╨▓, ╨▓╤Б╨╡╨│╨╛ QFILES < MQFILES,
+           ╨╜╨░ ╨║╨░╨╢╨┤╤Л╨╣ ╤Д╨░╨╣╨╗ ╨╛╤В╨▓╨╛╨┤╨╕╤В╤Б╤П L1PFILE (╨╛╤В 0)]
 MQFILES L1PFILE * BYTE 1- VCTR FLSNAME
 
-[FLSPTR - вектор, где хранятся указатели на FLSNAME -
-          используетс и при сортировке и при доступе (1 .. QFILES)]
+[FLSPTR - ╨▓╨╡╨║╤В╨╛╤А, ╨│╨┤╨╡ ╤Е╤А╨░╨╜╤П╤В╤Б╤П ╤Г╨║╨░╨╖╨░╤В╨╡╨╗╨╕ ╨╜╨░ FLSNAME -
+          ╨╕╤Б╨┐╨╛╨╗╤М╨╖╤Г╨╡╤В╤Б ╨╕ ╨┐╤А╨╕ ╤Б╨╛╤А╤В╨╕╤А╨╛╨▓╨║╨╡ ╨╕ ╨┐╤А╨╕ ╨┤╨╛╤Б╤В╤Г╨┐╨╡ (1 .. QFILES)]
 WORD MQFILES VCTR FLSPTR
 %FI
 

@@ -1,23 +1,23 @@
-" áè¨p¥­¨ï p¥¤ ªâ®p .        ‚¥àá¨ï 1.2. 20 ®ï¡àï  1990."
+"Ð Ð°ÑÑˆÐ¸pÐµÐ½Ð¸Ñ pÐµÐ´Ð°ÐºÑ‚Ð¾pÐ°.        Ð’ÐµÑ€ÑÐ¸Ñ 1.2. 20 ÐÐ¾ÑÐ±Ñ€Ñ  1990."
 B10 CR 12 ! SCOLOR TOS''
 PROGRAM $EDEXT USE SYSTEM USE $EDIT
 B8
 [ '' NOP   '' ATT   '' POINT '' COPY   '' CTRLD '' EX    '' CTRLF '' GET
   0        1 A      2 B      3 C       4 D      5 E      6 F      7 G
 
- '' ERS    '' ƒ’    '' DIV   '' STS    '' NSTR  '' .BK   '' NOP   '' NOP
+ '' ERS    '' Ð“Ð¢    '' DIV   '' STS    '' NSTR  '' .BK   '' NOP   '' NOP
  10 H      11 I     12 J     13 K      14 L     15 M     16 N     17 O
 
- '' ’€    '' TXT   '' DL    '' IC     '' DC    '' CTRLU '' IL    '' NOP
+ '' Ð¢ÐÐ‘    '' TXT   '' DL    '' IC     '' DC    '' CTRLU '' IL    '' NOP
  20 P      21 Q     22 R     23 S      24 T     25 U     26 V     27 W
 
- '' ’€    '' !->   '' <-    '' AR2    '' UP    '' DOWN  '' „Œ  '' NOPOIN
+ '' Ð¢ÐÐ‘    '' !->   '' <-    '' AR2    '' UP    '' DOWN  '' ÐŸÐ Ð”Ðœ  '' NOPOIN
  30 X      31 Y     32 Z     33 {      34 \     35 }     36 ^     37 _
 
  '' WINDOW '' TSTR  '' LDATE '' SK+    '' MARKS '' DATE  '' EXR   '' L1
  40        41       42       43        44       45       46       47
 
- '' AU+    '' .BSTR '' TOLMOV '' ZAPIS '' EDIT  '' REST  '' BEG   '' .‘
+ '' AU+    '' .BSTR '' TOLMOV '' ZAPIS '' EDIT  '' REST  '' BEG   '' .ÐŸÐ¡
  50        51       52        53       54       55       56       57
 
  '' ST3    '' RENSC '' TOPMOV '' SCHFL '' ZB    '' IFL
@@ -59,7 +59,7 @@ B8
 :: : ?BK 12 = ;
 :: : SPE #  TOB'' ;
 
-[”®à¬ â¨à®¢ ­¨¥]
+[Ð¤Ð¾Ñ€Ð¼Ð°Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ]
 VAR A
 :: FIX VAR NDLS 113 ! NDLS
 : ER [] MARKS [L,H,1/0] BR+ ER1 DD [] ;
@@ -67,7 +67,7 @@ VAR A
   C2 - 1+ C2 [LINE] C ST3 5 - ST3 HS + 5 + SEG BR+ TOLMOV RENSC
   [L,SK] .BSTR ER2 [L] TSTR 1+ E2 WINDOW L1 TOLMOV [] ;
 
-[Žá­®¢­®© æ¨ª«]
+[ÐžÑÐ½Ð¾Ð²Ð½Ð¾Ð¹ Ñ†Ð¸ÐºÐ»]
 : ER2 [SK] AF ! A RP OSTR D [] ;
   : OSTR [SK] A @B BR 12 OS1 40 OS2 #- OS3 ELSE OS4 [SK'] ;
 
@@ -95,84 +95,84 @@ VAR A
 : A+ !1+ A ;
 : DLS-1 NDLS 1- ;
 
-[à®æ¥¤ãà  ¯¥à¥­®á  á«®¢]
-VAR NSL [ ç «®]
-VAR KSL [Š®­¥æ]
-VAR LGL [‹¥¢ ï £« á­ ï,  ¤à. ¨«¨ 0]
-VAR RGL [à ¢ ï £« á­ ï,  ¤à. ¨«¨ 0]
-VAR DLINA [€¤à¥á ¯®á«. ¢®§¬. «¨â¥àë ¢ áâà®ª¥]
-VAR MESTOP [Œ¥áâ® ¯¥à.,  ¤à. ¯®á«.¡ãª¢ë]
+[ÐŸÑ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ð° Ð¿ÐµÑ€ÐµÐ½Ð¾ÑÐ° ÑÐ»Ð¾Ð²]
+VAR NSL [ÐÐ°Ñ‡Ð°Ð»Ð¾]
+VAR KSL [ÐšÐ¾Ð½ÐµÑ†]
+VAR LGL [Ð›ÐµÐ²Ð°Ñ Ð³Ð»Ð°ÑÐ½Ð°Ñ, Ð°Ð´Ñ€. Ð¸Ð»Ð¸ 0]
+VAR RGL [ÐŸÑ€Ð°Ð²Ð°Ñ Ð³Ð»Ð°ÑÐ½Ð°Ñ, Ð°Ð´Ñ€. Ð¸Ð»Ð¸ 0]
+VAR DLINA [ÐÐ´Ñ€ÐµÑ Ð¿Ð¾ÑÐ». Ð²Ð¾Ð·Ð¼. Ð»Ð¸Ñ‚ÐµÑ€Ñ‹ Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ]
+VAR MESTOP [ÐœÐµÑÑ‚Ð¾ Ð¿ÐµÑ€., Ð°Ð´Ñ€. Ð¿Ð¾ÑÐ».Ð±ÑƒÐºÐ²Ñ‹]
 
-[‚å®¤:  ¤à. ¯®á«. ¢®§¬®¦­®©
- ¡ãª¢ë ¢ áâà®ª¥ (¤«¨­ -1) ¢ áâ¥ª¥,  ¤à. ¯¥à¢®© ¨ ¯®á«.
- ¡ãª¢ á«®¢  ¢ ¯¥à¥¬¥­­ëå NSL ¨ KSL]
+[Ð’Ñ…Ð¾Ð´: Ð°Ð´Ñ€. Ð¿Ð¾ÑÐ». Ð²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾Ð¹
+ Ð±ÑƒÐºÐ²Ñ‹ Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ (Ð´Ð»Ð¸Ð½Ð°-1) Ð² ÑÑ‚ÐµÐºÐµ, Ð°Ð´Ñ€. Ð¿ÐµÑ€Ð²Ð¾Ð¹ Ð¸ Ð¿Ð¾ÑÐ».
+ Ð±ÑƒÐºÐ² ÑÐ»Ð¾Ð²Ð° Ð² Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ… NSL Ð¸ KSL]
 : PER [TEK] C ! DLINA PERENOS [] ;
 : PERENOS [TEK] C RP ISKRGL D [TEK] RP ISKLGL D []
   LGL BR0 NETPER PEREN1 [] ;
 
-[à ¢ ï £« á­ ï]
+[ÐŸÑ€Ð°Ð²Ð°Ñ Ð³Ð»Ð°ÑÐ½Ð°Ñ]
 : ISKRGL [A] 1+ C @B [A+1B] C ?SP IF+ IRGL1
   GLAS? [A+1,1/0] IF+ IRGL2 [A+1] ;
-[Š®­ç¨«®áì]
+[ÐšÐ¾Ð½Ñ‡Ð¸Ð»Ð¾ÑÑŒ]
 : IRGL1 [A,40] D !0 RGL EX [A] ;
-[…áâì £« á­ ï]
+[Ð•ÑÑ‚ÑŒ Ð³Ð»Ð°ÑÐ½Ð°Ñ]
 : IRGL2 [A] C ! RGL EX [A] ;
 
-[‹¥¢ ï £« á­ ï]
+[Ð›ÐµÐ²Ð°Ñ Ð³Ð»Ð°ÑÐ½Ð°Ñ]
 : ISKLGL [A] C @B [A,B] C ?SP IF+ ILGL1
   GLAS? [A,1/0] IF+ ILGL2 1- [A-1] ;
-[Š®­ç¨«®áì]
+[ÐšÐ¾Ð½Ñ‡Ð¸Ð»Ð¾ÑÑŒ]
 : ILGL1 [A,40] D !0 LGL EX [A] ;
-[…áâì £« á­ ï]
+[Ð•ÑÑ‚ÑŒ Ð³Ð»Ð°ÑÐ½Ð°Ñ]
 : ILGL2 [A] C ! LGL EX [A] ;
 
-[¥ ¯¥à¥­®á¨âáï]
+[ÐÐµ Ð¿ÐµÑ€ÐµÐ½Ð¾ÑÐ¸Ñ‚ÑÑ]
 : NETPER [] !0 MESTOP [] ;
 
-[‹¥¢ ï £« á­ ï ¥áâì, ¤ «ìè¥]
+[Ð›ÐµÐ²Ð°Ñ Ð³Ð»Ð°ÑÐ½Ð°Ñ ÐµÑÑ‚ÑŒ, Ð´Ð°Ð»ÑŒÑˆÐµ]
 : PEREN1 [] RGL BR0 PEREN11 PEREN2 [] ;
-[…áâì ®¡¥ £« á­ë¥]
+[Ð•ÑÑ‚ÑŒ Ð¾Ð±Ðµ Ð³Ð»Ð°ÑÐ½Ñ‹Ðµ]
 : PEREN2 [] RGL LGL - [RGL-LGL] BR 1 PER0 2 PER1 ELSE PER2 [] ;
-[¥à¥­®á ­¥¢®§¬®¦¥­, «¥¢¥¥]
+[ÐŸÐµÑ€ÐµÐ½Ð¾Ñ Ð½ÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶ÐµÐ½, Ð»ÐµÐ²ÐµÐµ]
 : PEREN11 [] LGL 1- PERENOS [] ;
 
-[ƒ« á­ë¥ àï¤®¬]
+[Ð“Ð»Ð°ÑÐ½Ñ‹Ðµ Ñ€ÑÐ´Ð¾Ð¼]
 : PER0 [] LGL NSL = NOT RGL KSL = NOT & LGL 1- @B SPEC? NOT &
   RGL 1+ @B SPEC? NOT & [1/0] BR+ PER01 PEREN11 [] ;
-[¥à¥­®á ¢®§¬®¦¥­]
+[ÐŸÐµÑ€ÐµÐ½Ð¾Ñ Ð²Ð¾Ð·Ð¼Ð¾Ð¶ÐµÐ½]
 : PER01 [] LGL ! MESTOP [] ;
 
-[ƒ« á­ë¥ ç¥à¥§ 1 ¡ãª¢ã]
-: PER1 [] LGL 1+ @B #© = BR+ PER11 PER12 [] ;
-[¥à¥­®á ¯®á«¥ ©]
+[Ð“Ð»Ð°ÑÐ½Ñ‹Ðµ Ñ‡ÐµÑ€ÐµÐ· 1 Ð±ÑƒÐºÐ²Ñƒ]
+: PER1 [] LGL 1+ @B #Ð¹ = BR+ PER11 PER12 [] ;
+[ÐŸÐµÑ€ÐµÐ½Ð¾Ñ Ð¿Ð¾ÑÐ»Ðµ Ð¹]
 : PER11 [] LGL 1+ ! MESTOP MESTOP DLINA > IF+ PEREN11 [] ;
-[Œ¥¦¤ã £« á­ë¬¨ á®£« á­ ï]
+[ÐœÐµÐ¶Ð´Ñƒ Ð³Ð»Ð°ÑÐ½Ñ‹Ð¼Ð¸ ÑÐ¾Ð³Ð»Ð°ÑÐ½Ð°Ñ]
 : PER12 [] LGL NSL = NOT LGL 1- @B SPEC? NOT &
   [1/0] BR+ PER01 PEREN11 [] ;
 
-[Œ¥¦¤ã £« á­ë¬¨ 2 ¨«¨ ¡®«ìè¥ ¡ãª¢]
+[ÐœÐµÐ¶Ð´Ñƒ Ð³Ð»Ð°ÑÐ½Ñ‹Ð¼Ð¸ 2 Ð¸Ð»Ð¸ Ð±Ð¾Ð»ÑŒÑˆÐµ Ð±ÑƒÐºÐ²]
 : PER2 [] 0 LGL RGL LGL - 1- DO PER20 D [1/0] BR+ PEREN11 PER22 [] ;
-[…áâì «¨ ¬¥¦¤ã £« á­ë¬¨ SPEC?]
+[Ð•ÑÑ‚ÑŒ Ð»Ð¸ Ð¼ÐµÐ¶Ð´Ñƒ Ð³Ð»Ð°ÑÐ½Ñ‹Ð¼Ð¸ SPEC?]
 : PER20 [0,A] 1+ C @B SPEC? IF+ PER201 [1/0,A+1] ;
 : PER201 [0,A] E2 T1 E2 EX [1,A] ;
-[€­ «¨§ ¯¥à¥­®á  ¢®§¬®¦¥­]
-: PER22 [] LGL 2+ @B C #ê = E2 #ì = &0 BR+ 2 1 LGL + ! MESTOP
+[ÐÐ½Ð°Ð»Ð¸Ð· Ð¿ÐµÑ€ÐµÐ½Ð¾ÑÐ° Ð²Ð¾Ð·Ð¼Ð¾Ð¶ÐµÐ½]
+: PER22 [] LGL 2+ @B C #ÑŠ = E2 #ÑŒ = &0 BR+ 2 1 LGL + ! MESTOP
   MESTOP DLINA > IF+ PEREN11 [] ;
 
-[à®¢¥àª  ­  SPEC?]
+[ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° SPEC?]
 : SPEC? [B] BR #- 1  #/ 1  #_ 1  #, 1  #. 1  #! 1  #? 1  #; 1  #" 1
   #' 1  #( 1  #) 1  #[ 1  #] 1  #: 1  #> 1  #< 1
   ELSE 0 [1/0] ;
-[à®¢¥àª  ­  £« á­ãî]
-: GLAS? [B] BR  #  1  #¥ 1  #¨ 1  #® 1  #ã 1  #í 1  #ë 1  #î 1  #ï 1
-  #€ 1  #… 1  #ˆ 1  #Ž 1  #“ 1  # 1  #› 1  #ž 1  #Ÿ 1
+[ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð³Ð»Ð°ÑÐ½ÑƒÑŽ]
+: GLAS? [B] BR  #Ð° 1  #Ðµ 1  #Ð¸ 1  #Ð¾ 1  #Ñƒ 1  #Ñ 1  #Ñ‹ 1  #ÑŽ 1  #Ñ 1
+  #Ð 1  #Ð• 1  #Ð˜ 1  #Ðž 1  #Ð£ 1  #Ð­ 1  #Ð« 1  #Ð® 1  #Ð¯ 1
   ELSE 0 [1/0] ;
 
 : @A AF @B ;
 : @U UN 1- @B ;
 : AU1+ AF @B UN !TB !1+ AF !1+ UN ;
 
-[AA - ¢áâ ¢«ï¥âáï ¢ ZAPIS, ®¡à ¡®âª  á¨¬¢®«  ¢ ª®­æ¥ áâà®ª¨]
+[AA - Ð²ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ÑÑ Ð² ZAPIS, Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° ÑÐ¸Ð¼Ð²Ð¾Ð»Ð° Ð² ÐºÐ¾Ð½Ñ†Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸]
 : AA [B] C BR #  MBK ELSE PEREP TAB ;
 : MBK D .BK IL ;
 ' EL NUSE
@@ -182,11 +182,11 @@ VAR MESTOP [Œ¥áâ® ¯¥à.,  ¤à. ¯®á«.¡ãª¢ë]
 : PEREP1 <- @A ?SP @A ?BK &0 EX+ BEG EX0 ;
 : DBELL D BELL ;
 
-[AA1 -¢ëà ¢­¨¢ ­¨¥ ¯® ¯à ¢®¬ã ªà î]
+[AA1 -Ð²Ñ‹Ñ€Ð°Ð²Ð½Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾ Ð¿Ñ€Ð°Ð²Ð¾Ð¼Ñƒ ÐºÑ€Ð°ÑŽ]
 : AA1 [] .BW REST NDLS > BR+ BELL AAA1 .BK [] ;
 : AAA1 [] NDLS REST - C TAB RP EXTENT DD [] ;
 : EXTENT [J,I] C EX0 BEG IF0 TAB? <- @A ?SP @U ?SP NOT &
-  IF+ IC2 [J,I Ž‚.] ;
+  IF+ IC2 [J,I ÐÐžÐ’.] ;
 : IC2 IC 1- ;
 : TAB? [J,I] C2 C2 = EX+ E2D C TAB [I,I] ;
 
@@ -207,18 +207,18 @@ COPYW E E'
 : TBIG1 RUSCAP !1 BIGL ;
 
 BYTE CNST CAP
-#€ # #‚ #ƒ #„ #… #† #‡ #ˆ #‰ #Š #‹ #Œ # #Ž #
-# #‘ #’ #“ #” #• #– #— #˜ #™ #š #› #œ # #ž #Ÿ ;
+#Ð #Ð‘ #Ð’ #Ð“ #Ð” #Ð• #Ð– #Ð— #Ð˜ #Ð™ #Ðš #Ð› #Ðœ #Ð #Ðž #ÐŸ
+#Ð  #Ð¡ #Ð¢ #Ð£ #Ð¤ #Ð¥ #Ð¦ #Ð§ #Ð¨ #Ð© #Ðª #Ð« #Ð¬ #Ð­ #Ð® #Ð¯ ;
 
 BYTE CNST LIT
-#  #¡ #¢ #£ #¤ #¥ #¦ #§ #¨ #© #ª #« #¬ #­ #® #¯
-#à #á #â #ã #ä #å #æ #ç #è #é #ê #ë #ì #í #î #ï ;
+#Ð° #Ð± #Ð² #Ð³ #Ð´ #Ðµ #Ð¶ #Ð· #Ð¸ #Ð¹ #Ðº #Ð» #Ð¼ #Ð½ #Ð¾ #Ð¿
+#Ñ€ #Ñ #Ñ‚ #Ñƒ #Ñ„ #Ñ… #Ñ† #Ñ‡ #Ñˆ #Ñ‰ #ÑŠ #Ñ‹ #ÑŒ #Ñ #ÑŽ #Ñ ;
 
 : TOCAP LATCAP RUSCAP ;
 : RUSCAP [B] C 0 ' LIT 40 SRCHB [B,I] C 40 < BR+ CAP E2 E2D [B'] ;
 : LATCAP [B] C #a #z SEG BR+ 40 0 - [B'] ;
 
-[ áè¨äà®¢ª  á®ªà é¥­¨©]
+[Ð Ð°ÑÑˆÐ¸Ñ„Ñ€Ð¾Ð²ÐºÐ° ÑÐ¾ÐºÑ€Ð°Ñ‰ÐµÐ½Ð¸Ð¹]
 : K20 [] VVD FIND BR0 D K21 [] ;
 : K21 [AZ] 'BA @ [BA] EXEC [A,DL] C2 @B #_ = IF+ BAC DO ZAS [] D ;
 : BAC <- DC E2 1+ E2 1- ;
@@ -226,7 +226,7 @@ BYTE CNST LIT
 : ZAS1 [*] D '' TRB RP EDITT D [] ;
 : EDITT EDIT @U ?SP EX+ ;
 
-[à¨¥¬ á®ªà é¥­¨ï]
+[ÐŸÑ€Ð¸ÐµÐ¼ ÑÐ¾ÐºÑ€Ð°Ñ‰ÐµÐ½Ð¸Ñ]
 : VVD [] 40 UN 1- BEG NEG SRCHB NEG [SK]
   UN C2 - C2 TWE [SK]
   SWIM PRS DO VVD1 D
@@ -242,14 +242,14 @@ B16
 : .W RCP T0 SCP ;
 : .BW .W TSTR WINDOW ;
 
-[–¥­âà¨à®¢ ­¨¥ â¥ªáâ  ¢ áâà®ª¥]
+[Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ‚ÐµÐºÑÑ‚Ð° Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ]
 : CENTR .PC UP AF [ADR] NOSP [DL] DO DC NDLS REST - SHR
   C BB > IF+ T0 DO IC .PC ;
   : NOSP [A] 0 RP NOSP1 E2D [I] ;
     : NOSP1 [A,I] C C3 + @B ?SP EX0 1+ [A,I+1] ;
 
 : STRLEN [] S( BASE@ ) B10 .BW .STS 0C ! SCOLOR
-  "„«¨­  áâp®ª¨ (‚¢®¤ - " TOS''
+  "Ð”Ð»Ð¸Ð½Ð° ÑÑ‚pÐ¾ÐºÐ¸ (Ð’Ð²Ð¾Ð´ - " TOS''
   NDLS 2 TON ") - " TOS'' 2 [TEXTCOLOR] ! SCOLOR
   ON NERR NOP TIN
   C BR0 NDLS C E2D 1 MAX DLS MIN ! NDLS .BW .STS L1 [] ;
@@ -277,39 +277,39 @@ VAR USLOVIE
         #T 142
         #X 141
         #H 101
-        #€ 32
-        # 32
-        #‚ 32
-        #ƒ 32
-        #„ 32
-        #… 32
-        #† 32
-        #‡ 32
-        #ˆ 32
-        #‰ 32
-        #Š 32
-        #‹ 32
-        #Œ 32
-        # 32
-        #Ž 32
-        # 32
+        #Ð 32
+        #Ð‘ 32
+        #Ð’ 32
+        #Ð“ 32
+        #Ð” 32
+        #Ð• 32
+        #Ð– 32
+        #Ð— 32
+        #Ð˜ 32
+        #Ð™ 32
+        #Ðš 32
+        #Ð› 32
+        #Ðœ 32
+        #Ð 32
+        #Ðž 32
+        #ÐŸ 32
 
-        # 80
-        #‘ 80
-        #’ 80
-        #“ 80
-        #” 80
-        #• 80
-        #– 80
-        #— 80
-        #˜ 80
-        #™ 80
-        #š 80
-        #› 80
-        #œ 80
-        # 80
-        #ž 80
-        #Ÿ 80
+        #Ð  80
+        #Ð¡ 80
+        #Ð¢ 80
+        #Ð£ 80
+        #Ð¤ 80
+        #Ð¥ 80
+        #Ð¦ 80
+        #Ð§ 80
+        #Ð¨ 80
+        #Ð© 80
+        #Ðª 80
+        #Ð« 80
+        #Ð¬ 80
+        #Ð­ 80
+        #Ð® 80
+        #Ð¯ 80
         ELSE 0 ;
       : IZMSDV + [B] C AF !TB TOB AU1+ [] ;
 
@@ -332,41 +332,41 @@ FIX BYTE VAR NEWPOSLIN 0 ! NEWPOSLIN
 
 '' STRZAMEN 68 [aF6]  C ' EXR NUSE ! EXR [+]
 
-[”®à¬¨à®¢ ­¨¥ ä ©«  á ¯®¬®éìî]
-[ADDEHELP - ¤®¡ ¢¨âì â¥ªáâ ®â¬¥ç¥­­ë© ¬ pª¥p ¬¨ ª ª ­®¢ãî á¥ªæ¨î ¢ ä ©« ¯®¬®é¨]
-       CHANNEL   CH0    [Š ­ « ¤«ï á¢ï§¨ á ä ©«®¬ ¯®¬®é¨]
-       WORD VAR  N      [®¬¥à á¥ªæ¨¨]
-       WORD VAR  HIGH   [®¬¥p áâp®ª¨ ¢¥på­¥£® ¬ pª¥p ]
-       WORD VAR  QSTRS  [‘ç¥âç¨ª áâà®ª]
-       BYTE VAR  SBPTR  [“ª § â¥«ì ¯® ¢¥ªâ®pã SBUF]
-       WORD VAR  NSTROK [‘ª®«ìª® áâp®ª ¯¥p¥­¥áâ¨ ¢ ä ©«]
-       WORD VAR  LITTLE [®¬¥p áâp®ª¨ ­¨¦­¥£® ¬ pª¥p ]
-       LONG VAR  OLDPOS [®§¨æ¨ï ¢ ä ©«¥ ¯®¬®é¨, ªã¤  ­ ¤® ¯¥p¥¯¨á âì
-                         ç¨á«® áâà®ª ¢ á¥ªæ¨¨]
-   FIX BYTE VAR  UDAL?  [¥p¥¬¥­­ ï ä« £ - ã¤ «ïâì â¥ªáâ ¯®á«¥ ¯¥p¥­¥á¥­¬ï
-                         ¢ ä ©« ¯®¬®é¨ (1) ¨«¨ ­¥â (0)]
-    79 BYTE VCTR SBUF   [ãä¥p ¤«ï ¢ë¢®¤¨¬®© áâp®ª¨]
-FIX 11 BYTE VCTR NFHELP [ãä¥p ¤«ï ¨¬¥­¨ ä ©«  ¯®¬®é¨]
+[Ð¤Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð° Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ]
+[ADDEHELP - Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ñ‚ÐµÐºÑÑ‚ Ð¾Ñ‚Ð¼ÐµÑ‡ÐµÐ½Ð½Ñ‹Ð¹ Ð¼Ð°pÐºÐµpÐ°Ð¼Ð¸ ÐºÐ°Ðº Ð½Ð¾Ð²ÑƒÑŽ ÑÐµÐºÑ†Ð¸ÑŽ Ð² Ñ„Ð°Ð¹Ð» Ð¿Ð¾Ð¼Ð¾Ñ‰Ð¸]
+       CHANNEL   CH0    [ÐšÐ°Ð½Ð°Ð» Ð´Ð»Ñ ÑÐ²ÑÐ·Ð¸ Ñ Ñ„Ð°Ð¹Ð»Ð¾Ð¼ Ð¿Ð¾Ð¼Ð¾Ñ‰Ð¸]
+       WORD VAR  N      [ÐÐ¾Ð¼ÐµÑ€ ÑÐµÐºÑ†Ð¸Ð¸]
+       WORD VAR  HIGH   [ÐÐ¾Ð¼Ðµp ÑÑ‚pÐ¾ÐºÐ¸ Ð²ÐµpÑ…Ð½ÐµÐ³Ð¾ Ð¼Ð°pÐºÐµpÐ°]
+       WORD VAR  QSTRS  [Ð¡Ñ‡ÐµÑ‚Ñ‡Ð¸Ðº ÑÑ‚Ñ€Ð¾Ðº]
+       BYTE VAR  SBPTR  [Ð£ÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ Ð¿Ð¾ Ð²ÐµÐºÑ‚Ð¾pÑƒ SBUF]
+       WORD VAR  NSTROK [Ð¡ÐºÐ¾Ð»ÑŒÐºÐ¾ ÑÑ‚pÐ¾Ðº Ð¿ÐµpÐµÐ½ÐµÑÑ‚Ð¸ Ð² Ñ„Ð°Ð¹Ð»]
+       WORD VAR  LITTLE [ÐÐ¾Ð¼Ðµp ÑÑ‚pÐ¾ÐºÐ¸ Ð½Ð¸Ð¶Ð½ÐµÐ³Ð¾ Ð¼Ð°pÐºÐµpÐ°]
+       LONG VAR  OLDPOS [ÐŸÐ¾Ð·Ð¸Ñ†Ð¸Ñ Ð² Ñ„Ð°Ð¹Ð»Ðµ Ð¿Ð¾Ð¼Ð¾Ñ‰Ð¸, ÐºÑƒÐ´Ð° Ð½Ð°Ð´Ð¾ Ð¿ÐµpÐµÐ¿Ð¸ÑÐ°Ñ‚ÑŒ
+                         Ñ‡Ð¸ÑÐ»Ð¾ ÑÑ‚Ñ€Ð¾Ðº Ð² ÑÐµÐºÑ†Ð¸Ð¸]
+   FIX BYTE VAR  UDAL?  [ÐŸÐµpÐµÐ¼ÐµÐ½Ð½Ð°Ñ Ñ„Ð»Ð°Ð³ - ÑƒÐ´Ð°Ð»ÑÑ‚ÑŒ Ñ‚ÐµÐºÑÑ‚ Ð¿Ð¾ÑÐ»Ðµ Ð¿ÐµpÐµÐ½ÐµÑÐµÐ½Ð¼Ñ
+                         Ð² Ñ„Ð°Ð¹Ð» Ð¿Ð¾Ð¼Ð¾Ñ‰Ð¸ (1) Ð¸Ð»Ð¸ Ð½ÐµÑ‚ (0)]
+    79 BYTE VCTR SBUF   [Ð‘ÑƒÑ„Ðµp Ð´Ð»Ñ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ð¼Ð¾Ð¹ ÑÑ‚pÐ¾ÐºÐ¸]
+FIX 11 BYTE VCTR NFHELP [Ð‘ÑƒÑ„Ðµp Ð´Ð»Ñ Ð¸Ð¼ÐµÐ½Ð¸ Ñ„Ð°Ð¹Ð»Ð° Ð¿Ð¾Ð¼Ð¾Ñ‰Ð¸]
 
 "COMDSSP.HLP" 0 ' NFHELP !SB
 
 : IZMUDAL [] .BW .STS 113 ! SCOLOR
-  "‚ë ¤¥©áâ¢¨â¥«ì­® " TOS'' UDAL? BR+ "­¥å®â¨â¥" "å®â¨â¥"
+  "Ð’Ñ‹ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ " TOS'' UDAL? BR+ "Ð½ÐµÑ…Ð¾Ñ‚Ð¸Ñ‚Ðµ" "Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ"
   118 ! SCOLOR TOS'' 113 ! SCOLOR
-  " ã¤ «ïâì â¥ªáâ ¯®á«¥ ¥£® § ¯¨á¨ ¢ HELPing (Y/N)" TOS'' TEXTCOLOR ! SCOLOR
+  " ÑƒÐ´Ð°Ð»ÑÑ‚ÑŒ Ñ‚ÐµÐºÑÑ‚ Ð¿Ð¾ÑÐ»Ðµ ÐµÐ³Ð¾ Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð² HELPing (Y/N)" TOS'' TEXTCOLOR ! SCOLOR
   UDAL? TIB BR #Y NOT #y NOT ELSE NOP ! UDAL? .BW .STS L1 [] ;
 
 : NAMEFHLP .BW .STS
-  "‚¢¥¤¨â¥ ¨¬ï ä ©«  ¯®¬®é¨ - " #  !!! NFHELP
+  "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ñ„Ð°Ð¹Ð»Ð° Ð¿Ð¾Ð¼Ð¾Ñ‰Ð¸ - " #  !!! NFHELP
   14 ! SCOLOR TOS''
   0 ' NFHELP 12 TIS
   TEXTCOLOR ! SCOLOR .BW .STS L1 [] ;
 
 : ADDEHELP [] MARKS [L,H,1/0] BR+ ADDEHLP DD [] ;
   : ADDEHLP [L,H] ! HIGH ! LITTLE
-    BEG TSTR [’¥ª ¯®§¨æ¨ï ¨ â¥ª áâp®ª ]
+    BEG TSTR [Ð¢ÐµÐº Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ Ð¸ Ñ‚ÐµÐº ÑÑ‚pÐ¾ÐºÐ°]
     ST3 SGX 0 MAX
-    [’¥ª ¯®§¨æ¨ï ¨ â¥ª áâp®ª ,ST3]
+    [Ð¢ÐµÐº Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ Ð¸ Ñ‚ÐµÐº ÑÑ‚pÐ¾ÐºÐ°,ST3]
     EON EXERR NOP
     ON ZAPROS NAMEFHLP
     ON .RAS ".HLP"
@@ -375,7 +375,7 @@ FIX 11 BYTE VCTR NFHELP [ãä¥p ¤«ï ¨¬¥­¨ ä ©«  ¯®¬®é¨]
 
     .BW .STS
      14 ! SCOLOR
-    "®¬¥p ¤®¡ ¢«ï¥¬®© á¥ªæ¨¨ - " TOS'' TIN ! N
+    "ÐÐ¾Ð¼Ðµp Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ð¹ ÑÐµÐºÑ†Ð¸Ð¸ - " TOS'' TIN ! N
     .BW .STS L1
 
     0 2 SPOS CH0 IW CH0 DO GH0 C
@@ -385,18 +385,18 @@ FIX 11 BYTE VCTR NFHELP [ãä¥p ¤«ï ¨¬¥­¨ ä ©«  ¯®¬®é¨]
     6 8 SCURS E3 E2
     RENSC TOLMOV TOPMOV [EXIST STATUS] IF0 ?UDAL .BK ;
     : ?UDAL UDAL? IF+ UDALYT [] ;
-    : SOOB .BW .STS "„ ­­ ï á¥ªæ¨ï ã¦¥ ¥áâì !!!" TOS'' TRB D .BW .STS L1 ;
+    : SOOB .BW .STS "Ð”Ð°Ð½Ð½Ð°Ñ ÑÐµÐºÑ†Ð¸Ñ ÑƒÐ¶Ðµ ÐµÑÑ‚ÑŒ !!!" TOS'' TRB D .BW .STS L1 ;
 
 : CYCL 0 SPOS CH0
   TEXTCOLOR ! SCOLOR
-  [L,H,’¥ª ¯®§¨æ¨ï ¨ â¥ª áâp®ª ,ST3,L,H]
+  [L,H,Ð¢ÐµÐº Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ Ð¸ Ñ‚ÐµÐº ÑÑ‚pÐ¾ÐºÐ°,ST3,L,H]
   ADDEH0 ;
-  : GH0 [¥áâì «¨ ¤ ­­ ï á¥ªæ¨ï ¢ ä ©«¥]
+  : GH0 [ÐµÑÑ‚ÑŒ Ð»Ð¸ Ð´Ð°Ð½Ð½Ð°Ñ ÑÐµÐºÑ†Ð¸Ñ Ð² Ñ„Ð°Ð¹Ð»Ðµ]
     [0] IW CH0 N = IF+ GH0' POS CH0 4 + SPOS CH0 [0] ;
     : GH0' [0] D IL CH0 EX ;
 
 : FHM ."
-¥â á¢®¡®¤­ëå á¥ªæ¨© ¢ ä ©«¥ ¯®¬®é¨ " FNAME CH0 EXERR ;
+ÐÐµÑ‚ ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ñ… ÑÐµÐºÑ†Ð¸Ð¹ Ð² Ñ„Ð°Ð¹Ð»Ðµ Ð¿Ð¾Ð¼Ð¾Ñ‰Ð¸ " FNAME CH0 EXERR ;
 
 : UDALYT [] HIGH ! M2 LITTLE ! M1 CTRLD [] ;
 
@@ -414,7 +414,7 @@ FIX 11 BYTE VCTR NFHELP [ãä¥p ¤«ï ¨¬¥­¨ ä ©«  ¯®¬®é¨]
    QSTRS OW CH0
    2 SPOS CH0 IW CH0 1+ 2 SPOS CH0 OW CH0 [] ;
 
-: ADDEH1 [‚¢®¤ ¨ ¢ë¢®¤ ®¤­®© áâà®ª¨]
+: ADDEH1 [Ð’Ð²Ð¾Ð´ Ð¸ Ð²Ñ‹Ð²Ð¾Ð´ Ð¾Ð´Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸]
    #  !!! SBUF
    13 78 ! SBUF 10 79 ! SBUF
    !0 SBPTR
@@ -422,22 +422,22 @@ FIX 11 BYTE VCTR NFHELP [ãä¥p ¤«ï ¨¬¥­¨ ä ©«  ¯®¬®é¨]
    0 ' SBUF 80 OS CH0
    !1+ QSTRS DOWN [] ;
 
-[‡ ¯®«­¥­¨¥ ¢ãä¥à  SBUF]
+[Ð—Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ Ð²ÑƒÑ„ÐµÑ€Ð° SBUF]
 : ADDEH2 [] !0 SBPTR AF 80 DO ADDEH3 D [] ;
   : ADDEH3 [AF] C @B C 10 = IF+ ADDEH4 [B]
     SBPTR ! SBUF [AF] 1+ [AF'] !1+ SBPTR [] ;
     : ADDEH4 [B] D EX [] ;
 B10
 : helpcom
-    BEG TSTR [’¥ª ¯®§¨æ¨ï ¨ â¥ª áâp®ª ]
+    BEG TSTR [Ð¢ÐµÐº Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ Ð¸ Ñ‚ÐµÐº ÑÑ‚pÐ¾ÐºÐ°]
     ST3 SGX 0 MAX CLS
-    [’¥ª ¯®§¨æ¨ï ¨ â¥ª áâp®ª ,ST3]
+    [Ð¢ÐµÐº Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ Ð¸ Ñ‚ÐµÐº ÑÑ‚pÐ¾ÐºÐ°,ST3]
     EON EXERR NOP
     ON .RAS ".HLP" ON ZAPROS NAMEFHLP
     20 "COMAND32.HLP" GENHELP
     RENSC TOLMOV TOPMOV .BK ;
 
-[‘âï£¨¢ ­¨¥ â¥ªáâ  ¢ áâp®ª¥]
+[Ð¡Ñ‚ÑÐ³Ð¸Ð²Ð°Ð½Ð¸Ðµ Ñ‚ÐµÐºÑÑ‚Ð° Ð² ÑÑ‚pÐ¾ÐºÐµ]
 : STYG [] TAB AF [AFendstr] .BK UP RP STYGSTR D .BK [] ;
   : STYGSTR [AFendstr]
     KBUF AF - EX- C AF > EX0 TOEND RP OBRWORD [AFendstr] ;
