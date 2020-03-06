@@ -73,6 +73,7 @@ open FAILS, ">$currentDir/fails.html";
 print FAILS <<"FL";
 <html>
 <head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<link href="../$hrd_path/css/$hrd.css" rel="stylesheet" type="text/css"/>
 </head>
 <body><pre>
@@ -103,7 +104,7 @@ foreach (@retlist)
 	
 	mkpath($fdir);
 	
-	my $cres = system "$colorer -ht \"$_\" -dc -dh -ln -o \"$fname.html\"";
+	my $cres = system "$colorer -ht \"$_\" -dc -dh -ln -o \"$fname.html\" -ei UTF-8 -eo UTF-8";
 	
 	my $res = system "$diff \"$origname.html\" \"$fname.html\" 1>>\"$currentDir/fails.html\"";
 	
