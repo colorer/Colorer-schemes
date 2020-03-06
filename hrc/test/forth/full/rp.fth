@@ -286,7 +286,7 @@ variable oldinst \ Inode before beginig procedure, for restoring in crash findin
 \ /sp@f,800000
     ['] execopen gobypath drop (  ) ;
 \ options/openprom
-\ Ñ´Ô ØpÆ¢•p™® Øp†¢®´Ï≠Æ·‚® ®ß¨•≠•≠®Ô ß≠†Á•≠®Ô ·¢Æ©·‚¢†
+\ –î–ª—è –øp–æ–≤–µp–∫–∏ –øp–∞–≤–∏–ª—å–Ω–æ—Å—Ç–∏ –∏–∑–º–µ–Ω–µ–Ω–∏—è –∑–Ω–∞—á–µ–Ω–∏—è —Å–≤–æ–π—Å—Ç–≤–∞
 : er (  ) s" /espdma@f,400000/esp@f,800000" s" SDDEV" property drop (  ) ;
 
 : .name ( Pnode ) space space

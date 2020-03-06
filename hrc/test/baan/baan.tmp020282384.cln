@@ -1,10 +1,10 @@
 |******************************************************************************
 |* tfzzz0458m002s  0  VRC B402 c4 land
-|* Печать формы № Т-1а
-|* Белугин Максим                
+|* РџРµС‡Р°С‚СЊ С„РѕСЂРјС‹ в„– Рў-1Р°
+|* Р‘РµР»СѓРіРёРЅ РњР°РєСЃРёРј                
 |* 2001-08-13
 |******************************************************************************
-|* Main table tfzzz058 Движение работников, Form Type 4
+|* Main table tfzzz058 Р”РІРёР¶РµРЅРёРµ СЂР°Р±РѕС‚РЅРёРєРѕРІ, Form Type 4
 |******************************************************************************
                                                                                 
 |****************************** declaration section ***************************
@@ -30,7 +30,7 @@ declaration:
 	#pragma used dll otudlldllreport
 	#include	"itudllreports"
 
-	table	ttfzzz058	| Движение работников
+	table	ttfzzz058	| Р”РІРёР¶РµРЅРёРµ СЂР°Р±РѕС‚РЅРёРєРѕРІ
 
     extern domain tfzzz.str10 number
     extern TDate date.from, date.to, pr.date
@@ -86,7 +86,7 @@ function read.main.table(){
 	String rsFile(128)
 	assert.v(
 		open.xml.rowset(spool.report, rsFile, USE_ROWSET(rsReport))> 0, 
-		"Проблема при генерации отчета"
+		"РџСЂРѕР±Р»РµРјР° РїСЂРё РіРµРЅРµСЂР°С†РёРё РѕС‚С‡РµС‚Р°"
 	)
 	Date docDate
 	docDate=0
@@ -126,7 +126,7 @@ function read.main.table(){
 	long    activ.record
     string  server.file(128)
 	activ.record = crystal.request.open(CR_REP_NAME, PLAIN_ROWSET, rsFile, server.file)
- 	assert.v(activ.record<>0,"Запись активации не создана")
+ 	assert.v(activ.record<>0,"Р—Р°РїРёСЃСЊ Р°РєС‚РёРІР°С†РёРё РЅРµ СЃРѕР·РґР°РЅР°")
 
 	if crystal.close.request(activ.record) then endif
 	if launch.rview(server.file) then endif
