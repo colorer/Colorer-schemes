@@ -24,7 +24,7 @@ node:
 ...
 --- |
 Moderators: [Site Admin, Dr.Moder, Polizei]
-# Хэш (как элемент хэша)
+# РҐСЌС€ (РєР°Рє СЌР»РµРјРµРЅС‚ С…СЌС€Р°)
 Location: {host: localhost, port: 5432}
 
 
@@ -38,7 +38,7 @@ Email list:
    - &h hunter
    - engineer
 SMS list:
-   - *h # заменится на hunter
+   - *h # Р·Р°РјРµРЅРёС‚СЃСЏ РЅР° hunter
 
 
 simple:
