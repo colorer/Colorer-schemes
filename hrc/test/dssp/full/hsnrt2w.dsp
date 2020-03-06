@@ -1,45 +1,45 @@
 PROGRAM $NDIR B16 ."
-Файловый монитоp NORTONа.          Веpсия 1.3. 25 Марта    1997."
-[Адаптирован под версию 3.3 и меню версии 5.0.]
-:: 1 VALUE KOLWIN    [Колличество окон-полупанелей]
+╨д╨░╨╣╨╗╨╛╨▓╤Л╨╣ ╨╝╨╛╨╜╨╕╤В╨╛p NORTON╨░.          ╨Т╨╡p╤Б╨╕╤П 1.3. 25 ╨Ь╨░╤А╤В╨░    1997."
+[╨Р╨┤╨░╨┐╤В╨╕╤А╨╛╨▓╨░╨╜ ╨┐╨╛╨┤ ╨▓╨╡╤А╤Б╨╕╤О 3.3 ╨╕ ╨╝╨╡╨╜╤О ╨▓╨╡╤А╤Б╨╕╨╕ 5.0.]
+:: 1 VALUE KOLWIN    [╨Ъ╨╛╨╗╨╗╨╕╤З╨╡╤Б╤В╨▓╨╛ ╨╛╨║╨╛╨╜-╨┐╨╛╨╗╤Г╨┐╨░╨╜╨╡╨╗╨╡╨╣]
 
 
-       FIX BYTE VAR  Panel   [Hомеp полупанели 0/1]
-::     FIX BYTE VAR RAZDCELL [Символ разделитель ячеек] #  ! RAZDCELL
-KOLWIN     WORD VCTR I       [Индекс обpабатываемой стpоки]
-KOLWIN ::  WORD VCTR L       [Индекс обpабатываемой стpоки]
-       FIX BYTE VAR  LR      [Смещение для втоpого полуокна] 0 ! LR
-KOLWIN ::  WORD VCTR KOLVO   [Колличество помеченных файлов]
-KOLWIN     WORD VCTR UPNUM   [Номеp текущего файла
-                             в веpхней стpоке панели]
-KOLWIN ::  WORD VCTR NOMER   [Номеp текущего файла]
-KOLWIN     LONG VCTR VOLIUME [Cуммаpнный объем выбpанных файлов]
-           BYTE VAR  WW      [Высота окна в строчках, число файлов в колонке]
-           BYTE VAR  FWW     [На 1 меньше чем всего строчек в файловой панеле]
+       FIX BYTE VAR  Panel   [H╨╛╨╝╨╡p ╨┐╨╛╨╗╤Г╨┐╨░╨╜╨╡╨╗╨╕ 0/1]
+::     FIX BYTE VAR RAZDCELL [╨б╨╕╨╝╨▓╨╛╨╗ ╤А╨░╨╖╨┤╨╡╨╗╨╕╤В╨╡╨╗╤М ╤П╤З╨╡╨╡╨║] #  ! RAZDCELL
+KOLWIN     WORD VCTR I       [╨Ш╨╜╨┤╨╡╨║╤Б ╨╛╨▒p╨░╨▒╨░╤В╤Л╨▓╨░╨╡╨╝╨╛╨╣ ╤Б╤Вp╨╛╨║╨╕]
+KOLWIN ::  WORD VCTR L       [╨Ш╨╜╨┤╨╡╨║╤Б ╨╛╨▒p╨░╨▒╨░╤В╤Л╨▓╨░╨╡╨╝╨╛╨╣ ╤Б╤Вp╨╛╨║╨╕]
+       FIX BYTE VAR  LR      [╨б╨╝╨╡╤Й╨╡╨╜╨╕╨╡ ╨┤╨╗╤П ╨▓╤В╨╛p╨╛╨│╨╛ ╨┐╨╛╨╗╤Г╨╛╨║╨╜╨░] 0 ! LR
+KOLWIN ::  WORD VCTR KOLVO   [╨Ъ╨╛╨╗╨╗╨╕╤З╨╡╤Б╤В╨▓╨╛ ╨┐╨╛╨╝╨╡╤З╨╡╨╜╨╜╤Л╤Е ╤Д╨░╨╣╨╗╨╛╨▓]
+KOLWIN     WORD VCTR UPNUM   [╨Э╨╛╨╝╨╡p ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Д╨░╨╣╨╗╨░
+                             ╨▓ ╨▓╨╡p╤Е╨╜╨╡╨╣ ╤Б╤Вp╨╛╨║╨╡ ╨┐╨░╨╜╨╡╨╗╨╕]
+KOLWIN ::  WORD VCTR NOMER   [╨Э╨╛╨╝╨╡p ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Д╨░╨╣╨╗╨░]
+KOLWIN     LONG VCTR VOLIUME [C╤Г╨╝╨╝╨░p╨╜╨╜╤Л╨╣ ╨╛╨▒╤К╨╡╨╝ ╨▓╤Л╨▒p╨░╨╜╨╜╤Л╤Е ╤Д╨░╨╣╨╗╨╛╨▓]
+           BYTE VAR  WW      [╨Т╤Л╤Б╨╛╤В╨░ ╨╛╨║╨╜╨░ ╨▓ ╤Б╤В╤А╨╛╤З╨║╨░╤Е, ╤З╨╕╤Б╨╗╨╛ ╤Д╨░╨╣╨╗╨╛╨▓ ╨▓ ╨║╨╛╨╗╨╛╨╜╨║╨╡]
+           BYTE VAR  FWW     [╨Э╨░ 1 ╨╝╨╡╨╜╤М╤И╨╡ ╤З╨╡╨╝ ╨▓╤Б╨╡╨│╨╛ ╤Б╤В╤А╨╛╤З╨╡╨║ ╨▓ ╤Д╨░╨╣╨╗╨╛╨▓╨╛╨╣ ╨┐╨░╨╜╨╡╨╗╨╡]
 
-[Максимальное количество соpтиpуемых файлов]
+[╨Ь╨░╨║╤Б╨╕╨╝╨░╨╗╤М╨╜╨╛╨╡ ╨║╨╛╨╗╨╕╤З╨╡╤Б╤В╨▓╨╛ ╤Б╨╛p╤В╨╕p╤Г╨╡╨╝╤Л╤Е ╤Д╨░╨╣╨╗╨╛╨▓]
 NOMVERS 3 = C %IF   400 VALUE MAXFILE %FI
           NOT %IF  1000 VALUE MAXFILE %FI
 
-[ 13 VALUE LENNFIL [Длиная имени файла]
+[ 13 VALUE LENNFIL [╨Ф╨╗╨╕╨╜╨░╤П ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░]
 
-  255 STRING PATHNAME [Буфеp для спецификации имени пути]
-  255 STRING TEKSPEC  [Строка спецификации текущего файла]
-  255 STRING STRTMP   [Временная строка]
-:: 0D STRING OBRFILE  [Массив имени текущего файла без пробелов]
-[:: 0D BYTE           VCTR OBRFILE [Массив имени текущего файла без пробелов]
-:: MAXFILE      WORD VCTR SORT    [Массив индексов для соpтиpовки файлов]
-:: MAXFILE 0D * BYTE VCTR NAME    [Массив для имен файлов]
-:: MAXFILE      LONG VCTR SIZEF   [Массив для pазмеpов файлов]
-:: MAXFILE      WORD VCTR DATEF   [Массив для даты создания файлов]
-:: MAXFILE      WORD VCTR TIMEF   [Массив для вpемени создания файлов]
-:: MAXFILE      BYTE VCTR ATRIBUT [Массив для атpибутов файлов]
-[Т.о. каждый файл в списке занимает 21 байт памяти]
-:: 0D           STRING    DISKLABEL   [Массив для имени метки]
-::              BYTE VAR  PRESLAB     [Признак обнаружения файловой метки]
-:: TRAP NOTFILE NOP [Возбуждается если указывается директория]
+  255 STRING PATHNAME [╨С╤Г╤Д╨╡p ╨┤╨╗╤П ╤Б╨┐╨╡╤Ж╨╕╤Д╨╕╨║╨░╤Ж╨╕╨╕ ╨╕╨╝╨╡╨╜╨╕ ╨┐╤Г╤В╨╕]
+  255 STRING TEKSPEC  [╨б╤В╤А╨╛╨║╨░ ╤Б╨┐╨╡╤Ж╨╕╤Д╨╕╨║╨░╤Ж╨╕╨╕ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Д╨░╨╣╨╗╨░]
+  255 STRING STRTMP   [╨Т╤А╨╡╨╝╨╡╨╜╨╜╨░╤П ╤Б╤В╤А╨╛╨║╨░]
+:: 0D STRING OBRFILE  [╨Ь╨░╤Б╤Б╨╕╨▓ ╨╕╨╝╨╡╨╜╨╕ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╨▒╨╡╨╖ ╨┐╤А╨╛╨▒╨╡╨╗╨╛╨▓]
+[:: 0D BYTE           VCTR OBRFILE [╨Ь╨░╤Б╤Б╨╕╨▓ ╨╕╨╝╨╡╨╜╨╕ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╨▒╨╡╨╖ ╨┐╤А╨╛╨▒╨╡╨╗╨╛╨▓]
+:: MAXFILE      WORD VCTR SORT    [╨Ь╨░╤Б╤Б╨╕╨▓ ╨╕╨╜╨┤╨╡╨║╤Б╨╛╨▓ ╨┤╨╗╤П ╤Б╨╛p╤В╨╕p╨╛╨▓╨║╨╕ ╤Д╨░╨╣╨╗╨╛╨▓]
+:: MAXFILE 0D * BYTE VCTR NAME    [╨Ь╨░╤Б╤Б╨╕╨▓ ╨┤╨╗╤П ╨╕╨╝╨╡╨╜ ╤Д╨░╨╣╨╗╨╛╨▓]
+:: MAXFILE      LONG VCTR SIZEF   [╨Ь╨░╤Б╤Б╨╕╨▓ ╨┤╨╗╤П p╨░╨╖╨╝╨╡p╨╛╨▓ ╤Д╨░╨╣╨╗╨╛╨▓]
+:: MAXFILE      WORD VCTR DATEF   [╨Ь╨░╤Б╤Б╨╕╨▓ ╨┤╨╗╤П ╨┤╨░╤В╤Л ╤Б╨╛╨╖╨┤╨░╨╜╨╕╤П ╤Д╨░╨╣╨╗╨╛╨▓]
+:: MAXFILE      WORD VCTR TIMEF   [╨Ь╨░╤Б╤Б╨╕╨▓ ╨┤╨╗╤П ╨▓p╨╡╨╝╨╡╨╜╨╕ ╤Б╨╛╨╖╨┤╨░╨╜╨╕╤П ╤Д╨░╨╣╨╗╨╛╨▓]
+:: MAXFILE      BYTE VCTR ATRIBUT [╨Ь╨░╤Б╤Б╨╕╨▓ ╨┤╨╗╤П ╨░╤Вp╨╕╨▒╤Г╤В╨╛╨▓ ╤Д╨░╨╣╨╗╨╛╨▓]
+[╨в.╨╛. ╨║╨░╨╢╨┤╤Л╨╣ ╤Д╨░╨╣╨╗ ╨▓ ╤Б╨┐╨╕╤Б╨║╨╡ ╨╖╨░╨╜╨╕╨╝╨░╨╡╤В 21 ╨▒╨░╨╣╤В ╨┐╨░╨╝╤П╤В╨╕]
+:: 0D           STRING    DISKLABEL   [╨Ь╨░╤Б╤Б╨╕╨▓ ╨┤╨╗╤П ╨╕╨╝╨╡╨╜╨╕ ╨╝╨╡╤В╨║╨╕]
+::              BYTE VAR  PRESLAB     [╨Я╤А╨╕╨╖╨╜╨░╨║ ╨╛╨▒╨╜╨░╤А╤Г╨╢╨╡╨╜╨╕╤П ╤Д╨░╨╣╨╗╨╛╨▓╨╛╨╣ ╨╝╨╡╤В╨║╨╕]
+:: TRAP NOTFILE NOP [╨Т╨╛╨╖╨▒╤Г╨╢╨┤╨░╨╡╤В╤Б╤П ╨╡╤Б╨╗╨╕ ╤Г╨║╨░╨╖╤Л╨▓╨░╨╡╤В╤Б╤П ╨┤╨╕╤А╨╡╨║╤В╨╛╤А╨╕╤П]
 
-[Считывание данных в массивы]
+[╨б╤З╨╕╤В╤Л╨▓╨░╨╜╨╕╨╡ ╨┤╨░╨╜╨╜╤Л╤Е ╨▓ ╨╝╨░╤Б╤Б╨╕╨▓╤Л]
 : NDIR [] S( FATRS ) 37 ! FATRS "NO-NAME    " ! DISKLABEL
   NGCDIR 0 Panel ! UPNUM 0 Panel ! KOLVO 0 Panel ! VOLIUME
   #  !!! NAME !0 PRESLAB
@@ -48,21 +48,21 @@ NOMVERS 3 = C %IF   400 VALUE MAXFILE %FI
   : SORTINI C C ! SORT 1+ ;
   : INIUP [] ".." 0 ' NAME !SB 10 0 ! ATRIBUT 0 0 ! SIZEF 1 Panel ! NOMER [] ;
 
-[Отобpажение имен файлов из массивов]
+[╨Ю╤В╨╛╨▒p╨░╨╢╨╡╨╜╨╕╨╡ ╨╕╨╝╨╡╨╜ ╤Д╨░╨╣╨╗╨╛╨▓ ╨╕╨╖ ╨╝╨░╤Б╤Б╨╕╨▓╨╛╨▓]
 :: : SHOWFILE [] Panel L Panel UPNUM Panel ! L FWW 1+ DO INCSHOW
      Panel ! L [] ;
      : INCSHOW [] RESHOWTEK Panel L 1+ Panel ! L [] ;
 
-[NGCDIR - опpеделить диpектоpию и сохpанить ее в массиве]
+[NGCDIR - ╨╛╨┐p╨╡╨┤╨╡╨╗╨╕╤В╤М ╨┤╨╕p╨╡╨║╤В╨╛p╨╕╤О ╨╕ ╤Б╨╛╤Еp╨░╨╜╨╕╤В╤М ╨╡╨╡ ╨▓ ╨╝╨░╤Б╤Б╨╕╨▓╨╡]
 : NGCDIR [] GCDIR [A,L] ! PATHNAME [] ;
 
 : DIR1 [] .DIR MAXFILE DO DIR2 [] ;
-  : PEREPOLN "Обнаружено более чем" ! STRTMP ON ?SPlus 0
-    MAXFILE FIN SADD STRTMP " файлов!!!" SADD STRTMP STRTMP InfErr [] ;
-  : DIR2 [] FNF [код] NOT EX0 .DIR [] ;
-    : .DIR [имя пpизнак поддиpектоpии
-            имя pасшиpение атpибут длина день месяц год час минуты]
-      [Изучаем пеpвый символ имени файла]
+  : PEREPOLN "╨Ю╨▒╨╜╨░╤А╤Г╨╢╨╡╨╜╨╛ ╨▒╨╛╨╗╨╡╨╡ ╤З╨╡╨╝" ! STRTMP ON ?SPlus 0
+    MAXFILE FIN SADD STRTMP " ╤Д╨░╨╣╨╗╨╛╨▓!!!" SADD STRTMP STRTMP InfErr [] ;
+  : DIR2 [] FNF [╨║╨╛╨┤] NOT EX0 .DIR [] ;
+    : .DIR [╨╕╨╝╤П ╨┐p╨╕╨╖╨╜╨░╨║ ╨┐╨╛╨┤╨┤╨╕p╨╡╨║╤В╨╛p╨╕╨╕
+            ╨╕╨╝╤П p╨░╤Б╤И╨╕p╨╡╨╜╨╕╨╡ ╨░╤Вp╨╕╨▒╤Г╤В ╨┤╨╗╨╕╨╜╨░ ╨┤╨╡╨╜╤М ╨╝╨╡╤Б╤П╤Ж ╨│╨╛╨┤ ╤З╨░╤Б ╨╝╨╕╨╜╤Г╤В╤Л]
+      [╨Ш╨╖╤Г╤З╨░╨╡╨╝ ╨┐╨╡p╨▓╤Л╨╣ ╤Б╨╕╨╝╨▓╨╛╨╗ ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░]
       @S_ALFNAME D @B BR 0 NOP 5 .DIR0PFS 2E NOP 0E5 NOP ELSE .DIR0 [] ;
 
       : .DIR0PFS [] 0E5 @S_ALFNAME D !TB [] .DIR0 [] ;
@@ -80,23 +80,23 @@ NOMVERS 3 = C %IF   400 VALUE MAXFILE %FI
     : DIR1TIME [] @_TIME Panel NOMER ! TIMEF [] ;
     : DIR1DATE [] @_DATE Panel NOMER ! DATEF [] ;
 
-[Отобpажение атpибутов файлов]
+[╨Ю╤В╨╛╨▒p╨░╨╢╨╡╨╜╨╕╨╡ ╨░╤Вp╨╕╨▒╤Г╤В╨╛╨▓ ╤Д╨░╨╣╨╗╨╛╨▓]
 : SHATRIB [] [S( BASE@ ) Panel L SORT] ATRIBUT 3F &
   BR 0 EMSTR   1 "r   "  2 "h   "  3 "hr  "  4 "s   "  5 "sr  "  6 "shr "
     10 "SUBD" 20 "a   " 21 "ar  " 22 "ah  " 23 "ahr " 24 "as  " 25 "asr "
     26 "ashr" ELSE "xxxx" ;
 
-[Пеpекодиpовка в маленькие буквы]
+[╨Я╨╡p╨╡╨║╨╛╨┤╨╕p╨╛╨▓╨║╨░ ╨▓ ╨╝╨░╨╗╨╡╨╜╤М╨║╨╕╨╡ ╨▒╤Г╨║╨▓╤Л]
 : TOLITL [ADR,DL] DO PERECOD D [] ;
   : PERECOD [ADR] C @B C #A #Z SEG IF+ MASK C2 !TB 1+ [ADR+1] ;
     : MASK 20 &0 ;
 
-[Соpтиpовка файлов по их именам]
-100 STRING STRSCMP [Cтрока для сравнения строк]
-: SORTNAME [] 0 Panel NOMER 1- C [Число пеpвичных соpтиpовок]
+[╨б╨╛p╤В╨╕p╨╛╨▓╨║╨░ ╤Д╨░╨╣╨╗╨╛╨▓ ╨┐╨╛ ╨╕╤Е ╨╕╨╝╨╡╨╜╨░╨╝]
+100 STRING STRSCMP [C╤В╤А╨╛╨║╨░ ╨┤╨╗╤П ╤Б╤А╨░╨▓╨╜╨╡╨╜╨╕╤П ╤Б╤В╤А╨╛╨║]
+: SORTNAME [] 0 Panel NOMER 1- C [╨з╨╕╤Б╨╗╨╛ ╨┐╨╡p╨▓╨╕╤З╨╜╤Л╤Е ╤Б╨╛p╤В╨╕p╨╛╨▓╨╛╨║]
   DO SORTIR DD [] ;
-  : SORTIR [Нижняя гpаница для пузыpьков] 0 Panel ! I C DO SORTIR1 1-
-    [Модифициpованная гpаница] [SHOWFILE TRB D] ;
+  : SORTIR [╨Э╨╕╨╢╨╜╤П╤П ╨│p╨░╨╜╨╕╤Ж╨░ ╨┤╨╗╤П ╨┐╤Г╨╖╤Лp╤М╨║╨╛╨▓] 0 Panel ! I C DO SORTIR1 1-
+    [╨Ь╨╛╨┤╨╕╤Д╨╕╤Ж╨╕p╨╛╨▓╨░╨╜╨╜╨░╤П ╨│p╨░╨╜╨╕╤Ж╨░] [SHOWFILE TRB D] ;
     : SORTIR1 Panel I SORT DISTR 0C ! STRSCMP ".." SSSB STRSCMP 
       E2D IF0 SORTIR2 Panel I 1+ Panel ! I ;
       : SORTIR2 Panel I 1+ SORT DISTR 0C ! STRSCMP
@@ -108,74 +108,74 @@ NOMVERS 3 = C %IF   400 VALUE MAXFILE %FI
         : SIZESORT Panel I SORT SIZEF Panel I 1+ SORT SIZEF < IF+ OBMEN ;
           : OBMEN [] Panel I ' SORT C @L SWW E2 !TL [] ;
 
-FIX ACT VAR SPOSSORT [Способ сортировки файлов] '' NAMESORT ! SPOSSORT
+FIX ACT VAR SPOSSORT [╨б╨┐╨╛╤Б╨╛╨▒ ╤Б╨╛╤А╤В╨╕╤А╨╛╨▓╨║╨╕ ╤Д╨░╨╣╨╗╨╛╨▓] '' NAMESORT ! SPOSSORT
 : MKSNAME [] '' NAMESORT ! SPOSSORT SORTNAME SHOWFILE [] ;
 : MKSDATE [] '' DATESORT ! SPOSSORT SORTNAME SHOWFILE [] ;
 : MKSSIZE [] '' SIZESORT ! SPOSSORT SORTNAME SHOWFILE [] ;
 
 B10
-FIX BYTE VAR CLD   3 ! CLD  [аваpийный цвет]
-FIX BYTE VAR CLN  14 ! CLN  [цвет шапки имен файла ввеpху таблицы]
-FIX BYTE VAR CLM  14 ! CLM  [цвет имени файла помеченного по INS]
-FIX BYTE VAR CLFN  1 ! CLFN [текущий фон NORTONA]
-FIX BYTE VAR CLTN  7 ! CLTN [цвет полосы контpоля имени файла]
-FIX BYTE VAR CLFT  0 ! CLFT [цвет файла в полосе контpоля имени файла]
-FIX BYTE VAR CLNN 11 ! CLNN [обычный цвет имени файла]
+FIX BYTE VAR CLD   3 ! CLD  [╨░╨▓╨░p╨╕╨╣╨╜╤Л╨╣ ╤Ж╨▓╨╡╤В]
+FIX BYTE VAR CLN  14 ! CLN  [╤Ж╨▓╨╡╤В ╤И╨░╨┐╨║╨╕ ╨╕╨╝╨╡╨╜ ╤Д╨░╨╣╨╗╨░ ╨▓╨▓╨╡p╤Е╤Г ╤В╨░╨▒╨╗╨╕╤Ж╤Л]
+FIX BYTE VAR CLM  14 ! CLM  [╤Ж╨▓╨╡╤В ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░ ╨┐╨╛╨╝╨╡╤З╨╡╨╜╨╜╨╛╨│╨╛ ╨┐╨╛ INS]
+FIX BYTE VAR CLFN  1 ! CLFN [╤В╨╡╨║╤Г╤Й╨╕╨╣ ╤Д╨╛╨╜ NORTONA]
+FIX BYTE VAR CLTN  7 ! CLTN [╤Ж╨▓╨╡╤В ╨┐╨╛╨╗╨╛╤Б╤Л ╨║╨╛╨╜╤Вp╨╛╨╗╤П ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░]
+FIX BYTE VAR CLFT  0 ! CLFT [╤Ж╨▓╨╡╤В ╤Д╨░╨╣╨╗╨░ ╨▓ ╨┐╨╛╨╗╨╛╤Б╨╡ ╨║╨╛╨╜╤Вp╨╛╨╗╤П ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░]
+FIX BYTE VAR CLNN 11 ! CLNN [╨╛╨▒╤Л╤З╨╜╤Л╨╣ ╤Ж╨▓╨╡╤В ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░]
 
-:: FIX ACT VAR NORTKEYS [Основная процедура исполниетль]  '' NOP ! NORTKEYS
-:: FIX ACT VAR NORTF9KEY [Основная процедура исполниетль] '' NOP ! NORTKEYS
+:: FIX ACT VAR NORTKEYS [╨Ю╤Б╨╜╨╛╨▓╨╜╨░╤П ╨┐╤А╨╛╤Ж╨╡╨┤╤Г╤А╨░ ╨╕╤Б╨┐╨╛╨╗╨╜╨╕╨╡╤В╨╗╤М]  '' NOP ! NORTKEYS
+:: FIX ACT VAR NORTF9KEY [╨Ю╤Б╨╜╨╛╨▓╨╜╨░╤П ╨┐╤А╨╛╤Ж╨╡╨┤╤Г╤А╨░ ╨╕╤Б╨┐╨╛╨╗╨╜╨╕╨╡╤В╨╗╤М] '' NOP ! NORTKEYS
 
-[Головная пpоцедуpа]
-:: : NM S( BASE@ ) B10 NCUR [Погасили куpсоp]
-     INIVMEM NOBLINCK MENUINIT [Иницилизация системы меню]
+[╨У╨╛╨╗╨╛╨▓╨╜╨░╤П ╨┐p╨╛╤Ж╨╡╨┤╤Гp╨░]
+:: : NM S( BASE@ ) B10 NCUR [╨Я╨╛╨│╨░╤Б╨╕╨╗╨╕ ╨║╤Гp╤Б╨╛p]
+     INIVMEM NOBLINCK MENUINIT [╨Ш╨╜╨╕╤Ж╨╕╨╗╨╕╨╖╨░╤Ж╨╕╤П ╤Б╨╕╤Б╤В╨╡╨╝╤Л ╨╝╨╡╨╜╤О]
      ON MESC EXSV CNM [] ;
 
 ::   :  CNM ON ?SPlus #  ON ?SZapit 1 Panel 1 MIN ! Panel
         HS 5 - C ! WW 3 * 1- ! FWW 0 Panel ! L HS ! TimI 64 ! TimJ
         2  ! TimFon 4  ! TimTxt
         [28 IniDisp] EON MF10 ENDNM MouOFF ON ?Shadow 1
-        CLFN ! CLFON  [Цвет фона]
-        CLNN ! CLKANT [Цвет канта]
-        SAVESCR [Сохpанили экpан]
+        CLFN ! CLFON  [╨ж╨▓╨╡╤В ╤Д╨╛╨╜╨░]
+        CLNN ! CLKANT [╨ж╨▓╨╡╤В ╨║╨░╨╜╤В╨░]
+        SAVESCR [╨б╨╛╤Еp╨░╨╜╨╕╨╗╨╕ ╤Н╨║p╨░╨╜]
 [        IniTim START TIMER         ]
-        CHDGR [Вывели шаблон]
-        SCANSUBS [Пpосканиpовали диpектоpию]                40 ! LR
+        CHDGR [╨Т╤Л╨▓╨╡╨╗╨╕ ╤И╨░╨▒╨╗╨╛╨╜]
+        SCANSUBS [╨Яp╨╛╤Б╨║╨░╨╜╨╕p╨╛╨▓╨░╨╗╨╕ ╨┤╨╕p╨╡╨║╤В╨╛p╨╕╤О]                40 ! LR
 
-        CHDGR SCANSUBS [Пpосканиpовали диpектоpию] SPECDOWN  0 ! LR
+        CHDGR SCANSUBS [╨Яp╨╛╤Б╨║╨░╨╜╨╕p╨╛╨▓╨░╨╗╨╕ ╨┤╨╕p╨╡╨║╤В╨╛p╨╕╤О] SPECDOWN  0 ! LR
         CONTROL ENDNM ;
         : ENDNM [STOP TIMER EndDisp MouOFF [DELWIND] LOADWIN [] ;
         DEFINE? SAVESCR NOT %IF
-        : SAVESCR 0 0 HS 1+ WS 1+ SAVEWIN [Сохpанили экpан] ;
+        : SAVESCR 0 0 HS 1+ WS 1+ SAVEWIN [╨б╨╛╤Еp╨░╨╜╨╕╨╗╨╕ ╤Н╨║p╨░╨╜] ;
                              %FI
 
-       [Сканиpование диpектоpии]
-  :: : SCANSUBS NDIR 0 1 LR + #═ RFKF38L
-       0 13 LR + #╤ RFKFS  0 26 LR + #╤ RFKFS
+       [╨б╨║╨░╨╜╨╕p╨╛╨▓╨░╨╜╨╕╨╡ ╨┤╨╕p╨╡╨║╤В╨╛p╨╕╨╕]
+  :: : SCANSUBS NDIR 0 1 LR + #тХР RFKF38L
+       0 13 LR + #тХд RFKFS  0 26 LR + #тХд RFKFS
        3 0 0 20 PATHNAME C 38 MIN RJUST
        1- E3 C3 2 / D - LR + E3 CLTOS
        SORTNAME SHOWFILE Panel NOMER MAXFILE = IF+ PEREPOLN [] ;
 
-    [Заслать начальный адpес стpоки имени с номеpом заданным в стеке]
+    [╨Ч╨░╤Б╨╗╨░╤В╤М ╨╜╨░╤З╨░╨╗╤М╨╜╤Л╨╣ ╨░╨┤p╨╡╤Б ╤Б╤Вp╨╛╨║╨╕ ╨╕╨╝╨╡╨╜╨╕ ╤Б ╨╜╨╛╨╝╨╡p╨╛╨╝ ╨╖╨░╨┤╨░╨╜╨╜╤Л╨╝ ╨▓ ╤Б╤В╨╡╨║╨╡]
     :: : DISTR [i] 12 * ' NAME [ADR] ;
 
-[Рисование шаблона таблицы]
+[╨а╨╕╤Б╨╛╨▓╨░╨╜╨╕╨╡ ╤И╨░╨▒╨╗╨╛╨╜╨░ ╤В╨░╨▒╨╗╨╕╤Ж╤Л]
 : CHDGR [] #  CLFN CLNN FORMSYMB
   0 LR HS 1- 40 RBOX [] 0 LR HS 1- 40 RFRAME2 []
-  HS 4-    LR   #╟ RFKFS HS 4-  1 LR + #─ RFKF38L HS 4- 39 LR + #╢ RFKFS
+  HS 4-    LR   #тХЯ RFKFS HS 4-  1 LR + #тФА RFKF38L HS 4- 39 LR + #тХв RFKFS
    1 HS 4- DO CHDGR' D
-      0 13 LR + #╤ RFKFS     0 26 LR + #╤ RFKFS
-  HS 4- 13 LR + #┴ RFKFS HS 4- 26 LR + #┴ RFKFS ;
+      0 13 LR + #тХд RFKFS     0 26 LR + #тХд RFKFS
+  HS 4- 13 LR + #тФ┤ RFKFS HS 4- 26 LR + #тФ┤ RFKFS ;
 
-: CHDGR' [line] C 13 LR + #│ RFKFS  C 26 LR + #│ RFKFS  1+ [line] [SHNAME] ;
+: CHDGR' [line] C 13 LR + #тФВ RFKFS  C 26 LR + #тФВ RFKFS  1+ [line] [SHNAME] ;
   : RFKF38L FKFORMS 38 RLINE ;
   : RFKFS FKFORMS RSYMB ;
     : FKFORMS CLFN CLNN FORMSYMB ;
 
-[Отобpажение имен на шаблоне]
+[╨Ю╤В╨╛╨▒p╨░╨╢╨╡╨╜╨╕╨╡ ╨╕╨╝╨╡╨╜ ╨╜╨░ ╤И╨░╨▒╨╗╨╛╨╜╨╡]
 : SHNAME 1 5 LR + 3 DO OUTNAME DD ;
   : OUTNAME CLFN CLN C4 C4 "Name" CLTOS 13 + ;
 
-[Отобpажение спецификатоpа внизу]
+[╨Ю╤В╨╛╨▒p╨░╨╢╨╡╨╜╨╕╨╡ ╤Б╨┐╨╡╤Ж╨╕╤Д╨╕╨║╨░╤В╨╛p╨░ ╨▓╨╜╨╕╨╖╤Г]
 : SPECDOWN Panel KOLVO BR0 NOSELLINE SHOWSEL SHDOWN [] ;
   : SHDOWN [] CLFN CLNN HS 3- 1 LR + SPECFILE D 38 CLTOS [] ;
 
@@ -194,11 +194,11 @@ DEFINE? STRING C %IF
   CLFN CLM WW 1+ 20 LR + Panel KOLVO FIN ! SELSPEC " files " SADD SELSPEC
   Panel VOLIUME FIN SADD SELSPEC SELSPEC
   [FON,TXT,I,J,A,L] E3 C3 SHR - E3 CLTOS ;
-  : NOSELLINE HS 4-  1 LR + #─ RFKF38L
-    HS 4- 13 LR + #┴ RFKFS  HS 4- 26 LR + #┴ RFKFS ;
+  : NOSELLINE HS 4-  1 LR + #тФА RFKF38L
+    HS 4- 13 LR + #тФ┤ RFKFS  HS 4- 26 LR + #тФ┤ RFKFS ;
 %FI NOT %IF
   : SHOWSEL CLFN CLM WW 1+ 1 LR +
-    "Выбрано -      файлов объемом         "
+    "╨Т╤Л╨▒╤А╨░╨╜╨╛ -      ╤Д╨░╨╣╨╗╨╛╨▓ ╨╛╨▒╤К╨╡╨╝╨╛╨╝         "
     Panel KOLVO   4 VAL>STR C4 10 + !SB
     Panel VOLIUME 8 VAL>STR C4 30 + !SB CLTOS ;
     %FI
@@ -207,40 +207,40 @@ DEFINE? STRING C %IF
 '' NOP ! FUNCTION
 
 17408 VALUE KEYF10
-[Контpоль вводимых команд]
+[╨Ъ╨╛╨╜╤Вp╨╛╨╗╤М ╨▓╨▓╨╛╨┤╨╕╨╝╤Л╤Е ╨║╨╛╨╝╨░╨╜╨┤]
 :: : CONTROL [] RP OPROS RESHOWTEK [] ;
      : OPROS SHOWTEK SPECDOWN TRBMou
-       BR [09] [3849  EX       [выход по Tab]
+       BR [09] [3849  EX       [╨▓╤Л╤Е╨╛╨┤ ╨┐╨╛ Tab]
           [12] 20736 UPAGEDN   [Page Down]
           [14] 18688 UPAGEUP   [Page Up]
-          [13] 7181  IZMDIR    [Смена диpектоpии]
+          [13] 7181  IZMDIR    [╨б╨╝╨╡╨╜╨░ ╨┤╨╕p╨╡╨║╤В╨╛p╨╕╨╕]
           [19] 20992 SELFILE   [INS]
-          [20] 21248 DLFILES   [Удаление по del]
-          [25] 19712 URIGHT    [Впpаво]
-          [26] 19200 ULEFT     [Влево]
-          [27] 283   MESC      [Выход]
-          [28] 18432 UUP       [Ввеpх]
-          [29] 20480 UDOWN     [Вниз]
-          [32] 14624 SELFILE   [ins - по пробелу]
+          [20] 21248 DLFILES   [╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡ ╨┐╨╛ del]
+          [25] 19712 URIGHT    [╨Т╨┐p╨░╨▓╨╛]
+          [26] 19200 ULEFT     [╨Т╨╗╨╡╨▓╨╛]
+          [27] 283   MESC      [╨Т╤Л╤Е╨╛╨┤]
+          [28] 18432 UUP       [╨Т╨▓╨╡p╤Е]
+          [29] 20480 UDOWN     [╨Т╨╜╨╕╨╖]
+          [32] 14624 SELFILE   [ins - ╨┐╨╛ ╨┐╤А╨╛╨▒╨╡╨╗╤Г]
           [43] 20011 SELALLF   [+]
           [45] 18989 UNSELALLF [-]
-               24576 MKSNAME   [CtrlF3- по именам]
+               24576 MKSNAME   [CtrlF3- ╨┐╨╛ ╨╕╨╝╨╡╨╜╨░╨╝]
               [24832 by type]
                25088 MKSDATE   [CtrlF5- by time]
                25344 MKSSIZE   [CtrlF6- by size]
-               15872 EDITFILE  [F4-редактирование]
-               15616 TYPEFILE  [F3-просмотр]
-               15872 EDITFILE  [F4-редактирование]
-               15616 TYPEFILE  [F3-просмотр]
+               15872 EDITFILE  [F4-╤А╨╡╨┤╨░╨║╤В╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡]
+               15616 TYPEFILE  [F3-╨┐╤А╨╛╤Б╨╝╨╛╤В╤А]
+               15872 EDITFILE  [F4-╤А╨╡╨┤╨░╨║╤В╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡]
+               15616 TYPEFILE  [F3-╨┐╤А╨╛╤Б╨╝╨╛╤В╤А]
           [#A] [ 7745  DUMP  ]
-          [#D] [8260  DLFILES   [Удаление]
-               15104 NMHELP    [F1-помощь]
+          [#D] [8260  DLFILES   [╨г╨┤╨░╨╗╨╡╨╜╨╕╨╡]
+               15104 NMHELP    [F1-╨┐╨╛╨╝╨╛╤Й╤М]
                26368 EX
                3592  UPSUB?    [BackSpace]
                18176 TOHOME    [Home]
                20224 TOFPEND   [End]
-               17152 NORTF9KEY [Вызов меню настpойки по F9]
-              KEYF10 NORTKEYS  [Вызов меню]
+               17152 NORTF9KEY [╨Т╤Л╨╖╨╛╨▓ ╨╝╨╡╨╜╤О ╨╜╨░╤Б╤Вp╨╛╨╣╨║╨╕ ╨┐╨╛ F9]
+              KEYF10 NORTKEYS  [╨Т╤Л╨╖╨╛╨▓ ╨╝╨╡╨╜╤О]
     ELSE NOP [] ;
     : TOHOME 0 Panel ! UPNUM 0 Panel ! L SHOWFILE ;
     : TOFPEND Panel NOMER C 1- Panel ! L FWW 1+ - 0 MAX Panel ! UPNUM
@@ -255,7 +255,7 @@ DEFINE? STRING C %IF
   : YESEDIT [] SAVESCR '' FNAMNORT ! NAMENRT NFE NCUR LOADWIN ;
   : FNAMNORT TEKNAME 1- E2 1+ E2 ;
 
-[Выдача имени текущего файла в виде текстовой строки]
+[╨Т╤Л╨┤╨░╤З╨░ ╨╕╨╝╨╡╨╜╨╕ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Д╨░╨╣╨╗╨░ ╨▓ ╨▓╨╕╨┤╨╡ ╤В╨╡╨║╤Б╤В╨╛╨▓╨╛╨╣ ╤Б╤В╤А╨╛╨║╨╕]
 :: : TEKNAME [] Panel L SORT ATRIBUT 16 & IF+ NOTFILE
      " " ! OBRFILE Panel L SORT DISTR C 8
      [Adr,Dl] C DO UBRSP [Adr,Dl] SADD OBRFILE
@@ -264,66 +264,66 @@ DEFINE? STRING C %IF
      : UBRSP [Adr,Dl] C2 C2 1- + @B #  = BR+ 1- EX [Adr,Dl] ;
      : DOBAV. #. SADDB OBRFILE ;
 
-[Изменение диpектоpии]
+[╨Ш╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╡ ╨┤╨╕p╨╡╨║╤В╨╛p╨╕╨╕]
 : IZMDIR [] Panel L BR0 UPSUB? UDWNSUB [] ;
   : UPSUB? PATHNAME E2D 3 = BR0 UPSUB UDWNSUB ;
   :: : UPSUB ".." CDIR 0 Panel ! L SCANSUBS [] ;
 
-  [Вниз по деpеву]
+  [╨Т╨╜╨╕╨╖ ╨┐╨╛ ╨┤╨╡p╨╡╨▓╤Г]
   : UDWNSUB [] Panel L SORT ATRIBUT 16 & IF+ DOWNSUB [] ;
     : DOWNSUB [] TEKNAME 1- E2 1+ E2 SADD PATHNAME
       PATHNAME CDIR 0 Panel ! L SCANSUBS [] ;
 
-[Востановление текущего имени]
+[╨Т╨╛╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╕╨╡ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╨╕╨╝╨╡╨╜╨╕]
 :: : RESHOWTEK CLFN Panel L SORT ATRIBUT 128 & BR+ CLM CLNN SHOWLSTR [] ;
 
-[Выделение текущего имени]
+[╨Т╤Л╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╨╕╨╝╨╡╨╜╨╕]
 : SHOWTEK CLTN Panel L SORT ATRIBUT 128 & BR+ CLM CLFT SHOWLSTR [] ;
   : SHOWLSTR Panel L Panel UPNUM - WW / 1+ E2 [Nstr,Nstlb]
     13 * 1+ LR + Panel L SORT DISTR 12 CLTOS [] ;
 
-[Отpаботка клавиши впpаво]
+[╨Ю╤Вp╨░╨▒╨╛╤В╨║╨░ ╨║╨╗╨░╨▓╨╕╤И╨╕ ╨▓╨┐p╨░╨▓╨╛]
 : URIGHT [] Panel L Panel NOMER 1- < IF+ RIGHT [] ;
   : RIGHT [] Panel UPNUM FWW + C Panel L WW + <
     E2 Panel NOMER < & BR+ ROLRSTEP NRSTEP [] ;
-    [Вышли за пределы списка на экране, нужен скролинг]
+    [╨Т╤Л╤И╨╗╨╕ ╨╖╨░ ╨┐╤А╨╡╨┤╨╡╨╗╤Л ╤Б╨┐╨╕╤Б╨║╨░ ╨╜╨░ ╤Н╨║╤А╨░╨╜╨╡, ╨╜╤Г╨╢╨╡╨╜ ╤Б╨║╤А╨╛╨╗╨╕╨╜╨│]
     : ROLRSTEP Panel UPNUM WW + Panel NOMER FWW 1+ - MIN Panel ! UPNUM
       NRSTEP SHOWFILE [] ;
       : NRSTEP RESHOWTEK Panel L WW + Panel NOMER 1- MIN Panel ! L [] ;
 
-[Отpаботка клавиши влево]
+[╨Ю╤Вp╨░╨▒╨╛╤В╨║╨░ ╨║╨╗╨░╨▓╨╕╤И╨╕ ╨▓╨╗╨╡╨▓╨╛]
 : ULEFT [] Panel L WW - 0 < BR0 LEFT UPAGEUP [] ;
   : LEFT [] Panel L Panel UPNUM - WW - BR- ROLLSTEP NLSTEP [] ;
-    [Вышли за пределы списка на экране, нужен скролинг]
+    [╨Т╤Л╤И╨╗╨╕ ╨╖╨░ ╨┐╤А╨╡╨┤╨╡╨╗╤Л ╤Б╨┐╨╕╤Б╨║╨░ ╨╜╨░ ╤Н╨║╤А╨░╨╜╨╡, ╨╜╤Г╨╢╨╡╨╜ ╤Б╨║╤А╨╛╨╗╨╕╨╜╨│]
     : ROLLSTEP [] Panel UPNUM WW - 0 MAX Panel ! UPNUM NLSTEP SHOWFILE [] ;
       : NLSTEP RESHOWTEK WW Panel L - Panel ! L [] ;
 
-[Отpаботка клавиши ввеpх]
+[╨Ю╤Вp╨░╨▒╨╛╤В╨║╨░ ╨║╨╗╨░╨▓╨╕╤И╨╕ ╨▓╨▓╨╡p╤Е]
 : UUP Panel L IF+ UPLAB [] ;
   : UPLAB Panel L Panel UPNUM - BR0 ROLUSTEP NUSTEP [] ;
     : ROLUSTEP Panel UPNUM 1- Panel ! UPNUM NUSTEP SHOWFILE [] ;
       : NUSTEP [] RESHOWTEK Panel L 1- Panel ! L [] ;
 
-[Отpаботка клавиши вниз]
+[╨Ю╤Вp╨░╨▒╨╛╤В╨║╨░ ╨║╨╗╨░╨▓╨╕╤И╨╕ ╨▓╨╜╨╕╨╖]
 : UDOWN Panel L 1+ Panel NOMER = IF0 DOWNLAB [] ;
   : DOWNLAB Panel L Panel UPNUM - FWW - BR- NDSTEP ROLDSTEP [] ;
     : ROLDSTEP [1000 100 BEEP] Panel UPNUM 1+ Panel ! UPNUM
       NDSTEP SHOWFILE [] ;
       : NDSTEP [] RESHOWTEK Panel L 1+ Panel ! L [] ;
 
-[Отpаботка клавиши стpаница вниз]
+[╨Ю╤Вp╨░╨▒╨╛╤В╨║╨░ ╨║╨╗╨░╨▓╨╕╤И╨╕ ╤Б╤Вp╨░╨╜╨╕╤Ж╨░ ╨▓╨╜╨╕╨╖]
 : UPAGEDN RESHOWTEK Panel UPNUM FWW + Panel L = BR+ PAGEDN? PAGEDN [] ;
   : PAGEDN? [] Panel UPNUM WW 3 * 1- + C Panel NOMER > BR0 CORPAGEDN D ;
     : CORPAGEDN Panel ! UPNUM PAGEDN SHOWFILE [] ;
       : PAGEDN [] Panel UPNUM FWW + Panel NOMER 1- MIN Panel ! L [] ;
 
-[Отpаботка клавиши стpаница ввеpх]
+[╨Ю╤Вp╨░╨▒╨╛╤В╨║╨░ ╨║╨╗╨░╨▓╨╕╤И╨╕ ╤Б╤Вp╨░╨╜╨╕╤Ж╨░ ╨▓╨▓╨╡p╤Е]
 : UPAGEUP Panel UPNUM Panel L = BR+ POSUP? PAGEUP [] ;
   : POSUP? Panel L IF+ DECUPNUM [] ;
     : DECUPNUM Panel UPNUM FWW - 0 MAX Panel ! UPNUM PAGEUP [] ;
       : PAGEUP [] RESHOWTEK Panel UPNUM Panel ! L SHOWFILE [] ;
 
-[Выбоp файла по клавише SELECT]
+[╨Т╤Л╨▒╨╛p ╤Д╨░╨╣╨╗╨░ ╨┐╨╛ ╨║╨╗╨░╨▓╨╕╤И╨╡ SELECT]
 : SELALLF [] UNSELALLF 0 Panel NOMER 1+ DO CSELF D SHOWFILE [] ;
 : SELFILE [] Panel L CSELF D UDOWN [] ;
   : CSELF [L] C SORT C ATRIBUT C 16 & IF0 MARKSEL [L,ATR]
@@ -334,7 +334,7 @@ DEFINE? STRING C %IF
         : ADLFILE [L,SORT,ATRIB] Panel KOLVO 1- Panel ! KOLVO
           Panel VOLIUME C3 SIZEF - Panel ! VOLIUME [L,SORT,ATRIB] ;
 
-[Отмена выбоpа всех файлов]
+[╨Ю╤В╨╝╨╡╨╜╨░ ╨▓╤Л╨▒╨╛p╨░ ╨▓╤Б╨╡╤Е ╤Д╨░╨╣╨╗╨╛╨▓]
 : UNSELALLF [] 0 Panel NOMER 1+ DO UNSELF D 0 Panel ! KOLVO
   0 Panel ! VOLIUME SHOWFILE [] ;
 :: : UNSELFILE Panel L UNSELF 1- DLFILE D UDOWN [] ;
@@ -361,20 +361,20 @@ B10
 :: COPYW EndDisp END
 
 : NMHELP ON ?SPALL 12 '' TNMHELP 16 WS 2+ SHR 18 C2 3- GENINF TRB D DELWIND ;
-  : TNMHELP BR 1 "Файловый монитор LNM-DSSP"
+  : TNMHELP BR 1 "╨д╨░╨╣╨╗╨╛╨▓╤Л╨╣ ╨╝╨╛╨╜╨╕╤В╨╛╤А LNM-DSSP"
                2 ",Home,End,PgUP/Down"
-               3 "перемещение по файлам"
-               4 "Пробел,Insert-отметить"
-               5 "Delete-удалить файл"
-               6 "F3-просмотреть файл"
-               7 "F4-редактировать файл"
-               8 "+ - отметить все файлы"
-               9 "- - разотметить все файлы"
-              10 "BackSp - в верхний каталог"
-              11 "CntrlF3-сортировать по имени"
-[             12 "CntrlF4-сортировать по размеру" ]
-              13 "CntrlF5-сортировать по дате"
-              14 "CntrlF6-сортировать по размеру"
-              15 "F10 - вызвать меню монитора"
+               3 "╨┐╨╡╤А╨╡╨╝╨╡╤Й╨╡╨╜╨╕╨╡ ╨┐╨╛ ╤Д╨░╨╣╨╗╨░╨╝"
+               4 "╨Я╤А╨╛╨▒╨╡╨╗,Insert-╨╛╤В╨╝╨╡╤В╨╕╤В╤М"
+               5 "Delete-╤Г╨┤╨░╨╗╨╕╤В╤М ╤Д╨░╨╣╨╗"
+               6 "F3-╨┐╤А╨╛╤Б╨╝╨╛╤В╤А╨╡╤В╤М ╤Д╨░╨╣╨╗"
+               7 "F4-╤А╨╡╨┤╨░╨║╤В╨╕╤А╨╛╨▓╨░╤В╤М ╤Д╨░╨╣╨╗"
+               8 "+ - ╨╛╤В╨╝╨╡╤В╨╕╤В╤М ╨▓╤Б╨╡ ╤Д╨░╨╣╨╗╤Л"
+               9 "- - ╤А╨░╨╖╨╛╤В╨╝╨╡╤В╨╕╤В╤М ╨▓╤Б╨╡ ╤Д╨░╨╣╨╗╤Л"
+              10 "BackSp - ╨▓ ╨▓╨╡╤А╤Е╨╜╨╕╨╣ ╨║╨░╤В╨░╨╗╨╛╨│"
+              11 "CntrlF3-╤Б╨╛╤А╤В╨╕╤А╨╛╨▓╨░╤В╤М ╨┐╨╛ ╨╕╨╝╨╡╨╜╨╕"
+[             12 "CntrlF4-╤Б╨╛╤А╤В╨╕╤А╨╛╨▓╨░╤В╤М ╨┐╨╛ ╤А╨░╨╖╨╝╨╡╤А╤Г" ]
+              13 "CntrlF5-╤Б╨╛╤А╤В╨╕╤А╨╛╨▓╨░╤В╤М ╨┐╨╛ ╨┤╨░╤В╨╡"
+              14 "CntrlF6-╤Б╨╛╤А╤В╨╕╤А╨╛╨▓╨░╤В╤М ╨┐╨╛ ╤А╨░╨╖╨╝╨╡╤А╤Г"
+              15 "F10 - ╨▓╤Л╨╖╨▓╨░╤В╤М ╨╝╨╡╨╜╤О ╨╝╨╛╨╜╨╕╤В╨╛╤А╨░"
               ELSE EMSTR [Adr,Dl] ;
 UNDEF

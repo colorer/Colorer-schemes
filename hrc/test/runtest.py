@@ -51,7 +51,7 @@ colorer = join(colorer_path, colorer_exe)
 if not os.path.isfile(colorer):
   sys.exit("Error: No %s in %s" % (colorer_exe, colorer_path))
 
-colorer_opts = ["-c", catalog_path, "-eh", join(colorer_path, "error.log")]
+colorer_opts = ["-c", catalog_path, "-eh", join(colorer_path, "error.log"), "-ei", "UTF-8","-eo","UTF-8"]
 
 valid_dir = normpath(join(tests_path, "_valid"))
 # __2009-06-05_12-35-00
@@ -96,6 +96,7 @@ fail_log.write(
 """
 <html>
 <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <title>%s Colorer Test Results</title>
   <link href="%s" rel="stylesheet" type="text/css"/>
 </head>

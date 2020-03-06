@@ -19,7 +19,7 @@ module alu (
                 endcase
             if(a) b <= c;
 
-�⮡� �� �뫮 ���४⭮, ���� ����� ⠪:
+чтобы все было корректно, надо писать так:
 
         always @(CLKDIV or HDP or HNDP or VDP or VNDP or PADDR[1:0])
          begin

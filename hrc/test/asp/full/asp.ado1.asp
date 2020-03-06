@@ -7,7 +7,7 @@
 	Developed by ActiveState Internet Corp., http://www.ActiveState.com
 -->
 
-<!-- ’ ¡«¨æ  áâ¨«¥© ¢® ¢­¥è­¥¬ ä ©«¥ GalRep.css -->
+<!-- Ð¢Ð°Ð±Ð»Ð¸Ñ†Ð° ÑÑ‚Ð¸Ð»ÐµÐ¹ Ð²Ð¾ Ð²Ð½ÐµÑˆÐ½ÐµÐ¼ Ñ„Ð°Ð¹Ð»Ðµ GalRep.css -->
 <link rel="stylesheet" href="<%=Session("binPath")%>bisrep.css"/>
 </head>
 <body>

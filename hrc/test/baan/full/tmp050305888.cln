@@ -37,12 +37,12 @@ declaration:
 	extern domain tfzzz.str200 cumul.part.desc
 	extern domain tfzzz.str200 efilter.group.dsc
 
-	table	ttfzzz003	| Работники
-	table	ttfzzz024	| Условия труда
+	table	ttfzzz003	| Р Р°Р±РѕС‚РЅРёРєРё
+	table	ttfzzz024	| РЈСЃР»РѕРІРёСЏ С‚СЂСѓРґР°
 	table	ttfzzz026
-	table	ttfzzz040	| Адреса работников
-	table	ttfzzz087	| Инвалидность работников	
-	table	ttfzzz095	| Виды стажей
+	table	ttfzzz040	| РђРґСЂРµСЃР° СЂР°Р±РѕС‚РЅРёРєРѕРІ
+	table	ttfzzz087	| РРЅРІР°Р»РёРґРЅРѕСЃС‚СЊ СЂР°Р±РѕС‚РЅРёРєРѕРІ	
+	table	ttfzzz095	| Р’РёРґС‹ СЃС‚Р°Р¶РµР№
 
 before.program:
 |	execute(get.defaults)
@@ -74,15 +74,15 @@ choice.cont.process:
 	on.choice:
 		tab.setLevelParams(true,true, false,true)
 		if doc.type<>tfzzz.pftvs.inds then
-			message("Поле Тип документа: для текущей версии допустимо только значение ИНДС")
+			message("РџРѕР»Рµ РўРёРї РґРѕРєСѓРјРµРЅС‚Р°: РґР»СЏ С‚РµРєСѓС‰РµР№ РІРµСЂСЃРёРё РґРѕРїСѓСЃС‚РёРјРѕ С‚РѕР»СЊРєРѕ Р·РЅР°С‡РµРЅРёРµ РРќР”РЎ")
 			choice.again()
 		endif
 		if etol(period)=0 then
-			message("Поле Период: должно быть указано значение")
+			message("РџРѕР»Рµ РџРµСЂРёРѕРґ: РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СѓРєР°Р·Р°РЅРѕ Р·РЅР°С‡РµРЅРёРµ")
 			choice.again()
 		endif
 		if not year then
-			message("Поле Год: должно быть указано значение")
+			message("РџРѕР»Рµ Р“РѕРґ: РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ СѓРєР°Р·Р°РЅРѕ Р·РЅР°С‡РµРЅРёРµ")
 			choice.again()
 		endif
         long startTime
@@ -108,10 +108,10 @@ function writeOasisFile(){
 	get.zzz.pfper.dates(year, period,lBdate, lEdate)
 
 	OAS_FILE("oasis.txt")
-	OAS_REC(O.S("ЗГЛВ"), O.S("04.00"))
-	OAS_REC(O.S("РБТД"), O.S("РБТД"), O.S(get.pf.reg.num(),14), O.S(get.comp.name(1),100))
-	OAS_REC(O.S("ПАЧК"), O.N(0), O.D(work.date), O.N(1))
-	OAS_REC(O.S("ТИПД"), O.S(enum.descr$("tfzzz.pftvs",doc.type),4), O.N(doc.count(doc.type, work.date)))
+	OAS_REC(O.S("Р—Р“Р›Р’"), O.S("04.00"))
+	OAS_REC(O.S("Р Р‘РўР”"), O.S("Р Р‘РўР”"), O.S(get.pf.reg.num(),14), O.S(get.comp.name(1),100))
+	OAS_REC(O.S("РџРђР§Рљ"), O.N(0), O.D(work.date), O.N(1))
+	OAS_REC(O.S("РўРРџР”"), O.S(enum.descr$("tfzzz.pftvs",doc.type),4), O.N(doc.count(doc.type, work.date)))
 	curr1 = 1
 	long count
 	count=0
@@ -122,11 +122,11 @@ function writeOasisFile(){
     selectdo
     	if empl.in.group(tfzzz003.emplid, efilter.group) then
     		inc(count) 
-    		set.sb.msg(str$(count)&" из "&str$(all))
+    		set.sb.msg(str$(count)&" РёР· "&str$(all))
     		isNotOtm = ( convertTypeCorr(form.type) <> tfzzz.pftf.otm )
     		strahnum = get.empl.pfin(tfzzz003.emplid,true)
     		strahnum(12;1)=" "
-    		| огранизация перебора в функции ProcessInterval всех инвалидностей и неинвалидностей.
+    		| РѕРіСЂР°РЅРёР·Р°С†РёСЏ РїРµСЂРµР±РѕСЂР° РІ С„СѓРЅРєС†РёРё ProcessInterval РІСЃРµС… РёРЅРІР°Р»РёРґРЅРѕСЃС‚РµР№ Рё РЅРµРёРЅРІР°Р»РёРґРЅРѕСЃС‚РµР№.
     	    tdate left
             left  = DR_MIN_DATE
 
@@ -134,29 +134,29 @@ function writeOasisFile(){
 	            tfzzz003.emplid = tfzzz003.emplid
             endif
 
-            repeat | этот цикл - по комкам инвалидностей. 
-            	   | комок инвалидностей - это период времени, не содержащий неинавалидностей.
+            repeat | СЌС‚РѕС‚ С†РёРєР» - РїРѕ РєРѕРјРєР°Рј РёРЅРІР°Р»РёРґРЅРѕСЃС‚РµР№. 
+            	   | РєРѕРјРѕРє РёРЅРІР°Р»РёРґРЅРѕСЃС‚РµР№ - СЌС‚Рѕ РїРµСЂРёРѕРґ РІСЂРµРјРµРЅРё, РЅРµ СЃРѕРґРµСЂР¶Р°С‰РёР№ РЅРµРёРЅР°РІР°Р»РёРґРЅРѕСЃС‚РµР№.
             	bool found
             	found=false
 	    		select * from tfzzz087
-    			where _index2  | целиком правее точки left
+    			where _index2  | С†РµР»РёРєРѕРј РїСЂР°РІРµРµ С‚РѕС‡РєРё left
     			  inrange {:tfzzz003.emplid, :left}
     			  and	  {:tfzzz003.emplid, DR_MAX_DATE}
     			  order by _index2
     			as set with 1 rows
     			selectdo 
-    				| нашли один некий интервал целиком справа от точки left
+    				| РЅР°С€Р»Рё РѕРґРёРЅ РЅРµРєРёР№ РёРЅС‚РµСЂРІР°Р» С†РµР»РёРєРѕРј СЃРїСЂР°РІР° РѕС‚ С‚РѕС‡РєРё left
     				found=1 
 
-    				| т.к изначально left=0 то леввее этого интервала точно неинавлид
-    				| => в диапазоне [left;	tfzzz087.invafrom] - НЕИНВАЛИД
+    				| С‚.Рє РёР·РЅР°С‡Р°Р»СЊРЅРѕ left=0 С‚Рѕ Р»РµРІРІРµРµ СЌС‚РѕРіРѕ РёРЅС‚РµСЂРІР°Р»Р° С‚РѕС‡РЅРѕ РЅРµРёРЅР°РІР»РёРґ
+    				| => РІ РґРёР°РїР°Р·РѕРЅРµ [left;	tfzzz087.invafrom] - РќР•РРќР’РђР›РР”
     				tdate lStart 
     				lStart = tfzzz087.invafrom
-   					ProcessInterval(false,left,lStart-1) | период где НЕИНВАЛИД
+   					ProcessInterval(false,left,lStart-1) | РїРµСЂРёРѕРґ РіРґРµ РќР•РРќР’РђР›РР”
 
-    				| надо найти правый край (lStop)
-    				| это сложнее т.к. может быть несколько индвалидностей налеплено вместе.
-    				| ищем правый край, отодвигая вправо переменную lStop
+    				| РЅР°РґРѕ РЅР°Р№С‚Рё РїСЂР°РІС‹Р№ РєСЂР°Р№ (lStop)
+    				| СЌС‚Рѕ СЃР»РѕР¶РЅРµРµ С‚.Рє. РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ РёРЅРґРІР°Р»РёРґРЅРѕСЃС‚РµР№ РЅР°Р»РµРїР»РµРЅРѕ РІРјРµСЃС‚Рµ.
+    				| РёС‰РµРј РїСЂР°РІС‹Р№ РєСЂР°Р№, РѕС‚РѕРґРІРёРіР°СЏ РІРїСЂР°РІРѕ РїРµСЂРµРјРµРЅРЅСѓСЋ lStop
     				tdate lStop
 					lStop =  tfzzz087.invato
 					repeat
@@ -165,7 +165,7 @@ function writeOasisFile(){
 						long xxx
 						xxx = lStop + 1
 		    			select * from tfzzz087
-    					where _index2  | перекрывает точку lStop
+    					where _index2  | РїРµСЂРµРєСЂС‹РІР°РµС‚ С‚РѕС‡РєСѓ lStop
     				  	inrange {:tfzzz003.emplid, :lStart, :xxx}
     				  	  and	{:tfzzz003.emplid, :lStop , DR_MAX_DATE}
 	    			  	order by _index2
@@ -173,21 +173,21 @@ function writeOasisFile(){
     					selectdo
     						lStop = tfzzz087.invato
     					selectempty
-    						cont=1 | всё, не нашли, правее двигать некуда, выходим.
+    						cont=1 | РІСЃС‘, РЅРµ РЅР°С€Р»Рё, РїСЂР°РІРµРµ РґРІРёРіР°С‚СЊ РЅРµРєСѓРґР°, РІС‹С…РѕРґРёРј.
     					endselect
     				until cont=1
     			selectempty
     				found=0
     			endselect
     			if found then 
-   					ProcessInterval(true,lStart,lStop) | период где ИНВАЛИД
-   					left = lStop + 1 | вот так! дальше будем искать следующий комок 
+   					ProcessInterval(true,lStart,lStop) | РїРµСЂРёРѕРґ РіРґРµ РРќР’РђР›РР”
+   					left = lStop + 1 | РІРѕС‚ С‚Р°Рє! РґР°Р»СЊС€Рµ Р±СѓРґРµРј РёСЃРєР°С‚СЊ СЃР»РµРґСѓСЋС‰РёР№ РєРѕРјРѕРє 
    				else     				
-    				break | выход из repeat
+    				break | РІС‹С…РѕРґ РёР· repeat
     			endif
 			until left>lEdate
-			| тут надо вызвать еще раз, для остатка оси времени и типа=неинвалид
-			ProcessInterval(false,left,DR_MAX_DATE) | период где НЕИНВАЛИД
+			| С‚СѓС‚ РЅР°РґРѕ РІС‹Р·РІР°С‚СЊ РµС‰Рµ СЂР°Р·, РґР»СЏ РѕСЃС‚Р°С‚РєР° РѕСЃРё РІСЂРµРјРµРЅРё Рё С‚РёРїР°=РЅРµРёРЅРІР°Р»РёРґ
+			ProcessInterval(false,left,DR_MAX_DATE) | РїРµСЂРёРѕРґ РіРґРµ РќР•РРќР’РђР›РР”
 
 			inc(curr1) 
 
@@ -211,22 +211,22 @@ function long doc.count(domain tfzzz.pftvs dType, tdate work.date){
 	return(count)
 }
 
-| когда оттестирую, заменю тут всё на дефайны
+| РєРѕРіРґР° РѕС‚С‚РµСЃС‚РёСЂСѓСЋ, Р·Р°РјРµРЅСЋ С‚СѓС‚ РІСЃС‘ РЅР° РґРµС„Р°Р№РЅС‹
 function void get.zzz.pfper.dates(long yr, domain tfzzz.pfper period, ref tdate lBdate, ref tdate lEdate){
   on case period                                                           
 	case tfzzz.pfper.jnsp: lBdate=date.to.num(yr,01,01) lEdate=date.to.num(yr,09,30) break |01.01-30.09
 	case tfzzz.pfper.apsp: lBdate=date.to.num(yr,04,01) lEdate=date.to.num(yr,09,30) break |01.04-30.09
 	case tfzzz.pfper.apdc: lBdate=date.to.num(yr,04,01) lEdate=date.to.num(yr,12,31) break |01.04-31.12
 
-	case tfzzz.pfper.jnmc: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,1),false,lBdate,lEdate) break |1 квартал
-	case tfzzz.pfper.apju: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,2),false,lBdate,lEdate) break |2 квартал
-	case tfzzz.pfper.jlsp: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,3),false,lBdate,lEdate) break |3 квартал
-	case tfzzz.pfper.okdc: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,4),false,lBdate,lEdate) break |4 квартал
+	case tfzzz.pfper.jnmc: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,1),false,lBdate,lEdate) break |1 РєРІР°СЂС‚Р°Р»
+	case tfzzz.pfper.apju: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,2),false,lBdate,lEdate) break |2 РєРІР°СЂС‚Р°Р»
+	case tfzzz.pfper.jlsp: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,3),false,lBdate,lEdate) break |3 РєРІР°СЂС‚Р°Р»
+	case tfzzz.pfper.okdc: get.period.dates(getTypedPeriodId(tfzzz.pert.quarter ,yr,4),false,lBdate,lEdate) break |4 РєРІР°СЂС‚Р°Р»
 
-	case tfzzz.pfper.jnju: get.period.dates(getTypedPeriodId(tfzzz.pert.halfyear,yr,1),false,lBdate,lEdate) break |1 полугодие
-	case tfzzz.pfper.jldc: get.period.dates(getTypedPeriodId(tfzzz.pert.halfyear,yr,2),false,lBdate,lEdate) break |2 полугодие
+	case tfzzz.pfper.jnju: get.period.dates(getTypedPeriodId(tfzzz.pert.halfyear,yr,1),false,lBdate,lEdate) break |1 РїРѕР»СѓРіРѕРґРёРµ
+	case tfzzz.pfper.jldc: get.period.dates(getTypedPeriodId(tfzzz.pert.halfyear,yr,2),false,lBdate,lEdate) break |2 РїРѕР»СѓРіРѕРґРёРµ
 
-	case tfzzz.pfper.jndc: get.period.dates(getTypedPeriodId(tfzzz.pert.year    ,yr,1),false,lBdate,lEdate) break |весь год
+	case tfzzz.pfper.jndc: get.period.dates(getTypedPeriodId(tfzzz.pert.year    ,yr,1),false,lBdate,lEdate) break |РІРµСЃСЊ РіРѕРґ
   endcase           
 }
 
@@ -263,7 +263,7 @@ function String convertStr(domain tfzzz.pftf type){
 }
 
 function String ConvertKTZL(bool invalid){
-	return(trim$(tfzzz003.emplpfct) & (invalid? "ИВ":""))
+	return(trim$(tfzzz003.emplpfct) & (invalid? "РР’":""))
 }
 
 function String ConvertAddr(){
@@ -294,10 +294,10 @@ function String ConvertAddr(){
 
 function String cvtRegion(){
 	if tfzzz040.addrregn="077" then
-		return("МОСКВА Г")
+		return("РњРћРЎРљР’Рђ Р“")
 	endif
 	if tfzzz040.addrregn="078" then
-		return("САНКТ-ПЕТЕРБУРГ Г")
+		return("РЎРђРќРљРў-РџР•РўР•Р Р‘РЈР Р“ Р“")
 	endif
 	return(tfzzz040.addrregn)
 }
@@ -323,16 +323,16 @@ function void processInterval(Bool inv, TDate date.f, TDate date.t){
 	TDate	d1, d2
 
 	if date.f >= date.t then
-		return | прочь, неправильные интервалы!
+		return | РїСЂРѕС‡СЊ, РЅРµРїСЂР°РІРёР»СЊРЅС‹Рµ РёРЅС‚РµСЂРІР°Р»С‹!
 	endif
 
 	intersect.ranges(date.f,date.t, lBdate, lEdate, d1, d2)
 	if d1=0 and d2=0 then
-		return | нет пересечения с отчетным периодом, прочь!
+		return | РЅРµС‚ РїРµСЂРµСЃРµС‡РµРЅРёСЏ СЃ РѕС‚С‡РµС‚РЅС‹Рј РїРµСЂРёРѕРґРѕРј, РїСЂРѕС‡СЊ!
 	endif
 
 	OAS_REC(
-	  O.S("ИНДС"), | 1
+	  O.S("РРќР”РЎ"), | 1
 	  O.N(curr1),   | 2
 	  O.S(convertTypeFormStr(form.type),4), | 3
 	  O.S(convertStr(ConvertTypeCorr(form.type)),4), | 4		  
@@ -361,8 +361,8 @@ function void processInterval(Bool inv, TDate date.f, TDate date.t){
 function String convertGender(){
 	String gstr(1)
 	gstr = enum.descr$("tfzzz.gender",get.employee.gender(tfzzz003.emplid, work.date))
-	if gstr="Н" then
-|		message("Сообщение: для работника с кодом "&str$(tfzzz003.emplid)&" нет данных о поле") !!!!!!! @@@@@@@@@@@
+	if gstr="Рќ" then
+|		message("РЎРѕРѕР±С‰РµРЅРёРµ: РґР»СЏ СЂР°Р±РѕС‚РЅРёРєР° СЃ РєРѕРґРѕРј "&str$(tfzzz003.emplid)&" РЅРµС‚ РґР°РЅРЅС‹С… Рѕ РїРѕР»Рµ") !!!!!!! @@@@@@@@@@@
 		gstr=" "
 	endif
 	return(gstr)
@@ -371,10 +371,10 @@ function String convertGender(){
 table ttfzzz007
 table ttfzzz006
 |@params
-|  rep.* - отчетный период
-|  pfis.* - период формирования индивидуальных сведений
-|  assurPart - страховая часть
-|  cumulPart - накопительная часть
+|  rep.* - РѕС‚С‡РµС‚РЅС‹Р№ РїРµСЂРёРѕРґ
+|  pfis.* - РїРµСЂРёРѕРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… СЃРІРµРґРµРЅРёР№
+|  assurPart - СЃС‚СЂР°С…РѕРІР°СЏ С‡Р°СЃС‚СЊ
+|  cumulPart - РЅР°РєРѕРїРёС‚РµР»СЊРЅР°СЏ С‡Р°СЃС‚СЊ
 |@created 
 | by Max Belugin 10.12.2002 16:33:20
 function payings(long empl, TDate rep.first, TDate rep.last, TDate pfis.first, TDate pfis.last, long assurPart, long cumulPart){
@@ -384,32 +384,32 @@ function payings(long empl, TDate rep.first, TDate rep.last, TDate pfis.first, T
 	allLeaveDays=leaveDays(empl, rep.first, rep.last)
 	
 	OAS_REC(
-		|<ТПЗП6>	Тип записи	Строка	4
-		O.S("НЧСЛ"), 
-		|<БНЧСЛ>	База для начислений страховых взносов	Действительное число	15.2
+		|<РўРџР—Рџ6>	РўРёРї Р·Р°РїРёСЃРё	РЎС‚СЂРѕРєР°	4
+		O.S("РќР§РЎР›"), 
+		|<Р‘РќР§РЎР›>	Р‘Р°Р·Р° РґР»СЏ РЅР°С‡РёСЃР»РµРЅРёР№ СЃС‚СЂР°С…РѕРІС‹С… РІР·РЅРѕСЃРѕРІ	Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ	15.2
 		O.N(0), 
-		|<СЧПФ>	Сумма начисленного взноса на страховую часть пенсии	Действительное число	15.2
+		|<РЎР§РџР¤>	РЎСѓРјРјР° РЅР°С‡РёСЃР»РµРЅРЅРѕРіРѕ РІР·РЅРѕСЃР° РЅР° СЃС‚СЂР°С…РѕРІСѓСЋ С‡Р°СЃС‚СЊ РїРµРЅСЃРёРё	Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ	15.2
 		O.N(ChPF(empl, pfis.first, pfis.last, assurPart)),
-		|<НЧПФ>	Сумма начисленного взноса на накопительную часть пенсии	Действительное число	15.2
+		|<РќР§РџР¤>	РЎСѓРјРјР° РЅР°С‡РёСЃР»РµРЅРЅРѕРіРѕ РІР·РЅРѕСЃР° РЅР° РЅР°РєРѕРїРёС‚РµР»СЊРЅСѓСЋ С‡Р°СЃС‚СЊ РїРµРЅСЃРёРё	Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ	15.2
 	    O.N(ChPF(empl, pfis.first, pfis.last, cumulPart)),
-	    |<ДВЗПФ>	Сумма начисленного взноса по дополнительному тарифу	Действительное число	15.2
+	    |<Р”Р’Р—РџР¤>	РЎСѓРјРјР° РЅР°С‡РёСЃР»РµРЅРЅРѕРіРѕ РІР·РЅРѕСЃР° РїРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕРјСѓ С‚Р°СЂРёС„Сѓ	Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ	15.2
 	    O.N(0),
-	    |<ВНДН>	Период работы по временной нетрудоспособности - месяцев	Целое число	2
+	    |<Р’РќР”Рќ>	РџРµСЂРёРѕРґ СЂР°Р±РѕС‚С‹ РїРѕ РІСЂРµРјРµРЅРЅРѕР№ РЅРµС‚СЂСѓРґРѕСЃРїРѕСЃРѕР±РЅРѕСЃС‚Рё - РјРµСЃСЏС†РµРІ	Р¦РµР»РѕРµ С‡РёСЃР»Рѕ	2
 	    O.N(round(days\30,0,2)),
-		|<ВНМСЦ>	Период работы по временной нетрудоспособности - дней	Целое число	2
+		|<Р’РќРњРЎР¦>	РџРµСЂРёРѕРґ СЂР°Р±РѕС‚С‹ РїРѕ РІСЂРµРјРµРЅРЅРѕР№ РЅРµС‚СЂСѓРґРѕСЃРїРѕСЃРѕР±РЅРѕСЃС‚Рё - РґРЅРµР№	Р¦РµР»РѕРµ С‡РёСЃР»Рѕ	2
 		O.N(round(days/30,0,0)),
-		|<АОДН>	Отпуск без сохранения содержания - месяцев	Целое число	2
+		|<РђРћР”Рќ>	РћС‚РїСѓСЃРє Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ СЃРѕРґРµСЂР¶Р°РЅРёСЏ - РјРµСЃСЏС†РµРІ	Р¦РµР»РѕРµ С‡РёСЃР»Рѕ	2
 		O.N(round(allLeaveDays\30,0,2)),
-		|<АОМСЦ>	Отпуск без сохранения содержания - дней	Целое число	2	)
+		|<РђРћРњРЎР¦>	РћС‚РїСѓСЃРє Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ СЃРѕРґРµСЂР¶Р°РЅРёСЏ - РґРЅРµР№	Р¦РµР»РѕРµ С‡РёСЃР»Рѕ	2	)
 		O.N(round(allLeaveDays/30,0,0))
      )
 }
-|<СЧПФ> - сумма по полям <Сумма> таблицы tfzzz022, по работнику, для 
-|  которого формируется данная запись индивидуальных сведений, периодам 
-|  непрерывной работы, попадающим в период формирования индивидуальных 
-|  сведений, периодам выплат, попадающим в период формирования индивидуальных 
-|  сведений, и коду налога, соответствующего значению параметра запроса 
-|  <Страховая часть>.
+|<РЎР§РџР¤> - СЃСѓРјРјР° РїРѕ РїРѕР»СЏРј <РЎСѓРјРјР°> С‚Р°Р±Р»РёС†С‹ tfzzz022, РїРѕ СЂР°Р±РѕС‚РЅРёРєСѓ, РґР»СЏ 
+|  РєРѕС‚РѕСЂРѕРіРѕ С„РѕСЂРјРёСЂСѓРµС‚СЃСЏ РґР°РЅРЅР°СЏ Р·Р°РїРёСЃСЊ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… СЃРІРµРґРµРЅРёР№, РїРµСЂРёРѕРґР°Рј 
+|  РЅРµРїСЂРµСЂС‹РІРЅРѕР№ СЂР°Р±РѕС‚С‹, РїРѕРїР°РґР°СЋС‰РёРј РІ РїРµСЂРёРѕРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… 
+|  СЃРІРµРґРµРЅРёР№, РїРµСЂРёРѕРґР°Рј РІС‹РїР»Р°С‚, РїРѕРїР°РґР°СЋС‰РёРј РІ РїРµСЂРёРѕРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… 
+|  СЃРІРµРґРµРЅРёР№, Рё РєРѕРґСѓ РЅР°Р»РѕРіР°, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРіРѕ Р·РЅР°С‡РµРЅРёСЋ РїР°СЂР°РјРµС‚СЂР° Р·Р°РїСЂРѕСЃР° 
+|  <РЎС‚СЂР°С…РѕРІР°СЏ С‡Р°СЃС‚СЊ>.
 |@created 
 | by Max Belugin 10.12.2002 16:17:58
 function double ChPF(long empl, TDate first, TDate last, long tax){
@@ -418,24 +418,24 @@ function double ChPF(long empl, TDate first, TDate last, long tax){
 	table ttfzzz022
 	long curPeriod
 	select tfzzz022.summ:cur, tfzzz022.pern:curPeriod from tfzzz022, tfzzz027 where
-		| по работнику, для которого формируется данная запись 
-		| индивидуальных сведений,
+		| РїРѕ СЂР°Р±РѕС‚РЅРёРєСѓ, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ С„РѕСЂРјРёСЂСѓРµС‚СЃСЏ РґР°РЅРЅР°СЏ Р·Р°РїРёСЃСЊ 
+		| РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… СЃРІРµРґРµРЅРёР№,
 		tfzzz022._index1={:empl, tfzzz027.pwpwbdat}
 		and
-		| периодам 
-		|  непрерывной работы, попадающим в период формирования 
-		| индивидуальных сведений
+		| РїРµСЂРёРѕРґР°Рј 
+		|  РЅРµРїСЂРµСЂС‹РІРЅРѕР№ СЂР°Р±РѕС‚С‹, РїРѕРїР°РґР°СЋС‰РёРј РІ РїРµСЂРёРѕРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ 
+		| РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… СЃРІРµРґРµРЅРёР№
 		tfzzz027._index2 inrange 
 			{:empl, DR_MIN_DATE, :first}
 			and
 			{:empl, :last, DR_MAX_DATE}
 		and
-		| коду налога, соответствующего значению параметра запроса 
-		|  <Страховая часть>
+		| РєРѕРґСѓ РЅР°Р»РѕРіР°, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРіРѕ Р·РЅР°С‡РµРЅРёСЋ РїР°СЂР°РјРµС‚СЂР° Р·Р°РїСЂРѕСЃР° 
+		|  <РЎС‚СЂР°С…РѕРІР°СЏ С‡Р°СЃС‚СЊ>
 		tfzzz022.nalc=:tax
 	selectdo
-		| периодам выплат, попадающим в период формирования индивидуальных 
-		| сведений
+		| РїРµСЂРёРѕРґР°Рј РІС‹РїР»Р°С‚, РїРѕРїР°РґР°СЋС‰РёРј РІ РїРµСЂРёРѕРґ С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… 
+		| СЃРІРµРґРµРЅРёР№
 		TDate curBeg, curEnd
 		get.period.dates(curPeriod, false, curBeg, curEnd)
 		if curEnd>=first and curBeg<=last then
@@ -455,19 +455,19 @@ function long illnessDays(long empl, long period){
 	long result
 	result=0
 	long was
-	|количество записей в непрерывном по датам наборе записей 
-	|(периоде больничного) в таблице tfzzz007 по основному рабочему 
-	|месту работника, виду времени, соответствующему значениям, 
-	|указанным в полях <Вид времени> записей таблицы tfzzz259, 
-	|имеющих значение поля <Тип отпуска> - <Временная нетрудоспособность>, 
-	|с признаком <Верхний уровень> и датой, попадающей в отчетный период. 
-	|Начало периода суммирования календарных дней определяется 
-	|как максимальная из дат:
-	|		дата начала периода <ПЕРИОД_ПУСТ>,
-	|		первая дата периода больничного;
-	|	Окончание периода суммирования календарных дней по одному документу определяется как минимальная из дат:
-	|		дата окончания периода <ПЕРИОД_ПУСТ>,
-	|		последняя дата периода больничного.
+	|РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃРµР№ РІ РЅРµРїСЂРµСЂС‹РІРЅРѕРј РїРѕ РґР°С‚Р°Рј РЅР°Р±РѕСЂРµ Р·Р°РїРёСЃРµР№ 
+	|(РїРµСЂРёРѕРґРµ Р±РѕР»СЊРЅРёС‡РЅРѕРіРѕ) РІ С‚Р°Р±Р»РёС†Рµ tfzzz007 РїРѕ РѕСЃРЅРѕРІРЅРѕРјСѓ СЂР°Р±РѕС‡РµРјСѓ 
+	|РјРµСЃС‚Сѓ СЂР°Р±РѕС‚РЅРёРєР°, РІРёРґСѓ РІСЂРµРјРµРЅРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРјСѓ Р·РЅР°С‡РµРЅРёСЏРј, 
+	|СѓРєР°Р·Р°РЅРЅС‹Рј РІ РїРѕР»СЏС… <Р’РёРґ РІСЂРµРјРµРЅРё> Р·Р°РїРёСЃРµР№ С‚Р°Р±Р»РёС†С‹ tfzzz259, 
+	|РёРјРµСЋС‰РёС… Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ <РўРёРї РѕС‚РїСѓСЃРєР°> - <Р’СЂРµРјРµРЅРЅР°СЏ РЅРµС‚СЂСѓРґРѕСЃРїРѕСЃРѕР±РЅРѕСЃС‚СЊ>, 
+	|СЃ РїСЂРёР·РЅР°РєРѕРј <Р’РµСЂС…РЅРёР№ СѓСЂРѕРІРµРЅСЊ> Рё РґР°С‚РѕР№, РїРѕРїР°РґР°СЋС‰РµР№ РІ РѕС‚С‡РµС‚РЅС‹Р№ РїРµСЂРёРѕРґ. 
+	|РќР°С‡Р°Р»Рѕ РїРµСЂРёРѕРґР° СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ РєР°Р»РµРЅРґР°СЂРЅС‹С… РґРЅРµР№ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ 
+	|РєР°Рє РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РёР· РґР°С‚:
+	|		РґР°С‚Р° РЅР°С‡Р°Р»Р° РїРµСЂРёРѕРґР° <РџР•Р РРћР”_РџРЈРЎРў>,
+	|		РїРµСЂРІР°СЏ РґР°С‚Р° РїРµСЂРёРѕРґР° Р±РѕР»СЊРЅРёС‡РЅРѕРіРѕ;
+	|	РћРєРѕРЅС‡Р°РЅРёРµ РїРµСЂРёРѕРґР° СЃСѓРјРјРёСЂРѕРІР°РЅРёСЏ РєР°Р»РµРЅРґР°СЂРЅС‹С… РґРЅРµР№ РїРѕ РѕРґРЅРѕРјСѓ РґРѕРєСѓРјРµРЅС‚Сѓ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ РєР°Рє РјРёРЅРёРјР°Р»СЊРЅР°СЏ РёР· РґР°С‚:
+	|		РґР°С‚Р° РѕРєРѕРЅС‡Р°РЅРёСЏ РїРµСЂРёРѕРґР° <РџР•Р РРћР”_РџРЈРЎРў>,
+	|		РїРѕСЃР»РµРґРЅСЏСЏ РґР°С‚Р° РїРµСЂРёРѕРґР° Р±РѕР»СЊРЅРёС‡РЅРѕРіРѕ.
 	long skipDate
 	skipDate=0
 	TBool prevWasIllness
@@ -648,7 +648,7 @@ function variantMaxa(long empl, TDate first, TDate last){
 	prof.endPiece("variantMaxa")
 }
 |
-| вызывает handlePeriod(wp,begDate, endDate, leaveKind, false)
+| РІС‹Р·С‹РІР°РµС‚ handlePeriod(wp,begDate, endDate, leaveKind, false)
 |@created 
 | by Max Belugin 12.12.2002 15:55:34
 function extern variantByWP(long empl, TDate first, TDate last){
@@ -726,22 +726,22 @@ function extern variantByWP(long empl, TDate first, TDate last){
 
 
 #define FLAG1
-^ (  OIVL="САМОЛЕТ" 
-^ or OIVL="СПЕЦАВ" 
-^ or OIVL="ИТСИСП" 
-^ or OIVL="ИТСМАВ" 
-^ or OIVL="ИНСПЕКТ" 
-^ or OIVL="ЛЕТИСП")
+^ (  OIVL="РЎРђРњРћР›Р•Рў" 
+^ or OIVL="РЎРџР•Р¦РђР’" 
+^ or OIVL="РРўРЎРРЎРџ" 
+^ or OIVL="РРўРЎРњРђР’" 
+^ or OIVL="РРќРЎРџР•РљРў" 
+^ or OIVL="Р›Р•РўРРЎРџ")
 
 #define FLAG2
-^    OIVL="ЗП80РК"
+^    OIVL="Р—Рџ80Р Рљ"
 
 #define FLAG3
-^ ( OIVL="ЗП81СМ"
-^ or OIVL="ЗП81ГД"
-^ or OIVL="ХИРУРГСМ"
-^ or OIVL="ХИРУРГД"
-^ or OIVL="ЗП80ПД")
+^ ( OIVL="Р—Рџ81РЎРњ"
+^ or OIVL="Р—Рџ81Р“Р”"
+^ or OIVL="РҐРР РЈР Р“РЎРњ"
+^ or OIVL="РҐРР РЈР Р“Р”"
+^ or OIVL="Р—Рџ80РџР”")
 
 
 function handlePeriod(long empl, TDate first, TDate last, domain tfzzz.pfvr leaveKind){
@@ -765,20 +765,20 @@ function handlePeriod(long empl, TDate first, TDate last, domain tfzzz.pfvr leav
 		was2 = false		
 		was3 = false		
 
-		| 2я часть недержания - 1
+		| 2СЏ С‡Р°СЃС‚СЊ РЅРµРґРµСЂР¶Р°РЅРёСЏ - 1
 		select  tfzzz024.* from	tfzzz058, tfzzz024
 		where 	tfzzz058._index1= {:tfzzz026.wp_staff, :tfzzz026.wp_prid1}
-			and tfzzz058.pnplwcnd refers to tfzzz024 | линк на 024
+			and tfzzz058.pnplwcnd refers to tfzzz024 | Р»РёРЅРє РЅР° 024
 			and tfzzz024.c_lb_pfc <> ""
 		selectdo
 		   was2=true	
 		endselect
 	
-		| 2я часть недержания - 2
+		| 2СЏ С‡Р°СЃС‚СЊ РЅРµРґРµСЂР¶Р°РЅРёСЏ - 2
 		select tfzzz095.* from tfzzz095, tfzzz156 where 
 		  tfzzz156._index1 inrange {:tfzzz026.wp_staff, :tfzzz026.wp_id, DR_MIN_LONG, :first}
 							  and  {:tfzzz026.wp_staff, :tfzzz026.wp_id, DR_MAX_LONG, :last}
-			and tfzzz156.smagstzh refers to tfzzz095	| Виды стажей
+			and tfzzz156.smagstzh refers to tfzzz095	| Р’РёРґС‹ СЃС‚Р°Р¶РµР№
 			and tfzzz095.rctpvsbs <> ""
 		as set with 1 rows
 		selectdo
@@ -789,7 +789,7 @@ function handlePeriod(long empl, TDate first, TDate last, domain tfzzz.pfvr leav
 			handlePeriodOld(_max(first, tfzzz026.wp_crdat), _min(last, tfzzz026.wp_andat), leaveKind, was1, was2, was3)
 		endif
 
-		| по просьбам Маш
+		| РїРѕ РїСЂРѕСЃСЊР±Р°Рј РњР°С€
 		if leaveKind=tfzzz.pfvr.deti or leaveKind=tfzzz.pfvr.dekr then
 			break
 		endif
@@ -832,10 +832,10 @@ function handlePeriodOld(TDate first, TDate last, domain tfzzz.pfvr leaveKind, t
 	long years ,months, days
 	PFSeniority(first, last, years ,months, days)
 
-	klwc = KLWCh(tfzzz026.wp_staff, tfzzz026.wp_id,NCPR, KNPR) | можно ли тут так передавать empl и wp ?
+	klwc = KLWCh(tfzzz026.wp_staff, tfzzz026.wp_id,NCPR, KNPR) | РјРѕР¶РЅРѕ Р»Рё С‚СѓС‚ С‚Р°Рє РїРµСЂРµРґР°РІР°С‚СЊ empl Рё wp ?
 	DCC1=0
 	DCC2=0
-	#define notVodolaz  (trim$(OITS)<>"ВОДОЛАЗ")
+	#define notVodolaz  (trim$(OITS)<>"Р’РћР”РћР›РђР—")
 	if (was2 or was3) and not isSpace(OUUS) then
 		DCC1 = min(months, round(notVodolaz ? (kdst/30) : klwc,0,0))
 	endif
@@ -845,11 +845,11 @@ function handlePeriodOld(TDate first, TDate last, domain tfzzz.pfvr leaveKind, t
 	| 10
 	DCC3=""
 	if leaveKind=tfzzz.pfvr.dekr then
-		DCC3="ДЕКРЕТ"
+		DCC3="Р”Р•РљР Р•Рў"
 |		alert(dcc3)
 	endif
 	if leaveKind=tfzzz.pfvr.deti then
-		DCC3="ДЕТИ"
+		DCC3="Р”Р•РўР"
 	|	alert(dcc3)
 	endif
 	| 11
@@ -878,7 +878,7 @@ function handlePeriodOld(TDate first, TDate last, domain tfzzz.pfvr leaveKind, t
 	endif
 
 	OAS_REC(
-		O.S("СТАЖ"), | 1
+		O.S("РЎРўРђР–"), | 1
 		O.N(curr2),  | 2
 		O.D(NCPR),   | 3
 		O.D(KNPR),   | 4		  
@@ -903,50 +903,50 @@ function handlePeriodOld(TDate first, TDate last, domain tfzzz.pfvr leaveKind, t
 |@created 
 | by Max Belugin 12.12.2002 17:38:10
 function PFSeniority(TDate first, TDate last, ref long y,ref long m, ref long d){
-	|?	Гн Мн Дн - дата начала периода,
+	|?	Р“РЅ РњРЅ Р”РЅ - РґР°С‚Р° РЅР°С‡Р°Р»Р° РїРµСЂРёРѕРґР°,
 	long first.y, first.m, first.d
 	num.to.date(first, first.y, first.m, first.d)
-	|?	Гк Мк Дк - дата конца периода,
+	|?	Р“Рє РњРє Р”Рє - РґР°С‚Р° РєРѕРЅС†Р° РїРµСЂРёРѕРґР°,
 	long last.y, last.m, last.d
 	num.to.date(last, last.y, last.m, last.d)
-|	|?	Г М Д - календарно отработанное время.
+|	|?	Р“ Рњ Р” - РєР°Р»РµРЅРґР°СЂРЅРѕ РѕС‚СЂР°Р±РѕС‚Р°РЅРЅРѕРµ РІСЂРµРјСЏ.
 |	long y, m, d
-	|?	Д=Дк-Дн
+	|?	Р”=Р”Рє-Р”РЅ
 	d=last.d-first.d
-	| если Д<0 
+	| РµСЃР»Рё Р”<0 
 	if d<0 then
-		| то Д=Д+30 
+		| С‚Рѕ Р”=Р”+30 
 		inc(d, 30)
-		| Мк=Мк-1
+		| РњРє=РњРє-1
 		dec(last.m)
 	endif
-	|?	М= Мк-Мн
+	|?	Рњ= РњРє-РњРЅ
 	m=last.m-first.m
-	|если М<0
+	|РµСЃР»Рё Рњ<0
 	if m<0 then
-		|то М=М+12
+		|С‚Рѕ Рњ=Рњ+12
 		inc(m, 12)
-		|Гк=Гк-1
+		|Р“Рє=Р“Рє-1
 		dec(last.y)
 	endif
-	|?	Г=Гк-Гн
+	|?	Р“=Р“Рє-Р“РЅ
 	y=last.y-first.y
-	|?	Д=Д+1
+	|?	Р”=Р”+1
 	inc(d)
-	|	если Д>=30
+	|	РµСЃР»Рё Р”>=30
 	if d>=30 then
-		|	то Д=0
+		|	С‚Рѕ Р”=0
 		d=0
-		|	М=М+1
+		|	Рњ=Рњ+1
 		inc(m)
 	endif	
 }
 
 
-|?	<КЛВЧ> - сумма по полям <Время> tfzzz156, для записей по 
-|текущему коду работника, рабочего места, виду стажа, в записи 
-|о котором в поле tfzzz095.pfst стоит значение <ДА>, и датам с 
-|<НЧПР> по <КНПР>.
+|?	<РљР›Р’Р§> - СЃСѓРјРјР° РїРѕ РїРѕР»СЏРј <Р’СЂРµРјСЏ> tfzzz156, РґР»СЏ Р·Р°РїРёСЃРµР№ РїРѕ 
+|С‚РµРєСѓС‰РµРјСѓ РєРѕРґСѓ СЂР°Р±РѕС‚РЅРёРєР°, СЂР°Р±РѕС‡РµРіРѕ РјРµСЃС‚Р°, РІРёРґСѓ СЃС‚Р°Р¶Р°, РІ Р·Р°РїРёСЃРё 
+|Рѕ РєРѕС‚РѕСЂРѕРј РІ РїРѕР»Рµ tfzzz095.pfst СЃС‚РѕРёС‚ Р·РЅР°С‡РµРЅРёРµ <Р”Рђ>, Рё РґР°С‚Р°Рј СЃ 
+|<РќР§РџР > РїРѕ <РљРќРџР >.
 |@created 
 | by Max Belugin 12.12.2002 17:57:02
 function double KLWCh(long empl, long wp, TDate first, TDate last){
@@ -967,10 +967,10 @@ function double KLWCh(long empl, long wp, TDate first, TDate last){
 
 
 
-|?	<КЛВЧ1> - сумма по полям <Время> tfzzz156, для записей по 
-|текущему коду работника, рабочего места, виду стажа, в записи 
-|о котором в поле tfzzz095.rctpinvs стоит значение <ДА>, и датам с 
-|<НЧПР> по <КНПР>.
+|?	<РљР›Р’Р§1> - СЃСѓРјРјР° РїРѕ РїРѕР»СЏРј <Р’СЂРµРјСЏ> tfzzz156, РґР»СЏ Р·Р°РїРёСЃРµР№ РїРѕ 
+|С‚РµРєСѓС‰РµРјСѓ РєРѕРґСѓ СЂР°Р±РѕС‚РЅРёРєР°, СЂР°Р±РѕС‡РµРіРѕ РјРµСЃС‚Р°, РІРёРґСѓ СЃС‚Р°Р¶Р°, РІ Р·Р°РїРёСЃРё 
+|Рѕ РєРѕС‚РѕСЂРѕРј РІ РїРѕР»Рµ tfzzz095.rctpinvs СЃС‚РѕРёС‚ Р·РЅР°С‡РµРЅРёРµ <Р”Рђ>, Рё РґР°С‚Р°Рј СЃ 
+|<РќР§РџР > РїРѕ <РљРќРџР >.
 |@created 
 | by Max Belugin 12.12.2002 17:57:02
 function double KLWCh1(long empl, long wp, TDate first, TDate last){
@@ -988,16 +988,16 @@ function double KLWCh1(long empl, long wp, TDate first, TDate last){
 }
 
 
-|?  <ОИВЛ> - значение поля tfzzz095.rctpvsbs для записи о виде стажа, 
-|по которому у работника по текущему рабочему месту существуют данные 
-| в таблице tfzzz156 на период с <НЧПР> по <КНПР>, и в записи о котором 
-| в поле "Входит в выслугу" стоит значение "ДА".
+|?  <РћРР’Р›> - Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ tfzzz095.rctpvsbs РґР»СЏ Р·Р°РїРёСЃРё Рѕ РІРёРґРµ СЃС‚Р°Р¶Р°, 
+|РїРѕ РєРѕС‚РѕСЂРѕРјСѓ Сѓ СЂР°Р±РѕС‚РЅРёРєР° РїРѕ С‚РµРєСѓС‰РµРјСѓ СЂР°Р±РѕС‡РµРјСѓ РјРµСЃС‚Сѓ СЃСѓС‰РµСЃС‚РІСѓСЋС‚ РґР°РЅРЅС‹Рµ 
+| РІ С‚Р°Р±Р»РёС†Рµ tfzzz156 РЅР° РїРµСЂРёРѕРґ СЃ <РќР§РџР > РїРѕ <РљРќРџР >, Рё РІ Р·Р°РїРёСЃРё Рѕ РєРѕС‚РѕСЂРѕРј 
+| РІ РїРѕР»Рµ "Р’С…РѕРґРёС‚ РІ РІС‹СЃР»СѓРіСѓ" СЃС‚РѕРёС‚ Р·РЅР°С‡РµРЅРёРµ "Р”Рђ".
 function String getOIVL(tdate first, tdate last){
 
 	select tfzzz095.* from tfzzz095, tfzzz156 where 
 	  tfzzz156._index1 inrange {:tfzzz026.wp_staff, :tfzzz026.wp_id, DR_MIN_LONG, :first}
 						  and  {:tfzzz026.wp_staff, :tfzzz026.wp_id, DR_MAX_LONG, :last}
-		and tfzzz156.smagstzh refers to tfzzz095	| Виды стажей
+		and tfzzz156.smagstzh refers to tfzzz095	| Р’РёРґС‹ СЃС‚Р°Р¶РµР№
 		and tfzzz095.rctpinvs = CB_TRUE
 	as set with 1 rows
 	selectdo
@@ -1011,23 +1011,23 @@ function String getOIVL(tdate first, tdate last){
 | by Max Belugin 13.12.2002 13:05:27
 function double getKDST(long empl, long wp, TDate first, TDate last){
 	prof.begPiece("getKDST")
-	|	<ФРВ> - фонд рабочего времени в днях по табелю за период с 
-	|<НЧПР> по <КНПР>.
+	|	<Р¤Р Р’> - С„РѕРЅРґ СЂР°Р±РѕС‡РµРіРѕ РІСЂРµРјРµРЅРё РІ РґРЅСЏС… РїРѕ С‚Р°Р±РµР»СЋ Р·Р° РїРµСЂРёРѕРґ СЃ 
+	|<РќР§РџР > РїРѕ <РљРќРџР >.
 	long FRV 
 	FRV=tb.workingDaysByDates(wp, "", first, last, 0, 0, false, true)
-	|	<КВЧ> - сумма по полям <Время> tfzzz156, для записей по текущему 
-	|коду работника, рабочего места, виду стажа, в записи о котором в поле 
-	|tfzzz095.pfst стоит значение <ДА>, и датам с <НЧПР> по <КНПР>.
+	|	<РљР’Р§> - СЃСѓРјРјР° РїРѕ РїРѕР»СЏРј <Р’СЂРµРјСЏ> tfzzz156, РґР»СЏ Р·Р°РїРёСЃРµР№ РїРѕ С‚РµРєСѓС‰РµРјСѓ 
+	|РєРѕРґСѓ СЂР°Р±РѕС‚РЅРёРєР°, СЂР°Р±РѕС‡РµРіРѕ РјРµСЃС‚Р°, РІРёРґСѓ СЃС‚Р°Р¶Р°, РІ Р·Р°РїРёСЃРё Рѕ РєРѕС‚РѕСЂРѕРј РІ РїРѕР»Рµ 
+	|tfzzz095.pfst СЃС‚РѕРёС‚ Р·РЅР°С‡РµРЅРёРµ <Р”Рђ>, Рё РґР°С‚Р°Рј СЃ <РќР§РџР > РїРѕ <РљРќРџР >.
 	double KVCh 
 	KVCh=KLWCh(empl, wp, first, last)	
 	if is0(KVCh) then
 		return(0)
 	endif
-	|	<КДПР> - количество календарных дней периода с <НЧПР> по <КНПР>.
+	|	<РљР”РџР > - РєРѕР»РёС‡РµСЃС‚РІРѕ РєР°Р»РµРЅРґР°СЂРЅС‹С… РґРЅРµР№ РїРµСЂРёРѕРґР° СЃ <РќР§РџР > РїРѕ <РљРќРџР >.
 	long KDPR	
 	KDPR=last-first+1
-	| ?	<КДСТ> - равно КДПР - (ФРВ - КВЧ/24), если (ФРВ - КВЧ/24) > 0, в 
-	|противном случае КДСТ равно КДПР, где
+	| ?	<РљР”РЎРў> - СЂР°РІРЅРѕ РљР”РџР  - (Р¤Р Р’ - РљР’Р§/24), РµСЃР»Рё (Р¤Р Р’ - РљР’Р§/24) > 0, РІ 
+	|РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ РљР”РЎРў СЂР°РІРЅРѕ РљР”РџР , РіРґРµ
 	if (FRV-KVCh/24)>0 then
 		return(KDPR - (FRV - KVCh/24))
 	endif

@@ -8,7 +8,7 @@ x%>
 safdasfd
 
 <!--
-á†Ø‡Æ·: <%= Request.ServerVariables("QUERY_STRING")%><br/>
+–ó–∞–ø—Ä–æ—Å: <%= Request.ServerVariables("QUERY_STRING")%><br/>
 Page: <%=AllMembersCode%> / <%=AllMembersStr%><br>
 -->
 

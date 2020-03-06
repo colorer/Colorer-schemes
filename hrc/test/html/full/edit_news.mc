@@ -4,24 +4,24 @@
 	<td>
 		<table>
 			<tr>
-				<td colspan="2"><b>изменить новость</b><hr></td>
+				<td colspan="2"><b>РёР·РјРµРЅРёС‚СЊ РЅРѕРІРѕСЃС‚СЊ</b><hr></td>
 			</tr>
 			<tr>
-				<td>дата</td>
+				<td>РґР°С‚Р°</td>
 				<td><input type="text" name="date" size="10" value="<% $date %>"></td>
 			</tr>
 			<tr>
-				<td valign="top">вступление</td>
+				<td valign="top">РІСЃС‚СѓРїР»РµРЅРёРµ</td>
 				<td><textarea rows="3" name="brief" cols="30"><% $brief %></textarea></td>
 			</tr>
 			<tr>
-				<td valign="top">полный текст</td>
+				<td valign="top">РїРѕР»РЅС‹Р№ С‚РµРєСЃС‚</td>
 				<td><textarea rows="6" name="news" cols="30"><% $news %></textarea></td>
 			</tr>
 			<tr>
 				<td align="right" colspan="2">
-					<input type="submit" value="сброс">
-					<input type="submit" name="change_news" value="сохранить">
+					<input type="submit" value="СЃР±СЂРѕСЃ">
+					<input type="submit" name="change_news" value="СЃРѕС…СЂР°РЅРёС‚СЊ">
 				</td>
 			</tr>
 		</table>

@@ -3,29 +3,29 @@ xquery version "1.0" encoding "windows-1251";
 declare namespace def = "colorer://hrc/lib/default.hrc";
 
 declare variable 
-	(: типы от потолка (: из hrc :) берем :)
+	(: С‚РёРїС‹ РѕС‚ РїРѕС‚РѕР»РєР° (: РёР· hrc :) Р±РµСЂРµРј :)
 	$def:test1 as def:empty := aaa/bbb/ccc; 
-declare variable $def:test2 := aaa/bbb/ccc + ccc; (: отвалилось... :)
+declare variable $def:test2 := aaa/bbb/ccc + ccc; (: РѕС‚РІР°Р»РёР»РѕСЃСЊ... :)
 declare variable $def:test3:=aaa/bbb;
-declare variable $test4:=aaa/bbb; (: глюка :)
+declare variable $test4:=aaa/bbb; (: РіР»СЋРєР° :)
 
 declare function def:foo ($bar as xs:string) as def:Text
 {
-	let $xx:= aaa/bbb, (: глюка :)
+	let $xx:= aaa/bbb, (: РіР»СЋРєР° :)
 	let $aa as empty()? := aaa/bbb,
 		$bb := aaa/bbb,
-		$cc:= aaa/bbb (: совсем плохо... :)
+		$cc:= aaa/bbb (: СЃРѕРІСЃРµРј РїР»РѕС…Рѕ... :)
 	
 	<aaa>
 	{
-		for $aa in $n return xxx (: и так далее... 
-все возможности будем проверять как-нибудь в другой раз... :) 
+		for $aa in $n return xxx (: Рё С‚Р°Рє РґР°Р»РµРµ... 
+РІСЃРµ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё Р±СѓРґРµРј РїСЂРѕРІРµСЂСЏС‚СЊ РєР°Рє-РЅРёР±СѓРґСЊ РІ РґСЂСѓРіРѕР№ СЂР°Р·... :) 
 	}
 	</aaa>
 };
 
 <foo>
 {
-	def:foo("&lt;фигня&gt;")/bar
+	def:foo("&lt;С„РёРіРЅСЏ&gt;")/bar
 }
 </foo>

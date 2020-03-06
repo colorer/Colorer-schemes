@@ -2,4 +2,4 @@ echo sample >> c:\log.txt && echo sample
 echo sample >> c:\log.txt || echo sample
 cmd.exe >> 1.txt
 echo sample && goto eof
-Echo Ðèñóåì ñïåöñèìâîë ^| è åùå îäèí ^> è åùå îäèí ^&
+Echo Ð Ð¸ÑÑƒÐµÐ¼ ÑÐ¿ÐµÑ†ÑÐ¸Ð¼Ð²Ð¾Ð» ^| Ð¸ ÐµÑ‰Ðµ Ð¾Ð´Ð¸Ð½ ^> Ð¸ ÐµÑ‰Ðµ Ð¾Ð´Ð¸Ð½ ^&

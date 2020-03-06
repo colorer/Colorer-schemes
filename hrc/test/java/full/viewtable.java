@@ -45,7 +45,7 @@ public class ViewTable {
                     } catch (Exception e) {
                         ssvt.log(e);
                     }
-                    // получить список прав пользователей на таблицу
+                    // РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РїСЂР°РІ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РЅР° С‚Р°Р±Р»РёС†Сѓ
                     String sqlRights = ssvt.getProperty("getSqlRights");
                     try {
                         PreparedStatement statement = connection.prepareStatement(sqlRights);
@@ -133,7 +133,7 @@ public class ViewTable {
         if (user.isAdministrator() || tableQuery.getUser(user.getId()).getInsert()) {
             Connection connection = ssvt.getConnection();
             if (connection != null) {
-                // Сформировать SQL запрос
+                // РЎС„РѕСЂРјРёСЂРѕРІР°С‚СЊ SQL Р·Р°РїСЂРѕСЃ
                 StringBuffer sql = new StringBuffer("insert into ").append(ssvt.getProperty("schema")).append('.').append(tableName).append(" (");
                 StringBuffer values = new StringBuffer("(");
                 int index = 0;
@@ -191,18 +191,18 @@ public class ViewTable {
         attributes.put("nocache", "yes");
         TableQuery tableQuery = initFields(ssvt, attributes);
         String tableName = tableQuery.getName();
-        // Получить вектор ключевых полей
+        // РџРѕР»СѓС‡РёС‚СЊ РІРµРєС‚РѕСЂ РєР»СЋС‡РµРІС‹С… РїРѕР»РµР№
         Vector keys = tableQuery.getKeys();
         boolean execute = false;
         String resultMessage = "";
         if (attributes.get("delRecord") == null) {
-            // Выполнить UPDATE записи
+            // Р’С‹РїРѕР»РЅРёС‚СЊ UPDATE Р·Р°РїРёСЃРё
             if (user.isAdministrator() || tableQuery.getUser(user.getId()).getUpdate()) {
                 Connection connection = ssvt.getConnection();
                 if (connection != null) {
-                    // Сформировать SQL запрос
+                    // РЎС„РѕСЂРјРёСЂРѕРІР°С‚СЊ SQL Р·Р°РїСЂРѕСЃ
                     StringBuffer sql = new StringBuffer("update ").append(ssvt.getProperty("schema")).append('.').append(tableName).append(" set ");
-                    // Установить значения изменяемых полей
+                    // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ РёР·РјРµРЅСЏРµРјС‹С… РїРѕР»РµР№
                     int index = 0;
                     for (Enumeration e = tableQuery.getSequence().elements(); e.hasMoreElements(); ) {
                         Field field = (Field) e.nextElement();
@@ -232,10 +232,10 @@ public class ViewTable {
                             }
                         }
                     }
-                    // Установить значения уникальных полей
+                    // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ СѓРЅРёРєР°Р»СЊРЅС‹С… РїРѕР»РµР№
                     sql.append(" where ");
                     addKeyFieldsToSQL(keys, sql, attributes);
-                    // Выполнить сформированный запрос
+                    // Р’С‹РїРѕР»РЅРёС‚СЊ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ Р·Р°РїСЂРѕСЃ
                     ssvt.log(user.getId() + ": " + sql);
                     int updateRecords = 0;
                     if (index > 0) {
@@ -244,12 +244,12 @@ public class ViewTable {
                             updateRecords = statement.executeUpdate(sql.toString());
                             statement.close();
                             switch (updateRecords) {
-                                case 0: resultMessage = "Запись не изменена.";
+                                case 0: resultMessage = "Р—Р°РїРёСЃСЊ РЅРµ РёР·РјРµРЅРµРЅР°.";
                                         break;
-                                case 1: resultMessage = "Операция редактирования записи выполнена успешно.";
+                                case 1: resultMessage = "РћРїРµСЂР°С†РёСЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ Р·Р°РїРёСЃРё РІС‹РїРѕР»РЅРµРЅР° СѓСЃРїРµС€РЅРѕ.";
                                         execute = true;
                                         break;
-                                default: resultMessage = "Изменено " + updateRecords + " записей.";
+                                default: resultMessage = "РР·РјРµРЅРµРЅРѕ " + updateRecords + " Р·Р°РїРёСЃРµР№.";
                             }
                         } catch (Exception e) {
                             resultMessage = ssvt.getStringManager().getString("database.executeError") + e.toString();
@@ -268,14 +268,14 @@ public class ViewTable {
                 resultMessage = ssvt.getStringManager().getString("database.notRights");
             }
         } else {
-            // Удалить запись
+            // РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ
             if (user.isAdministrator() || tableQuery.getUser(user.getId()).getDelete()) {
                 Connection connection = ssvt.getConnection();
                 if (connection != null) {
-                    // Сформировать SQL запрос
+                    // РЎС„РѕСЂРјРёСЂРѕРІР°С‚СЊ SQL Р·Р°РїСЂРѕСЃ
                     StringBuffer sql = new StringBuffer("delete from ").append(ssvt.getProperty("schema")).append('.').append(tableName).append(" where ");
                     addKeyFieldsToSQL(keys, sql, attributes);
-                    // Выполнить сформированный запрос
+                    // Р’С‹РїРѕР»РЅРёС‚СЊ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ Р·Р°РїСЂРѕСЃ
                     ssvt.log(user.getId() + ": " + sql);
                     int deleteRecords = 0;
                     try {
@@ -283,12 +283,12 @@ public class ViewTable {
                         deleteRecords = statement.executeUpdate(sql.toString());
                         statement.close();
                         switch (deleteRecords) {
-                            case 0: resultMessage = "Запись не удалена";
+                            case 0: resultMessage = "Р—Р°РїРёСЃСЊ РЅРµ СѓРґР°Р»РµРЅР°";
                                     break;
-                            case 1: resultMessage = "Операция удаления записи выполнена успешно.";
+                            case 1: resultMessage = "РћРїРµСЂР°С†РёСЏ СѓРґР°Р»РµРЅРёСЏ Р·Р°РїРёСЃРё РІС‹РїРѕР»РЅРµРЅР° СѓСЃРїРµС€РЅРѕ.";
                                     execute = true;
                                     break;
-                            default: resultMessage = "Удалено " + deleteRecords + " записей.";
+                            default: resultMessage = "РЈРґР°Р»РµРЅРѕ " + deleteRecords + " Р·Р°РїРёСЃРµР№.";
                         }
                     } catch (Exception e) {
                         resultMessage = ssvt.getStringManager().getString("database.executeError") + e.toString();
@@ -323,7 +323,7 @@ public class ViewTable {
         TableQuery tableQuery = initFields(ssvt, attributes);
         String tableName = tableQuery.getName();
         String startName = ssvt.getProperty(tableName + '.' + "startName", "");
-        // Получить вектор ключевых полей
+        // РџРѕР»СѓС‡РёС‚СЊ РІРµРєС‚РѕСЂ РєР»СЋС‡РµРІС‹С… РїРѕР»РµР№
         Vector keys = tableQuery.getKeys();
         form.addElement("<html><head><title>");
         String action = (String) attributes.get("action");
@@ -343,16 +343,16 @@ public class ViewTable {
         form.addElement("<form method=\"POST\" action=\"" + actionForm +"\">");
 
         if (!add) {
-            // Получить запись по уникальному ключу
+            // РџРѕР»СѓС‡РёС‚СЊ Р·Р°РїРёСЃСЊ РїРѕ СѓРЅРёРєР°Р»СЊРЅРѕРјСѓ РєР»СЋС‡Сѓ
             Connection connection = ssvt.getConnection();
             if (connection != null) {
-                // Сформировать SQL запрос
+                // РЎС„РѕСЂРјРёСЂРѕРІР°С‚СЊ SQL Р·Р°РїСЂРѕСЃ
 //                StringBuffer sql = new StringBuffer(ssvt.getProperty(tableName + '.' + "getRecords"));
                 StringBuffer sql = new StringBuffer(getRecordsSQL(ssvt, tableName));
                 if (keys.size() > 0) {
                     sql.append(" where ");
                     addKeyFieldsToSQL(keys, sql, attributes);
-                    // Выполнить сформированный запрос и занести значения полей в [values]
+                    // Р’С‹РїРѕР»РЅРёС‚СЊ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ Р·Р°РїСЂРѕСЃ Рё Р·Р°РЅРµСЃС‚Рё Р·РЅР°С‡РµРЅРёСЏ РїРѕР»РµР№ РІ [values]
                     ssvt.log(user.getId() + ": " + sql);
                     try {
                         PreparedStatement statement = connection.prepareStatement(sql.toString());
@@ -380,15 +380,15 @@ public class ViewTable {
         }
 
         if (!add && (values.size() == 0)) {
-            form.addElement("Запись для редактирования не найдена.");
+            form.addElement("Р—Р°РїРёСЃСЊ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РЅРµ РЅР°Р№РґРµРЅР°.");
         } else {
-            // Вставить в форму невидимые поля 
+            // Р’СЃС‚Р°РІРёС‚СЊ РІ С„РѕСЂРјСѓ РЅРµРІРёРґРёРјС‹Рµ РїРѕР»СЏ 
             form.addElement("<INPUT TYPE=\"HIDDEN\" NAME=\"table\" VALUE=\"" + tableName + "\">");
             form.addElement("<INPUT TYPE=\"HIDDEN\" NAME=\"action\" VALUE=\"" + action + "\">");
 
             StringBuffer buf;
             if (!add) {
-                // Вставить в форму невидимые поля уникального ключа при редактировании записи
+                // Р’СЃС‚Р°РІРёС‚СЊ РІ С„РѕСЂРјСѓ РЅРµРІРёРґРёРјС‹Рµ РїРѕР»СЏ СѓРЅРёРєР°Р»СЊРЅРѕРіРѕ РєР»СЋС‡Р° РїСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё Р·Р°РїРёСЃРё
                 for (Enumeration e = keys.elements(); e.hasMoreElements(); ) {
                     Field field = (Field) e.nextElement();
                     String name = field.getName();
@@ -398,7 +398,7 @@ public class ViewTable {
             }
 
             String checkValue = ssvt.getProperty(tableName + '.' +"FORM" + '.' + "CHECKBOX" + '.' + "VALUE", "YES");
-            // Вставить в форму редактируемые поля записи
+            // Р’СЃС‚Р°РІРёС‚СЊ РІ С„РѕСЂРјСѓ СЂРµРґР°РєС‚РёСЂСѓРµРјС‹Рµ РїРѕР»СЏ Р·Р°РїРёСЃРё
             form.addElement("<table>");
             for (Enumeration e = tableQuery.getSequence().elements(); e.hasMoreElements(); ) {
                 Field field = (Field) e.nextElement();
@@ -410,7 +410,7 @@ public class ViewTable {
                     buf.append(ssvt.getStringManager().getString(tableName + '.' + name)).append("</td><td>").append("&nbsp;").append("</td><td>");
                     String valueField = (String) values.get(name);
                     if (keys.contains(field) && !add) {
-                        // При редактировании  поле уникального ключа недоступно для редактирования
+                        // РџСЂРё СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРё  РїРѕР»Рµ СѓРЅРёРєР°Р»СЊРЅРѕРіРѕ РєР»СЋС‡Р° РЅРµРґРѕСЃС‚СѓРїРЅРѕ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
                         if (valueField != null) {
                             buf.append("<B>").append(valueField).append("</B>");
                         }
@@ -469,8 +469,8 @@ public class ViewTable {
                     }
                     buf.append("<td>");
                     if (addField != null) {
-                        buf.append("<INPUT TYPE=SUBMIT NAME=\"" + addField + "\" VALUE=\"Изменить\">");
-                        buf.append("<INPUT TYPE=SUBMIT NAME=\"" + keyField + '.' + "ADD" + "\" VALUE=\"Изменить\">");
+                        buf.append("<INPUT TYPE=SUBMIT NAME=\"" + addField + "\" VALUE=\"РР·РјРµРЅРёС‚СЊ\">");
+                        buf.append("<INPUT TYPE=SUBMIT NAME=\"" + keyField + '.' + "ADD" + "\" VALUE=\"РР·РјРµРЅРёС‚СЊ\">");
                     } 
                     buf.append("</td>");
                     buf.append("</td></tr>");
@@ -480,7 +480,7 @@ public class ViewTable {
 
             if (!add) form.addElement("<tr><td>" + ssvt.getStringManager().getString(tableName + '.' + "deleteRecord") + "</td><td>" + "&nbsp;" + "</td><td>" + "<INPUT TYPE=\"CHECKBOX\" NAME=\"delRecord\" VALUE=\"" + checkValue + "\"></td></tr>");
             form.addElement("</table><p>");
-            form.addElement("<INPUT TYPE=SUBMIT NAME=\"ENTER\" VALUE=\"Ввод\">&nbsp;&nbsp;&nbsp;<INPUT TYPE=RESET VALUE=\"Очистить\"></form>");
+            form.addElement("<INPUT TYPE=SUBMIT NAME=\"ENTER\" VALUE=\"Р’РІРѕРґ\">&nbsp;&nbsp;&nbsp;<INPUT TYPE=RESET VALUE=\"РћС‡РёСЃС‚РёС‚СЊ\"></form>");
         }
         form.addElement("</body></html>");
         return form;
@@ -532,7 +532,7 @@ public class ViewTable {
 
         form.addElement("<center>");
         form.addElement("<table border width=" + ssvt.getProperty(tableName + '.' + "width", "%95") + '>');
-        // Вывести заголовок таблицы
+        // Р’С‹РІРµСЃС‚Рё Р·Р°РіРѕР»РѕРІРѕРє С‚Р°Р±Р»РёС†С‹
         StringBuffer header = new StringBuffer("<tr>");
         for (Enumeration e = sequence.elements(); e.hasMoreElements(); ) {
             Field field = (Field) e.nextElement();
@@ -543,11 +543,11 @@ public class ViewTable {
         }
         form.addElement(header.append("</tr>").toString());
 
-        int count = 0; // Количество выбранных записей
-        // Вывести тело таблицы
+        int count = 0; // РљРѕР»РёС‡РµСЃС‚РІРѕ РІС‹Р±СЂР°РЅРЅС‹С… Р·Р°РїРёСЃРµР№
+        // Р’С‹РІРµСЃС‚Рё С‚РµР»Рѕ С‚Р°Р±Р»РёС†С‹
         Connection connection = ssvt.getConnection();
         if (connection != null) {
-            // Сформировать SQL запрос
+            // РЎС„РѕСЂРјРёСЂРѕРІР°С‚СЊ SQL Р·Р°РїСЂРѕСЃ
             StringBuffer sql = new StringBuffer(getRecordsSQL(ssvt, tableName));
             int index = 0;
             boolean whereIs = false;
@@ -566,13 +566,13 @@ public class ViewTable {
                     sql.append(' ').append(startName).append(userNameAttribute).append('=').append(getValueField(field, value));
                 }
             }
-            // Добавить в SQL запрос условия выброки записей установленные пользователем
+            // Р”РѕР±Р°РІРёС‚СЊ РІ SQL Р·Р°РїСЂРѕСЃ СѓСЃР»РѕРІРёСЏ РІС‹Р±СЂРѕРєРё Р·Р°РїРёСЃРµР№ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
 
-            // Добавить в SQL запрос предикаты сортировки записей
+            // Р”РѕР±Р°РІРёС‚СЊ РІ SQL Р·Р°РїСЂРѕСЃ РїСЂРµРґРёРєР°С‚С‹ СЃРѕСЂС‚РёСЂРѕРІРєРё Р·Р°РїРёСЃРµР№
 
 //            sql.append(" ");
 
-            // Выполнить запрос
+            // Р’С‹РїРѕР»РЅРёС‚СЊ Р·Р°РїСЂРѕСЃ
             try {
 
                 PreparedStatement statement = connection.prepareStatement(sql.toString());
@@ -582,14 +582,14 @@ public class ViewTable {
                 while (result.next()) {
                     if ((count >= beginNumber) && (count < endNumber)) {
                         Enumeration e;
-                        // Получить значения полей записи
+                        // РџРѕР»СѓС‡РёС‚СЊ Р·РЅР°С‡РµРЅРёСЏ РїРѕР»РµР№ Р·Р°РїРёСЃРё
                         Hashtable values = new Hashtable();
                         for (e = sequence.elements(); e.hasMoreElements(); ) {
                             Field field = (Field) e.nextElement();
                             String valueField = result.getString(field.getName());
                             if (valueField != null) values.put(field.getName(), valueField);
                         }
-                        // Вывести запись
+                        // Р’С‹РІРµСЃС‚Рё Р·Р°РїРёСЃСЊ
                         StringBuffer buf = new StringBuffer("<tr>");
                         for (e = sequence.elements(), index = 0; e.hasMoreElements();) {
                             Field field = (Field) e.nextElement();
@@ -608,7 +608,7 @@ public class ViewTable {
                                             link.append('&').append(key.getName()).append('=');
                                             for (int pos = 0; pos < valueKey.length(); pos++) {
                                                 char c = valueKey.charAt(pos);
-// если русские буквы ?
+// РµСЃР»Рё СЂСѓСЃСЃРєРёРµ Р±СѓРєРІС‹ ?
                                                 if (c == ' ') link.append("%20");
                                                 else link.append(c);
                                             }
@@ -646,11 +646,11 @@ public class ViewTable {
         }
         form.addElement("</table><p>");
         form.addElement("</center>");
-        form.addElement("Всего записей: " + count + "<p>");
+        form.addElement("Р’СЃРµРіРѕ Р·Р°РїРёСЃРµР№: " + count + "<p>");
         if (count > max) {
             int countPage = count / max;
             if (count % max > 0) countPage++;
-            StringBuffer buf = new StringBuffer("Страницы: ");
+            StringBuffer buf = new StringBuffer("РЎС‚СЂР°РЅРёС†С‹: ");
             for (int index = 1; index <= countPage; index++) {
                 if (index != page) {
                     buf.append("<a href=\"" + uriTable + "&page=" + index + "\">"); 

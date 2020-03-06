@@ -43,7 +43,7 @@ h3, h4, h5  {
     font-size: 105%;
 }
 
-P XMP, td P XMP, XMP, CODE,  PRE, .MONO  {      /* . в .MONO не относится к разделителю */
+P XMP, td P XMP, XMP, CODE,  PRE, .MONO  {      /* . РІ .MONO РЅРµ РѕС‚РЅРѕСЃРёС‚СЃСЏ Рє СЂР°Р·РґРµР»РёС‚РµР»СЋ */
     font-family : Andale Mono, Courier New, Courier, monospace;
 }
 
@@ -51,9 +51,9 @@ P XMP, td P XMP, XMP, CODE,  PRE, .MONO  {      /* . в .MONO не относится к разд
 
 }
 
-DIV.subtoc {padding: 1em; border: solid thin;   /*border не выделяется*/
+DIV.subtoc {padding: 1em; border: solid thin;   /*border РЅРµ РІС‹РґРµР»СЏРµС‚СЃСЏ*/
     margin: 1em 0;
-    background: #ddd;                          /*background не выделяется*/
+    background: #ddd;                          /*background РЅРµ РІС‹РґРµР»СЏРµС‚СЃСЏ*/
 }
 
 /**/

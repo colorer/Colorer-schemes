@@ -21,7 +21,7 @@ $string = "text text text text text text text text
 text text text text text text text text text text
 text text text text text text text text text text";
 
-¨
+Â¨
 
 $string = 'text text text text text text text text
 text text text text text text text text text text

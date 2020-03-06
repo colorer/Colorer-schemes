@@ -16,15 +16,15 @@
 </currencies>
 
 <categories>
-  <category id="1">Книги</category>
+  <category id="1">РљРЅРёРіРё</category>
 
-  <category id="2">Видео</category>
-  <category id="3" parentId="1">Детективы</category>
-  <category id="4" parentId="1">Боевики</category>
-  <category id="5" parentId="2">Комедии</category>
+  <category id="2">Р’РёРґРµРѕ</category>
+  <category id="3" parentId="1">Р”РµС‚РµРєС‚РёРІС‹</category>
+  <category id="4" parentId="1">Р‘РѕРµРІРёРєРё</category>
+  <category id="5" parentId="2">РљРѕРјРµРґРёРё</category>
 
-  <category id="6">Принтеры</category>
-  <category id="7">Оргтехника</category>
+  <category id="6">РџСЂРёРЅС‚РµСЂС‹</category>
+  <category id="7">РћСЂРіС‚РµС…РЅРёРєР°</category>
 </categories>
 <offers>
 <offer id="12341" type="vendor.model" available="true" bid="13">
@@ -35,15 +35,15 @@
   <categoryId> 6 </categoryId>
   <picture>http://best.seller.ru/img/device12345.jpg</picture>
   <delivery> true </delivery>
-  <typePrefix> Принтер </typePrefix>
-  <vendor> НP </vendor>
+  <typePrefix> РџСЂРёРЅС‚РµСЂ </typePrefix>
+  <vendor> РќP </vendor>
   <vendorCode> Q7533A </vendorCode>
   <model> Color LaserJet 3000</model>
   <description>
-    A4, 64Mb, 600x600 dpi, USB 2.0, 29стр/мин ч/б / 15стр/мин цв, лотки на 100л и 250л, плотность до 175г/м, до 60000 стр/месяц
+    A4, 64Mb, 600x600 dpi, USB 2.0, 29СЃС‚СЂ/РјРёРЅ С‡/Р± / 15СЃС‚СЂ/РјРёРЅ С†РІ, Р»РѕС‚РєРё РЅР° 100Р» Рё 250Р», РїР»РѕС‚РЅРѕСЃС‚СЊ РґРѕ 175Рі/Рј, РґРѕ 60000 СЃС‚СЂ/РјРµСЃСЏС†
   </description>
   <manufacturer_warranty>true</manufacturer_warranty>
-  <country_of_origin>Япония</country_of_origin>
+  <country_of_origin>РЇРїРѕРЅРёСЏ</country_of_origin>
  
 </offer>
 <offer id="12346" available="true" bid="21">
@@ -54,10 +54,10 @@
   <categoryId>6</categoryId>
   <picture>http://best.seller.ru/img/device12345.jpg</picture>
   <delivery>false</delivery>
-  <name> Золотые наручные часы </name>
+  <name> Р—РѕР»РѕС‚С‹Рµ РЅР°СЂСѓС‡РЅС‹Рµ С‡Р°СЃС‹ </name>
   <vendorCode> A1234567B </vendorCode>
-  <description> Изящные золотые часы.</description>
-  <country_of_origin>Китай</country_of_origin>
+  <description> РР·СЏС‰РЅС‹Рµ Р·РѕР»РѕС‚С‹Рµ С‡Р°СЃС‹.</description>
+  <country_of_origin>РљРёС‚Р°Р№</country_of_origin>
 
 </offer>
 <offer id="12342" type="book" available="true" bid="17">
@@ -68,11 +68,11 @@
   <categoryId>3</categoryId>
   <picture>http://best.seller.ru/product_page.asp?pid=14345.jpg</picture>
   <delivery>true</delivery>
-  <author>Александра Маринина</author>
-  <name>Все не так. В 2 томах. Том 1</name>
+  <author>РђР»РµРєСЃР°РЅРґСЂР° РњР°СЂРёРЅРёРЅР°</author>
+  <name>Р’СЃРµ РЅРµ С‚Р°Рє. Р’ 2 С‚РѕРјР°С…. РўРѕРј 1</name>
 
-  <publisher>ЭКСМО - Пресс</publisher>
-  <series>А. Маринина - королева детектива</series>
+  <publisher>Р­РљРЎРњРћ - РџСЂРµСЃСЃ</publisher>
+  <series>Рђ. РњР°СЂРёРЅРёРЅР° - РєРѕСЂРѕР»РµРІР° РґРµС‚РµРєС‚РёРІР°</series>
   <year>2007</year>
   <ISBN>978-5-699-23647-3</ISBN>
   <volume>2</volume>
@@ -82,11 +82,11 @@
   <page_extent>288</page_extent>
 
   <description>
-Все прекрасно в большом патриархальном семействе Руденко. Но - увы! - 
-впечатление это обманчиво: каждого из многочисленных (еще)Все прекрасно в 
-большом патриархальном семействе Руденко. Но - увы! - впечатление это обманчиво:
- каждого из многочисленных представителей семьи обуревают свои потаенные страсти
- и запретные желания. И потому, когда погибает, причем явно.
+Р’СЃРµ РїСЂРµРєСЂР°СЃРЅРѕ РІ Р±РѕР»СЊС€РѕРј РїР°С‚СЂРёР°СЂС…Р°Р»СЊРЅРѕРј СЃРµРјРµР№СЃС‚РІРµ Р СѓРґРµРЅРєРѕ. РќРѕ - СѓРІС‹! - 
+РІРїРµС‡Р°С‚Р»РµРЅРёРµ СЌС‚Рѕ РѕР±РјР°РЅС‡РёРІРѕ: РєР°Р¶РґРѕРіРѕ РёР· РјРЅРѕРіРѕС‡РёСЃР»РµРЅРЅС‹С… (РµС‰Рµ)Р’СЃРµ РїСЂРµРєСЂР°СЃРЅРѕ РІ 
+Р±РѕР»СЊС€РѕРј РїР°С‚СЂРёР°СЂС…Р°Р»СЊРЅРѕРј СЃРµРјРµР№СЃС‚РІРµ Р СѓРґРµРЅРєРѕ. РќРѕ - СѓРІС‹! - РІРїРµС‡Р°С‚Р»РµРЅРёРµ СЌС‚Рѕ РѕР±РјР°РЅС‡РёРІРѕ:
+ РєР°Р¶РґРѕРіРѕ РёР· РјРЅРѕРіРѕС‡РёСЃР»РµРЅРЅС‹С… РїСЂРµРґСЃС‚Р°РІРёС‚РµР»РµР№ СЃРµРјСЊРё РѕР±СѓСЂРµРІР°СЋС‚ СЃРІРѕРё РїРѕС‚Р°РµРЅРЅС‹Рµ СЃС‚СЂР°СЃС‚Рё
+ Рё Р·Р°РїСЂРµС‚РЅС‹Рµ Р¶РµР»Р°РЅРёСЏ. Р РїРѕС‚РѕРјСѓ, РєРѕРіРґР° РїРѕРіРёР±Р°РµС‚, РїСЂРёС‡РµРј СЏРІРЅРѕ.
   </description>
 
   <downloadable>false</downloadable>
@@ -107,14 +107,14 @@
 
   <media>CD</media>
 
-<description> Dark Side Of The Moon, поставивший мир на уши
- невиданным сочетанием звуков, - это всего-навсего девять 
-треков, и даже не все они писались специально для альбома. 
-Порывшись по сусекам, участники Pink Floyd мудро сделали 
-новое из хорошо забытого старого - песен, которые 
-почему-либо не пошли в дело или остались незаконченными. 
-Одним из источников вдохновения стали саундтреки 
-для кинофильмов, которые группа производила в больших количествах.
+<description> Dark Side Of The Moon, РїРѕСЃС‚Р°РІРёРІС€РёР№ РјРёСЂ РЅР° СѓС€Рё
+ РЅРµРІРёРґР°РЅРЅС‹Рј СЃРѕС‡РµС‚Р°РЅРёРµРј Р·РІСѓРєРѕРІ, - СЌС‚Рѕ РІСЃРµРіРѕ-РЅР°РІСЃРµРіРѕ РґРµРІСЏС‚СЊ 
+С‚СЂРµРєРѕРІ, Рё РґР°Р¶Рµ РЅРµ РІСЃРµ РѕРЅРё РїРёСЃР°Р»РёСЃСЊ СЃРїРµС†РёР°Р»СЊРЅРѕ РґР»СЏ Р°Р»СЊР±РѕРјР°. 
+РџРѕСЂС‹РІС€РёСЃСЊ РїРѕ СЃСѓСЃРµРєР°Рј, СѓС‡Р°СЃС‚РЅРёРєРё Pink Floyd РјСѓРґСЂРѕ СЃРґРµР»Р°Р»Рё 
+РЅРѕРІРѕРµ РёР· С…РѕСЂРѕС€Рѕ Р·Р°Р±С‹С‚РѕРіРѕ СЃС‚Р°СЂРѕРіРѕ - РїРµСЃРµРЅ, РєРѕС‚РѕСЂС‹Рµ 
+РїРѕС‡РµРјСѓ-Р»РёР±Рѕ РЅРµ РїРѕС€Р»Рё РІ РґРµР»Рѕ РёР»Рё РѕСЃС‚Р°Р»РёСЃСЊ РЅРµР·Р°РєРѕРЅС‡РµРЅРЅС‹РјРё. 
+РћРґРЅРёРј РёР· РёСЃС‚РѕС‡РЅРёРєРѕРІ РІРґРѕС…РЅРѕРІРµРЅРёСЏ СЃС‚Р°Р»Рё СЃР°СѓРЅРґС‚СЂРµРєРё 
+РґР»СЏ РєРёРЅРѕС„РёР»СЊРјРѕРІ, РєРѕС‚РѕСЂС‹Рµ РіСЂСѓРїРїР° РїСЂРѕРёР·РІРѕРґРёР»Р° РІ Р±РѕР»СЊС€РёС… РєРѕР»РёС‡РµСЃС‚РІР°С….
 
 </description>
 
@@ -129,20 +129,20 @@
   <categoryId>2</categoryId>
   <picture>http://best.seller.ru/img/device92347.jpg</picture>
   <delivery>true</delivery>
-  <title>Свадьба Мюриэл</title>
+  <title>РЎРІР°РґСЊР±Р° РњСЋСЂРёСЌР»</title>
   <year>1999</year>
   <media>DVD</media>
-  <starring>Тони Колетт (Toni Collette), Рэйчел Грифитс (Rachel Griffiths)</starring>
+  <starring>РўРѕРЅРё РљРѕР»РµС‚С‚ (Toni Collette), Р СЌР№С‡РµР» Р“СЂРёС„РёС‚СЃ (Rachel Griffiths)</starring>
 
-  <director>П Дж Хоген</director>
+  <director>Рџ Р”Р¶ РҐРѕРіРµРЅ</director>
   <originalName>Muriel's wedding</originalName>
-  <country>Австралия</country>
+  <country>РђРІСЃС‚СЂР°Р»РёСЏ</country>
   <description> 
-Гадкий утенок из провинциального городка покидает свое 
-гнездо, и в компании своей подруги отправляется искать веселой жизни в большой и
- загадочный город. Фильм о мечтах и реальности, дружбе и юности молодой девушки,    
- приключения которой повторяют судьбы Золушки и героини Джулии Робертс из 
-ставшего классикой фильма Красотка...
+Р“Р°РґРєРёР№ СѓС‚РµРЅРѕРє РёР· РїСЂРѕРІРёРЅС†РёР°Р»СЊРЅРѕРіРѕ РіРѕСЂРѕРґРєР° РїРѕРєРёРґР°РµС‚ СЃРІРѕРµ 
+РіРЅРµР·РґРѕ, Рё РІ РєРѕРјРїР°РЅРёРё СЃРІРѕРµР№ РїРѕРґСЂСѓРіРё РѕС‚РїСЂР°РІР»СЏРµС‚СЃСЏ РёСЃРєР°С‚СЊ РІРµСЃРµР»РѕР№ Р¶РёР·РЅРё РІ Р±РѕР»СЊС€РѕР№ Рё
+ Р·Р°РіР°РґРѕС‡РЅС‹Р№ РіРѕСЂРѕРґ. Р¤РёР»СЊРј Рѕ РјРµС‡С‚Р°С… Рё СЂРµР°Р»СЊРЅРѕСЃС‚Рё, РґСЂСѓР¶Р±Рµ Рё СЋРЅРѕСЃС‚Рё РјРѕР»РѕРґРѕР№ РґРµРІСѓС€РєРё,    
+ РїСЂРёРєР»СЋС‡РµРЅРёСЏ РєРѕС‚РѕСЂРѕР№ РїРѕРІС‚РѕСЂСЏСЋС‚ СЃСѓРґСЊР±С‹ Р—РѕР»СѓС€РєРё Рё РіРµСЂРѕРёРЅРё Р”Р¶СѓР»РёРё Р РѕР±РµСЂС‚СЃ РёР· 
+СЃС‚Р°РІС€РµРіРѕ РєР»Р°СЃСЃРёРєРѕР№ С„РёР»СЊРјР° РљСЂР°СЃРѕС‚РєР°...
   </description>
 
 </offer>
@@ -155,10 +155,10 @@
   <categoryId>6</categoryId>
   <picture>http://best.seller.ru/img/device12345.jpg</picture>
   <delivery>false</delivery>
-  <worldRegion>Африка</worldRegion>
+  <worldRegion>РђС„СЂРёРєР°</worldRegion>
 
-  <country>Египет</country>
-  <region>Хургада</region>
+  <country>Р•РіРёРїРµС‚</country>
+  <region>РҐСѓСЂРіР°РґР°</region>
   <days>7</days>
   <dataTour>01/01/03</dataTour>
 
@@ -168,29 +168,29 @@
   <room>SNG</room>
 
   <meal>ALL</meal>
-  <included>авиаперелет, трансфер, проживание, питание, страховка</included>
-  <transport>Авиа</transport>
+  <included>Р°РІРёР°РїРµСЂРµР»РµС‚, С‚СЂР°РЅСЃС„РµСЂ, РїСЂРѕР¶РёРІР°РЅРёРµ, РїРёС‚Р°РЅРёРµ, СЃС‚СЂР°С…РѕРІРєР°</included>
+  <transport>РђРІРёР°</transport>
   <description></description>
 
 </offer>
 
  <offer id="1234" type="event-ticket"  available="true" bid="13"> 
- <url>url товарного предложения</url>
+ <url>url С‚РѕРІР°СЂРЅРѕРіРѕ РїСЂРµРґР»РѕР¶РµРЅРёСЏ</url>
  <price>100000</price>
  <currencyId>RUR</currencyId>
  <categoryId>3</categoryId> 
- <picture>url картинки товарного предложения</picture>
+ <picture>url РєР°СЂС‚РёРЅРєРё С‚РѕРІР°СЂРЅРѕРіРѕ РїСЂРµРґР»РѕР¶РµРЅРёСЏ</picture>
  <delivery>true</delivery>
- <name>Дмитрий Хворостовский и Национальный филармонический
- оркестр России. Дирижер - Владимир Спиваков.</name>
- <place>Московский  международный Дом музыки</place>
- <hall plan="url плана зала">Большой  зал</hall>
- <hall_part>Партер р. 1-5</hall_part>
+ <name>Р”РјРёС‚СЂРёР№ РҐРІРѕСЂРѕСЃС‚РѕРІСЃРєРёР№ Рё РќР°С†РёРѕРЅР°Р»СЊРЅС‹Р№ С„РёР»Р°СЂРјРѕРЅРёС‡РµСЃРєРёР№
+ РѕСЂРєРµСЃС‚СЂ Р РѕСЃСЃРёРё. Р”РёСЂРёР¶РµСЂ - Р’Р»Р°РґРёРјРёСЂ РЎРїРёРІР°РєРѕРІ.</name>
+ <place>РњРѕСЃРєРѕРІСЃРєРёР№  РјРµР¶РґСѓРЅР°СЂРѕРґРЅС‹Р№ Р”РѕРј РјСѓР·С‹РєРё</place>
+ <hall plan="url РїР»Р°РЅР° Р·Р°Р»Р°">Р‘РѕР»СЊС€РѕР№  Р·Р°Р»</hall>
+ <hall_part>РџР°СЂС‚РµСЂ СЂ. 1-5</hall_part>
 
  <date>2004-12-31T19:00</date> 
  <is_premiere>0</is_premiere>
  <is_kids>0</is_kids>
- <description>описание товарного предложения.</description>
+ <description>РѕРїРёСЃР°РЅРёРµ С‚РѕРІР°СЂРЅРѕРіРѕ РїСЂРµРґР»РѕР¶РµРЅРёСЏ.</description>
 
 </offer>
 
@@ -202,7 +202,7 @@
    <categoryId>35</categoryId>
    <picture>http://</picture>
    <delivery>false</delivery>   
-   <typePrefix>Наушники</typePrefix>
+   <typePrefix>РќР°СѓС€РЅРёРєРё</typePrefix>
    <vendor>SONY</vendor>
 
    <model>MDR-CD480</model>
@@ -217,7 +217,7 @@
    <categoryId>35</categoryId>
    <picture>http://</picture>
    <delivery>true</delivery>
-   <typePrefix>Наушники</typePrefix>
+   <typePrefix>РќР°СѓС€РЅРёРєРё</typePrefix>
    <vendor>SONY</vendor>
    <model>MDR-CD480</model>
    <description> </description>
@@ -232,7 +232,7 @@
    <categoryId>35</categoryId>
    <picture>http://</picture>
    <delivery>true</delivery>   
-   <typePrefix>Наушники</typePrefix>
+   <typePrefix>РќР°СѓС€РЅРёРєРё</typePrefix>
    <vendor>SONY</vendor>
    <model>MDR-CD480</model>
    <description> </description>

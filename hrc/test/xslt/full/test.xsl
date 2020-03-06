@@ -4,7 +4,7 @@
   <xsl:output encoding="Windows-1251"/>
   <xsl:template match="/root">
     <root>
-      <new-text>�஢�ઠ</new-text>
+      <new-text>Проверка</new-text>
       <old-text>
         <xsl:apply-templates select="text"/>
       </old-text>

@@ -1,18 +1,18 @@
- 0: USE SYSTEM USE $SCRWORK
+Ôªø 0: USE SYSTEM USE $SCRWORK
  1: DEFINE? $DATTIM %IF USE $DATTIM %FI
  2: <span class='dssp-dsspExpr def-Directive'>PROGRAM $WATCH</span> BASE@ <span class='dssp-dsspString def-String'>."</span>
- 3: <span class='dssp-dsspString def-String'>è‡ÆÊ•·· TIMER §´Ô ¢Î§†Á® ¢‡•¨•≠® ≠† Ì™‡†≠."</span>
+ 3: <span class='dssp-dsspString def-String'>–ü—Ä–æ—Ü–µ—Å—Å TIMER –¥–ª—è –≤—ã–¥–∞—á–∏ –≤—Ä–µ–º–µ–Ω–∏ –Ω–∞ —ç–∫—Ä–∞–Ω."</span>
  4: <span class='dssp-dsspComment def-Comment def-Syntax'>[*****************************************************************************]</span>
- 5: <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[&lt;= äéçîàÉìêÄñàü:  0 - Á†·Î:¨®≠„‚Î:·•™„≠§Î    1 - Á†·Î:¨®≠„‚Î  ]</span>
+ 5: <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[&lt;= –ö–û–ù–§–ò–ì–£–†–ê–¶–ò–Ø:  0 - —á–∞—Å—ã:–º–∏–Ω—É—Ç—ã:—Å–µ–∫—É–Ω–¥—ã    1 - —á–∞—Å—ã:–º–∏–Ω—É—Ç—ã  ]</span>
  6: <span class='dssp-dsspParam def-Parameter'>B10</span>
  7: 
  8: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR TimFon</span> <span class='def-NumberDec def-Number'>3</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimFon
  9: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR TimTxt</span> <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimTxt
 10: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR TimI</span>   <span class='def-NumberDec def-Number'>0</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimI
 11: :: <span class='dssp-dsspParam def-Parameter'>FIX</span> <span class='dssp-dsspParam def-Parameter'>VAR TimJ</span>  <span class='def-NumberDec def-Number'>70</span> <span class='dssp-dsspParam def-Parameter'>!</span> TimJ
-12:    <span class='dssp-dsspParam def-Parameter'>LONG</span> <span class='dssp-dsspParam def-Parameter'>VAR Btime</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[·®·‚•¨≠Æ• ¢‡•¨Ô ¢ ¨®´®·•™„≠§†Â]</span>
+12:    <span class='dssp-dsspParam def-Parameter'>LONG</span> <span class='dssp-dsspParam def-Parameter'>VAR Btime</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[—Å–∏—Å—Ç–µ–º–Ω–æ–µ –≤—Ä–µ–º—è –≤ –º–∏–ª–∏—Å–µ–∫—É–Ω–¥–∞—Ö]</span>
 13: 
-14: : PTIM <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> TIME <span class='def-NumberDec def-Number'>55</span> <span class='dssp-dsspParam def-Parameter'>*</span> Btime  +  <span class='def-NumberDec def-Number'>1000</span> <span class='dssp-dsspParam def-Parameter'>/</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[¢‡•¨Ô ¢ ·•™„≠§†Â]</span>
+14: : PTIM <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> TIME <span class='def-NumberDec def-Number'>55</span> <span class='dssp-dsspParam def-Parameter'>*</span> Btime  +  <span class='def-NumberDec def-Number'>1000</span> <span class='dssp-dsspParam def-Parameter'>/</span> <span class='dssp-dsspParam def-Parameter'>D</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[–≤—Ä–µ–º—è –≤ —Å–µ–∫—É–Ω–¥–∞—Ö]</span>
 15:   <span class='def-NumberDec def-Number'>60</span> <span class='dssp-dsspParam def-Parameter'>/</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[tm,s]</span> <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='def-NumberDec def-Number'>60</span> <span class='dssp-dsspParam def-Parameter'>/</span> <span class='dssp-dsspParam def-Parameter'>E2</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[s,m,h]</span>  ShowTim  <span class='dssp-dsspParam def-Parameter'>DDD</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
 16: 
 17: <span class='def-NumberDec def-Number'>20</span> <span class='def-NumberDec def-Number'>100</span> <span class='def-NumberDec def-Number'>100</span> '' PTIM :: TASK TIMER  <span class='def-NumberDec def-Number'>18</span> INTV TIMER

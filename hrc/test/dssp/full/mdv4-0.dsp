@@ -1,54 +1,54 @@
 PROGRAM $DUMP B10 ."
-[26-10-1994 16:00] Для запуска программы должны быть загружены пакеты:
-[10-10-1994 12:41] SCRWORK  - Примитивы работы с экраном
-[24- 8-1994 12:43] MENU4    - Пакет организации меню
-[23- 8-1994 16:51] MENUTIL4 - Утилиты для меню
-[21- 4-1994  9:56] GENHLP   - Выдача помощи
-[19- 4-1994  8:00] QCL      - Цветовой конфигуратор - избыточен
-[ 6- 4-1994 14:43] DIASXXXX - Дизассемблер - необязательно
-[ 5- 4-1994  7:59] [ 5- 4-1994  9:04] [25- 3-1994 15:01] 4005 байт
-[10-12-1993 10:48] Программа DUMP."
+[26-10-1994 16:00] ╨Ф╨╗╤П ╨╖╨░╨┐╤Г╤Б╨║╨░ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л ╨┤╨╛╨╗╨╢╨╜╤Л ╨▒╤Л╤В╤М ╨╖╨░╨│╤А╤Г╨╢╨╡╨╜╤Л ╨┐╨░╨║╨╡╤В╤Л:
+[10-10-1994 12:41] SCRWORK  - ╨Я╤А╨╕╨╝╨╕╤В╨╕╨▓╤Л ╤А╨░╨▒╨╛╤В╤Л ╤Б ╤Н╨║╤А╨░╨╜╨╛╨╝
+[24- 8-1994 12:43] MENU4    - ╨Я╨░╨║╨╡╤В ╨╛╤А╨│╨░╨╜╨╕╨╖╨░╤Ж╨╕╨╕ ╨╝╨╡╨╜╤О
+[23- 8-1994 16:51] MENUTIL4 - ╨г╤В╨╕╨╗╨╕╤В╤Л ╨┤╨╗╤П ╨╝╨╡╨╜╤О
+[21- 4-1994  9:56] GENHLP   - ╨Т╤Л╨┤╨░╤З╨░ ╨┐╨╛╨╝╨╛╤Й╨╕
+[19- 4-1994  8:00] QCL      - ╨ж╨▓╨╡╤В╨╛╨▓╨╛╨╣ ╨║╨╛╨╜╤Д╨╕╨│╤Г╤А╨░╤В╨╛╤А - ╨╕╨╖╨▒╤Л╤В╨╛╤З╨╡╨╜
+[ 6- 4-1994 14:43] DIASXXXX - ╨Ф╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╡╤А - ╨╜╨╡╨╛╨▒╤П╨╖╨░╤В╨╡╨╗╤М╨╜╨╛
+[ 5- 4-1994  7:59] [ 5- 4-1994  9:04] [25- 3-1994 15:01] 4005 ╨▒╨░╨╣╤В
+[10-12-1993 10:48] ╨Я╤А╨╛╨│╤А╨░╨╝╨╝╨░ DUMP."
 
        BYTE VAR BOXMEM
 :: FIX BYTE VAR YDIA
-:: FIX BYTE VAR XDIA      [Координаты окна дизассемблера]        39 ! XDIA
-:: FIX BYTE VAR BASE      [Система счисления при вводе]          16 ! BASE
-:: FIX BYTE VAR CLSYM     [Цвет выводимой символьной части]      14 ! CLSYM
-:: FIX BYTE VAR CLMOD     [Цвет модифицированного уже символа]   10 ! CLMOD
-:: FIX LONG VAR DMLABEL   [Адрес-метка для быстрого продвижения]  0 ! DMLABEL
-::     WORD VAR CHANGE    [Признак изменений в режиме DUMP]
-::     WORD VAR BATRVM    [Переменная хранитель атрибута]
-::     WORD VAR LABLATR   [Переменная хранитель атрибута]
-       LONG VAR ADRUPS    [Начальный адрес верхней строки в окне DUMPа]
-       LONG VAR ADRTEK    [Текущий адрес DUMPа]
-       LONG VAR ADREND    [Адрес конца  области DUMPа]
-       BYTE VAR COMLEN    [Длина дизасемблируемой команды]
-   FIX BYTE VAR CLSFON    [Фон символа в симольной части]     11 ! CLSFON
-   FIX BYTE VAR CLTTDIA   [Текст в окне дизассемблера с КТ]   12 ! CLTTDIA
-   FIX BYTE VAR CLTNDIA   [Текст в окне дизассемблера без КТ] 09 ! CLTNDIA
-:: FIX BYTE VAR CLTDUMP   [Цвет символа]                       7 ! CLTDUMP
-:: FIX BYTE VAR TCLTDUMP  [Цвет текущего символа]             12 ! TCLTDUMP
-:: FIX BYTE VAR TCLFDUMP  [Цвет фона текущего символа]         7 ! TCLFDUMP
-::     BYTE VAR FLAGZOOM  [Флаг разрешения выдачи зуммера]
-:: FIX LONG VAR NABEGOBL  [Конечный адрес области]          0    ! NABEGOBL
-:: FIX LONG VAR NAENDOBL  [Начальный адрес области]         3840 ! NAENDOBL
-:: FIX LONG VAR NNOVVAL   [Вновь заносимое значение]        0    ! NNOVVAL
-:: FIX BYTE VAR DCORNXU   [Столбец верхнего левого угла]       3 ! DCORNXU
-:: FIX BYTE VAR DCORNYU   [Строка  верхнего левого угла]       4 ! DCORNYU
-:: FIX BYTE VAR DCORNXD   [Столбец нижнего правого угла]      61 ! DCORNXD
-:: FIX BYTE VAR DCORNYD   [Строка  нижнего правого угла]      21 ! DCORNYD
-::     BYTE VAR INFSTRD   [Строка  нижнего правого угла]
-:: FIX BYTE VAR ?ONSYMV   [0-кодовый режим, 1-символьный режим] 0 ! ?ONSYMV
-:: FIX ACT  VAR PROVTRP   [Проверка наличия точки останова]
-:: FIX ACT  VAR ACTHELP   [Переменная обработчик выдачи подсказки]
-:: FIX ACT  VAR ALTHELP   [Переменная выдачи альтернативной подсказки]
-:: FIX ACT  VAR ASSHELP   [Выдачи подсказки по системе команд ассемблера]
-:: FIX ACT  VAR ALTKEYS   [Переменная обработчик альтернативных клавиш]
+:: FIX BYTE VAR XDIA      [╨Ъ╨╛╨╛╤А╨┤╨╕╨╜╨░╤В╤Л ╨╛╨║╨╜╨░ ╨┤╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╡╤А╨░]        39 ! XDIA
+:: FIX BYTE VAR BASE      [╨б╨╕╤Б╤В╨╡╨╝╨░ ╤Б╤З╨╕╤Б╨╗╨╡╨╜╨╕╤П ╨┐╤А╨╕ ╨▓╨▓╨╛╨┤╨╡]          16 ! BASE
+:: FIX BYTE VAR CLSYM     [╨ж╨▓╨╡╤В ╨▓╤Л╨▓╨╛╨┤╨╕╨╝╨╛╨╣ ╤Б╨╕╨╝╨▓╨╛╨╗╤М╨╜╨╛╨╣ ╤З╨░╤Б╤В╨╕]      14 ! CLSYM
+:: FIX BYTE VAR CLMOD     [╨ж╨▓╨╡╤В ╨╝╨╛╨┤╨╕╤Д╨╕╤Ж╨╕╤А╨╛╨▓╨░╨╜╨╜╨╛╨│╨╛ ╤Г╨╢╨╡ ╤Б╨╕╨╝╨▓╨╛╨╗╨░]   10 ! CLMOD
+:: FIX LONG VAR DMLABEL   [╨Р╨┤╤А╨╡╤Б-╨╝╨╡╤В╨║╨░ ╨┤╨╗╤П ╨▒╤Л╤Б╤В╤А╨╛╨│╨╛ ╨┐╤А╨╛╨┤╨▓╨╕╨╢╨╡╨╜╨╕╤П]  0 ! DMLABEL
+::     WORD VAR CHANGE    [╨Я╤А╨╕╨╖╨╜╨░╨║ ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╣ ╨▓ ╤А╨╡╨╢╨╕╨╝╨╡ DUMP]
+::     WORD VAR BATRVM    [╨Я╨╡╤А╨╡╨╝╨╡╨╜╨╜╨░╤П ╤Е╤А╨░╨╜╨╕╤В╨╡╨╗╤М ╨░╤В╤А╨╕╨▒╤Г╤В╨░]
+::     WORD VAR LABLATR   [╨Я╨╡╤А╨╡╨╝╨╡╨╜╨╜╨░╤П ╤Е╤А╨░╨╜╨╕╤В╨╡╨╗╤М ╨░╤В╤А╨╕╨▒╤Г╤В╨░]
+       LONG VAR ADRUPS    [╨Э╨░╤З╨░╨╗╤М╨╜╤Л╨╣ ╨░╨┤╤А╨╡╤Б ╨▓╨╡╤А╤Е╨╜╨╡╨╣ ╤Б╤В╤А╨╛╨║╨╕ ╨▓ ╨╛╨║╨╜╨╡ DUMP╨░]
+       LONG VAR ADRTEK    [╨в╨╡╨║╤Г╤Й╨╕╨╣ ╨░╨┤╤А╨╡╤Б DUMP╨░]
+       LONG VAR ADREND    [╨Р╨┤╤А╨╡╤Б ╨║╨╛╨╜╤Ж╨░  ╨╛╨▒╨╗╨░╤Б╤В╨╕ DUMP╨░]
+       BYTE VAR COMLEN    [╨Ф╨╗╨╕╨╜╨░ ╨┤╨╕╨╖╨░╤Б╨╡╨╝╨▒╨╗╨╕╤А╤Г╨╡╨╝╨╛╨╣ ╨║╨╛╨╝╨░╨╜╨┤╤Л]
+   FIX BYTE VAR CLSFON    [╨д╨╛╨╜ ╤Б╨╕╨╝╨▓╨╛╨╗╨░ ╨▓ ╤Б╨╕╨╝╨╛╨╗╤М╨╜╨╛╨╣ ╤З╨░╤Б╤В╨╕]     11 ! CLSFON
+   FIX BYTE VAR CLTTDIA   [╨в╨╡╨║╤Б╤В ╨▓ ╨╛╨║╨╜╨╡ ╨┤╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╡╤А╨░ ╤Б ╨Ъ╨в]   12 ! CLTTDIA
+   FIX BYTE VAR CLTNDIA   [╨в╨╡╨║╤Б╤В ╨▓ ╨╛╨║╨╜╨╡ ╨┤╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╡╤А╨░ ╨▒╨╡╨╖ ╨Ъ╨в] 09 ! CLTNDIA
+:: FIX BYTE VAR CLTDUMP   [╨ж╨▓╨╡╤В ╤Б╨╕╨╝╨▓╨╛╨╗╨░]                       7 ! CLTDUMP
+:: FIX BYTE VAR TCLTDUMP  [╨ж╨▓╨╡╤В ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Б╨╕╨╝╨▓╨╛╨╗╨░]             12 ! TCLTDUMP
+:: FIX BYTE VAR TCLFDUMP  [╨ж╨▓╨╡╤В ╤Д╨╛╨╜╨░ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╤Б╨╕╨╝╨▓╨╛╨╗╨░]         7 ! TCLFDUMP
+::     BYTE VAR FLAGZOOM  [╨д╨╗╨░╨│ ╤А╨░╨╖╤А╨╡╤И╨╡╨╜╨╕╤П ╨▓╤Л╨┤╨░╤З╨╕ ╨╖╤Г╨╝╨╝╨╡╤А╨░]
+:: FIX LONG VAR NABEGOBL  [╨Ъ╨╛╨╜╨╡╤З╨╜╤Л╨╣ ╨░╨┤╤А╨╡╤Б ╨╛╨▒╨╗╨░╤Б╤В╨╕]          0    ! NABEGOBL
+:: FIX LONG VAR NAENDOBL  [╨Э╨░╤З╨░╨╗╤М╨╜╤Л╨╣ ╨░╨┤╤А╨╡╤Б ╨╛╨▒╨╗╨░╤Б╤В╨╕]         3840 ! NAENDOBL
+:: FIX LONG VAR NNOVVAL   [╨Т╨╜╨╛╨▓╤М ╨╖╨░╨╜╨╛╤Б╨╕╨╝╨╛╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡]        0    ! NNOVVAL
+:: FIX BYTE VAR DCORNXU   [╨б╤В╨╛╨╗╨▒╨╡╤Ж ╨▓╨╡╤А╤Е╨╜╨╡╨│╨╛ ╨╗╨╡╨▓╨╛╨│╨╛ ╤Г╨│╨╗╨░]       3 ! DCORNXU
+:: FIX BYTE VAR DCORNYU   [╨б╤В╤А╨╛╨║╨░  ╨▓╨╡╤А╤Е╨╜╨╡╨│╨╛ ╨╗╨╡╨▓╨╛╨│╨╛ ╤Г╨│╨╗╨░]       4 ! DCORNYU
+:: FIX BYTE VAR DCORNXD   [╨б╤В╨╛╨╗╨▒╨╡╤Ж ╨╜╨╕╨╢╨╜╨╡╨│╨╛ ╨┐╤А╨░╨▓╨╛╨│╨╛ ╤Г╨│╨╗╨░]      61 ! DCORNXD
+:: FIX BYTE VAR DCORNYD   [╨б╤В╤А╨╛╨║╨░  ╨╜╨╕╨╢╨╜╨╡╨│╨╛ ╨┐╤А╨░╨▓╨╛╨│╨╛ ╤Г╨│╨╗╨░]      21 ! DCORNYD
+::     BYTE VAR INFSTRD   [╨б╤В╤А╨╛╨║╨░  ╨╜╨╕╨╢╨╜╨╡╨│╨╛ ╨┐╤А╨░╨▓╨╛╨│╨╛ ╤Г╨│╨╗╨░]
+:: FIX BYTE VAR ?ONSYMV   [0-╨║╨╛╨┤╨╛╨▓╤Л╨╣ ╤А╨╡╨╢╨╕╨╝, 1-╤Б╨╕╨╝╨▓╨╛╨╗╤М╨╜╤Л╨╣ ╤А╨╡╨╢╨╕╨╝] 0 ! ?ONSYMV
+:: FIX ACT  VAR PROVTRP   [╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨╜╨░╨╗╨╕╤З╨╕╤П ╤В╨╛╤З╨║╨╕ ╨╛╤Б╤В╨░╨╜╨╛╨▓╨░]
+:: FIX ACT  VAR ACTHELP   [╨Я╨╡╤А╨╡╨╝╨╡╨╜╨╜╨░╤П ╨╛╨▒╤А╨░╨▒╨╛╤В╤З╨╕╨║ ╨▓╤Л╨┤╨░╤З╨╕ ╨┐╨╛╨┤╤Б╨║╨░╨╖╨║╨╕]
+:: FIX ACT  VAR ALTHELP   [╨Я╨╡╤А╨╡╨╝╨╡╨╜╨╜╨░╤П ╨▓╤Л╨┤╨░╤З╨╕ ╨░╨╗╤М╤В╨╡╤А╨╜╨░╤В╨╕╨▓╨╜╨╛╨╣ ╨┐╨╛╨┤╤Б╨║╨░╨╖╨║╨╕]
+:: FIX ACT  VAR ASSHELP   [╨Т╤Л╨┤╨░╤З╨╕ ╨┐╨╛╨┤╤Б╨║╨░╨╖╨║╨╕ ╨┐╨╛ ╤Б╨╕╤Б╤В╨╡╨╝╨╡ ╨║╨╛╨╝╨░╨╜╨┤ ╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╡╤А╨░]
+:: FIX ACT  VAR ALTKEYS   [╨Я╨╡╤А╨╡╨╝╨╡╨╜╨╜╨░╤П ╨╛╨▒╤А╨░╨▒╨╛╤В╤З╨╕╨║ ╨░╨╗╤М╤В╨╡╤А╨╜╨░╤В╨╕╨▓╨╜╤Л╤Е ╨║╨╗╨░╨▓╨╕╤И]
 
 DEFINE? CODNUMB NOT %IF
-:: FIX  LONG VAR CODNUMB  [Адрес размещения кода в памяти для дизассемблера]
+:: FIX  LONG VAR CODNUMB  [╨Р╨┤╤А╨╡╤Б ╤А╨░╨╖╨╝╨╡╤Й╨╡╨╜╨╕╤П ╨║╨╛╨┤╨░ ╨▓ ╨┐╨░╨╝╤П╤В╨╕ ╨┤╨╗╤П ╨┤╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╡╤А╨░]
                     %FI
-DEFINE? VVB NOT %IF :: 80 BYTE VCTR VVB  [Служебная строка] %FI
+DEFINE? VVB NOT %IF :: 80 BYTE VCTR VVB  [╨б╨╗╤Г╨╢╨╡╨▒╨╜╨░╤П ╤Б╤В╤А╨╛╨║╨░] %FI
 DEFINE? NAMEHLP NOT %IF
 80 FIX STRING NAMEHLP "" ! NAMEHLP
                     %FI
@@ -56,13 +56,13 @@ DEFINE? NAMEHLP NOT %IF
 DEFINE? TMEMORY NOT %IF 20000 BYTE VCTR TMEMORY %FI
 
 DEFINE? NACHCOD NOT %IF
-:: FIX  LONG VAR NACHCOD  [Адрес начала области размещения кода в памяти]
+:: FIX  LONG VAR NACHCOD  [╨Р╨┤╤А╨╡╤Б ╨╜╨░╤З╨░╨╗╨░ ╨╛╨▒╨╗╨░╤Б╤В╨╕ ╤А╨░╨╖╨╝╨╡╤Й╨╡╨╜╨╕╤П ╨║╨╛╨┤╨░ ╨▓ ╨┐╨░╨╝╤П╤В╨╕]
 DEFINE? MEMORY %IF 0 ' MEMORY ! NACHCOD %FI
                     %FI
 
 DEFINE? NACHLO NOT %IF
-:: FIX  LONG VAR NACHALO [Адрес начала области DUMPа-обычно не меньше чем
-                          величина NACHCOD]
+:: FIX  LONG VAR NACHALO [╨Р╨┤╤А╨╡╤Б ╨╜╨░╤З╨░╨╗╨░ ╨╛╨▒╨╗╨░╤Б╤В╨╕ DUMP╨░-╨╛╨▒╤Л╤З╨╜╨╛ ╨╜╨╡ ╨╝╨╡╨╜╤М╤И╨╡ ╤З╨╡╨╝
+                          ╨▓╨╡╨╗╨╕╤З╨╕╨╜╨░ NACHCOD]
                    %FI
    DEFINE? NOPKOD  %IF NOPKOD ! NNOVVAL %FI
 '' NOP C C ! ACTHELP ! ALTHELP ! ASSHELP '' T0 ! PROVTRP
@@ -73,32 +73,32 @@ DEFINE? PR      NOT %IF COPYW D  PR      %FI
 [ DEFINE? !VW NOT %IF :: : !VW !T ; %FI ]
 DEFINE? !VW NOT %IF :: COPYW !T !VW %FI
 
-[Процедура дампирования области памяти]
-:: : NDUMP [Адрес строки комментария,Длина,Adr of begin,Adr of end,Adr tek]
+[╨Я╤А╨╛╤Ж╨╡╨┤╤Г╤А╨░ ╨┤╨░╨╝╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╤П ╨╛╨▒╨╗╨░╤Б╤В╨╕ ╨┐╨░╨╝╤П╤В╨╕]
+:: : NDUMP [╨Р╨┤╤А╨╡╤Б ╤Б╤В╤А╨╛╨║╨╕ ╨║╨╛╨╝╨╝╨╡╨╜╤В╨░╤А╨╕╤П,╨Ф╨╗╨╕╨╜╨░,Adr of begin,Adr of end,Adr tek]
      S( NPALLET DCORNYU BROW BCOL BASE@ )
      B16 ETXOFF ! ADRTEK ! ADREND ! NACHALO
-     PROVADRUPS [Записали и проверили адреса]
+     PROVADRUPS [╨Ч╨░╨┐╨╕╤Б╨░╨╗╨╕ ╨╕ ╨┐╤А╨╛╨▓╨╡╤А╨╕╨╗╨╕ ╨░╨┤╤А╨╡╤Б╨░]
      HS DCORNYU - 1- C ! DCORNYD ! INFSTRD
      ON ?SJust 1  ON ?SPALL 17  EON MESC DELWIND
      DCORNYD DCORNYU + 1- ! BROW DCORNXU 1+ ! BCOL
-     72 ! DCORNXD !0 CHANGE [Изменений еще не было]
-     NCUR [Погасили курсор] DCORNYU 2- ! YDIA
+     72 ! DCORNXD !0 CHANGE [╨Ш╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╣ ╨╡╤Й╨╡ ╨╜╨╡ ╨▒╤Л╨╗╨╛]
+     NCUR [╨Я╨╛╨│╨░╤Б╨╕╨╗╨╕ ╨║╤Г╤А╤Б╨╛╤А] DCORNYU 2- ! YDIA
      [Adr,Dl] DCORNXD DCORNXU - LJUST
      '' DMPTEXT DCORNYU DCORNXU DCORNYD DCORNXD GLBINF  17 SETPALL
-     DCORNYU 3- DCORNXU DCORNXD C2 - SHR + #╦ CLFON CLKANT FORMSYMB RSYMB
-     DCORNYU 2- DCORNXU DCORNXD C2 - SHR + #║ CLFON CLKANT FORMSYMB RSYMB
-     DCORNYU 1- DCORNXU DCORNXD C2 - SHR + #╩ CLFON CLKANT FORMSYMB RSYMB
+     DCORNYU 3- DCORNXU DCORNXD C2 - SHR + #тХж CLFON CLKANT FORMSYMB RSYMB
+     DCORNYU 2- DCORNXU DCORNXD C2 - SHR + #тХС CLFON CLKANT FORMSYMB RSYMB
+     DCORNYU 1- DCORNXU DCORNXD C2 - SHR + #тХй CLFON CLKANT FORMSYMB RSYMB
      DCORNYU 1+ ! DCORNYU
-     SHOWBASE SHOWLABEL ADRTEK DVIGAEM [К текущей ячейке]
+     SHOWBASE SHOWLABEL ADRTEK DVIGAEM [╨Ъ ╤В╨╡╨║╤Г╤Й╨╡╨╣ ╤П╤З╨╡╨╣╨║╨╡]
      FIRSTSCR INFDIAS
      SHOWTEK MOULIMIT MouON RP SDV MouFREE MouOFF DELWIND ;
-     [Проверка адреса на корректность]
+     [╨Я╤А╨╛╨▓╨╡╤А╨║╨░ ╨░╨┤╤А╨╡╤Б╨░ ╨╜╨░ ╨║╨╛╤А╤А╨╡╨║╤В╨╜╨╛╤Б╤В╤М]
      : PROVADRUPS [] NACHALO [C] ADREND C2 - [Voliume] 15 &0 + ! ADREND
        [AdrBeg] [ADRTEK C2 - -16 & 128 - MAX
        ADREND 16 HS * - 1- MIN ! ADRUPS] ;
      : MOULIMIT DCORNXU DCORNYU 1- DCORNXD 2+ DCORNYD 3+ MouRANGE ;
      : DMPTEXT BR
-1  "      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  Символьная форма"
+1  "      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  ╨б╨╕╨╝╨▓╨╛╨╗╤М╨╜╨░╤П ╤Д╨╛╤А╨╝╨░"
 INFSTRD
    "    ESC F1 F2 F3 F5 F6 F7 F8 F9 F10 PgDn PgUp Enter Tab Insert    "
 ELSE EMSTR ;
@@ -108,13 +108,13 @@ ELSE EMSTR ;
     YDIA XDIA 0 ' VVB 34 CLTOS [] ;
     DEFINE? DEMSTR NOT %IF :: : DEMSTR D EMSTR ; %FI
 
-  [Выдача экрана с кодами ячеек]
+  [╨Т╤Л╨┤╨░╤З╨░ ╤Н╨║╤А╨░╨╜╨░ ╤Б ╨║╨╛╨┤╨░╨╝╨╕ ╤П╤З╨╡╨╡╨║]
   : FIRSTSCR CLFON 4 SHT CLTDUMP &0 SWB ! BATRVM
     DCORNYU DCORNXU 6 + OPADRVM [Ptrvm] ADRUPS
     DCORNYD DCORNYU - 3+ DO STRSHOW DD ;
     : STRSHOW [Ptrvm,Adres] DLABEL CLFON 4 SHT CLSYM &0 SWB C3 98 +
       C3 16 DO POSYM DDD 16 DO ELEMSHOW E2 64 + E2 ;
-      : POSYM [Atrib,AdrVm,AdrSourse] C @B C4 &0 C3 !VW [Записали символ]
+      : POSYM [Atrib,AdrVm,AdrSourse] C @B C4 &0 C3 !VW [╨Ч╨░╨┐╨╕╤Б╨░╨╗╨╕ ╤Б╨╕╨╝╨▓╨╛╨╗]
         1+ E2 2+ E2 ;
 
   : ELEMSHOW [Ptrvm,Tadri] C @B -4 SHT LEGALSYM E2 2+ E2
@@ -129,10 +129,10 @@ ELSE EMSTR ;
 ::  : LEGALSYM [Ptrvm,Adr,Sym] 15 & C 9 > BR0 #0 #7 + BATRVM &0 C3 !VW
       [Ptr,AdR] ;
 
-[Прокрутка окна на 1 строку вниз]
+[╨Я╤А╨╛╨║╤А╤Г╤В╨║╨░ ╨╛╨║╨╜╨░ ╨╜╨░ 1 ╤Б╤В╤А╨╛╨║╤Г ╨▓╨╜╨╕╨╖]
 :: : WNDUP [] 0 MROLL [] ;
 
-[Прокрутка окна на 1 строку вверх]
+[╨Я╤А╨╛╨║╤А╤Г╤В╨║╨░ ╨╛╨║╨╜╨░ ╨╜╨░ 1 ╤Б╤В╤А╨╛╨║╤Г ╨▓╨▓╨╡╤А╤Е]
 : WNDDOWN [] 1 MROLL [] ;
   : MROLL [0 - UP, 1 - DOWN] PUSH
     DCORNYU DCORNXU DCORNYD C3 - 3+ DCORNXD C3 - 2+
@@ -142,11 +142,11 @@ ELSE EMSTR ;
 
 : SCRDUHL MouFREE ON ?SPALL 41
   140 NAMEHLP GENHELP MOULIMIT [] ; '' SCRDUHL ! ACTHELP
-  [Опрос вводимых команд]
+  [╨Ю╨┐╤А╨╛╤Б ╨▓╨▓╨╛╨┤╨╕╨╝╤Л╤Е ╨║╨╛╨╝╨░╨╜╨┤]
   : SDV [] TRBMou C BR0 OBRMOUS OBRKEYB [] ;
     : OBRMOUS D MouPosI DCORNYD DCORNYU + 2- = BR0 VERHDUMP NIZDUMP
       DEFPALL INFDIAS MouON [] ;
-B16   : NIZDUMP [] MouPosJ DCORNXU - [Координата относительно края окна]
+B16   : NIZDUMP [] MouPosJ DCORNXU - [╨Ъ╨╛╨╛╤А╨┤╨╕╨╜╨░╤В╨░ ╨╛╤В╨╜╨╛╤Б╨╕╤В╨╡╨╗╤М╨╜╨╛ ╨║╤А╨░╤П ╨╛╨║╨╜╨░]
         0E C2 < IF0 NOP
         C  0  4 SEG IF+ BASEMOD  [MOD BASE]
         C  5  9 SEG IF+ DEX      [Exit-ESC]
@@ -161,7 +161,7 @@ B16   : NIZDUMP [] MouPosJ DCORNXU - [Координата относительно края окна]
         C 22 25 SEG IF+ AVTDIAS  [F10]
         C 26 2A SEG IF+ PAGEDNC  [PageUp]
         C 2B 2F SEG IF+ PAGEUPC  [PageDn]
-        C 30 35 SEG IF+ NORMODIF [Enter - Модификация]
+        C 30 35 SEG IF+ NORMODIF [Enter - ╨Ь╨╛╨┤╨╕╤Д╨╕╨║╨░╤Ж╨╕╤П]
         C 36 39 SEG IF+ TABULYC  [TAB]
         C 3A 3F SEG IF+ INSSDIA  [Insert]
         C 40 41 SEG IF+ BEGSTRC  [HOME]
@@ -169,19 +169,19 @@ B16   : NIZDUMP [] MouPosJ DCORNXU - [Координата относительно края окна]
         C 44 45 SEG IF+ DUSTEP   [Up]
           46 47 SEG IF+ ENDSTRC  [END] ;
       DEFINE? DEX NOT %IF : DEX D EX ; %FI
-      : VERHDUMP [] MouPosJ DCORNXU - [Координата относительно края окна]
+      : VERHDUMP [] MouPosJ DCORNXU - [╨Ъ╨╛╨╛╤А╨┤╨╕╨╜╨░╤В╨░ ╨╛╤В╨╜╨╛╤Б╨╕╤В╨╡╨╗╤М╨╜╨╛ ╨║╤А╨░╤П ╨╛╨║╨╜╨░]
         4 C2 < BR0 USTADR NOUSTADR D [] ;
-        : NOUSTADR 5 - C C [Позиция относительно конца метки]
+        : NOUSTADR 5 - C C [╨Я╨╛╨╖╨╕╤Ж╨╕╤П ╨╛╤В╨╜╨╛╤Б╨╕╤В╨╡╨╗╤М╨╜╨╛ ╨║╨╛╨╜╤Ж╨░ ╨╝╨╡╤В╨║╨╕]
           30 < BR+ MouKOD MouSYM [] ;
  : MouKOD [Pos] 3 / D [Nstr] SHOWNORM 0 ! ?ONSYMV USTMOU ;
-   : USTMOU MouPosI DCORNYU - 4 SHT + [N-узла]
-     ADRUPS + [новый адрес] C ADRTEK = BR0 NEWATEK DMODIF [] ;
+   : USTMOU MouPosI DCORNYU - 4 SHT + [N-╤Г╨╖╨╗╨░]
+     ADRUPS + [╨╜╨╛╨▓╤Л╨╣ ╨░╨┤╤А╨╡╤Б] C ADRTEK = BR0 NEWATEK DMODIF [] ;
    : NEWATEK [AdrNew] VYPSTEP ;
    : DMODIF [] D NORMODIF [] ;
  : MouSYM [Pos] SHOWNORM 1 ! ?ONSYMV C 31 > BR+ OBRSYM D SHOWTEK ;
    : OBRSYM 1 ! ?ONSYMV 32 - USTMOU ;
 
-    [Обработка клавиатуры]
+    [╨Ю╨▒╤А╨░╨▒╨╛╤В╨║╨░ ╨║╨╗╨░╨▓╨╕╨░╤В╤Г╤А╤Л]
     : OBRKEYB [cod] BR
       4700 BEGSTRC  [Home]
       0F09 TABULYC  [Tab]
@@ -195,17 +195,17 @@ B16   : NIZDUMP [] MouPosJ DCORNXU - [Координата относительно края окна]
       4800 DUSTEP   [Up]
       5000 DDSTEP   [Down]
 
-      3B00 ACTHELP  [F1 - key Вызов помощи]
-      3C00 OBLWORK  [F2 - key Вызов меню работы с областью]
-      3D00 BASEMOD  [F3 - key Изменение системы счисления для ввода]
-      3F00 USTADR   [F5 - key Ввод метки и движение к ней]
-      4000 TOLABEL  [F6 - key Передвижение к установленной метке]
-      4100 HELPF7   [F7 - key Вызов помощи по системе команд]
-      4200 MODTRP   [F8 - key Простановка контрольной точки]
-      4300 MODDIAF  [F9 - key Ввод имени файла протокола дизассемблирования]
+      3B00 ACTHELP  [F1 - key ╨Т╤Л╨╖╨╛╨▓ ╨┐╨╛╨╝╨╛╤Й╨╕]
+      3C00 OBLWORK  [F2 - key ╨Т╤Л╨╖╨╛╨▓ ╨╝╨╡╨╜╤О ╤А╨░╨▒╨╛╤В╤Л ╤Б ╨╛╨▒╨╗╨░╤Б╤В╤М╤О]
+      3D00 BASEMOD  [F3 - key ╨Ш╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╡ ╤Б╨╕╤Б╤В╨╡╨╝╤Л ╤Б╤З╨╕╤Б╨╗╨╡╨╜╨╕╤П ╨┤╨╗╤П ╨▓╨▓╨╛╨┤╨░]
+      3F00 USTADR   [F5 - key ╨Т╨▓╨╛╨┤ ╨╝╨╡╤В╨║╨╕ ╨╕ ╨┤╨▓╨╕╨╢╨╡╨╜╨╕╨╡ ╨║ ╨╜╨╡╨╣]
+      4000 TOLABEL  [F6 - key ╨Я╨╡╤А╨╡╨┤╨▓╨╕╨╢╨╡╨╜╨╕╨╡ ╨║ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╜╨╛╨╣ ╨╝╨╡╤В╨║╨╡]
+      4100 HELPF7   [F7 - key ╨Т╤Л╨╖╨╛╨▓ ╨┐╨╛╨╝╨╛╤Й╨╕ ╨┐╨╛ ╤Б╨╕╤Б╤В╨╡╨╝╨╡ ╨║╨╛╨╝╨░╨╜╨┤]
+      4200 MODTRP   [F8 - key ╨Я╤А╨╛╤Б╤В╨░╨╜╨╛╨▓╨║╨░ ╨║╨╛╨╜╤В╤А╨╛╨╗╤М╨╜╨╛╨╣ ╤В╨╛╤З╨║╨╕]
+      4300 MODDIAF  [F9 - key ╨Т╨▓╨╛╨┤ ╨╕╨╝╨╡╨╜╨╕ ╤Д╨░╨╣╨╗╨░ ╨┐╤А╨╛╤В╨╛╨║╨╛╨╗╨░ ╨┤╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╕╤А╨╛╨▓╨░╨╜╨╕╤П]
       4400 AVTDIAS  [F0 - auto deasm]
-      5200 INSSDIA  [INS - key Вывод строки дизассемблера в файл]
-      6300 HELPF6   [CntRlF6-key Вызов альтернативной помощи]
+      5200 INSSDIA  [INS - key ╨Т╤Л╨▓╨╛╨┤ ╤Б╤В╤А╨╛╨║╨╕ ╨┤╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╡╤А╨░ ╨▓ ╤Д╨░╨╣╨╗]
+      6300 HELPF6   [CntRlF6-key ╨Т╤Л╨╖╨╛╨▓ ╨░╨╗╤М╤В╨╡╤А╨╜╨░╤В╨╕╨▓╨╜╨╛╨╣ ╨┐╨╛╨╝╨╛╤Й╨╕]
       7700 CntrHOME
       7500 CntrEND
       ELSE ALTVVOD DEFPALL INFDIAS ;
@@ -216,7 +216,7 @@ B16   : NIZDUMP [] MouPosJ DCORNXU - [Координата относительно края окна]
 
 B10
 : OBLWORK EON MESC FIRDEL ON ?SPALL 5 ON MHELP AREAHLP
-  "    Заполнение области"
+  "    ╨Ч╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╨╡ ╨╛╨▒╨╗╨░╤Б╤В╨╕"
   '' IZMENEN '' OBLTEXT '' VALTEXT 4 6 6 20 6 GLBMENU DELWIND [] ;
 : FIRDEL DELWIND DEFPALL FIRSTSCR SHOWTEK [] ;
 : IZMENEN ON ?SPALL 6
@@ -229,12 +229,12 @@ B10
   : AREAHLP ON ?SPALL 41 138 NAMEHLP GENHELP ;
 
 : OBLTEXT BR
-  1 "Заполнить значением"
-  2 "Вводимое значение -"
-  3 "Начальный адрес   -"
-  4 "Конечный адрес    -"
-  5 "Заполнить ловушками"
-  6 "Очистить ловушки"
+  1 "╨Ч╨░╨┐╨╛╨╗╨╜╨╕╤В╤М ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡╨╝"
+  2 "╨Т╨▓╨╛╨┤╨╕╨╝╨╛╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡ -"
+  3 "╨Э╨░╤З╨░╨╗╤М╨╜╤Л╨╣ ╨░╨┤╤А╨╡╤Б   -"
+  4 "╨Ъ╨╛╨╜╨╡╤З╨╜╤Л╨╣ ╨░╨┤╤А╨╡╤Б    -"
+  5 "╨Ч╨░╨┐╨╛╨╗╨╜╨╕╤В╤М ╨╗╨╛╨▓╤Г╤И╨║╨░╨╝╨╕"
+  6 "╨Ю╤З╨╕╤Б╤В╨╕╤В╤М ╨╗╨╛╨▓╤Г╤И╨║╨╕"
   ELSE EMSTR ;
 : VALTEXT BR 3 AOBLBEG 4 AOBLEND 2 VNOSVAL ELSE EMSTR ;
 : AOBLBEG NABEGOBL STRWORD ;
@@ -244,10 +244,10 @@ B10
 :: : STRBYTE SCLR VVODSTR 2 VAL>STR ;
 
 
-[Выдача сообщения о ходе заполнения]
+[╨Т╤Л╨┤╨░╤З╨░ ╤Б╨╛╨╛╨▒╤Й╨╡╨╜╨╕╤П ╨╛ ╤Е╨╛╨┤╨╡ ╨╖╨░╨┐╨╛╨╗╨╜╨╡╨╜╨╕╤П]
 : VYPZAPL ON ?SPALL 7 '' ZAPINFO 21 33 1 15 GENINF NABEGOBL NAENDOBL
   C2 - 1+ E2 NACHCOD + E2 C BR+ VZV DDD DELWIND !1 CHANGE MESC ;
-::  : ZAPINFO BR 1 "Заполняю память" ELSE EMSTR ;
+::  : ZAPINFO BR 1 "╨Ч╨░╨┐╨╛╨╗╨╜╤П╤О ╨┐╨░╨╝╤П╤В╤М" ELSE EMSTR ;
    : VZV [ADR,DL] DO VPIS D [] ;
      : VPIS [ADR] NNOVVAL C2 !TB 1+ ;
 
@@ -258,12 +258,12 @@ B10
 : INVALN PODGVVOD NUMVVOD NNOVVAL !1 CHANGE ;
   : PODGVVOD '' DEMSTR MENCPOS 24 + 0 5  ;
 
-[Ввод значений байтов непосредственно с символьной клавиатуры]
+[╨Т╨▓╨╛╨┤ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╣ ╨▒╨░╨╣╤В╨╛╨▓ ╨╜╨╡╨┐╨╛╤Б╤А╨╡╨┤╤Б╤В╨▓╨╡╨╜╨╜╨╛ ╤Б ╤Б╨╕╨╝╨▓╨╛╨╗╤М╨╜╨╛╨╣ ╨║╨╗╨░╨▓╨╕╨░╤В╤Г╤А╤Л]
 : VODKBD [kod] INKEY 255 & ADRTEK !TB SHOWNORM ADRTEK 1+
   PROVEND SHOWTEK !1 CHANGE ;
 
 B16
-[Ввод нового значения байта с клавиатуры]
+[╨Т╨▓╨╛╨┤ ╨╜╨╛╨▓╨╛╨│╨╛ ╨╖╨╜╨░╤З╨╡╨╜╨╕╤П ╨▒╨░╨╣╤В╨░ ╤Б ╨║╨╗╨░╨▓╨╕╨░╤В╤Г╤А╤Л]
 : TABULYC [] SHOWNORM ?ONSYMV NOT ! ?ONSYMV SHOWTEK [] ;
   : SHOWNORM  ?ONSYMV BR0 REKODSHOW RETEKSYMB [] ;
   : SHOWTEK   ?ONSYMV BR0 CTEKSHOW  TEKSYMB [] ;
@@ -286,32 +286,32 @@ B16
   ADREND 10 DCORNYD DCORNYU - 2+ * - MIN ! ADRUPS
   ADRTEK + PROVEND FIRSTSCR SHOWTEK ;
   : PROVEND ADREND MIN ! ADRTEK ;
-  [Всего имеется строк]
+  [╨Т╤Б╨╡╨│╨╛ ╨╕╨╝╨╡╨╡╤В╤Б╤П ╤Б╤В╤А╨╛╨║]
   : ?STROK - 1+ 10 / D DCORNYD DCORNYU - 2+ MIN 10 * ;
 
 B10
 DEFINE? UNDFKEY NOT %IF
 TRAP UNDFKEY NOP
                     %FI
-[Выдача зумера пpи неправильном вводе]
+[╨Т╤Л╨┤╨░╤З╨░ ╨╖╤Г╨╝╨╡╤А╨░ ╨┐p╨╕ ╨╜╨╡╨┐╤А╨░╨▓╨╕╨╗╤М╨╜╨╛╨╝ ╨▓╨▓╨╛╨┤╨╡]
 :: : ZUMER FLAGZOOM IF+ IGOGO UNDFKEY ;
      : IGOGO 4 DO ZVOOK ;
 
 :: : KODVVOD 1 ! FLAGZOOM INKEY MASKLIT
      C 16 25 SEG IF+ DVIG-#0 [B]
      C #A #F SEG BR+ DVIG-#A D [B] ;
-  [Модификация стаpого значения новым символом]
+  [╨Ь╨╛╨┤╨╕╤Д╨╕╨║╨░╤Ж╨╕╤П ╤Б╤В╨░p╨╛╨│╨╛ ╨╖╨╜╨░╤З╨╡╨╜╨╕╤П ╨╜╨╛╨▓╤Л╨╝ ╤Б╨╕╨╝╨▓╨╛╨╗╨╛╨╝]
   : DVIG-#0 [B'] C 16 - VDVIGZN ;
   : DVIG-#A [B']   #7 - VDVIGZN ;
-::  : VDVIGZN [Тетрада числа] 0 ! FLAGZOOM
-      ADRTEK @B [Получили стаpое значение]
-      4 SHT &0 [Младшую тетраду числа соединили со стаpой старшей]
-      ADRTEK !TB [Записали новое значение на место стаpого]
+::  : VDVIGZN [╨в╨╡╤В╤А╨░╨┤╨░ ╤З╨╕╤Б╨╗╨░] 0 ! FLAGZOOM
+      ADRTEK @B [╨Я╨╛╨╗╤Г╤З╨╕╨╗╨╕ ╤Б╤В╨░p╨╛╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡]
+      4 SHT &0 [╨Ь╨╗╨░╨┤╤И╤Г╤О ╤В╨╡╤В╤А╨░╨┤╤Г ╤З╨╕╤Б╨╗╨░ ╤Б╨╛╨╡╨┤╨╕╨╜╨╕╨╗╨╕ ╤Б╨╛ ╤Б╤В╨░p╨╛╨╣ ╤Б╤В╨░╤А╤И╨╡╨╣]
+      ADRTEK !TB [╨Ч╨░╨┐╨╕╤Б╨░╨╗╨╕ ╨╜╨╛╨▓╨╛╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡ ╨╜╨░ ╨╝╨╡╤Б╤В╨╛ ╤Б╤В╨░p╨╛╨│╨╛]
       DTEKTOS [B] NORMZVOOK !1 CHANGE ;
-      [Выдача писка пpи нормальном вводе]
+      [╨Т╤Л╨┤╨░╤З╨░ ╨┐╨╕╤Б╨║╨░ ╨┐p╨╕ ╨╜╨╛╤А╨╝╨░╨╗╤М╨╜╨╛╨╝ ╨▓╨▓╨╛╨┤╨╡]
       :: : NORMZVOOK 1000 40 BEEP ;
 
-[Вывод текущего положения]
+[╨Т╤Л╨▓╨╛╨┤ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛ ╨┐╨╛╨╗╨╛╨╢╨╡╨╜╨╕╤П]
 : DTEKTOS S( BASE@ ) B16 SHOWTEK SYMCOOR ADRTEK @B CLMOD SWB &0 RSYMB [] ;
 
 : DLSTEP []  -1 STEP ;
@@ -330,65 +330,65 @@ TRAP UNDFKEY NOP
       : DOWNROLL ADRUPS 16 - ! ADRUPS WNDDOWN
         DCORNYU DCORNXU 6 + OPADRVM ADRUPS STRSHOW DD ;
 
-[Определение координат кодовой части байта]
+[╨Ю╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╨║╨╛╨╛╤А╨┤╨╕╨╜╨░╤В ╨║╨╛╨┤╨╛╨▓╨╛╨╣ ╤З╨░╤Б╤В╨╕ ╨▒╨░╨╣╤В╨░]
 : SYMCOOR OPRUZ E2 DCORNYU + E2 58 + [Nstr,Pstr] ;
-[Определение координат символьной части байта]
+[╨Ю╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╨║╨╛╨╛╤А╨┤╨╕╨╜╨░╤В ╤Б╨╕╨╝╨▓╨╛╨╗╤М╨╜╨╛╨╣ ╤З╨░╤Б╤В╨╕ ╨▒╨░╨╣╤В╨░]
 : OPRCOORDUMP [] OPRUZ 3 * 09 + E2 DCORNYU + E2 [Nstr,Pstr] ;
-  [Определение по текущему адресу номера узла]
+  [╨Ю╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╨┐╨╛ ╤В╨╡╨║╤Г╤Й╨╡╨╝╤Г ╨░╨┤╤А╨╡╤Б╤Г ╨╜╨╛╨╝╨╡╤А╨░ ╤Г╨╖╨╗╨░]
   : OPRUZ [] ADRTEK ADRUPS - ABS 16 / [Nstr,Pstr] ;
 
-[Отображение элемента как текущего]
+[╨Ю╤В╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╨╡ ╤Н╨╗╨╡╨╝╨╡╨╜╤В╨░ ╨║╨░╨║ ╤В╨╡╨║╤Г╤Й╨╡╨│╨╛]
 : CTEKSHOW TCLFDUMP TCLTDUMP KODCLTOS [] ;
 
-[Отображение элемента как обычного]
+[╨Ю╤В╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╨╡ ╤Н╨╗╨╡╨╝╨╡╨╜╤В╨░ ╨║╨░╨║ ╨╛╨▒╤Л╤З╨╜╨╛╨│╨╛]
 : REKODSHOW CLFON CLTDUMP KODCLTOS [] ;
   : KODCLTOS OPRCOORDUMP ADRTEK @B STRBYTE CLTOS ;
 
-[П/П модификации обычной выбранной ячейки]
+[╨Я/╨Я ╨╝╨╛╨┤╨╕╤Д╨╕╨║╨░╤Ж╨╕╨╕ ╨╛╨▒╤Л╤З╨╜╨╛╨╣ ╨▓╤Л╨▒╤А╨░╨╜╨╜╨╛╨╣ ╤П╤З╨╡╨╣╨║╨╕]
 : NORMODIF [] S( BASE@ ) EON MESC NOP BASE ! BASE@
   modif SHOWTEK DEFPALL [] ;
-  [Процедура ввода числа]
-  : modif [] ON ?SPALL 9  ADRTEK EQU BOXMEM [содержимое ячейки]
+  [╨Я╤А╨╛╤Ж╨╡╨┤╤Г╤А╨░ ╨▓╨▓╨╛╨┤╨░ ╤З╨╕╤Б╨╗╨░]
+  : modif [] ON ?SPALL 9  ADRTEK EQU BOXMEM [╤Б╨╛╨┤╨╡╤А╨╢╨╕╨╝╨╛╨╡ ╤П╤З╨╡╨╣╨║╨╕]
     '' prigreg 21 30 1 24 NUMVVOD BOXMEM [] !1 CHANGE [] ;
-  :: : prigreg [i] BR 1 "Введите новое значение" ELSE EMSTR [A,DL] ;
+  :: : prigreg [i] BR 1 "╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨╜╨╛╨▓╨╛╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╨╡" ELSE EMSTR [A,DL] ;
   :: : STRVALUE 0 ' VVB BASE@ BR 2 8  8 3  10 3  16 2 ELSE 4 ;
 
 B10
-[Процедура установки заданного адреса дампа]
+[╨Я╤А╨╛╤Ж╨╡╨┤╤Г╤А╨░ ╤Г╤Б╤В╨░╨╜╨╛╨▓╨║╨╕ ╨╖╨░╨┤╨░╨╜╨╜╨╛╨│╨╛ ╨░╨┤╤А╨╡╤Б╨░ ╨┤╨░╨╝╨┐╨░]
 : USTADR [] S( BASE@ ) B16 ON ?SPALL 8  1234 10 BEEP
   '' prigadr 21 30 2 28 NUMVVOD DMLABEL DEFPALL
-  [Здесь уже имеется адрес и нужно к нему двигаться] TOLABEL [] ;
+  [╨Ч╨┤╨╡╤Б╤М ╤Г╨╢╨╡ ╨╕╨╝╨╡╨╡╤В╤Б╤П ╨░╨┤╤А╨╡╤Б ╨╕ ╨╜╤Г╨╢╨╜╨╛ ╨║ ╨╜╨╡╨╝╤Г ╨┤╨▓╨╕╨│╨░╤В╤М╤Б╤П] TOLABEL [] ;
   : TOLABEL DMLABEL DVIGAEM [] ;
   : DVIGAEM [Adr]
-    NACHCOD + [] C ADREND MIN ! ADRTEK [Проверили на выход за границу]
+    NACHCOD + [] C ADREND MIN ! ADRTEK [╨Я╤А╨╛╨▓╨╡╤А╨╕╨╗╨╕ ╨╜╨░ ╨▓╤Л╤Е╨╛╨┤ ╨╖╨░ ╨│╤А╨░╨╜╨╕╤Ж╤Г]
     NACHALO - -16 & 128 - NACHALO C E3 + MAX
-    ADREND 16 HS 7 - * 1- - MIN ! ADRUPS [скорректировали все адреса]
+    ADREND 16 HS 7 - * 1- - MIN ! ADRUPS [╤Б╨║╨╛╤А╤А╨╡╨║╤В╨╕╤А╨╛╨▓╨░╨╗╨╕ ╨▓╤Б╨╡ ╨░╨┤╤А╨╡╤Б╨░]
     FIRSTSCR SHOWLABEL
-    [Перерисовываем экран] SHOWTEK ;
+    [╨Я╨╡╤А╨╡╤А╨╕╤Б╨╛╨▓╤Л╨▓╨░╨╡╨╝ ╤Н╨║╤А╨░╨╜] SHOWTEK ;
   : STRADR DMLABEL STRWORD ;
-  : prigadr [i] BR 1 "Введите требуемый вам HEX - "
-                   2 "адрес области  дампирования." ELSE EMSTR ;
-[Отображение значения метки]
+  : prigadr [i] BR 1 "╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╤В╤А╨╡╨▒╤Г╨╡╨╝╤Л╨╣ ╨▓╨░╨╝ HEX - "
+                   2 "╨░╨┤╤А╨╡╤Б ╨╛╨▒╨╗╨░╤Б╤В╨╕  ╨┤╨░╨╝╨┐╨╕╤А╨╛╨▓╨░╨╜╨╕╤П." ELSE EMSTR ;
+[╨Ю╤В╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╨╡ ╨╖╨╜╨░╤З╨╡╨╜╨╕╤П ╨╝╨╡╤В╨║╨╕]
 : SHOWLABEL CLFON 13 DCORNYU 1- DCORNXU STRADR #: C3 C3 + !TB 1+ CLTOS [] ;
 
-[############## Изменение системы исчисления ##################]
+[############## ╨Ш╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╡ ╤Б╨╕╤Б╤В╨╡╨╝╤Л ╨╕╤Б╤З╨╕╤Б╨╗╨╡╨╜╨╕╤П ##################]
 B10
-   BYTE VAR BL   [Переменная для контроля изменений системы исчисления]
-:: BYTE VAR BCOL [Колонка отображения системы исчисления]
-:: BYTE VAR BROW [Строка отображения  системы исчисления]
+   BYTE VAR BL   [╨Я╨╡╤А╨╡╨╝╨╡╨╜╨╜╨░╤П ╨┤╨╗╤П ╨║╨╛╨╜╤В╤А╨╛╨╗╤П ╨╕╨╖╨╝╨╡╨╜╨╡╨╜╨╕╨╣ ╤Б╨╕╤Б╤В╨╡╨╝╤Л ╨╕╤Б╤З╨╕╤Б╨╗╨╡╨╜╨╕╤П]
+:: BYTE VAR BCOL [╨Ъ╨╛╨╗╨╛╨╜╨║╨░ ╨╛╤В╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╤П ╤Б╨╕╤Б╤В╨╡╨╝╤Л ╨╕╤Б╤З╨╕╤Б╨╗╨╡╨╜╨╕╤П]
+:: BYTE VAR BROW [╨б╤В╤А╨╛╨║╨░ ╨╛╤В╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╤П  ╤Б╨╕╤Б╤В╨╡╨╝╤Л ╨╕╤Б╤З╨╕╤Б╨╗╨╡╨╜╨╕╤П]
 
-[Подпрограмма модификации системы исчисления]
+[╨Я╨╛╨┤╨┐╤А╨╛╨│╤А╨░╨╝╨╝╨░ ╨╝╨╛╨┤╨╕╤Д╨╕╨║╨░╤Ж╨╕╨╕ ╤Б╨╕╤Б╤В╨╡╨╝╤Л ╨╕╤Б╤З╨╕╤Б╨╗╨╡╨╜╨╕╤П]
 :: : BASEMOD [] BL 1+ 3 & C ! BL [i] BR 0 2 1 8 2 10 ELSE 16 ! BASE SHOWBASE ;
 
-   [Текст модификации системы]
+   [╨в╨╡╨║╤Б╤В ╨╝╨╛╨┤╨╕╤Д╨╕╨║╨░╤Ж╨╕╨╕ ╤Б╨╕╤Б╤В╨╡╨╝╤Л]
    : INFBASE [i] BR 0 "BIN" 1 "OCT" 2 "DEC" ELSE "HEX" [Alr,Dl] ;
 :: : SHOWBASE CLFON 15 BROW BCOL
      BASE BR 2 0 8 1 10 2 ELSE 3 C ! BL INFBASE CLTOS ;
 
-FIX 50 STRING FILEDIA [Имя файла дизассемблирования] "DIAS-MEM.TXT" ! FILEDIA
+FIX 50 STRING FILEDIA [╨Ш╨╝╤П ╤Д╨░╨╣╨╗╨░ ╨┤╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╕╤А╨╛╨▓╨░╨╜╨╕╤П] "DIAS-MEM.TXT" ! FILEDIA
 :: : MODDIAF EON MESC NOP
      ON ?SPALL 3 '' INFDIAF 21 15 1 50 GENVVOD FILEDIA [] ;
-     : INFDIAF D "Введите имя файла протокола дизассемблирования:" ;
+     : INFDIAF D "╨Т╨▓╨╡╨┤╨╕╤В╨╡ ╨╕╨╝╤П ╤Д╨░╨╣╨╗╨░ ╨┐╤А╨╛╤В╨╛╨║╨╛╨╗╨░ ╨┤╨╕╨╖╨░╤Б╤Б╨╡╨╝╨▒╨╗╨╕╤А╨╛╨▓╨░╨╜╨╕╤П:" ;
 
 : INSSDIA OPENDIA OUDIAS CLOSE CH ;
   : OPENDIA ON NOF SOZDAT FILEDIA CONNECT CH OPEN CH LENB CH SPOS CH ;
@@ -403,9 +403,9 @@ B16
     : ??ESC TRB 1B = EX+ [] ;
 
 MENUINIT UNDEF
-10 C [1 - Отладка\ 0 - рабочая]
-:: : STT "DUMP буфера редактора" BBUF C ! NACHCOD KBUF 5 CT C3 - NDUMP ;
-[:: : STTN "DUMP буфера редактора" BBUF C ! NACHCOD KBUF 0 NDUMP ;]
+10 C [1 - ╨Ю╤В╨╗╨░╨┤╨║╨░\ 0 - ╤А╨░╨▒╨╛╤З╨░╤П]
+:: : STT "DUMP ╨▒╤Г╤Д╨╡╤А╨░ ╤А╨╡╨┤╨░╨║╤В╨╛╤А╨░" BBUF C ! NACHCOD KBUF 5 CT C3 - NDUMP ;
+[:: : STTN "DUMP ╨▒╤Г╤Д╨╡╤А╨░ ╤А╨╡╨┤╨░╨║╤В╨╛╤А╨░" BBUF C ! NACHCOD KBUF 0 NDUMP ;]
 %FI
 NOT %IF CLEAR $DUMP %FI
 CLEAR $DUMP

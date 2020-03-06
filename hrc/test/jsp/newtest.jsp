@@ -6,14 +6,14 @@
  <jsp:include>     </jsp:include>
  <jsp:setProperty> </jsp:setProperty>
  <jsp:useBean>     </jsp:useBean>
-           или
- <jsp:forward id="1" и другие параметры ..... />
- <jsp:getProperty id="1" и другие параметры ..... />
- <jsp:include id="1" и другие параметры ..... />
- <jsp:setProperty id="1" и другие параметры ..... />
- <jsp:useBean id="1" и другие параметры ..... />
+           п╦п╩п╦
+ <jsp:forward id="1" п╦ п╢я─я┐пЁп╦п╣ п©п╟я─п╟п╪п╣я┌я─я▀ ..... />
+ <jsp:getProperty id="1" п╦ п╢я─я┐пЁп╦п╣ п©п╟я─п╟п╪п╣я┌я─я▀ ..... />
+ <jsp:include id="1" п╦ п╢я─я┐пЁп╦п╣ п©п╟я─п╟п╪п╣я┌я─я▀ ..... />
+ <jsp:setProperty id="1" п╦ п╢я─я┐пЁп╦п╣ п©п╟я─п╟п╪п╣я┌я─я▀ ..... />
+ <jsp:useBean id="1" п╦ п╢я─я┐пЁп╦п╣ п©п╟я─п╟п╪п╣я┌я─я▀ ..... />
 
- <jsp:    /> и  - это тоже самое, что и <% %>
+ <jsp:    /> п╦  - я█я┌п╬ я┌п╬п╤п╣ я│п╟п╪п╬п╣, я┤я┌п╬ п╦ <% %>
 
 <%@ page import = "java.util.*" %>
 <%@ page import = "java.sql.*" %>
