@@ -1,306 +1,308 @@
-  0: <span class='z80-aLComment def-Comment def-Syntax'>; screen.za</span>
-  1: <span class='z80-aLComment def-Comment def-Syntax'>; ê†°Æ‚† · ¢®§•Æ°„‰•‡Æ¨</span>
+Ôªø  0: <span class='z80-aLComment def-Comment def-Syntax'>; screen.za</span>
+  1: <span class='z80-aLComment def-Comment def-Syntax'>; –†–∞–±–æ—Ç–∞ —Å –≤–∏–¥–µ–æ–±—É—Ñ–µ—Ä–æ–º</span>
   2: <span class='z80-aLComment def-Comment def-Syntax'>; 02.09.2000</span>
   3: 
-  4: <span class='z80-aDirective def-Directive'>COMMENT</span><span class='z80-aBComment def-Comment def-Syntax'> -----------------------------------------------í‡•°„•‚-</span>
-  5: <span class='z80-aBComment def-Comment def-Syntax'></span>
-  6: <span class='z80-aBComment def-Comment def-Syntax'>í‡•°„•‚:</span>
+  4: 
+  5: 
+  6: <span class='z80-aDirective def-Directive'>COMMENT</span><span class='z80-aBComment def-Comment def-Syntax'> -----------------------------------------------–¢—Ä–µ–±—É–µ—Ç-</span>
   7: <span class='z80-aBComment def-Comment def-Syntax'></span>
-  8: <span class='z80-aBComment def-Comment def-Syntax'>* FONT_4x8 - †§‡•· Ë‡®‰‚† 4x8 (·Ø•Ê®†´Ï≠Î© ‰Æ‡¨†‚, ·</span>
-  9: <span class='z80-aBComment def-Comment def-Syntax'>             ¢Î‡†¢≠®¢†≠®•¨ ≠† #100</span>
- 10: <span class='z80-aBComment def-Comment def-Syntax'>* FONT_8x8 - †§‡•· Ë‡®‰‚† 8x8 (·Ø•Ê®†´Ï≠Î© ‰Æ‡¨†‚, ·</span>
- 11: <span class='z80-aBComment def-Comment def-Syntax'>             ¢Î‡†¢≠®¢†≠®•¨ ≠† #100</span>
- 12: <span class='z80-aBComment def-Comment def-Syntax'>* cfg_COL_MAIN - †‚‡®°„‚Î Ì™‡†≠†</span>
- 13: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 14: <span class='z80-aBComment def-Comment def-Syntax'>---------------------------------------------------------------</span>
- 15: 
- 16: <span class='z80-aDirective def-Directive'>COMMENT</span><span class='z80-aBComment def-Comment def-Syntax'> ----------------------------------------------ëÆ§•‡¶®‚-</span>
- 17: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 18: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Pos2Scr: å†™‡Æ· Ø‡•Æ°‡†ß„•‚ ™ÆÆ‡§®≠†‚Î ¢ †§‡•· Ì™‡†≠†.</span>
- 19: <span class='z80-aBComment def-Comment def-Syntax'>      d  - ™ÆÆ‡§®≠†‚† Y (0-23);</span>
- 20: <span class='z80-aBComment def-Comment def-Syntax'>      e  - ™ÆÆ‡§®≠†‚† X (0-31).</span>
- 21: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: de - †§‡•· Ì™‡†≠†, ·ÆÆ‚¢•‚·‚¢„ÓÈ®© X ® Y,</span>
- 22: <span class='z80-aBComment def-Comment def-Syntax'>              a  - ®ß¨•≠•≠.</span>
- 23: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 24: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Pos2Attr: å†™‡Æ· Ø‡•Æ°‡†ß„•‚ ™ÆÆ‡§®≠†‚Î ¢ †§‡•· Æ°´†·‚®</span>
- 25: <span class='z80-aBComment def-Comment def-Syntax'>                †‚‡®°„‚Æ¢.</span>
- 26: <span class='z80-aBComment def-Comment def-Syntax'>      d  - ™ÆÆ‡§®≠†‚† Y (0-23);</span>
- 27: <span class='z80-aBComment def-Comment def-Syntax'>      e  - ™ÆÆ‡§®≠†‚† X (0-31).</span>
- 28: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: de - †§‡•· Ì™‡†≠†, ·ÆÆ‚¢•‚·‚¢„ÓÈ®© X ® Y,</span>
- 29: <span class='z80-aBComment def-Comment def-Syntax'>              a  - ®ß¨•≠•≠.</span>
- 30: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 31: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Scr2Attr: å†™‡Æ· Ø‡•Æ°‡†ß„•‚ †§‡•· Ì™‡†≠† ¢ †§‡•· Æ°´†·‚®</span>
- 32: <span class='z80-aBComment def-Comment def-Syntax'>                †‚‡®°„‚Æ¢.</span>
- 33: <span class='z80-aBComment def-Comment def-Syntax'>      de - †§‡•· Ì™‡†≠†;</span>
- 34: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: de - ØÆ´„Á•≠≠Î© †§‡•· †‚‡®°„‚Æ¢, a - ®ß¨•≠•≠.</span>
- 35: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 36: <span class='z80-aBComment def-Comment def-Syntax'>* scr_AddrDn: å†™‡Æ· ØÆ´„Á†•‚ †§‡•· Ì™‡†≠† ≠† Æ§≠„ Ø®™·•´Ï≠„Ó</span>
- 37: <span class='z80-aBComment def-Comment def-Syntax'>              ´®≠•©™„ ≠®¶• ß†§†≠≠Æ£Æ.</span>
- 38: <span class='z80-aBComment def-Comment def-Syntax'>      de - †§‡•· Ì™‡†≠†;</span>
- 39: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: de - ØÆ´„Á•≠≠Î© †§‡•· Ì™‡†≠†, a  - ®ß¨•≠•≠.</span>
- 40: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 41: <span class='z80-aBComment def-Comment def-Syntax'>* scr_AddrUp: å†™‡Æ· ØÆ´„Á†•‚ †§‡•· Ì™‡†≠† ≠† Æ§≠„ Ø®™·•´Ï≠„Ó</span>
- 42: <span class='z80-aBComment def-Comment def-Syntax'>              ´®≠•©™„ ¢ÎË• ß†§†≠≠Æ£Æ.</span>
- 43: <span class='z80-aBComment def-Comment def-Syntax'>      de - †§‡•· Ì™‡†≠†;</span>
- 44: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: de - ØÆ´„Á•≠≠Î© †§‡•· Ì™‡†≠†, a  - ®ß¨•≠•≠.</span>
- 45: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 46: <span class='z80-aBComment def-Comment def-Syntax'>* scr_AddrDn8: å†™‡Æ· ØÆ´„Á†•‚ †§‡•· Ì™‡†≠† ≠† Æ§≠Æ ß≠†™Æ¨•·‚Æ</span>
- 47: <span class='z80-aBComment def-Comment def-Syntax'>               ≠®¶• ß†§†≠≠Æ£Æ.</span>
- 48: <span class='z80-aBComment def-Comment def-Syntax'>      de - †§‡•· Ì™‡†≠†;</span>
- 49: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: de - ØÆ´„Á•≠≠Î© †§‡•· Ì™‡†≠†, a  - ®ß¨•≠•≠.</span>
- 50: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 51: <span class='z80-aBComment def-Comment def-Syntax'>* scr_AddrUp8: å†™‡Æ· ØÆ´„Á†•‚ †§‡•· Ì™‡†≠† ≠† Æ§≠„ Ø®™·•´Ï≠„Ó</span>
- 52: <span class='z80-aBComment def-Comment def-Syntax'>               ´®≠•©™„ ¢ÎË• ß†§†≠≠Æ£Æ.</span>
- 53: <span class='z80-aBComment def-Comment def-Syntax'>      de - †§‡•· Ì™‡†≠†;</span>
- 54: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: de - ØÆ´„Á•≠≠Î© †§‡•· Ì™‡†≠†, a  - ®ß¨•≠•≠.</span>
- 55: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 56: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Clear: éÁ®·‚™† Ì™‡†≠† ¢ ·ÆÆ‚¢•‚·‚¢®® · †‚‡®°„‚†¨®.</span>
+  8: <span class='z80-aBComment def-Comment def-Syntax'>–¢—Ä–µ–±—É–µ—Ç:</span>
+  9: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 10: <span class='z80-aBComment def-Comment def-Syntax'>* FONT_4x8 - –∞–¥—Ä–µ—Å —à—Ä–∏—Ñ—Ç–∞ 4x8 (—Å–ø–µ—Ü–∏–∞–ª—å–Ω—ã–π —Ñ–æ—Ä–º–∞—Ç, —Å</span>
+ 11: <span class='z80-aBComment def-Comment def-Syntax'>             –≤—ã—Ä–∞–≤–Ω–∏–≤–∞–Ω–∏–µ–º –Ω–∞ #100</span>
+ 12: <span class='z80-aBComment def-Comment def-Syntax'>* FONT_8x8 - –∞–¥—Ä–µ—Å —à—Ä–∏—Ñ—Ç–∞ 8x8 (—Å–ø–µ—Ü–∏–∞–ª—å–Ω—ã–π —Ñ–æ—Ä–º–∞—Ç, —Å</span>
+ 13: <span class='z80-aBComment def-Comment def-Syntax'>             –≤—ã—Ä–∞–≤–Ω–∏–≤–∞–Ω–∏–µ–º –Ω–∞ #100</span>
+ 14: <span class='z80-aBComment def-Comment def-Syntax'>* cfg_COL_MAIN - –∞—Ç—Ä–∏–±—É—Ç—ã —ç–∫—Ä–∞–Ω–∞</span>
+ 15: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 16: <span class='z80-aBComment def-Comment def-Syntax'>---------------------------------------------------------------</span>
+ 17: 
+ 18: <span class='z80-aDirective def-Directive'>COMMENT</span><span class='z80-aBComment def-Comment def-Syntax'> ----------------------------------------------–°–æ–¥–µ—Ä–∂–∏—Ç-</span>
+ 19: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 20: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Pos2Scr: –ú–∞–∫—Ä–æ—Å –ø—Ä–µ–æ–±—Ä–∞–∑—É–µ—Ç –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç—ã –≤ –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞.</span>
+ 21: <span class='z80-aBComment def-Comment def-Syntax'>      d  - –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç–∞ Y (0-23);</span>
+ 22: <span class='z80-aBComment def-Comment def-Syntax'>      e  - –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç–∞ X (0-31).</span>
+ 23: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞, —Å–æ–æ—Ç–≤–µ—Ç—Å—Ç–≤—É—é—â–∏–π X –∏ Y,</span>
+ 24: <span class='z80-aBComment def-Comment def-Syntax'>              a  - –∏–∑–º–µ–Ω–µ–Ω.</span>
+ 25: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 26: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Pos2Attr: –ú–∞–∫—Ä–æ—Å –ø—Ä–µ–æ–±—Ä–∞–∑—É–µ—Ç –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç—ã –≤ –∞–¥—Ä–µ—Å –æ–±–ª–∞—Å—Ç–∏</span>
+ 27: <span class='z80-aBComment def-Comment def-Syntax'>                –∞—Ç—Ä–∏–±—É—Ç–æ–≤.</span>
+ 28: <span class='z80-aBComment def-Comment def-Syntax'>      d  - –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç–∞ Y (0-23);</span>
+ 29: <span class='z80-aBComment def-Comment def-Syntax'>      e  - –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç–∞ X (0-31).</span>
+ 30: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞, —Å–æ–æ—Ç–≤–µ—Ç—Å—Ç–≤—É—é—â–∏–π X –∏ Y,</span>
+ 31: <span class='z80-aBComment def-Comment def-Syntax'>              a  - –∏–∑–º–µ–Ω–µ–Ω.</span>
+ 32: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 33: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Scr2Attr: –ú–∞–∫—Ä–æ—Å –ø—Ä–µ–æ–±—Ä–∞–∑—É–µ—Ç –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞ –≤ –∞–¥—Ä–µ—Å –æ–±–ª–∞—Å—Ç–∏</span>
+ 34: <span class='z80-aBComment def-Comment def-Syntax'>                –∞—Ç—Ä–∏–±—É—Ç–æ–≤.</span>
+ 35: <span class='z80-aBComment def-Comment def-Syntax'>      de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞;</span>
+ 36: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: de - –ø–æ–ª—É—á–µ–Ω–Ω—ã–π –∞–¥—Ä–µ—Å –∞—Ç—Ä–∏–±—É—Ç–æ–≤, a - –∏–∑–º–µ–Ω–µ–Ω.</span>
+ 37: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 38: <span class='z80-aBComment def-Comment def-Syntax'>* scr_AddrDn: –ú–∞–∫—Ä–æ—Å –ø–æ–ª—É—á–∞–µ—Ç –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞ –Ω–∞ –æ–¥–Ω—É –ø–∏–∫—Å–µ–ª—å–Ω—É—é</span>
+ 39: <span class='z80-aBComment def-Comment def-Syntax'>              –ª–∏–Ω–µ–π–∫—É –Ω–∏–∂–µ –∑–∞–¥–∞–Ω–Ω–æ–≥–æ.</span>
+ 40: <span class='z80-aBComment def-Comment def-Syntax'>      de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞;</span>
+ 41: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: de - –ø–æ–ª—É—á–µ–Ω–Ω—ã–π –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞, a  - –∏–∑–º–µ–Ω–µ–Ω.</span>
+ 42: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 43: <span class='z80-aBComment def-Comment def-Syntax'>* scr_AddrUp: –ú–∞–∫—Ä–æ—Å –ø–æ–ª—É—á–∞–µ—Ç –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞ –Ω–∞ –æ–¥–Ω—É –ø–∏–∫—Å–µ–ª—å–Ω—É—é</span>
+ 44: <span class='z80-aBComment def-Comment def-Syntax'>              –ª–∏–Ω–µ–π–∫—É –≤—ã—à–µ –∑–∞–¥–∞–Ω–Ω–æ–≥–æ.</span>
+ 45: <span class='z80-aBComment def-Comment def-Syntax'>      de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞;</span>
+ 46: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: de - –ø–æ–ª—É—á–µ–Ω–Ω—ã–π –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞, a  - –∏–∑–º–µ–Ω–µ–Ω.</span>
+ 47: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 48: <span class='z80-aBComment def-Comment def-Syntax'>* scr_AddrDn8: –ú–∞–∫—Ä–æ—Å –ø–æ–ª—É—á–∞–µ—Ç –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞ –Ω–∞ –æ–¥–Ω–æ –∑–Ω–∞–∫–æ–º–µ—Å—Ç–æ</span>
+ 49: <span class='z80-aBComment def-Comment def-Syntax'>               –Ω–∏–∂–µ –∑–∞–¥–∞–Ω–Ω–æ–≥–æ.</span>
+ 50: <span class='z80-aBComment def-Comment def-Syntax'>      de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞;</span>
+ 51: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: de - –ø–æ–ª—É—á–µ–Ω–Ω—ã–π –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞, a  - –∏–∑–º–µ–Ω–µ–Ω.</span>
+ 52: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 53: <span class='z80-aBComment def-Comment def-Syntax'>* scr_AddrUp8: –ú–∞–∫—Ä–æ—Å –ø–æ–ª—É—á–∞–µ—Ç –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞ –Ω–∞ –æ–¥–Ω—É –ø–∏–∫—Å–µ–ª—å–Ω—É—é</span>
+ 54: <span class='z80-aBComment def-Comment def-Syntax'>               –ª–∏–Ω–µ–π–∫—É –≤—ã—à–µ –∑–∞–¥–∞–Ω–Ω–æ–≥–æ.</span>
+ 55: <span class='z80-aBComment def-Comment def-Syntax'>      de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞;</span>
+ 56: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: de - –ø–æ–ª—É—á–µ–Ω–Ω—ã–π –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞, a  - –∏–∑–º–µ–Ω–µ–Ω.</span>
  57: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 58: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Print8x8: è•Á†‚Ï ASCIIZ-·‚‡Æ™® ≠† Ì™‡†≠• ¢ ‡•¶®¨• 8x8.</span>
- 59: <span class='z80-aBComment def-Comment def-Syntax'>      ix - †§‡•· ·‚‡Æ™®;</span>
- 60: <span class='z80-aBComment def-Comment def-Syntax'>      bc - ™ÆÆ‡§®≠†‚Î Ì™‡†≠† (·¨. scr_Pos2Scr).</span>
- 61: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: a - 0, ix - ØÆ·´•§≠®© Ì´•¨•≠‚ ·‚‡Æ™® (0)</span>
- 62: <span class='z80-aBComment def-Comment def-Syntax'>              hl,de,b - ®ß¨•≠•≠Î.</span>
- 63: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 64: <span class='z80-aBComment def-Comment def-Syntax'>* scr_SymOut8x8: è•Á†‚Ï ·®¨¢Æ´† ≠† Ì™‡†≠• ¢ ‡•¶®¨• 8x8</span>
- 65: <span class='z80-aBComment def-Comment def-Syntax'>      de - †§‡•· Ì™‡†≠†;</span>
- 66: <span class='z80-aBComment def-Comment def-Syntax'>      a  - ™Æ§ ·®¨¢Æ´†.</span>
- 67: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: hl,bc,a - ®ß¨•¨•≠Î.</span>
- 68: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 69: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Print4x8: è•Á†‚Ï ASCIIZ-·‚‡Æ™® ≠† Ì™‡†≠• ¢ ‡•¶®¨• 4x8.</span>
- 70: <span class='z80-aBComment def-Comment def-Syntax'>      ix - †§‡•· ·‚‡Æ™®;</span>
- 71: <span class='z80-aBComment def-Comment def-Syntax'>      bc - ™ÆÆ‡§®≠†‚Î Ì™‡†≠† (·¨. scr_Pos2Scr).</span>
- 72: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: a - 0, ix - ØÆ·´•§≠®© Ì´•¨•≠‚ ·‚‡Æ™® (0)</span>
- 73: <span class='z80-aBComment def-Comment def-Syntax'>              hl,de,bc - ®ß¨•≠•≠Î.</span>
- 74: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 75: <span class='z80-aBComment def-Comment def-Syntax'>* scr_SymOut4x8: è•Á†‚Ï ·®¨¢Æ´† ≠† Ì™‡†≠• ¢ ‡•¶®¨• 4x8</span>
- 76: <span class='z80-aBComment def-Comment def-Syntax'>      de - †§‡•· Ì™‡†≠†;</span>
- 77: <span class='z80-aBComment def-Comment def-Syntax'>      c  - ¨†·™† ·®¨¢Æ´† (%11110000 ®´® %00001111);</span>
- 78: <span class='z80-aBComment def-Comment def-Syntax'>      a  - ™Æ§ ·®¨¢Æ´†.</span>
- 79: <span class='z80-aBComment def-Comment def-Syntax'>  ÇÆß¢‡†È†•‚: hl,bc,a - ®ß¨•¨•≠Î.</span>
- 80: <span class='z80-aBComment def-Comment def-Syntax'></span>
- 81: <span class='z80-aBComment def-Comment def-Syntax'>---------------------------------------------------------------</span>
- 82: 
- 83: <span class='z80-aLabel def-Label'>scr_Pos2Scr</span><span class='z80-aLabel def-Label'>       MAC</span>
- 84:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
- 85:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00000111</span>
- 86:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
- 87:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+ 58: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Clear: –û—á–∏—Å—Ç–∫–∞ —ç–∫—Ä–∞–Ω–∞ –≤ —Å–æ–æ—Ç–≤–µ—Ç—Å—Ç–≤–∏–∏ —Å –∞—Ç—Ä–∏–±—É—Ç–∞–º–∏.</span>
+ 59: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 60: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Print8x8: –ü–µ—á–∞—Ç—å ASCIIZ-—Å—Ç—Ä–æ–∫–∏ –Ω–∞ —ç–∫—Ä–∞–Ω–µ –≤ —Ä–µ–∂–∏–º–µ 8x8.</span>
+ 61: <span class='z80-aBComment def-Comment def-Syntax'>      ix - –∞–¥—Ä–µ—Å —Å—Ç—Ä–æ–∫–∏;</span>
+ 62: <span class='z80-aBComment def-Comment def-Syntax'>      bc - –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç—ã —ç–∫—Ä–∞–Ω–∞ (—Å–º. scr_Pos2Scr).</span>
+ 63: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: a - 0, ix - –ø–æ—Å–ª–µ–¥–Ω–∏–π —ç–ª–µ–º–µ–Ω—Ç —Å—Ç—Ä–æ–∫–∏ (0)</span>
+ 64: <span class='z80-aBComment def-Comment def-Syntax'>              hl,de,b - –∏–∑–º–µ–Ω–µ–Ω—ã.</span>
+ 65: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 66: <span class='z80-aBComment def-Comment def-Syntax'>* scr_SymOut8x8: –ü–µ—á–∞—Ç—å —Å–∏–º–≤–æ–ª–∞ –Ω–∞ —ç–∫—Ä–∞–Ω–µ –≤ —Ä–µ–∂–∏–º–µ 8x8</span>
+ 67: <span class='z80-aBComment def-Comment def-Syntax'>      de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞;</span>
+ 68: <span class='z80-aBComment def-Comment def-Syntax'>      a  - –∫–æ–¥ —Å–∏–º–≤–æ–ª–∞.</span>
+ 69: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: hl,bc,a - –∏–∑–º–µ–º–µ–Ω—ã.</span>
+ 70: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 71: <span class='z80-aBComment def-Comment def-Syntax'>* scr_Print4x8: –ü–µ—á–∞—Ç—å ASCIIZ-—Å—Ç—Ä–æ–∫–∏ –Ω–∞ —ç–∫—Ä–∞–Ω–µ –≤ —Ä–µ–∂–∏–º–µ 4x8.</span>
+ 72: <span class='z80-aBComment def-Comment def-Syntax'>      ix - –∞–¥—Ä–µ—Å —Å—Ç—Ä–æ–∫–∏;</span>
+ 73: <span class='z80-aBComment def-Comment def-Syntax'>      bc - –∫–æ–æ—Ä–¥–∏–Ω–∞—Ç—ã —ç–∫—Ä–∞–Ω–∞ (—Å–º. scr_Pos2Scr).</span>
+ 74: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: a - 0, ix - –ø–æ—Å–ª–µ–¥–Ω–∏–π —ç–ª–µ–º–µ–Ω—Ç —Å—Ç—Ä–æ–∫–∏ (0)</span>
+ 75: <span class='z80-aBComment def-Comment def-Syntax'>              hl,de,bc - –∏–∑–º–µ–Ω–µ–Ω—ã.</span>
+ 76: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 77: <span class='z80-aBComment def-Comment def-Syntax'>* scr_SymOut4x8: –ü–µ—á–∞—Ç—å —Å–∏–º–≤–æ–ª–∞ –Ω–∞ —ç–∫—Ä–∞–Ω–µ –≤ —Ä–µ–∂–∏–º–µ 4x8</span>
+ 78: <span class='z80-aBComment def-Comment def-Syntax'>      de - –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞;</span>
+ 79: <span class='z80-aBComment def-Comment def-Syntax'>      c  - –º–∞—Å–∫–∞ —Å–∏–º–≤–æ–ª–∞ (%11110000 –∏–ª–∏ %00001111);</span>
+ 80: <span class='z80-aBComment def-Comment def-Syntax'>      a  - –∫–æ–¥ —Å–∏–º–≤–æ–ª–∞.</span>
+ 81: <span class='z80-aBComment def-Comment def-Syntax'>  –í–æ–∑–≤—Ä–∞—â–∞–µ—Ç: hl,bc,a - –∏–∑–º–µ–º–µ–Ω—ã.</span>
+ 82: <span class='z80-aBComment def-Comment def-Syntax'></span>
+ 83: <span class='z80-aBComment def-Comment def-Syntax'>---------------------------------------------------------------</span>
+ 84: 
+ 85: <span class='z80-aLabel def-Label'>scr_Pos2Scr</span><span class='z80-aLabel def-Label'>       MAC</span>
+ 86:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+ 87:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00000111</span>
  88:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
- 89:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
- 90:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
- 91:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
- 92:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00011000</span>
- 93:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aNumHex def-NumberHex def-Number'>#40</span> <span class='z80-aLComment def-Comment def-Syntax'>;#C0</span>
- 94:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
- 95:                   <span class='z80-aDirective def-Directive'>ENDM</span>
- 96: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
- 97: 
- 98: <span class='z80-aLabel def-Label'>scr_Pos2Attr</span><span class='z80-aLabel def-Label'>      MAC</span>
- 99:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-100:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
-101:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+ 89:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+ 90:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+ 91:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
+ 92:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+ 93:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+ 94:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00011000</span>
+ 95:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aNumHex def-NumberHex def-Number'>#40</span> <span class='z80-aLComment def-Comment def-Syntax'>;#C0</span>
+ 96:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+ 97:                   <span class='z80-aDirective def-Directive'>ENDM</span>
+ 98: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+ 99: 
+100: <span class='z80-aLabel def-Label'>scr_Pos2Attr</span><span class='z80-aLabel def-Label'>      MAC</span>
+101:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
 102:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
-103:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-104:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%11100000</span>
-105:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aRegister def-Register'>e</span>
-106:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-107:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-108:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00000011</span>
-109:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aNumHex def-NumberHex def-Number'>#58</span> <span class='z80-aLComment def-Comment def-Syntax'>;#D8</span>
-110:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-111:                   <span class='z80-aDirective def-Directive'>ENDM</span>
-112: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-113: 
-114: <span class='z80-aLabel def-Label'>scr_Scr2Attr</span><span class='z80-aLabel def-Label'>      MAC</span>
-115:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-116:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00011000</span>
-117:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
-118:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+103:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+104:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+105:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+106:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%11100000</span>
+107:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aRegister def-Register'>e</span>
+108:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+109:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+110:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00000011</span>
+111:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aNumHex def-NumberHex def-Number'>#58</span> <span class='z80-aLComment def-Comment def-Syntax'>;#D8</span>
+112:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+113:                   <span class='z80-aDirective def-Directive'>ENDM</span>
+114: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+115: 
+116: <span class='z80-aLabel def-Label'>scr_Scr2Attr</span><span class='z80-aLabel def-Label'>      MAC</span>
+117:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+118:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00011000</span>
 119:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
-120:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aNumHex def-NumberHex def-Number'>#58</span> <span class='z80-aLComment def-Comment def-Syntax'>;#D8</span>
-121:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-122:                   <span class='z80-aDirective def-Directive'>ENDM</span>
-123: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-124: 
-125: <span class='z80-aLabel def-Label'>scr_AddrDn</span><span class='z80-aLabel def-Label'>        MAC</span>
-126:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-127:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-128:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00000111</span>
-129:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>nz</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>12</span>
-130:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
-131:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#20</span>
-132:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-133:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>6</span>
-134:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-135:                   <span class='z80-aMnemonic def-Operator def-Symbol'>sub</span>   <span class='z80-aNumHex def-NumberHex def-Number'>#08</span>
-136:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-137:                   <span class='z80-aDirective def-Directive'>ENDM</span>
-138: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-139: 
-140: <span class='z80-aLabel def-Label'>scr_AddrUp</span><span class='z80-aLabel def-Label'>        MAC</span>
-141:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-142:                   <span class='z80-aMnemonic def-Operator def-Symbol'>dec</span>   <span class='z80-aRegister def-Register'>d</span>
-143:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00000111</span>
-144:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>nz</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>12</span>
-145:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
-146:                   <span class='z80-aMnemonic def-Operator def-Symbol'>sub</span>   <span class='z80-aNumHex def-NumberHex def-Number'>#20</span>
-147:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-148:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>6</span>
-149:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-150:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#08</span>
-151:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-152:                   <span class='z80-aDirective def-Directive'>ENDM</span>
-153: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-154: 
-155: <span class='z80-aLabel def-Label'>scr_AddrDn8</span><span class='z80-aLabel def-Label'>       MAC</span>
-156:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
-157:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#20</span>
-158:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-159:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>nc</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>6</span>
-160:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-161:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#08</span>
-162:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-163:                   <span class='z80-aDirective def-Directive'>ENDM</span>
-164: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-165: 
-166: <span class='z80-aLabel def-Label'>scr_AddrUp8</span><span class='z80-aLabel def-Label'>       MAC</span>
-167:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
-168:                   <span class='z80-aMnemonic def-Operator def-Symbol'>sub</span>   <span class='z80-aNumHex def-NumberHex def-Number'>#20</span>
-169:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-170:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>nc</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>6</span>
-171:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-172:                   <span class='z80-aMnemonic def-Operator def-Symbol'>sub</span>   <span class='z80-aNumHex def-NumberHex def-Number'>#08</span>
-173:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-174:                   <span class='z80-aDirective def-Directive'>ENDM</span>
-175: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-176: 
-177: <span class='z80-aLabel def-Label'>scr_Clear</span><span class='z80-aLabel def-Label'>         PROC</span>
-178:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#5AFF</span> <span class='z80-aLComment def-Comment def-Syntax'>;#DAFF</span>
-179:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#5AFE</span> <span class='z80-aLComment def-Comment def-Syntax'>;#DAFE</span>
-180:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>bc</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#02FF</span>
-181:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span>cfg_COL_MAIN<span class='z80-aSymbol def-Symbol'>)</span>
-182:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-183:                   <span class='z80-aMnemonic def-Operator def-Symbol'>lddr</span>
-184:                   <span class='z80-aMnemonic def-Operator def-Symbol'>dec</span>   <span class='z80-aRegister def-Register'>hl</span>
-185:                   <span class='z80-aMnemonic def-Operator def-Symbol'>dec</span>   <span class='z80-aRegister def-Register'>e</span>
-186:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span>
-187:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>bc</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#17FF</span>
-188:                   <span class='z80-aMnemonic def-Operator def-Symbol'>lddr</span>
-189:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>
-190: <span class='z80-aLabel def-Label'>scr_Clear</span><span class='z80-aLabel def-Label'>         ENDP</span>
-191: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-192: 
-193: <span class='z80-aLabel def-Label'>scr_Print4x8</span><span class='z80-aLabel def-Label'>      PROC</span>
-194:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>b</span>
-195:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span>
-196:                   scr_Pos2Scr
-197:                   <span class='z80-aMnemonic def-Operator def-Symbol'>bit</span>   <span class='z80-aNumDec def-NumberDec def-Number'>0</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span> <span class='z80-aLComment def-Comment def-Syntax'>;ó•‚/≠•Á•‚? ç„¶≠Æ §´Ô ¨†·™®</span>
-198:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumBin def-NumberBin def-Number'>%00001111</span> <span class='z80-aLComment def-Comment def-Syntax'>;Ñ´Ô Á•‚≠ÎÂ ·‚Æ´°ÊÆ¢</span>
-199:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>z</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>@1</span>
-200:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumBin def-NumberBin def-Number'>%11110000</span> <span class='z80-aLComment def-Comment def-Syntax'>;Ñ´Ô ≠•Á•‚≠ÎÂ ·‚Æ´°ÊÆ¢</span>
-201: <span class='z80-aLabel def-Label'>@1</span><span class='z80-aLabel def-Label'>:</span>               <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>ix</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;a = ÆÁ•‡•§≠Æ© ·®¨¢Æ´ ·‚‡Æ™®</span>
-202:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aRegister def-Register'>a</span>
-203:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>   <span class='z80-aMnemonic def-Operator def-Symbol'>z</span> <span class='z80-aLComment def-Comment def-Syntax'>;ÇÆß¢‡†‚, •·´® a=0</span>
-204:                   <span class='z80-aMnemonic def-Operator def-Symbol'>call  </span><span class='z80-aSymbol def-Symbol'>scr_SymOut4x8</span> <span class='z80-aLComment def-Comment def-Syntax'>;ÇÎ¢Æ§ ·®¨¢Æ´†</span>
-205:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>ix</span>
-206:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>c</span>      <span class='z80-aLComment def-Comment def-Syntax'>;\</span>
-207:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jp    </span><span class='z80-aSymbol def-Symbol'>p,@1</span><span class='z80-aSymbol def-Symbol'>-</span><span class='z80-aNumDec def-NumberDec def-Number'>2</span> <span class='z80-aLComment def-Comment def-Syntax'>;- è‡Æ¢•‡®¨ ·‚†‡Ë®© °®‚ c</span>
-208:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumBin def-NumberBin def-Number'>%00001111</span>
-209:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>e</span> <span class='z80-aLComment def-Comment def-Syntax'>;ë´•§„ÓÈ®© †§‡•· Ì™‡†≠†</span>
-210:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aLabel def-Label'>@1</span>
-211: <span class='z80-aLabel def-Label'>scr_Print4x8</span><span class='z80-aLabel def-Label'>      ENDP</span>
-212: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-213: 
-214: <span class='z80-aLabel def-Label'>scr_Print8x8</span><span class='z80-aLabel def-Label'>      PROC</span>
-215:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>b</span>
-216:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span>
-217:                   scr_Pos2Scr
-218:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>ix</span><span class='z80-aSymbol def-Symbol'>)</span>
-219:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aRegister def-Register'>a</span>
-220:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>   <span class='z80-aMnemonic def-Operator def-Symbol'>z</span>
-221:                   <span class='z80-aMnemonic def-Operator def-Symbol'>call  </span><span class='z80-aSymbol def-Symbol'>scr_SymOut8x8</span>
-222:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>e</span>
-223:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>ix</span>
-224:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aLabel def-Label'>scr_Print8x8</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>3</span>
-225: <span class='z80-aLabel def-Label'>scr_Print8x8</span><span class='z80-aLabel def-Label'>      ENDP</span>
-226: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-227: 
-228: <span class='z80-aLabel def-Label'>scr_SymOut8x8</span><span class='z80-aLabel def-Label'>     PROC</span>
-229:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>h</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>HIGH</span> FONT_8x8 <span class='z80-aLComment def-Comment def-Syntax'>;Ñ.°. ¢Î‡†¢≠•≠ ≠† 256!</span>
-230:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>l</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-231:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
-232:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>b</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumDec def-NumberDec def-Number'>8</span>
-233: <span class='z80-aLabel def-Label'>@1</span><span class='z80-aLabel def-Label'>:</span>               <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;ç• ‡†ß´®≠•®¢†•¨ - ® ‚†™ °Î·‚‡Æ</span>
-234:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-235:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
-236:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-237:                   <span class='z80-aMnemonic def-Operator def-Symbol'>djnz  </span><span class='z80-aSymbol def-Symbol'>@1</span>
-238:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span>
-239:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>
-240: <span class='z80-aLabel def-Label'>scr_SymOut8x8</span><span class='z80-aLabel def-Label'>     ENDP</span>
-241: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-242: 
-243: <span class='z80-aLabel def-Label'>scr_SymOut4x8</span><span class='z80-aLabel def-Label'>     PROC</span>
-244:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>h</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>HIGH</span> FONT_4x8 <span class='z80-aLComment def-Comment def-Syntax'>;Ñ.°. ¢Î‡†¢≠•≠ ≠† 256!</span>
-245:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>l</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span> <span class='z80-aLComment def-Comment def-Syntax'>;hl = FONT_4x8</span>
-246:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>b</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span> <span class='z80-aLComment def-Comment def-Syntax'>;ëÆÂ‡†≠®¨ de</span>
-247:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;a = ·Æ§•‡¶®¨Æ• ¢®§•Æ°„‰•‡†</span>
-248:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;\</span>
-249:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>    <span class='z80-aLComment def-Comment def-Syntax'>; ç†´Æ¶•≠®• ≠† Ì™‡†≠ ØÆ ¨†·™•</span>
-250:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;/</span>
-251:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span> <span class='z80-aLComment def-Comment def-Syntax'>;é‚‡†ß®¨ ®ß¨•≠•≠®• ≠† Ì™‡†≠•</span>
-252:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
-253:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-254:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;ê†ß´®≠••≠Æ §´Ô ·™Æ‡Æ·‚®</span>
-255:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-256:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+120:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+121:                   <span class='z80-aMnemonic def-Operator def-Symbol'>rrca</span>
+122:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aNumHex def-NumberHex def-Number'>#58</span> <span class='z80-aLComment def-Comment def-Syntax'>;#D8</span>
+123:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+124:                   <span class='z80-aDirective def-Directive'>ENDM</span>
+125: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+126: 
+127: <span class='z80-aLabel def-Label'>scr_AddrDn</span><span class='z80-aLabel def-Label'>        MAC</span>
+128:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+129:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+130:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00000111</span>
+131:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>nz</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>12</span>
+132:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
+133:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#20</span>
+134:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+135:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>6</span>
+136:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+137:                   <span class='z80-aMnemonic def-Operator def-Symbol'>sub</span>   <span class='z80-aNumHex def-NumberHex def-Number'>#08</span>
+138:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+139:                   <span class='z80-aDirective def-Directive'>ENDM</span>
+140: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+141: 
+142: <span class='z80-aLabel def-Label'>scr_AddrUp</span><span class='z80-aLabel def-Label'>        MAC</span>
+143:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+144:                   <span class='z80-aMnemonic def-Operator def-Symbol'>dec</span>   <span class='z80-aRegister def-Register'>d</span>
+145:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aNumBin def-NumberBin def-Number'>%00000111</span>
+146:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>nz</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>12</span>
+147:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
+148:                   <span class='z80-aMnemonic def-Operator def-Symbol'>sub</span>   <span class='z80-aNumHex def-NumberHex def-Number'>#20</span>
+149:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+150:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>6</span>
+151:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+152:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#08</span>
+153:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+154:                   <span class='z80-aDirective def-Directive'>ENDM</span>
+155: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+156: 
+157: <span class='z80-aLabel def-Label'>scr_AddrDn8</span><span class='z80-aLabel def-Label'>       MAC</span>
+158:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
+159:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#20</span>
+160:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+161:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>nc</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>6</span>
+162:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+163:                   <span class='z80-aMnemonic def-Operator def-Symbol'>add</span>   <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#08</span>
+164:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+165:                   <span class='z80-aDirective def-Directive'>ENDM</span>
+166: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+167: 
+168: <span class='z80-aLabel def-Label'>scr_AddrUp8</span><span class='z80-aLabel def-Label'>       MAC</span>
+169:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>e</span>
+170:                   <span class='z80-aMnemonic def-Operator def-Symbol'>sub</span>   <span class='z80-aNumHex def-NumberHex def-Number'>#20</span>
+171:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+172:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>nc</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>$</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>6</span>
+173:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+174:                   <span class='z80-aMnemonic def-Operator def-Symbol'>sub</span>   <span class='z80-aNumHex def-NumberHex def-Number'>#08</span>
+175:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+176:                   <span class='z80-aDirective def-Directive'>ENDM</span>
+177: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+178: 
+179: <span class='z80-aLabel def-Label'>scr_Clear</span><span class='z80-aLabel def-Label'>         PROC</span>
+180:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#5AFF</span> <span class='z80-aLComment def-Comment def-Syntax'>;#DAFF</span>
+181:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#5AFE</span> <span class='z80-aLComment def-Comment def-Syntax'>;#DAFE</span>
+182:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>bc</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#02FF</span>
+183:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span>cfg_COL_MAIN<span class='z80-aSymbol def-Symbol'>)</span>
+184:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+185:                   <span class='z80-aMnemonic def-Operator def-Symbol'>lddr</span>
+186:                   <span class='z80-aMnemonic def-Operator def-Symbol'>dec</span>   <span class='z80-aRegister def-Register'>hl</span>
+187:                   <span class='z80-aMnemonic def-Operator def-Symbol'>dec</span>   <span class='z80-aRegister def-Register'>e</span>
+188:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span>
+189:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>bc</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumHex def-NumberHex def-Number'>#17FF</span>
+190:                   <span class='z80-aMnemonic def-Operator def-Symbol'>lddr</span>
+191:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>
+192: <span class='z80-aLabel def-Label'>scr_Clear</span><span class='z80-aLabel def-Label'>         ENDP</span>
+193: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+194: 
+195: <span class='z80-aLabel def-Label'>scr_Print4x8</span><span class='z80-aLabel def-Label'>      PROC</span>
+196:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>b</span>
+197:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span>
+198:                   scr_Pos2Scr
+199:                   <span class='z80-aMnemonic def-Operator def-Symbol'>bit</span>   <span class='z80-aNumDec def-NumberDec def-Number'>0</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span> <span class='z80-aLComment def-Comment def-Syntax'>;–ß–µ—Ç/–Ω–µ—á–µ—Ç? –ù—É–∂–Ω–æ –¥–ª—è –º–∞—Å–∫–∏</span>
+200:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumBin def-NumberBin def-Number'>%00001111</span> <span class='z80-aLComment def-Comment def-Syntax'>;–î–ª—è —á–µ—Ç–Ω—ã—Ö —Å—Ç–æ–ª–±—Ü–æ–≤</span>
+201:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aMnemonic def-Operator def-Symbol'>z</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aLabel def-Label'>@1</span>
+202:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumBin def-NumberBin def-Number'>%11110000</span> <span class='z80-aLComment def-Comment def-Syntax'>;–î–ª—è –Ω–µ—á–µ—Ç–Ω—ã—Ö —Å—Ç–æ–ª–±—Ü–æ–≤</span>
+203: <span class='z80-aLabel def-Label'>@1</span><span class='z80-aLabel def-Label'>:</span>               <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>ix</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;a = –æ—á–µ—Ä–µ–¥–Ω–æ–π —Å–∏–º–≤–æ–ª —Å—Ç—Ä–æ–∫–∏</span>
+204:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aRegister def-Register'>a</span>
+205:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>   <span class='z80-aMnemonic def-Operator def-Symbol'>z</span> <span class='z80-aLComment def-Comment def-Syntax'>;–í–æ–∑–≤—Ä–∞—Ç, –µ—Å–ª–∏ a=0</span>
+206:                   <span class='z80-aMnemonic def-Operator def-Symbol'>call  </span><span class='z80-aSymbol def-Symbol'>scr_SymOut4x8</span> <span class='z80-aLComment def-Comment def-Syntax'>;–í—ã–≤–æ–¥ —Å–∏–º–≤–æ–ª–∞</span>
+207:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>ix</span>
+208:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>c</span>      <span class='z80-aLComment def-Comment def-Syntax'>;\</span>
+209:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jp    </span><span class='z80-aSymbol def-Symbol'>p,@1</span><span class='z80-aSymbol def-Symbol'>-</span><span class='z80-aNumDec def-NumberDec def-Number'>2</span> <span class='z80-aLComment def-Comment def-Syntax'>;- –ü—Ä–æ–≤–µ—Ä–∏–º —Å—Ç–∞—Ä—à–∏–π –±–∏—Ç c</span>
+210:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumBin def-NumberBin def-Number'>%00001111</span>
+211:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>e</span> <span class='z80-aLComment def-Comment def-Syntax'>;–°–ª–µ–¥—É—é—â–∏–π –∞–¥—Ä–µ—Å —ç–∫—Ä–∞–Ω–∞</span>
+212:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aLabel def-Label'>@1</span>
+213: <span class='z80-aLabel def-Label'>scr_Print4x8</span><span class='z80-aLabel def-Label'>      ENDP</span>
+214: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+215: 
+216: <span class='z80-aLabel def-Label'>scr_Print8x8</span><span class='z80-aLabel def-Label'>      PROC</span>
+217:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>b</span>
+218:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>e</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span>
+219:                   scr_Pos2Scr
+220:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>ix</span><span class='z80-aSymbol def-Symbol'>)</span>
+221:                   <span class='z80-aMnemonic def-Operator def-Symbol'>or</span>    <span class='z80-aRegister def-Register'>a</span>
+222:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>   <span class='z80-aMnemonic def-Operator def-Symbol'>z</span>
+223:                   <span class='z80-aMnemonic def-Operator def-Symbol'>call  </span><span class='z80-aSymbol def-Symbol'>scr_SymOut8x8</span>
+224:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>e</span>
+225:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>ix</span>
+226:                   <span class='z80-aMnemonic def-Operator def-Symbol'>jr</span>    <span class='z80-aLabel def-Label'>scr_Print8x8</span><span class='z80-aSymbol def-Symbol'>+</span><span class='z80-aNumDec def-NumberDec def-Number'>3</span>
+227: <span class='z80-aLabel def-Label'>scr_Print8x8</span><span class='z80-aLabel def-Label'>      ENDP</span>
+228: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+229: 
+230: <span class='z80-aLabel def-Label'>scr_SymOut8x8</span><span class='z80-aLabel def-Label'>     PROC</span>
+231:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>h</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>HIGH</span> FONT_8x8 <span class='z80-aLComment def-Comment def-Syntax'>;–î.–±. –≤—ã—Ä–∞–≤–Ω–µ–Ω –Ω–∞ 256!</span>
+232:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>l</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+233:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>c</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span>
+234:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>b</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aNumDec def-NumberDec def-Number'>8</span>
+235: <span class='z80-aLabel def-Label'>@1</span><span class='z80-aLabel def-Label'>:</span>               <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;–ù–µ —Ä–∞–∑–ª–∏–Ω–µ–∏–≤–∞–µ–º - –∏ —Ç–∞–∫ –±—ã—Å—Ç—Ä–æ</span>
+236:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+237:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
+238:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+239:                   <span class='z80-aMnemonic def-Operator def-Symbol'>djnz  </span><span class='z80-aSymbol def-Symbol'>@1</span>
+240:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>c</span>
+241:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>
+242: <span class='z80-aLabel def-Label'>scr_SymOut8x8</span><span class='z80-aLabel def-Label'>     ENDP</span>
+243: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+244: 
+245: <span class='z80-aLabel def-Label'>scr_SymOut4x8</span><span class='z80-aLabel def-Label'>     PROC</span>
+246:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>h</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>HIGH</span> FONT_4x8 <span class='z80-aLComment def-Comment def-Syntax'>;–î.–±. –≤—ã—Ä–∞–≤–Ω–µ–Ω –Ω–∞ 256!</span>
+247:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>l</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span> <span class='z80-aLComment def-Comment def-Syntax'>;hl = FONT_4x8</span>
+248:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>b</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>d</span> <span class='z80-aLComment def-Comment def-Syntax'>;–°–æ—Ö—Ä–∞–Ω–∏–º de</span>
+249:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;a = —Å–æ–¥–µ—Ä–∂–∏–º–æ–µ –≤–∏–¥–µ–æ–±—É—Ñ–µ—Ä–∞</span>
+250:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;\</span>
+251:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>    <span class='z80-aLComment def-Comment def-Syntax'>; –ù–∞–ª–æ–∂–µ–Ω–∏–µ –Ω–∞ —ç–∫—Ä–∞–Ω –ø–æ –º–∞—Å–∫–µ</span>
+252:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;/</span>
+253:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span> <span class='z80-aLComment def-Comment def-Syntax'>;–û—Ç—Ä–∞–∑–∏–º –∏–∑–º–µ–Ω–µ–Ω–∏–µ –Ω–∞ —ç–∫—Ä–∞–Ω–µ</span>
+254:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
+255:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+256:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span> <span class='z80-aLComment def-Comment def-Syntax'>;–†–∞–∑–ª–∏–Ω–µ–µ–Ω–æ –¥–ª—è —Å–∫–æ—Ä–æ—Å—Ç–∏</span>
 257:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-258:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-259:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
-260:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-261:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
-262:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-263:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+258:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+259:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
+260:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+261:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
+262:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+263:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
 264:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-265:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-266:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
-267:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-268:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
-269:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-270:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+265:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+266:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
+267:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+268:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
+269:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+270:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
 271:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-272:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-273:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
-274:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-275:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
-276:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-277:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+272:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+273:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
+274:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+275:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
+276:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+277:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
 278:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-279:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-280:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
-281:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-282:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
-283:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-284:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+279:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+280:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
+281:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+282:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
+283:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+284:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
 285:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-286:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-287:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
-288:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-289:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
-290:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-291:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+286:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+287:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
+288:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+289:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
+290:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+291:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
 292:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-293:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-294:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
-295:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
-296:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
-297:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-298:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+293:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+294:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
+295:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+296:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>h</span>
+297:                   <span class='z80-aMnemonic def-Operator def-Symbol'>inc</span>   <span class='z80-aRegister def-Register'>d</span>
+298:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>a</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span>
 299:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
-300:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
-301:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>b</span> <span class='z80-aLComment def-Comment def-Syntax'>;ÇÆ··‚†≠Æ¢®¨ de</span>
-302:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>
-303: <span class='z80-aLabel def-Label'>scr_SymOut4x8</span><span class='z80-aLabel def-Label'>     ENDP</span>
-304: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
-305: 
+300:                   <span class='z80-aMnemonic def-Operator def-Symbol'>and</span>   <span class='z80-aRegister def-Register'>c</span>
+301:                   <span class='z80-aMnemonic def-Operator def-Symbol'>xor</span>   <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>hl</span><span class='z80-aSymbol def-Symbol'>)</span>
+302:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aSymbol def-Symbol'>(</span><span class='z80-aRegister def-Register'>de</span><span class='z80-aSymbol def-Symbol'>)</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>a</span>
+303:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ld</span>    <span class='z80-aRegister def-Register'>d</span><span class='z80-aSymbol def-Symbol'>,</span><span class='z80-aRegister def-Register'>b</span> <span class='z80-aLComment def-Comment def-Syntax'>;–í–æ—Å—Å—Ç–∞–Ω–æ–≤–∏–º de</span>
+304:                   <span class='z80-aMnemonic def-Operator def-Symbol'>ret</span>
+305: <span class='z80-aLabel def-Label'>scr_SymOut4x8</span><span class='z80-aLabel def-Label'>     ENDP</span>
+306: <span class='z80-aLComment def-Comment def-Syntax'>;-------------------------------------------------------------;</span>
+307: 
