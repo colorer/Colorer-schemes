@@ -185,12 +185,12 @@
   scheme="str.cont" region="string"
   region00="def:PairStart" region10="def:PairEnd"
   />
- <block start="/(grep) (\-\w+)?\s*(&apos;)/" end="/(&apos;)/"
+ <!--block start="/(\bgrep) (\-\w+)?\s*(&apos;)/" end="/(&apos;)/"
   scheme="regexp:pcre.regexp" region="string"
   region00="def:PairStart" region10="def:PairEnd"
   region01="command.sys" region02="op"
   region03="def:StringEdge" region11="def:StringEdge"
- />
+ /-->
  <!--block start="/(echo) (\-\w+)?\s*\M[^&quot;&apos;`;\)\}]+/"
   end="/$/" priority="low" content-priority="low"
   scheme="var" region="string"
