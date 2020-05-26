@@ -123,6 +123,8 @@
        <word name="find"/>
        <word name="xargs"/>
        <word name="wc"/>
+       <word name="sort"/>
+       <word name="uniq"/>
 
        <word name="alias"/>
        <word name="bg"/>
