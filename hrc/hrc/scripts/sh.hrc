@@ -185,7 +185,7 @@
   scheme="str.cont" region="string"
   region00="def:PairStart" region10="def:PairEnd"
   />
- <!--block start="/(\bgrep) (\-\w+)?\s*(&apos;)/" end="/(&apos;)/"
+ <!--block start="/(\b[efz]?grep) (\-\w+)?\s*(&apos;)/" end="/(&apos;)/"
   scheme="regexp:pcre.regexp" region="string"
   region00="def:PairStart" region10="def:PairEnd"
   region01="command.sys" region02="op"
