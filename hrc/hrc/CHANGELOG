@@ -1,3 +1,13 @@
+2020-06-11
+  Fixed:
+   - nix: add missing blockstring escaping (volth)
+   - markdown: support escaping in blockquotes; use GitHub Flavored Markdown escaping (Roman Kuzmin)
+   - fcharp: support F# 4.6 anonymous records (Roman Kuzmin)
+   - powershell: handle `using ...` directives (Roman Kuzmin)
+   - cpp: allow curly brackets inside expressions (Egor Suvorov)
+   - perl: add coloring Perl v.5.10+ features (ildar-shaimordanov)
+   - sh: highlight the most frequestly used unix commands simplify "grep" highlighting ; add sort and uniq (ildar-shaimordanov)
+
 2018-12-08
   Fixed:
    - twig: fix 'error' region
@@ -207,7 +217,7 @@
   Fixed:
     - SilverStripe - some fixes (lazyeugene)
     - css (lazyeugene)
-    - php - проблемные места с endif/endfor/endwhile (lazyeugene)
+    - php - РїСЂРѕР±Р»РµРјРЅС‹Рµ РјРµСЃС‚Р° СЃ endif/endfor/endwhile (lazyeugene)
     - js 
 
 2013-07-02
@@ -222,7 +232,7 @@
 2013-28-01
   Fixed:
     - warning in log for acapella
-    - html, css, php, jscript - many changes (Небольшая реорганизация css и html схем. Добавлено множество тегов/аттрибутов/правил. Часть устаревших теперь deprecated. Добавлено множество слов в схему php, расширена раскраска строк (все парсятся как строки для printf-функций), добавлена урезанная поддержка меток в пхп и парных скобок : и endfor/endif/endforeach/endwhile/else (чтобы работало, необходимо, чтобы : шло непосредственно за зыкрывающей условие скобкой либо сразу за else. Немного добавлено в jscript-схему.)
+    - html, css, php, jscript - many changes (РќРµР±РѕР»СЊС€Р°СЏ СЂРµРѕСЂРіР°РЅРёР·Р°С†РёСЏ css Рё html СЃС…РµРј. Р”РѕР±Р°РІР»РµРЅРѕ РјРЅРѕР¶РµСЃС‚РІРѕ С‚РµРіРѕРІ/Р°С‚С‚СЂРёР±СѓС‚РѕРІ/РїСЂР°РІРёР». Р§Р°СЃС‚СЊ СѓСЃС‚Р°СЂРµРІС€РёС… С‚РµРїРµСЂСЊ deprecated. Р”РѕР±Р°РІР»РµРЅРѕ РјРЅРѕР¶РµСЃС‚РІРѕ СЃР»РѕРІ РІ СЃС…РµРјСѓ php, СЂР°СЃС€РёСЂРµРЅР° СЂР°СЃРєСЂР°СЃРєР° СЃС‚СЂРѕРє (РІСЃРµ РїР°СЂСЃСЏС‚СЃСЏ РєР°Рє СЃС‚СЂРѕРєРё РґР»СЏ printf-С„СѓРЅРєС†РёР№), РґРѕР±Р°РІР»РµРЅР° СѓСЂРµР·Р°РЅРЅР°СЏ РїРѕРґРґРµСЂР¶РєР° РјРµС‚РѕРє РІ РїС…Рї Рё РїР°СЂРЅС‹С… СЃРєРѕР±РѕРє : Рё endfor/endif/endforeach/endwhile/else (С‡С‚РѕР±С‹ СЂР°Р±РѕС‚Р°Р»Рѕ, РЅРµРѕР±С…РѕРґРёРјРѕ, С‡С‚РѕР±С‹ : С€Р»Рѕ РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ Р·Р° Р·С‹РєСЂС‹РІР°СЋС‰РµР№ СѓСЃР»РѕРІРёРµ СЃРєРѕР±РєРѕР№ Р»РёР±Рѕ СЃСЂР°Р·Сѓ Р·Р° else. РќРµРјРЅРѕРіРѕ РґРѕР±Р°РІР»РµРЅРѕ РІ jscript-СЃС…РµРјСѓ.)
 	- Lua (Rakhmatullin A.I.)
 
 2013-22-01
