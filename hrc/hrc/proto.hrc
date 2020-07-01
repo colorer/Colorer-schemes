@@ -362,7 +362,7 @@
   </prototype>
   <prototype name="jScript" group="inet" description="JavaScript">
     <location link="inet/jscript.hrc"/>
-    <filename>/\.(js|mocha)$/i</filename>
+    <filename>/\.(js|mocha|ts)$/i</filename>
   </prototype>
   <prototype name="actionscript" group="inet" description="ActionScript">
     <location link="inet/actionscript.hrc"/>
