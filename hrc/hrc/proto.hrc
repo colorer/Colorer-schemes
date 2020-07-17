@@ -87,7 +87,7 @@
   </prototype>
   <prototype name="perl" group="main" description="Perl">
     <location link="base/perl.hrc"/>
-    <filename>/\.(pl[sx]?|pm|pod|t|ph)$/i</filename>
+    <filename weight="3">/\.(pl[sx]?|pm|pod|t|ph)$/i</filename>
     <firstline weight='2'>/^\#!\s*.+perl\b/</firstline>
     <firstline>/perl/i</firstline>
     <parameters>
@@ -912,7 +912,7 @@
   </prototype>
   <prototype name="sicstusProlog" group="rare" description="Sicstus Prolog">
     <location link="rare/sprolog.hrc"/>
-    <filename>/\.pl$/i</filename>
+    <filename weight="1">/\.pl$/i</filename>
   </prototype>
   <prototype name="stata" group="rare" description="STATA">
     <location link="rare/stata.hrc"/>
