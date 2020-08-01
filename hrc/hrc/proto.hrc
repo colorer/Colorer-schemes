@@ -912,7 +912,7 @@
   </prototype>
   <prototype name="sicstusProlog" group="rare" description="Sicstus Prolog">
     <location link="rare/sprolog.hrc"/>
-    <filename weight="1">/\.pl$/i</filename>
+    <filename>/\.pl$/i</filename>
   </prototype>
   <prototype name="stata" group="rare" description="STATA">
     <location link="rare/stata.hrc"/>
