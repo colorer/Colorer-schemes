@@ -99,6 +99,7 @@
     <location link="base/java.hrc"/>
     <filename>/\.ja(va|v|d)$/i</filename>
     <firstline weight='2'>/^\/\/ Decompiled by Jad/</firstline>
+    <firstline weight='2'>/^\/\*\r?\n \* Decompiled with CFR/</firstline><!-- support another java decompiler https://github.com/leibnitz27/cfr -->
     <parameters>
       <param name="tabs-as-errors" value="false" description="Shows tabulation symbol as error"/>
       <param name="spaces-as-errors" value="false" description="Shows trailing spaces as error"/>
