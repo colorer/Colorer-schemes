@@ -1,7 +1,10 @@
+2020-11-28
+  Fixed:
+   - python: backslash in raw string (ctapmex)
+   
 2020-06-12
   Fixed:
    - python: add underscores in numeric literals (ctapmex)
-
 
 2020-06-11
   Fixed:
