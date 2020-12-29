@@ -1,3 +1,7 @@
+2020-12-30
+  Improve:
+   - go: treat func as FunctionKeyword and Outlined (Roman Kuzmin)
+   
 2020-11-28
   Fixed:
    - python: backslash in raw string (ctapmex)
