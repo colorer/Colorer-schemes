@@ -22,6 +22,9 @@
     <hrd class="rgb" name="mirror" description="Blue a'la NC">
       <location link="&hrd;/rgb/mirror.hrd"/>
     </hrd>
+	<hrd class="rgb" name="navy-mirror" description="Navy Blue a'la NC">
+      <location link="&hrd;/rgb/contrib/navy-mirror.hrd"/>
+    </hrd>
     <hrd class="rgb" name="mirice" description="Ice Mirror">
       <location link="&hrd;/rgb/mirice.hrd"/>
     </hrd>
