@@ -602,6 +602,10 @@
     <filename>/\.(text|md|markdown)$/i</filename>
     <location link="misc/markdown.hrc"/>
   </prototype>
+  <prototype name="graphql" group="inet" description="GraphQL">
+    <filename>/\.(graphql|gql)$/i</filename>
+    <location link="inet/graphql.hrc"/>
+  </prototype>
 
 
   &scripts-colorer-protos;
