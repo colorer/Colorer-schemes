@@ -36,7 +36,7 @@ With help of:
       </scheme>
 
      <scheme name="vbstring.content">
-     	<regexp match="/(?{string.escape}&quot;&quot;)/"/>
+        <regexp match="/(?{string.escape}&quot;&quot;)/"/>
      </scheme>
 
       <scheme name="csharp">
@@ -58,13 +58,17 @@ With help of:
 
          <regexp><![CDATA[
            /^ \M \s*
-           (\w [\w*\[\]\s]+? [*\[\]\s]) (delegate \s* \([\w_*~,\[\]\s]*\)\s*)?
+           (\w [\w*\[\]\s.<,>]*? [*\[\]\s]) (delegate \s* \([\w_*~,\[\]\s]*\)\s*)?
 
            (?{csharp:FuncOutline}
-            ([\w.]+?)
+            \w+?
            )
 
-           (\sfor)?~4 (\sif)?~3 (\swhile)?~6 (\sdo)?~3 (\sswitch)?~7 (\scatch)?~6 (\sforeach)?~8
+           \s*
+
+           (for)?~3 (if)?~2 (while)?~5 (do)?~2 (switch)?~6 (catch)?~5 (foreach)?~7
+
+           (< \s* \w [\w,\s]*? >)?
 
            \s* \( (.* \( [^\(\)]* \))* ( [^\)]*?\) | [^\);]*? )
            \s* ($|\{|\/) /x
@@ -118,6 +122,8 @@ With help of:
          <keywords region="csKeyword">
             <word name="abstract"/>
             <word name="as"/>
+            <word name="async"/>
+            <word name="await"/>
             <word name="base"/>
             <word name="bool"/>
             <word name="yield break"/>
