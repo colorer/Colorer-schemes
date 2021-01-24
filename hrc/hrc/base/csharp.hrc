@@ -61,7 +61,7 @@ With help of:
            (\w [\w*\[\]\s.<,>]*? [*\[\]\s]) (delegate \s* \([\w_*~,\[\]\s]*\)\s*)?
 
            (?{csharp:FuncOutline}
-            \w+?
+            [\w.]+
            )
 
            (\s* < \s* \w [\w,\s]*? >)?
