@@ -79,16 +79,16 @@
  78:  
  79:  
  80:                 <span class='def-Directive'>#sql forUpdateCursor </span><span class='sql-sqlSymb def-Symbol'>=</span><span class='def-Directive'> </span>
- 81: <span class='def-Directive'>                </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'>   </span><span class='sql-tsqlWord def-Keyword'>SELECT</span><span class='def-Directive'> name</span><span class='sql-sqlSymb def-Symbol'>,</span><span class='def-Directive'> dept </span>
- 82: <span class='def-Directive'>                        </span><span class='sql-tsqlWord def-Keyword'>FROM</span><span class='def-Directive'> staff</span>
- 83: <span class='def-Directive'>                        </span><span class='sql-tsqlWord def-Keyword'>WHERE</span><span class='def-Directive'> job</span><span class='sql-sqlSymb def-Symbol'>=</span><span class='sql-sqlString def-String'>'Mgr'</span><span class='def-Directive'> </span>
- 84: <span class='def-Directive'>                </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql            /* :rk.1:erk. *//* :rk.2:erk. */</span>
+ 81: <span class='def-Directive'>                </span><span class='sql-sqlComment def-Comment def-Syntax'>{   SELECT name, dept </span>
+ 82: <span class='sql-sqlComment def-Comment def-Syntax'>                        FROM staff</span>
+ 83: <span class='sql-sqlComment def-Comment def-Syntax'>                        WHERE job='Mgr' </span>
+ 84: <span class='sql-sqlComment def-Comment def-Syntax'>                }</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql            /* :rk.1:erk. *//* :rk.2:erk. */</span>
  85:  
  86:                 <span class='def-Keyword'>while</span> <span class='def-Symbol'>(</span><span class='def-Keyword'>true</span><span class='def-Symbol'>)</span> 
  87:                 <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-Directive'>#sql </span>
- 88: <span class='def-Directive'>                    </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'>   </span><span class='sql-tsqlWord def-Keyword'>FETCH</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>forUpdateCursor</span><span class='def-Directive'></span>
- 89: <span class='def-Directive'>                            </span><span class='sql-tsqlWord def-Keyword'>INTO</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>name</span><span class='sql-sqlSymb def-Symbol'>,</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>dept</span><span class='def-Directive'></span>
- 90: <span class='def-Directive'>                    </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql                        /* :rk.3:erk. */</span>
+ 88: <span class='def-Directive'>                    </span><span class='sql-sqlComment def-Comment def-Syntax'>{   FETCH :forUpdateCursor</span>
+ 89: <span class='sql-sqlComment def-Comment def-Syntax'>                            INTO :name, :dept</span>
+ 90: <span class='sql-sqlComment def-Comment def-Syntax'>                    }</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql                        /* :rk.3:erk. */</span>
  91:                     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>forUpdateCursor<span class='def-Symbol'>.</span>endFetch<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>break</span><span class='def-SymbolStrong def-Symbol'>;</span>
  92: 
  93:                     <span class='def-Keyword'>if</span> <span class='def-Symbol'>(</span>dept <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>40</span><span class='def-Symbol'>)</span>
@@ -96,18 +96,18 @@
  95:                             name <span class='def-Symbol'>+</span> <span class='def-String'>" in dept. "</span> 
  96:                             <span class='def-Symbol'>+</span> dept <span class='def-Symbol'>+</span> <span class='def-String'>" will be demoted to Clerk"</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
  97:                         <span class='def-Directive'>#sql</span>
- 98: <span class='def-Directive'>                        </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'>   </span><span class='sql-tsqlWord def-Keyword'>UPDATE</span><span class='def-Directive'> staff </span><span class='sql-tsqlWord def-Keyword'>SET</span><span class='def-Directive'> job </span><span class='sql-sqlSymb def-Symbol'>=</span><span class='def-Directive'> </span><span class='sql-sqlString def-String'>'Clerk'</span><span class='def-Directive'></span>
- 99: <span class='def-Directive'>                            </span><span class='sql-tsqlWord def-Keyword'>WHERE</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>CURRENT</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>OF</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>forUpdateCursor</span><span class='def-Directive'></span>
-100: <span class='def-Directive'>                        </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql                    /* :rk.4:erk. */</span>
+ 98: <span class='def-Directive'>                        </span><span class='sql-sqlComment def-Comment def-Syntax'>{   UPDATE staff SET job = 'Clerk'</span>
+ 99: <span class='sql-sqlComment def-Comment def-Syntax'>                            WHERE CURRENT OF :forUpdateCursor</span>
+100: <span class='sql-sqlComment def-Comment def-Syntax'>                        }</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql                    /* :rk.4:erk. */</span>
 101:                     <span class='def-SymbolStrong def-Symbol'>}</span>
 102:                     <span class='def-Keyword'>else</span>
 103:                     <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println <span class='def-Symbol'>(</span>
 104:                             name <span class='def-Symbol'>+</span> <span class='def-String'>" in dept. "</span> <span class='def-Symbol'>+</span> dept
 105:                             <span class='def-Symbol'>+</span> <span class='def-String'>" will be DELETED!"</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
 106:                         <span class='def-Directive'>#sql</span>
-107: <span class='def-Directive'>                        </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'>   </span><span class='sql-tsqlWord def-Keyword'>DELETE</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>FROM</span><span class='def-Directive'> staff</span>
-108: <span class='def-Directive'>                            </span><span class='sql-tsqlWord def-Keyword'>WHERE</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>CURRENT</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>OF</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>:</span><span class='def-Var'>forUpdateCursor</span><span class='def-Directive'></span>
-109: <span class='def-Directive'>                        </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql</span>
+107: <span class='def-Directive'>                        </span><span class='sql-sqlComment def-Comment def-Syntax'>{   DELETE FROM staff</span>
+108: <span class='sql-sqlComment def-Comment def-Syntax'>                            WHERE CURRENT OF :forUpdateCursor</span>
+109: <span class='sql-sqlComment def-Comment def-Syntax'>                        }</span><span class='def-Directive'>;</span> <span class='def-LineComment def-Comment def-Syntax'>// #sql</span>
 110:                     <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-LineComment def-Comment def-Syntax'>// if - else</span>
 111:                 <span class='def-SymbolStrong def-Symbol'>}</span>
 112:                 forUpdateCursor<span class='def-Symbol'>.</span>close<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>  <span class='def-Comment def-Syntax'>/* :rk.5:erk. */</span>
@@ -118,7 +118,7 @@
 117:             <span class='def-Keyword'>finally</span>
 118:             <span class='def-SymbolStrong def-Symbol'>{</span>   <span class='def-LineComment def-Comment def-Syntax'>// Rollback the transaction</span>
 119:                 <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println<span class='def-Symbol'>(</span><span class='def-String'>"</span><span class='java-StringEscape def-StringContent def-String'>\n</span><span class='def-String'>Rollback the transaction..."</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
-120:                 <span class='def-Directive'>#sql </span><span class='sql-sqlSymb def-Symbol'>{</span><span class='def-Directive'> </span><span class='sql-tsqlWord def-Keyword'>ROLLBACK</span><span class='def-Directive'> </span><span class='sql-sqlSymb def-Symbol'>}</span><span class='def-Directive'>;</span>
+120:                 <span class='def-Directive'>#sql </span><span class='sql-sqlComment def-Comment def-Syntax'>{ ROLLBACK }</span><span class='def-Directive'>;</span>
 121:                 <span class='def-ClassKeyword def-Keyword'>System</span><span class='def-Symbol'>.</span>out<span class='def-Symbol'>.</span>println<span class='def-Symbol'>(</span><span class='def-String'>"Rollback done."</span><span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>;</span>
 122:             <span class='def-SymbolStrong def-Symbol'>}</span> <span class='def-LineComment def-Comment def-Syntax'>// try - catch - finally</span>
 123:         <span class='def-SymbolStrong def-Symbol'>}</span>
