@@ -1,3 +1,12 @@
+2021-01-30
+  New:
+   - GraphQL (Roman Kuzmin)
+  Fixed:
+   - csharp: Generic parameters; chabge outline for functions; new words (Roman Kuzmin)
+  Improve:
+   - iss: Added support syntax InnoSetup 6.1.2 (based on IS documentation) (denzabenza)
+   - sql: new keywords and blocks (denzabenza)
+  
 2020-12-30
   Improve:
    - go: treat func as FunctionKeyword and Outlined (Roman Kuzmin)
