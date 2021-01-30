@@ -398,6 +398,10 @@
     <location link="inet/mxml.hrc"/>
     <filename>/\.mxml$/i</filename>
   </prototype>
+  <prototype name="graphql" group="inet" description="GraphQL">
+    <filename>/\.(graphql|gql)$/i</filename>
+    <location link="inet/graphql.hrc"/>
+  </prototype>
 
 
   <!--  xml types  -->
