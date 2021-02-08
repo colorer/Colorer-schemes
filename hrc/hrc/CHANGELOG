@@ -1,3 +1,19 @@
+2021-02-08
+  Improve:
+   - fcharp:  
+      from Roman Kuzmin
+        support F# 5 interpolated strings
+        support octal and bit numbers
+        support underscore in numbers
+        support shebang
+   - GraphQL:
+      from Roman Kuzmin
+        Treat descriptions and string literals separately.
+        Amend parsing numbers, add dot errors.
+        color arguments, input and object fields
+        tweak union, ImplementsInterfaces
+        add Error to Base, related tweaks
+
 2021-01-30
   New:
    - GraphQL (Roman Kuzmin)
