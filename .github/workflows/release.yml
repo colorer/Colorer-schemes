@@ -1,0 +1,17 @@
+name: release
+
+on: workflow_dispatch
+ 
+jobs:
+  build-schemes:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Build
+        working-directory: ${{runner.workspace}}/Colorer-schemes
+        run: ./build.sh base.far
+        
+      - run: ls ${{runner.workspace}}/Colorer-schemes/build -R
