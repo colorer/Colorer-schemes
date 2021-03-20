@@ -1,0 +1,25 @@
+name: check build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+ 
+jobs:
+  build-schemes:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Build unpacked
+        run: ./build.sh base.distr-unpacked
+
+      - name: Build packed
+        run: ./build.sh base.distr-unpacked
+        
