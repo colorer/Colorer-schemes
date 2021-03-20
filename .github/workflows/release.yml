@@ -1,6 +1,9 @@
-name: release
+name: Release
 
-on: workflow_dispatch
+on:
+  push:
+    tags:
+      - "v*"
  
 jobs:
   build-schemes:
@@ -10,8 +13,19 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
 
-      - name: Build
+      - name: Get version
+        id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Build packed schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.far
-        
-      - run: ls ${{runner.workspace}}/Colorer-schemes/build -R
+        run: ./build.sh base.distr-packed -Dpostfix=${{ steps.get_version.outputs.version }}
+
+      - name: Build unpacked schemes
+        working-directory: ${{runner.workspace}}/Colorer-schemes
+        run: ./build.sh base.distr-unpacked -Dpostfix=${{ steps.get_version.outputs.version }}
+
+      - name: Create release
+        run: gh release create ${{ steps.get_version.outputs.version }} ./build/*.zip -t "Colorer base ${{ steps.get_version.outputs.version }}" -n "new version"
+        env:
+          GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
