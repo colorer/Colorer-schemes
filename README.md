@@ -2,6 +2,7 @@
 ========================
 The library of schemes is a basic set of descriptions of syntaxes and styles of the coloring, used by Colorer library.
 The project contains files and scripts for creation of library of schemes.
+[![check build](https://github.com/colorer/Colorer-schemes/actions/workflows/checks.yml/badge.svg)](https://github.com/colorer/Colorer-schemes/actions/workflows/checks.yml)
 
 *Improvements of translation of this file to English are welcome*
 
