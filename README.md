@@ -22,19 +22,13 @@ To build the library of schemes, you will need:
 
   * git
   * ant 1.8 or higher
-  * java development kit 6 (jdk) or higher
+  * java development kit 8 (jdk) or higher
   * perl
 
 Download the source from git repository:
 
 ```sh
 git clone https://github.com/colorer/Colorer-schemes.git
-```
-
-or update git repository:
-
-```sh
-git pull
 ```
 
 Run build
@@ -45,10 +39,12 @@ build.cmd target
 
 where the *target* is one of the values
 
-  * base        - simple build of the schema library. Folder 'build/base'
-  * base.pack   - build the schema library with the hrc-files packed into an archive. Folder 'build/basep'
-  * base.far    - build the schema library for distribution with FarColorer distribution kit. Folder 'build/basefar'
-  * base.update - archive base.pack. Folder 'build'
+  * base                - simple build of the schema library. Folder 'build/base'
+  * base.packed         - build the schema library with the hrc-files packed into an jar file. Folder 'build/basep'
+  * base.unpacked       - build the schema library with the hrc-files. Folder 'build/baseunpack'
+  * base.far            - build the schema library for distribution with FarColorer distribution kit. Folder 'build/basefar'
+  * base.distr-packed   - archive base.packed. Folder 'build'
+  * base.distr-unpacked - archive base.unpacked. Folder 'build'
 
 ### Features of build under Windows ###
 
@@ -62,29 +58,15 @@ set JAVA_HOME=v:\apps\jdk
 
 ### Features of build under Linux ###
 
-Here is an example on Debian Wheezy.
+Here is an example on Ubuntu 20.04.
 
-Install ant and jdk
+Install ant
 
 ```sh
-apt-get install ant openjdk-6-jdk
+apt-get install ant
 ```
 
 If the apt config contains `APT::Install-Recommends "False";`, then you must also install `ant-optional`.
-
-In the file */usr/share/ant/bin/ant* comment out lines
-
-```sh
-# Add the Xerces 2 XML parser in the Debian version
-if [ -z "$LOCALCLASSPATH" ] ; then
-  LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar"
-else
-  LOCALCLASSPATH="/usr/share/java/xmlParserAPIs.jar:/usr/share/java/xercesImpl.jar:$LOCALCLASSPATH"
-fi
-```
-
-This action corrects the error `Warning: XML resolver not found; external catalogs will be ignored` when building schemes.
-See detailed description of the error [in Debian bug-tracker](http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=552032).
 
 ## Develop ##
 
