@@ -27,7 +27,7 @@ jobs:
         run: |
           wget https://github.com/colorer/Colorer-library/releases/download/v1.2.1/colorer.x64.v1.2.1.tar.gz
           mkdir bin
-          tar -xf colorer.x64.v1.2.1.tar.gz
+          tar -xf colorer.x64.v1.2.1.tar.gz -C ./bin
 
       - name: Test schemes
         working-directory: hrc/test
