@@ -25,6 +25,7 @@ jobs:
 
       - name: Install colorer
         run: |
+          sudo apt-get -y install libicu-dev libxerces-c-dev libspdlog-dev libfmt-dev zlib1g-dev libminizip-dev
           wget https://github.com/colorer/Colorer-library/releases/download/v1.2.1/colorer.x64.v1.2.1.tar.gz
           mkdir bin
           tar -xf colorer.x64.v1.2.1.tar.gz -C ./bin
