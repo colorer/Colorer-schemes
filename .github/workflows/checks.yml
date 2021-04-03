@@ -22,4 +22,16 @@ jobs:
 
       - name: Build packed
         run: ./build.sh base.distr-unpacked
+
+      - name: Install colorer
+        run: |
+          wget https://github.com/colorer/Colorer-library/releases/download/v1.2.1/colorer.x64.v1.2.1.tar.gz
+          mkdir bin
+          tar -xf colorer.x64.v1.2.1.tar.gz
+
+      - name: Test schemes
+        working-directory: hrc/test
+        run: python3 runtest.py
+
+
         
