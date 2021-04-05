@@ -1,7 +1,9 @@
 bin
 build
+__*
 hrc/src/buildlist.xml
 hrc/test/__*
 hrd/hrd/buildlist.xml
 objs
 .vscode
+
