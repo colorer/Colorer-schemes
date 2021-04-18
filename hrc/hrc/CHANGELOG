@@ -3,6 +3,11 @@
    - GraphQL:
       from Roman Kuzmin
         add outlined to input, enum, union names.
+  Fix:
+   - nix:
+      from kvtb
+        escape ~ in regexp for home dir
+
 
 2021-02-08
   Improve:
