@@ -1,3 +1,9 @@
+2021-04-18
+  Improve:
+   - GraphQL:
+      from Roman Kuzmin
+        add outlined to input, enum, union names.
+
 2021-02-08
   Improve:
    - fcharp:  
