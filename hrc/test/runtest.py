@@ -77,8 +77,12 @@ def init():
 
     # -- path setup --
     working_path = os.getcwd()
-    script_path = normpath(dirname(__file__))
+    script_path = normpath(join(working_path, dirname(__file__)))
     project_path = join(script_path, "..", "..")
+
+    print(working_path)
+    print(script_path)
+    print(project_path)
 
     # -- read propertie file --
     prop_path = {}
@@ -183,6 +187,9 @@ def filediff(oldpath, newpath):
 def report(results):
     failed = 0
     changed = 0
+    if len(testfile_list) == 0:
+        print("Files for test didn`t found")
+        return
 
     print("Generating report...")
     fail_log = open(join(out_dir, "fails.html"), "w")
