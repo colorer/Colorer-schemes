@@ -1,3 +1,9 @@
+2021-04-24
+  Fix:
+   - awk:
+      from ildar-shaimordanov
+        solve the issue with $( ... )
+
 2021-04-18
   Improve:
    - GraphQL:
