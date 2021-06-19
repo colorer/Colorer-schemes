@@ -124,7 +124,7 @@
   </prototype>
   <prototype name="csharp" group="main" description="C#">
     <location link="base/csharp.hrc"/>
-    <filename>/\.cs$/i</filename>
+    <filename>/\.csx?$/i</filename>
   </prototype>
   <prototype name="fsharp" group="main" description="F#">
     <location link="base/fsharp.hrc"/>
