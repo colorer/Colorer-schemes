@@ -70,7 +70,7 @@
     </scheme>
 
     <scheme name="Char">
-      <regexp match="/(?{Apos}')((?{Escape}\\('|0|u%hex;{4}|x%hex;{1,4}))|(?{String}.))(?{Apos}')/"/>
+      <regexp match="/(?{Apos}')((?{Escape}\\('|\\|&quot;|0|u%hex;{4}|x%hex;{1,4}))|(?{String}.))(?{Apos}')/"/>
     </scheme>
 
     <scheme name="Comment">
