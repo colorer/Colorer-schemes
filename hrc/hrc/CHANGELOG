@@ -1,8 +1,15 @@
-2021-04-24
+2021-09-12
   Fix:
    - awk:
       from ildar-shaimordanov
         solve the issue with $( ... )
+   - csharp:
+      from Roman Kuzmin
+        Fix csharp.hrc parsing of char literals.
+		Add .csx extension to csharp schema in proto.hrc. CSharp scripts usually have .csx extension.
+   - diff:
+      from Andrew Aksyonoff 
+        support for git inline diff (aka --word-diff)
 
 2021-04-18
   Improve:
