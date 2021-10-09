@@ -1,3 +1,9 @@
+2021-10-09
+  Fix:
+   - calcset:
+      from ctapmex
+        update hrc for latest file structure
+
 2021-09-12
   Fix:
    - awk:
