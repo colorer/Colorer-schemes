@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - "v*"
- 
+
 jobs:
   build-schemes:
     runs-on: ubuntu-20.04
@@ -24,6 +24,10 @@ jobs:
       - name: Build unpacked schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
         run: ./build.sh base.distr-unpacked -Dpostfix=${{ steps.get_version.outputs.version }}
+
+      - name: Build allpacked schemes
+        working-directory: ${{runner.workspace}}/Colorer-schemes
+        run: ./build.sh base.distr-allpacked -Dpostfix=${{ steps.get_version.outputs.version }}
 
       - name: Create release
         run: gh release create ${{ steps.get_version.outputs.version }} ./build/*.zip -t "Colorer base ${{ steps.get_version.outputs.version }}" -n "new version"

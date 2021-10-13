@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE catalog [
+    <!ENTITY catalog-console SYSTEM "jar:common.zip!hrd/catalog-console.xml">
+    <!ENTITY catalog-rgb SYSTEM "jar:common.zip!hrd/catalog-rgb.xml">
+    <!ENTITY catalog-text SYSTEM "jar:common.zip!hrd/catalog-text.xml">
+]>
+<catalog xmlns="http://colorer.github.io/schema/v1/catalog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://colorer.github.io/schema/v1/catalog https://colorer.github.io/schema/v1/catalog.xsd">
+    <hrc-sets>
+        <location link="jar:common.zip!hrc/proto.hrc" />
+    </hrc-sets>
+    <hrd-sets>
+        &catalog-console;
+        &catalog-rgb;
+        &catalog-text;
+    </hrd-sets>
+</catalog>
