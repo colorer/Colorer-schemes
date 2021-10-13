@@ -95,7 +95,7 @@ def init():
     colorer_path = join(project_path, normpath(prop_path["colorer"]))
     catalog_path = join(project_path, normpath(prop_path["catalog"]))
     hrd_path = join(project_path, normpath(
-        prop_path["build-dir"]), prop_path["base-dir"], prop_path["hrd"])
+        prop_path["build-dir"]), prop_path["base-dir"],"hrd")
     hrd = os.getenv('COLORER5HRD', 'white')
     css = "%s/css/%s.css" % (hrd_path, hrd)
     if not os.path.isfile(css):

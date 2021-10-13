@@ -40,12 +40,13 @@ build.cmd target
 
 where the *target* is one of the values
 
-  * base                - simple build of the schema library. Folder 'build/base'
-  * base.packed         - build the schema library with the hrc-files packed into an jar file. Folder 'build/basep'
-  * base.unpacked       - build the schema library with the hrc-files. Folder 'build/baseunpack'
-  * base.far            - build the schema library for distribution with FarColorer distribution kit. Folder 'build/basefar'
-  * base.distr-packed   - archive base.packed. Folder 'build'
-  * base.distr-unpacked - archive base.unpacked. Folder 'build'
+  * base                 - simple build of the schema library. Folder 'build/base'
+  * base.packed          - build the schema library with the hrc-files packed into an zip file. Folder 'build/base-packed'
+  * base.unpacked        - build the schema library with the hrc-files don`t packed into an zip file. Folder 'build/base-unpacked'
+  * base.allpacked       - build the schema library with all files packed into a zip file. Folder 'build/base-allpacked'
+  * base.distr-packed    - archive base.packed. Folder 'build'
+  * base.distr-unpacked  - archive base.unpacked. Folder 'build'
+  * base.distr-allpacked - archive base.allpacked. Folder 'build'
 
 ### Features of build under Windows ###
 
