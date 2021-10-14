@@ -71,7 +71,7 @@
 		</copy>
 
 		<copy file='catalog/catalog.base.xml' tofile='${base-pack-dir}/catalog.xml' />
-		<copy file='hrc/hrc/CHANGELOG' todir='${base-pack-dir}/hrc' />
+		<copy file='CHANGELOG.md' todir='${base-pack-dir}' />
 	</target>
 
 	<target name="base.packed.clean">
@@ -89,7 +89,7 @@
 		</copy>
 
 		<copy file='catalog/catalog.base.xml' tofile='${base-unpack-dir}/catalog.xml' />
-		<copy file='hrc/hrc/CHANGELOG' todir='${base-unpack-dir}/hrc' />
+		<copy file='CHANGELOG.md' todir='${base-unpack-dir}' />
 	</target>
 
 	<target name="base.unpacked.clean">
@@ -104,6 +104,7 @@
 		<zip destfile='${base-allpack-dir}/common.zip'>
 			<fileset dir='${build-dir}' includes='hrc/**, hrd/**' excludes='hrd/reg.addons/**, hrd/css/**' />
 		</zip>
+		<copy file='CHANGELOG.md' todir='${base-allpack-dir}' />
 	</target>
 
 	<target name="base.allpacked.clean">
