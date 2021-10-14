@@ -33,6 +33,6 @@ jobs:
         run: ./build.sh base.distr-allpacked -Dpostfix=${{ env.version }}
 
       - name: Create release
-        run: gh release create ${{ env.version }} ./build/*.zip -t "Colorer base ${{ env.version }}" -n "prerelease"
+        run: gh release create v${{ env.version }} -t "v${{ env.version }}" ./build/*.zip -n "Colorer base ${{ env.version }}"
         env:
           GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
