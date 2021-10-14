@@ -18,7 +18,7 @@ jobs:
         shell: bash
         run: |
           export LATEST_RELEASE_VERSION=$(cat version.txt)
-          echo "VERSION=$LATEST_RELEASE_VERSION.$GITHUB_RUN_NUMBER">> $GITHUB_ENV
+          echo "version=$LATEST_RELEASE_VERSION.$GITHUB_RUN_NUMBER">> $GITHUB_ENV
 
       - name: Build packed schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
@@ -33,7 +33,6 @@ jobs:
         run: ./build.sh base.distr-allpacked -Dpostfix=${{ env.version }}
 
       - name: Create release
-        shell: bash
         run: gh release create v${{ env.version }} -t "v${{ env.version }}" ./build/*.zip -n "Colorer base ${{ env.version }}"
         env:
           GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
