@@ -3,19 +3,27 @@
 ## [Unreleased]
 
 ### Fixed
-- [calcset] update hrc for latest file structure
+- [calcset] update hrc for latest file structure.
+
+### Changed
+- Simplified catalog.xml. 
+- Use new xsd schema for catalog.xml.
+- Common.jar rename to common.zip
+
+### Added
+- New package type of base - all packed. Hrc and hrd files in one archive.
 
 ## [1.2.0] - 2021-09-12
 
 ### Fixed
-- [awk] solve the issue with $( ... )
+- [awk] solve the issue with $( ... ).
 - [csharp] Fix csharp.hrc parsing of char literals.
 
 ### Changed
 - [csharp] Add .csx extension to csharp schema in proto.hrc. CSharp scripts usually have .csx extension.
 
 ### Added
-- [diff] Add support for git inline diff (aka --word-diff)
+- [diff] Add support for git inline diff (aka --word-diff).
 
 ## [1.1.0] - 2021-05-07
 
