@@ -1,0 +1,35 @@
+name: Taged release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-schemes:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Get version
+        id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Build packed schemes
+        working-directory: ${{runner.workspace}}/Colorer-schemes
+        run: ./build.sh base.distr-packed -Dpostfix=${{ steps.get_version.outputs.version }}
+
+      - name: Build unpacked schemes
+        working-directory: ${{runner.workspace}}/Colorer-schemes
+        run: ./build.sh base.distr-unpacked -Dpostfix=${{ steps.get_version.outputs.version }}
+
+      - name: Build allpacked schemes
+        working-directory: ${{runner.workspace}}/Colorer-schemes
+        run: ./build.sh base.distr-allpacked -Dpostfix=${{ steps.get_version.outputs.version }}
+
+      - name: Create release
+        run: gh release create ${{ steps.get_version.outputs.version }} ./build/*.zip -t "Colorer base ${{ steps.get_version.outputs.version }}" -n "new version"
+        env:
+          GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}

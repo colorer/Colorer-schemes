@@ -1,35 +1,38 @@
-name: Release
+name: release on commit
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_run:
+    workflows: ["check build"]
+    types: [completed]
 
 jobs:
   build-schemes:
     runs-on: ubuntu-20.04
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'master' }}
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v2
 
       - name: Get version
-        id: get_version
-        uses: battila7/get-version-action@v2
+        shell: bash
+        run: |
+          export LATEST_RELEASE_VERSION=$(cat version.txt)
+          echo "VERSION=$LATEST_RELEASE_VERSION.$GITHUB_RUN_NUMBER">> $GITHUB_ENV
 
       - name: Build packed schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-packed -Dpostfix=${{ steps.get_version.outputs.version }}
+        run: ./build.sh base.distr-packed -Dpostfix=${{ env.version }}
 
       - name: Build unpacked schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-unpacked -Dpostfix=${{ steps.get_version.outputs.version }}
+        run: ./build.sh base.distr-unpacked -Dpostfix=${{ env.version }}
 
       - name: Build allpacked schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-allpacked -Dpostfix=${{ steps.get_version.outputs.version }}
+        run: ./build.sh base.distr-allpacked -Dpostfix=${{ env.version }}
 
       - name: Create release
-        run: gh release create ${{ steps.get_version.outputs.version }} ./build/*.zip -t "Colorer base ${{ steps.get_version.outputs.version }}" -n "new version"
+        run: gh release create ${{ env.version }} ./build/*.zip -t "Colorer base ${{ env.version }}" -n "prerelease"
         env:
           GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
