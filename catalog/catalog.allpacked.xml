@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE catalog [
+    <!ENTITY hrd "jar:common.zip!hrd">
     <!ENTITY catalog-console SYSTEM "jar:common.zip!hrd/catalog-console.xml">
     <!ENTITY catalog-rgb SYSTEM "jar:common.zip!hrd/catalog-rgb.xml">
     <!ENTITY catalog-text SYSTEM "jar:common.zip!hrd/catalog-text.xml">

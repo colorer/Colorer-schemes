@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE catalog [
+    <!ENTITY hrd "hrd">
     <!ENTITY catalog-console SYSTEM "hrd/catalog-console.xml">
     <!ENTITY catalog-rgb SYSTEM "hrd/catalog-rgb.xml">
     <!ENTITY catalog-text SYSTEM "hrd/catalog-text.xml">
