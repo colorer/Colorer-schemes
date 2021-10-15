@@ -19,7 +19,7 @@ jobs:
         run: |
           export LATEST_RELEASE_VERSION=$(cat version.txt)
           echo "version=$LATEST_RELEASE_VERSION.$GITHUB_RUN_NUMBER">> $GITHUB_ENV
-          sed -i "s/\[Unreleased\]/\[$version\]/g" CHANGELOG.md
+          sed -i "s/\[Unreleased\]/\[${{ env.version }}\]/g" CHANGELOG.md
 
       - name: Build packed schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
