@@ -11,7 +11,7 @@
 - Common.jar rename to common.zip
 
 ### Added
-- New package type of base - all packed. Hrc and hrd files in one archive.
+- New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
 
 ## [1.2.0] - 2021-09-12
 

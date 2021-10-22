@@ -8,6 +8,7 @@
 <catalog xmlns="http://colorer.github.io/schema/v1/catalog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://colorer.github.io/schema/v1/catalog https://colorer.github.io/schema/v1/catalog.xsd">
     <hrc-sets>
         <location link="jar:common.zip!hrc/proto.hrc" />
+        <location link="auto" />
     </hrc-sets>
     <hrd-sets>
         &catalog-console;

@@ -100,6 +100,9 @@
 		<mkdir dir='${base-allpack-dir}' />
 
 		<copy file='catalog/catalog.allpacked.xml' tofile='${base-allpack-dir}/catalog.xml' />
+		<copy todir='${base-allpack-dir}' overwrite='true'>
+			<fileset dir='${build-dir}/hrc/' includes='auto/**/*' />
+		</copy>
 
 		<zip destfile='${base-allpack-dir}/common.zip'>
 			<fileset dir='${build-dir}' includes='hrc/**, hrd/**' excludes='hrd/reg.addons/**, hrd/css/**' />
