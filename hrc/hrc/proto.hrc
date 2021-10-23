@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding='UTF-8'?>
-<!DOCTYPE hrc PUBLIC "-//Cail Lomecb//DTD Colorer HRC take5//EN" "http://colorer.sf.net/2003/hrc.dtd" [
+<!DOCTYPE hrc [
   <!-- include -->
   <!ENTITY scripts-colorer-protos SYSTEM "scripts.colorer.ent.hrc">
   <!ENTITY scripts-far-protos SYSTEM "scripts.far.ent.hrc">
@@ -14,8 +14,7 @@
   <!ENTITY php-proto-gen SYSTEM "php-prot.ent.hrc">
 ]>
 
-<hrc version="take5" xmlns="http://colorer.sf.net/2003/hrc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hrc.xsd">
-
+<hrc version="take5" xmlns="http://colorer.github.io/schema/v1/hrc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://colorer.github.io/schema/v1/hrc http://colorer.github.io/schema/v1/hrc.xsd">
   <annotation>
     <documentation>
    This is a base HRC file with prototype defines and types linking information.
@@ -392,8 +391,8 @@
     <filename>/\.mxml$/i</filename>
   </prototype>
   <prototype name="graphql" group="inet" description="GraphQL">
-    <filename>/\.(graphql|gql)$/i</filename>
     <location link="inet/graphql.hrc" />
+    <filename>/\.(graphql|gql)$/i</filename>
   </prototype>
 
 
@@ -587,16 +586,16 @@
     <firstline>/^# gawk/i</firstline>
   </prototype>
   <prototype name="powershell" group="scripts" description="PowerShell">
-    <filename>/\.ps(m|d)?1$/i</filename>
     <location link="scripts/powershell.hrc" />
+    <filename>/\.ps(m|d)?1$/i</filename>
   </prototype>
   <prototype name="r" group="scripts" description="R">
-    <filename>/\.(R|Rhistory|Rprofile)$/i</filename>
     <location link="scripts/r.hrc" />
+    <filename>/\.(R|Rhistory|Rprofile)$/i</filename>
   </prototype>
   <prototype name="markdown" group="scripts" description="markdown">
-    <filename>/\.(text|md|markdown)$/i</filename>
     <location link="misc/markdown.hrc" />
+    <filename>/\.(text|md|markdown)$/i</filename>
   </prototype>
   &scripts-colorer-protos;
   &scripts-far-protos;
@@ -627,8 +626,8 @@
   </prototype>
 
   <prototype name="mkb" group="scripts" description="Project build file for Airplay SDK">
-    <filename>/\.mk[bf]$/i</filename>
     <location link="scripts/mkb.hrc" />
+    <filename>/\.mk[bf]$/i</filename>
   </prototype>
   <prototype name="ant" group="scripts" description="Ant's build.xml" targetNamespace="http://jakarta.apache.org/ant/">
     <location link="scripts/gen/ant.hrc" />
@@ -815,9 +814,9 @@
   </prototype>
   <prototype name="cobolfr" group="rare" description="Cobol Free format">
     <location link="rare/cobolfr.hrc" />
+    <filename>/\.(cob|cbl)$/i</filename>
     <firstline>/SOURCEFORMAT\"FREE\"/i</firstline>
     <firstline>/^IDENTIFICATION/i</firstline>
-    <filename>/\.(cob|cbl)$/i</filename>
   </prototype>
   <prototype name="cache" group="rare" description="Cache/Open-M">
     <location link="rare/cache.hrc" />
