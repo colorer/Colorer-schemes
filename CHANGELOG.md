@@ -4,6 +4,7 @@
 
 ### Fixed
 - [calcset] update hrc for latest file structure.
+- [picasm] fix typo  sndwf -> andwf
 
 ### Changed
 - Simplified catalog.xml. 

@@ -101,7 +101,7 @@
             <word name="addwf"/>
             <word name="addwfc"/>
             <word name="andlw"/>
-            <word name="sndwf"/>
+            <word name="andwf"/>
             <word name="banksel"/>
             <word name="bankisel"/>
             <word name="bc"/>
@@ -388,4 +388,3 @@
    - the terms of any one of the MPL, the GPL or the LGPL.
    -
    - ***** END LICENSE BLOCK ***** -->
-
