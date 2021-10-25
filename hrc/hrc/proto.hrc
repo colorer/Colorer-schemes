@@ -14,7 +14,7 @@
     <!ENTITY php-proto-gen SYSTEM "php-prot.ent.hrc">
 ]>
 
-<hrc version="take5" xmlns="http://colorer.github.io/schema/v1/hrc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://colorer.github.io/schema/v1/hrc http://colorer.github.io/schema/v1/hrc.xsd">
+<hrc version="take5" xmlns="http://colorer.sf.net/2003/hrc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hrc.xsd">
     <annotation>
         <documentation>
    This is a base HRC file with prototype defines and types linking information.
