@@ -11,6 +11,8 @@
 - Use new xsd schema for catalog.xml.
 - Common.jar rename to common.zip
 - reformat proto.hrc and included files; changed namespace.
+- Tweak visual.hrd xml CData markup
+- remove obsolete from visual-rgb.hrd
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
