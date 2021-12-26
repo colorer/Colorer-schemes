@@ -13,6 +13,7 @@
 - reformat proto.hrc and included files; changed namespace.
 - Tweak visual.hrd xml CData markup
 - remove obsolete from visual-rgb.hrd
+- [groovy] add .gradle as groovy
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
