@@ -21,6 +21,7 @@
 - [fsharp] support Unicode names
 - [powershell] add split to regex operators
 - [powershell] add missing automatic variables
+- [farmenu] Color commands with prefixes lua: using lua scheme, ps: and vps: using powershell scheme.
 
 ## [1.2.0] - 2021-09-12
 
