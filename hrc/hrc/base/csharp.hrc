@@ -32,7 +32,7 @@
     <region name="end" parent="def:PairEnd"/>
 
     <entity name="hex" value="[0-9a-fA-F]"/>
-    <entity name="type_space" value="\w[\w\[\]\s.,&lt;&gt;*]*?\s+"/>
+    <entity name="type_space" value="\w[\w\[\]\s.,&lt;&gt;*]*?\??\s+"/>
     <entity name="string_escape" value="\\([&apos;&quot;\\0abfnrtv]|x%hex;{1,4}|u%hex;{4}|U00%hex;{6})"/>
 
     <!--interpolated verbatim string-->
