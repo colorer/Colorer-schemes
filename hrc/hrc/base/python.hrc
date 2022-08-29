@@ -21,6 +21,9 @@
   <region name="pyComment" parent="def:Comment"/>
   <region name="pyString" parent="def:String"/>
   <region name="pyStringEscape" parent="def:StringContent"/>
+  <region name="pyStringEdge" parent="def:StringEdge"/>
+  <region name="pyBytes" parent="pyString"/>
+  <region name="pyBytesEdge" parent="pyStringEdge"/>
   <region name="pyNumber" parent="def:Number"/>
   <region name="pyNumberDec" parent="def:NumberDec"/>
   <region name="pyNumberOct" parent="def:NumberOct"/>
@@ -35,36 +38,118 @@
   <region name="pySpecialName" parent="def:ParameterStrong"/>
   <region name="pyFunction" parent="def:FunctionKeyword"/>
 
-
   <entity name="digit"          value="[0-9]" />
 
   <entity name="digitpart"      value="(?:%digit;(?:_?%digit;)*)" />
   <entity name="exponent"       value="(?:[eE][+-]?%digitpart;)" />
 
-
-  <scheme name="RawStringSingle"> <!-- single-quoted strings should end with slash if span multiple lines -->
-    <regexp match="/[^\\']$/" region="def:Error" />   <!-- error if end of line is not quote or escape -->
-    <regexp match="/\\$/" region="pyStringEscape" />  <!-- highlight escape at end of line -->
-    <regexp match="/\\'/" region="pyStringEscape" priority="low"/>  <!-- highlight escape quoted in the middle -->
+  <!-- String and bytes literal : https://docs.python.org/3/reference/lexical_analysis.html#string-and-bytes-literals -->
+  <!-- In raw literals escaping with backslash works differently,
+       it simply advances parser over the escaped character, e.g.
+       r'\'' produces string with two characters, that's why it's not highlighted -->
+  <scheme name="RawStringContent">
+    <regexp match="/\\\\/" />
+    <regexp match="/\\[&apos;&quot;]/" />
+    <block start="/\\$/" end="/^/" scheme="def:empty" region="pyStringEscape" />
   </scheme>
-  <scheme name="RawStringDouble">
-    <regexp match="/[^\\&quot;]$/" region="def:Error" />
-    <regexp match="/\\$/" region="pyStringEscape" />
-    <regexp match="/\\&quot;/" region="pyStringEscape" priority="low"/>
+  <scheme name="RawBytesContent">
+    <regexp match="/[^\x00-\x7F]/" region="def:Error" />
+    <inherit scheme="RawStringContent" />
   </scheme>
   <!-- highlight non-raw string contents -->
-  <scheme name="StringCommon">
-    <regexp match="/\\./" region="pyStringEscape" />
+  <scheme name="ContentCommon">
+    <regexp match="/\\[\n\\&apos;&quot;abfnrtv]/" region="pyStringEscape" />
+    <regexp match="/\\[0-7]{1,3}/" region="pyStringEscape" />
+    <regexp match="/\\x[0-9a-fA-F]{2}/" region="pyStringEscape" />
+    <regexp match="/\\x[0-9a-fA-F]{0,2}/" region="def:Error" />
   </scheme>
-  <scheme name="StringSingle"> <!-- single-quoted strings should end with slash if span multiple lines -->
-    <regexp match="/(\\).$/" region="def:Error" region1="pyStringEscape" />
-    <inherit scheme="RawStringSingle" />
-    <inherit scheme="StringCommon" />
+  <scheme name="StringContent">
+    <regexp match="/\\u[0-9a-fA-F]{4}/" region="pyStringEscape" />
+    <regexp match="/\\u[0-9a-fA-F]{0,4}/" region="def:Error" />
+    <regexp match="/\\U[0-9a-fA-F]{8}/" region="pyStringEscape" />
+    <regexp match="/\\U[0-9a-fA-F]{0,8}/" region="def:Error" />
+    <regexp match="/(\\N\{)[^&apos;&quot;\{\}]*(\})/" region="pyStringEscape"
+      region1="def:PairStart" region2="def:PairEnd" />
+    <regexp match="/\\N\{?/" region="def:Error" />
+    <inherit scheme="ContentCommon" />
+    <inherit scheme="RawStringContent" />
+    <regexp match="/\\/" region="def:ErrorText" />
   </scheme>
-  <scheme name="StringDouble"> <!-- double-quoted strings should also end with slash to span multiple lines -->
-    <regexp match="/(\\).$/" region="def:Error" region1="pyStringEscape" />
-    <inherit scheme="RawStringDouble" />
-    <inherit scheme="StringCommon" />
+  <scheme name="BytesContent">
+    <inherit scheme="ContentCommon" />
+    <inherit scheme="RawBytesContent" />
+    <regexp match="/\\/" region="def:ErrorText" />
+  </scheme>
+  <!-- Formatted string Contents -->
+  <!-- TODO: Error at any backslash occurance -->
+  <!-- TODO: Error at any quote/apostrophe occurance (the type which literal is opened with) -->
+  <scheme name="FormatSpec">
+    <regexp match="/[^\{\}]/" region="pyString" />
+    <inherit scheme="ReplacementField" />
+  </scheme>
+  <scheme name="FExpression">
+    <regexp match="/(!)([sra])?([^:\}]+)?/" priority="low"
+       region1="pyStringEdge" region2="pyString" region3="def:Error" />
+    <block start="/:/" end="/($|\}?=)/" scheme="FormatSpec" region00="pyStringEdge" />
+    <regexp match="/(=)\s*([^!:\}]+)?/" priority="low" region1="pyDelimiter" region2="def:Error" />
+    <inherit scheme="python" />
+  </scheme>
+  <scheme name="ReplacementField">
+    <block start="/(\{)/" end="/($|\})/"
+       scheme="FExpression" region="def:Insertion"
+       region00="def:PairStart" region10="def:PairEnd" 
+       region01="pyStringEdge" region11="pyStringEdge" />
+  </scheme>
+  <scheme name="FStringCommon">
+    <regexp match="/\{{2}|\}{2}/" region="pyStringEscape" />
+    <inherit scheme="ReplacementField" />
+  </scheme>
+  <scheme name="FStringContent">
+    <inherit scheme="FStringCommon" />
+    <inherit scheme="StringContent" />
+  </scheme>
+  <scheme name="RawFStringContent">
+    <inherit scheme="FStringCommon" />
+    <inherit scheme="RawStringContent" />
+  </scheme>
+  <scheme name="StringAndBytesLiterals">
+    <block start="/(u?(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
+       scheme="StringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/(r(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
+       scheme="RawStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/(b(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
+       scheme="BytesContent" region="pyBytes" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyBytesEdge" region11="pyBytesEdge" />
+    <block start="/((?:rb|br)(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
+       scheme="RawBytesContent" region="pyBytes" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyBytesEdge" region11="pyBytesEdge" />
+    <block start="/(f(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
+       scheme="FStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/((?:fr|rf)(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
+       scheme="RawFStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <!-- Same as above but for singlequotes -->
+    <block start="/(u?(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
+       scheme="StringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/(r(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
+       scheme="RawStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/(b(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
+       scheme="BytesContent" region="pyBytes" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyBytesEdge" region11="pyBytesEdge" />
+    <block start="/((?:rb|br)(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
+       scheme="RawBytesContent" region="pyBytes" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyBytesEdge" region11="pyBytesEdge" />
+    <block start="/(f(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
+       scheme="FStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/((?:fr|rf)(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
+       scheme="RawFStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
   </scheme>
 
 
@@ -386,6 +471,7 @@
    <regexp match="/\M(?{pyOutline}^\s*(class|def)\s+\w+)/" />
    <regexp match="/\M(?{pyOutline}^if\s+__name__\s+==\s+(&apos;|&quot;)__main__\1)/x"/>
 
+   <inherit scheme="StringAndBytesLiterals" />
    <inherit scheme="Keywords"/>
    <inherit scheme="SpecialNames"/>
    <inherit scheme="Functions"/>
@@ -425,22 +511,6 @@
 
    <!-- basic python comment - consider it everything after # till the end of line -->
    <block start="/#/" end="/$/" region="pyComment" scheme="def:Comment"/>
-
-   <!-- python strings : http://docs.python.org/ref/strings.html -->
-   <block start="/(u|U)?(r|R)?(&quot;{3}|&apos;{3})/" end="/\y3/"
-      region00="def:PairStart" region10="def:PairEnd"
-      scheme="def:Comment" region="pyComment" />
-      <!-- TODO: better scheme for multiline comments/docstrings -->
-      <!-- scheme="StringCommon" region="pyString" /> -->
-   <block start="/(u|U)?(&apos;)/"              end="/\y2/"
-      region00="def:PairStart" region10="def:PairEnd" scheme="StringSingle" region="pyString" />
-   <block start="/(u|U)?(&quot;)/"              end="/\y2/"
-      region00="def:PairStart" region10="def:PairEnd" scheme="StringDouble" region="pyString" />
-   <block start="/(u|U)?(r|R)(&apos;)/"  end="/\y3/"
-      region00="def:PairStart" region10="def:PairEnd" scheme="RawStringSingle" region="pyString" />
-   <block start="/(u|U)?(r|R)(&quot;)/"  end="/\y3/"
-      region00="def:PairStart" region10="def:PairEnd" scheme="RawStringDouble" region="pyString" />
-
 
    <!-- Imaginary literals : https://docs.python.org/3/reference/lexical_analysis.html#imaginary-literals -->
    <!-- placed before integers to avoid confusion with python2 octals, where exponent will get an error -->
