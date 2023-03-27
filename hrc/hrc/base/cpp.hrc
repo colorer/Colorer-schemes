@@ -461,6 +461,9 @@
    <word name="unary_negate"/>
    <word name="binary_negate"/>
 
+   <!-- Other functions -->
+   <word name="offsetof"/>
+
    <!-- stdexept -->
    <word name="exception"/>
    <word name="logic_error"/>
