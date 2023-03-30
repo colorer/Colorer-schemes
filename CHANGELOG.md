@@ -5,6 +5,14 @@
 ### Fixed
 - [calcset] update hrc for latest file structure.
 - [picasm] fix typo  sndwf -> andwf
+- [python] numeric fixes, more strict, and fine-grained types/classes
+- [python] completely rework string literals, adding bytes and fstring support
+    * bytes literals and fstrings are now supported
+    * added support for \x \u \U \N{name} escape sequences
+    * triple-quoted literals are no longer comments
+    * a lot of syntax errors are highlighted
+    * fixed bunch of bugs, especially in raw literals
+- [csharp] recognise functions with nullable results
 
 ### Changed
 - Simplified catalog.xml. 
@@ -22,6 +30,8 @@
 - [powershell] add split to regex operators
 - [powershell] add missing automatic variables
 - [farmenu] Color commands with prefixes lua: using lua scheme, ps: and vps: using powershell scheme.
+- [python] missing py3 stuff like operators, keywords, and magic names
+- [cpp] all the keywords from the https://en.cppreference.com/w/cpp/keyword
 
 ## [1.2.0] - 2021-09-12
 
