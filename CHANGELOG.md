@@ -32,6 +32,7 @@
 - [farmenu] Color commands with prefixes lua: using lua scheme, ps: and vps: using powershell scheme.
 - [python] missing py3 stuff like operators, keywords, and magic names
 - [cpp] all the keywords from the https://en.cppreference.com/w/cpp/keyword
+- [qmake] add all identifiers for Qt 5.15
 
 ## [1.2.0] - 2021-09-12
 
