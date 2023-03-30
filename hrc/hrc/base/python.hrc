@@ -25,13 +25,21 @@
   <region name="pyNumberDec" parent="def:NumberDec"/>
   <region name="pyNumberOct" parent="def:NumberOct"/>
   <region name="pyNumberHex" parent="def:NumberHex"/>
+  <region name="pyNumberBin" parent="def:NumberBin"/>
   <region name="pyNumberFloat" parent="def:NumberFloat"/>
+  <region name="pyNumberComplex" parent="def:Number"/>
   <region name="pyNumberSuffix" parent="def:NumberSuffix"/>
   <region name="pyOperator" parent="def:Operator"/>
   <region name="pyDelimiter" parent="def:Symbol"/>
   <region name="pyOutline" parent="def:Outlined"/>
   <region name="pySpecialName" parent="def:ParameterStrong"/>
   <region name="pyFunction" parent="def:FunctionKeyword"/>
+
+
+  <entity name="digit"          value="[0-9]" />
+
+  <entity name="digitpart"      value="(?:%digit;(?:_?%digit;)*)" />
+  <entity name="exponent"       value="(?:[eE][+-]?%digitpart;)" />
 
 
   <scheme name="RawStringSingle"> <!-- single-quoted strings should end with slash if span multiple lines -->
@@ -433,22 +441,25 @@
    <block start="/(u|U)?(r|R)(&quot;)/"  end="/\y3/"
       region00="def:PairStart" region10="def:PairEnd" scheme="RawStringDouble" region="pyString" />
 
-   <!-- python floats and imaginary numbers : http://docs.python.org/ref/floating.html -->
-   <!-- placed before integers to avoid confusion with octals, where exponent will get an error -->
-   <regexp match="/\B\.\d[\d_]*([Ee][-+]?\d+)?([jJ])?(\w*)\b/" region0="pyNumberFloat" region2="pyNumberSuffix" region3="def:Error" />
-   <regexp match="/\b\d[\d_]*\.[\d_]*([Ee][-+]?\d+)?([jJ])?(\w*)/" region0="pyNumberFloat" region2="pyNumberSuffix" region3="def:Error" />
-   <regexp match="/\b\d+([Ee][-+]?\d+)?([jJ])?(\w*)\b/" region0="pyNumber" region1="pyNumberSuffix" region2="def:Error" />
 
-
-   <!-- python integers : https://docs.python.org/2/reference/lexical_analysis.html#integer-and-long-integer-literals -->
+   <!-- Imaginary literals : https://docs.python.org/3/reference/lexical_analysis.html#imaginary-literals -->
+   <!-- placed before integers to avoid confusion with python2 octals, where exponent will get an error -->
+   <regexp match="/\B\.%digitpart;(%exponent;?j)(\w+)?/i" region0="pyNumberComplex" region1="pyNumberSuffix" region2="def:Error" />
+   <regexp match="/\b%digitpart;(?:\.%digitpart;?)?(%exponent;?j)(\w+)?/i" region0="pyNumberComplex" region1="pyNumberSuffix" region2="def:Error" />
+   <!-- Floating point literals : https://docs.python.org/3/reference/lexical_analysis.html#floating-point-literals -->
+   <regexp match="/\B\.%digitpart;(%exponent;)?(\w+)?/" region0="pyNumberFloat" region1="pyNumberSuffix" region2="def:Error" />
+   <regexp match="/\b%digitpart;(?:(%exponent;)|\.%digitpart;?(%exponent;)?)(\w+)?/" region0="pyNumberFloat" region1="pyNumberSuffix" region2="pyNumberSuffix" region3="def:Error" />
+   <!-- Integer literals : https://docs.python.org/3/reference/lexical_analysis.html#integer-literals -->
    <!-- hex -->
-   <regexp match="/\b(0[xX][0-9a-fA-F_]*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
+   <regexp match="/\b(0x(?:_?[0-9a-fA-F])*)(L)?(\w+)?\b/i" region1="pyNumberHex" region2="pyNumberSuffix" region3="def:Error" />
    <!-- binary -->
-   <regexp match="/\b(0b[01_]*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
+   <regexp match="/\b(0b(?:_?[01])*)(L)?(\w+)?\b/i" region1="pyNumberBin" region2="pyNumberSuffix" region3="def:Error" />
    <!-- octal -->
-   <regexp match="/\b(0o?[0-7_]*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
+   <regexp match="/\b(0o(?:_?[0-7])*)(L)?(\w+)?\b/i" region1="pyNumberOct" region2="pyNumberSuffix" region3="def:Error" />
    <!-- decimal -->
-   <regexp match="/\b([1-9][\d_]*)([Ll])?(\w*)\b/" region1="pyNumber" region2="pyNumberSuffix" region3="def:Error" />
+   <regexp match="/\b([1-9](?:_?\d)*|0+(?:_?0)*)(L)?(\w+)?\b/i" region1="pyNumberDec" region2="pyNumberSuffix" region3="def:Error" />
+   <!-- python2 octal, python3 syntax error -->
+   <regexp match="/\b(0[0-7]*)(L)?(\w+)?\b/i" region1="pyNumberOct" region2="pyNumberSuffix" region3="def:Error" />
 
 
    <!-- python delimiters : http://docs.python.org/ref/delimiters.html -->
