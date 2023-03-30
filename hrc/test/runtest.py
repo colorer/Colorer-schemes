@@ -26,6 +26,7 @@ import multiprocessing.pool
 from datetime import datetime
 from os.path import dirname, join, normpath
 import threading
+import shutil
 
 # -- global variable --
 script_path = None
@@ -70,19 +71,16 @@ def init():
     global script_path
     global working_path
     global out_dir
+    global out_result_dir
     global valid_dir
     global colorer
     global colorer_opts
-    global css
+    global css_path
 
     # -- path setup --
     working_path = os.getcwd()
     script_path = normpath(join(working_path, dirname(__file__)))
     project_path = join(script_path, "..", "..")
-
-    print(working_path)
-    print(script_path)
-    print(project_path)
 
     # -- read propertie file --
     prop_path = {}
@@ -92,13 +90,14 @@ def init():
                 name, value = line.strip()[5:].split("=", 1)
                 prop_path[name.strip()] = value.strip()
 
-    colorer_path = join(project_path, normpath(prop_path["colorer"]))
-    catalog_path = join(project_path, normpath(prop_path["catalog"]))
-    hrd_path = join(project_path, normpath(
-        prop_path["build-dir"]), prop_path["base-dir"],"hrd")
+    colorer_path = normpath(join(project_path, normpath(prop_path["colorer"])))
+    catalog_path = normpath(join(project_path, normpath(prop_path["catalog"])))
+    hrd_path = normpath(join(project_path, normpath(
+        prop_path["build-dir"]), prop_path["base-dir"],"hrd"))
     hrd = os.getenv('COLORER5HRD', 'white')
-    css = "%s/css/%s.css" % (hrd_path, hrd)
-    if not os.path.isfile(css):
+    css_path = "css/%s.css" % (hrd)
+    css_origin_path = normpath("%s/css/%s.css" % (hrd_path, hrd))
+    if not os.path.isfile(css_path):
         print("Warning: Stylesheet %s does not exist" % css)
 
     colorer_exe = "colorer"
@@ -110,7 +109,11 @@ def init():
     out_dir = datetime.today().strftime("__%Y-%m-%d_%H-%M-%S")
     if os.path.exists(out_dir):
         sys.exit("Exiting: Test dir already exists - %s" % out_dir)
+    out_result_dir = join(out_dir,"result");
     os.mkdir(out_dir)
+    os.mkdir(out_result_dir)
+    os.mkdir(out_dir + "/css")
+    shutil.copy(css_origin_path, join(out_dir,css_path))
 
     colorer_opts = ["-c", catalog_path, "-el", "info", "-ed", out_dir]
 
@@ -162,7 +165,7 @@ def run_one_test(test):
 
     filename = "%s.html" % test
     origname = filename.replace(script_path, valid_dir, 1)
-    outname = filename.replace(script_path, join(working_path, out_dir), 1)
+    outname = filename.replace(script_path, join(working_path, out_result_dir), 1)
     outdir = dirname(outname)
 
     if not os.path.exists(outdir):
@@ -202,7 +205,7 @@ def report(results):
             <link href="%s" rel="stylesheet" type="text/css"/>
         </head>
         <body>
-        """ % (out_dir, normpath("../" + css))
+        """ % (out_dir, css_path)
     )
 
     for test, ret, origname, outname in results:
