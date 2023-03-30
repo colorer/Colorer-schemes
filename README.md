@@ -77,7 +77,7 @@ Descriptions of syntaxes (scheme) are divided into static and generated. Static 
 After scheme change, it is necessary test changes for regressions. For this purpose it is necessary:
 
   1. to build the library of schemes `build base`
-  2. check that `bin` directory in the root of the project has `colorer.exe` (the utility for working with library of schemes)
+  2. check that `bin` directory in the root of the project has `colorer` (the utility for working with library of schemes)
   3. start script `runtest.py` from  `hrc/test` directory 
   4. script will check the result of coloring of reference file, the result is output to the console and `fails.html` file in *current_working_dir*/*time_of_test* directory.
   5. after the analysis of divergences in case of mistakes it is necessary to correct the scheme. If the current coloring is considered correct, it is necessary to replace the reference file with the new one.
