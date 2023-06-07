@@ -122,11 +122,11 @@
         /x
       </regexp>
 
-      <!--class, struct, interface, enum-->
+      <!--class, struct, interface, enum, record-->
       <regexp>
         /
           ((?{Keyword}partial)\s+)?
-          (?{Keyword}class|struct|interface|enum)\s+
+          (?{Keyword}class|struct|interface|enum|record(?:\s+(?:struct|class))?)\s+
           (?{def:Outlined}(?{Class}\w+))
         /x
       </regexp>
