@@ -157,8 +157,6 @@
   </scheme>
   
   <scheme name="RawStringContent">
-   <!-- Are tabulations valid inside the raw string literal? -->
-   <!-- inherit scheme="TabsAsErrors"/ -->
   </scheme>
 
   <scheme name="PreprocLine">
