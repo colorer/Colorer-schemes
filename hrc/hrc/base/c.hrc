@@ -131,7 +131,7 @@
    <regexp match="/'.*?'/" region="def:Error"/>
   </scheme>
 
-  <entity name='DelimChars' value='[!"#%\x26\x27*+,-.\x2F0123456789:;\x3C=\x3E?ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\]^_abcdefghijklmnopqrstuvwxyz\{\|\}~]'/>
+  <entity name='DelimChars' value='[!"#\%\x26\x27\*\+,\-\.\x2F:;0123456789\x3C\=\x3E\?ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\]\^_abcdefghijklmnopqrstuvwxyz\{\|\}\~]'/>
   <scheme name="String">
    <block start="/(?{def:StringEdge}(L|U|u8?)?&#34;)/" end="/(?{def:StringEdge}&#34;)/"
           scheme="StringContent" region="String" inner-region="yes"
