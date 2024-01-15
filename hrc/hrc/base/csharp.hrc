@@ -35,6 +35,11 @@
     <entity name="type_space" value="\w[\w\[\]\s.,&lt;&gt;*]*?\??\s+"/>
     <entity name="string_escape" value="\\([&apos;&quot;\\0abfnrtv]|x%hex;{1,4}|u%hex;{4}|U00%hex;{6})"/>
 
+    <!--raw string-->
+    <scheme name="RawString">
+      <block scheme="def:empty" start="/(?{start}\$*(?{Quot}&quot;{3,}))/" end="/(?{end}(?{Quot}\y{Quot}))/" region="String"/>
+    </scheme>
+
     <!--interpolated verbatim string-->
     <scheme name="IVString">
       <block scheme="IVStringContent" start="/(?{start}(?{Quot}\$@&quot;))/" end="/(?{end}(?{Quot}&quot;))/" region="String"/>
@@ -79,6 +84,7 @@
     </scheme>
 
     <scheme name="csharp">
+      <inherit scheme="RawString"/>
       <inherit scheme="IVString"/>
       <inherit scheme="IString"/>
       <inherit scheme="VString"/>
@@ -116,11 +122,11 @@
         /x
       </regexp>
 
-      <!--class, struct, interface, enum-->
+      <!--class, struct, interface, enum, record-->
       <regexp>
         /
           ((?{Keyword}partial)\s+)?
-          (?{Keyword}class|struct|interface|enum)\s+
+          (?{Keyword}class|struct|interface|enum|record(?:\s+(?:struct|class))?)\s+
           (?{def:Outlined}(?{Class}\w+))
         /x
       </regexp>
