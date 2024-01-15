@@ -33,6 +33,9 @@
 - [python] missing py3 stuff like operators, keywords, and magic names
 - [cpp] all the keywords from the https://en.cppreference.com/w/cpp/keyword
 - [qmake] add all identifiers for Qt 5.15
+- [csharp] support record, the new type keyword
+- [csharp] support C# 11 raw strings
+- [cpp] add support for C++11 string literals
 
 ## [1.2.0] - 2021-09-12
 
