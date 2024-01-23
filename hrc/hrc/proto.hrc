@@ -74,8 +74,33 @@
 
     <prototype name="asm" group="main" description="ASM">
         <location link="base/asm.hrc" />
-        <filename>/\.(mac|asm|inc|i32|cod)$/i</filename>
+        <filename>/\.(asm|fasm|nasm|masm|tasm|uasm|farm|fasmarm|asmarm|s|inc|i32|cod|asi|mac)$/i</filename>
         <firstline>/^\s*;/</firstline>
+        <firstline>/^\s*\.model\b/i</firstline>
+        <firstline>/^\s*\.8086\b/</firstline>
+        <firstline>/^\s*\.186\b/</firstline>
+        <firstline>/^\s*\.286p?\b/i</firstline>
+        <firstline>/^\s*p286\b/i</firstline>
+        <firstline>/^\s*\.386p?\b/i</firstline>
+        <firstline>/^\s*p386\b/i</firstline>
+        <firstline>/^\s*\.486p?\b/i</firstline>
+        <firstline>/^\s*p486\b/i</firstline>
+        <firstline>/^\s*\.586p?\b/i</firstline>
+        <firstline>/^\s*p586\b/i</firstline>
+        <firstline>/^\s*\.686p?\b/i</firstline>
+        <firstline>/^\s*p686\b/i</firstline>
+        <firstline>/^\s*\.?code\b/i</firstline>
+        <firstline>/^\s*\.?data\b/i</firstline>
+        <firstline>/^\s*\.?bss\b/i</firstline>
+        <firstline>/^\s*\.?stack\b/i</firstline>
+        <firstline>/^\s*org\b/i</firstline>
+        <firstline>/^\s*include\b/i</firstline>
+        <firstline>/^\s*format\b/i</firstline>
+        <firstline>/^\s*option\b/i</firstline>
+        <firstline>/^\s*bits\b/i</firstline>
+        <firstline>/^\s*use16\b/i</firstline>
+        <firstline>/^\s*use32\b/i</firstline>
+        <firstline>/^\s*use64\b/i</firstline>
     </prototype>
     <prototype name="perl" group="main" description="Perl">
         <location link="base/perl.hrc" />

@@ -36,6 +36,7 @@
 - [csharp] support record, the new type keyword
 - [csharp] support C# 11 raw strings
 - [cpp] add support for C++11 string literals
+- [asm] add new registers, blocks. New masks for filenames and firstline
 
 ## [1.2.0] - 2021-09-12
 
