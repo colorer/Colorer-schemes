@@ -8,11 +8,11 @@ on:
  
 jobs:
   build-schemes:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build unpacked
         run: ./build.sh base.distr-unpacked
@@ -26,9 +26,9 @@ jobs:
       - name: Install colorer
         run: |
           sudo apt-get -y install libicu-dev libxerces-c-dev libspdlog-dev libfmt-dev zlib1g-dev libminizip-dev
-          wget https://github.com/colorer/Colorer-library/releases/download/v1.2.1/colorer.x64.v1.2.1.tar.gz
+          wget https://github.com/colorer/Colorer-library/releases/download/v1.3.1/colorer.x64.v1.3.1.tar.gz
           mkdir bin
-          tar -xf colorer.x64.v1.2.1.tar.gz -C ./bin
+          tar -xf colorer.x64.v1.3.1.tar.gz -C ./bin
 
       - name: Test schemes
         working-directory: hrc/test

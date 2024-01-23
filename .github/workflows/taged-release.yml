@@ -7,29 +7,25 @@ on:
 
 jobs:
   build-schemes:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
-
-      - name: Get version
-        id: get_version
-        uses: battila7/get-version-action@v2
+        uses: actions/checkout@v4
 
       - name: Build packed schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-packed -Dpostfix=${{ steps.get_version.outputs.version }}
+        run: ./build.sh base.distr-packed -Dpostfix=${{ github.ref_name }}
 
       - name: Build unpacked schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-unpacked -Dpostfix=${{ steps.get_version.outputs.version }}
+        run: ./build.sh base.distr-unpacked -Dpostfix=${{ github.ref_name }}
 
       - name: Build allpacked schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-allpacked -Dpostfix=${{ steps.get_version.outputs.version }}
+        run: ./build.sh base.distr-allpacked -Dpostfix=${{ github.ref_name }}
 
       - name: Create release
-        run: gh release create ${{ steps.get_version.outputs.version }} ./build/*.zip -t "Colorer base ${{ steps.get_version.outputs.version }}" -n "new version"
+        run: gh release create ${{ github.ref_name }} ./build/*.zip -t "Colorer base ${{ github.ref_name }}" -n "new version"
         env:
           GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
