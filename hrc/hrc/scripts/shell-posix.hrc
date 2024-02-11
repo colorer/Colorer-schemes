@@ -424,6 +424,8 @@
 </scheme>
 
 <scheme name="escapes">
+    <!-- spaces between backslash and EOL are usually unexpected -->
+    <block start="/\\\s+$/" end="/$/" scheme="def:empty" region="Error"/>
     <!-- escape new line -->
     <block start="/\\$/" end="/^/" scheme="def:empty"/>
     <!-- ignore other escaped char -->
