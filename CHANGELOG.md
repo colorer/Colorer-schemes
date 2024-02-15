@@ -40,6 +40,9 @@
 - [asm] add new registers, blocks. New masks for filenames and firstline
 - [shell-posix] add a new schema for POSIX shell with block structures and error checking
 - [shell-bash] add a new schema for bash script based on shell-posix
+- [asm] add directives
+- [c] add unix standard functions, const and others
+- [cpp] add some c++11 types
 
 ## [1.2.0] - 2021-09-12
 
