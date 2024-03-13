@@ -246,18 +246,27 @@
         <location link="inet/html.hrc" />
         <filename>/\.[^ptr]??html?$/i</filename>
         <firstline>/^\s*&lt;((!DOCTYPE\s+)?HTML|!\-\-)/i</firstline>
+	<firstline>/^\s*&lt;(html|head|title|body)\b/i</firstline>
+	<firstline>/^\s*&lt;(div|span|a|script|style|table|form)\b/i</firstline>
         <parameters>
             <param name="conditional-comments" value="true" description="IE conditional comments" />
             <param name="html-pairs" value="true" description="Highlighting some known HTML Pair tags. Please, use &lt; /&gt; syntax for singles like p, td, tr etc.." />
+            <!-- firstline -->
+            <param name='firstlines' value='2' description="lines for 'firstline'" />
+            <param name='firstlinebytes' value='2000' description="bytes for 'firstline'" />
         </parameters>
     </prototype>
 
     <prototype name="css" group="inet" description="css">
         <location link="inet/css.hrc" />
         <filename>/\.css$/i</filename>
+	<firstline>/^\s*[\.\#\w-]+\s*\{/i</firstline>	
         <parameters>
             <param name="html-css" value="true" description="Default use css for HTML" />
             <param name="svg-css" value="false" description="Default use css for SVG" />
+            <!-- firstline -->
+            <param name='firstlines' value='2' description="lines for 'firstline'" />
+            <param name='firstlinebytes' value='2000' description="bytes for 'firstline'" />
         </parameters>
     </prototype>
     <prototype name="html-css" group="inet" description="css for html">
@@ -570,8 +579,13 @@
     <prototype name="sql" group="database" description="SQL, PL/SQL">
         <location link="db/sql.hrc" />
         <filename>/\.sql$/i</filename>
+	<firstline>/^\s*(SELECT|INSERT INTO|UPDATE|DELETE FROM)\s+.*?\s+(FROM|INTO|SET|WHERE)\b/i</firstline>
+	<firstline>/^\s*--.*$|^\s*\/\*.*\*\/$/i</firstline>
         <parameters>
             <param name="backslash_escapes" value="true" description="Treat \' in character literals as an escaped '" />
+            <!-- firstline -->
+            <param name='firstlines' value='10' description="lines for 'firstline'" />
+            <param name='firstlinebytes' value='2000' description="bytes for 'firstline'" />
         </parameters>
     </prototype>
     <prototype name="mysql" group="database" description="MySQL">
@@ -1006,6 +1020,7 @@
     <prototype name="json" group="rare" description="JSON">
         <location link="rare/json.hrc" />
         <filename weight='3'>/\.json$/i</filename>
+	<firstline weight="3">/^\s*\{\s*"\w+":/i</firstline>
     </prototype>
     <prototype name="yaml" group="rare" description="YAML">
         <location link="rare/yaml.hrc" />
