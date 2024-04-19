@@ -43,6 +43,9 @@
 - [asm] add directives
 - [c] add unix standard functions, const and others
 - [cpp] add some c++11 types
+- [csharp] add new number suffixes u, uy, etc.
+- [csharp] add new operators ?:, ??, etc.
+- [csharp] retire obsolete cmdlets
 
 ## [1.2.0] - 2021-09-12
 
