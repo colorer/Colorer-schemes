@@ -46,6 +46,10 @@
 - [csharp] add new number suffixes u, uy, etc.
 - [csharp] add new operators ?:, ??, etc.
 - [csharp] retire obsolete cmdlets
+- [cobol] many changes
+- [cobolfr] many changes
+- [jcl] many changes
+- [pl1] many changes
 
 ## [1.2.0] - 2021-09-12
 
