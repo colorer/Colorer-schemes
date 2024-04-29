@@ -50,6 +50,7 @@
 - [cobolfr] many changes
 - [jcl] many changes
 - [pl1] many changes
+- [cmake] updated for cmake version 3.29.2; add gen script for cmake
 
 ## [1.2.0] - 2021-09-12
 
