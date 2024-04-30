@@ -13,6 +13,9 @@
     * a lot of syntax errors are highlighted
     * fixed bunch of bugs, especially in raw literals
 - [csharp] recognise functions with nullable results
+- [shell-posix] Comments are not recognized in case statement
+- [shell-posix] Commands are not recognized correctly after escaped new-line
+- [shell-bash] Redirection symbols < and > inside "magic backticks" block break background highlighting till the end of the file
 
 ### Changed
 - Simplified catalog.xml.
