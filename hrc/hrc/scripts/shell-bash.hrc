@@ -514,6 +514,7 @@
         <virtual scheme="shell-posix:variable_names" subst-scheme="variable_names"/>
         <virtual scheme="shell-posix:strings" subst-scheme="strings"/>
         <virtual scheme="shell-posix:redirections_start" subst-scheme="redirections_start"/>
+        <virtual scheme="shell-posix:script_words" subst-scheme="script_words"/>
     </inherit>
 </scheme>
 
