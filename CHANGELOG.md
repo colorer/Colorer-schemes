@@ -16,6 +16,7 @@
 - [shell-posix] Comments are not recognized in case statement
 - [shell-posix] Commands are not recognized correctly after escaped new-line
 - [shell-bash] Redirection symbols < and > inside "magic backticks" block break background highlighting till the end of the file
+- [smarty] fixed the work of smarty templates
 
 ### Changed
 - Simplified catalog.xml.
@@ -54,6 +55,8 @@
 - [jcl] many changes
 - [pl1] many changes
 - [cmake] updated for cmake version 3.29.2; add gen script for cmake
+- [smarty] add tpl extension and first line pattern
+- [prolog] add first line pattern
 
 ## [1.2.0] - 2021-09-12
 
