@@ -148,7 +148,7 @@
 
     <!-- functions -->
     <block start="/\b(%word;)\s*(\(\s*\))\s*/" end="//" scheme="script"
-        region01="FunctionName" region02="Symbol"/>
+        region00="def:Outlined" region01="FunctionName" region02="Symbol"/>
 
     <!-- if ... fi -->
     <block start="/\M\b(if)\b/" end="/\b(fi)\b/" scheme="if"

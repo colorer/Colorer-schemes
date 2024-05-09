@@ -57,6 +57,8 @@
 - [cmake] updated for cmake version 3.29.2; add gen script for cmake
 - [smarty] add tpl extension and first line pattern
 - [prolog] add first line pattern
+- [shell-posix] add functions to outlined list
+- [shell-bash] add functions to outlined list
 
 ## [1.2.0] - 2021-09-12
 
