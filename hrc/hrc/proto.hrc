@@ -280,7 +280,7 @@
         <location link="inet/smarty.hrc" />
         <filename>/\.smarty$/</filename>
         <filename>/\.tpl$/</filename>
-        <firstline>/^\s*[{&lt;]/x</firstline>
+        <firstline>/^\s*[\{&lt;]/x</firstline>
     </prototype>
     <prototype name="ss" group="inet" description="SilverStripe">
         <location link="inet/ss.hrc" />
