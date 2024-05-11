@@ -664,7 +664,7 @@
      <word name="uint64_t"/>
      <word name="int64_t"/>
      <word name="uintptr_t"/>
-     <word name="intptr_t"/>     
+     <word name="intptr_t"/>
      <word name="FILE"/>
    </keywords>
    
@@ -932,7 +932,7 @@
 		</keywords>
 	</scheme>
 	
-  &c-unix;
+	&c-unix;
 	&c-win32;
 	
 	</type>

@@ -151,7 +151,7 @@
         <word name=".type"/>
         <word name="%object"/>
         <word name="%function"/>
-      </keywords>    
+      </keywords>
       <keywords ignorecase="yes" region="asmDefinition">
         <word name="align"/>
         <word name="db"/>

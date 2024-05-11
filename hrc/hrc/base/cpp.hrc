@@ -201,7 +201,7 @@
    <word name="noexcept"/>
    <word name="not"/>
    <word name="not_eq"/>
-   <word name="nullptr"/>
+   <word name="nullptr" region="c:KeywordConstant"/>
    <word name="operator"/>
    <word name="or"/>
    <word name="or_eq"/>
