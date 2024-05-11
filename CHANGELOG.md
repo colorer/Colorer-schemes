@@ -17,6 +17,7 @@
 - [shell-posix] Commands are not recognized correctly after escaped new-line
 - [shell-bash] Redirection symbols < and > inside "magic backticks" block break background highlighting till the end of the file
 - [smarty] fixed the work of smarty templates
+- [markdown] amend emphasis with underscores
 
 ### Changed
 - Simplified catalog.xml.
