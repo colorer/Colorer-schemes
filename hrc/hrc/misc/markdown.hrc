@@ -7,11 +7,12 @@ xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hr
 <type name="markdown">
 <annotation><documentation><![CDATA[
 
-markdown.hrc by Roman Kuzmin, aka NightRoman, 2024-05-10
+markdown.hrc by Roman Kuzmin, aka NightRoman, 2024-05-13
 
+* Use markdown2 for extensions.
 * Inline HTML should be valid XML.
 * Opened spans are always colored.
-* Blockquotes are only partialy parsed.
+* Blockquotes are partially parsed.
 * List levels 4: only items are parsed.
 * List levels 5+: all is colored as code.
 * Indentation: 4/8/12 spaces, 1/2/3 tabs.
@@ -267,6 +268,9 @@ markdown.hrc by Roman Kuzmin, aka NightRoman, 2024-05-10
 </scheme>
 
 <scheme name="markdown">
+  <!--user extensions-->
+  <inherit scheme="markdown2:markdown2" />
+
   <regexp match="/^(?{Rule}%Rule;)/"/>
 
   <block scheme="Head" region="HeadText"
@@ -279,7 +283,7 @@ markdown.hrc by Roman Kuzmin, aka NightRoman, 2024-05-10
   start="/(?{start}^ {4,}|\t+)\S.*/" end="/(?{end})\M%i3;\S/"/>
 
   <block scheme="def:empty" region="Code"
-  start="/(?{start}^%FenceMark;).*$/" end="/(?{end}^(?{FenceMark}\y{FenceMark})).*$/"/>
+  start="/(?{start}^%FenceMark;).*$/" end="/(?{end}^(?{FenceMark}\y{FenceMark}))\s*$/"/>
 
   <regexp match="/^(?{Reference}%Ref;.*)/"/>
 
