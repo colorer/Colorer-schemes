@@ -60,6 +60,7 @@
 - [prolog] add first line pattern
 - [shell-posix] add functions to outlined list
 - [shell-bash] add functions to outlined list
+- [markdown] added the ability to connect the backlight in 'code' by creating your own scheme 'markdown2:markdown2'
 
 ## [1.2.0] - 2021-09-12
 
