@@ -292,7 +292,7 @@
 		</scheme>
 
 		<scheme name="InverseInsertion">
-			<block start="/(\})/" end="/(\{)/" scheme="html"
+			<block start="/(\})/" end="/(\{)\M\S/" scheme="html"
 				priority="low" region="Text" inner-region="yes"
 				region00="Insertion" region10="Insertion" 
 				region01="OpenTag"   region11="OpenTag" 

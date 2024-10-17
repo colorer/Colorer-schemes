@@ -20,6 +20,7 @@
 - [smarty] fixed the work of smarty templates
 - [markdown] amend emphasis with underscores
 - [markdown] fix trailing spaces in em and strong
+- [smarty] fixed working with nested brackets
 
 ### Changed
 - Simplified catalog.xml.
