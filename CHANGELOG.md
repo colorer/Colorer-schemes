@@ -67,6 +67,8 @@
 - [shell-bash] add functions to outlined list
 - [markdown] added the ability to connect the backlight in 'code' by creating your own scheme 'markdown2:markdown2'
 - [markdown] highlight special all caps HTML tags
+- [hcl] add a new schema for HashiCorp HCL
+- [terraform] add a new schema for HashiCorp Terraform
 
 ## [1.2.0] - 2021-09-12
 
