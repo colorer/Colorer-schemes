@@ -23,6 +23,7 @@
 - [markdown] fix trailing spaces in em and strong
 - [smarty] fixed working with nested brackets
 - [smarty] literal block - text only
+- [shell-posix] fix variable assignments with line continuations
 
 ### Changed
 - Simplified catalog.xml.
