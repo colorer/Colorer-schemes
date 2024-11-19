@@ -70,6 +70,7 @@
 - [markdown] highlight special all caps HTML tags
 - [hcl] add a new schema for HashiCorp HCL
 - [terraform] add a new schema for HashiCorp Terraform
+- [dockerfile] add a new schema for Dockerfile
 
 ## [1.2.0] - 2021-09-12
 

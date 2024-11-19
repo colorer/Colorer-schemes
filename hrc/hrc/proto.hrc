@@ -798,6 +798,12 @@
         <filename>/\.nut$/i</filename>
     </prototype>
 
+    <prototype name="dockerfile" group="scripts" description="Dockerfile">
+        <location link="scripts/dockerfile.hrc"/>
+        <filename>/^[Dd]ockerfile\..+$/</filename>
+        <filename>/^[Dd]ockerfile$/</filename>
+        <firstline>/^\s*FROM\b/</firstline>
+    </prototype>
 
     <prototype name="rarscript" group="scripts.install" description="RAR Install Script">
         <location link="scripts/rarscrpt.hrc" />
