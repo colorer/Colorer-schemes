@@ -15,18 +15,18 @@
             https://docs.docker.com/reference/dockerfile/
 
         Limitations:
-            1. Comments within multiline instructions are not supported.
-            2. Custom escape character is not supported.
-            3. Shell is assumed to be a posix shell. There is no possability
+            1. Custom escape character is not supported.
+            2. Shell is assumed to be a posix shell. There is no possability
                to highlight as other shell (e.g. powershell).
-            4. heredoc in RUN instruction is highlighted as a shell script.
+            3. heredoc in RUN instruction is highlighted as a shell script.
                Practically, it can be anything else (e.g. python script).
 
         TODO:
             1. Parse URIs in source parameters for ADD/COPY
             2. Highlight sources and destinations differently for ADD/COPY
             3. Recognize and hightlight image name for "COPY --from=..."
-            4. Recognize and validate parameters for instructions
+            4. Recognize and validate parameters for instructions (FROM/RUN/ADD etc.)
+            5. Recognize and highlight parser directives (https://docs.docker.com/reference/dockerfile/#parser-directives)
 
         Home: https://github.com/chpock/ck.colorer-schemes
         Send requests there for bug fixes and features.
@@ -128,11 +128,16 @@
     <block start="//" end="/$/" region="Error" scheme="def:empty"/>
 </scheme>
 
+<scheme name="inline-comment">
+    <block start="/^\s*#/" end="/^/" region="Comment" scheme="def:Comment"/>
+</scheme>
+
 <scheme name="escape_newline">
     <!-- spaces between backslash and EOL are usually unexpected -->
     <block start="/%escape;\s+$/" end="/$/" region00="Symbol" scheme="def:empty" region="Error"/>
     <!-- escape new line -->
     <block start="/%escape;$/" end="/^/" region00="Symbol" scheme="def:empty"/>
+    <inherit scheme="inline-comment"/>
 </scheme>
 
 <scheme name="escapes">
@@ -247,12 +252,12 @@
         end="/^(\y{HeredocAnchor})\s*$/" scheme="RUN-heredoc"
         region01="StringEdge" region02="StringEdge" region11="HeredocAnchor"
         region00="def:PairStart" region10="def:PairEnd"/>
-    <block start="/(\S)?=/" end="/$/" scheme="shell-posix:script"/>
+    <block start="/(\S)?=/" end="/$/" scheme="shell-script"/>
 </scheme>
 
 <scheme name="CMD">
     <inherit scheme="string-array"/>
-    <block start="/(\S)?=/" end="/$/" scheme="shell-posix:script"/>
+    <block start="/(\S)?=/" end="/$/" scheme="shell-script"/>
 </scheme>
 
 <scheme name="LABEL">
@@ -379,7 +384,7 @@
 
 <scheme name="HEALTHCHECK-cmd">
     <inherit scheme="parameters"/>
-    <block start="/CMD\b\s*/" end="/$/" scheme="shell-posix:script" region00="Constant"/>
+    <block start="/CMD\b\s*/" end="/$/" scheme="shell-script" region00="Constant"/>
     <!-- everything is an error -->
     <block start="//" end="/$/" scheme="def:empty" region="Error"/>
 </scheme>
@@ -399,6 +404,18 @@
     <inherit scheme="string-array"/>
     <!-- everything is an error -->
     <block start="//" end="/$/" scheme="def:empty" region="Error"/>
+</scheme>
+
+<scheme name="shell-script">
+    <inherit scheme="inline-comment"/>
+    <inherit scheme="shell-posix:script">
+        <virtual scheme="shell-posix:escape_newline" subst-scheme="shell-script-escape_newline"/>
+    </inherit>
+</scheme>
+
+<scheme name="shell-script-escape_newline">
+    <inherit scheme="inline-comment"/>
+    <inherit scheme="shell-posix:escape_newline"/>
 </scheme>
 
 </type>
