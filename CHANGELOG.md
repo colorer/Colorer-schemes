@@ -34,6 +34,7 @@
 - remove obsolete from visual-rgb.hrd
 - [groovy] add .gradle as groovy
 - Use the new shell-posix schema for shell scripts by default
+- [json] highlight JSON object keys
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
