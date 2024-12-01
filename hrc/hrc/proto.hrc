@@ -1085,6 +1085,7 @@
     </prototype>
 
     <prototype name="default" group="other" description="default type">
+        <location link="base/default.hrc" />
         <filename weight='1'>//</filename>
         <parameters>
             <!-- firstline -->
@@ -1093,15 +1094,10 @@
         </parameters>
     </prototype>
 
-    <type name="default">
-        <scheme name='default' />
-    </type>
-
-
     <!--  packages  -->
 
     <package name="def" description="core definitions">
-        <location link="lib/default.hrc" />
+        <location link="lib/def.hrc" />
     </package>
     <package name="uri" description="URI (RFC 2396)">
         <location link="lib/uri.hrc" />
