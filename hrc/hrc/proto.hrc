@@ -638,13 +638,11 @@
         <filename>/\.(text|md|markdown)$/i</filename>
     </prototype>
     &scripts-colorer-protos;
-  &scripts-far-protos;
+    &scripts-far-protos;
     <prototype name="makefile" group="scripts" description="makefile">
         <location link="scripts/makefile.hrc" />
         <filename>/(makefile | tools\.ini) | \.(mak|gmk|ds(p|w)|bp(k|r|g))$/ix</filename>
         <filename weight='3'>/\.mk$/i</filename>
-        <!--firstline>/Microsoft Developer Studio Project File/i</firstline>
-    <firstline>/^\!if/i</firstline-->
         <firstline>/makefile/s</firstline>
         <parameters>
             <param name="gnu" value="false" description="use GNU make only" />
@@ -824,10 +822,10 @@
 
     <!--  rare languages  -->
     &rare-j2ee-protos;
-  &rare-gen-protos;
-  &rare-scripts-protos;
-  &rare-qrm-protos;
-  &rare-ie-weidu-protos;
+    &rare-gen-protos;
+    &rare-scripts-protos;
+    &rare-qrm-protos;
+    &rare-ie-weidu-protos;
     <prototype name="c1c" group="rare" description="1C">
         <location link="rare/1c.hrc" />
         <filename>/\.1c$/i</filename>
@@ -850,7 +848,7 @@
     </prototype>
 
     <!--  !! you may wish to swap next two types
-  because of collision with extensions  -->
+     because of collision with extensions  -->
     <prototype name="dssp" group="rare" description="Dssp">
         <location link="rare/dssp.hrc" />
         <filename>/\.dsp$/i</filename>
