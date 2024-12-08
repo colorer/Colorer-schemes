@@ -36,7 +36,7 @@
 - Use the new shell-posix schema for shell scripts by default
 - [json] highlight JSON object keys
 - rename lib/default.hrc to lib/def.hrc
-- move 'default' type implementation from proto.hrc to base/default.hrc 
+- move 'default' type implementation from proto.hrc to base/default.hrc
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
@@ -74,6 +74,7 @@
 - [hcl] add a new schema for HashiCorp HCL
 - [terraform] add a new schema for HashiCorp Terraform
 - [dockerfile] add a new schema for Dockerfile
+- [jenkinsfile] add a new schema for Jenkins configuration (Jenkinsfile)
 
 ## [1.2.0] - 2021-09-12
 
