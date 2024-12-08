@@ -36,7 +36,8 @@
 - Use the new shell-posix schema for shell scripts by default
 - [json] highlight JSON object keys
 - rename lib/default.hrc to lib/def.hrc
-- move 'default' type implementation from proto.hrc to base/default.hrc 
+- move 'default' type implementation from proto.hrc to base/default.hrc
+- [shell-posix] allow to include shell-posix scheme as subscheme enclosed in quotes
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
