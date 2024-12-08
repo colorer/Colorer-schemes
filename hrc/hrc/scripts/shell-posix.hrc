@@ -104,7 +104,7 @@
 <entity name="wrdbreakchars" value="|;#)&amp;`"/>
 <entity name="wrdbreak" value="[%wrdbreakchars;]"/>
 <entity name="wrdnotbreak" value="[^%wrdbreakchars;]"/>
-<entity name="cmdbreak" value="%wrdbreak;|$"/>
+<entity name="cmdbreak" value="%wrdbreak;|&quot;|&apos;|$"/>
 
 <scheme name="shell-posix">
     <inherit scheme="def:unixCommentFirstline">
@@ -578,7 +578,7 @@
     <!-- skip whitespace -->
     <regexp match="/\s+/"/>
     <inherit scheme="redirections_end"/>
-    <regexp match="/%wrdnotbreak;/" region="Error"/>
+    <regexp match="/%wrdnotbreak;/" region="Error" priority="low"/>
 </scheme>
 
 <scheme name="cmd-one-parameter-number">
