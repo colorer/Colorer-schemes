@@ -75,6 +75,7 @@
 - [hcl] add a new schema for HashiCorp HCL
 - [terraform] add a new schema for HashiCorp Terraform
 - [dockerfile] add a new schema for Dockerfile
+- [jenkinsfile] add a new schema for Jenkins configuration (Jenkinsfile)
 
 ## [1.2.0] - 2021-09-12
 
