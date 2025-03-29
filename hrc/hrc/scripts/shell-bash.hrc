@@ -400,22 +400,22 @@
         region01="PairStart"      region11="PairEnd"
         scheme="variable_expansion_substring"/>
     <!-- ${!VAR} -->
-    <block start="/((\$\{))(?{VariablePrefix}!)\M((%specvar-strict;)|[\w_]+)(\})?=/"
+    <block start="/((\$\{))(?{VariablePrefix}!)\M((%specvar-strict;)|[\w_]+)(\}|$)/"
         end="/(\}|$)/"
         region02="VariableStrong" region10="VariableStrong"
         region01="PairStart"      region11="PairEnd"
         scheme="variable_names"/>
     <!-- ${!prefix*} ${!prefix@} -->
-    <block start="/((\$\{))(?{VariablePrefix}!)\M((%specvar-strict;)|[\w_]+)([*@]|\[[*@]\])?=/"
+    <block start="/((\$\{))(?{VariablePrefix}!)\M((%specvar-strict;)|[\w_]+)([*@]|\[[*@]\])(\}|$)/"
         end="/(?{VariablePrefix}[*@]|\[[*@]\])(\}|$)/"
         region02="VariableStrong" region10="VariableStrong"
         region01="PairStart"      region11="PairEnd"
         scheme="variable_names"/>
-    <!-- ${VAR@...} -->
-    <block start="/((\$\{))\M((%specvar-strict;)|[\w_]+)(@[UuLQEPAKak])?=/"
-        end="/(?{VariablePrefix}@[UuLQEPAKak])(\}|$)/"
+    <!-- ${VAR@...} ${!VAR@...} -->
+    <block start="/((\$\{))(?{VariablePrefix}!)?\M((%specvar-strict;)|[\w_]+)@[^\}]+(\}|$)/"
+        end="/(?{VariablePrefix}@)((?{VariablePrefix}[UuLQEPAKak])|(?{Error}[^\}]+))(\}|$)/"
         region02="VariableStrong" region10="VariableStrong"
-        region01="PairStart"      region11="PairEnd"
+        region01="PairStart"      region12="PairEnd"
         scheme="variable_names"/>
     <!-- ${VAR^...} ${VAR^^...} ${VAR,...} ${VAR,,...} -->
     <block start="/((\$\{))\M((%specvar-strict;)|[\w_]+)(?{VariablePrefix}\^{1,2}|,{1,2})/"

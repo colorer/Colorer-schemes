@@ -24,6 +24,7 @@
 - [smarty] fixed working with nested brackets
 - [smarty] literal block - text only
 - [shell-posix] fix variable assignments with line continuations
+- [shell-bash] fix indirect expansion+transformation
 
 ### Changed
 - Simplified catalog.xml.
