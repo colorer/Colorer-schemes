@@ -24,6 +24,9 @@
 - [smarty] fixed working with nested brackets
 - [smarty] literal block - text only
 - [shell-posix] fix variable assignments with line continuations
+- [shell-posix] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
+- [shell-bash] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
+- [dockerfile] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
 
 ### Changed
 - Simplified catalog.xml.
