@@ -437,7 +437,7 @@
     <!--  xml types  -->
     <prototype name="xml" group="xml" description="xml">
         <location link="xml/xml.hrc" />
-        <filename>/\.(xml|\w*proj|gi2|gpr|ui)$/i</filename>
+        <filename>/\.(xml|\w*proj|gi2|gpr|ui|xaml)$/i</filename>
         <filename>/\.(wxs|fb2)$/i</filename>
         <firstline>/^&lt;\?xml | &lt;\!DOCTYPE | xmlns /x</firstline>
         <firstline>/^\s*&lt;\w+&gt;\s*/</firstline> <!-- (\s+\w+\s*=\*([&quot;&apos;]).+?\2)*\s* -->
