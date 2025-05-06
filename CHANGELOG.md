@@ -42,6 +42,7 @@
 - rename lib/default.hrc to lib/def.hrc
 - move 'default' type implementation from proto.hrc to base/default.hrc
 - [shell-posix] allow to include shell-posix scheme as subscheme enclosed in quotes
+- Add *.xaml to xml prototype
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
@@ -80,6 +81,7 @@
 - [terraform] add a new schema for HashiCorp Terraform
 - [dockerfile] add a new schema for Dockerfile
 - [jenkinsfile] add a new schema for Jenkins configuration (Jenkinsfile)
+- [markdown] add Obsidian Templater blocks
 
 ## [1.2.0] - 2021-09-12
 
