@@ -136,7 +136,7 @@
     </prototype>
     <prototype name="pascal" group="main" description="Pascal">
         <location link="base/pascal.hrc" />
-        <filename>/\.(\~?pas|dpr|dpk|inc|int|pp)$/i</filename>
+        <filename>/\.(\~?pas|dpr|dpk|inc|int|pp|lpr)$/i</filename>
         <firstline>/^(\{|\/\/|resourcestring|program|library|unit|package)/i</firstline>
     </prototype>
     <prototype name="csharp" group="main" description="C#">
@@ -754,7 +754,7 @@
 
     <prototype name="delphiform" group="scripts" description="Delphi form">
         <location link="scripts/dfm.hrc" />
-        <filename>/\.dfm$/i</filename>
+        <filename>/\.(dfm|lfm)$/i</filename>
     </prototype>
     <prototype name="pnuts" group="scripts" description="Java: Pnuts">
         <location link="scripts/pnuts.hrc" />
