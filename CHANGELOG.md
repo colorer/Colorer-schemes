@@ -87,6 +87,7 @@
 - [pascal] add 'object' to highlight 
 - [pascal] add some types
 - [pascal] highlight noAscii symbols
+- [pascal] add abstract and sealed for object; type NativeInt, NativeUint
 
 ## [1.2.0] - 2021-09-12
 

@@ -14,6 +14,7 @@
      Vadim V. Lopushansky <pult@ukr.net>
      Timur Safin <timur@lanit.ru> completed Delphi4/5 support
      Vadim Zenko <vzhome@nm.ru>
+     Karagy added support for object
     ]]></contributors>
    </annotation>
 
@@ -142,6 +143,8 @@
             <word name="LongBool"/>
             <word name="LongInt"/>
             <word name="LongWord"/>
+            <word name="NativeInt"/>
+            <word name="NativeUInt"/>
             <word name="OleVariant"/>
             <word name="OpenString"/>
             <word name="PAnsiChar"/>
@@ -171,13 +174,15 @@
          </keywords>
 
 
-<!-- .Net  -->
+         <!-- .Net  -->
          <keywords ignorecase="yes" region="pNetUnsafeType">
             <word name="PChar"/>
             <word name="Pointer"/>
             <word name="Real48"/>
          </keywords>
 
+         <!-- Highlights non-ASCII characters in identifiers.
+              Turn off if not needed. -->
          <regexp match="/[^\x00-\x7F]+/" region="Error"/>
       </scheme>
 
@@ -211,7 +216,6 @@
       <scheme name="pasClass">
          <inherit scheme="pascal"/>
          <keywords ignorecase="yes" region="pWord">
-
             <word name="private"/>
             <word name="protected"/>
             <word name="public"/>
@@ -238,13 +242,12 @@
       <scheme name="pasObject">
          <inherit scheme="pascal"/>
          <keywords ignorecase="yes" region="pWord">
-
             <word name="private"/>
             <word name="protected"/>
             <word name="public"/>
             <!--word name="published"/-->
 
-            <word name="dynamic"/>
+            <!-- word name="dynamic"/-->
             <!--word name="override"/-->
             <word name="reintroduce"/>
             <word name="virtual"/>
@@ -255,12 +258,12 @@
             <!-- .Net -->
             <word name="strict"/>
             <!--word name="helper"/-->
-            <!--word name="sealed"/-->
+            <word name="sealed"/>
             <word name="final"/>
             <!--word name="static"/-->
          </keywords>
 
-         <regexp match="/(published|override|message|helper|sealed|static)/" region="Error"/>
+         <regexp match="/(published|dynamic|override|message|helper|static)/" region="Error"/>
       </scheme>
 
       <scheme name="pasRecord">
@@ -285,11 +288,12 @@
   не согласен.
 -->
          <block start="/\=\s*(interface|dispinterface) \s*\M (\(|\/|\{|$)/ix" end="/\b(end)\b/i" scheme="pascal" region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
-         <block start="/\b(class) \s*\M (\(|\/|\{|$)/ix" end="/\b(end)\b/i" scheme="pasClass" region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
+         <block start="/\b(class)  \s*\M (\(|\/|\{|$)/ix" end="/\b(end)\b/i" scheme="pasClass"  region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
          <block start="/\b(object) \s*\M (\(|\/|\{|$)/ix" end="/\b(end)\b/i" scheme="pasObject" region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
 
          <!-- .Net  -->
-         <block start="/\b(class\s+?(sealed|helper)) \s*\M /ix" end="/\b(end)\b/i" scheme="pasClass" region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
+         <block start="/\b(class \s+?(abstract|sealed|helper)) \s*\M /ix" end="/\b(end)\b/i" scheme="pasClass"  region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
+         <block start="/\b(object\s+?(abstract|sealed       )) \s*\M /ix" end="/\b(end)\b/i" scheme="pasObject" region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
 
          <block start="/\b(try)\b/i" end="/\b(end)\b/i" scheme="pascal" region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
          <block start="/\b(repeat)\b/ix" end="/\b(until)\b/ix" scheme="pascal" region00="pWord2" region10="pWord2" region01="PairStart" region11="PairEnd"/>
