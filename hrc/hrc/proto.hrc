@@ -138,6 +138,9 @@
         <location link="base/pascal.hrc" />
         <filename>/\.(\~?pas|dpr|dpk|inc|int|pp|lpr)$/i</filename>
         <firstline>/^(\{|\/\/|resourcestring|program|library|unit|package)/i</firstline>
+        <parameters>
+            <param name="non-ascii-as-errors" value="false" description="non-ASCII characters in identifiers as error" />
+        </parameters>
     </prototype>
     <prototype name="csharp" group="main" description="C#">
         <location link="base/csharp.hrc" />

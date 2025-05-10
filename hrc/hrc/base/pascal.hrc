@@ -159,8 +159,7 @@
             <word name="Text"/>
             <word name="TextFile"/>
 
-            <word name="UInt"/> <!-- broken for UINT, use Case Sensitive UInt for order words -->
-
+            <word name="UInt"/>
             <word name="UInt8"/>
             <word name="UInt16"/>
             <word name="UInt32"/>
@@ -181,8 +180,12 @@
             <word name="Real48"/>
          </keywords>
 
-         <!-- Highlights non-ASCII characters in identifiers.
-              Turn off if not needed. -->
+         <inherit scheme="non-ASCII"/>
+
+      </scheme>
+
+      <scheme name="non-ASCII" if="non-ascii-as-errors">
+         <!-- Highlights non-ASCII characters in identifiers. -->
          <regexp match="/[^\x00-\x7F]+/" region="Error"/>
       </scheme>
 
