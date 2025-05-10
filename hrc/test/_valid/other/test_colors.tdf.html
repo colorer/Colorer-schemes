@@ -29,7 +29,7 @@
  28: 
  29: <span class='ahdl-ahdlComment def-Comment def-Syntax'>-- expressions</span>
  30: a<span class='ahdl-ahdlSymbol def-Symbol'>=</span>b+c<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
- 31: e<span class='ahdl-ahdlSymbol def-Symbol'>=</span>!<span class='ahdl-ahdlSymbol def-Symbol'>(</span>!<span class='ahdl-ahdlSymbol def-Symbol'>(</span>f <span class='ahdl-ahdlSymbol def-Symbol'>&amp;</span> c<span class='ahdl-ahdlSymbol def-Symbol'>)</span> <span class='ahdl-ahdlSymbol def-Symbol'>#</span> <span class='ahdl-ahdlSymbol def-Symbol'>(</span>e<span class='ahdl-ahdlSymbol def-Symbol'>&amp;</span>v<span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> <span class='ahdl-ahdlComment def-Comment def-Syntax'>--fixme: "!" not works as operator</span>
+ 31: e<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlSymbol def-Symbol'>!</span><span class='ahdl-ahdlSymbol def-Symbol'>(</span><span class='ahdl-ahdlSymbol def-Symbol'>!</span><span class='ahdl-ahdlSymbol def-Symbol'>(</span>f <span class='ahdl-ahdlSymbol def-Symbol'>&amp;</span> c<span class='ahdl-ahdlSymbol def-Symbol'>)</span> <span class='ahdl-ahdlSymbol def-Symbol'>#</span> <span class='ahdl-ahdlSymbol def-Symbol'>(</span>e<span class='ahdl-ahdlSymbol def-Symbol'>&amp;</span>v<span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
  32: a<span class='ahdl-ahdlSymbol def-Symbol'>=</span>b<span class='ahdl-ahdlSymbol def-Symbol'>$</span>f<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
  33: s<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlSymbol def-Symbol'>(</span>r<span class='ahdl-ahdlSymbol def-Symbol'>!=</span><span class='def-NumberDec def-Number'>4</span><span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
  34: w<span class='ahdl-ahdlSymbol def-Symbol'>=</span><span class='ahdl-ahdlSymbol def-Symbol'>(</span>c<span class='ahdl-ahdlSymbol def-Symbol'>>=</span>q<span class='ahdl-ahdlSymbol def-Symbol'>)</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span>
@@ -111,7 +111,7 @@
 110: <span class='ahdl-ahdlKeyword def-Keyword'>    if</span> UNDERFLOW_CHECKING<span class='ahdl-ahdlSymbol def-Symbol'>==</span><span class='def-StringEdge def-String'>"</span><span class='c-String def-String'>OFF</span><span class='def-StringEdge def-String'>"</span> <span class='ahdl-ahdlKeyword def-Keyword'>generate</span>
 111:       valid_rreq <span class='ahdl-ahdlSymbol def-Symbol'>=</span> rreq<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
 112:     <span class='ahdl-ahdlKeyword def-Keyword'>else</span> <span class='ahdl-ahdlKeyword def-Keyword'>generate</span>
-113:       valid_rreq <span class='ahdl-ahdlSymbol def-Symbol'>=</span> rreq <span class='ahdl-ahdlKeyword def-Keyword'>and</span> !empty<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
+113:       valid_rreq <span class='ahdl-ahdlSymbol def-Symbol'>=</span> rreq <span class='ahdl-ahdlKeyword def-Keyword'>and</span> <span class='ahdl-ahdlSymbol def-Symbol'>!</span>empty<span class='ahdl-ahdlSymbol def-Symbol'>;</span>
 114:     <span class='ahdl-ahdlKeyword def-Keyword'>end</span> <span class='ahdl-ahdlKeyword def-Keyword'>generate</span><span class='ahdl-ahdlSymbol def-Symbol'>;</span> 
 115: 
 116: 

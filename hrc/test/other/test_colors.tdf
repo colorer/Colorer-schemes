@@ -29,7 +29,7 @@ global;
 
 -- expressions
 a=b+c;
-e=!(!(f & c) # (e&v)); --fixme: "!" not works as operator
+e=!(!(f & c) # (e&v));
 a=b$f;
 s=(r!=4);
 w=(c>=q);

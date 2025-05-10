@@ -288,7 +288,7 @@
 287:   <span class='dssp-dsspParam def-Parameter'>!1+</span> QFILES <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> QFILES <span class='dssp-dsspParam def-Parameter'>!</span> FLSPTR <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> MFS2NAME <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> SRCHNXT <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
 288: 
 289: <span class='dssp-dsspComment def-Comment def-Syntax'>[MFS2NAME - пересылка имени]</span>
-290: : MFS2NAME <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='dssp-dsspParam def-Parameter'>SP</span> QFILES AFNAME L1PFILE !!<span class='dssp-dsspParam def-Parameter'>!MB</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span>
+290: : MFS2NAME <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> <span class='dssp-dsspParam def-Parameter'>SP</span> QFILES AFNAME L1PFILE <span class='dssp-dsspParam def-Parameter'>!</span><span class='dssp-dsspParam def-Parameter'>!</span><span class='dssp-dsspParam def-Parameter'>!MB</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span>
 291:   AIBUF <span class='dssp-dsspComment def-Comment def-Syntax'>[Адрес имени]</span> DLIBL <span class='dssp-dsspComment def-Comment def-Syntax'>[A,L]</span> QFILES AFNAME <span class='dssp-dsspParam def-Parameter'>!SB</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
 292: 
 293: <span class='dssp-dsspParam def-Parameter'>B16</span>
@@ -319,7 +319,7 @@
 318: : MFS3P <span class='dssp-dsspComment def-Comment def-Syntax'>[i]</span> <span class='dssp-dsspParam def-Parameter'>!</span> NOMFILE DELWIND <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span> ;
 319: 
 320: <span class='dssp-dsspComment def-Comment def-Syntax'>[ WORD VAR NOMFILE ]</span>
-321: : MFS3T <span class='dssp-dsspComment def-Comment def-Syntax'>[i]</span> <span class='dssp-dsspParam def-Parameter'>!</span> NOMFILE <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span><span class='dssp-dsspString def-String'> "                    "</span> #  <span class='dssp-dsspParam def-Parameter'>C3</span> <span class='dssp-dsspParam def-Parameter'>C3</span> !!<span class='dssp-dsspParam def-Parameter'>!MB</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[A,L]</span>
+321: : MFS3T <span class='dssp-dsspComment def-Comment def-Syntax'>[i]</span> <span class='dssp-dsspParam def-Parameter'>!</span> NOMFILE <span class='dssp-dsspComment def-Comment def-Syntax'>[]</span><span class='dssp-dsspString def-String'> "                    "</span> #  <span class='dssp-dsspParam def-Parameter'>C3</span> <span class='dssp-dsspParam def-Parameter'>C3</span> <span class='dssp-dsspParam def-Parameter'>!</span><span class='dssp-dsspParam def-Parameter'>!</span><span class='dssp-dsspParam def-Parameter'>!MB</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[A,L]</span>
 322:   NOMFILE AFNAME L1PFILE <span class='dssp-dsspComment def-Comment def-Syntax'>[A,L,Aname,Lname]</span> <span class='dssp-dsspParam def-Parameter'>C4</span> <span class='def-NumberDec def-Number'>4</span>+ <span class='dssp-dsspParam def-Parameter'>!SB</span> <span class='dssp-dsspComment def-Comment def-Syntax'>[A,L]</span> ;
 323: 
 324: <span class='dssp-dsspComment def-Comment def-Syntax'>[**********************************************]</span>
