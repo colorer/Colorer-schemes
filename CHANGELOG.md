@@ -88,6 +88,7 @@
 - [pascal] add some types
 - [pascal] highlight noAscii symbols
 - [pascal] add abstract and sealed for object; type NativeInt, NativeUint
+- [c] add format string length modifiers since C99
 
 ## [1.2.0] - 2021-09-12
 
