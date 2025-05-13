@@ -28,6 +28,7 @@
 - [shell-posix] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
 - [shell-bash] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
 - [dockerfile] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
+- [blue.hrd] fix colors for cross
 
 ### Changed
 - Simplified catalog.xml.
@@ -89,6 +90,7 @@
 - [pascal] highlight noAscii symbols
 - [pascal] add abstract and sealed for object; type NativeInt, NativeUint
 - [c] add format string length modifiers since C99
+- [navy-mirror.hrd] add colors for cross
 
 ## [1.2.0] - 2021-09-12
 
