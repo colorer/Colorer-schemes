@@ -29,6 +29,7 @@
 - [shell-bash] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
 - [dockerfile] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
 - [blue.hrd] fix colors for cross
+- [json] fix comments in json
 
 ### Changed
 - Simplified catalog.xml.
