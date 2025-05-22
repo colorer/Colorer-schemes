@@ -1,0 +1,160 @@
+﻿  0: <span class='def-Symbol'>cmake_minimum_required(</span><span class='cmake-cmake_parameters def-Parameter'>VERSION</span> 3.10<span class='def-Symbol'>)</span>
+  1: 
+  2: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+  3: <span class='def-CommentContent def-Comment def-Syntax'># Policy</span>
+  4: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+  5: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_VERSION</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>VERSION_GREATER</span> 3.15<span class='def-Symbol'>)</span>
+  6:   <span class='def-CommentContent def-Comment def-Syntax'># enable CMAKE_MSVC_RUNTIME_LIBRARY</span>
+  7:   <span class='def-Symbol'>cmake_policy(</span><span class='cmake-cmake_parameters def-Parameter'>SET</span> CMP0091 <span class='cmake-cmake_parameters def-Parameter'>NEW</span><span class='def-Symbol'>)</span>
+  8:   <span class='def-CommentContent def-Comment def-Syntax'># enable &lt;LIB>_ROOT</span>
+  9:   <span class='def-Symbol'>cmake_policy(</span><span class='cmake-cmake_parameters def-Parameter'>SET</span> CMP0074 <span class='cmake-cmake_parameters def-Parameter'>NEW</span><span class='def-Symbol'>)</span>
+ 10: <span class='def-Symbol'>endif()</span>
+ 11: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 12: <span class='def-CommentContent def-Comment def-Syntax'># Extract version</span>
+ 13: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 14: <span class='def-Symbol'>include(</span>cmake/colorer_extract_version.cmake<span class='def-Symbol'>)</span>
+ 15: colorer_extract_version<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+ 16: 
+ 17: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 18: <span class='def-CommentContent def-Comment def-Syntax'># main project</span>
+ 19: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 20: <span class='def-Symbol'>project(</span>colorer <span class='cmake-cmake_parameters def-Parameter'>VERSION</span> <span class='def-Symbol'>${</span><span class='def-String'>COLORER_VERSION</span><span class='def-Symbol'>}</span> <span class='cmake-cmake_parameters def-Parameter'>LANGUAGES</span> <span class='cmake-cmake_parameters def-Parameter'>CXX</span><span class='def-Symbol'>)</span>
+ 21: <span class='def-Symbol'>message(</span><span class='cmake-cmake_parameters def-Parameter'>STATUS</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Build Colorer library: </span><span class='def-Symbol'>${</span><span class='def-String'>COLORER_VERSION</span><span class='def-Symbol'>}</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+ 22: 
+ 23: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 24: <span class='def-CommentContent def-Comment def-Syntax'># Set default build type</span>
+ 25: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 26: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='cmake-cmake_operators def-Operator def-Symbol'>NOT</span> <span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_BUILD_TYPE</span><span class='def-Symbol'>)</span>
+ 27:   <span class='def-Symbol'>set(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_BUILD_TYPE</span> Release <span class='cmake-cmake_parameters def-Parameter'>CACHE</span> STRING <span class='def-StringEdge def-String'>"</span><span class='def-String'>Build type, one of: Release, Debug</span><span class='def-StringEdge def-String'>"</span> <span class='cmake-cmake_parameters def-Parameter'>FORCE</span><span class='def-Symbol'>)</span>
+ 28: <span class='def-Symbol'>endif()</span>
+ 29: <span class='def-Symbol'>set(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CONFIGURATION_TYPES</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_BUILD_TYPE</span><span class='def-Symbol'>}</span><span class='def-StringEdge def-String'>"</span> <span class='cmake-cmake_parameters def-Parameter'>CACHE</span> STRING <span class='def-StringEdge def-String'>"</span><span class='def-StringEdge def-String'>"</span> <span class='cmake-cmake_parameters def-Parameter'>FORCE</span><span class='def-Symbol'>)</span>
+ 30: <span class='def-Symbol'>message(</span><span class='cmake-cmake_parameters def-Parameter'>STATUS</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Build type: </span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_BUILD_TYPE</span><span class='def-Symbol'>}</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+ 31: 
+ 32: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 33: <span class='def-CommentContent def-Comment def-Syntax'># global library settings</span>
+ 34: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 35: <span class='def-CommentContent def-Comment def-Syntax'># build options</span>
+ 36: <span class='def-Symbol'>option(</span>COLORER_USE_VCPKG <span class='def-StringEdge def-String'>"</span><span class='def-String'>Use dependencies installed via vcpkg</span><span class='def-StringEdge def-String'>"</span> ON<span class='def-Symbol'>)</span>
+ 37: <span class='def-Symbol'>option(</span>COLORER_BUILD_TOOLS <span class='def-StringEdge def-String'>"</span><span class='def-String'>Build colorer tools</span><span class='def-StringEdge def-String'>"</span> ON<span class='def-Symbol'>)</span>
+ 38: <span class='def-Symbol'>option(</span>COLORER_BUILD_TEST <span class='def-StringEdge def-String'>"</span><span class='def-String'>Build tests</span><span class='def-StringEdge def-String'>"</span> OFF<span class='def-Symbol'>)</span>
+ 39: <span class='def-Symbol'>option(</span>COLORER_BUILD_INSTALL <span class='def-StringEdge def-String'>"</span><span class='def-String'>Make targets for install</span><span class='def-StringEdge def-String'>"</span> ON<span class='def-Symbol'>)</span>
+ 40: <span class='def-Symbol'>set(</span>COLORER_BUILD_ARCH x64 <span class='cmake-cmake_parameters def-Parameter'>CACHE</span> STRING <span class='def-StringEdge def-String'>"</span><span class='def-String'>Build architecture</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+ 41: <span class='def-Symbol'>option(</span>COLORER_BUILD_HARD_WARNINGS <span class='def-StringEdge def-String'>"</span><span class='def-String'>Compiler warnings as error on Release build</span><span class='def-StringEdge def-String'>"</span> ON<span class='def-Symbol'>)</span>
+ 42: <span class='def-Symbol'>option(</span>COLORER_BUILD_OLD_COMPILERS <span class='def-StringEdge def-String'>"</span><span class='def-String'>Use own implementation for standard library</span><span class='def-StringEdge def-String'>"</span> OFF<span class='def-Symbol'>)</span>
+ 43: 
+ 44: <span class='def-CommentContent def-Comment def-Syntax'># library features</span>
+ 45: <span class='def-Symbol'>option(</span>COLORER_USE_ZIPINPUTSOURCE <span class='def-StringEdge def-String'>"</span><span class='def-String'>Use zip inputsource for schemes</span><span class='def-StringEdge def-String'>"</span> ON<span class='def-Symbol'>)</span>
+ 46: <span class='def-Symbol'>option(</span>COLORER_USE_DEEPTRACE <span class='def-StringEdge def-String'>"</span><span class='def-String'>Use trace logging</span><span class='def-StringEdge def-String'>"</span> OFF<span class='def-Symbol'>)</span>
+ 47: <span class='def-Symbol'>option(</span>COLORER_USE_ICU_STRINGS <span class='def-StringEdge def-String'>"</span><span class='def-String'>Use ICU library for strings</span><span class='def-StringEdge def-String'>"</span> ON<span class='def-Symbol'>)</span>
+ 48: 
+ 49: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 50: <span class='def-CommentContent def-Comment def-Syntax'># global compilation settings</span>
+ 51: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 52: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>MSVC</span><span class='def-Symbol'>)</span>
+ 53:   <span class='def-CommentContent def-Comment def-Syntax'># set global Visual C++ runtime</span>
+ 54:   <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_BUILD_TYPE</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>MATCHES</span> Debug<span class='def-Symbol'>)</span>
+ 55:     <span class='def-Symbol'>set(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_MSVC_RUNTIME_LIBRARY</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>MultiThreadedDebug</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+ 56:   <span class='def-Symbol'>else(</span><span class='def-Symbol'>)</span>
+ 57:     <span class='def-Symbol'>set(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_MSVC_RUNTIME_LIBRARY</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>MultiThreaded</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+ 58:   <span class='def-Symbol'>endif()</span>
+ 59: <span class='def-Symbol'>endif()</span>
+ 60: 
+ 61: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 62: <span class='def-CommentContent def-Comment def-Syntax'># load modules</span>
+ 63: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 64: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='cmake-cmake_operators def-Operator def-Symbol'>NOT</span> COLORER_USE_VCPKG<span class='def-Symbol'>)</span>
+ 65:   <span class='def-CommentContent def-Comment def-Syntax'># this line need for find_package</span>
+ 66:   <span class='def-Symbol'>list(</span><span class='cmake-cmake_parameters def-Parameter'>APPEND</span> <span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_MODULE_PATH</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_LIST_DIR</span><span class='def-Symbol'>}</span><span class='def-String'>/cmake</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+ 67: <span class='def-Symbol'>endif()</span>
+ 68: 
+ 69: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 70: <span class='def-CommentContent def-Comment def-Syntax'># find dependencies</span>
+ 71: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 72: <span class='def-CommentContent def-Comment def-Syntax'># core library</span>
+ 73: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_USE_ICU_STRINGS<span class='def-Symbol'>)</span>
+ 74:   <span class='def-Symbol'>find_package(</span>ICU <span class='cmake-cmake_parameters def-Parameter'>COMPONENTS</span> uc data <span class='cmake-cmake_parameters def-Parameter'>REQUIRED</span><span class='def-Symbol'>)</span>
+ 75: <span class='def-Symbol'>endif()</span>
+ 76: 
+ 77: <span class='def-Symbol'>find_package(</span>LibXml2 <span class='cmake-cmake_parameters def-Parameter'>REQUIRED</span><span class='def-Symbol'>)</span>
+ 78: 
+ 79: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_USE_ZIPINPUTSOURCE<span class='def-Symbol'>)</span>
+ 80:   <span class='def-Symbol'>find_package(</span>ZLIB <span class='cmake-cmake_parameters def-Parameter'>REQUIRED</span><span class='def-Symbol'>)</span>
+ 81:   <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_USE_VCPKG<span class='def-Symbol'>)</span>
+ 82:     <span class='def-Symbol'>find_package(</span>unofficial-minizip <span class='cmake-cmake_parameters def-Parameter'>REQUIRED</span><span class='def-Symbol'>)</span>
+ 83:   <span class='def-Symbol'>else(</span><span class='def-Symbol'>)</span>
+ 84:     <span class='def-Symbol'>find_package(</span>minizip <span class='cmake-cmake_parameters def-Parameter'>REQUIRED</span><span class='def-Symbol'>)</span>
+ 85:   <span class='def-Symbol'>endif()</span>
+ 86: <span class='def-Symbol'>endif()</span>
+ 87: 
+ 88: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 89: <span class='def-CommentContent def-Comment def-Syntax'># colorer library</span>
+ 90: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 91: <span class='def-Symbol'>add_subdirectory(</span>./src<span class='def-Symbol'>)</span>
+ 92: 
+ 93: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 94: <span class='def-CommentContent def-Comment def-Syntax'># colorer tool</span>
+ 95: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+ 96: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_BUILD_TOOLS<span class='def-Symbol'>)</span>
+ 97:   <span class='def-Symbol'>add_subdirectory(</span>./tools/colorer<span class='def-Symbol'>)</span>
+ 98: <span class='def-Symbol'>endif()</span>
+ 99: 
+100: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+101: <span class='def-CommentContent def-Comment def-Syntax'># Tests</span>
+102: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+103: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_BUILD_TEST<span class='def-Symbol'>)</span>
+104:   <span class='def-Symbol'>add_subdirectory(</span>./tests/unit<span class='def-Symbol'>)</span>
+105:   <span class='def-Symbol'>add_subdirectory(</span>./tests<span class='def-Symbol'>)</span>
+106: <span class='def-Symbol'>endif()</span>
+107: 
+108: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+109: <span class='def-CommentContent def-Comment def-Syntax'># install</span>
+110: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+111: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_BUILD_INSTALL<span class='def-Symbol'>)</span>
+112:   <span class='def-Symbol'>include(</span>GNUInstallDirs<span class='def-Symbol'>)</span>
+113: 
+114:   <span class='def-Symbol'>install(</span><span class='cmake-cmake_parameters def-Parameter'>TARGETS</span> colorer_lib
+115:       <span class='cmake-cmake_parameters def-Parameter'>EXPORT</span> colorerTargets
+116:       <span class='cmake-cmake_parameters def-Parameter'>LIBRARY</span> <span class='cmake-cmake_parameters def-Parameter'>DESTINATION</span> <span class='def-Symbol'>${</span><span class='def-String'>CMAKE_INSTALL_LIBDIR</span><span class='def-Symbol'>}</span>
+117:       <span class='cmake-cmake_parameters def-Parameter'>ARCHIVE</span> <span class='cmake-cmake_parameters def-Parameter'>DESTINATION</span> <span class='def-Symbol'>${</span><span class='def-String'>CMAKE_INSTALL_LIBDIR</span><span class='def-Symbol'>}</span>
+118:       <span class='cmake-cmake_parameters def-Parameter'>RUNTIME</span> <span class='cmake-cmake_parameters def-Parameter'>DESTINATION</span> <span class='def-Symbol'>${</span><span class='def-String'>CMAKE_INSTALL_BINDIR</span><span class='def-Symbol'>}</span>
+119:   <span class='def-Symbol'>)</span>
+120: 
+121:   <span class='def-Symbol'>install(</span><span class='cmake-cmake_parameters def-Parameter'>DIRECTORY</span> <span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_LIST_DIR</span><span class='def-Symbol'>}</span>/src/colorer
+122:       <span class='cmake-cmake_parameters def-Parameter'>DESTINATION</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='def-String'>CMAKE_INSTALL_INCLUDEDIR</span><span class='def-Symbol'>}</span><span class='def-StringEdge def-String'>"</span>
+123:       <span class='cmake-cmake_parameters def-Parameter'>FILES_MATCHING</span> <span class='cmake-cmake_parameters def-Parameter'>PATTERN</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>*.h</span><span class='def-StringEdge def-String'>"</span>
+124:   <span class='def-Symbol'>)</span>
+125:   <span class='def-Symbol'>install(</span><span class='cmake-cmake_parameters def-Parameter'>FILES</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_BINARY_DIR</span><span class='def-Symbol'>}</span><span class='def-String'>/src/colorer/common/Features.h</span><span class='def-StringEdge def-String'>"</span>
+126:       <span class='cmake-cmake_parameters def-Parameter'>DESTINATION</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='def-String'>CMAKE_INSTALL_INCLUDEDIR</span><span class='def-Symbol'>}</span><span class='def-String'>/colorer/common</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+127: 
+128:   <span class='def-Symbol'>install(</span><span class='cmake-cmake_parameters def-Parameter'>EXPORT</span> colorerTargets
+129:       <span class='cmake-cmake_parameters def-Parameter'>FILE</span> colorerTargets.cmake
+130:       <span class='cmake-cmake_parameters def-Parameter'>DESTINATION</span> lib/cmake/colorer
+131:       <span class='cmake-cmake_parameters def-Parameter'>NAMESPACE</span> colorer::
+132:   <span class='def-Symbol'>)</span>
+133: 
+134:   <span class='def-Symbol'>configure_file(</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_LIST_DIR</span><span class='def-Symbol'>}</span><span class='def-String'>/cmake/colorerConfig.cmake.in</span><span class='def-StringEdge def-String'>"</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_BINARY_DIR</span><span class='def-Symbol'>}</span><span class='def-String'>/cmake/colorerConfig.cmake</span><span class='def-StringEdge def-String'>"</span> <span class='cmake-cmake_parameters def-Parameter'>@ONLY</span><span class='def-Symbol'>)</span>
+135: 
+136:   <span class='def-Symbol'>include(</span>CMakePackageConfigHelpers<span class='def-Symbol'>)</span>
+137:   write_basic_package_version_file<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_BINARY_DIR</span><span class='def-Symbol'>}</span><span class='def-String'>/colorerConfigVersion.cmake</span><span class='def-StringEdge def-String'>"</span> COMPATIBILITY SameMajorVersion<span class='def-Symbol'>)</span>
+138:   <span class='def-Symbol'>install(</span><span class='cmake-cmake_parameters def-Parameter'>FILES</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_BINARY_DIR</span><span class='def-Symbol'>}</span><span class='def-String'>/cmake/colorerConfig.cmake</span><span class='def-StringEdge def-String'>"</span>
+139:       <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_BINARY_DIR</span><span class='def-Symbol'>}</span><span class='def-String'>/colorerConfigVersion.cmake</span><span class='def-StringEdge def-String'>"</span>
+140:       <span class='cmake-cmake_parameters def-Parameter'>DESTINATION</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='def-String'>CMAKE_INSTALL_LIBDIR</span><span class='def-Symbol'>}</span><span class='def-String'>/cmake/colorer</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+141: 
+142:   <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_BUILD_TOOLS<span class='def-Symbol'>)</span>
+143:     <span class='def-Symbol'>install(</span><span class='cmake-cmake_parameters def-Parameter'>TARGETS</span> consoletools <span class='cmake-cmake_parameters def-Parameter'>RUNTIME</span> <span class='cmake-cmake_parameters def-Parameter'>DESTINATION</span> <span class='def-Symbol'>${</span><span class='def-String'>CMAKE_INSTALL_BINDIR</span><span class='def-Symbol'>}</span><span class='def-Symbol'>)</span>
+144:   <span class='def-Symbol'>endif()</span>
+145: 
+146:   <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+147:   <span class='def-CommentContent def-Comment def-Syntax'># cpack</span>
+148:   <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+149:   <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='def-String'>COLORER_BUILD_ARCH</span><span class='def-Symbol'>}</span><span class='def-StringEdge def-String'>"</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>STREQUAL</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>x64</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+150:     <span class='def-Symbol'>set(</span>PACKAGE_FILE_NAME <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>PROJECT_NAME</span><span class='def-Symbol'>}</span><span class='def-String'>.v</span><span class='def-Symbol'>${</span><span class='def-String'>COLORER_VERSION</span><span class='def-Symbol'>}</span><span class='def-String'>.x64</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+151:   <span class='def-Symbol'>else(</span><span class='def-Symbol'>)</span>
+152:     <span class='def-Symbol'>set(</span>PACKAGE_FILE_NAME <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>PROJECT_NAME</span><span class='def-Symbol'>}</span><span class='def-String'>.v</span><span class='def-Symbol'>${</span><span class='def-String'>COLORER_VERSION</span><span class='def-Symbol'>}</span><span class='def-String'>.x86</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+153:   <span class='def-Symbol'>endif()</span>
+154:   <span class='def-Symbol'>set(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CPACK_GENERATOR</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>ZIP</span><span class='def-StringEdge def-String'>"</span> <span class='cmake-cmake_parameters def-Parameter'>CACHE</span> STRING <span class='def-StringEdge def-String'>"</span><span class='def-String'>Generators to support. semi-colon delimited list</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+155:   <span class='def-Symbol'>set(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CPACK_INCLUDE_TOPLEVEL_DIRECTORY</span> 0<span class='def-Symbol'>)</span>
+156:   <span class='def-Symbol'>set(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CPACK_PACKAGE_FILE_NAME</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='def-String'>PACKAGE_FILE_NAME</span><span class='def-Symbol'>}</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+157: 
+158:   <span class='def-Symbol'>include(</span>CPack<span class='def-Symbol'>)</span>
+159: <span class='def-Symbol'>endif()</span>

@@ -1,0 +1,283 @@
+﻿  0: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+  1: <span class='def-CommentContent def-Comment def-Syntax'># colorer source</span>
+  2: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+  3: <span class='def-Symbol'>set(</span>SRC_COLORER
+  4:     colorer/Common.h
+  5:     colorer/Exception.h
+  6:     colorer/FileType.h
+  7:     colorer/HrcLibrary.h
+  8:     colorer/LineSource.h
+  9:     colorer/ParserFactory.h
+ 10:     colorer/Region.h
+ 11:     colorer/RegionHandler.h
+ 12:     colorer/Scheme.h
+ 13:     colorer/TextParser.h
+ 14:     colorer/base/BaseNames.h
+ 15:     colorer/base/XmlTagDefs.h
+ 16:     colorer/common/Exception.cpp
+ 17:     colorer/common/Logger.cpp
+ 18:     colorer/common/Logger.h
+ 19:     colorer/cregexp/cregexp.cpp
+ 20:     colorer/cregexp/cregexp.h
+ 21:     colorer/editor/BaseEditor.cpp
+ 22:     colorer/editor/BaseEditor.h
+ 23:     colorer/editor/EditorListener.h
+ 24:     colorer/editor/OutlineItem.h
+ 25:     colorer/editor/Outliner.cpp
+ 26:     colorer/editor/Outliner.h
+ 27:     colorer/editor/PairMatch.h
+ 28:     colorer/handlers/LineRegion.cpp
+ 29:     colorer/handlers/LineRegion.h
+ 30:     colorer/handlers/LineRegionsCompactSupport.cpp
+ 31:     colorer/handlers/LineRegionsCompactSupport.h
+ 32:     colorer/handlers/LineRegionsSupport.cpp
+ 33:     colorer/handlers/LineRegionsSupport.h
+ 34:     colorer/handlers/RegionDefine.h
+ 35:     colorer/handlers/RegionMapper.cpp
+ 36:     colorer/handlers/RegionMapper.h
+ 37:     colorer/handlers/StyledHRDMapper.cpp
+ 38:     colorer/handlers/StyledHRDMapper.h
+ 39:     colorer/handlers/StyledRegion.cpp
+ 40:     colorer/handlers/StyledRegion.h
+ 41:     colorer/handlers/TextHRDMapper.cpp
+ 42:     colorer/handlers/TextHRDMapper.h
+ 43:     colorer/handlers/TextRegion.cpp
+ 44:     colorer/handlers/TextRegion.h
+ 45:     colorer/io/FileInputSource.cpp
+ 46:     colorer/io/FileInputSource.h
+ 47:     colorer/io/FileWriter.cpp
+ 48:     colorer/io/FileWriter.h
+ 49:     colorer/io/InputSource.cpp
+ 50:     colorer/io/InputSource.h
+ 51:     colorer/io/StreamWriter.cpp
+ 52:     colorer/io/StreamWriter.h
+ 53:     colorer/io/Writer.cpp
+ 54:     colorer/io/Writer.h
+ 55:     colorer/parsers/CatalogParser.cpp
+ 56:     colorer/parsers/CatalogParser.h
+ 57:     colorer/parsers/FileType.cpp
+ 58:     colorer/parsers/FileTypeChooser.cpp
+ 59:     colorer/parsers/FileTypeChooser.h
+ 60:     colorer/parsers/FileTypeImpl.cpp
+ 61:     colorer/parsers/FileTypeImpl.h
+ 62:     colorer/parsers/HrcLibrary.cpp
+ 63:     colorer/parsers/HrcLibraryImpl.cpp
+ 64:     colorer/parsers/HrcLibraryImpl.h
+ 65:     colorer/parsers/HrdNode.h
+ 66:     colorer/parsers/KeywordList.cpp
+ 67:     colorer/parsers/KeywordList.h
+ 68:     colorer/parsers/ParserFactory.cpp
+ 69:     colorer/parsers/ParserFactoryImpl.cpp
+ 70:     colorer/parsers/ParserFactoryImpl.h
+ 71:     colorer/parsers/SchemeImpl.h
+ 72:     colorer/parsers/SchemeNode.cpp
+ 73:     colorer/parsers/SchemeNode.h
+ 74:     colorer/parsers/TextParser.cpp
+ 75:     colorer/parsers/TextParserHelpers.cpp
+ 76:     colorer/parsers/TextParserHelpers.h
+ 77:     colorer/parsers/TextParserImpl.cpp
+ 78:     colorer/parsers/TextParserImpl.h
+ 79:     colorer/parsers/VirtualEntry.h
+ 80:     colorer/utils/Environment.cpp
+ 81:     colorer/utils/Environment.h
+ 82:     colorer/utils/FileSystems.h
+ 83:     colorer/version.h
+ 84:     colorer/viewer/ParsedLineWriter.cpp
+ 85:     colorer/viewer/ParsedLineWriter.h
+ 86:     colorer/viewer/TextConsoleViewer.cpp
+ 87:     colorer/viewer/TextConsoleViewer.h
+ 88:     colorer/viewer/TextLinesStore.cpp
+ 89:     colorer/viewer/TextLinesStore.h
+ 90:     colorer/xml/XMLNode.cpp
+ 91:     colorer/xml/XMLNode.h
+ 92:     colorer/xml/XmlInputSource.cpp
+ 93:     colorer/xml/XmlInputSource.h
+ 94:     colorer/xml/XmlReader.cpp
+ 95:     colorer/xml/XmlReader.h
+ 96: <span class='def-Symbol'>)</span>
+ 97: 
+ 98: 
+ 99: <span class='def-Symbol'>set(</span>SRC_COLORER_XML
+100:   colorer/xml/libxml2/LibXmlReader.cpp
+101:   colorer/xml/libxml2/LibXmlReader.h
+102:   colorer/xml/libxml2/LibXmlInputSource.h
+103:   colorer/xml/libxml2/LibXmlInputSource.cpp
+104: <span class='def-Symbol'>)</span>
+105: 
+106: 
+107: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_USE_ZIPINPUTSOURCE<span class='def-Symbol'>)</span>
+108:   <span class='def-Symbol'>set(</span>COLORER_FEATURE_ZIPINPUTSOURCE 1<span class='def-Symbol'>)</span>
+109:   <span class='def-Symbol'>set(</span>SRC_COLORER_ZIP
+110:     colorer/xml/libxml2/SharedXmlInputSource.cpp
+111:     colorer/xml/libxml2/SharedXmlInputSource.h
+112:     colorer/zip/MemoryFile.cpp
+113:     colorer/zip/MemoryFile.h
+114:   <span class='def-Symbol'>)</span>
+115: <span class='def-Symbol'>endif()</span>
+116: 
+117: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_USE_ICU_STRINGS<span class='def-Symbol'>)</span>
+118:   <span class='def-Symbol'>set(</span>SRC_COLORER_STRINGS
+119:       colorer/strings/icu/common_icu.h
+120:       colorer/strings/icu/strings.h
+121:       colorer/strings/icu/Character.cpp
+122:       colorer/strings/icu/Character.h
+123:       colorer/strings/icu/Encodings.cpp
+124:       colorer/strings/icu/Encodings.h
+125:       colorer/strings/icu/UnicodeStringContainer.h
+126:       colorer/strings/icu/UnicodeTools.cpp
+127:       colorer/strings/icu/UnicodeTools.h
+128:       colorer/strings/icu/UStr.cpp
+129:       colorer/strings/icu/UStr.h
+130:   <span class='def-Symbol'>)</span>
+131:   <span class='def-Symbol'>set(</span>COLORER_FEATURE_ICU 1<span class='def-Symbol'>)</span>
+132: 
+133: <span class='def-Symbol'>else(</span><span class='def-Symbol'>)</span>
+134:   <span class='def-Symbol'>set(</span>SRC_COLORER_STRINGS
+135:       colorer/strings/legacy/common_legacy.h
+136:       colorer/strings/legacy/strings.h
+137:       colorer/strings/legacy/BitArray.cpp
+138:       colorer/strings/legacy/BitArray.h
+139:       colorer/strings/legacy/Character.cpp
+140:       colorer/strings/legacy/Character.h
+141:       colorer/strings/legacy/CharacterClass.cpp
+142:       colorer/strings/legacy/CharacterClass.h
+143:       colorer/strings/legacy/CommonString.h
+144:       colorer/strings/legacy/CString.cpp
+145:       colorer/strings/legacy/CString.h
+146:       colorer/strings/legacy/Encodings.cpp
+147:       colorer/strings/legacy/Encodings.h
+148:       colorer/strings/legacy/UnicodeString.cpp
+149:       colorer/strings/legacy/UnicodeString.h
+150:       colorer/strings/legacy/UnicodeStringContainer.h
+151:       colorer/strings/legacy/UnicodeTools.cpp
+152:       colorer/strings/legacy/UnicodeTools.h
+153:       colorer/strings/legacy/UStr.cpp
+154:       colorer/strings/legacy/UStr.h
+155:       colorer/strings/legacy/x_charcategory.h
+156:       colorer/strings/legacy/x_charcategory2.h
+157:       colorer/strings/legacy/x_charcategory_names.h
+158:       colorer/strings/legacy/x_defines.h
+159:       colorer/strings/legacy/x_encodings.h
+160:       colorer/strings/legacy/x_tables.h
+161:       colorer/strings/legacy/StringExceptions.h
+162:   <span class='def-Symbol'>)</span>
+163: <span class='def-Symbol'>endif()</span>
+164: 
+165: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_BUILD_OLD_COMPILERS<span class='def-Symbol'>)</span>
+166:   <span class='def-Symbol'>set(</span>SRC_COLORER_PLATFORM colorer/platform/filesystem.hpp<span class='def-Symbol'>)</span>
+167:   <span class='def-Symbol'>set(</span>COLORER_FEATURE_OLD_COMPILERS 1<span class='def-Symbol'>)</span>
+168: <span class='def-Symbol'>endif()</span>
+169: 
+170: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+171: <span class='def-CommentContent def-Comment def-Syntax'># Generate headers</span>
+172: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+173: <span class='def-Symbol'>configure_file(</span>
+174:     <span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_SOURCE_DIR</span><span class='def-Symbol'>}</span>/colorer/common/Features.h.in
+175:     <span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_BINARY_DIR</span><span class='def-Symbol'>}</span>/colorer/common/Features.h
+176: <span class='def-Symbol'>)</span>
+177: 
+178: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+179: <span class='def-CommentContent def-Comment def-Syntax'># common flags</span>
+180: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+181: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CXX_COMPILER_ID</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>MATCHES</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>GNU</span><span class='def-StringEdge def-String'>"</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>OR</span> <span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CXX_COMPILER_ID</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>MATCHES</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>Clang</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+182:   <span class='def-CommentContent def-Comment def-Syntax'># default for gcc</span>
+183:   <span class='def-CommentContent def-Comment def-Syntax'># CMAKE_CXX_FLAGS=</span>
+184:   <span class='def-CommentContent def-Comment def-Syntax'># CMAKE_CXX_FLAGS_DEBUG= -g</span>
+185:   <span class='def-CommentContent def-Comment def-Syntax'># CMAKE_CXX_FLAGS_RELEASE= -O3 -DNDEBUG</span>
+186: 
+187:   <span class='def-CommentContent def-Comment def-Syntax'># set only new flags</span>
+188:   <span class='def-Symbol'>set(</span>FLAGS_CXX_DEFAULT -fpermissive -Wall -Wextra -Wpedantic -Wsign-promo -Wnon-virtual-dtor<span class='def-Symbol'>)</span>
+189: 
+190:   <span class='def-Symbol'>if</span> <span class='def-Symbol'>(</span>COLORER_BUILD_HARD_WARNINGS<span class='def-Symbol'>)</span>
+191:     <span class='def-Symbol'>set(</span>FLAGS_CXX_RELEASE <span class='def-Symbol'>${</span><span class='def-String'>FLAGS_CXX_RELEASE</span><span class='def-Symbol'>}</span> -Werror<span class='def-Symbol'>)</span>
+192:   <span class='def-Symbol'>endif()</span>
+193: 
+194:   <span class='def-Symbol'>set(</span>FLAGS_CXX_DEBUG<span class='def-Symbol'>)</span>
+195: <span class='def-Symbol'>elseif(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CXX_COMPILER_ID</span> MATCHES <span class='def-StringEdge def-String'>"</span><span class='cmake-cmake_variables def-VarStrong def-Var'>MSVC</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+196: 
+197:   <span class='def-CommentContent def-Comment def-Syntax'># default for msvc</span>
+198:   <span class='def-CommentContent def-Comment def-Syntax'># CMAKE_CXX_FLAGS= /DWIN32 /D_WINDOWS /GR /EHsc</span>
+199:   <span class='def-CommentContent def-Comment def-Syntax'># CMAKE_CXX_FLAGS_DEBUG= /MDd /Zi /Ob0 /Od /RTC1</span>
+200:   <span class='def-CommentContent def-Comment def-Syntax'># CMAKE_CXX_FLAGS_RELEASE= /MD /O2 /Ob2 /DNDEBUG</span>
+201: 
+202:   <span class='def-CommentContent def-Comment def-Syntax'># remove /W3 flag from CMAKE_CXX_FLAGS</span>
+203:   <span class='def-Symbol'>string(</span><span class='cmake-cmake_parameters def-Parameter'>REGEX</span> <span class='cmake-cmake_parameters def-Parameter'>REPLACE</span> <span class='def-StringEdge def-String'>"</span><span class='def-String'>/W[3|4]</span><span class='def-StringEdge def-String'>"</span> <span class='def-StringEdge def-String'>"</span><span class='def-StringEdge def-String'>"</span> <span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CXX_FLAGS</span> <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CXX_FLAGS</span><span class='def-Symbol'>}</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+204: 
+205:   <span class='def-Symbol'>set(</span>FLAGS_CXX_DEFAULT<span class='def-Symbol'>)</span>
+206:   <span class='def-Symbol'>set(</span>FLAGS_CXX_RELEASE /W3<span class='def-Symbol'>)</span>
+207: 
+208:   <span class='def-Symbol'>if</span> <span class='def-Symbol'>(</span>COLORER_BUILD_HARD_WARNINGS<span class='def-Symbol'>)</span>
+209:     <span class='def-Symbol'>set(</span>FLAGS_CXX_RELEASE <span class='def-Symbol'>${</span><span class='def-String'>FLAGS_CXX_RELEASE</span><span class='def-Symbol'>}</span> /WX<span class='def-Symbol'>)</span>
+210:   <span class='def-Symbol'>endif()</span>
+211: 
+212:   <span class='def-Symbol'>set(</span>FLAGS_CXX_DEBUG /W4<span class='def-Symbol'>)</span>
+213: <span class='def-Symbol'>endif()</span>
+214: 
+215: <span class='def-Symbol'>set(</span>MAIN_FLAGS_CXX_DEBUG <span class='def-Symbol'>${</span><span class='def-String'>FLAGS_CXX_DEBUG</span><span class='def-Symbol'>}</span> <span class='def-Symbol'>${</span><span class='def-String'>FLAGS_CXX_DEFAULT</span><span class='def-Symbol'>}</span><span class='def-Symbol'>)</span>
+216: <span class='def-Symbol'>set(</span>MAIN_FLAGS_CXX_RELEASE <span class='def-Symbol'>${</span><span class='def-String'>FLAGS_CXX_RELEASE</span><span class='def-Symbol'>}</span> <span class='def-Symbol'>${</span><span class='def-String'>FLAGS_CXX_DEFAULT</span><span class='def-Symbol'>}</span><span class='def-Symbol'>)</span>
+217: 
+218: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+219: <span class='def-CommentContent def-Comment def-Syntax'># build</span>
+220: <span class='def-CommentContent def-Comment def-Syntax'>#====================================================</span>
+221: <span class='def-Symbol'>add_library(</span>colorer_lib STATIC <span class='def-Symbol'>${</span><span class='def-String'>SRC_COLORER</span><span class='def-Symbol'>}</span> <span class='def-Symbol'>${</span><span class='def-String'>SRC_COLORER_STRINGS</span><span class='def-Symbol'>}</span> <span class='def-Symbol'>${</span><span class='def-String'>SRC_COLORER_XML</span><span class='def-Symbol'>}</span> <span class='def-Symbol'>${</span><span class='def-String'>SRC_COLORER_ZIP</span><span class='def-Symbol'>}</span> <span class='def-Symbol'>${</span><span class='def-String'>SRC_COLORER_PLATFORM</span><span class='def-Symbol'>}</span><span class='def-Symbol'>)</span>
+222: <span class='def-Symbol'>add_library(</span>colorer::colorer <span class='cmake-cmake_parameters def-Parameter'>ALIAS</span> colorer_lib<span class='def-Symbol'>)</span>
+223: <span class='def-Symbol'>target_include_directories(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PUBLIC</span>
+224:     <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>$&lt;</span><span class='def-String'>BUILD_INTERFACE</span><span class='def-Symbol'>:</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_SOURCE_DIR</span><span class='def-Symbol'>}</span><span class='def-Symbol'>></span><span class='def-StringEdge def-String'>"</span>
+225:     <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>$&lt;</span><span class='def-String'>BUILD_INTERFACE</span><span class='def-Symbol'>:</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CURRENT_BINARY_DIR</span><span class='def-Symbol'>}</span><span class='def-Symbol'>></span><span class='def-StringEdge def-String'>"</span>
+226:     <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>$&lt;</span><span class='def-String'>INSTALL_INTERFACE</span><span class='def-Symbol'>:</span><span class='def-Symbol'>${</span><span class='def-String'>CMAKE_INSTALL_INCLUDEDIR</span><span class='def-Symbol'>}</span><span class='def-Symbol'>></span><span class='def-StringEdge def-String'>"</span>
+227: <span class='def-Symbol'>)</span>
+228: 
+229: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_BUILD_OLD_COMPILERS<span class='def-Symbol'>)</span>
+230:   <span class='def-Symbol'>set_target_properties(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PROPERTIES</span>
+231:           CXX_STANDARD 17
+232:           CXX_STANDARD_REQUIRED YES
+233:           CXX_EXTENSIONS YES
+234:   <span class='def-Symbol'>)</span>
+235: <span class='def-Symbol'>else(</span><span class='def-Symbol'>)</span>
+236:   <span class='def-Symbol'>set_target_properties(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PROPERTIES</span>
+237:           CXX_STANDARD 17
+238:           CXX_STANDARD_REQUIRED YES
+239:           CXX_EXTENSIONS NO
+240:   <span class='def-Symbol'>)</span>
+241: <span class='def-Symbol'>endif()</span>
+242: 
+243: <span class='def-Symbol'>target_link_libraries(</span>colorer_lib
+244:         <span class='cmake-cmake_parameters def-Parameter'>PUBLIC</span> LibXml2::LibXml2
+245: <span class='def-Symbol'>)</span>
+246: 
+247: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_USE_ICU_STRINGS<span class='def-Symbol'>)</span>
+248:   <span class='def-Symbol'>target_link_libraries(</span>colorer_lib
+249:       <span class='cmake-cmake_parameters def-Parameter'>PUBLIC</span> ICU::uc ICU::data
+250:   <span class='def-Symbol'>)</span>
+251:   <span class='def-Symbol'>if</span> <span class='def-Symbol'>(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>APPLE</span><span class='def-Symbol'>)</span>
+252:     <span class='def-Symbol'>target_include_directories(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PUBLIC</span>
+253:          <span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>$&lt;</span><span class='def-String'>BUILD_INTERFACE</span><span class='def-Symbol'>:</span><span class='def-String'>/opt/homebrew/include</span><span class='def-Symbol'>></span><span class='def-StringEdge def-String'>"</span>
+254:     <span class='def-Symbol'>)</span>
+255:   <span class='def-Symbol'>endif ()</span>
+256: <span class='def-Symbol'>endif()</span>
+257: 
+258: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_USE_ZIPINPUTSOURCE<span class='def-Symbol'>)</span>
+259:   <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span>COLORER_USE_VCPKG<span class='def-Symbol'>)</span>
+260:     <span class='def-Symbol'>target_link_libraries(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PUBLIC</span> unofficial::minizip::minizip<span class='def-Symbol'>)</span>
+261:   <span class='def-Symbol'>else(</span><span class='def-Symbol'>)</span>
+262:     <span class='def-Symbol'>target_link_libraries(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PUBLIC</span> minizip::minizip<span class='def-Symbol'>)</span>
+263:   <span class='def-Symbol'>endif()</span>
+264: <span class='def-Symbol'>endif()</span>
+265: 
+266: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_COMPILER_IS_GNUCXX</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>AND</span> <span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_CXX_COMPILER_VERSION</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>VERSION_LESS</span> 9<span class='def-Symbol'>)</span>
+267:   <span class='def-Symbol'>target_link_libraries(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PUBLIC</span> stdc++fs<span class='def-Symbol'>)</span>
+268: <span class='def-Symbol'>endif()</span>
+269: 
+270: <span class='def-Symbol'>if</span><span class='def-Symbol'>(</span><span class='def-Symbol'>${</span><span class='cmake-cmake_variables def-VarStrong def-Var'>CMAKE_BUILD_TYPE</span><span class='def-Symbol'>}</span> <span class='cmake-cmake_operators def-Operator def-Symbol'>MATCHES</span> Debug<span class='def-Symbol'>)</span>
+271:   <span class='def-Symbol'>target_compile_options(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PRIVATE</span> <span class='def-Symbol'>$&lt;</span><span class='def-Symbol'>$&lt;</span><span class='def-String'>COMPILE_LANGUAGE</span><span class='def-Symbol'>:</span><span class='def-String'>CXX</span><span class='def-Symbol'>></span><span class='def-String'>:</span><span class='def-Symbol'>${</span><span class='def-String'>MAIN_FLAGS_CXX_DEBUG</span><span class='def-Symbol'>}</span><span class='def-Symbol'>></span><span class='def-Symbol'>)</span>
+272: <span class='def-Symbol'>else(</span><span class='def-Symbol'>)</span>
+273:   <span class='def-Symbol'>target_compile_options(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PRIVATE</span> <span class='def-Symbol'>$&lt;</span><span class='def-Symbol'>$&lt;</span><span class='def-String'>COMPILE_LANGUAGE</span><span class='def-Symbol'>:</span><span class='def-String'>CXX</span><span class='def-Symbol'>></span><span class='def-String'>:</span><span class='def-Symbol'>${</span><span class='def-String'>MAIN_FLAGS_CXX_RELEASE</span><span class='def-Symbol'>}</span><span class='def-Symbol'>></span><span class='def-Symbol'>)</span>
+274: <span class='def-Symbol'>endif()</span>
+275: 
+276: <span class='def-Symbol'>set_target_properties(</span>colorer_lib <span class='cmake-cmake_parameters def-Parameter'>PROPERTIES</span>
+277:     OUTPUT_NAME <span class='def-StringEdge def-String'>"</span><span class='def-String'>colorer</span><span class='def-StringEdge def-String'>"</span>
+278:     VERSION <span class='def-Symbol'>${</span><span class='def-String'>COLORER_VERSION</span><span class='def-Symbol'>}</span>
+279:     SOVERSION <span class='def-Symbol'>${</span><span class='def-String'>COLORER_VERSION_MAJOR</span><span class='def-Symbol'>}</span>
+280:     DEBUG_POSTFIX <span class='def-StringEdge def-String'>"</span><span class='def-String'>d</span><span class='def-StringEdge def-String'>"</span>
+281: <span class='def-Symbol'>)</span>
+282: 
