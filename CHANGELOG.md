@@ -30,6 +30,8 @@
 - [dockerfile] fix unhighlighted areas after updating colorer from 1.3.3 to 1.4.0
 - [blue.hrd] fix colors for cross
 - [json] fix comments in json
+- [shell-posix] recognize line continuation after "while; do...done" / "for; do...done" blocks
+- [shell-bash] recornize bash-specific syntax in for loops, recornize an append operator
 
 ### Changed
 - Simplified catalog.xml.
@@ -86,7 +88,7 @@
 - [dockerfile] add a new schema for Dockerfile
 - [jenkinsfile] add a new schema for Jenkins configuration (Jenkinsfile)
 - [markdown] add Obsidian Templater blocks
-- [pascal] add 'object' to highlight 
+- [pascal] add 'object' to highlight
 - [pascal] add some types
 - [pascal] highlight noAscii symbols
 - [pascal] add abstract and sealed for object; type NativeInt, NativeUint
