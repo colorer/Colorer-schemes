@@ -92,6 +92,8 @@
 - [pascal] add abstract and sealed for object; type NativeInt, NativeUint
 - [c] add format string length modifiers since C99
 - [navy-mirror.hrd] add colors for cross
+- [farmenu] Add optional @ before Lua and PowerShellFar prefixes
+- [farmenu] Support luas: in addition to lua:
 
 ## [1.2.0] - 2021-09-12
 
