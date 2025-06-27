@@ -94,6 +94,7 @@
 - [navy-mirror.hrd] add colors for cross
 - [farmenu] Add optional @ before Lua and PowerShellFar prefixes
 - [farmenu] Support luas: in addition to lua:
+- [powershell] Add to outlined: #requires and top level process|begin|end|dynamicparam|clean blocks.
 
 ## [1.2.0] - 2021-09-12
 
