@@ -40,12 +40,19 @@
     <region name="AvsPlugin" parent="ParameterStrong"/>
 
 
+    <scheme name="avsComment">
+        <!-- Linear Comments -->
+        <regexp match="/#.*$/" region0="AvsComment"/>
+        <block start="/\/\*/" end="/\*\//" scheme="avsComment" region="AvsComment" region00="PairStart" region10="PairEnd"/>
+        <block start="/\[\*/" end="/\*\]/" scheme="avsComment" region="AvsComment" region00="PairStart" region10="PairEnd"/>
+    </scheme>
+
     <scheme name="avisynth">
-      <inherit scheme="PairedBrackets">
-        <virtual scheme="PairedBrackets" subst-scheme="avisynth"/>
-      </inherit>
-      <!-- Linear Comments -->
-      <regexp match="/#.*$/" region0="AvsComment"/>
+      <block start="/(\{)/" end="/(\})/" scheme="avisynth" region00="SymbolStrong" region01="PairStart" region10="SymbolStrong" region11="PairEnd"/>
+      <block start="/(\()/" end="/(\))/" scheme="avisynth" region00="Symbol" region01="PairStart" region10="Symbol" region11="PairEnd"/>
+
+      <inherit scheme="avsComment"/>
+
       <!-- Numbers -->
       <regexp match="/\c(\$[\da-fA-F]+)\b/" region0="AvsNumb"/>
       <regexp match="/\c(\$[\da-fA-F]*?([^\s\W\da-fA-F]).*?)\B/" region0="Error"/>
