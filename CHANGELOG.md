@@ -98,6 +98,10 @@
 - [farmenu] Support luas: in addition to lua:
 - [powershell] Add to outlined: #requires and top level process|begin|end|dynamicparam|clean blocks.
 - [AviSynth] Add block comments support
+- [go-template] add a new schema for Go template
+- [go-template-sprig] add a new schema for Go template with Sprig functions
+- [helm-tpl] add a new schema for Helm templates
+- [helm-text] add a new schema for text files used in Helm Charts
 
 ## [1.2.0] - 2021-09-12
 
