@@ -15,8 +15,14 @@
 	<ant antfile="build.xml" dir='reg.addons' target="${target}"/>
 </target>
 
+<target name='copy.const-hrd'>
+	<copy todir='../${path.build-dir}/${path.base-dir}/hrd'>
+		<fileset dir='../../${path.base-static}/hrd' excludes='**/.empty/**'/>
+	</copy>
+</target>
 
-<target name='all' depends="hrd2css, hrd2hrd, hcd2reg"/>
+
+<target name='all' depends="copy.const-hrd, hrd2css, hrd2hrd, hcd2reg"/>
 
 
 <target name="clean">

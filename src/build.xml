@@ -21,7 +21,7 @@
 
 	<!-- default targets for build -->
 	<target name='all' depends="hrc, hrd">
-		<copy file='catalog/catalog.base.xml' tofile='${build-dir}/catalog.xml' overwrite='true' />
+		<copy file='../base/catalog.base.xml' tofile='${build-dir}/catalog.xml' overwrite='true' />
 	</target>
 
 	<target name="clean">
@@ -70,8 +70,8 @@
 			<fileset dir='${build-dir}/hrd/' excludes='reg.addons/**' />
 		</copy>
 
-		<copy file='catalog/catalog.base.xml' tofile='${base-pack-dir}/catalog.xml' />
-		<copy file='CHANGELOG.md' todir='${base-pack-dir}' />
+		<copy file='../base/catalog.base.xml' tofile='${base-pack-dir}/catalog.xml' />
+		<copy file='../CHANGELOG.md' todir='${base-pack-dir}' />
 	</target>
 
 	<target name="base.packed.clean">
@@ -88,8 +88,8 @@
 			<fileset dir='${build-dir}/hrd/' excludes='reg.addons/**' />
 		</copy>
 
-		<copy file='catalog/catalog.base.xml' tofile='${base-unpack-dir}/catalog.xml' />
-		<copy file='CHANGELOG.md' todir='${base-unpack-dir}' />
+		<copy file='../base/catalog.base.xml' tofile='${base-unpack-dir}/catalog.xml' />
+		<copy file='../CHANGELOG.md' todir='${base-unpack-dir}' />
 	</target>
 
 	<target name="base.unpacked.clean">
@@ -99,7 +99,7 @@
 	<target name="base.allpacked" depends='base, base.allpacked.clean'>
 		<mkdir dir='${base-allpack-dir}' />
 
-		<copy file='catalog/catalog.allpacked.xml' tofile='${base-allpack-dir}/catalog.xml' />
+		<copy file='../base/catalog.allpacked.xml' tofile='${base-allpack-dir}/catalog.xml' />
 		<copy todir='${base-allpack-dir}' overwrite='true'>
 			<fileset dir='${build-dir}/hrc/' includes='auto/**/*' />
 		</copy>
@@ -107,7 +107,7 @@
 		<zip destfile='${base-allpack-dir}/common.zip'>
 			<fileset dir='${build-dir}' includes='hrc/**, hrd/**' excludes='hrd/reg.addons/**, hrd/css/**' />
 		</zip>
-		<copy file='CHANGELOG.md' todir='${base-allpack-dir}' />
+		<copy file='../CHANGELOG.md' todir='${base-allpack-dir}' />
 	</target>
 
 	<target name="base.allpacked.clean">

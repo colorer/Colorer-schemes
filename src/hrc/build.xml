@@ -4,6 +4,7 @@
 <property name="target" value="all" description="default subproject target"/>
 <property file='../path.properties'/>
 <property name='copy-path' value='../${path.build-dir}/${path.base-dir}/hrc'/>
+<property name='copy-from' value='../../${path.base-static}/hrc'/>
 
 <target name='all' depends="hrc"/>
 
@@ -16,7 +17,7 @@
 
 <target name='copy.const-hrd'>
 	<copy todir='${copy-path}'>
-		<fileset dir='hrc' includes='**/*.hrc'/>
+		<fileset dir='${copy-from}' includes='**/*.hrc' excludes='**/gen/**'/>
 	</copy>
 </target>
 

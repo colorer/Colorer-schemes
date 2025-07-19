@@ -1,9 +1,8 @@
 bin
 build
 __*
-hrc/src/buildlist.xml
-hrc/test/__*
-hrd/hrd/buildlist.xml
+buildlist.xml
+tests/test/__*
 objs
 !.vscode/tasks.json
 
