@@ -7,31 +7,24 @@ on:
  
 jobs:
   build-schemes:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Build unpacked
-        run: ./build.sh base.distr-unpacked
-
-      - name: Build packed
-        run: ./build.sh base.distr-unpacked
-
-      - name: Build allpacked
-        run: ./build.sh base.distr-allpacked
+      - name: Build base
+        run: ./build.sh base.distr-all
 
       - name: Install colorer
         run: |
           sudo apt-get -y install libicu-dev libxerces-c-dev libspdlog-dev libfmt-dev zlib1g-dev libminizip-dev
-          wget https://github.com/colorer/Colorer-library/releases/download/v1.3.1/colorer.x64.v1.3.1.tar.gz
+          wget https://github.com/colorer/Colorer-library/releases/download/v1.5.0/colorer.x64.v1.5.0.tar.gz
           mkdir bin
-          tar -xf colorer.x64.v1.3.1.tar.gz -C ./bin
+          tar -xf colorer.x64.v1.5.0.tar.gz -C ./bin
 
-      - name: Test schemes
-        working-directory: hrc/test
-        run: python3 runtest.py
+      - name: Test load all schemes
+        run: ./build.sh test.load
 
-
-        
+      - name: Test parse
+        run: ./build.sh test.parse       

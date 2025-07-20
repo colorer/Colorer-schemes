@@ -7,23 +7,15 @@ on:
 
 jobs:
   build-schemes:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Build packed schemes
+      - name: Build schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-packed -Dpostfix=${{ github.ref_name }}
-
-      - name: Build unpacked schemes
-        working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-unpacked -Dpostfix=${{ github.ref_name }}
-
-      - name: Build allpacked schemes
-        working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-allpacked -Dpostfix=${{ github.ref_name }}
+        run: ./build.sh base.distr-all ${{ github.ref_name }}
 
       - name: Create release
         run: gh release create ${{ github.ref_name }} ./build/*.zip -t "Colorer base ${{ github.ref_name }}" -n "new version"
