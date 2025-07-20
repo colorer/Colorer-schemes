@@ -4,15 +4,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run HRC tests",
+            "label": "Run HRC parse tests",
             "type": "shell",
-            "command": "python3 ../hrc/test/runtest.py",
-            "options": {"cwd": "${workspaceFolder}/build"}
+            "command": "./build.sh test.parse",
+        },
+        {
+            "label": "Run HRC load test",
+            "type": "shell",
+            "command": "./build.sh test.load",
         },
         {
             "label": "Build schemes",
             "type": "shell",
-            "command": "./build.sh clean & ./build.sh",
+            "command": "./build.sh clean && ./build.sh base",
             "group": {
                 "kind": "build",
                 "isDefault": true

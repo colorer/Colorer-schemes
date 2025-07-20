@@ -98,7 +98,8 @@ def init():
         sys.exit("Error: No %s in %s" % (colorer_exe, colorer_path))
 
     valid_dir = normpath(join(script_path, "_valid"))
-    out_dir = "_build/test_" + datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+    os.mkdir("_test")
+    out_dir = "_test/test_" + datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
     if os.path.exists(out_dir):
         sys.exit("Exiting: Test dir already exists - %s" % out_dir)
     out_result_dir = join(out_dir,"result");

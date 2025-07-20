@@ -1,6 +1,7 @@
 #!/bin/bash
 
 BUILD_DIR="_build"
+TEST_DIR="_test"
 BASE_BUILD_DIR="${BUILD_DIR}/base"
 
 build_base() {
@@ -98,7 +99,7 @@ zip_distr() {
 if [ "$#" -lt 1 ]; then
     echo "Usage: $0 <action>"
     echo "Actions: 'base', 'base.unpacked', 'base.allpacked', 'base.packed', 'base.distr-unpacked', 'base.distr-packed', 'base.distr-allpacked', "
-    echo " 'base.distr-all', 'clean', 'test.load', 'test.parse'"
+    echo " 'base.distr-all', 'clean', 'test.load', 'test.parse', 'test.clean'"
     exit 1
 fi
 
@@ -157,6 +158,9 @@ case "$ACTION" in
         ;;
     test.parse)
         python3 ./tests/test/runtest.py $2
+        ;;
+    test.clean)
+        rm -rf ${CUR_DIR}/${TEST_DIR}
         ;;
     *)
         echo "Error: Invalid action '$ACTION'."
