@@ -17,7 +17,7 @@
 
 <target name='copy.const-hrd'>
 	<copy todir='${copy-path}'>
-		<fileset dir='${copy-from}' includes='**/*.hrc' excludes='**/gen/** **/*-gen.ent.hrc/**'/>
+		<fileset dir='${copy-from}' includes='**/*.hrc' excludes='**/gen/** **/*-gen.ent.hrc/** **/readme.md/**'/>
 	</copy>
 </target>
 

@@ -17,7 +17,7 @@
 
 <target name='copy.const-hrd'>
 	<copy todir='../${path.build-dir}/${path.base-dir}/hrd'>
-		<fileset dir='../../${path.base-static}/hrd' excludes='**/.empty/**'/>
+		<fileset dir='../../${path.base-static}/hrd' excludes='**/readme.md/**'/>
 	</copy>
 </target>
 
