@@ -1,95 +1,134 @@
 ﻿# Colorer schemes
 
-The library of schemes is a basic set of descriptions of syntaxes and styles of the coloring, used by Colorer library.
-The project contains files and scripts for creation of library of schemes.
-[![check build](https://github.com/colorer/Colorer-schemes/actions/workflows/checks.yml/badge.svg)](https://github.com/colorer/Colorer-schemes/actions/workflows/checks.yml)
+# Colorer Schemes
 
-*Improvements of translation of this file to English are welcome*
+Welcome! This repository contains the core library of syntax highlighting schemes (syntaxes and styles) used by the [Colorer library](http://colorer.sourceforge.net/). It includes all the necessary files and scripts to build and test the scheme library.
 
-## Structure
+[![Check Build Status](https://github.com/colorer/Colorer-schemes/actions/workflows/checks.yml/badge.svg)](https://github.com/colorer/Colorer-schemes/actions/workflows/checks.yml)
 
-  * hrc - basic set of descriptions of syntaxes (hrc-files) and their generators
-  * hrd - basic set of styles of a coloring (hrd-files), their generators and additions
-  * shared - shared colorer xml schemes
-  * javalib - required java libs
+
+## Project Structure
+
+This project has two main parts: `base` and `src`.
+
+*   **`base/`**: This directory contains the pre-built, ready-to-use HRC and HRD files.
+    *   **This is what 99% of users and contributors will work with.** If you want to fix a syntax or add a keyword, you should edit the files here.
+
+*   **`src/`**: This directory contains the source files and scripts used to *generate* some of the schemes in `base`.
+    *   Modifying these files is an advanced task, needed only when you want to change the generation logic itself, which is very rare.
+
+*   **`tests/`**: Scripts for testing the scheme library.
   
-## How to build from source
 
+## How to Build
 
-### Common
-
-To build the library of schemes, you will need:
-
-  * git
-  * ant 1.8 or higher
-  * java development kit 8 (jdk) or higher
-  * perl
-
-Download the source from git repository:
-
+First, clone the repository:
 ```sh
 git clone https://github.com/colorer/Colorer-schemes.git
+cd Colorer-schemes
 ```
 
-Run build
+There are two main build workflows.
 
+### Simple Build (from `base`)
+
+This is the standard build process that creates the final library from the files in the `base` directory. It does not require any special dependencies.
+
+Run the build script with a specific target:
 ```sh
-build.cmd target
+./build.sh <target>
 ```
 
-where the *target* is one of the values
+**Available Targets:**
 
-  * base                 - simple build of the schema library. Folder 'build/base'
-  * base.packed          - build the schema library with the hrc-files packed into an zip file. Folder 'build/base-packed'
-  * base.unpacked        - build the schema library with the hrc-files don`t packed into an zip file. Folder 'build/base-unpacked'
-  * base.allpacked       - build the schema library with all files packed into a zip file. Folder 'build/base-allpacked'
-  * base.distr-packed    - archive base.packed. Folder 'build'
-  * base.distr-unpacked  - archive base.unpacked. Folder 'build'
-  * base.distr-allpacked - archive base.allpacked. Folder 'build'
+| Target                 | Description                                                                          | Output Directory       |
+| ---------------------- | ------------------------------------------------------------------------------------ | ---------------------- |
+| `base`                 | Builds the standard schema library.                                                  | `_build/base`          |
+| `base.packed`          | Builds the library and packages HRC files into a `common.zip`. (Recommended)         | `_build/base-packed`   |
+| `base.unpacked`        | Builds the library but leaves all HRC files unpacked.                                | `_build/base-unpacked` |
+| `base.allpacked`       | Builds the library and packages *all* files into a single `catalog.zip`.             | `_build/base-allpacked`|
+| `base.distr-packed`    | Creates a distributable archive of the `base.packed` build.                          | `_build/`              |
+| `base.distr-unpacked`  | Creates a distributable archive of the `base.unpacked` build.                        | `_build/`              |
+| `base.distr-allpacked` | Creates a distributable archive of the `base.allpacked` build.                       | `_build/`              |
 
-### Features of build under Windows
+### Full Rebuild (from `src`)
 
-Before starting the build scripts, make sure that the *PATH* environment variable contains the path to jdk and ant.
-Also you need the environment variable *JAVA_HOME* set. For example:
+This workflow is only for advanced developers who need to regenerate schemes from the `src` directory.
 
-```cmd
-set PATH=v:\apps\jdk\bin;v:\apps\ant\bin;%PATH%
-set JAVA_HOME=v:\apps\jdk
-```
+**Prerequisites:**
+*   Ant 1.8+
+*   Java Development Kit (JDK) 8+
+*   Perl
 
-### Features of build under Linux
+**Build Steps:**
+1.  Navigate to the `src` directory: `cd src`
+2.  Run the build script: `./build.sh <target>`
+    *   The build targets are the same as listed above.
+    *   The output will be located in the `src/build` directory.
 
-Here is an example on Ubuntu 20.04.
+#### Platform Notes
 
-Install ant
+*   **Linux (Ubuntu 24.04 example):**
+    ```sh
+    sudo apt-get install ant
+    ```
+    If you have `APT::Install-Recommends "False";` in your apt configuration, you may also need to install `ant-optional`.
 
-```sh
-apt-get install ant
-```
+*   **Windows:**
+    Ensure that your `PATH` environment variable includes the paths to your JDK and Ant `bin` directories. You also need to set the `JAVA_HOME` variable.
+    ```cmd
+    set JAVA_HOME=C:\path\to\your\jdk
+    set PATH=%JAVA_HOME%\bin;C:\path\to\your\ant\bin;%PATH%
+    ```
 
-If the apt config contains `APT::Install-Recommends "False";`, then you must also install `ant-optional`.
+## How to Contribute
 
-## Develop
+We welcome contributions! The development process depends on what you want to change.
 
-Descriptions of syntaxes (scheme) are divided into static and generated. Static are in a directory hrc/hrc, generated in hrc/src.
+### Workflow for Modifying Existing Schemes (99% of cases)
 
-After scheme change, it is necessary test changes for regressions. For this purpose it is necessary:
+This is the standard workflow for fixing highlighting or adding keywords.
 
-  1. to build the library of schemes `build base`
-  2. check that `bin` directory in the root of the project has `colorer` (the utility for working with library of schemes)
-  3. start script `runtest.py` from  `hrc/test` directory 
-  4. script will check the result of coloring of reference file, the result is output to the console and `fails.html` file in *current_working_dir*/*time_of_test* directory.
-  5. after the analysis of divergences in case of mistakes it is necessary to correct the scheme. If the current coloring is considered correct, it is necessary to replace the reference file with the new one.
-     Reference files reside in hrc/test/_valid. New files reside in *current_working_dir*/*time_of_test*/result
+1.  **Edit Files:** Make your changes directly to the scheme files located in the `base/hrc` directory.
+2.  **Rebuild the Library:** Run a simple build to apply your changes.
+    ```sh
+    ./build.sh base
+    ```
+3.  **Run Tests:** Make sure the `colorer` command-line utility is available in the `bin/` directory and run the regression tests.
+    ```sh
+    ./build.sh test.parse
+    ```
+4.  **Analyze Results:** The script will check for differences against reference files. Any failures will be printed to the console and detailed in a `fails.html` file inside a new `_test/<timestamp>/` directory.
+5.  **Update or Fix:**
+    *   If the test reveals a mistake in your scheme, go back to step 1 and fix it.
+    *   If your changes are correct and the test failed because the *reference file* is outdated, replace the old reference file with your new result.
+        *   Reference files are in: `tests/_valid/`
+        *   Your new output files are in: `_test/<timestamp>/result/`
 
-Also before modification of a repository it is recommended to edit the hrc/hrc/CHANGELOG file
+### Workflow for Modifying Generated Schemes (Advanced)
+
+This is only necessary if you are changing the file generation logic.
+
+1.  **Edit `src`:** Make your changes to the files and scripts in the `src` directory.
+2.  **Build from `src`:** Go to the `src` folder and run a build.
+    ```sh
+    cd src
+    ./build.sh base
+    ```
+3.  **Copy to `base`:** Copy the newly generated files from `src/build/` over to the `base/` directory, replacing the old ones.
+4.  **Test:** Return to the root directory (`cd ..`) and follow steps 3-5 from the standard workflow above to test your changes.
+
+### Final Step
+
+Before submitting your changes, please add a summary of your work to the `CHANGELOG` file.
 
 ## Links
 
+*   **Project Main Page:** [http://colorer.sourceforge.net/](http://colorer.sourceforge.net/)
+*   **Project New site:** [https://colorer.github.io](https://colorer.github.io)
 
-* Project main page: [http://colorer.sourceforge.net/](http://colorer.sourceforge.net/)
 
 ## License
 
-This project is licensed under the terms of the GNU Lesser General Public License v2.1.
+This project is licensed under the terms of the **GNU Lesser General Public License v2.1**.
 A copy of the license is available in the `LICENSE` file in the root of the repository.
