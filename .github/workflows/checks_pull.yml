@@ -27,4 +27,4 @@ jobs:
         run: ./build.sh test.load
 
       - name: Test parse
-        run: ./build.sh test.parse       
+        run: ./build.sh test.parse

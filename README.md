@@ -1,6 +1,4 @@
-﻿# Colorer schemes
-
-# Colorer Schemes
+﻿# Colorer Schemes
 
 Welcome! This repository contains the core library of syntax highlighting schemes (syntaxes and styles) used by the [Colorer library](http://colorer.sourceforge.net/). It includes all the necessary files and scripts to build and test the scheme library.
 
