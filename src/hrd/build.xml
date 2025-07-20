@@ -22,7 +22,8 @@
 </target>
 
 
-<target name='all' depends="copy.const-hrd, hrd2css, hrd2hrd, hcd2reg"/>
+<!-- hcd2reg disabled -->
+<target name='all' depends="copy.const-hrd, hrd2css, hrd2hrd"/>
 
 
 <target name="clean">
