@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<project name="schemes" default="all" basedir=".">
+
+	<property name="target" value="all" description="default subproject target" />
+	<property file='path.properties' />
+	<property name="build-dir" value='${path.build-dir}/${path.base-dir}' description="place where all is builded" />
+	<property name="base-pack-dir" value='${path.build-dir}/${path.base-pack}' description="folder with packed base" />
+	<property name="base-unpack-dir" value='${path.build-dir}/${path.base-unpack}' description="folder with unpacked base" />
+	<property name="base-allpack-dir" value='${path.build-dir}/${path.base-allpack}' description="folder with full packed base" />
+
+
+	<!-- build -->
+	<target name='hrd'>
+		<ant antfile="build.xml" dir='hrd' target="${target}" />
+	</target>
+
+	<target name='hrc'>
+		<ant antfile="build.xml" dir='hrc' target="${target}" />
+	</target>
+	<!-- /build -->
+
+	<!-- default targets for build -->
+	<target name='all' depends="hrc, hrd">
+		<copy file='../base/catalog.base.xml' tofile='${build-dir}/catalog.xml' overwrite='true' />
+	</target>
+
+	<target name="clean">
+		<antcall target='hrc'>
+			<param name='target' value='clean' />
+		</antcall>
+		<antcall target='hrd'>
+			<param name='target' value='clean' />
+		</antcall>
+		<delete file='${build-dir}/catalog.xml' />
+	</target>
+
+	<target name='base'>
+		<antcall target="all" />
+	</target>
+	<!-- /default targets for build -->
+
+	<!-- core targets for packaging -->
+	<target name="hrc.zip" depends='hrc'>
+		<mkdir dir='${target-dir}/hrc/auto/types' />
+
+		<zip destfile='${target-dir}/hrc/common.zip'>
+			<fileset dir='${build-dir}/hrc' includes='**/*' excludes='proto*.hrc, *.ent.hrc, auto, auto/**/*' />
+		</zip>
+
+		<copy todir='${target-dir}/hrc/' overwrite='true'>
+			<fileset dir='${build-dir}/hrc/' includes='proto*.hrc, *.ent.hrc' />
+		</copy>
+		<copy todir='${target-dir}/hrc/' overwrite='true'>
+			<fileset dir='${build-dir}/hrc/' includes='auto/**/*' />
+		</copy>
+		<replace dir='${target-dir}/hrc/' includes='*.hrc' token='link="' value='link="jar:common.zip!' />
+	</target>
+
+	<!-- /core targets for packaging -->
+
+	<!-- make ditrib -->
+
+	<target name="base.packed" depends='base, base.packed.clean'>
+		<mkdir dir='${base-pack-dir}' />
+
+		<antcall target='hrc.zip'>
+			<param name='target-dir' value='${base-pack-dir}' />
+		</antcall>
+		<copy todir='${base-pack-dir}/hrd/' overwrite='true'>
+			<fileset dir='${build-dir}/hrd/' excludes='reg.addons/**' />
+		</copy>
+
+		<copy file='../base/catalog.base.xml' tofile='${base-pack-dir}/catalog.xml' />
+		<copy file='../CHANGELOG.md' todir='${base-pack-dir}' />
+	</target>
+
+	<target name="base.packed.clean">
+		<delete dir="${base-pack-dir}" />
+	</target>
+
+	<target name="base.unpacked" depends='base, base.unpacked.clean'>
+		<mkdir dir='${base-unpack-dir}' />
+
+		<copy todir='${base-unpack-dir}/hrc/' overwrite='true'>
+			<fileset dir='${build-dir}/hrc/' includes='**/*' />
+		</copy>
+		<copy todir='${base-unpack-dir}/hrd/' overwrite='true'>
+			<fileset dir='${build-dir}/hrd/' excludes='reg.addons/**' />
+		</copy>
+
+		<copy file='../base/catalog.base.xml' tofile='${base-unpack-dir}/catalog.xml' />
+		<copy file='../CHANGELOG.md' todir='${base-unpack-dir}' />
+	</target>
+
+	<target name="base.unpacked.clean">
+		<delete dir="${base-unpack-dir}" />
+	</target>
+
+	<target name="base.allpacked" depends='base, base.allpacked.clean'>
+		<mkdir dir='${base-allpack-dir}' />
+
+		<copy file='../base/catalog.allpacked.xml' tofile='${base-allpack-dir}/catalog.xml' />
+		<copy todir='${base-allpack-dir}' overwrite='true'>
+			<fileset dir='${build-dir}/hrc/' includes='auto/**/*' />
+		</copy>
+
+		<zip destfile='${base-allpack-dir}/common.zip'>
+			<fileset dir='${build-dir}' includes='hrc/**, hrd/**' excludes='hrd/reg.addons/**, hrd/css/**' />
+		</zip>
+		<copy file='../CHANGELOG.md' todir='${base-allpack-dir}' />
+	</target>
+
+	<target name="base.allpacked.clean">
+		<delete dir="${base-allpack-dir}" />
+	</target>
+
+	<!-- /make ditrib -->
+
+	<target name="base.distr" description='Build archive for distribute'>
+		<tstamp>
+			<format property="TODAY" pattern="yyyy-MM-dd" />
+		</tstamp>
+		<property name="postfix" value="${TODAY}" />
+		<property name='hrcupdate-zip' value='${path.build-dir}/colorer-base.${type}.${postfix}.zip' />
+
+		<zip destfile='${hrcupdate-zip}'>
+			<fileset dir='${target-dir}' />
+		</zip>
+	</target>
+
+	<target name="base.distr-packed" depends="base.packed" description='Build packed distrib'>
+		<antcall target='base.distr'>
+			<param name='target-dir' value='${base-pack-dir}' />
+			<param name='type' value='packed' />
+		</antcall>
+	</target>
+
+	<target name="base.distr-unpacked" depends="base.unpacked" description='Build unpacked distrib'>
+		<antcall target='base.distr'>
+			<param name='target-dir' value='${base-unpack-dir}' />
+			<param name='type' value='unpacked' />
+		</antcall>
+	</target>
+
+	<target name="base.distr-allpacked" depends="base.allpacked" description='Build allpacked distrib'>
+		<antcall target='base.distr'>
+			<param name='target-dir' value='${base-allpack-dir}' />
+			<param name='type' value='allpacked' />
+		</antcall>
+	</target>
+
+</project>

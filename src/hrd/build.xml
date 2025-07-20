@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project name="hrd" default="all" basedir=".">
+
+<property name="target" value="all" description="default subproject target"/>
+
+<target name='hrd2hrd'>
+	<ant antfile="build.xml" dir='hrd' target="${target}"/>
+</target>
+
+<target name='hrd2css' depends="hrd2hrd">
+	<ant antfile="build.xml" dir='css' target="${target}"/>
+</target>
+
+<target name='hcd2reg'>
+	<ant antfile="build.xml" dir='reg.addons' target="${target}"/>
+</target>
+
+<target name='copy.const-hrd'>
+	<copy todir='../${path.build-dir}/${path.base-dir}/hrd'>
+		<fileset dir='../../${path.base-static}/hrd' excludes='**/readme.md/**'/>
+	</copy>
+</target>
+
+
+<!-- hcd2reg disabled -->
+<target name='all' depends="copy.const-hrd, hrd2css, hrd2hrd"/>
+
+
+<target name="clean">
+	<property file='../path.properties'/>
+	<property name='clean-path' value='../${path.build-dir}/${path.base-dir}/hrd'/>
+
+	<antcall target='all'>
+		<param name='target' value='clean'/>
+	</antcall>
+	<delete dir="${clean-path}"/>
+</target>
+
+</project>

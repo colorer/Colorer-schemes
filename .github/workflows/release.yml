@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-schemes:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'master' }}
 
     steps:
@@ -23,15 +23,7 @@ jobs:
 
       - name: Build packed schemes
         working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-packed -Dpostfix=${{ env.version }}
-
-      - name: Build unpacked schemes
-        working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-unpacked -Dpostfix=${{ env.version }}
-
-      - name: Build allpacked schemes
-        working-directory: ${{runner.workspace}}/Colorer-schemes
-        run: ./build.sh base.distr-allpacked -Dpostfix=${{ env.version }}
+        run: ./build.sh base.distr-all ${{ env.version }}
 
       - name: Create release
         run: gh release create v${{ env.version }} -t "v${{ env.version }}" ./build/*.zip -n "Colorer base ${{ env.version }}"

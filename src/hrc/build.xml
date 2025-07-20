@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project name="hrc" default="all" basedir=".">
+
+<property name="target" value="all" description="default subproject target"/>
+<property file='../path.properties'/>
+<property name='copy-path' value='../${path.build-dir}/${path.base-dir}/hrc'/>
+<property name='copy-from' value='../../${path.base-static}/hrc'/>
+
+<target name='all' depends="hrc"/>
+
+<target name='hrc'>
+	<antcall target='copy.const-hrd'/>
+	<ant antfile="build.xml" dir='src' target="${target}">
+		<property name='bin' value='../../../${path.build-dir}/${path.base-dir}'/>
+  </ant>
+</target>
+
+<target name='copy.const-hrd'>
+	<copy todir='${copy-path}'>
+		<fileset dir='${copy-from}' includes='**/*.hrc' excludes='**/gen/** **/*-gen.ent.hrc/** **/readme.md/**'/>
+	</copy>
+</target>
+
+<target name='hrc-gen'>
+	<ant antfile="build.xml" dir='src' target="${target}"/>
+</target>
+
+<target name="clean">
+	<delete failonerror='false' includeemptydirs="true">
+		<fileset dir="${copy-path}"/>
+	</delete>
+	<antcall target='hrc-gen'>
+		<param name='target' value='clean'/>
+	</antcall>
+</target>
+
+</project>

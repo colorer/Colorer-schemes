@@ -1,0 +1,41 @@
+<target-list>
+	
+	<!-- php must be runed BEFORE any xml, because it create php-proto-gen.ent.hrc -->
+	<target type='perl' place='hrc/base/gen'/>
+	<target type='php' place='hrc/inet/gen'/>
+	<target type='sh' place='hrc/scripts/gen'/>
+	
+	<!-- here we can run xml... -->
+	<target type='ant' place='hrc/scripts/gen'/>
+	<target type='entity' place='hrc/inet/gen'/>
+	<target type='xhtml' place='hrc/inet/gen'/>
+	<target type='wml' place='hrc/inet/gen'/>
+	<target type='xml' place='hrc/xml/gen'/>
+	<target type='xlink' place='hrc/xml/gen'/>
+	<target type='xslt' place='hrc/xml/gen'/>
+	<target type='xslfo' place='hrc/xml/gen'/>
+	<target type='xmlschema' place='hrc/xml/gen'/>
+	<target type='relaxng' place='hrc/xml/gen'/>
+	<target type='sch' place='hrc/xml/gen'/>
+	<target type='wsdl' place='hrc/xml/gen'/>
+	<target type='xmlcatalog' place='hrc/xml/gen'/>
+	<target type='docbook' place='hrc/xml/gen'/>
+	<target type='mathml' place='hrc/xml/gen'/>
+	<target type='svg' place='hrc/inet/gen'/>
+	<target type='j2ee' place='hrc/rare/gen/j2ee'/>
+	<target type='wsc' place='hrc/scripts/gen'/>
+	<target type='colorer' place='hrc/scripts/gen/colorer'/>
+	<target type='calcset' place='hrc/scripts/gen/far'/>
+	<target type='esc' place='hrc/scripts/gen/far'/>
+	<target type='rdf' place='hrc/xml/gen'/>
+	<target type='htc' place='hrc/inet/gen'/>
+	<target type='parser' place='hrc/rare/gen'/>
+	<target type='rss' place='hrc/inet/gen'/>
+	<target type='xbl' place='hrc/inet/gen'/>
+	<target type='xsieve' place='hrc/rare/gen'/>
+	<target type='qrc' place='hrc/scripts/gen'/>
+	<target type='ibatis' place='hrc/rare/gen'/>
+	<target type='log4j' place='hrc/rare/gen'/>
+	<target type='yml' place='hrc/rare/gen'/>
+</target-list>
+

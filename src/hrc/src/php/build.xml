@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<project name="src.php" default="all" basedir=".">
+
+<property name="root" value="../../.." description="hrc project root location"/>
+<property name="util" value="${root}/apps/ant/util.xml" description="ant utils location"/>
+<property name="this" value="/src/php" description="this project location"/>
+
+<property name="src" value="src" description="this project sourse"/>
+<property name="bin" value="ready" description="this project binary|hrc"/>
+<property name="bin.prot" value="ready" description="this project proto.hrc addon"/>
+<property name="obj" value="objs" description="this project temp"/>
+
+
+<mkdir dir='${obj}'/>
+<!-- packages.xml -->
+
+<target name="pack-xml.check">
+ <uptodate property="pack-xml.check"  targetfile="${obj}/php.xml">
+  <srcfiles dir="${src}" includes="php.pl, php.lst"/>
+  <srcfiles dir="." includes="build.xml"/>
+ </uptodate>
+</target>
+
+<target name="pack-xml" depends="pack-xml.check" unless="pack-xml.check"> 
+ <exec executable="perl" output="${obj}/php.xml">
+  <arg line='${src}/php.pl ${src}/php.lst'/>
+ </exec> 
+ <echo level="info" message="Create php.xml"/>
+</target>
+
+<!-- keygen.hrc -->
+
+<target name="pack-hrc.check">
+ <dependset>
+  <srcfilelist dir="${src}" files = "php.xsl"/>
+  <srcfilelist dir="${obj}" files = "php.xml"/>
+  <targetfilelist dir="${bin}" files="php-gen.ent.hrc"/>
+ </dependset>
+</target>
+
+<target name="pack-hrc" depends="pack-xml, pack-hrc.check">
+ <xslt in="${obj}/php.xml" out="${bin}/php-gen.ent.hrc" style="${src}/php.xsl" classpath="${xslt-classpath}"/>
+</target>
+
+
+<!-- hrc-prot -->
+
+<target name="hrc-prot.check">
+ <dependset>
+  <srcfilelist dir="${src}" files = "php-prot.xsl"/>
+  <srcfilelist dir="${obj}" files = "php.xml"/>
+  <targetfilelist dir="${bin}" files="php-prot-gen.ent.hrc"/>
+ </dependset>
+</target>
+
+<target name="hrc-prot" depends="pack-xml, hrc-prot.check">
+ <xslt in="${obj}/php.xml" out="${bin.prot}/php-prot-gen.ent.hrc" style="${src}/php-prot.xsl" classpath="${xslt-classpath}"/>
+</target>
+
+<!-- final -->
+
+<target name="all" depends="hrc-prot, pack-hrc"/>
+
+<target name="clean">
+ <delete failonerror='false'>
+  <fileset dir="${obj}" includes="*.*" excludes='.empty'/>
+  <fileset dir="${bin}" includes="php-gen.ent.hrc"/>
+  <fileset dir="${bin.prot}" includes="php-prot-gen.ent.hrc"/>
+ </delete>
+</target>
+
+</project>
