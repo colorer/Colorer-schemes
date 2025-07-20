@@ -22,11 +22,11 @@
 	<target type='docbook' place='hrc/xml/gen'/>
 	<target type='mathml' place='hrc/xml/gen'/>
 	<target type='svg' place='hrc/inet/gen'/>
-	<target type='j2ee' place='hrc/rare/j2ee'/>
+	<target type='j2ee' place='hrc/rare/gen/j2ee'/>
 	<target type='wsc' place='hrc/scripts/gen'/>
-	<target type='colorer' place='hrc/scripts/colorer'/>
-	<target type='calcset' place='hrc/scripts/far/gen'/>
-	<target type='esc' place='hrc/scripts/far/gen/'/>
+	<target type='colorer' place='hrc/scripts/gen/colorer'/>
+	<target type='calcset' place='hrc/scripts/gen/far'/>
+	<target type='esc' place='hrc/scripts/gen/far'/>
 	<target type='rdf' place='hrc/xml/gen'/>
 	<target type='htc' place='hrc/inet/gen'/>
 	<target type='parser' place='hrc/rare/gen'/>

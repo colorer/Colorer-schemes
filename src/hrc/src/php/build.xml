@@ -49,12 +49,12 @@
  <dependset>
   <srcfilelist dir="${src}" files = "php-prot.xsl"/>
   <srcfilelist dir="${obj}" files = "php.xml"/>
-  <targetfilelist dir="${bin}" files="php-prot.ent.hrc"/>
+  <targetfilelist dir="${bin}" files="php-prot-gen.ent.hrc"/>
  </dependset>
 </target>
 
 <target name="hrc-prot" depends="pack-xml, hrc-prot.check">
- <xslt in="${obj}/php.xml" out="${bin.prot}/php-prot.ent.hrc" style="${src}/php-prot.xsl" classpath="${xslt-classpath}"/>
+ <xslt in="${obj}/php.xml" out="${bin.prot}/php-prot-gen.ent.hrc" style="${src}/php-prot.xsl" classpath="${xslt-classpath}"/>
 </target>
 
 <!-- final -->
@@ -65,7 +65,7 @@
  <delete failonerror='false'>
   <fileset dir="${obj}" includes="*.*" excludes='.empty'/>
   <fileset dir="${bin}" includes="php-gen.ent.hrc"/>
-  <fileset dir="${bin.prot}" includes="php-prot.ent.hrc"/>
+  <fileset dir="${bin.prot}" includes="php-prot-gen.ent.hrc"/>
  </delete>
 </target>
 
