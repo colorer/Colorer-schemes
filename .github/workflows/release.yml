@@ -26,6 +26,6 @@ jobs:
         run: ./build.sh base.distr-all ${{ env.version }}
 
       - name: Create release
-        run: gh release create v${{ env.version }} -t "v${{ env.version }}" ./build/*.zip -n "Colorer base ${{ env.version }}"
+        run: gh release create v${{ env.version }} -t "v${{ env.version }}" ./_build/*.zip -n "Colorer base ${{ env.version }}"
         env:
           GITHUB_TOKEN: ${{secrets.PACKAGES_GITHUB_TOKEN}}
