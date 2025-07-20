@@ -1,9 +1,7 @@
 bin
 src/build
 _build
-__*
 buildlist.xml
-tests/test/__*
 objs
 !.vscode/tasks.json
 

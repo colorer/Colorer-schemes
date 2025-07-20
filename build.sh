@@ -97,7 +97,8 @@ zip_distr() {
 # Check the number of arguments passed
 if [ "$#" -lt 1 ]; then
     echo "Usage: $0 <action>"
-    echo "Actions: 'base', 'base.unpacked', 'base.allpacked' or 'base.packed'"
+    echo "Actions: 'base', 'base.unpacked', 'base.allpacked', 'base.packed', 'base.distr-unpacked', 'base.distr-packed', 'base.distr-allpacked', "
+    echo " 'base.distr-all', 'clean', 'test.load', 'test.parse'"
     exit 1
 fi
 
@@ -150,6 +151,12 @@ case "$ACTION" in
         ;;
     clean)
         rm -rf ${CUR_DIR}/${BUILD_DIR}
+        ;;
+    test.load)
+        ./tests/test_fullload.sh $2
+        ;;
+    test.parse)
+        python3 ./tests/test/runtest.py $2
         ;;
     *)
         echo "Error: Invalid action '$ACTION'."

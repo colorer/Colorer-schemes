@@ -82,23 +82,15 @@ def init():
     script_path = normpath(join(working_path, dirname(__file__)))
     project_path = join(script_path, "..", "..")
 
-    # -- read propertie file --
-    prop_path = {}
-    with open(join(project_path, "path.properties")) as f:
-        for line in f:
-            if line.startswith("path."):
-                name, value = line.strip()[5:].split("=", 1)
-                prop_path[name.strip()] = value.strip()
-
-    colorer_path = normpath(join(project_path, normpath(prop_path["colorer"])))
-    catalog_path = normpath(join(project_path, normpath(prop_path["catalog"])))
-    hrd_path = normpath(join(project_path, normpath(
-        prop_path["build-dir"]), prop_path["base-dir"],"hrd"))
+    colorer_path = normpath(join(project_path, "bin"))
+    catalog_path = normpath(join(project_path, "_build/base/catalog.xml"))
+    hrd_path = normpath(join(project_path, "_build", "base", "hrd"))
     hrd = os.getenv('COLORER5HRD', 'white')
     css_path = "css/%s.css" % (hrd)
     css_origin_path = normpath("%s/css/%s.css" % (hrd_path, hrd))
-    if not os.path.isfile(css_path):
-        print("Warning: Stylesheet %s does not exist" % css)
+    print(css_origin_path)
+    if not os.path.isfile(css_origin_path):
+        print("Warning: Stylesheet %s does not exist" % hrd)
 
     colorer_exe = "colorer"
     colorer = join(colorer_path, colorer_exe)
@@ -106,7 +98,7 @@ def init():
         sys.exit("Error: No %s in %s" % (colorer_exe, colorer_path))
 
     valid_dir = normpath(join(script_path, "_valid"))
-    out_dir = datetime.today().strftime("__%Y-%m-%d_%H-%M-%S")
+    out_dir = "_build/test_" + datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
     if os.path.exists(out_dir):
         sys.exit("Exiting: Test dir already exists - %s" % out_dir)
     out_result_dir = join(out_dir,"result");
