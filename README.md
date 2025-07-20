@@ -1,23 +1,22 @@
-﻿Colorer schemes
-========================
+﻿# Colorer schemes
+
 The library of schemes is a basic set of descriptions of syntaxes and styles of the coloring, used by Colorer library.
 The project contains files and scripts for creation of library of schemes.
 [![check build](https://github.com/colorer/Colorer-schemes/actions/workflows/checks.yml/badge.svg)](https://github.com/colorer/Colorer-schemes/actions/workflows/checks.yml)
 
 *Improvements of translation of this file to English are welcome*
 
-Structure
-------------------------
+## Structure
 
   * hrc - basic set of descriptions of syntaxes (hrc-files) and their generators
   * hrd - basic set of styles of a coloring (hrd-files), their generators and additions
   * shared - shared colorer xml schemes
   * javalib - required java libs
   
-How to build from source
-------------------------
+## How to build from source
 
-### Common ###
+
+### Common
 
 To build the library of schemes, you will need:
 
@@ -48,7 +47,7 @@ where the *target* is one of the values
   * base.distr-unpacked  - archive base.unpacked. Folder 'build'
   * base.distr-allpacked - archive base.allpacked. Folder 'build'
 
-### Features of build under Windows ###
+### Features of build under Windows
 
 Before starting the build scripts, make sure that the *PATH* environment variable contains the path to jdk and ant.
 Also you need the environment variable *JAVA_HOME* set. For example:
@@ -58,7 +57,7 @@ set PATH=v:\apps\jdk\bin;v:\apps\ant\bin;%PATH%
 set JAVA_HOME=v:\apps\jdk
 ```
 
-### Features of build under Linux ###
+### Features of build under Linux
 
 Here is an example on Ubuntu 20.04.
 
@@ -70,7 +69,7 @@ apt-get install ant
 
 If the apt config contains `APT::Install-Recommends "False";`, then you must also install `ant-optional`.
 
-## Develop ##
+## Develop
 
 Descriptions of syntaxes (scheme) are divided into static and generated. Static are in a directory hrc/hrc, generated in hrc/src.
 
@@ -85,7 +84,12 @@ After scheme change, it is necessary test changes for regressions. For this purp
 
 Also before modification of a repository it is recommended to edit the hrc/hrc/CHANGELOG file
 
-Links
-------------------------
+## Links
+
 
 * Project main page: [http://colorer.sourceforge.net/](http://colorer.sourceforge.net/)
+
+## License
+
+This project is licensed under the terms of the GNU Lesser General Public License v2.1.
+A copy of the license is available in the `LICENSE` file in the root of the repository.
