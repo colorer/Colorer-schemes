@@ -103,6 +103,8 @@
 - [go-template-sprig] add a new schema for Go template with Sprig functions
 - [helm-tpl] add a new schema for Helm templates
 - [helm-text] add a new schema for text files used in Helm Charts
+- [hrc] add new attribute global for packages
+- [hrd] add attributes for hrd element
 
 ## [1.2.0] - 2021-09-12
 
