@@ -76,7 +76,7 @@
 
 <!-- custom/custom-type/script-n-style/element/language - part I: -->
 
-<xsl:template match="c:language" mode="scriptdefscheme">
+<xsl:template match="c:language[@first]" mode="scriptdefscheme">
 	<xsl:variable name="scheme">
 		<xsl:choose>
 			<xsl:when test="@scheme">
@@ -119,7 +119,7 @@
 
 <!-- custom/custom-type/script-n-style/element/default: -->
 
-<xsl:template match="c:element/c:default | c:element/c:language" mode="scriptdef">
+<xsl:template match="c:element/c:default | c:element/c:language[not(@expr)]" mode="scriptdef">
 	<xsl:param name="tag" select="'script'"/>
 	<xsl:variable name='prefix'>
 		<xsl:call-template name='nsprefix'>

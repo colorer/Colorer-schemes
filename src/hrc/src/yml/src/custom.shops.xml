@@ -12,12 +12,10 @@
     
     <script-n-style>
     	<element name="url">
-    		<language name="uri"/>
-    		<default name="uri"/>
+    		<language name="uri" first="true"/>
     	</element>
     	<element name="picture">
     		<language name="uri"/>
-    		<default name="uri"/>
     	</element>
     </script-n-style>
     
