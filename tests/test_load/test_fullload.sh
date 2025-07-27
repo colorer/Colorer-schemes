@@ -8,11 +8,12 @@ fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 current_date=$(date +"%Y-%m-%d_%H-%M-%S")
-LOG_FILE=${SCRIPT_DIR}/../${RESULT_DIR}/colorer_${current_date}.log 
+ROOT_LEVEL="../.."
+LOG_FILE=${SCRIPT_DIR}/${ROOT_LEVEL}/${RESULT_DIR}/colorer_${current_date}.log 
 
-mkdir -p "${SCRIPT_DIR}/../_test"
+mkdir -p "${SCRIPT_DIR}/${ROOT_LEVEL}/_test"
 
-${SCRIPT_DIR}/../bin/colorer -c ${SCRIPT_DIR}/../_build/${BASE}/catalog.xml -ll -el info -eh colorer_${current_date} -ed ${SCRIPT_DIR}/../${RESULT_DIR}
+${SCRIPT_DIR}/${ROOT_LEVEL}/bin/colorer -c ${SCRIPT_DIR}/${ROOT_LEVEL}/_build/${BASE}/catalog.xml -ll -el info -eh colorer_${current_date} -ed ${SCRIPT_DIR}/${ROOT_LEVEL}/${RESULT_DIR}
 
 # checking for new errors
 grep -v -F -f ${SCRIPT_DIR}/ignored_error.txt ${LOG_FILE}

@@ -154,7 +154,7 @@ case "$ACTION" in
         rm -rf ${CUR_DIR}/${BUILD_DIR}
         ;;
     test.load)
-        ./tests/test_fullload.sh $2
+        ./tests/test_load/test_fullload.sh $2
         ;;
     test.parse)
         python3 ./tests/test/runtest.py $2
