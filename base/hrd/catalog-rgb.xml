@@ -43,3 +43,6 @@
         <hrd class="rgb" name="far2l" description="far2l">
             <location link="&hrd;/rgb/far2l.hrd"/>
         </hrd>
+        <hrd class="rgb" name="violet" description="Violet by Kate tempergate">
+            <location link="&hrd;/rgb/violet.hrd"/>
+        </hrd>
