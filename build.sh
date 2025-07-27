@@ -162,6 +162,7 @@ case "$ACTION" in
             echo "✅ Success."
         else
             echo "❌ Error: the result of the parsing does not match the expected. Please fix it."
+            exit 1
         fi
         ;;
     test.clean)

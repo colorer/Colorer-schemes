@@ -49,7 +49,6 @@ def main():
     find_files()
     results = run_tests()
     changed = report(results)
-    print (changed)
 
     if changed==0:
         sys.exit(0)

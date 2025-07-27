@@ -24,4 +24,5 @@ else
   echo "❌ Error: unknown errors were found in the log file!"
   echo "Found lines:"
   grep --color=auto -F -f ${SCRIPT_DIR}/ignored_error.txt ${LOG_FILE}
+  exit 1
 fi
