@@ -106,6 +106,7 @@
 - [helm-text] add a new schema for text files used in Helm Charts
 - [hrc] add new attribute global for packages
 - [hrd] add attributes for hrd element
+- [far2l.hrd] add rgb style from far2l
 
 ## [1.2.0] - 2021-09-12
 

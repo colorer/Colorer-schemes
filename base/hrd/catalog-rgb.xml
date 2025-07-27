@@ -40,3 +40,6 @@
         <hrd class="rgb" name="visual" description="Visual by Roman Kuzmin">
             <location link="&hrd;/rgb/contrib/visual-rgb.hrd"/>
         </hrd>
+        <hrd class="rgb" name="far2l" description="far2l">
+            <location link="&hrd;/rgb/far2l.hrd"/>
+        </hrd>
