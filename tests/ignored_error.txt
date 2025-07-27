@@ -1,0 +1,2 @@
+type name qualifer in 'markdown2:markdown2' doesn't match any type
+cannot resolve scheme name 'markdown2:markdown2' of inherit in scheme 'markdown:markdown'
