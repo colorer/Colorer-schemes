@@ -158,6 +158,11 @@ case "$ACTION" in
         ;;
     test.parse)
         python3 ./tests/test/runtest.py $2
+        if [ $? -eq 0 ]; then
+            echo "✅ Success."
+        else
+            echo "❌ Error: the result of the parsing does not match the expected. Please fix it."
+        fi
         ;;
     test.clean)
         rm -rf ${CUR_DIR}/${TEST_DIR}

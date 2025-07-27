@@ -48,7 +48,13 @@ def main():
     init()
     find_files()
     results = run_tests()
-    report(results)
+    changed = report(results)
+    print (changed)
+
+    if changed==0:
+        sys.exit(0)
+    else:
+        sys.exit(1)
 
 
 def parse_args():
@@ -232,8 +238,9 @@ def report(results):
           (len(testfile_list), failed, (float(failed) / len(testfile_list) * 100),
            changed, (float(changed) / len(testfile_list) * 100))
           )
+    
+    return failed+changed
 
 
 if __name__ == "__main__":
     main()
-
