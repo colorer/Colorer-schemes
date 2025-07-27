@@ -18,7 +18,7 @@ jobs:
 
       - name: Install colorer
         run: |
-          sudo apt-get -y install libicu libxml2 zlib1g libminizip
+          sudo apt-get -y install libicu74 libxml2 zlib1g libminizip1t64
           wget https://github.com/colorer/Colorer-library/releases/download/v1.5.0/colorer.x64.v1.5.0.tar.gz
           mkdir bin
           tar -xf colorer.x64.v1.5.0.tar.gz -C ./bin
