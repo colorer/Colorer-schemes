@@ -52,6 +52,7 @@
 - [shell-bash] recornize bash-specific syntax in for loops, recornize an append operator
 - [black.hrd] fix colors for cross
 - [yml] fix error in generated scheme; update scheme to 2.4.0
+- [verilog] add define, include, timescale support
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.

@@ -11,14 +11,14 @@
  10: 
  11: <span class='def-Error'>!con</span> <span class='def-Error'>.ext=all</span>        <span class='def-Comment def-Syntax'>// This is a switch to allow the SILOS III analog extensions</span>
  12: 
- 13: <span class='def-Error'>`define</span> <span class='def-Error'>abs1(a)</span> <span class='def-Error'>(((a)&lt;0)?-(a):(a))</span>
- 14: <span class='def-Error'>`define</span> <span class='def-Error'>close(a,b)</span> <span class='def-Error'>(`abs1(a-b)</span> <span class='def-Error'>&lt;</span> <span class='def-Error'>0.01)</span> <span class='def-Error'>?</span> <span class='def-Error'>1:0</span>
- 15: <span class='def-Error'>`define</span> <span class='def-Error'>high</span>  <span class='def-Error'>'b1</span>                       
- 16: <span class='def-Error'>`define</span> <span class='def-Error'>low</span>   <span class='def-Error'>'b0</span>
+ 13: <span class='def-Directive'>`define</span> <span class='def-Keyword'>abs1(a)</span> <span class='def-Identifier'>(((a)&lt;0)?-(a):(a))</span>
+ 14: <span class='def-Directive'>`define</span> <span class='def-Keyword'>close(a,b)</span> <span class='def-Identifier'>(`abs1(a-b) &lt; 0.01) ? 1:0</span>
+ 15: <span class='def-Directive'>`define</span> <span class='def-Keyword'>high</span>  <span class='def-Identifier'>'b1                       </span>
+ 16: <span class='def-Directive'>`define</span> <span class='def-Keyword'>low</span>   <span class='def-Identifier'>'b0</span>
  17: 
  18: <span class='def-Comment def-Syntax'>// this module defines the stimulus and instantiates the circuit</span>
  19: 
- 20: <span class='def-Error'>`timescale</span> <span class='def-Error'>1ns</span> <span class='def-Error'>/</span> <span class='def-Error'>1ns</span>
+ 20: <span class='def-Directive'>`timescale</span> <span class='def-Keyword'>1ns</span> / <span class='def-Keyword'>1ns</span>
  21: 
  22: <span class='verilog-verWord def-Keyword'>module top</span><span class='verilog-verSymb def-Symbol'>;</span>
  23:     <span class='def-Keyword'>wire</span>     up<span class='verilog-verSymb def-Symbol'>,</span> down<span class='def-Keyword'>;</span>       
