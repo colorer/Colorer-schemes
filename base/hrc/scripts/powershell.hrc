@@ -7,7 +7,7 @@ xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hr
 <type name="powershell">
 <annotation><documentation><![CDATA[
 
-powershell.hrc by Roman Kuzmin, aka nightroman, 2025-10-26
+powershell.hrc by Roman Kuzmin, aka nightroman, 2025-10-27
 visual.hrd is recommended as optimized for powershell.hrc
 
 Regex syntax in strings after regex operators, [regex], and <#regex#>
@@ -65,7 +65,7 @@ SQL syntax in here-strings after <#sql#>
 
 <entity name="token" value="[^\s$'&#34;\()\{},|;&amp;]"/>
 <entity name="e-function" value="(?:\s*(?:[\(\{]|$)|\s+&lt;?#)?="/>
-<entity name="end" value="(?:`?~1$|[|});]?=)"/>
+<entity name="end" value="(?:`?~1$|[|});&amp;]?=)"/>
 <entity name="sname" value="\D?=\w+"/>
 <entity name="s-rem" value="(?:^|[\s,;=\()\{}\[\]'&#34;]?#1)"/>
 <entity name="vname" value="\w[\w\?]*"/>
@@ -902,11 +902,12 @@ SQL syntax in here-strings after <#sql#>
     start="/(?{Operator},)/" end="/\S?=/"/>
 </scheme>
 
+<entity name="op-invoke" value="(?:\.|&amp;(&amp;)?!)"/>
 <scheme name="invoke">
     <block scheme="command-name" region="Command" inner-region="yes"
-    start="/~(?{Operator}[.&amp;])\s*%token;?=/" end="/%token;?!|$/"/>
+    start="/~(?{Operator}%op-invoke;)\s*%token;?=/" end="/%token;?!|$/"/>
 
-    <regexp match="/~(?{Operator}[.&amp;])/"/>
+    <regexp match="/~(?{Operator}%op-invoke;)/"/>
 
     <inherit scheme="command-element"/>
 </scheme>
@@ -920,7 +921,7 @@ SQL syntax in here-strings after <#sql#>
 
 <scheme name="pipeline-block">
     <block scheme="command"
-    start="/(?{start}(?{Pipeline}\|))/" end="/(?{end})%end;/"/>
+    start="/(?{start}(?{Pipeline}\|\|?|&amp;&amp;))/" end="/(?{end})%end;/"/>
 </scheme>
 
 <scheme name="command">
