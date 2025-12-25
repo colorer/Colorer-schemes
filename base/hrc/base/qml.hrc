@@ -126,7 +126,7 @@
             <!-- SINGLE-LINE COMMENTS -->
             <regexp match="/\/\/.*$/" region="qmlComment"/>
 
-            <!-- MULTI-LINE COMMENTS  (todo: not working) -->
+            <!-- MULTI-LINE COMMENTS -->
             <block start="/\/\*/" end="/\*\//"
                    scheme="NotNestedComment"
                    region="qmlComment"
