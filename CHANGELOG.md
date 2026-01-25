@@ -55,6 +55,7 @@
 - [verilog] add define, include, timescale support
 - [cmake] fix escaping strings
 - [cpp] functions outliner list cleanup
+- [markdown] permissive tag-only highlighting for inline HTML
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
