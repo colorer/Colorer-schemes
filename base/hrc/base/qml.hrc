@@ -17,8 +17,6 @@
         ]]></contributors>
     </annotation>
 
-    <import type="def"/>
-
     <type name="qml">
 
         <region name="qmlKeyword" parent="def:Keyword"/>
@@ -28,7 +26,7 @@
         <region name="qmlNumber" parent="def:Number"/>
         <region name="qmlProperty" parent="def:Identifier"/>
         <region name="qmlSignal" parent="def:Identifier"/>
-        <region name="qmlImport" parent="def:Include"/>
+        <region name="qmlImport" parent="def:Directive"/>
 
         <scheme name="StringContent">
             <regexp match="/\\[\\nrt&quot;&apos;]/" region="def:StringContent"/>
@@ -36,6 +34,15 @@
         <scheme name="NotNestedComment">
             <inherit scheme="def:Comment"/>
         </scheme>
+        <scheme name="QmlImport">
+            <block start="/^\s*import\b/" end="/$/"
+                   region="qmlImport">
+                <regexp match="/\bQtQuick\b/" region="qmlType"/>
+                <regexp match="/\bControls\b/" region="qmlType"/>
+                <regexp match="/\b\d+(\.\d+)?\b/" region="qmlNumber"/>
+            </block>
+        </scheme>
+
 
         <!-- Keywords -->
         <scheme name="Keywords">
@@ -120,6 +127,7 @@
             </keywords>
         </scheme>
 
+
         <!-- MAIN SCHEME -->
         <scheme name="qml">
 
@@ -151,14 +159,6 @@
             <!-- NUMBERS -->
             <regexp match="/\b\d+(\.\d+)?\b/" region="qmlNumber"/>
 
-            <!-- IMPORT STATEMENTS -->
-            <block start="/^\s*import\b/" end="/$/"
-                    region="qmlImport">
-                <regexp match="/\bQtQuick\b/" region="qmlType"/>
-                <regexp match="/\bControls\b/" region="qmlType"/>
-                <regexp match="/\b\d+(\.\d+)?\b/" region="qmlNumber"/>
-            </block>
-
             <!-- PROPERTY -->
             <regexp match="/\b\w+\s*:/" region="qmlProperty"/>
 
@@ -166,13 +166,13 @@
             <regexp match="/\bon[A-Z]\w*/" region="qmlSignal"/>
 
             <!-- INHERIT KEYWORDS AND TYPES -->
+            <inherit scheme="QmlImport"/>
             <inherit scheme="Keywords"/>
             <inherit scheme="Types"/>
             <inherit scheme="QuickShellTypes"/>
             <inherit scheme="def:PairedBrackets">
                 <virtual scheme="def:PairedBrackets" subst-scheme="qml"/>
             </inherit>
-
         </scheme>
 
     </type>
