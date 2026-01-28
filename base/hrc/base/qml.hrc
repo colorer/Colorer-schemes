@@ -34,16 +34,17 @@
         <scheme name="NotNestedComment">
             <inherit scheme="def:Comment"/>
         </scheme>
+        <scheme name="QmlImportLine">
+            <regexp match="/\bQtQuick\b/" region="qmlType"/>
+            <regexp match="/\bControls\b/" region="qmlType"/>
+            <regexp match="/\b\d+(\.\d+)?\b/" region="qmlNumber"/>
+        </scheme>
         <scheme name="QmlImport">
             <block start="/^\s*import\b/" end="/$/"
-                   region="qmlImport">
-                <regexp match="/\bQtQuick\b/" region="qmlType"/>
-                <regexp match="/\bControls\b/" region="qmlType"/>
-                <regexp match="/\b\d+(\.\d+)?\b/" region="qmlNumber"/>
-            </block>
+                   scheme="QmlImportLine"
+                   region="qmlImport"/>
         </scheme>
-
-
+        
         <!-- Keywords -->
         <scheme name="Keywords">
             <keywords region="qmlKeyword">
