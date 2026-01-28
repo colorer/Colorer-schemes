@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- [swift] Add Swift syntax highlighting support
+
 ### Changed
 - License has been changed to LGPL 2.1 for the resulting hrc files with the specified license 'MPL 1.1/GPL 2.0/LGPL 2.1'.
 - Simplified catalog.xml.
