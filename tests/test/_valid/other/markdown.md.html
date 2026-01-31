@@ -1,0 +1,98 @@
+﻿ 0: Inline HTML should not bleed:
+ 1: <span class='xml-element-start-lt def-OpenTag def-Tag'>&lt;</span><span class='xml-element-start-name def-Tag'>sub</span><span class='xml-element-start-gt def-OpenTag def-Tag'>></span>lower with<span class='xml-element-start-lt def-OpenTag def-Tag'>&lt;</span><span class='xml-element-start-name def-Tag'>br</span><span class='xml-element-start-gt def-OpenTag def-Tag'>></span><span class='markdown-EmText def-Label'>*breaks*</span><span class='xml-element-end-lt def-CloseTag def-Tag'>&lt;/</span><span class='xml-element-end-name def-Tag'>sub</span><span class='xml-element-end-gt def-CloseTag def-Tag'>></span> and <span class='xml-element-start-lt def-OpenTag def-Tag'>&lt;</span><span class='xml-element-start-name def-Tag'>custom-tag</span> <span class='xml-Attribute-name def-ParameterUnknown def-ParameterStrong def-Parameter'>attr</span><span class='xml-Attribute-eq def-Symbol'>=</span><span class='xml-AttValue-start def-StringEdge def-String'>"</span><span class='xml-AttValue def-String'>v</span><span class='xml-AttValue-end def-StringEdge def-String'>"</span><span class='xml-element-start-gt def-OpenTag def-Tag'>></span>inline with<span class='xml-element-start-lt def-OpenTag def-Tag'>&lt;</span><span class='xml-element-start-name def-Tag'>br</span><span class='xml-element-start-gt def-OpenTag def-Tag'>></span> breaks<span class='xml-element-end-lt def-CloseTag def-Tag'>&lt;/</span><span class='xml-element-end-name def-Tag'>custom-tag</span><span class='xml-element-end-gt def-CloseTag def-Tag'>></span>
+ 2: <span class='markdown-EmText def-Label'>_and break highlighting_</span>.
+ 3: 
+ 4: Inline <span class='xml-element-start-lt def-OpenTag def-Tag'>&lt;</span><span class='xml-element-start-name def-Tag'>div</span> <span class='xml-Attribute-name def-ParameterUnknown def-ParameterStrong def-Parameter'>style</span><span class='xml-Attribute-eq def-Symbol'>=</span><span class='xml-AttValue-start def-StringEdge def-String'>"</span><span class='xml-AttValue def-String'>></span><span class='xml-AttValue-end def-StringEdge def-String'>"</span> <span class='xml-element-start-gt def-OpenTag def-Tag'>/></span>
+ 5: 
+ 6: <span class='def-Comment def-Syntax'>&lt;!--some comment--></span>
+ 7: 
+ 8: Inline <span class='def-Comment def-Syntax'>&lt;!--some XML comment--></span> followed by a self-closing tag <span class='xml-element-start-lt def-OpenTag def-Tag'>&lt;</span><span class='xml-element-start-name def-Tag'>hr</span>    <span class='xml-element-start-gt def-OpenTag def-Tag'>/></span>
+ 9: 
+10: HTML block type 1 (pre/script/style/textarea):
+11: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>pre</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+12:     *This*
+13:         **is**
+14:             `not`
+15:                 _markdown_
+16: <span class='html-htmlDirective def-Directive'>&lt;!DOCTYPE html></span>
+17: 
+18: *Still* __not__
+19: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>html</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='html-htmlParam def-Parameter'>lang</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"en"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+20: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>body</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+21:     <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>p</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>This is <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>br</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span> HTML<span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>p</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+22: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>body</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+23: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>html</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+24: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>pre</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+25: 
+26: HTML block type 2 (comment):
+27: <span class='def-Comment def-Syntax'>&lt;!--</span>
+28: <span class='def-Comment def-Syntax'>*not markdown*</span>
+29: <span class='def-Comment def-Syntax'>--></span>
+30: 
+31: HTML block type 3 (processing instruction):
+32: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;?pi</span>
+33: *not markdown*
+34: <span class='html-htmlTagBr def-OpenTag def-Tag'>?></span>
+35: 
+36: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;?xml</span> <span class='html-htmlParam def-Parameter'>version</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"1.0"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>?></span>
+37: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;?xml-stylesheet</span> <span class='html-htmlParam def-Parameter'>href</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"style.css"</span> <span class='html-htmlParam def-Parameter'>type</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"text/css"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>?></span>
+38: 
+39: HTML block type 4 (declaration):
+40: <span class='html-htmlDirective def-Directive'>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML </span><span class='html-htmlNumb def-Number'>4.01</span><span class='html-htmlDirective def-Directive'> Frameset//EN"</span>
+41: <span class='html-htmlDirective def-Directive'>  "http://www</span><span class='html-htmlNumb def-Number'>.</span><span class='html-htmlDirective def-Directive'>w3</span><span class='html-htmlNumb def-Number'>.</span><span class='html-htmlDirective def-Directive'>org/TR/html4/frameset</span><span class='html-htmlNumb def-Number'>.</span><span class='html-htmlDirective def-Directive'>dtd"></span>
+42: 
+43: HTML block type 5 (CDATA):
+44: <span class='markdown-BlindMark def-Tag'>&lt;![CDATA[</span>
+45: *not markdown*
+46: 
+47: *Still* __not__
+48: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlUnknowTag def-Tag'>data</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> attr</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>'v'</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlUnknowTag def-Tag'>data</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+49: <span class='markdown-BlindMark def-Tag'>]]></span>
+50: 
+51: HTML block type 6 (block tags, blank line ends):
+52: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>div</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='html-htmlParam def-Parameter'>id</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlNumb def-Number'>1</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+53: *not markdown*
+54: 
+55: <span class='markdown-EmText def-Label'>_Hello_</span> <span class='markdown-StrongText def-StringEdge def-String'>**markdown*</span>
+56: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlOpenTag def-Keyword'>div</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+57: 
+58: Additional block tag samples (type 6):
+59: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>table</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='html-htmlParam def-Parameter'>style</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'>CSS</span><span class='html-htmlString def-String'>"</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+60: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>tr</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+61: *no*
+62: 
+63: <span class='markdown-EmText def-Label'>_yes_</span>
+64: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>td</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> attr</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"v"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>`not markdown`<span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlOpenTag def-Keyword'>td</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlOpenTag def-Keyword'>tr</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+65: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlOpenTag def-Keyword'>table</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+66: 
+67: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>section</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+68: *not markdown*
+69: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlOpenTag def-Keyword'>section</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+70: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlUnknowTag def-Tag'>SEARCH</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+71: *not markdown*
+72: 
+73: <span class='markdown-Code def-TypeKeyword def-Keyword'>`markdown`</span>
+74: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlUnknowTag def-Tag'>SEARCH</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+75: 
+76: HTML block type 7 (complete tag line, blank line ends):
+77: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlUnknowTag def-Tag'>custom-tag</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+78: *not markdown*
+79: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlUnknowTag def-Tag'>custom-tag</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+80: 
+81: Additional complete-tag samples (type 7):
+82: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlUnknowTag def-Tag'>ns:x-tag</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='html-htmlParam def-Parameter'>data</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'>-x</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"1"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+83: *not markdown*
+84: 
+85: <span class='xml-element-start-lt def-OpenTag def-Tag'>&lt;</span><span class='xml-element-start-name def-Tag'>down</span><span class='xml-element-start-gt def-OpenTag def-Tag'>></span><span class='markdown-EmText def-Label'>*lies*</span> <span class='markdown-EmText def-Label'>_mark_</span><span class='xml-element-end-lt def-CloseTag def-Tag'>&lt;/</span><span class='xml-element-end-name def-Tag'>down</span><span class='xml-element-end-gt def-CloseTag def-Tag'>></span>
+86: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlUnknowTag def-Tag'>ns:x-tag</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+87: `not markdown`
+88:  
+89: In list:
+90: 
+91: <span class='markdown-ListMark markdown-ShownMark def-Keyword'>-</span> <span class='markdown-ListText def-Number'>before</span>
+92: <span class='markdown-ListText def-Number'>  </span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>pre</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span><span class='markdown-ListText def-Number'></span>
+93:   `not highlighted` _neither_  *nor this*
+94:   <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>pre</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+95: <span class='markdown-ListMark markdown-ShownMark def-Keyword'>-</span> <span class='markdown-ListText def-Number'>after</span>
+96: <span class='markdown-ListText def-Number'>  and here </span><span class='markdown-Code def-TypeKeyword def-Keyword'>`code span`</span><span class='markdown-ListText def-Number'> </span><span class='markdown-EmText def-Label'>_emphasis_</span><span class='markdown-ListText def-Number'>  </span><span class='markdown-StrongText def-StringEdge def-String'>**strong**</span><span class='markdown-ListText def-Number'></span>
+97: 

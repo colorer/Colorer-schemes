@@ -1,0 +1,270 @@
+﻿  0: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Swift syntax highlighting test file</span>
+  1: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Covers: keywords, types, strings, numbers, comments, attributes</span>
+  2: 
+  3: <span class='swift-Keyword def-Keyword'>import</span> Foundation
+  4: <span class='swift-Keyword def-Keyword'>import</span> SwiftUI
+  5: 
+  6: <span class='def-CommentDoc def-Comment def-Syntax'>/// A documentation comment for the protocol</span>
+  7: <span class='swift-Keyword def-Keyword'>protocol</span> Drawable <span class='swift-Symbol def-Symbol'>{</span>
+  8:     <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> draw<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span>
+  9:     <span class='swift-Keyword def-Keyword'>var</span> description<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>{</span> <span class='swift-KeywordModifier def-Keyword'>get</span> <span class='swift-Symbol def-Symbol'>}</span>
+ 10: <span class='swift-Symbol def-Symbol'>}</span>
+ 11: 
+ 12: <span class='def-CommentDoc def-Comment def-Syntax'>/**</span>
+ 13: <span class='def-CommentDoc def-Comment def-Syntax'> * Multi-line documentation comment</span>
+ 14: <span class='def-CommentDoc def-Comment def-Syntax'> * for the Shape class</span>
+ 15: <span class='def-CommentDoc def-Comment def-Syntax'> */</span>
+ 16: <span class='swift-Attribute def-Directive'>@available</span><span class='swift-Symbol def-Symbol'>(</span>iOS <span class='def-NumberFloat def-Number'>15.0</span><span class='swift-Symbol def-Symbol'>,</span> macOS <span class='def-NumberFloat def-Number'>12.0</span><span class='swift-Symbol def-Symbol'>,</span> <span class='swift-Symbol def-Symbol'>*</span><span class='swift-Symbol def-Symbol'>)</span>
+ 17: <span class='swift-Keyword def-Keyword'>public</span> <span class='swift-Keyword def-Keyword'>class</span> Shape<span class='swift-Symbol def-Symbol'>:</span> Drawable <span class='swift-Symbol def-Symbol'>{</span>
+ 18:     <span class='swift-Keyword def-Keyword'>private</span> <span class='swift-Keyword def-Keyword'>var</span> name<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span>
+ 19:     <span class='swift-Keyword def-Keyword'>internal</span> <span class='swift-Keyword def-Keyword'>let</span> sides<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span>
+ 20:     <span class='swift-Keyword def-Keyword'>public</span> <span class='swift-Keyword def-Keyword'>static</span> <span class='swift-Keyword def-Keyword'>var</span> count <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span>
+ 21: 
+ 22:     <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// MARK: - Initialization</span>
+ 23: 
+ 24:     <span class='swift-KeywordModifier def-Keyword'>required</span> <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>init</span><span class='swift-Symbol def-Symbol'>(</span>name<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span><span class='swift-Symbol def-Symbol'>,</span> sides<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 25:         <span class='swift-Keyword def-Keyword'>self</span><span class='swift-Symbol def-Symbol'>.</span>name <span class='swift-Symbol def-Symbol'>=</span> name
+ 26:         <span class='swift-Keyword def-Keyword'>self</span><span class='swift-Symbol def-Symbol'>.</span>sides <span class='swift-Symbol def-Symbol'>=</span> sides
+ 27:         <span class='swift-Keyword def-Keyword'>Self</span><span class='swift-Symbol def-Symbol'>.</span>count <span class='swift-Symbol def-Symbol'>+</span><span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+ 28:     <span class='swift-Symbol def-Symbol'>}</span>
+ 29: 
+ 30:     <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>deinit</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 31:         <span class='swift-Keyword def-Keyword'>Self</span><span class='swift-Symbol def-Symbol'>.</span>count <span class='swift-Symbol def-Symbol'>-</span><span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+ 32:     <span class='swift-Symbol def-Symbol'>}</span>
+ 33: 
+ 34:     <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> draw<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 35:         <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Drawing </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>name</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='swift-String def-String'> with </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>sides</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='swift-String def-String'> sides</span><span class='def-StringEdge def-String'>"</span>
+ 36:     <span class='swift-Symbol def-Symbol'>}</span>
+ 37: 
+ 38:     <span class='swift-Keyword def-Keyword'>var</span> description<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 39:         <span class='swift-KeywordModifier def-Keyword'>get</span> <span class='swift-Symbol def-Symbol'>{</span> <span class='swift-Keyword def-Keyword'>return</span> name <span class='swift-Symbol def-Symbol'>}</span>
+ 40:         <span class='swift-KeywordModifier def-Keyword'>set</span> <span class='swift-Symbol def-Symbol'>{</span> name <span class='swift-Symbol def-Symbol'>=</span> newValue <span class='swift-Symbol def-Symbol'>}</span>
+ 41:     <span class='swift-Symbol def-Symbol'>}</span>
+ 42: <span class='swift-Symbol def-Symbol'>}</span>
+ 43: 
+ 44: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Struct with generics</span>
+ 45: <span class='swift-Keyword def-Keyword'>struct</span> Container<span class='swift-Symbol def-Symbol'>&lt;</span>T<span class='swift-Symbol def-Symbol'>:</span> Equatable<span class='swift-Symbol def-Symbol'>></span><span class='swift-Symbol def-Symbol'>:</span> Hashable <span class='swift-Symbol def-Symbol'>{</span>
+ 46:     <span class='swift-Keyword def-Keyword'>var</span> items<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-Symbol def-Symbol'>[</span>T<span class='swift-Symbol def-Symbol'>]</span> <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Symbol def-Symbol'>[</span><span class='swift-Symbol def-Symbol'>]</span>
+ 47: 
+ 48:     <span class='swift-KeywordModifier def-Keyword'>mutating</span> <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> add<span class='swift-Symbol def-Symbol'>(</span><span class='def-Number'>_</span> item<span class='swift-Symbol def-Symbol'>:</span> T<span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 49:         items<span class='swift-Symbol def-Symbol'>.</span>append<span class='swift-Symbol def-Symbol'>(</span>item<span class='swift-Symbol def-Symbol'>)</span>
+ 50:     <span class='swift-Symbol def-Symbol'>}</span>
+ 51: 
+ 52:     <span class='swift-Keyword def-Keyword'>subscript</span><span class='swift-Symbol def-Symbol'>(</span>index<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> T <span class='swift-Symbol def-Symbol'>{</span>
+ 53:         <span class='swift-Keyword def-Keyword'>return</span> items<span class='swift-Symbol def-Symbol'>[</span>index<span class='swift-Symbol def-Symbol'>]</span>
+ 54:     <span class='swift-Symbol def-Symbol'>}</span>
+ 55: <span class='swift-Symbol def-Symbol'>}</span>
+ 56: 
+ 57: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Enum with associated values</span>
+ 58: <span class='swift-Keyword def-Keyword'>enum</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Result</span><span class='swift-Symbol def-Symbol'>&lt;</span>Success<span class='swift-Symbol def-Symbol'>,</span> Failure<span class='swift-Symbol def-Symbol'>:</span> Error<span class='swift-Symbol def-Symbol'>></span> <span class='swift-Symbol def-Symbol'>{</span>
+ 59:     <span class='swift-Keyword def-Keyword'>case</span> success<span class='swift-Symbol def-Symbol'>(</span>Success<span class='swift-Symbol def-Symbol'>)</span>
+ 60:     <span class='swift-Keyword def-Keyword'>case</span> failure<span class='swift-Symbol def-Symbol'>(</span>Failure<span class='swift-Symbol def-Symbol'>)</span>
+ 61: 
+ 62:     <span class='swift-Keyword def-Keyword'>var</span> isSuccess<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Bool</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 63:         <span class='swift-Keyword def-Keyword'>switch</span> <span class='swift-Keyword def-Keyword'>self</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 64:         <span class='swift-Keyword def-Keyword'>case</span> <span class='swift-Symbol def-Symbol'>.</span>success<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-Keyword def-Keyword'>return</span> <span class='swift-Keyword def-Keyword'>true</span>
+ 65:         <span class='swift-Keyword def-Keyword'>case</span> <span class='swift-Symbol def-Symbol'>.</span>failure<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-Keyword def-Keyword'>return</span> <span class='swift-Keyword def-Keyword'>false</span>
+ 66:         <span class='swift-Symbol def-Symbol'>}</span>
+ 67:     <span class='swift-Symbol def-Symbol'>}</span>
+ 68: <span class='swift-Symbol def-Symbol'>}</span>
+ 69: 
+ 70: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Actor for concurrency</span>
+ 71: <span class='swift-Keyword def-Keyword'>actor</span> Counter <span class='swift-Symbol def-Symbol'>{</span>
+ 72:     <span class='swift-Keyword def-Keyword'>private</span> <span class='swift-Keyword def-Keyword'>var</span> value <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span>
+ 73: 
+ 74:     <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> increment<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 75:         value <span class='swift-Symbol def-Symbol'>+</span><span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+ 76:     <span class='swift-Symbol def-Symbol'>}</span>
+ 77: 
+ 78:     <span class='swift-KeywordModifier def-Keyword'>nonisolated</span> <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> description<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>{</span>
+ 79:         <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Counter actor</span><span class='def-StringEdge def-String'>"</span>
+ 80:     <span class='swift-Symbol def-Symbol'>}</span>
+ 81: <span class='swift-Symbol def-Symbol'>}</span>
+ 82: 
+ 83: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Extension with protocol conformance</span>
+ 84: <span class='swift-Keyword def-Keyword'>extension</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>:</span> Drawable <span class='swift-Symbol def-Symbol'>{</span>
+ 85:     <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> draw<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>{</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span><span class='swift-Symbol def-Symbol'>(</span><span class='swift-Keyword def-Keyword'>self</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>}</span>
+ 86:     <span class='swift-Keyword def-Keyword'>var</span> description<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>{</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Integer: </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-Keyword def-Keyword'>self</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='def-StringEdge def-String'>"</span> <span class='swift-Symbol def-Symbol'>}</span>
+ 87: <span class='swift-Symbol def-Symbol'>}</span>
+ 88: 
+ 89: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Numbers: decimal, binary, octal, hex, float</span>
+ 90: <span class='swift-Keyword def-Keyword'>let</span> decimal <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>42</span>
+ 91: <span class='swift-Keyword def-Keyword'>let</span> binary <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberBin def-Number'>0</span><span class='def-NumberSuffix def-Number'>b</span><span class='def-NumberBin def-Number'>101010</span>
+ 92: <span class='swift-Keyword def-Keyword'>let</span> octal <span class='swift-Symbol def-Symbol'>=</span> <span class='def-Number'>0o52</span>
+ 93: <span class='swift-Keyword def-Keyword'>let</span> hex <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberHex def-Number'>0x2A</span>
+ 94: <span class='swift-Keyword def-Keyword'>let</span> float <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>3.14159</span>
+ 95: <span class='swift-Keyword def-Keyword'>let</span> scientific <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>1.25e-2</span>
+ 96: <span class='swift-Keyword def-Keyword'>let</span> hexFloat <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberHex def-Number'>0xC</span><span class='swift-Symbol def-Symbol'>.</span><span class='def-Number'>3</span>p<span class='def-Number'>0</span>
+ 97: <span class='swift-Keyword def-Keyword'>let</span> bigNumber <span class='swift-Symbol def-Symbol'>=</span> <span class='def-Number'>1_000_000</span>
+ 98: <span class='swift-Keyword def-Keyword'>let</span> negativeFloat <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Symbol def-Symbol'>-</span><span class='def-NumberFloat def-Number'>273.15</span>
+ 99: 
+100: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Strings</span>
+101: <span class='swift-Keyword def-Keyword'>let</span> simple <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Hello, World!</span><span class='def-StringEdge def-String'>"</span>
+102: <span class='swift-Keyword def-Keyword'>let</span> escaped <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Tab:</span><span class='swift-StringEscape def-StringContent def-String'>\t</span><span class='swift-String def-String'>Newline:</span><span class='swift-StringEscape def-StringContent def-String'>\n</span><span class='swift-String def-String'>Quote:</span><span class='swift-StringEscape def-StringContent def-String'>\"</span><span class='def-StringEdge def-String'>"</span>
+103: <span class='swift-Keyword def-Keyword'>let</span> unicode <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Unicode: </span><span class='swift-StringEscape def-StringContent def-String'>\u{1F600}</span><span class='def-StringEdge def-String'>"</span>
+104: <span class='swift-Keyword def-Keyword'>let</span> interpolated <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Value is </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>decimal</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='swift-String def-String'> and </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>float</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='def-StringEdge def-String'>"</span>
+105: <span class='swift-Keyword def-Keyword'>let</span> multiline <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>"""</span><span class='swift-String def-String'></span>
+106: <span class='swift-String def-String'>    This is a multiline</span>
+107: <span class='swift-String def-String'>    string literal with</span>
+108: <span class='swift-String def-String'>    interpolation: </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>hex</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='swift-String def-String'></span>
+109: <span class='swift-String def-String'>    </span><span class='def-StringEdge def-String'>"""</span>
+110: <span class='swift-Keyword def-Keyword'>let</span> raw <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>#"</span><span class='swift-String def-String'>Raw string with "quotes" and \n not escaped</span><span class='def-StringEdge def-String'>"#</span>
+111: <span class='swift-Keyword def-Keyword'>let</span> rawInterpolated <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>#"</span><span class='swift-String def-String'>Value: \#(decimal)</span><span class='def-StringEdge def-String'>"#</span>
+112: 
+113: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Control flow</span>
+114: <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> processValue<span class='swift-Symbol def-Symbol'>(</span><span class='def-Number'>_</span> value<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>?</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>{</span>
+115:     <span class='swift-Keyword def-Keyword'>guard</span> <span class='swift-Keyword def-Keyword'>let</span> v <span class='swift-Symbol def-Symbol'>=</span> value <span class='swift-Keyword def-Keyword'>else</span> <span class='swift-Symbol def-Symbol'>{</span>
+116:         <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>nil</span><span class='def-StringEdge def-String'>"</span>
+117:     <span class='swift-Symbol def-Symbol'>}</span>
+118: 
+119:     <span class='swift-Keyword def-Keyword'>if</span> v <span class='swift-Symbol def-Symbol'>&lt;</span> <span class='def-NumberDec def-Number'>0</span> <span class='swift-Symbol def-Symbol'>{</span>
+120:         <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>negative</span><span class='def-StringEdge def-String'>"</span>
+121:     <span class='swift-Symbol def-Symbol'>}</span> <span class='swift-Keyword def-Keyword'>else</span> <span class='swift-Keyword def-Keyword'>if</span> v <span class='swift-Symbol def-Symbol'>=</span><span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span> <span class='swift-Symbol def-Symbol'>{</span>
+122:         <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>zero</span><span class='def-StringEdge def-String'>"</span>
+123:     <span class='swift-Symbol def-Symbol'>}</span>
+124: 
+125:     <span class='swift-Keyword def-Keyword'>for</span> i <span class='swift-Keyword def-Keyword'>in</span> <span class='def-NumberDec def-Number'>0</span><span class='swift-Symbol def-Symbol'>.</span><span class='swift-Symbol def-Symbol'>.</span><span class='swift-Symbol def-Symbol'>&lt;</span>v <span class='swift-Symbol def-Symbol'>{</span>
+126:         print<span class='swift-Symbol def-Symbol'>(</span>i<span class='swift-Symbol def-Symbol'>)</span>
+127:     <span class='swift-Symbol def-Symbol'>}</span>
+128: 
+129:     <span class='swift-Keyword def-Keyword'>var</span> sum <span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>0</span>
+130:     <span class='swift-Keyword def-Keyword'>while</span> sum <span class='swift-Symbol def-Symbol'>&lt;</span> v <span class='swift-Symbol def-Symbol'>{</span>
+131:         sum <span class='swift-Symbol def-Symbol'>+</span><span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+132:     <span class='swift-Symbol def-Symbol'>}</span>
+133: 
+134:     <span class='swift-Keyword def-Keyword'>repeat</span> <span class='swift-Symbol def-Symbol'>{</span>
+135:         sum <span class='swift-Symbol def-Symbol'>-</span><span class='swift-Symbol def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1</span>
+136:     <span class='swift-Symbol def-Symbol'>}</span> <span class='swift-Keyword def-Keyword'>while</span> sum <span class='swift-Symbol def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span>
+137: 
+138:     <span class='swift-Keyword def-Keyword'>switch</span> v <span class='swift-Symbol def-Symbol'>{</span>
+139:     <span class='swift-Keyword def-Keyword'>case</span> <span class='def-NumberDec def-Number'>0</span><span class='swift-Symbol def-Symbol'>:</span>
+140:         <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>zero</span><span class='def-StringEdge def-String'>"</span>
+141:     <span class='swift-Keyword def-Keyword'>case</span> <span class='def-NumberDec def-Number'>1</span><span class='swift-Symbol def-Symbol'>.</span><span class='swift-Symbol def-Symbol'>.</span><span class='def-NumberFloat def-Number'>.10</span><span class='swift-Symbol def-Symbol'>:</span>
+142:         <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>small</span><span class='def-StringEdge def-String'>"</span>
+143:     <span class='swift-Keyword def-Keyword'>case</span> <span class='swift-Keyword def-Keyword'>let</span> x <span class='swift-Keyword def-Keyword'>where</span> x <span class='swift-Symbol def-Symbol'>></span> <span class='def-NumberDec def-Number'>100</span><span class='swift-Symbol def-Symbol'>:</span>
+144:         <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>large: </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>x</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='def-StringEdge def-String'>"</span>
+145:     <span class='swift-Keyword def-Keyword'>default</span><span class='swift-Symbol def-Symbol'>:</span>
+146:         <span class='swift-Keyword def-Keyword'>break</span>
+147:     <span class='swift-Symbol def-Symbol'>}</span>
+148: 
+149:     <span class='swift-Keyword def-Keyword'>defer</span> <span class='swift-Symbol def-Symbol'>{</span>
+150:         print<span class='swift-Symbol def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Cleanup</span><span class='def-StringEdge def-String'>"</span><span class='swift-Symbol def-Symbol'>)</span>
+151:     <span class='swift-Symbol def-Symbol'>}</span>
+152: 
+153:     <span class='swift-Keyword def-Keyword'>return</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>done</span><span class='def-StringEdge def-String'>"</span>
+154: <span class='swift-Symbol def-Symbol'>}</span>
+155: 
+156: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Error handling</span>
+157: <span class='swift-Keyword def-Keyword'>enum</span> NetworkError<span class='swift-Symbol def-Symbol'>:</span> Error <span class='swift-Symbol def-Symbol'>{</span>
+158:     <span class='swift-Keyword def-Keyword'>case</span> timeout
+159:     <span class='swift-Keyword def-Keyword'>case</span> notFound<span class='swift-Symbol def-Symbol'>(</span>url<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span><span class='swift-Symbol def-Symbol'>)</span>
+160: <span class='swift-Symbol def-Symbol'>}</span>
+161: 
+162: <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> fetchData<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Keyword def-Keyword'>throws</span> <span class='swift-Symbol def-Symbol'>-></span> Data <span class='swift-Symbol def-Symbol'>{</span>
+163:     <span class='swift-Keyword def-Keyword'>throw</span> NetworkError<span class='swift-Symbol def-Symbol'>.</span>timeout
+164: <span class='swift-Symbol def-Symbol'>}</span>
+165: 
+166: <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> handleError<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>{</span>
+167:     <span class='swift-Keyword def-Keyword'>do</span> <span class='swift-Symbol def-Symbol'>{</span>
+168:         <span class='swift-Keyword def-Keyword'>let</span> data <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Keyword def-Keyword'>try</span> fetchData<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span>
+169:         print<span class='swift-Symbol def-Symbol'>(</span>data<span class='swift-Symbol def-Symbol'>)</span>
+170:     <span class='swift-Symbol def-Symbol'>}</span> <span class='swift-Keyword def-Keyword'>catch</span> NetworkError<span class='swift-Symbol def-Symbol'>.</span>timeout <span class='swift-Symbol def-Symbol'>{</span>
+171:         print<span class='swift-Symbol def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Timeout!</span><span class='def-StringEdge def-String'>"</span><span class='swift-Symbol def-Symbol'>)</span>
+172:     <span class='swift-Symbol def-Symbol'>}</span> <span class='swift-Keyword def-Keyword'>catch</span> <span class='swift-Symbol def-Symbol'>{</span>
+173:         print<span class='swift-Symbol def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Unknown error: </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>error</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='def-StringEdge def-String'>"</span><span class='swift-Symbol def-Symbol'>)</span>
+174:     <span class='swift-Symbol def-Symbol'>}</span>
+175: 
+176:     <span class='swift-Keyword def-Keyword'>let</span> result <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Keyword def-Keyword'>try</span><span class='swift-Symbol def-Symbol'>?</span> fetchData<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span>
+177:     <span class='swift-Keyword def-Keyword'>let</span> forced <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Keyword def-Keyword'>try</span><span class='swift-Symbol def-Symbol'>!</span> Data<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span>
+178:     <span class='def-Number'>_</span> <span class='swift-Symbol def-Symbol'>=</span> result
+179:     <span class='def-Number'>_</span> <span class='swift-Symbol def-Symbol'>=</span> forced
+180: <span class='swift-Symbol def-Symbol'>}</span>
+181: 
+182: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Async/await</span>
+183: <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> asyncOperation<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-KeywordModifier def-Keyword'>async</span> <span class='swift-Keyword def-Keyword'>throws</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span> <span class='swift-Symbol def-Symbol'>{</span>
+184:     <span class='swift-Keyword def-Keyword'>try</span> <span class='swift-Keyword def-Keyword'>await</span> Task<span class='swift-Symbol def-Symbol'>.</span>sleep<span class='swift-Symbol def-Symbol'>(</span>nanoseconds<span class='swift-Symbol def-Symbol'>:</span> <span class='def-Number'>1_000_000</span><span class='swift-Symbol def-Symbol'>)</span>
+185:     <span class='swift-Keyword def-Keyword'>return</span> <span class='def-NumberDec def-Number'>42</span>
+186: <span class='swift-Symbol def-Symbol'>}</span>
+187: 
+188: <span class='swift-Attribute def-Directive'>@MainActor</span>
+189: <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> updateUI<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-KeywordModifier def-Keyword'>async</span> <span class='swift-Symbol def-Symbol'>{</span>
+190:     <span class='swift-Keyword def-Keyword'>let</span> value <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Keyword def-Keyword'>await</span> <span class='swift-Symbol def-Symbol'>(</span><span class='swift-Keyword def-Keyword'>try</span><span class='swift-Symbol def-Symbol'>?</span> asyncOperation<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>?</span><span class='swift-Symbol def-Symbol'>?</span> <span class='def-NumberDec def-Number'>0</span>
+191:     print<span class='swift-Symbol def-Symbol'>(</span>value<span class='swift-Symbol def-Symbol'>)</span>
+192: <span class='swift-Symbol def-Symbol'>}</span>
+193: 
+194: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Closures</span>
+195: <span class='swift-Keyword def-Keyword'>let</span> closure <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Symbol def-Symbol'>{</span> <span class='swift-Symbol def-Symbol'>(</span>x<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span> <span class='swift-Keyword def-Keyword'>in</span>
+196:     <span class='swift-Keyword def-Keyword'>return</span> x <span class='swift-Symbol def-Symbol'>*</span> <span class='def-NumberDec def-Number'>2</span>
+197: <span class='swift-Symbol def-Symbol'>}</span>
+198: 
+199: <span class='swift-Keyword def-Keyword'>let</span> shortClosure<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-Symbol def-Symbol'>(</span><span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span> <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Symbol def-Symbol'>{</span> $<span class='def-NumberDec def-Number'>0</span> <span class='swift-Symbol def-Symbol'>*</span> <span class='def-NumberDec def-Number'>2</span> <span class='swift-Symbol def-Symbol'>}</span>
+200: 
+201: <span class='swift-Keyword def-Keyword'>let</span> sorted <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Symbol def-Symbol'>[</span><span class='def-NumberDec def-Number'>3</span><span class='swift-Symbol def-Symbol'>,</span> <span class='def-NumberDec def-Number'>1</span><span class='swift-Symbol def-Symbol'>,</span> <span class='def-NumberDec def-Number'>2</span><span class='swift-Symbol def-Symbol'>]</span><span class='swift-Symbol def-Symbol'>.</span>sorted <span class='swift-Symbol def-Symbol'>{</span> $<span class='def-NumberDec def-Number'>0</span> <span class='swift-Symbol def-Symbol'>&lt;</span> $<span class='def-NumberDec def-Number'>1</span> <span class='swift-Symbol def-Symbol'>}</span>
+202: 
+203: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Property wrappers</span>
+204: <span class='swift-Attribute def-Directive'>@propertyWrapper</span>
+205: <span class='swift-Keyword def-Keyword'>struct</span> Clamped <span class='swift-Symbol def-Symbol'>{</span>
+206:     <span class='swift-Keyword def-Keyword'>private</span> <span class='swift-Keyword def-Keyword'>var</span> value<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span>
+207:     <span class='swift-Keyword def-Keyword'>private</span> <span class='swift-Keyword def-Keyword'>let</span> range<span class='swift-Symbol def-Symbol'>:</span> ClosedRange<span class='swift-Symbol def-Symbol'>&lt;</span><span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>></span>
+208: 
+209:     <span class='swift-Keyword def-Keyword'>var</span> wrappedValue<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span> <span class='swift-Symbol def-Symbol'>{</span>
+210:         <span class='swift-KeywordModifier def-Keyword'>get</span> <span class='swift-Symbol def-Symbol'>{</span> value <span class='swift-Symbol def-Symbol'>}</span>
+211:         <span class='swift-KeywordModifier def-Keyword'>set</span> <span class='swift-Symbol def-Symbol'>{</span> value <span class='swift-Symbol def-Symbol'>=</span> min<span class='swift-Symbol def-Symbol'>(</span>max<span class='swift-Symbol def-Symbol'>(</span>newValue<span class='swift-Symbol def-Symbol'>,</span> range<span class='swift-Symbol def-Symbol'>.</span>lowerBound<span class='swift-Symbol def-Symbol'>)</span><span class='swift-Symbol def-Symbol'>,</span> range<span class='swift-Symbol def-Symbol'>.</span>upperBound<span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>}</span>
+212:     <span class='swift-Symbol def-Symbol'>}</span>
+213: 
+214:     <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>init</span><span class='swift-Symbol def-Symbol'>(</span>wrappedValue<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>,</span> <span class='def-Number'>_</span> range<span class='swift-Symbol def-Symbol'>:</span> ClosedRange<span class='swift-Symbol def-Symbol'>&lt;</span><span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span><span class='swift-Symbol def-Symbol'>></span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>{</span>
+215:         <span class='swift-Keyword def-Keyword'>self</span><span class='swift-Symbol def-Symbol'>.</span>range <span class='swift-Symbol def-Symbol'>=</span> range
+216:         <span class='swift-Keyword def-Keyword'>self</span><span class='swift-Symbol def-Symbol'>.</span>value <span class='swift-Symbol def-Symbol'>=</span> min<span class='swift-Symbol def-Symbol'>(</span>max<span class='swift-Symbol def-Symbol'>(</span>wrappedValue<span class='swift-Symbol def-Symbol'>,</span> range<span class='swift-Symbol def-Symbol'>.</span>lowerBound<span class='swift-Symbol def-Symbol'>)</span><span class='swift-Symbol def-Symbol'>,</span> range<span class='swift-Symbol def-Symbol'>.</span>upperBound<span class='swift-Symbol def-Symbol'>)</span>
+217:     <span class='swift-Symbol def-Symbol'>}</span>
+218: <span class='swift-Symbol def-Symbol'>}</span>
+219: 
+220: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Compiler directives</span>
+221: <span class='swift-Directive def-Directive'>#if</span> DEBUG
+222: <span class='swift-Keyword def-Keyword'>let</span> debugMode <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Keyword def-Keyword'>true</span>
+223: <span class='swift-Directive def-Directive'>#elseif</span> RELEASE
+224: <span class='swift-Keyword def-Keyword'>let</span> debugMode <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Keyword def-Keyword'>false</span>
+225: <span class='swift-Directive def-Directive'>#else</span>
+226: <span class='swift-Keyword def-Keyword'>let</span> debugMode <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Keyword def-Keyword'>false</span>
+227: <span class='swift-Directive def-Directive'>#endif</span>
+228: 
+229: <span class='swift-Directive def-Directive'>#if</span> swift<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>></span><span class='swift-Symbol def-Symbol'>=</span><span class='def-NumberFloat def-Number'>5.5</span><span class='swift-Symbol def-Symbol'>)</span>
+230: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Swift 5.5+ code</span>
+231: <span class='swift-Directive def-Directive'>#endif</span>
+232: 
+233: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Special literals</span>
+234: <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> logLocation<span class='swift-Symbol def-Symbol'>(</span>file<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Directive def-Directive'>#file</span><span class='swift-Symbol def-Symbol'>,</span> line<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Int</span> <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Directive def-Directive'>#line</span><span class='swift-Symbol def-Symbol'>,</span> function<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span> <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Directive def-Directive'>#function</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>{</span>
+235:     print<span class='swift-Symbol def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>file</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='swift-String def-String'>:</span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>line</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='swift-String def-String'> - </span><span class='def-InsertionStart def-Insertion'>\(</span><span class='swift-StringInterpolation def-Insertion'>function</span><span class='def-InsertionEnd def-Insertion'>)</span><span class='def-StringEdge def-String'>"</span><span class='swift-Symbol def-Symbol'>)</span>
+236: <span class='swift-Symbol def-Symbol'>}</span>
+237: 
+238: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Keywords as identifiers (backticks)</span>
+239: <span class='swift-Keyword def-Keyword'>let</span> `<span class='swift-Keyword def-Keyword'>class</span>` <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>not a class</span><span class='def-StringEdge def-String'>"</span>
+240: <span class='swift-Keyword def-Keyword'>let</span> `<span class='swift-Keyword def-Keyword'>self</span>` <span class='swift-Symbol def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>not self</span><span class='def-StringEdge def-String'>"</span>
+241: 
+242: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Operators</span>
+243: <span class='swift-Keyword def-Keyword'>precedencegroup</span> ExponentiationPrecedence <span class='swift-Symbol def-Symbol'>{</span>
+244:     higherThan<span class='swift-Symbol def-Symbol'>:</span> MultiplicationPrecedence
+245:     associativity<span class='swift-Symbol def-Symbol'>:</span> right
+246: <span class='swift-Symbol def-Symbol'>}</span>
+247: 
+248: <span class='swift-KeywordModifier def-Keyword'>infix</span> <span class='swift-Keyword def-Keyword'>operator</span> <span class='swift-Symbol def-Symbol'>*</span><span class='swift-Symbol def-Symbol'>*</span><span class='swift-Symbol def-Symbol'>:</span> ExponentiationPrecedence
+249: 
+250: <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> <span class='swift-Symbol def-Symbol'>*</span><span class='swift-Symbol def-Symbol'>*</span> <span class='swift-Symbol def-Symbol'>(</span>base<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Double</span><span class='swift-Symbol def-Symbol'>,</span> power<span class='swift-Symbol def-Symbol'>:</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Double</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Double</span> <span class='swift-Symbol def-Symbol'>{</span>
+251:     <span class='swift-Keyword def-Keyword'>return</span> pow<span class='swift-Symbol def-Symbol'>(</span>base<span class='swift-Symbol def-Symbol'>,</span> power<span class='swift-Symbol def-Symbol'>)</span>
+252: <span class='swift-Symbol def-Symbol'>}</span>
+253: 
+254: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Type aliases and opaque types</span>
+255: <span class='swift-Keyword def-Keyword'>typealias</span> StringDict <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Dictionary</span><span class='swift-Symbol def-Symbol'>&lt;</span><span class='swift-KeywordType def-TypeKeyword def-Keyword'>String</span><span class='swift-Symbol def-Symbol'>,</span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Any</span><span class='swift-Symbol def-Symbol'>></span>
+256: <span class='swift-Keyword def-Keyword'>typealias</span> Completion <span class='swift-Symbol def-Symbol'>=</span> <span class='swift-Symbol def-Symbol'>(</span><span class='swift-KeywordType def-TypeKeyword def-Keyword'>Result</span><span class='swift-Symbol def-Symbol'>&lt;</span>Data<span class='swift-Symbol def-Symbol'>,</span> Error<span class='swift-Symbol def-Symbol'>></span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordType def-TypeKeyword def-Keyword'>Void</span>
+257: 
+258: <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> makeShape<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-Symbol def-Symbol'>-></span> <span class='swift-KeywordModifier def-Keyword'>some</span> Drawable <span class='swift-Symbol def-Symbol'>{</span>
+259:     <span class='swift-Keyword def-Keyword'>return</span> Shape<span class='swift-Symbol def-Symbol'>(</span>name<span class='swift-Symbol def-Symbol'>:</span> <span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Square</span><span class='def-StringEdge def-String'>"</span><span class='swift-Symbol def-Symbol'>,</span> sides<span class='swift-Symbol def-Symbol'>:</span> <span class='def-NumberDec def-Number'>4</span><span class='swift-Symbol def-Symbol'>)</span>
+260: <span class='swift-Symbol def-Symbol'>}</span>
+261: 
+262: <span class='swift-LineComment def-LineComment def-Comment def-Syntax'>// Main entry point</span>
+263: <span class='swift-Attribute def-Directive'>@main</span>
+264: <span class='swift-Keyword def-Keyword'>struct</span> App <span class='swift-Symbol def-Symbol'>{</span>
+265:     <span class='swift-Keyword def-Keyword'>static</span> <span class='swift-FunctionKeyword def-FunctionKeyword def-Keyword'>func</span> main<span class='swift-Symbol def-Symbol'>(</span><span class='swift-Symbol def-Symbol'>)</span> <span class='swift-KeywordModifier def-Keyword'>async</span> <span class='swift-Symbol def-Symbol'>{</span>
+266:         print<span class='swift-Symbol def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='swift-String def-String'>Hello, Swift!</span><span class='def-StringEdge def-String'>"</span><span class='swift-Symbol def-Symbol'>)</span>
+267:     <span class='swift-Symbol def-Symbol'>}</span>
+268: <span class='swift-Symbol def-Symbol'>}</span>
+269: 
