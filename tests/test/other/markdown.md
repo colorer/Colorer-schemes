@@ -1,5 +1,5 @@
 Inline HTML should not bleed:
-<sub>lower with<br> breaks</sub> and <custom-tag attr="v">inline with<br> breaks</custom-tag>
+<sub>lower with<br>*breaks*</sub> and <custom-tag attr="v">inline with<br> breaks</custom-tag>
 _and break highlighting_.
 
 Inline <div style=">" />
@@ -15,6 +15,8 @@ HTML block type 1 (pre/script/style/textarea):
             `not`
                 _markdown_
 <!DOCTYPE html>
+
+*Still* __not__
 <html lang="en">
 <body>
     <p>This is <br> HTML</p>
@@ -42,17 +44,25 @@ HTML block type 4 (declaration):
 HTML block type 5 (CDATA):
 <![CDATA[
 *not markdown*
+
+*Still* __not__
 <data attr='v'></data>
 ]]>
 
 HTML block type 6 (block tags, blank line ends):
-<div>
+<div id=1>
 *not markdown*
+
+_Hello_ **markdown*
 </div>
 
 Additional block tag samples (type 6):
 <table style="CSS" >
-<tr><td attr="v">`not markdown`</td></tr>
+<tr>
+*no*
+
+_yes_
+<td attr="v">`not markdown`</td></tr>
 </table>
 
 <section>
@@ -60,6 +70,8 @@ Additional block tag samples (type 6):
 </section>
 <SEARCH>
 *not markdown*
+
+`markdown`
 </SEARCH>
 
 HTML block type 7 (complete tag line, blank line ends):
@@ -70,7 +82,10 @@ HTML block type 7 (complete tag line, blank line ends):
 Additional complete-tag samples (type 7):
 <ns:x-tag data-x="1">
 *not markdown*
+
+<down>*lies* _mark_</down>
 </ns:x-tag>
+`not markdown`
  
 In list:
 
