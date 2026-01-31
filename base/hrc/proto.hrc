@@ -654,9 +654,9 @@
         <filename weight='5'>/\.awk$/i</filename>
         <firstline>/^# gawk/i</firstline>
     </prototype>
-    <prototype name="powershell" group="scripts" description="PowerShell">
+    <prototype name="powershell" group="scripts" description="PowerShell/Nushell">
         <location link="scripts/powershell.hrc" />
-        <filename>/\.ps(m|d)?1$/i</filename>
+        <filename>/\.(ps1|psm1|psd1|nu)$/i</filename>
     </prototype>
     <prototype name="r" group="scripts" description="R">
         <location link="scripts/r.hrc" />
