@@ -22,7 +22,7 @@
 - Add *.xaml to xml prototype
 - Add *.lpr to pascal prototype
 - Add *.lfm to delphiform prototype
-  
+
 ### Fixed
 - [calcset] update hrc for latest file structure.
 - [picasm] fix typo  sndwf -> andwf
@@ -59,6 +59,7 @@
 - [cmake] fix escaping strings
 - [cpp] functions outliner list cleanup
 - [markdown] improve HTML handling (inline tags and CommonMark blocks)
+- [shell-posix] fix heredoc with '<<-' operator
 
 ### Added
 - New package type of base - all packed. Hrc and hrd files in one archive. Directory 'auto' not in archive.
