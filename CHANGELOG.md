@@ -29,6 +29,7 @@
 - Add *.lfm to delphiform prototype
 
 ### Fixed
+- [perl] recognise regexp after range operator (`/'/ .. /"/`)
 - [calcset] update hrc for latest file structure.
 - [picasm] fix typo  sndwf -> andwf
 - [python] numeric fixes, more strict, and fine-grained types/classes
