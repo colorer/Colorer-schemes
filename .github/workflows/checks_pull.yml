@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Build base
         run: ./build.sh base.distr-all
@@ -19,9 +19,9 @@ jobs:
       - name: Install colorer
         run: |
           sudo apt-get -y install libicu74 libxml2 zlib1g libminizip1t64
-          wget https://github.com/colorer/Colorer-library/releases/download/v1.5.0/colorer.x64.v1.5.0.tar.gz
+          wget https://github.com/colorer/Colorer-library/releases/download/v1.6.0/colorer.x64.v1.6.0.tar.gz
           mkdir bin
-          tar -xf colorer.x64.v1.5.0.tar.gz -C ./bin
+          tar -xf colorer.x64.v1.6.0.tar.gz -C ./bin
 
       - name: Test load all schemes
         run: ./build.sh test.load
