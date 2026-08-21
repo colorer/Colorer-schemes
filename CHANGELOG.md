@@ -4,6 +4,10 @@
 
 ### Added
 - [swift] Add Swift syntax highlighting support
+- [go.mod] Add go.mod file syntax highlighting support
+- [go.sum] Add go.sum file syntax highlighting support
+- [gitignore] Add .gitignore file syntax highlighting support
+- [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
 - License has been changed to LGPL 2.1 for the resulting hrc files with the specified license 'MPL 1.1/GPL 2.0/LGPL 2.1'.

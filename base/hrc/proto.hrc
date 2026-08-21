@@ -198,6 +198,10 @@
         <location link="base/lua.hrc" />
         <filename>/\.(w?lua)$/i</filename>
     </prototype>
+    <prototype name="moonscript" group="main" description="MoonScript">
+        <location link="base/moonscript.hrc" />
+        <filename>/\.moon$/i</filename>
+    </prototype>
     <prototype name="ruby" group="main" description="Ruby">
         <location link="base/ruby.hrc" />
         <filename>/\.(rb|rbw|ruby|rake)$/i</filename>
@@ -232,6 +236,14 @@
         <parameters>
             <param name="tabs-as-errors" value="false" description="Shows tabulation symbol as error" />
         </parameters>
+    </prototype>
+    <prototype name="go-mod" group="main" description="Go module">
+        <location link="base/go-mod.hrc" />
+        <filename>/^go\.mod$/i</filename>
+    </prototype>
+    <prototype name="go-sum" group="main" description="Go checksum">
+        <location link="base/go-sum.hrc" />
+        <filename>/^go\.sum$/i</filename>
     </prototype>
     <prototype name="kotlin" group="main" description="Kotlin">
         <location link="base/kotlin.hrc" />
@@ -652,6 +664,10 @@
         <location link="scripts/config.hrc" />
         <filename>/\.(ctl|tpl|ini|cfg|inf|srg|conf|types|tab|dof|dsk|lng|editorconfig)$/i</filename>
         <firstline>/^[;\[\#]/</firstline>
+    </prototype>
+    <prototype name="gitignore" group="scripts" description="Git ignore">
+        <location link="scripts/gitignore.hrc" />
+        <filename>/^\.gitignore$/i</filename>
     </prototype>
     <prototype name="awk" group="scripts" description="AWK">
         <location link="scripts/awk.hrc" />
