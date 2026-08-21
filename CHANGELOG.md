@@ -10,6 +10,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [css] add @media rules and media query highlighting
 - License has been changed to LGPL 2.1 for the resulting hrc files with the specified license 'MPL 1.1/GPL 2.0/LGPL 2.1'.
 - Simplified catalog.xml.
 - Use new xsd schema for catalog.xml.

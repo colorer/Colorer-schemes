@@ -1,0 +1,77 @@
+/* MDN: top-level media query */
+@media screen and (min-width: 900px) {
+  article {
+    padding: 1rem 3rem;
+  }
+}
+
+@media print {
+  body {
+    font-size: 10pt;
+  }
+}
+
+@media screen, print {
+  body {
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .container {
+    display: block;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  body {
+    line-height: 1.4;
+  }
+}
+
+@media not screen and (min-width: 411px) {
+  p { color: red; }
+}
+
+@media (min-width: 544px), (orientation: portrait) {
+  h1 { font-size: 2em; }
+}
+
+/* brace on the next line */
+@media screen,
+       print {
+  body {
+    line-height: 1.2;
+  }
+}
+
+@media screen and (((min-width: 600px) and (max-width: 1024px)) or (max-width: 480px)) {
+  .box { width: 100%; }
+}
+
+@media (min-resolution: 150dpi) {
+  img { max-width: 100%; }
+}
+
+/* nested media query */
+@media screen {
+  @media (min-width: 900px) {
+    article {
+      padding: 1rem 3rem;
+    }
+  }
+}
+
+/* CSS nesting inside a rule */
+.button {
+  color: white;
+  @media (max-width: 600px) {
+    color: green;
+  }
+}
