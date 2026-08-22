@@ -64,6 +64,7 @@
 - [black.hrd] fix colors for cross
 - [yml] fix error in generated scheme; update scheme to 2.4.0
 - [verilog] add define, include, timescale support
+- [verilog] highlight function-like compiler macros (`name(...)) and pair module/endmodule when the name is a macro; recognise .vh headers
 - [cmake] fix escaping strings
 - [cpp] functions outliner list cleanup
 - [markdown] improve HTML handling (inline tags and CommonMark blocks)

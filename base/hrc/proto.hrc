@@ -1018,6 +1018,7 @@
     <prototype name="verilog" group="rare" description="Verilog HDL">
         <location link="rare/verilog.hrc" />
         <filename weight='3'>/\.g?v$/i</filename>
+        <filename weight='3'>/\.vh$/i</filename>
     </prototype>
     <prototype name="vhdl" group="rare" description="VHDL">
         <location link="rare/vhdl.hrc" />

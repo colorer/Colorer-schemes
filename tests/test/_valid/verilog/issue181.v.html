@@ -1,0 +1,30 @@
+﻿ 0: <span class='verilog-PreprocWord def-Directive'>`include</span><span class='verilog-PreprocIncludeEdge def-StringEdge def-String'>"</span><span class='verilog-PreprocInclude def-Path def-URI'>top_define.vh</span><span class='verilog-PreprocIncludeEdge def-StringEdge def-String'>"</span>
+ 1: <span class='verilog-PreprocWord def-Directive'>`include </span><span class='verilog-PreprocIncludeEdge def-StringEdge def-String'>"</span><span class='verilog-PreprocInclude def-Path def-URI'>static_macro_define.vh</span><span class='verilog-PreprocIncludeEdge def-StringEdge def-String'>"</span>
+ 2: <span class='verilog-PreprocWord def-Directive'>`include </span><span class='verilog-PreprocIncludeEdge def-StringEdge def-String'>&lt;</span><span class='verilog-PreprocInclude def-Path def-URI'>ieee.vh</span><span class='verilog-PreprocIncludeEdge def-StringEdge def-String'>></span>
+ 3: 
+ 4: <span class='def-Directive'>`timescale</span> <span class='def-Keyword'>1ns</span> / <span class='def-Keyword'>1ps</span>
+ 5: <span class='def-Directive'>`timescale</span> <span class='def-Keyword'>1ns</span>/<span class='def-Keyword'>1ps</span>
+ 6: 
+ 7: <span class='verilog-verWord def-Keyword'>module `getname</span><span class='verilog-verSymb def-Symbol'>(</span>test_module<span class='verilog-verSymb def-Symbol'>,</span><span class='verilog-PreprocWord def-Directive'>`module_name</span><span class='verilog-verSymb def-Symbol'>)</span>
+ 8: <span class='def-Symbol'>(</span>
+ 9:     <span class='def-Keyword'>input</span> a<span class='verilog-verSymb def-Symbol'>,</span>
+10:     <span class='def-Keyword'>output</span> b
+11: <span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+12: 
+13: <span class='def-Keyword'>assign</span> b <span class='verilog-verSymb def-Symbol'>=</span> a<span class='def-Keyword'>;</span>
+14: 
+15: <span class='verilog-verWord def-Keyword'>endmodule</span>
+16: 
+17: <span class='verilog-verWord def-Keyword'>module `plain_macro</span>
+18: <span class='def-Symbol'>(</span>
+19:     <span class='def-Keyword'>input</span> c<span class='verilog-verSymb def-Symbol'>,</span>
+20:     <span class='def-Keyword'>output</span> d
+21: <span class='def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>;</span>
+22: <span class='def-Keyword'>assign</span> d <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-PreprocWord def-Directive'>`plain_macro_subst</span><span class='def-Keyword'>;</span>
+23: <span class='def-Keyword'>assign</span> d <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-PreprocWord def-Directive'>`getname</span><span class='verilog-PreprocWord def-Directive'>(</span>c<span class='verilog-verSymb def-Symbol'>,</span> <span class='verilog-PreprocWord def-Directive'>`module_name</span><span class='verilog-verSymb def-Symbol'>)</span><span class='def-Keyword'>;</span>
+24: <span class='verilog-verWord def-Keyword'>endmodule</span>
+25: 
+26: <span class='verilog-verWord def-Keyword'>module nested_parens</span><span class='verilog-verSymb def-Symbol'>;</span>
+27: <span class='def-Keyword'>wire</span> x <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-PreprocWord def-Directive'>`outer</span><span class='verilog-PreprocWord def-Directive'>(</span>a<span class='verilog-verSymb def-Symbol'>,</span> <span class='verilog-PreprocWord def-Directive'>`inner</span><span class='verilog-PreprocWord def-Directive'>(</span>b<span class='verilog-verSymb def-Symbol'>,</span> c<span class='verilog-verSymb def-Symbol'>)</span><span class='verilog-verSymb def-Symbol'>,</span> d<span class='verilog-verSymb def-Symbol'>)</span><span class='def-Keyword'>;</span>
+28: <span class='verilog-verWord def-Keyword'>endmodule</span>
+29: 

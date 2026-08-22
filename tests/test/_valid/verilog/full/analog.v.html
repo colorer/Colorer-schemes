@@ -80,14 +80,14 @@
  79:     always
  80:         <span class='def-Keyword'>begin</span>
  81:             @ (analog_in or feedback)<span class='verilog-verSymb def-Symbol'>;</span>
- 82:             up <span class='verilog-verSymb def-Symbol'>=</span> `low<span class='verilog-verSymb def-Symbol'>;</span>
- 83:             down <span class='verilog-verSymb def-Symbol'>=</span> `low<span class='verilog-verSymb def-Symbol'>;</span>
- 84:             <span class='verilog-verWord def-Keyword'>if</span> (!`close(analog_in<span class='verilog-verSymb def-Symbol'>,</span>feedback))
+ 82:             up <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-PreprocWord def-Directive'>`low</span><span class='verilog-verSymb def-Symbol'>;</span>
+ 83:             down <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-PreprocWord def-Directive'>`low</span><span class='verilog-verSymb def-Symbol'>;</span>
+ 84:             <span class='verilog-verWord def-Keyword'>if</span> (!<span class='verilog-PreprocWord def-Directive'>`close</span><span class='verilog-PreprocWord def-Directive'>(</span>analog_in<span class='verilog-verSymb def-Symbol'>,</span>feedback<span class='verilog-verSymb def-Symbol'>)</span>)
  85:                 <span class='def-Keyword'>begin</span>
  86:                 <span class='verilog-verWord def-Keyword'>if</span> ( analog_in <span class='verilog-verSymb def-Symbol'>></span> feedback )
- 87:                     up <span class='verilog-verSymb def-Symbol'>=</span> `high<span class='verilog-verSymb def-Symbol'>;</span>
+ 87:                     up <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-PreprocWord def-Directive'>`high</span><span class='verilog-verSymb def-Symbol'>;</span>
  88:                 <span class='verilog-verWord def-Keyword'>else</span> <span class='verilog-verWord def-Keyword'>if</span> ( analog_in <span class='verilog-verSymb def-Symbol'>&lt;</span> feedback )
- 89:                     down <span class='verilog-verSymb def-Symbol'>=</span> `high<span class='verilog-verSymb def-Symbol'>;</span>
+ 89:                     down <span class='verilog-verSymb def-Symbol'>=</span> <span class='verilog-PreprocWord def-Directive'>`high</span><span class='verilog-verSymb def-Symbol'>;</span>
  90:                 <span class='def-Keyword'>end</span>
  91:         <span class='def-Keyword'>end</span>
  92: <span class='verilog-verWord def-Keyword'>endmodule</span>
