@@ -1,0 +1,24 @@
+﻿ 0: <span class='makefile-keyword def-Directive'>ifeq</span><span class='makefile-in-directive def-String'> </span><span class='makefile-symbs def-Symbol'>(</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>$(</span><span class='makefile-var def-Var'>VAR1</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>)</span>, var1<span class='makefile-symbs def-Symbol'>)</span>
+ 1: <span class='makefile-var def-Var'>  TEST </span><span class='makefile-var-equ makefile-symbs def-Symbol'>=</span><span class='makefile-var-content def-VarStrong def-Var'> var1</span>
+ 2: <span class='makefile-keyword def-Directive'>else ifeq</span><span class='makefile-in-directive def-String'> </span><span class='makefile-symbs def-Symbol'>(</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>$(</span><span class='makefile-var def-Var'>VAR2</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>)</span>, var2<span class='makefile-symbs def-Symbol'>)</span>
+ 3: <span class='makefile-var def-Var'>  TEST </span><span class='makefile-var-equ makefile-symbs def-Symbol'>=</span><span class='makefile-var-content def-VarStrong def-Var'> var2</span>
+ 4: <span class='makefile-keyword def-Directive'>else</span>
+ 5:   <span class='makefile-var-ref def-SymbolStrong def-Symbol'>$(</span><span class='makefile-var-func def-KeywordStrong def-Keyword'>error</span><span class='makefile-var-content def-VarStrong def-Var'> TEST</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>)</span>
+ 6: <span class='makefile-keyword def-Directive'>endif</span>
+ 7: 
+ 8: <span class='makefile-keyword def-Directive'>export</span><span class='makefile-in-directive def-String'> </span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>$(</span><span class='makefile-var def-Var'>TEST</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>)</span>
+ 9: 
+10: <span class='makefile-keyword def-Directive'>ifndef </span><span class='makefile-var def-Var'>FOO</span>
+11: <span class='makefile-keyword def-Directive'>else ifdef </span><span class='makefile-var def-Var'>BAR</span>
+12: <span class='makefile-var def-Var'>  X </span><span class='makefile-var-equ makefile-symbs def-Symbol'>=</span><span class='makefile-var-content def-VarStrong def-Var'> 1</span>
+13: <span class='makefile-keyword def-Directive'>else ifneq</span><span class='makefile-in-directive def-String'> </span><span class='makefile-symbs def-Symbol'>(</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>$(</span><span class='makefile-var def-Var'>Y</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>)</span>,<span class='makefile-symbs def-Symbol'>)</span>
+14: <span class='makefile-var def-Var'>  X </span><span class='makefile-var-equ makefile-symbs def-Symbol'>=</span><span class='makefile-var-content def-VarStrong def-Var'> 2</span>
+15: <span class='makefile-keyword def-Directive'>else ifndef </span><span class='makefile-var def-Var'>BAZ</span>
+16: <span class='makefile-var def-Var'>  X </span><span class='makefile-var-equ makefile-symbs def-Symbol'>=</span><span class='makefile-var-content def-VarStrong def-Var'> 3</span>
+17: <span class='makefile-keyword def-Directive'>endif</span>
+18: 
+19: <span class='makefile-keyword def-Directive'>export</span>
+20: <span class='makefile-keyword def-Directive'>export</span><span class='makefile-in-directive def-String'> </span><span class='makefile-var def-Var'>FOO</span>
+21: <span class='makefile-keyword def-Directive'>unexport</span><span class='makefile-in-directive def-String'> </span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>$(</span><span class='makefile-var def-Var'>TEST</span><span class='makefile-var-ref def-SymbolStrong def-Symbol'>)</span>
+22: <span class='makefile-override makefile-keyword def-Directive'>export</span><span class='makefile-var def-Var'> ASSIGNED </span><span class='makefile-var-equ makefile-symbs def-Symbol'>=</span><span class='makefile-var-content def-VarStrong def-Var'> value</span>
+23: 

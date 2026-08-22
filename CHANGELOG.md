@@ -29,6 +29,7 @@
 - Add *.lfm to delphiform prototype
 
 ### Fixed
+- [makefile] recognise GNU Make `else ifeq`/`else ifdef` conditionals and `export`/`unexport` without assignment
 - [perl] recognise regexp after range operator (`/'/ .. /"/`)
 - [calcset] update hrc for latest file structure.
 - [picasm] fix typo  sndwf -> andwf
