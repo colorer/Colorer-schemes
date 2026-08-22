@@ -12,12 +12,12 @@
  11: 
  12: <span class='def-Symbol'>#</span>!<span class='def-Symbol'>[</span>cfg_attr<span class='def-Symbol'>(</span>feature = "scoped-pool"<span class='def-Symbol'>,</span> feature<span class='def-Symbol'>(</span>scoped<span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-Symbol'>]</span>
  13: 
- 14: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+ 14: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
  15: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>mem<span class='def-Symbol'>;</span>
  16: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span>mpsc<span class='def-Symbol'>::</span><span class='def-Symbol'>{</span>channel<span class='def-Symbol'>,</span> Sender<span class='def-Symbol'>,</span> Receiver<span class='def-Symbol'>}</span><span class='def-Symbol'>;</span>
  17: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span><span class='def-Symbol'>{</span>Arc<span class='def-Symbol'>,</span> Mutex<span class='def-Symbol'>}</span><span class='def-Symbol'>;</span>
  18: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>thread<span class='def-Symbol'>;</span>
- 19: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+ 19: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
  20: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>thread<span class='def-Symbol'>::</span>JoinGuard<span class='def-Symbol'>;</span>
  21: 
  22: <span class='def-Keyword'>trait</span> FnBox <span class='def-Symbol'>{</span>
@@ -170,13 +170,13 @@
 169: <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
 170: <span class='def-CommentDoc def-Comment def-Syntax'>/// assert_eq!(numbers, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);</span>
 171: <span class='def-CommentDoc def-Comment def-Syntax'>/// ```</span>
-172: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+172: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 173: <span class='def-Keyword'>pub</span> <span class='def-Keyword'>struct</span> ScopedPool&lt;'pool> <span class='def-Symbol'>{</span>
 174:     sender: Option&lt;Sender&lt;Thunk&lt;'pool>>><span class='def-Symbol'>,</span>
 175:     _guards: Vec&lt;JoinGuard&lt;'pool<span class='def-Symbol'>,</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>>>
 176: <span class='def-Symbol'>}</span>
 177: 
-178: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+178: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 179: <span class='def-Keyword'>impl</span>&lt;'pool> ScopedPool&lt;'pool> <span class='def-Symbol'>{</span>
 180:     <span class='def-CommentDoc def-Comment def-Syntax'>/// Spawns a new thread pool with `threads` threads.</span>
 181:     <span class='def-CommentDoc def-Comment def-Syntax'>///</span>
@@ -205,7 +205,7 @@
 204:     <span class='def-Symbol'>}</span>
 205: <span class='def-Symbol'>}</span>
 206: 
-207: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+207: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 208: <span class='def-Keyword'>impl</span>&lt;'a> Drop <span class='def-Keyword'>for</span> ScopedPool&lt;'a> <span class='def-Symbol'>{</span>
 209:     <span class='def-Keyword'>fn</span> drop<span class='def-Symbol'>(</span>&amp;<span class='def-Keyword'>mut</span> <span class='def-Keyword'>self</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 210:         <span class='def-LineComment def-Comment def-Syntax'>// We need to ensure that the sender is dropped before the JoinGuards</span>
@@ -214,7 +214,7 @@
 213:     <span class='def-Symbol'>}</span>
 214: <span class='def-Symbol'>}</span>
 215: 
-216: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+216: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 217: <span class='def-Keyword'>fn</span> spawn_scoped_in_pool&lt;'a><span class='def-Symbol'>(</span>jobs: Arc&lt;Mutex&lt;Receiver&lt;Thunk&lt;'a>>>><span class='def-Symbol'>)</span> <span class='def-Symbol'>-></span> JoinGuard&lt;'a<span class='def-Symbol'>,</span> <span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>>
 218: <span class='def-Symbol'>{</span>
 219:     thread<span class='def-Symbol'>::</span>scoped<span class='def-Symbol'>(</span><span class='def-Keyword'>move</span> || <span class='def-Symbol'>{</span>
@@ -236,7 +236,7 @@
 235:     <span class='def-Symbol'>}</span><span class='def-Symbol'>)</span>
 236: <span class='def-Symbol'>}</span>
 237: 
-238: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>test</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+238: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>test</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 239: <span class='def-Keyword'>mod</span> test <span class='def-Symbol'>{</span>
 240:     <span class='def-Keyword'>use</span> <span class='def-Keyword'>super</span><span class='def-Symbol'>::</span>ThreadPool<span class='def-Symbol'>;</span>
 241:     <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span>mpsc<span class='def-Symbol'>::</span>channel<span class='def-Symbol'>;</span>
@@ -244,7 +244,7 @@
 243: 
 244:     <span class='def-Keyword'>const</span> TEST_TASKS: usize = <span class='def-NumberDec def-Number'>4</span><span class='def-Symbol'>;</span>
 245: 
-246: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+246: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 247:     <span class='def-Keyword'>fn</span> test_works<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 248:         <span class='def-Keyword'>let</span> pool = ThreadPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 249: 
@@ -259,13 +259,13 @@
 258:         assert_eq!<span class='def-Symbol'>(</span>rx.iter<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.take<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span>.fold<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>,</span> |a<span class='def-Symbol'>,</span> b| a + b<span class='def-Symbol'>)</span><span class='def-Symbol'>,</span> TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 259:     <span class='def-Symbol'>}</span>
 260: 
-261: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
-262: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+261: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+262: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 263:     <span class='def-Keyword'>fn</span> test_zero_tasks_panic<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 264:         ThreadPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 265:     <span class='def-Symbol'>}</span>
 266: 
-267: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+267: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 268:     <span class='def-Keyword'>fn</span> test_recovery_from_subtask_panic<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 269:         <span class='def-Keyword'>let</span> pool = ThreadPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 270: 
@@ -286,7 +286,7 @@
 285:         assert_eq!<span class='def-Symbol'>(</span>rx.iter<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.take<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span>.fold<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>,</span> |a<span class='def-Symbol'>,</span> b| a + b<span class='def-Symbol'>)</span><span class='def-Symbol'>,</span> TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 286:     <span class='def-Symbol'>}</span>
 287: 
-288: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+288: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 289:     <span class='def-Keyword'>fn</span> test_should_not_panic_on_drop_if_subtasks_panic_after_drop<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 290: 
 291:         <span class='def-Keyword'>let</span> pool = ThreadPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
@@ -308,14 +308,14 @@
 307:     <span class='def-Symbol'>}</span>
 308: <span class='def-Symbol'>}</span>
 309: 
-310: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>all</span><span class='def-Symbol'>(</span><span class='def-Directive'>test</span><span class='def-Symbol'>,</span><span class='def-Directive'> feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+310: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>cfg</span><span class='def-Symbol'>(</span><span class='def-Directive'>all</span><span class='def-Symbol'>(</span><span class='def-Directive'>test</span><span class='def-Symbol'>,</span><span class='def-Directive'> feature = "scoped-pool"</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 311: <span class='def-Keyword'>mod</span> test_scoped <span class='def-Symbol'>{</span>
 312:     <span class='def-Keyword'>use</span> <span class='def-Keyword'>super</span><span class='def-Symbol'>::</span>ScopedPool<span class='def-Symbol'>;</span>
 313:     <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>sync<span class='def-Symbol'>::</span>mpsc<span class='def-Symbol'>::</span>channel<span class='def-Symbol'>;</span>
 314: 
 315:     <span class='def-Keyword'>const</span> TEST_TASKS: usize = <span class='def-NumberDec def-Number'>4</span><span class='def-Symbol'>;</span>
 316: 
-317: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+317: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 318:     <span class='def-Keyword'>fn</span> test_works_1<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 319:         <span class='def-Keyword'>let</span> pool = ScopedPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 320: 
@@ -330,7 +330,7 @@
 329:         assert_eq!<span class='def-Symbol'>(</span>rx.iter<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>.take<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span>.fold<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>,</span> |a<span class='def-Symbol'>,</span> b| a + b<span class='def-Symbol'>)</span><span class='def-Symbol'>,</span> TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 330:     <span class='def-Symbol'>}</span>
 331: 
-332: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+332: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 333:     <span class='def-Keyword'>fn</span> test_works_2<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 334:         <span class='def-Keyword'>let</span> <span class='def-Keyword'>mut</span> numbers: &amp;<span class='def-Keyword'>mut</span> <span class='def-Symbol'>[</span>u32<span class='def-Symbol'>]</span> = &amp;<span class='def-Keyword'>mut</span> <span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>1</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>4</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>5</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>6</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>7</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>8</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>9</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>10</span><span class='def-Symbol'>]</span><span class='def-Symbol'>;</span>
 335:         <span class='def-Symbol'>{</span>
@@ -344,14 +344,14 @@
 343:         assert_eq!<span class='def-Symbol'>(</span>numbers<span class='def-Symbol'>,</span> <span class='def-Symbol'>[</span><span class='def-NumberDec def-Number'>2</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>3</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>4</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>5</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>6</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>7</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>8</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>9</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>10</span><span class='def-Symbol'>,</span> <span class='def-NumberDec def-Number'>11</span><span class='def-Symbol'>]</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 344:     <span class='def-Symbol'>}</span>
 345: 
-346: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
-347: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+346: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+347: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 348:     <span class='def-Keyword'>fn</span> test_zero_tasks_panic<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 349:         ScopedPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 350:     <span class='def-Symbol'>}</span>
 351: 
-352: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
-353: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    #[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+352: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>test</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
+353: <span class='def-DirectiveEdge def-DirectiveContent def-Directive'>    </span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>#</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>[</span><span class='def-Directive'>should_panic</span><span class='def-DirectiveEdge def-DirectiveContent def-Directive'>]</span>
 354:     <span class='def-Keyword'>fn</span> test_panic_propagation<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>{</span>
 355:         <span class='def-Keyword'>let</span> pool = ScopedPool<span class='def-Symbol'>::</span>new<span class='def-Symbol'>(</span>TEST_TASKS<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
 356: 

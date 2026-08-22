@@ -29,6 +29,7 @@
 - Add *.lfm to delphiform prototype
 
 ### Fixed
+- [rust] highlight matching `()`, `[]` and `{}` when the cursor is on a bracket
 - [batch] cmd does not treat backslash as a quote escape; mark double quotes as pairs
 - [makefile] recognise GNU Make `else ifeq`/`else ifdef` conditionals and `export`/`unexport` without assignment
 - [perl] recognise regexp after range operator (`/'/ .. /"/`)
