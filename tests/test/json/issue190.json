@@ -1,0 +1,11 @@
+{
+  "simple": "value",
+  "escaped\"quote": "also\"escaped",
+  "unicode\u0041": "B",
+  "slash\\path": "ok",
+  "nested": {
+    "inner": [1, 2.5, true, false, null]
+  }
+  // line comment
+  /* block comment */
+}
