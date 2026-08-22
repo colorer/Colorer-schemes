@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [dart] Add Dart syntax highlighting support
 - [swift] Add Swift syntax highlighting support
 - [go.mod] Add go.mod file syntax highlighting support
 - [go.sum] Add go.sum file syntax highlighting support

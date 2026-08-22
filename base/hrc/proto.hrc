@@ -282,6 +282,11 @@
         <location link="base/swift.hrc" />
         <filename>/\.swift$/i</filename>
     </prototype>
+    <prototype name="dart" group="main" description="Dart">
+        <location link="base/dart.hrc" />
+        <filename>/\.dart$/i</filename>
+        <firstline weight='2'>/^\#!\s*.+\bdart\b/</firstline>
+    </prototype>
 
     <!--  inet languages  -->
     <package name="html-entity" description="(x)html entities">
