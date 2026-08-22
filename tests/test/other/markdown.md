@@ -95,3 +95,11 @@ In list:
   </pre>
 - after
   and here `code span` _emphasis_  **strong**
+
+Link reference definitions:
+
+[text]: https://github.com/colorer/Colorer-schemes/issues/new "title attr"
+[foo]: /url/ 'single title'
+[bar]: <http://example.com/> (paren title)
+[baz]: /relative/path#anchor
+   [indented]: ../file.md
