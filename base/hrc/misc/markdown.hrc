@@ -5,7 +5,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hrc.xsd">
 
 <type name="markdown">
-<annotation><documentation><![CDATA[
+<annotation>
+<documentation><![CDATA[
 
 markdown.hrc by Roman Kuzmin (nightroman), 2026-01-30
 
@@ -27,7 +28,11 @@ Inline JavaScript
 
 Contributors:
   Alexey Shelaev
-]]></documentation></annotation>
+]]></documentation>
+<contributors><![CDATA[
+  Aleksey Dobrunov <ctapmex@ctapmex.com>
+]]></contributors>
+</annotation>
 
 <region name="Anchor"        parent="def:LabelStrong"    description="{#Anchor}"/>
 <region name="Code"          parent="def:TypeKeyword"    description="`Code` spans, indented and fenced blocks."/>
@@ -50,8 +55,10 @@ Contributors:
 <region name="FenceMark"     parent="BlindMark"          description="~~~"/>
 <region name="HeadMark"      parent="BlindMark"          description="#, ##, ..., ######"/>
 <region name="LinkMark"      parent="BlindMark"          description="[]() or [][] or []"/>
+<region name="LinkDest"      parent="def:URI"            description="Link destination in [Ref]: Address"/>
+<region name="LinkTitle"     parent="def:String"         description="Optional title in [Ref]: Address 'Title'"/>
 <region name="QuoteMark"     parent="BlindMark"          description=">, >>, ..."/>
-<region name="Reference"     parent="BlindMark"          description="[Ref]: Address 'Title'"/>
+<region name="Reference"     parent="BlindMark"          description="[Ref]: prefix of a link reference definition"/>
 
 <region name="TemplateStart" parent="def:InsertionStart"/>
 <region name="TemplateEnd" parent="def:InsertionEnd"/>
@@ -273,6 +280,15 @@ Contributors:
   </inherit>
 </scheme>
 
+<scheme name="ReferenceDef">
+  <!-- <destination> -->
+  <regexp match="/\s*(?{LinkMark}&lt;)(?{LinkDest}[^&gt;]*)(?{LinkMark}&gt;)/"/>
+  <!-- destination; first char is not a title delimiter -->
+  <regexp match="/\s*(?{LinkDest}[^\s&lt;&quot;'\(]\S*)/"/>
+  <!-- "title" | 'title' | (title) -->
+  <regexp match="/\s*(?{LinkTitle}(?:&quot;[^&quot;]*&quot;|'[^']*'|\([^)]*\)))/"/>
+</scheme>
+
 <scheme name="Head">
   <regexp match="/(?{HeadMark}#*\s*)?(?{Anchor}\{#%ID;\})(?{HeadMark}\s*#*\s*)$/"/>
   <regexp match="/(?{HeadMark}#+\s*)$/"/>
@@ -383,7 +399,8 @@ Contributors:
   <block scheme="Template" region="Code"
   start="/(?{start}^%FenceMark;).*$/" end="/(?{end}^(?{FenceMark}\y{FenceMark}))\s*$/"/>
 
-  <regexp match="/^(?{def:Outlined}(?{Reference}%Ref;.*))/"/>
+  <block scheme="ReferenceDef" region="def:Outlined"
+  start="/^(?{def:Outlined}(?{Reference}%Ref;))/" end="/$/"/>
 
   <regexp match="/^(?{Abbreviation}%Abbr;.*)/"/>
 

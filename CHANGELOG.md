@@ -72,6 +72,7 @@
 - [cmake] fix escaping strings
 - [cpp] functions outliner list cleanup
 - [markdown] improve HTML handling (inline tags and CommonMark blocks)
+- [markdown] highlight URL and title in link reference definitions
 - [shell-posix] fix heredoc with '<<-' operator
 
 ### Added
