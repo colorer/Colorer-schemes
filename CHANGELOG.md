@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [toml] Add TOML syntax highlighting support
 - [dart] Add Dart syntax highlighting support
 - [swift] Add Swift syntax highlighting support
 - [go.mod] Add go.mod file syntax highlighting support

@@ -1,0 +1,56 @@
+﻿ 0: <span class='toml-Comment def-LineComment def-Comment def-Syntax'># This is a TOML document</span>
+ 1: 
+ 2: <span class='toml-Key def-Keyword'>title</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>TOML Example</span><span class='def-StringEdge def-String'>"</span>
+ 3: <span class='toml-Key def-Keyword'>escaped</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>quote </span><span class='toml-Escape def-StringContent def-String'>\"</span><span class='toml-String def-String'> and </span><span class='toml-Escape def-StringContent def-String'>\\</span><span class='toml-String def-String'> slash </span><span class='toml-Escape def-StringContent def-String'>\n</span><span class='toml-String def-String'> newline </span><span class='toml-Escape def-StringContent def-String'>\u0041</span><span class='def-StringEdge def-String'>"</span>
+ 4: <span class='toml-Key def-Keyword'>literal</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>'</span><span class='toml-String def-String'>C:\Users\nodejs\templates</span><span class='def-StringEdge def-String'>'</span>
+ 5: 
+ 6: <span class='def-SymbolStrong def-Symbol'>[</span><span class='toml-TableName def-KeywordStrong def-Keyword'>owner</span><span class='def-SymbolStrong def-Symbol'>]</span>
+ 7: <span class='toml-Key def-Keyword'>name</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>Tom Preston-Werner</span><span class='def-StringEdge def-String'>"</span>
+ 8: <span class='toml-Key def-Keyword'>dob</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-DateTime def-Date'>1979-05-27T07:32:00-08:00</span>
+ 9: <span class='toml-Key def-Keyword'>local-date</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-DateTime def-Date'>1979-05-27</span>
+10: <span class='toml-Key def-Keyword'>local-time</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-DateTime def-Date'>07:32:00.999999</span>
+11: <span class='toml-Key def-Keyword'>local-datetime</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-DateTime def-Date'>1979-05-27T07:32:00</span>
+12: 
+13: <span class='def-SymbolStrong def-Symbol'>[</span><span class='toml-TableName def-KeywordStrong def-Keyword'>database</span><span class='def-SymbolStrong def-Symbol'>]</span>
+14: <span class='toml-Key def-Keyword'>enabled</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-Boolean def-BooleanConstant def-Constant def-Keyword'>true</span>
+15: <span class='toml-Key def-Keyword'>ports</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-Symbol def-Symbol'>[</span> <span class='def-NumberDec def-Number'>8001</span><span class='toml-Symbol def-Symbol'>,</span> <span class='def-NumberDec def-Number'>8001</span><span class='toml-Symbol def-Symbol'>,</span> <span class='def-NumberDec def-Number'>8002</span> <span class='toml-Symbol def-Symbol'>]</span>
+16: <span class='toml-Key def-Keyword'>data</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-Symbol def-Symbol'>[</span> <span class='toml-Symbol def-Symbol'>[</span><span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>delta</span><span class='def-StringEdge def-String'>"</span><span class='toml-Symbol def-Symbol'>,</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>phi</span><span class='def-StringEdge def-String'>"</span><span class='toml-Symbol def-Symbol'>]</span><span class='toml-Symbol def-Symbol'>,</span> <span class='toml-Symbol def-Symbol'>[</span><span class='def-NumberFloat def-Number'>3.14</span><span class='toml-Symbol def-Symbol'>]</span> <span class='toml-Symbol def-Symbol'>]</span>
+17: <span class='toml-Key def-Keyword'>temp_targets</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-Symbol def-Symbol'>{</span> <span class='toml-Key def-Keyword'>cpu</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>79.5</span><span class='toml-Symbol def-Symbol'>,</span> <span class='toml-Key def-Keyword'>case</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>72.0</span> <span class='toml-Symbol def-Symbol'>}</span>
+18: <span class='toml-Key def-Keyword'>colors</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-Symbol def-Symbol'>[</span>
+19:   <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>red</span><span class='def-StringEdge def-String'>"</span><span class='toml-Symbol def-Symbol'>,</span>
+20:   <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>blue</span><span class='def-StringEdge def-String'>"</span><span class='toml-Symbol def-Symbol'>,</span>
+21: <span class='toml-Symbol def-Symbol'>]</span>
+22: <span class='toml-Key def-Keyword'>hex</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberHex def-Number'>0xDEAD_BEEF</span>
+23: <span class='toml-Key def-Keyword'>oct</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberOct def-Number'>0o755</span>
+24: <span class='toml-Key def-Keyword'>bin</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberBin def-Number'>0b11010110</span>
+25: <span class='toml-Key def-Keyword'>float</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>6.626e-34</span>
+26: <span class='toml-Key def-Keyword'>infinite</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>+inf</span>
+27: <span class='toml-Key def-Keyword'>not-a-number</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberFloat def-Number'>nan</span>
+28: <span class='toml-Key def-Keyword'>negative</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberDec def-Number'>-17</span>
+29: <span class='toml-Key def-Keyword'>underscored</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberDec def-Number'>1_000</span>
+30: 
+31: <span class='def-SymbolStrong def-Symbol'>[</span><span class='toml-TableName def-KeywordStrong def-Keyword'>servers</span><span class='toml-Symbol def-Symbol'>.</span><span class='def-StringEdge def-String'>"</span><span class='toml-TableName def-KeywordStrong def-Keyword'>alpha</span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>]</span>
+32: <span class='toml-Key def-Keyword'>ip</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>10.0.0.1</span><span class='def-StringEdge def-String'>"</span>
+33: <span class='toml-Key def-Keyword'>role</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>frontend</span><span class='def-StringEdge def-String'>"</span>
+34: 
+35: <span class='def-SymbolStrong def-Symbol'>[[</span><span class='toml-TableName def-KeywordStrong def-Keyword'>products</span><span class='def-SymbolStrong def-Symbol'>]]</span>
+36: <span class='toml-Key def-Keyword'>name</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>Hammer</span><span class='def-StringEdge def-String'>"</span>
+37: <span class='toml-Key def-Keyword'>sku</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberDec def-Number'>738594937</span>
+38: 
+39: <span class='def-SymbolStrong def-Symbol'>[[</span><span class='toml-TableName def-KeywordStrong def-Keyword'>products</span><span class='def-SymbolStrong def-Symbol'>]]</span>
+40: <span class='toml-Key def-Keyword'>name</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>Nail</span><span class='def-StringEdge def-String'>"</span>
+41: <span class='toml-Key def-Keyword'>sku</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-NumberDec def-Number'>284758393</span>
+42: 
+43: <span class='toml-Key def-Keyword'>description</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"""</span><span class='toml-String def-String'></span>
+44: <span class='toml-String def-String'>Roses are red</span>
+45: <span class='toml-String def-String'>Violets are blue</span>
+46: <span class='def-StringEdge def-String'>"""</span>
+47: 
+48: <span class='toml-Key def-Keyword'>path</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>'''</span><span class='toml-String def-String'></span>
+49: <span class='toml-String def-String'>C:\Users\nodejs\templates</span>
+50: <span class='def-StringEdge def-String'>'''</span>
+51: 
+52: <span class='def-StringEdge def-String'>"</span><span class='toml-Key def-Keyword'>quoted.key</span><span class='def-StringEdge def-String'>"</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>value</span><span class='def-StringEdge def-String'>"</span>
+53: <span class='def-StringEdge def-String'>'</span><span class='toml-Key def-Keyword'>literal-key</span><span class='def-StringEdge def-String'>'</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='def-StringEdge def-String'>"</span><span class='toml-String def-String'>ok</span><span class='def-StringEdge def-String'>"</span>
+54: <span class='toml-Key def-Keyword'>dotted</span><span class='toml-Symbol def-Symbol'>.</span><span class='toml-Key def-Keyword'>bare</span> <span class='def-SymbolStrong def-Symbol'>=</span> <span class='toml-Boolean def-BooleanConstant def-Constant def-Keyword'>true</span>
+55: 

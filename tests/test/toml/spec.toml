@@ -1,0 +1,55 @@
+# This is a TOML document
+
+title = "TOML Example"
+escaped = "quote \" and \\ slash \n newline \u0041"
+literal = 'C:\Users\nodejs\templates'
+
+[owner]
+name = "Tom Preston-Werner"
+dob = 1979-05-27T07:32:00-08:00
+local-date = 1979-05-27
+local-time = 07:32:00.999999
+local-datetime = 1979-05-27T07:32:00
+
+[database]
+enabled = true
+ports = [ 8001, 8001, 8002 ]
+data = [ ["delta", "phi"], [3.14] ]
+temp_targets = { cpu = 79.5, case = 72.0 }
+colors = [
+  "red",
+  "blue",
+]
+hex = 0xDEAD_BEEF
+oct = 0o755
+bin = 0b11010110
+float = 6.626e-34
+infinite = +inf
+not-a-number = nan
+negative = -17
+underscored = 1_000
+
+[servers."alpha"]
+ip = "10.0.0.1"
+role = "frontend"
+
+[[products]]
+name = "Hammer"
+sku = 738594937
+
+[[products]]
+name = "Nail"
+sku = 284758393
+
+description = """
+Roses are red
+Violets are blue
+"""
+
+path = '''
+C:\Users\nodejs\templates
+'''
+
+"quoted.key" = "value"
+'literal-key' = "ok"
+dotted.bare = true
