@@ -29,7 +29,7 @@ For start `/(keyword)(\()/`, end `/(\))/`:
 First digit: `0` = start, `1` = end. Second digit: capture index (`0` = entire match).
 
 ```xml
-<block start="/^\s*(require)\s*\(\s*$/"
+<block start="/(require)\s*\(\s*$/"
        end="/^\s*\)\s*$/"
        scheme="requireBlock"
        region00="Symbol" region01="Keyword" region10="Symbol"/>
