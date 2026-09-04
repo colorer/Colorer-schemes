@@ -67,4 +67,5 @@ Always `./build.sh base` before colorer / load / parse (or use `validate.py`, wh
 
 - [examples.md](examples.md) — copy-paste HRC + MIT footer, snippets
 - [reference.md](reference.md) — regions numbering, CLI, regexp tips
+- [speed.md](speed.md) — write regexps/keywords so coloring does fewer `CRegExp::parse()`; do not change `priority="low"`
 - [hrc-ref.md](hrc-ref.md) — full HRC / regexp reference

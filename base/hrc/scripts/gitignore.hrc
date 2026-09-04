@@ -29,9 +29,6 @@
       <!-- comments -->
       <regexp match="/^\s*#.*$/" region="Comment"/>
 
-      <!-- blank lines -->
-      <regexp match="/^\s*$/"/>
-
       <!-- negation marker -->
       <regexp match="/^\s*(!)/" region1="Negation"/>
 
