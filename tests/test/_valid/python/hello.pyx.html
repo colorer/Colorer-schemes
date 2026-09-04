@@ -1,0 +1,12 @@
+﻿ 0: <span class='python-pyComment def-Comment def-Syntax'># cython: language_level=3</span>
+ 1: 
+ 2: <span class='cython-Keyword def-Keyword'>cimport</span> numpy <span class='python-pyKeyword def-Keyword'>as</span> np
+ 3: <span class='python-pyKeyword def-Keyword'>from</span> libc<span class='python-pyDelimiter def-Symbol'>.</span>math <span class='cython-Keyword def-Keyword'>cimport</span> sqrt
+ 4: 
+ 5: <span class='cython-Keyword def-Keyword'>cdef</span> <span class='cython-TypeKeyword def-TypeKeyword def-Keyword'>double</span> hypot<span class='def-Symbol'>(</span><span class='cython-TypeKeyword def-TypeKeyword def-Keyword'>double</span> x<span class='python-pyDelimiter def-Symbol'>,</span> <span class='cython-TypeKeyword def-TypeKeyword def-Keyword'>double</span> y<span class='def-Symbol'>)</span> <span class='cython-Keyword def-Keyword'>noexcept</span> <span class='cython-Keyword def-Keyword'>nogil</span><span class='python-pyDelimiter def-Symbol'>:</span>
+ 6:     <span class='python-pyKeyword def-Keyword'>return</span> sqrt<span class='def-Symbol'>(</span>x <span class='python-pyOperator def-Operator def-Symbol'>*</span> x <span class='python-pyOperator def-Operator def-Symbol'>+</span> y <span class='python-pyOperator def-Operator def-Symbol'>*</span> y<span class='def-Symbol'>)</span>
+ 7: 
+ 8: <span class='cython-Keyword def-Keyword'>cpdef</span> <span class='cython-TypeKeyword def-TypeKeyword def-Keyword'>int</span> add<span class='def-Symbol'>(</span><span class='cython-TypeKeyword def-TypeKeyword def-Keyword'>int</span> a<span class='python-pyDelimiter def-Symbol'>,</span> <span class='cython-TypeKeyword def-TypeKeyword def-Keyword'>int</span> b<span class='def-Symbol'>)</span><span class='python-pyDelimiter def-Symbol'>:</span>
+ 9:     <span class='cython-Keyword def-Keyword'>cdef</span> <span class='cython-TypeKeyword def-TypeKeyword def-Keyword'>int</span> total <span class='python-pyDelimiter def-Symbol'>=</span> a <span class='python-pyOperator def-Operator def-Symbol'>+</span> b
+10:     <span class='python-pyKeyword def-Keyword'>return</span> total
+11: 

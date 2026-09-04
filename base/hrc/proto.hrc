@@ -194,6 +194,10 @@
         <firstline weight='2'>/^\#!\S*.+python/</firstline>
         <firstline>/^("""|import)/</firstline>
     </prototype>
+    <prototype name="cython" group="main" description="Cython">
+        <location link="base/cython.hrc" />
+        <filename>/\.(pyx|pxd|pxi)$/i</filename>
+    </prototype>
     <prototype name="lua" group="main" description="Lua">
         <location link="base/lua.hrc" />
         <filename>/\.(w?lua)$/i</filename>
@@ -711,6 +715,11 @@
         <location link="scripts/r.hrc" />
         <filename>/\.(R|Rhistory|Rprofile)$/i</filename>
     </prototype>
+    <prototype name="rproj" group="scripts" description="RStudio project">
+        <location link="scripts/rproj.hrc" />
+        <!-- xml binds /\w*proj$/ (csproj, vbproj, …); weight 3 beats that default 2 -->
+        <filename weight="3">/\.(rproj)$/i</filename>
+    </prototype>
     <prototype name="rmd" group="scripts" description="R Markdown / Quarto">
         <location link="scripts/rmd.hrc" />
         <filename>/\.(Rmd|qmd)$/i</filename>
@@ -1125,6 +1134,7 @@
         <location link="rare/toml.hrc" />
         <filename>/\.toml$/i</filename>
         <filename>/^Pipfile$/i</filename>
+        <filename>/^(Cargo|poetry|uv)\.lock$/i</filename>
     </prototype>
 
     <!--  other types  -->

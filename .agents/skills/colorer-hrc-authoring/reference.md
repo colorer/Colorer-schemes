@@ -36,9 +36,11 @@ Raise `weight` only when you have counted a real competitor:
 1. Another type’s **filename** matches the same path (shared extension, `\.txt$`, …), or
 2. Another type’s **firstline** sum is ≥ 2 **and** that type is listed **earlier** in `proto.hrc` (ties go to the earlier entry).
 
-Existing justified examples: `.ss` / `.twig` (10 vs a shared suffix), `CMakeLists.txt` (3 vs `text`’s `.txt`), yaml (10), json (3). Unjustified: extra weight on `.pyi`, `.scss`, `.prisma`, `.vue` — default filename 2 already beat qml/cpp/pascal `firstline` (1).
+Existing justified examples: `.ss` / `.twig` (10 vs a shared suffix), `CMakeLists.txt` (3 vs `text`’s `.txt`), yaml (10), json (3), `.Rproj` (3 vs xml’s `\w*proj`). Unjustified: extra weight on `.pyi`, `.scss`, `.prisma`, `.vue` — default filename 2 already beat qml/cpp/pascal `firstline` (1).
 
 When a firstline steals a file that has **no** filename rule (`.pyi` → qml `import`, `.scss` → cpp `//`, `.ipynb` → pascal `{`), the fix is to **add `<filename>`**, not to inflate `weight`.
+
+Do not write `\.Rproj` or `\.rproj`: `\R` is not a letter (the chooser fails to compile) and `\r` is a carriage return. Put the first letter in a group or class: `/\.(rproj)$/i`, `/\.(Rmd|qmd)$/i`. xml’s `/\w*proj$/` already claims `*.csproj` and also `*.Rproj` — beat it with `weight="3"`, do not reuse xml.
 
 ## `<block>` region numbering
 

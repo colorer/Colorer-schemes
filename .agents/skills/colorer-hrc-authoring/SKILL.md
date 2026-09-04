@@ -62,7 +62,7 @@ Always `./build.sh base` before colorer / load / parse (or use `validate.py`, wh
 - Catch-alls: `priority="low"`.
 - In `<block>`, `region00` = whole start match, `region01` = first capture — swap if a keyword is colored as a symbol.
 - Type missing from `-lt` → prototype path, well-formed XML, and rebuild.
-- Autodetect: do not put `weight` on a unique `<filename>`; default 2 already beats `<firstline>` (default 1) and the catch-all `default` type (1). Raise `weight` only to beat a **named** competitor (another filename, or a firstline whose summed weight is ≥ 2 **and** listed earlier in `proto.hrc`).
+- Autodetect: do not put `weight` on a unique `<filename>`; default 2 already beats `<firstline>` (default 1) and the catch-all `default` type (1). Raise `weight` only to beat a **named** competitor (another filename, or a firstline whose summed weight is ≥ 2 **and** listed earlier in `proto.hrc`). After `\.` do not write `R`/`r` (`\R` is invalid, `\r` is CR); use `/\.(rproj)$/i`.
 
 ## Resources
 

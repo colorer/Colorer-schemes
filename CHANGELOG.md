@@ -15,6 +15,8 @@
 - [svelte] Svelte components (`.svelte`)
 - [razor] Razor / Blazor (`.razor`, `.cshtml`) with `@code` C# islands
 - [cpp] recognise C++20 modules and extra headers (`.ixx`, `.cppm`, `.hh`, `.hxx`, `.ipp`, `.tpp`, `.inl`)
+- [cython] Cython highlighting (`.pyx`, `.pxd`, `.pxi`) on top of Python
+- [rproj] RStudio project files (`.Rproj`)
 - [toml] Add TOML syntax highlighting support
 - [dart] Add Dart syntax highlighting support
 - [swift] Add Swift syntax highlighting support
@@ -30,6 +32,7 @@
 - [csharp] add `required`/`init`/`file`/`scoped`/`nint`/`nuint`
 - [jScript] add `async`/`await`/`of`; colour TypeScript `type`; do not treat `boolean` as an ES3 reserved word
 - [vbnet] add `Async`/`Await`/`Iterator`/`Yield`/`NameOf`
+- [toml] recognise `Cargo.lock`, `poetry.lock`, `uv.lock`
 - [json] speed up number and string-escape matching
 - [qml] speed up import and property matching
 - [gitignore] speed up comment, negation and escape matching
