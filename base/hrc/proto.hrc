@@ -441,7 +441,11 @@
     </prototype>
     <prototype name="jScript" group="inet" description="JavaScript">
         <location link="inet/jscript.hrc" />
-        <filename>/\.(cjs|mjs|js|mocha|ts|mts|cts)$/i</filename>
+        <filename>/\.(cjs|mjs|js|mocha)$/i</filename>
+    </prototype>
+    <prototype name="typescript" group="inet" description="TypeScript">
+        <location link="inet/typescript.hrc" />
+        <filename>/\.(ts|mts|cts)$/i</filename>
     </prototype>
     <prototype name="jsx" group="inet" description="JSX / TSX">
         <location link="inet/jsx.hrc" />
@@ -656,7 +660,9 @@
     </prototype>
     <prototype name="mysql" group="database" description="MySQL">
         <location link="db/mysql.hrc" />
-        <filename>/\.sql$/i</filename>
+        <filename>/\.mysql$/i</filename>
+        <firstline weight="3">/-- MySQL dump/i</firstline>
+        <firstline weight="3">/-- MariaDB dump/i</firstline>
     </prototype>
 
     <!--  scripts  -->

@@ -447,7 +447,6 @@
              <word name="protected"/>
              <word name="public"/>
              <word name="static"/>
-             <word name="type"/>
              <word name="yield"/>
           </keywords>
       </scheme>

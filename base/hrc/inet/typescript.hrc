@@ -5,10 +5,11 @@
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://colorer.sf.net/2003/hrc http://colorer.sf.net/2003/hrc.xsd">
 
-  <type name="jsx">
+  <type name="typescript">
     <annotation>
       <documentation>
-        JSX and TSX: JavaScript/TypeScript with XML-like tags.
+        TypeScript on top of JavaScript.
+        https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
       </documentation>
       <contributors><![CDATA[
         Aleksey Dobrunov <ctapmex@ctapmex.com>
@@ -17,50 +18,35 @@
 
     <import type="def"/>
     <import type="jScript"/>
-    <import type="typescript"/>
 
-    <region name="JsxTag" parent="def:Keyword"/>
-    <region name="JsxBracket" parent="def:OpenTag"/>
-    <region name="JsxAttr" parent="def:Parameter"/>
+    <region name="Keyword" parent="def:Keyword"/>
+    <region name="TypeKeyword" parent="def:TypeKeyword"/>
 
-    <scheme name="jsxExpr">
-      <inherit scheme="jsx"/>
-    </scheme>
-
-    <scheme name="jsxAttrs">
-      <block start="/(\{)/" end="/(\})/"
-             scheme="jsxExpr"
-             region00="def:Symbol" region10="def:Symbol"
-             region01="def:PairStart" region11="def:PairEnd"/>
-      <inherit scheme="jScript:jString"/>
-      <regexp match="/([A-Za-z_][\w:-]*)(\s*)(=)/"
-              region1="JsxAttr" region3="def:Symbol"/>
-      <keywords region="def:Symbol">
-        <symb name="/"/>
+    <scheme name="tsKeywords">
+      <keywords region="Keyword">
+        <word name="abstract"/>
+        <word name="as"/>
+        <word name="asserts"/>
+        <word name="declare"/>
+        <word name="infer"/>
+        <word name="is"/>
+        <word name="keyof"/>
+        <word name="namespace"/>
+        <word name="override"/>
+        <word name="readonly"/>
+        <word name="satisfies"/>
+        <word name="type"/>
+      </keywords>
+      <keywords region="TypeKeyword">
+        <word name="never"/>
+        <word name="unknown"/>
       </keywords>
     </scheme>
 
-    <scheme name="jsx">
-      <!-- Fragments <> and </> -->
-      <regexp match="/(&lt;)(&gt;)/" region1="JsxBracket" region2="JsxBracket"/>
-      <regexp match="/(&lt;\/)(&gt;)/" region1="JsxBracket" region2="JsxBracket"/>
-      <!-- Opening / self-closing tag until > or /> -->
-      <block start="/(&lt;)([A-Za-z][\w.-]*)/" end="/(\/?&gt;)/"
-             scheme="jsxAttrs"
-             region00="def:PairStart" region10="def:PairEnd"
-             region01="JsxBracket" region02="JsxTag"
-             region11="JsxBracket"/>
-      <!-- Closing tag -->
-      <regexp match="/(&lt;\/)([A-Za-z][\w.-]*)(\s*&gt;)/"
-              region1="JsxBracket" region2="JsxTag" region3="JsxBracket"/>
-      <keywords region="def:Keyword">
-        <word name="async"/>
-        <word name="await"/>
-        <word name="of"/>
-      </keywords>
-      <inherit scheme="typescript:tsKeywords"/>
+    <scheme name="typescript">
+      <inherit scheme="tsKeywords"/>
       <inherit scheme="jScript:jScript">
-        <virtual scheme="jScript:jScript" subst-scheme="jsx"/>
+        <virtual scheme="jScript:jScript" subst-scheme="typescript"/>
       </inherit>
     </scheme>
   </type>

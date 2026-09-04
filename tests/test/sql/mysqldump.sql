@@ -1,0 +1,5 @@
+-- MySQL dump 10.13
+CREATE TABLE t (
+  id INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (id)
+);

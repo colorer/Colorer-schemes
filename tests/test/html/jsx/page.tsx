@@ -1,3 +1,5 @@
+export type Id = string;
+
 export default function Page() {
   return <h1 className="title">Hello, Next.js!</h1>;
 }
