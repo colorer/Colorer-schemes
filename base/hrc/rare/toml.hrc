@@ -42,10 +42,7 @@
     </scheme>
 
     <scheme name="escapes">
-      <regexp match="/\\[btnfre\\&quot;]/" region="Escape"/>
-      <regexp match="/\\u[0-9A-Fa-f]{4}/" region="Escape"/>
-      <regexp match="/\\U[0-9A-Fa-f]{8}/" region="Escape"/>
-      <regexp match="/\\x[0-9A-Fa-f]{2}/" region="Escape"/>
+      <regexp match="/\\(?:[btnfre\\&quot;]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8}|x[0-9A-Fa-f]{2})/" region="Escape"/>
       <regexp match="/\\./" region="Error"/>
       <regexp match="/\\/" region="Error" priority="low"/>
     </scheme>
@@ -88,20 +85,20 @@
     </scheme>
 
     <scheme name="numbers">
-      <regexp match="/0x%hex;\b/" region="def:NumberHex"/>
-      <regexp match="/0o%oct;\b/" region="def:NumberOct"/>
-      <regexp match="/0b%bin;\b/" region="def:NumberBin"/>
-      <regexp match="/[+-]?%dec;\.%dec;(?:[eE][+-]?%dec;)?/" region="def:NumberFloat"/>
-      <regexp match="/[+-]?%dec;[eE][+-]?%dec;/" region="def:NumberFloat"/>
+      <regexp match="/(?:(?{def:NumberHex}0x%hex;)|(?{def:NumberOct}0o%oct;)|(?{def:NumberBin}0b%bin;))\b/"/>
+      <regexp match="/[+-](?:%dec;\.%dec;(?:[eE][+-]?%dec;)?|%dec;[eE][+-]?%dec;)/" region="def:NumberFloat"/>
+      <regexp match="/%dec;(?:\.%dec;(?:[eE][+-]?%dec;)?|[eE][+-]?%dec;)/" region="def:NumberFloat"/>
       <regexp match="/[+-](inf|nan)\b/" region="def:NumberFloat"/>
-      <regexp match="/\b(inf|nan)\b/" region="def:NumberFloat"/>
-      <regexp match="/[+-]?(?:0|[1-9](?:_?[0-9])*)\b/" region="def:NumberDec"/>
+      <keywords region="def:NumberFloat">
+        <word name="inf"/>
+        <word name="nan"/>
+      </keywords>
+      <regexp match="/[+-](?:0|[1-9](?:_?[0-9])*)\b/" region="def:NumberDec"/>
+      <regexp match="/(?:0|[1-9](?:_?[0-9])*)\b/" region="def:NumberDec"/>
     </scheme>
 
     <scheme name="datetimes">
-      <regexp match="/%fullDate;[Tt ]%partialTime;%timeOffset;/" region="DateTime"/>
-      <regexp match="/%fullDate;[Tt ]%partialTime;/" region="DateTime"/>
-      <regexp match="/%fullDate;/" region="DateTime"/>
+      <regexp match="/%fullDate;(?:[Tt ]%partialTime;(?:%timeOffset;)?)?/" region="DateTime"/>
       <regexp match="/%partialTime;/" region="DateTime"/>
     </scheme>
 
@@ -191,11 +188,11 @@
 
     <scheme name="toml">
       <inherit scheme="comment"/>
-      <block start="/^\s*(\[\[)/" end="/(\]\])/"
+      <block start="/(\[\[)/" end="/(\]\])/"
              scheme="tableName"
              region00="def:PairStart" region10="def:PairEnd"
              region01="def:SymbolStrong" region11="def:SymbolStrong"/>
-      <block start="/^\s*(\[)/" end="/(\])/"
+      <block start="/(\[)/" end="/(\])/"
              scheme="tableName"
              region00="def:PairStart" region10="def:PairEnd"
              region01="def:SymbolStrong" region11="def:SymbolStrong"/>

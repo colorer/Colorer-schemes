@@ -12,6 +12,13 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [json] speed up number and string-escape matching
+- [qml] speed up import and property matching
+- [gitignore] speed up comment, negation and escape matching
+- [swift] speed up directives; colour Swift number literals (underscores, `0o`, hex-float) without inheriting `def:Number`
+- [vbasic] speed up strings; recognise `""` inside a string
+- [foxpro] speed up strings and `{|...|}` inserts; recognise doubled quotes
+- [ole] speed up strings and `{|...|}` inserts; recognise doubled quotes
 - [css] add @media rules and media query highlighting
 - License has been changed to LGPL 2.1 for the resulting hrc files with the specified license 'MPL 1.1/GPL 2.0/LGPL 2.1'.
 - Simplified catalog.xml.

@@ -38,7 +38,7 @@ New types are almost always static: put them under `./base/hrc/` next to similar
 Author from git only: `git config user.name` / `git config user.email` (current year for copyright).
 
 - **New file:** `<annotation><contributors>` with that author; after `</hrc>`, MIT comment block (full text in [examples.md](examples.md)).
-- **Edit existing:** do not change the trailing license; append the git author to `type` → `annotation` → `contributors` (create the block if missing). Skip if already listed.
+- **Edit existing:** do not change the trailing license; append the git author to `type` → `annotation` → `contributors` (create the block if missing). Skip if already listed. `Name <email>` must be in `<![CDATA[…]]>` (or without `<>`): raw `<email>` is XML and the type fails to load.
 
 ## Tests
 
@@ -53,7 +53,7 @@ Always `./build.sh base` before colorer / load / parse (or use `validate.py`, wh
 
 - **Load:** success = `✅ Success: there are no unknown errors in the log.` Extend `ignored_error.txt` only for unavoidable pre-existing noise.
 - **Parse:** no diffs ideally. If a scheme fix intentionally changes output, review then copy from `./_test/test_*` into `./tests/test/_valid`.
-- **New scheme:** add ≥1 sample under `./tests/test/<lang>/` and matching golden `./tests/test/_valid/<lang>/…html`.
+- **New scheme / no golden:** add ≥1 sample under `./tests/test/<lang>/` and matching golden `./tests/test/_valid/<lang>/…html` (`colorer -ht FILE -t TYPE -dc -dh -ln`). Shared extensions (`.prg`): pick one unique to the prototype (`.spr`).
 
 ## Conventions
 
@@ -67,4 +67,6 @@ Always `./build.sh base` before colorer / load / parse (or use `validate.py`, wh
 
 - [examples.md](examples.md) — copy-paste HRC + MIT footer, snippets
 - [reference.md](reference.md) — regions numbering, CLI, regexp tips
+- [speed.md](speed.md) — fewer `CRegExp::parse()` and less NFA: hard first char, `$` on short end-RE, required literals, no overlapping lazy tails; do not change `priority="low"`
 - [hrc-ref.md](hrc-ref.md) — full HRC / regexp reference
+- Colorer-library (optional; example sibling `../Colorer-library`) — engine skill `colorer-hrc`, `perftest` corpus `tests/performance/samples/`
