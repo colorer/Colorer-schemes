@@ -29,7 +29,7 @@ New types are almost always static: put them under `./base/hrc/` next to similar
 1. **Sample** — get a sample file; list keywords, strings, comments, numbers, blocks.
 2. **Template** — copy a close match from `./base/hrc/` (see [examples.md](examples.md)).
 3. **HRC** — `<type name>` = main `<scheme name>`; regions from `def:*`; `<regexp>` for line tokens, `<block>` for nesting.
-4. **Prototype** — add to `base/hrc/proto.hrc` (`name` matches type; `<filename>` / `<firstline>` as needed; `<location link="…">` relative to `hrc/`).
+4. **Prototype** — add to `base/hrc/proto.hrc` (`name` matches type; `<filename>` / `<firstline>` as needed; `<location link="…">` relative to `hrc/`). Unique extensions do **not** need `weight` (filename already defaults to 2). See [reference.md](reference.md#prototype-weights).
 5. **Author / license** — see below.
 6. **Test** — `./build.sh base`, then the checks below.
 
@@ -62,11 +62,12 @@ Always `./build.sh base` before colorer / load / parse (or use `validate.py`, wh
 - Catch-alls: `priority="low"`.
 - In `<block>`, `region00` = whole start match, `region01` = first capture — swap if a keyword is colored as a symbol.
 - Type missing from `-lt` → prototype path, well-formed XML, and rebuild.
+- Autodetect: do not put `weight` on a unique `<filename>`; default 2 already beats `<firstline>` (default 1) and the catch-all `default` type (1). Raise `weight` only to beat a **named** competitor (another filename, or a firstline whose summed weight is ≥ 2 **and** listed earlier in `proto.hrc`).
 
 ## Resources
 
 - [examples.md](examples.md) — copy-paste HRC + MIT footer, snippets
-- [reference.md](reference.md) — regions numbering, CLI, regexp tips
+- [reference.md](reference.md) — prototype weights, regions numbering, CLI, regexp tips
 - [speed.md](speed.md) — fewer `CRegExp::parse()` and less NFA: hard first char, `$` on short end-RE, required literals, no overlapping lazy tails; do not change `priority="low"`
 - [hrc-ref.md](hrc-ref.md) — full HRC / regexp reference
 - Colorer-library (optional; example sibling `../Colorer-library`) — engine skill `colorer-hrc`, `perftest` corpus `tests/performance/samples/`

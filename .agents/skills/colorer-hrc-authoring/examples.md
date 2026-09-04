@@ -84,6 +84,8 @@ SOFTWARE.
 
 ## Prototype
 
+Unique extension — no `weight` (filename defaults to 2). Raise `weight` only to beat a named competitor; see [reference.md](reference.md#prototype-weights).
+
 ```xml
 <prototype name="tiny" group="main" description="Tiny language">
     <location link="base/tiny.hrc" />
