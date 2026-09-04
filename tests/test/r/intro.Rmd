@@ -1,0 +1,15 @@
+---
+title: "Learn R Markdown"
+output: html_document
+---
+
+# Overview
+
+A short R chunk:
+
+```{r, include = FALSE}
+x <- 1 + 2
+print(x)
+```
+
+Done.

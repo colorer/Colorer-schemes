@@ -1,0 +1,3 @@
+from pathlib import Path
+
+def read_text(path: Path) -> str: ...

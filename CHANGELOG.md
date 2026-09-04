@@ -3,6 +3,12 @@
 ## [Unreleased]
 
 ### Added
+- [jsx] JSX/TSX highlighting (`.jsx`, `.tsx`) on top of JavaScript
+- [scss] SCSS highlighting (`.scss`); indented Sass stays on `.sass`
+- [ipynb] Jupyter Notebook (`.ipynb`) as JSON, so Pascal firstline does not steal it
+- [rmd] R Markdown / Quarto (`.Rmd`, `.qmd`) with YAML front matter and R/Python chunks
+- [python] recognise `.pyi` type stubs
+- [kotlin] recognise `.kts` / `.gradle.kts` scripts
 - [toml] Add TOML syntax highlighting support
 - [dart] Add Dart syntax highlighting support
 - [swift] Add Swift syntax highlighting support
