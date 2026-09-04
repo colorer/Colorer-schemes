@@ -38,7 +38,7 @@
     </prototype>
     <prototype name="cpp" group="main" description="C++">
         <location link="base/cpp.hrc" />
-        <filename>/\.(cpp|cxx|cc|hpp|h|icpp)$/i</filename>
+        <filename>/\.(cpp|cxx|cc|hpp|h|icpp|hh|hxx|ipp|tpp|inl|ixx|cppm|ccm|cxxm)$/i</filename>
         <firstline>/^\s*(\/\* | \/\/)/xi</firstline>
         <firstline>/\#include/</firstline>
         <firstline>/\#define|\#if/</firstline>
@@ -190,8 +190,7 @@
     </prototype>
     <prototype name="python" group="main" description="Python">
         <location link="base/python.hrc" />
-        <filename>/\.(py|pyw|pys)$/i</filename>
-        <filename weight="5">/\.pyi$/i</filename>
+        <filename>/\.(py|pyw|pys|pyi)$/i</filename>
         <firstline weight='2'>/^\#!\S*.+python/</firstline>
         <firstline>/^("""|import)/</firstline>
     </prototype>
@@ -248,8 +247,7 @@
     </prototype>
     <prototype name="kotlin" group="main" description="Kotlin">
         <location link="base/kotlin.hrc" />
-        <filename>/\.kt$/i</filename>
-        <filename weight="5">/\.kts$/i</filename>
+        <filename>/\.(kt|kts)$/i</filename>
     </prototype>
     <prototype name="groovy" group="main" description="Groovy">
         <location link="base/groovy.hrc" />
@@ -326,7 +324,7 @@
     </prototype>
     <prototype name="scss" group="inet" description="SCSS">
         <location link="inet/scss.hrc" />
-        <filename weight="5">/\.scss$/i</filename>
+        <filename>/\.scss$/i</filename>
     </prototype>
     <prototype name="less" group="inet" description="Less css">
         <location link="inet/less.hrc" />
@@ -443,7 +441,19 @@
     </prototype>
     <prototype name="jsx" group="inet" description="JSX / TSX">
         <location link="inet/jsx.hrc" />
-        <filename weight="5">/\.(jsx|tsx)$/i</filename>
+        <filename>/\.(jsx|tsx)$/i</filename>
+    </prototype>
+    <prototype name="vue" group="inet" description="Vue SFC">
+        <location link="inet/vue.hrc" />
+        <filename>/\.vue$/i</filename>
+    </prototype>
+    <prototype name="svelte" group="inet" description="Svelte">
+        <location link="inet/svelte.hrc" />
+        <filename>/\.svelte$/i</filename>
+    </prototype>
+    <prototype name="razor" group="inet" description="Razor / Blazor">
+        <location link="inet/razor.hrc" />
+        <filename>/\.(razor|cshtml)$/i</filename>
     </prototype>
     <prototype name="actionscript" group="inet" description="ActionScript">
         <location link="inet/actionscript.hrc" />
@@ -636,6 +646,10 @@
             <param name="backslash_escapes" value="true" description="Treat \' in character literals as an escaped '" />
         </parameters>
     </prototype>
+    <prototype name="prisma" group="database" description="Prisma schema">
+        <location link="db/prisma.hrc" />
+        <filename>/\.prisma$/i</filename>
+    </prototype>
     <prototype name="mysql" group="database" description="MySQL">
         <location link="db/mysql.hrc" />
         <filename>/\.sql$/i</filename>
@@ -699,7 +713,7 @@
     </prototype>
     <prototype name="rmd" group="scripts" description="R Markdown / Quarto">
         <location link="scripts/rmd.hrc" />
-        <filename weight="10">/\.(Rmd|qmd)$/i</filename>
+        <filename>/\.(Rmd|qmd)$/i</filename>
     </prototype>
     <prototype name="markdown" group="scripts" description="markdown">
         <location link="misc/markdown.hrc" />
@@ -725,6 +739,12 @@
         <filename>/(\.cmake)$/i</filename>
         <filename weight="3">/(^CMakeLists\.txt)$/i</filename>
         <firstline weight="2">/^cmake_minimum_required/xi</firstline>
+    </prototype>
+    <prototype name="meson" group="scripts" description="Meson">
+        <location link="scripts/meson.hrc" />
+        <filename>/^meson\.build$/i</filename>
+        <filename>/^meson\.options$/i</filename>
+        <filename>/^meson_options\.txt$/i</filename>
     </prototype>
     <prototype name="solution" group="scripts" description="Microsoft Visual Studio Solution File">
         <location link="scripts/solution.hrc" />
@@ -1095,7 +1115,7 @@
     </prototype>
     <prototype name="ipynb" group="rare" description="Jupyter Notebook">
         <location link="rare/ipynb.hrc" />
-        <filename weight="10">/\.ipynb$/i</filename>
+        <filename>/\.ipynb$/i</filename>
     </prototype>
     <prototype name="yaml" group="rare" description="YAML">
         <location link="rare/yaml.hrc" />

@@ -1,0 +1,23 @@
+﻿ 0: <span class='prisma-Keyword def-Keyword'>generator</span> client <span class='def-SymbolStrong def-Symbol'>{</span>
+ 1:   provider = <span class='def-StringEdge def-String'>"</span><span class='prisma-String def-String'>prisma-client-js</span><span class='def-StringEdge def-String'>"</span>
+ 2: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 3: 
+ 4: <span class='prisma-Keyword def-Keyword'>datasource</span> db <span class='def-SymbolStrong def-Symbol'>{</span>
+ 5:   provider = <span class='def-StringEdge def-String'>"</span><span class='prisma-String def-String'>postgresql</span><span class='def-StringEdge def-String'>"</span>
+ 6:   url      = env<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>"</span><span class='prisma-String def-String'>DATABASE_URL</span><span class='def-StringEdge def-String'>"</span><span class='def-Symbol'>)</span>
+ 7: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 8: 
+ 9: <span class='def-CommentDoc def-Comment def-Syntax'>/// User account</span>
+10: <span class='prisma-Keyword def-Keyword'>model</span> User <span class='def-SymbolStrong def-Symbol'>{</span>
+11:   id    <span class='prisma-Type def-TypeKeyword def-Keyword'>Int</span>     <span class='prisma-Attribute def-Directive'>@id</span> <span class='prisma-Attribute def-Directive'>@default</span><span class='def-Symbol'>(</span>autoincrement<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span>
+12:   email <span class='prisma-Type def-TypeKeyword def-Keyword'>String</span>  <span class='prisma-Attribute def-Directive'>@unique</span>
+13:   posts Post<span class='def-Symbol'>[</span><span class='def-Symbol'>]</span>
+14: <span class='def-SymbolStrong def-Symbol'>}</span>
+15: 
+16: <span class='prisma-Keyword def-Keyword'>model</span> Post <span class='def-SymbolStrong def-Symbol'>{</span>
+17:   id       <span class='prisma-Type def-TypeKeyword def-Keyword'>Int</span>    <span class='prisma-Attribute def-Directive'>@id</span> <span class='prisma-Attribute def-Directive'>@default</span><span class='def-Symbol'>(</span>autoincrement<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span><span class='def-Symbol'>)</span>
+18:   title    <span class='prisma-Type def-TypeKeyword def-Keyword'>String</span>
+19:   author   User   <span class='prisma-Attribute def-Directive'>@relation</span><span class='def-Symbol'>(</span>fields: <span class='def-Symbol'>[</span>authorId<span class='def-Symbol'>]</span>, references: <span class='def-Symbol'>[</span>id<span class='def-Symbol'>]</span><span class='def-Symbol'>)</span>
+20:   authorId <span class='prisma-Type def-TypeKeyword def-Keyword'>Int</span>
+21: <span class='def-SymbolStrong def-Symbol'>}</span>
+22: 

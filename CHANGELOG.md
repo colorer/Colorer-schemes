@@ -9,6 +9,12 @@
 - [rmd] R Markdown / Quarto (`.Rmd`, `.qmd`) with YAML front matter and R/Python chunks
 - [python] recognise `.pyi` type stubs
 - [kotlin] recognise `.kts` / `.gradle.kts` scripts
+- [prisma] Prisma schema (`.prisma`), so C firstline does not steal it
+- [meson] Meson build (`meson.build`, `meson.options`)
+- [vue] Vue single-file components (`.vue`)
+- [svelte] Svelte components (`.svelte`)
+- [razor] Razor / Blazor (`.razor`, `.cshtml`) with `@code` C# islands
+- [cpp] recognise C++20 modules and extra headers (`.ixx`, `.cppm`, `.hh`, `.hxx`, `.ipp`, `.tpp`, `.inl`)
 - [toml] Add TOML syntax highlighting support
 - [dart] Add Dart syntax highlighting support
 - [swift] Add Swift syntax highlighting support
