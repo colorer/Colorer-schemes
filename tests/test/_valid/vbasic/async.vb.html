@@ -1,0 +1,9 @@
+﻿0: <span class='vbasic-vbWord def-Keyword'>Public</span> <span class='vbasic-vbWord def-Keyword'>Async</span> <span class='vbasic-vbWord def-Keyword'>Function</span> FetchAsync<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='vbasic-vbWord def-Keyword'>As</span> Task<span class='def-Symbol'>(</span><span class='vbasic-vbWord def-Keyword'>Of</span> <span class='vbasic-vbWord def-Keyword'>String</span><span class='def-Symbol'>)</span>
+1:     <span class='vbasic-vbWord def-Keyword'>Dim</span> <span class='vbasic-vbWord def-Keyword'>name</span> <span class='vbasic-vbSymb def-Symbol'>=</span> <span class='vbasic-vbWord def-Keyword'>NameOf</span><span class='def-Symbol'>(</span>FetchAsync<span class='def-Symbol'>)</span>
+2:     <span class='vbasic-vbWord def-Keyword'>Return</span> <span class='vbasic-vbWord def-Keyword'>Await</span> IO<span class='vbasic-vbNumb def-Number'>.</span>ReadAsync<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>
+3: <span class='vbasic-vbWord def-Keyword'>End</span> <span class='vbasic-vbWord def-Keyword'>Function</span>
+4: 
+5: <span class='vbasic-vbWord def-Keyword'>Public</span> <span class='vbasic-vbWord def-Keyword'>Iterator</span> <span class='vbasic-vbWord def-Keyword'>Function</span> Items<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='vbasic-vbWord def-Keyword'>As</span> IEnumerable<span class='def-Symbol'>(</span><span class='vbasic-vbWord def-Keyword'>Of</span> <span class='vbasic-vbWord def-Keyword'>Integer</span><span class='def-Symbol'>)</span>
+6:     <span class='vbasic-vbWord def-Keyword'>Yield</span> <span class='vbasic-vbNumb def-Number'>1</span>
+7: <span class='vbasic-vbWord def-Keyword'>End</span> <span class='vbasic-vbWord def-Keyword'>Function</span>
+8: 

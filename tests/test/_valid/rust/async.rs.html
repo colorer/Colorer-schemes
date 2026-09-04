@@ -1,0 +1,5 @@
+﻿0: <span class='def-Keyword'>pub</span> <span class='def-Keyword'>async</span> <span class='def-Keyword'>fn</span> fetch<span class='def-Symbol'>(</span>url: &amp;str<span class='def-Symbol'>)</span> <span class='def-Symbol'>-></span> Result&lt;String<span class='def-Symbol'>,</span> Box&lt;<span class='def-Keyword'>dyn</span> std<span class='def-Symbol'>::</span>error<span class='def-Symbol'>::</span>Error>> <span class='def-Symbol'>{</span>
+1:     <span class='def-Keyword'>let</span> body = client.get<span class='def-Symbol'>(</span>url<span class='def-Symbol'>)</span>.<span class='def-Keyword'>await</span>?<span class='def-Symbol'>;</span>
+2:     Ok<span class='def-Symbol'>(</span>body<span class='def-Symbol'>)</span>
+3: <span class='def-Symbol'>}</span>
+4: 

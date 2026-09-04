@@ -14,6 +14,34 @@ In `base/hrc/proto.hrc`, near related entries. `link` is relative to `hrc/`:
 </prototype>
 ```
 
+Prefer one `<filename>` regexp that lists all extensions for the type (`/\.(kt|kts)$/i`). A second `<filename>` is fine when the pattern is a full name (`/^meson\.build$/i`), not as a way to attach a fake `weight`.
+
+## Prototype weights
+
+Autodetect (`chooseFileType`) sums every matching `<filename>` and `<firstline>` on the prototype. Highest sum wins; **ties keep the first prototype in `proto.hrc`**.
+
+| Element | Default `weight` |
+|---------|------------------|
+| `<filename>` | **2** |
+| `<firstline>` | **1** |
+
+- **Firstline always scores**, even when the filename did not match. (A comment in the engine about “content only after filename > 0” is stale.)
+- The CLI concatenates about the first 4 lines / 500 bytes (`default` type’s `firstlines` / `firstlinebytes`) and runs each firstline RE on that blob. A firstline **without `^`** can match anywhere in the blob; several firstline rules on the same type **add up**.
+- Type `default` has `<filename weight='1'>//</filename>` and matches every name. A unique extension at default 2 already beats it.
+
+**Do not set `weight` on a unique extension.** `weight="5"` / `"10"` does not “make autodetection more reliable” if nothing else claims that name.
+
+Raise `weight` only when you have counted a real competitor:
+
+1. Another type’s **filename** matches the same path (shared extension, `\.txt$`, …), or
+2. Another type’s **firstline** sum is ≥ 2 **and** that type is listed **earlier** in `proto.hrc` (ties go to the earlier entry).
+
+Existing justified examples: `.ss` / `.twig` (10 vs a shared suffix), `CMakeLists.txt` (3 vs `text`’s `.txt`), yaml (10), json (3), `.Rproj` (3 vs xml’s `\w*proj`). Unjustified: extra weight on `.pyi`, `.scss`, `.prisma`, `.vue` — default filename 2 already beat qml/cpp/pascal `firstline` (1).
+
+When a firstline steals a file that has **no** filename rule (`.pyi` → qml `import`, `.scss` → cpp `//`, `.ipynb` → pascal `{`), the fix is to **add `<filename>`**, not to inflate `weight`.
+
+Do not write `\.Rproj` or `\.rproj`: `\R` is not a letter (the chooser fails to compile) and `\r` is a carriage return. Put the first letter in a group or class: `/\.(rproj)$/i`, `/\.(Rmd|qmd)$/i`. xml’s `/\w*proj$/` already claims `*.csproj` and also `*.Rproj` — beat it with `weight="3"`, do not reuse xml.
+
 ## `<block>` region numbering
 
 For start `/(keyword)(\()/`, end `/(\))/`:

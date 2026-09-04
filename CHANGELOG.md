@@ -3,6 +3,21 @@
 ## [Unreleased]
 
 ### Added
+- [jsx] JSX/TSX highlighting (`.jsx`, `.tsx`) on top of JavaScript
+- [scss] SCSS highlighting (`.scss`); indented Sass stays on `.sass`
+- [ipynb] Jupyter Notebook (`.ipynb`) as JSON, so Pascal firstline does not steal it
+- [rmd] R Markdown / Quarto (`.Rmd`, `.qmd`) with YAML front matter and R/Python chunks
+- [python] recognise `.pyi` type stubs
+- [kotlin] recognise `.kts` / `.gradle.kts` scripts
+- [prisma] Prisma schema (`.prisma`), so C firstline does not steal it
+- [meson] Meson build (`meson.build`, `meson.options`)
+- [vue] Vue single-file components (`.vue`)
+- [svelte] Svelte components (`.svelte`)
+- [razor] Razor / Blazor (`.razor`, `.cshtml`) with `@code` C# islands
+- [cpp] recognise C++20 modules and extra headers (`.ixx`, `.cppm`, `.hh`, `.hxx`, `.ipp`, `.tpp`, `.inl`)
+- [cython] Cython highlighting (`.pyx`, `.pxd`, `.pxi`) on top of Python
+- [rproj] RStudio project files (`.Rproj`)
+- [typescript] TypeScript highlighting (`.ts`, `.mts`, `.cts`) on top of JavaScript
 - [toml] Add TOML syntax highlighting support
 - [dart] Add Dart syntax highlighting support
 - [swift] Add Swift syntax highlighting support
@@ -12,6 +27,16 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [python] add `match`/`case`; treat `print`/`exec` as builtins, not keywords
+- [rust] add `async`/`await`/`dyn`; drop obsolete reserved words (`alignof`, `proc`, …)
+- [java] add `record`/`sealed`/`permits`/`var`/`yield`/`when` and text blocks
+- [csharp] add `required`/`init`/`file`/`scoped`/`nint`/`nuint`
+- [jScript] add `async`/`await`/`of`; do not treat `boolean` as an ES3 reserved word
+- [vbnet] add `Async`/`Await`/`Iterator`/`Yield`/`NameOf`
+- [toml] recognise `Cargo.lock`, `poetry.lock`, `uv.lock`
+- [r] native pipe `|>` and `\(x)` lambda
+- [mysql] bind `.mysql` and mysqldump firstline; `.sql` stays on sql
+- [jsx] TypeScript keywords in TSX via shared `tsKeywords`
 - [json] speed up number and string-escape matching
 - [qml] speed up import and property matching
 - [gitignore] speed up comment, negation and escape matching

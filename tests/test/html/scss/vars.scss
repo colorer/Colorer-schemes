@@ -1,0 +1,18 @@
+// SCSS variables and nesting
+$primary: #0d6efd;
+$spacer: 1rem;
+
+@mixin card($radius: 4px) {
+  border-radius: $radius;
+  color: $primary;
+}
+
+.card {
+  @include card(8px);
+  padding: $spacer;
+  color: darken($primary, 10%);
+
+  &__title {
+    font-size: 1.2rem;
+  }
+}

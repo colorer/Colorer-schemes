@@ -1,0 +1,9 @@
+﻿0: <span class='python-pyKeyword def-Keyword'>def</span> http_status<span class='def-Symbol'>(</span>code<span class='def-Symbol'>)</span><span class='python-pyDelimiter def-Symbol'>:</span>
+1:     <span class='python-pyKeyword def-Keyword'>match</span> code<span class='python-pyDelimiter def-Symbol'>:</span>
+2:         <span class='python-pyKeyword def-Keyword'>case</span> <span class='python-pyNumberDec def-NumberDec def-Number'>200</span> <span class='python-pyOperator def-Operator def-Symbol'>|</span> <span class='python-pyNumberDec def-NumberDec def-Number'>201</span><span class='python-pyDelimiter def-Symbol'>:</span>
+3:             <span class='python-pyKeyword def-Keyword'>return</span> <span class='python-pyStringEdge def-StringEdge def-String'>"</span><span class='python-pyString def-String'>ok</span><span class='python-pyStringEdge def-StringEdge def-String'>"</span>
+4:         <span class='python-pyKeyword def-Keyword'>case</span> <span class='python-pyNumberDec def-NumberDec def-Number'>404</span><span class='python-pyDelimiter def-Symbol'>:</span>
+5:             <span class='python-pyKeyword def-Keyword'>return</span> <span class='python-pyStringEdge def-StringEdge def-String'>"</span><span class='python-pyString def-String'>missing</span><span class='python-pyStringEdge def-StringEdge def-String'>"</span>
+6:         <span class='python-pyKeyword def-Keyword'>case</span> _<span class='python-pyDelimiter def-Symbol'>:</span>
+7:             <span class='python-pyKeyword def-Keyword'>return</span> <span class='python-pyStringEdge def-StringEdge def-String'>"</span><span class='python-pyString def-String'>other</span><span class='python-pyStringEdge def-StringEdge def-String'>"</span>
+8: 

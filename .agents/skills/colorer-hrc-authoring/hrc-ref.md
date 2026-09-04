@@ -233,6 +233,8 @@ This attribute defines weight, added to the total language weight, when choosing
 
 If any of these two elements is used more than once, each matched instance adds specified amount to the total weight of a language.
 
+Both filename and firstline rules of a prototype are always tested and summed. Firstline is **not** skipped when filename did not match. The CLI feeds roughly the first four lines of the file as one string; firstline patterns without `^` may match anywhere in that prefix. On a tie (equal total weight) the **first** matching prototype in `proto.hrc` wins. Unique filenames should omit `weight` (default 2 already beats firstline default 1 and the catch-all `default` type at 1).
+
 Actual language definition can be separated from its prototype and placed into other file \(or resource\). In this case `<location>` element specifies where to find the definition. The file or resource specified will not be loaded until language matches and is selected for highlightning process.
 
 Element: `<location>`

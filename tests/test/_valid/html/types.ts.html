@@ -1,0 +1,15 @@
+﻿ 0: <span class='jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>export</span> <span class='typescript-Keyword def-Keyword'>type</span> Id <span class='def-Symbol'>=</span> string <span class='def-Symbol'>|</span> number<span class='def-SymbolStrong def-Symbol'>;</span>
+ 1: 
+ 2: <span class='jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>export</span> <span class='jScript-ES5StrictFutureReservedWord jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>interface</span> User <span class='def-SymbolStrong def-Symbol'>{</span>
+ 3:   <span class='typescript-Keyword def-Keyword'>readonly</span> id<span class='def-SymbolStrong def-Symbol'>:</span> Id<span class='def-SymbolStrong def-Symbol'>;</span>
+ 4:   name<span class='def-SymbolStrong def-Symbol'>?</span><span class='def-SymbolStrong def-Symbol'>:</span> string<span class='def-SymbolStrong def-Symbol'>;</span>
+ 5: <span class='def-SymbolStrong def-Symbol'>}</span>
+ 6: 
+ 7: <span class='jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>export</span> <span class='jScript-ES5ReservedWord def-Keyword'>function</span> load<span class='def-Symbol'>(</span>id<span class='def-SymbolStrong def-Symbol'>:</span> Id<span class='def-Symbol'>)</span><span class='def-SymbolStrong def-Symbol'>:</span> Promise<span class='def-Symbol'>&lt;</span>User<span class='def-Symbol'>></span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 8:   <span class='jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>const</span> data <span class='def-Symbol'>=</span> fetch<span class='def-Symbol'>(</span><span class='def-StringEdge def-String'>`</span><span class='def-String'>/api/</span><span class='def-StringEdge def-String'>${</span><span class='def-Var'>id</span><span class='def-StringEdge def-String'>}</span><span class='def-StringEdge def-String'>`</span><span class='def-Symbol'>)</span> <span class='typescript-Keyword def-Keyword'>as</span> Promise<span class='def-Symbol'>&lt;</span>User<span class='def-Symbol'>></span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 9:   <span class='jScript-ES5ReservedWord def-Keyword'>return</span> data<span class='def-SymbolStrong def-Symbol'>;</span>
+10: <span class='def-SymbolStrong def-Symbol'>}</span>
+11: 
+12: <span class='typescript-Keyword def-Keyword'>type</span> Box<span class='def-Symbol'>&lt;</span>T<span class='def-Symbol'>></span> <span class='def-Symbol'>=</span> <span class='def-SymbolStrong def-Symbol'>{</span> value<span class='def-SymbolStrong def-Symbol'>:</span> T <span class='def-SymbolStrong def-Symbol'>}</span><span class='def-SymbolStrong def-Symbol'>;</span>
+13: <span class='typescript-Keyword def-Keyword'>declare</span> <span class='jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>const</span> empty<span class='def-SymbolStrong def-Symbol'>:</span> <span class='typescript-TypeKeyword def-TypeKeyword def-Keyword'>never</span><span class='def-SymbolStrong def-Symbol'>;</span>
+14: 
