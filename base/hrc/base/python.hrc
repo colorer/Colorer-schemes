@@ -14,6 +14,7 @@
   <contributors><![CDATA[
     anatoly techtonik <techtonik@php.net>
     Nikita Kniazev <kniazev.nikita@gmail.com>
+    Aleksey Dobrunov <ctapmex@ctapmex.com>
   ]]></contributors>
  </annotation>
 
@@ -170,7 +171,6 @@
     <word name="elif"/>
     <word name="else"/>
     <word name="except"/>
-    <word name="exec"/>
     <word name="finally"/>
     <word name="for"/>
     <word name="from"/>
@@ -180,11 +180,12 @@
     <word name="in"/>
     <word name="is"/>
     <word name="lambda"/>
+    <word name="match"/>
+    <word name="case"/>
     <word name="nonlocal"/>
     <word name="not"/>
     <word name="or"/>
     <word name="pass"/>
-    <word name="print"/>
     <word name="raise"/>
     <word name="return"/>
     <word name="try"/>
@@ -225,6 +226,7 @@
       <word name="divmod"/>
       <word name="enumerate"/>
       <word name="eval"/>
+      <word name="exec"/>
       <word name="execfile"/>
       <word name="file"/>
       <word name="filter"/>
@@ -257,6 +259,7 @@
       <word name="open"/>
       <word name="ord"/>
       <word name="pow"/>
+      <word name="print"/>
       <word name="property"/>
       <word name="range"/>
       <word name="raw_input"/>

@@ -24,6 +24,12 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [python] add `match`/`case`; treat `print`/`exec` as builtins, not keywords
+- [rust] add `async`/`await`/`dyn`; drop obsolete reserved words (`alignof`, `proc`, …)
+- [java] add `record`/`sealed`/`permits`/`var`/`yield`/`when` and text blocks
+- [csharp] add `required`/`init`/`file`/`scoped`/`nint`/`nuint`
+- [jScript] add `async`/`await`/`of`; colour TypeScript `type`; do not treat `boolean` as an ES3 reserved word
+- [vbnet] add `Async`/`Await`/`Iterator`/`Yield`/`NameOf`
 - [json] speed up number and string-escape matching
 - [qml] speed up import and property matching
 - [gitignore] speed up comment, negation and escape matching

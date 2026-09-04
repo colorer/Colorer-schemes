@@ -21,7 +21,7 @@
  20: <span class='def-Keyword'>use</span> std<span class='def-Symbol'>::</span>thread<span class='def-Symbol'>::</span>JoinGuard<span class='def-Symbol'>;</span>
  21: 
  22: <span class='def-Keyword'>trait</span> FnBox <span class='def-Symbol'>{</span>
- 23:     <span class='def-Keyword'>fn</span> call_box<span class='def-Symbol'>(</span><span class='def-Keyword'>self</span>: Box&lt;Self><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 23:     <span class='def-Keyword'>fn</span> call_box<span class='def-Symbol'>(</span><span class='def-Keyword'>self</span>: Box&lt;<span class='def-Keyword'>Self</span>><span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
  24: <span class='def-Symbol'>}</span>
  25: 
  26: <span class='def-Keyword'>impl</span>&lt;F: FnOnce<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span>> FnBox <span class='def-Keyword'>for</span> F <span class='def-Symbol'>{</span>
