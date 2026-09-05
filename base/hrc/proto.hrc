@@ -459,6 +459,11 @@
         <location link="inet/svelte.hrc" />
         <filename>/\.svelte$/i</filename>
     </prototype>
+    <prototype name="astro" group="inet" description="Astro">
+        <location link="inet/astro.hrc" />
+        <!-- diff firstline for patch headers is weight 2; 3 wins regardless of proto order -->
+        <filename weight="3">/\.astro$/i</filename>
+    </prototype>
     <prototype name="razor" group="inet" description="Razor / Blazor">
         <location link="inet/razor.hrc" />
         <filename>/\.(razor|cshtml)$/i</filename>
