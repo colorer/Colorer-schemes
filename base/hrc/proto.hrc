@@ -198,6 +198,10 @@
         <location link="base/cython.hrc" />
         <filename>/\.(pyx|pxd|pxi)$/i</filename>
     </prototype>
+    <prototype name="julia" group="main" description="Julia">
+        <location link="base/julia.hrc" />
+        <filename>/\.jl$/i</filename>
+    </prototype>
     <prototype name="lua" group="main" description="Lua">
         <location link="base/lua.hrc" />
         <filename>/\.(w?lua)$/i</filename>

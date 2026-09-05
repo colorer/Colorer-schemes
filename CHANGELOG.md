@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [julia] Julia (`.jl`)
 - [gitattributes] Git attributes (`.gitattributes`)
 - [typst] Typst (`.typ`)
 - [gleam] Gleam (`.gleam`)
