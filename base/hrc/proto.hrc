@@ -298,6 +298,10 @@
         <location link="base/gdscript.hrc" />
         <filename>/\.gd$/i</filename>
     </prototype>
+    <prototype name="solidity" group="main" description="Solidity">
+        <location link="base/solidity.hrc" />
+        <filename>/\.sol$/i</filename>
+    </prototype>
     <prototype name="swift" group="main" description="Swift">
         <location link="base/swift.hrc" />
         <filename>/\.swift$/i</filename>
