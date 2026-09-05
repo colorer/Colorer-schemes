@@ -27,6 +27,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [json] recognise `.jsonc`; list JSON, YAML, TOML and Jupyter under scripts instead of rare
 - [gitignore] recognise `.dockerignore`, `.prettierignore`, `.eslintignore`, `.npmignore`
 - [dockerfile] recognise `Containerfile` and `.dockerfile`
 - [python] add `match`/`case`; treat `print`/`exec` as builtins, not keywords

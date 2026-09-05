@@ -1127,19 +1127,19 @@
         <location link="rare/llvm.hrc" />
         <filename weight='3'>/\.ll$/i</filename>
     </prototype>
-    <prototype name="json" group="rare" description="JSON">
+    <prototype name="json" group="scripts" description="JSON">
         <location link="rare/json.hrc" />
-        <filename weight='3'>/\.json$/i</filename>
+        <filename weight='3'>/\.jsonc?$/i</filename>
     </prototype>
-    <prototype name="ipynb" group="rare" description="Jupyter Notebook">
+    <prototype name="ipynb" group="scripts" description="Jupyter Notebook">
         <location link="rare/ipynb.hrc" />
         <filename>/\.ipynb$/i</filename>
     </prototype>
-    <prototype name="yaml" group="rare" description="YAML">
+    <prototype name="yaml" group="scripts" description="YAML">
         <location link="rare/yaml.hrc" />
         <filename weight="10">/\.ya?ml$/</filename>
     </prototype>
-    <prototype name="toml" group="rare" description="TOML">
+    <prototype name="toml" group="scripts" description="TOML">
         <location link="rare/toml.hrc" />
         <filename>/\.toml$/i</filename>
         <filename>/^Pipfile$/i</filename>

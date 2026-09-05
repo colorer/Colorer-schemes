@@ -12,7 +12,7 @@
                 Eugene Myronchuk
             </contributors>
             <appinfo>
-                <prototype name="yaml" group="rare" description="YAML">
+                <prototype name="yaml" group="scripts" description="YAML">
                     <location link="rare/yaml.hrc"/>
                     <filename weight="10">/\.(yml)$/</filename>
                 </prototype>

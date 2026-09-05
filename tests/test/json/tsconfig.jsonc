@@ -1,0 +1,8 @@
+{
+  // JSON with comments
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+  },
+  "include": ["src/**/*.ts"]
+}
