@@ -742,6 +742,10 @@
         <location link="scripts/gitignore.hrc" />
         <filename>/^\.(git|docker|prettier|eslint|npm)ignore$/i</filename>
     </prototype>
+    <prototype name="gitattributes" group="scripts" description="Git attributes">
+        <location link="scripts/gitattributes.hrc" />
+        <filename>/^\.gitattributes$/i</filename>
+    </prototype>
     <prototype name="dotenv" group="scripts" description="dotenv">
         <location link="scripts/dotenv.hrc" />
         <filename>/\.env(\.[^/]+)?$/i</filename>

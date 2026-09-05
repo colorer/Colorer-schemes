@@ -1,0 +1,3 @@
+# comment
+* text=auto eol=lf
+*.c diff=cpp

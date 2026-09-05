@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [gitattributes] Git attributes (`.gitattributes`)
 - [typst] Typst (`.typ`)
 - [gleam] Gleam (`.gleam`)
 - [solidity] Solidity (`.sol`)
