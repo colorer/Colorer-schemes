@@ -189,6 +189,7 @@
     <word name="raise"/>
     <word name="return"/>
     <word name="try"/>
+    <word name="type"/>
     <word name="while"/>
     <word name="with"/>
     <word name="yield"/>
@@ -277,7 +278,6 @@
       <word name="sum"/>
       <word name="super"/>
       <word name="tuple"/>
-      <word name="type"/>
       <word name="unichr"/>
       <word name="unicode"/>
       <word name="vars"/>
