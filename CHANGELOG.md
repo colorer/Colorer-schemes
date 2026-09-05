@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [markdown] highlight common languages in fenced code blocks (indented, no blank line; same coloring in lists); markdown2 stays for extra languages
 - [terraform] recognise `.tofu`
 - [graphql] recognise `.graphqls` schema files
 - [typescript] `accessor` auto-accessor fields
