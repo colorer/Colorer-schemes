@@ -9,7 +9,7 @@
     <annotation>
       <documentation>
         Ignore-list syntax (.gitignore, .dockerignore, .prettierignore,
-        .eslintignore, .npmignore)
+        .eslintignore, .npmignore, .gitignore_global)
         https://git-scm.com/docs/gitignore
       </documentation>
       <contributors><![CDATA[

@@ -1,0 +1,7 @@
+{
+  // TypeScript project
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": true
+  }
+}

@@ -1,0 +1,6 @@
+{
+  // VS Code / JS project
+  "compilerOptions": {
+    "checkJs": true
+  }
+}

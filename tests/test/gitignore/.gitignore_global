@@ -1,0 +1,3 @@
+# user-global git excludes
+*.log
+.DS_Store
