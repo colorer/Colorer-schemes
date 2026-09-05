@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [vue] `v-*` / `@` / `:` template directives and `<script lang="ts">`
 - [rust] raw strings `r#"…"#` / `r##"…"##`, `#![` crate attributes, and lifetimes
 - [csv] colour TSV tab separators (tabs are skipped unless attached to a field)
 - [go] `//go:` compiler directives before line comments
