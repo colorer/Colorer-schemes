@@ -1,0 +1,14 @@
+ 0: <span class='yaml-KeyName def-Keyword'>name</span><span class='def-Symbol'>:</span> <span class='def-String'>ci</span>
+ 1: <span class='yaml-KeyName def-Keyword'>on</span><span class='def-Symbol'>:</span> <span class='def-String'>push</span>
+ 2: <span class='yaml-KeyName def-Keyword'>jobs</span><span class='def-Symbol'>:</span>
+ 3:   <span class='yaml-KeyName def-Keyword'>build</span><span class='def-Symbol'>:</span>
+ 4:     <span class='yaml-KeyName def-Keyword'>runs-on</span><span class='def-Symbol'>:</span> <span class='def-String'>ubuntu-latest</span>
+ 5:     <span class='yaml-KeyName def-Keyword'>steps</span><span class='def-Symbol'>:</span>
+ 6:       <span class='def-Symbol'>-</span> <span class='yaml-KeyName def-Keyword'>run</span><span class='def-Symbol'>:</span> <span class='def-String'>echo </span><span class='def-StringEdge def-String'>"</span><span class='def-SymbolStrong def-Symbol'>$</span><span class='def-SymbolStrong def-Symbol'>{{</span><span class='def-Var'> github.actor </span><span class='def-SymbolStrong def-Symbol'>}}</span><span class='def-StringEdge def-String'>"</span>
+ 7:       <span class='def-Symbol'>-</span> <span class='yaml-KeyName def-Keyword'>run</span><span class='def-Symbol'>:</span> <span class='def-SymbolStrong def-Symbol'>$</span><span class='def-SymbolStrong def-Symbol'>{{</span><span class='def-Var'> github.token </span><span class='def-SymbolStrong def-Symbol'>}}</span>
+ 8:     <span class='yaml-KeyName def-Keyword'>env</span><span class='def-Symbol'>:</span>
+ 9:       <span class='yaml-KeyName def-Keyword'>NOTE</span><span class='def-Symbol'>:</span> <span class='def-Symbol'>|</span>
+10:         <span class='def-String'>block</span>
+11:       <span class='yaml-KeyName def-Keyword'>FOLDED</span><span class='def-Symbol'>:</span> <span class='def-Symbol'>></span>
+12:         <span class='def-String'>line</span>
+13: 
