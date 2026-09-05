@@ -208,10 +208,12 @@ Contributors:
   <inherit scheme="Wrap"/>
   <inherit scheme="Escape"/>
   <inherit scheme="CodeSpan"/>
+  <regexp match="/\[([ xX])\]/" region="ListMark"/>
   <inherit scheme="LinkSpan"/>
   <inherit scheme="Template"/>
   <inherit scheme="HtmlBlock"/>
   <inherit scheme="Html"/>
+  <regexp match="/\|/" region="ShownMark"/>
 </scheme>
 
 <scheme name="EmSpan">
@@ -409,6 +411,11 @@ Contributors:
 
   <block scheme="List"
   start="/(?{start}%i3;%ListMark;)/" end="/(?{end})/"/>
+
+  <regexp match="/^ {,3}(?:\|?\s*:?-+:?\s*){2,}\|?\s*$/" region="Rule"/>
+
+  <block scheme="Text"
+  start="/^ {,3}\|?=/" end="/$/"/>
 
   <block scheme="Para"
   start="/\M(?{start}%i3;)\S/" end="/(?{end})%PEnd;/"/>

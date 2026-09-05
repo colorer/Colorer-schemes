@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [markdown] GFM tables (`|`) and task lists (`[ ]` / `[x]`)
 - [dockerfile] parser directives (`# syntax=`, `# escape=`) before comments
 - [vue] `v-*` / `@` / `:` template directives and `<script lang="ts">`
 - [rust] raw strings `r#"…"#` / `r##"…"##`, `#![` crate attributes, and lifetimes
