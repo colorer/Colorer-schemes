@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [typescript] `accessor` auto-accessor fields
 - [css] color functions `oklch()` / `oklab()` / `color-mix()`
 - [config] pair `[]` around INI/EditorConfig section names
 - [json] recognise `jsconfig.json` / `tsconfig*.json`

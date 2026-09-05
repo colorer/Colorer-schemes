@@ -12,3 +12,7 @@ export function load(id: Id): Promise<User> {
 
 type Box<T> = { value: T };
 declare const empty: never;
+
+class Counter {
+  accessor count = 0;
+}
