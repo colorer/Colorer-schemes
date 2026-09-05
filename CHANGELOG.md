@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [sql] PostgreSQL dollar-quotes (`$$` / `$tag$`), `$1` parameters, and `COPY FROM stdin` dumps
 - [yaml] quoted keys (`"on":`)
 - [python] PEP 750 t-strings (`t"…"`, `tr"…"`)
 - [xml] recognise `.slnx` Visual Studio solutions
