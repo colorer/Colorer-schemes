@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [terraform] recognise `.tofu`
 - [graphql] recognise `.graphqls` schema files
 - [typescript] `accessor` auto-accessor fields
 - [css] color functions `oklch()` / `oklab()` / `color-mix()`

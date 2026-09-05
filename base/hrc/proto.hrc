@@ -899,6 +899,7 @@
         <location link="scripts/hcl/terraform.hrc"/>
         <filename>/\.tf$/i</filename>
         <filename>/\.tfvars$/i</filename>
+        <filename>/\.tofu$/i</filename>
     </prototype>
 
     <prototype name="delphiform" group="scripts" description="Delphi form">
