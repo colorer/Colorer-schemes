@@ -63,6 +63,7 @@
         </scheme>
 
         <scheme name="Keys">
+			<regexp match="/(([&quot;&apos;])[^&quot;&apos;\n]*\2)\s*\M:(\s|$)?=/" region1="KeyName" />
 			<regexp match="/([\w\.\:\-]+)\M:(\s|$)?=/" region1="KeyName" />
         </scheme>
 

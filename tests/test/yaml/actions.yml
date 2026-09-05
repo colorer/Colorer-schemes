@@ -1,5 +1,6 @@
 name: ci
 on: push
+"quoted": yes
 jobs:
   build:
     runs-on: ubuntu-latest

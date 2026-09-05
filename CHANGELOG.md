@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [yaml] quoted keys (`"on":`)
 - [python] PEP 750 t-strings (`t"…"`, `tr"…"`)
 - [xml] recognise `.slnx` Visual Studio solutions
 - [go] type-set operator `~` in interface constraints
