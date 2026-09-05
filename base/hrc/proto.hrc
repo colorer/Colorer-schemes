@@ -213,6 +213,10 @@
         <firstline weight='4'>/-\*- ruby -\*-/i</firstline>
         <firstline>/bin\/ruby/i</firstline>
     </prototype>
+    <prototype name="elixir" group="main" description="Elixir">
+        <location link="base/elixir.hrc" />
+        <filename>/\.exs?$/i</filename>
+    </prototype>
     <prototype name="nix" group="main" description="Nix">
         <location link="base/nix.hrc" />
         <filename>/\.(nix)$/i</filename>

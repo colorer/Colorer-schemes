@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [elixir] Elixir (`.ex`, `.exs`)
 - [zig] Zig language (`.zig`)
 - [csv] CSV / TSV (`.csv`, `.tsv`)
 - [mdx] MDX (`.mdx`): Markdown with ESM import/export
