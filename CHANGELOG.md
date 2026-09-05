@@ -32,6 +32,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [rust] raw strings `r#"…"#` / `r##"…"##`, `#![` crate attributes, and lifetimes
 - [csv] colour TSV tab separators (tabs are skipped unless attached to a field)
 - [go] `//go:` compiler directives before line comments
 - [python] PEP 695 `type` alias as a keyword
