@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [xml] recognise `.slnx` Visual Studio solutions
 - [go] type-set operator `~` in interface constraints
 - [csharp] collection-expression spread `..` before member `.`
 - [java] unnamed `_` and `module-info` keywords (`module`/`requires`/`exports`/…)
