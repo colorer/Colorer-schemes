@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [protobuf] Protocol Buffers schema (`.proto`)
 - [dotenv] dotenv / env files (`.env`, `.env.*`)
 - [jsx] JSX/TSX highlighting (`.jsx`, `.tsx`) on top of JavaScript
 - [scss] SCSS highlighting (`.scss`); indented Sass stays on `.sass`

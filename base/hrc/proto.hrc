@@ -1131,6 +1131,10 @@
         <location link="rare/llvm.hrc" />
         <filename weight='3'>/\.ll$/i</filename>
     </prototype>
+    <prototype name="protobuf" group="rare" description="Protocol Buffers">
+        <location link="rare/protobuf.hrc" />
+        <filename>/\.proto$/i</filename>
+    </prototype>
     <prototype name="json" group="scripts" description="JSON">
         <location link="rare/json.hrc" />
         <filename weight='3'>/\.jsonc?$/i</filename>
