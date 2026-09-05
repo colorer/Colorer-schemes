@@ -1,0 +1,33 @@
+@layer reset, base;
+
+@layer utilities {
+  .hidden { display: none; }
+}
+
+@container (min-width: 700px) {
+  .card { grid-template-columns: 1fr 1fr; }
+}
+
+@scope (.article) {
+  p { line-height: 1.6; }
+}
+
+.card:has(img),
+.card:is(article, section),
+.card:where(.wide) {
+  display: grid;
+}
+
+.button {
+  color: oklch(0.7 0.15 250);
+  background: color-mix(in oklch, white 40%, blue);
+  &:hover {
+    color: blue;
+  }
+  .icon {
+    opacity: 0.8;
+  }
+  @media (max-width: 600px) {
+    color: green;
+  }
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package example.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// user record
+message User {
+  string name = 1;
+  int32 id = 2;
+  repeated string tags = 3;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_ACTIVE = 1;
+}
+
+service UserService {
+  rpc GetUser (User) returns (User);
+}

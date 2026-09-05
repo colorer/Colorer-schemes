@@ -1,0 +1,14 @@
+name: ci
+on: push
+"quoted": yes
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.actor }}"
+      - run: ${{ github.token }}
+    env:
+      NOTE: |
+        block
+      FOLDED: >
+        line

@@ -133,6 +133,12 @@
     <block start="/((?:fr|rf)(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
        scheme="RawFStringContent" region="pyString" inner-region="yes"
        region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/(t(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
+       scheme="FStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/((?:tr|rt)(?{Delim}&apos;{3}|&quot;{3}))/i" end="/(\y{Delim})/"
+       scheme="RawFStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
     <!-- Same as above but for singlequotes -->
     <block start="/(u?(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
        scheme="StringContent" region="pyString" inner-region="yes"
@@ -150,6 +156,12 @@
        scheme="FStringContent" region="pyString" inner-region="yes"
        region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
     <block start="/((?:fr|rf)(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
+       scheme="RawFStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/(t(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
+       scheme="FStringContent" region="pyString" inner-region="yes"
+       region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
+    <block start="/((?:tr|rt)(?{Delim}&apos;|&quot;))/i" end="/($|\y{Delim})/"
        scheme="RawFStringContent" region="pyString" inner-region="yes"
        region00="def:PairStart" region10="def:PairEnd" region01="pyStringEdge" region11="pyStringEdge" />
   </scheme>
@@ -189,6 +201,7 @@
     <word name="raise"/>
     <word name="return"/>
     <word name="try"/>
+    <word name="type"/>
     <word name="while"/>
     <word name="with"/>
     <word name="yield"/>
@@ -277,7 +290,6 @@
       <word name="sum"/>
       <word name="super"/>
       <word name="tuple"/>
-      <word name="type"/>
       <word name="unichr"/>
       <word name="unicode"/>
       <word name="vars"/>

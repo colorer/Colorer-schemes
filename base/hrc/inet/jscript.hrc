@@ -414,6 +414,7 @@
              <word name="async"/>
              <word name="await"/>
              <word name="of"/>
+             <word name="using"/>
           </keywords>
           <keywords region="ES5FutureReservedWord" worddiv="%worddiv;">
              <word name="class"/>
@@ -456,46 +457,55 @@
  <!-- Operators Computational  -->
              <symb name="++"/>
              <symb name="--"/>
+             <symb name="**="/>
+             <symb name="**"/>
+             <symb name="*="/>
              <symb name="*"/>
+             <symb name="/="/>
              <symb name="/"/>
+             <symb name="%="/>
              <symb name="%"/>
+             <symb name="+="/>
              <symb name="+"/>
+             <symb name="-="/>
              <symb name="-"/>
  <!-- Operators Logical -->
              <symb name="!"/>
-             <symb name="&lt;"/>
-             <symb name="&gt;"/>
+             <symb name="&lt;&lt;="/>
+             <symb name="&lt;&lt;"/>
              <symb name="&lt;="/>
+             <symb name="&lt;"/>
+             <symb name="&gt;&gt;&gt;="/>
+             <symb name="&gt;&gt;&gt;"/>
+             <symb name="/&gt;&gt;="/>
+             <symb name="/&gt;&gt;"/>
              <symb name="&gt;="/>
+             <symb name="&gt;"/>
+             <symb name="==="/>
+             <symb name="!=="/>
              <symb name="=="/>
              <symb name="!="/>
+             <symb name="&amp;&amp;="/>
              <symb name="&amp;&amp;"/>
+             <symb name="&amp;="/>
+             <symb name="&amp;"/>
+             <symb name="||="/>
              <symb name="||"/>
+             <symb name="??="/>
+             <symb name="??"/>
+             <symb name="?."/>
              <symb name="?" region="SymbolStrong"/> <!-- EE: strong -->
  <!-- Operators Bitwise -->
              <symb name="~"/>
-             <symb name="&lt;&lt;"/>
-             <symb name="/&gt;&gt;"/>
-             <symb name="&gt;&gt;&gt;"/>
-             <symb name="&amp;"/>
+             <symb name="^="/>
              <symb name="^"/>
+             <symb name="|="/>
              <symb name="|"/>
  <!-- Operators Assignment -->
-             <symb name="==="/>
-             <symb name="!=="/>
              <symb name="="/>
-             <symb name="+="/>
-             <symb name="-+"/>
-             <symb name="*="/>
-             <symb name="/="/>
-             <symb name="%="/>
-             <symb name="&lt;&lt;="/>
-             <symb name="/&gt;&gt;="/>
-             <symb name="&gt;&gt;&gt;="/>
-             <symb name="&amp;="/>
-             <symb name="|="/>
-             <symb name="^="/>
  <!-- Operators other?  -->
+             <symb name="=>"/>
+             <symb name="..."/>
              <symb name=","/>
              <symb name="."/>
              <symb name=":" region="SymbolStrong"/> <!-- EE: strong -->
@@ -530,7 +540,7 @@
            </start>
            <end region0="StringEdge" region1="PairEnd" region2="regexp:SpecArea">
             <![CDATA[
-             /(\y2([igm]*))/x
+             /(\y2([gimsuvyd]*))/x
             ]]>
            </end>
          </block>
@@ -539,6 +549,8 @@
    <regexp match='/ \/ ( \\. | [^\\\/] )*? \/ /x' region="String"/>
    -->
          <regexp match="/\$[\d_*&amp;+`']/" region="Var"/>
+         <!-- private fields: only after '.', so CF #url.row# is not a field -->
+         <regexp match="/(\.)(#[A-Za-z_$][\w$]*)/" region1="Symbol" region2="Var"/>
          <inherit scheme="jsKeywords"/>
          <regexp match="/!\w?=/" region="Symbol"/>
          <inherit scheme="jsOperators"/>

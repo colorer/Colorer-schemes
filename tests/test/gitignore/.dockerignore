@@ -1,0 +1,5 @@
+# build context
+node_modules
+.git
+*.md
+!README.md

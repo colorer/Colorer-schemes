@@ -25,6 +25,7 @@
     <scheme name="tsKeywords">
       <keywords region="Keyword">
         <word name="abstract"/>
+        <word name="accessor"/>
         <word name="as"/>
         <word name="asserts"/>
         <word name="declare"/>

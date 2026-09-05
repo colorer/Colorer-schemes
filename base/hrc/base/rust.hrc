@@ -22,6 +22,12 @@
     Keywords: https://doc.rust-lang.org/reference/keywords.html
     -->
 
+    <scheme name="StringEscapes">
+      <regexp match="/\\[nrt0'\\&quot;\\]/" region="def:SymbolStrong"/>
+      <regexp match="/\\x[\da-fA-F]{2}/" region="def:SymbolStrong"/>
+      <regexp match="/\\u\{[\da-fA-F]+\}/" region="def:SymbolStrong"/>
+    </scheme>
+
     <scheme name="rust">
       <regexp match="/\/\*\*\//" region="def:CommentDoc"/>
       <block start="/\/\/\//" end="/$/" scheme="doxygen:doxygen" region="def:CommentDoc"/>
@@ -34,9 +40,31 @@
         <end region0="def:PairEnd"><![CDATA[/\*\//]]></end>
       </block>
 
+      <!-- raw strings: fixed one or two hashes, not an arbitrary run -->
+      <block start="/(br##&quot;)/" end="/(&quot;##)/" scheme="def:empty" region="def:String"
+             region00="def:StringEdge" region10="def:StringEdge"/>
+      <block start="/(r##&quot;)/" end="/(&quot;##)/" scheme="def:empty" region="def:String"
+             region00="def:StringEdge" region10="def:StringEdge"/>
+      <block start="/(br#&quot;)/" end="/(&quot;#)/" scheme="def:empty" region="def:String"
+             region00="def:StringEdge" region10="def:StringEdge"/>
+      <block start="/(r#&quot;)/" end="/(&quot;#)/" scheme="def:empty" region="def:String"
+             region00="def:StringEdge" region10="def:StringEdge"/>
+      <block start="/(br&quot;)/" end="/(&quot;)/" scheme="def:empty" region="def:String"
+             region00="def:StringEdge" region10="def:StringEdge"/>
+      <block start="/(r&quot;)/" end="/(&quot;)/" scheme="def:empty" region="def:String"
+             region00="def:StringEdge" region10="def:StringEdge"/>
+      <block start="/(b&quot;)/" end="/(&quot;)/" scheme="StringEscapes" region="def:String"
+             region00="def:StringEdge" region10="def:StringEdge"/>
+      <block start="/(&quot;)/" end="/(&quot;)/" scheme="StringEscapes" region="def:String"
+             region00="def:StringEdge" region10="def:StringEdge"/>
+
+      <!-- char literals before lifetimes so 'x' is not 'x -->
+      <regexp match="/b?'(\\.|.)'/" region="def:Character"/>
+      <regexp match="/'[A-Za-z_][\w]*/" region="def:Var"/>
+
       <inherit scheme="def:Number"/>
 
-      <block start="/^\s*(#)(\[)/" end="/(\])/" scheme="rust" region="def:Directive"
+      <block start="/(#\!?)(\[)/" end="/(\])/" scheme="rust" region="def:Directive"
              region00="def:DirectiveEdge" region01="def:DirectiveEdge" region02="def:PairStart"
              region10="def:DirectiveEdge" region11="def:PairEnd"/>
 

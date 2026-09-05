@@ -1,15 +1,17 @@
-﻿ 0: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;script setup></span>
+﻿ 0: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;script setup lang="ts"></span>
  1: <span class='jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>import</span> <span class='def-SymbolStrong def-Symbol'>{</span> ref <span class='def-SymbolStrong def-Symbol'>}</span> from <span class='def-StringEdge def-String'>'</span><span class='def-String'>vue</span><span class='def-StringEdge def-String'>'</span>
- 2: <span class='jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>const</span> count <span class='def-Symbol'>=</span> ref<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span>
- 3: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/script></span>
- 4: 
- 5: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='vue-SfcTag html-htmlOpenTag def-Keyword'>template</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
- 6:   <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>button</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> @click</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"count++"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span><span class='def-Insertion'>{{ count }}</span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>button</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
- 7: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='vue-SfcTag html-htmlOpenTag def-Keyword'>template</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
- 8: 
- 9: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;style></span>
-10: <span class='html-htmlOpenTag def-Keyword'>button</span> <span class='def-SymbolStrong def-Symbol'>{</span>
-11:   <span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='css-Symbol def-Symbol'>:</span> <span class='def-NumberPrefix def-Number'>#</span><span class='def-NumberHex def-Number'>42b883</span><span class='def-SymbolStrong def-Symbol'>;</span>
-12: <span class='def-SymbolStrong def-Symbol'>}</span>
-13: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/style></span>
-14: 
+ 2: <span class='typescript-Keyword def-Keyword'>type</span> Point <span class='def-Symbol'>=</span> number
+ 3: <span class='jScript-ES5FutureReservedWord jScript-ES5ReservedWord def-Keyword'>const</span> count <span class='def-Symbol'>=</span> ref<span class='def-Symbol'>(</span><span class='def-NumberDec def-Number'>0</span><span class='def-Symbol'>)</span>
+ 4: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/script></span>
+ 5: 
+ 6: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='vue-SfcTag html-htmlOpenTag def-Keyword'>template</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+ 7:   <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>button</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='vue-Directive def-Keyword'>v-if</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"ok"</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='vue-Directive def-Keyword'>@click</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"count++"</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='vue-Directive def-Keyword'>:title</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"name"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span><span class='def-Insertion'>{{ count }}</span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>button</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+ 8:   <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>input</span><span class='html-htmlUnknowParam def-ParameterUnknown def-ParameterStrong def-Parameter'> </span><span class='vue-Directive def-Keyword'>v-model</span><span class='html-htmlTagEqu def-Symbol'>=</span><span class='html-htmlString def-String'>"count"</span><span class='html-htmlTagBr def-OpenTag def-Tag'>/></span>
+ 9: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='vue-SfcTag html-htmlOpenTag def-Keyword'>template</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+10: 
+11: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;style></span>
+12: <span class='html-htmlOpenTag def-Keyword'>button</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+13:   <span class='css-PropertyName def-KeywordStrong def-Keyword'>color</span><span class='css-Symbol def-Symbol'>:</span> <span class='def-NumberPrefix def-Number'>#</span><span class='def-NumberHex def-Number'>42b883</span><span class='def-SymbolStrong def-Symbol'>;</span>
+14: <span class='def-SymbolStrong def-Symbol'>}</span>
+15: <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/style></span>
+16: 

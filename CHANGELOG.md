@@ -3,6 +3,21 @@
 ## [Unreleased]
 
 ### Added
+- [julia] Julia (`.jl`)
+- [gitattributes] Git attributes (`.gitattributes`)
+- [typst] Typst (`.typ`)
+- [gleam] Gleam (`.gleam`)
+- [solidity] Solidity (`.sol`)
+- [luau] Luau (`.luau`) on top of Lua
+- [blade] Laravel Blade (`.blade.php`) on top of PHP
+- [gdscript] GDScript (`.gd`)
+- [elixir] Elixir (`.ex`, `.exs`)
+- [zig] Zig language (`.zig`)
+- [csv] CSV / TSV (`.csv`, `.tsv`)
+- [mdx] MDX (`.mdx`): Markdown with ESM import/export
+- [astro] Astro components (`.astro`) with JS front matter; weight 3 so diff does not steal `---`
+- [protobuf] Protocol Buffers schema (`.proto`)
+- [dotenv] dotenv / env files (`.env`, `.env.*`)
 - [jsx] JSX/TSX highlighting (`.jsx`, `.tsx`) on top of JavaScript
 - [scss] SCSS highlighting (`.scss`); indented Sass stays on `.sass`
 - [ipynb] Jupyter Notebook (`.ipynb`) as JSON, so Pascal firstline does not steal it
@@ -27,6 +42,35 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [markdown] highlight common languages in fenced code blocks (indented, no blank line; same coloring in lists); markdown2 stays for extra languages
+- [terraform] recognise `.tofu`
+- [graphql] recognise `.graphqls` schema files
+- [typescript] `accessor` auto-accessor fields
+- [css] color functions `oklch()` / `oklab()` / `color-mix()`
+- [config] pair `[]` around INI/EditorConfig section names
+- [json] recognise `jsconfig.json` / `tsconfig*.json`
+- [gitignore] recognise `.gitignore_global`
+- [sql] PostgreSQL dollar-quotes (`$$` / `$tag$`), `$1` parameters, and `COPY FROM stdin` dumps
+- [yaml] quoted keys (`"on":`)
+- [python] PEP 750 t-strings (`t"…"`, `tr"…"`)
+- [xml] recognise `.slnx` Visual Studio solutions
+- [go] type-set operator `~` in interface constraints
+- [csharp] collection-expression spread `..` before member `.`
+- [java] unnamed `_` and `module-info` keywords (`module`/`requires`/`exports`/…)
+- [markdown] GFM tables (`|`) and task lists (`[ ]` / `[x]`)
+- [dockerfile] parser directives (`# syntax=`, `# escape=`) before comments
+- [vue] `v-*` / `@` / `:` template directives and `<script lang="ts">`
+- [rust] raw strings `r#"…"#` / `r##"…"##`, `#![` crate attributes, and lifetimes
+- [csv] colour TSV tab separators (tabs are skipped unless attached to a field)
+- [go] `//go:` compiler directives before line comments
+- [python] PEP 695 `type` alias as a keyword
+- [yaml] GitHub Actions `${{ }}` expressions
+- [css] `@layer`/`@container`/`@scope`, `:has()`/`:is()`/`:where()`, `&` nesting, and nested rules inside declarations
+- [php] PHP 8 `match`/`enum`/`readonly`/`fn`/`never`, `=>`, and `#[...]` attributes before `#` comments
+- [jScript] ES2015–2024 operators (`?.`, `??`, `=>`, `...`, `**`, logical assignment), regexp flags `s/u/y/d/v`, `#private`, and `using`
+- [json] recognise `.jsonc`; list JSON, YAML, TOML and Jupyter under scripts instead of rare
+- [gitignore] recognise `.dockerignore`, `.prettierignore`, `.eslintignore`, `.npmignore`
+- [dockerfile] recognise `Containerfile` and `.dockerfile`
 - [python] add `match`/`case`; treat `print`/`exec` as builtins, not keywords
 - [rust] add `async`/`await`/`dyn`; drop obsolete reserved words (`alignof`, `proc`, …)
 - [java] add `record`/`sealed`/`permits`/`var`/`yield`/`when` and text blocks

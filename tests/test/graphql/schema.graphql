@@ -1,0 +1,10 @@
+type User {
+  id: ID!
+  name: String
+}
+
+query GetUser($id: ID!) {
+  user(id: $id) {
+    name
+  }
+}

@@ -1,0 +1,14 @@
+﻿ 0: <span class='def-LineComment def-Comment def-Syntax'>// SPDX-License-Identifier: MIT</span>
+ 1: <span class='def-Keyword'>pragma</span> solidity <span class='def-Symbol'>^</span><span class='def-Number'>0.8.24</span><span class='def-Symbol'>;</span>
+ 2: 
+ 3: <span class='def-Keyword'>contract</span> Token <span class='def-SymbolStrong def-Symbol'>{</span>
+ 4:     <span class='def-Keyword'>event</span> Transfer<span class='def-Symbol'>(</span><span class='solidity-Type def-TypeKeyword def-Keyword'>address</span> <span class='def-Keyword'>indexed</span> to<span class='def-Symbol'>,</span> <span class='solidity-Type def-TypeKeyword def-Keyword'>uint256</span> amount<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+ 5: 
+ 6:     <span class='def-Keyword'>mapping</span><span class='def-Symbol'>(</span><span class='solidity-Type def-TypeKeyword def-Keyword'>address</span> <span class='def-Symbol'>=></span> <span class='solidity-Type def-TypeKeyword def-Keyword'>uint256</span><span class='def-Symbol'>)</span> <span class='def-Keyword'>public</span> balance<span class='def-Symbol'>;</span>
+ 7: 
+ 8:     <span class='def-Keyword'>function</span> mint<span class='def-Symbol'>(</span><span class='solidity-Type def-TypeKeyword def-Keyword'>address</span> to<span class='def-Symbol'>,</span> <span class='solidity-Type def-TypeKeyword def-Keyword'>uint256</span> amount<span class='def-Symbol'>)</span> <span class='def-Keyword'>public</span> <span class='def-SymbolStrong def-Symbol'>{</span>
+ 9:         balance<span class='def-Symbol'>[</span>to<span class='def-Symbol'>]</span> <span class='def-Symbol'>+</span><span class='def-Symbol'>=</span> amount<span class='def-Symbol'>;</span>
+10:         <span class='def-Keyword'>emit</span> Transfer<span class='def-Symbol'>(</span>to<span class='def-Symbol'>,</span> amount<span class='def-Symbol'>)</span><span class='def-Symbol'>;</span>
+11:     <span class='def-SymbolStrong def-Symbol'>}</span>
+12: <span class='def-SymbolStrong def-Symbol'>}</span>
+13: 
