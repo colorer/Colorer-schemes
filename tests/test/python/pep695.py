@@ -7,3 +7,7 @@ try:
     first([])
 except* ValueError:
     pass
+
+name = "Ada"
+msg = t"Hello {name}"
+raw = tr"\n {name}"
