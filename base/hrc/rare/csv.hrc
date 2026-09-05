@@ -33,7 +33,8 @@
         <symb name=","/>
         <symb name=";"/>
       </keywords>
-      <regexp match="/&#9;/" region="Separator"/>
+      <!-- tab is skipped as whitespace on its own; colour it as the tail of a field -->
+      <regexp match="/([^,	;]+)(	)/" region2="Separator"/>
       <inherit scheme="def:Number"/>
     </scheme>
   </type>
