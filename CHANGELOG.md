@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [luau] Luau (`.luau`) on top of Lua
 - [blade] Laravel Blade (`.blade.php`) on top of PHP
 - [gdscript] GDScript (`.gd`)
 - [elixir] Elixir (`.ex`, `.exs`)

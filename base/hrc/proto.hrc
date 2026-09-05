@@ -202,6 +202,10 @@
         <location link="base/lua.hrc" />
         <filename>/\.(w?lua)$/i</filename>
     </prototype>
+    <prototype name="luau" group="main" description="Luau">
+        <location link="base/luau.hrc" />
+        <filename>/\.luau$/i</filename>
+    </prototype>
     <prototype name="moonscript" group="main" description="MoonScript">
         <location link="base/moonscript.hrc" />
         <filename>/\.moon$/i</filename>
