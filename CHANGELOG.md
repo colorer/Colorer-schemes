@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [gleam] Gleam (`.gleam`)
 - [solidity] Solidity (`.sol`)
 - [luau] Luau (`.luau`) on top of Lua
 - [blade] Laravel Blade (`.blade.php`) on top of PHP

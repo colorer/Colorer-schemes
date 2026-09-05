@@ -221,6 +221,10 @@
         <location link="base/elixir.hrc" />
         <filename>/\.exs?$/i</filename>
     </prototype>
+    <prototype name="gleam" group="main" description="Gleam">
+        <location link="base/gleam.hrc" />
+        <filename>/\.gleam$/i</filename>
+    </prototype>
     <prototype name="nix" group="main" description="Nix">
         <location link="base/nix.hrc" />
         <filename>/\.(nix)$/i</filename>
