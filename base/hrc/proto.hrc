@@ -290,6 +290,10 @@
         <location link="base/zig.hrc" />
         <filename>/\.zig$/i</filename>
     </prototype>
+    <prototype name="gdscript" group="main" description="GDScript">
+        <location link="base/gdscript.hrc" />
+        <filename>/\.gd$/i</filename>
+    </prototype>
     <prototype name="swift" group="main" description="Swift">
         <location link="base/swift.hrc" />
         <filename>/\.swift$/i</filename>

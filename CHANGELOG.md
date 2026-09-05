@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [gdscript] GDScript (`.gd`)
 - [elixir] Elixir (`.ex`, `.exs`)
 - [zig] Zig language (`.zig`)
 - [csv] CSV / TSV (`.csv`, `.tsv`)
