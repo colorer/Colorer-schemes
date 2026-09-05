@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [csv] CSV / TSV (`.csv`, `.tsv`)
 - [mdx] MDX (`.mdx`): Markdown with ESM import/export
 - [astro] Astro components (`.astro`) with JS front matter; weight 3 so diff does not steal `---`
 - [protobuf] Protocol Buffers schema (`.proto`)

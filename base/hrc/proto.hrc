@@ -1144,6 +1144,10 @@
         <location link="rare/protobuf.hrc" />
         <filename>/\.proto$/i</filename>
     </prototype>
+    <prototype name="csv" group="rare" description="CSV / TSV">
+        <location link="rare/csv.hrc" />
+        <filename>/\.(csv|tsv)$/i</filename>
+    </prototype>
     <prototype name="json" group="scripts" description="JSON">
         <location link="rare/json.hrc" />
         <filename weight='3'>/\.jsonc?$/i</filename>
