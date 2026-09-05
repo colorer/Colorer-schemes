@@ -395,6 +395,11 @@
             &php-proto-gen;
         </parameters>
     </prototype>
+    <prototype name="blade" group="inet" description="Laravel Blade">
+        <location link="inet/blade.hrc" />
+        <!-- php filename .php is weight 2; 3 wins for *.blade.php -->
+        <filename weight="3">/\.blade\.php$/i</filename>
+    </prototype>
 
     <prototype name="xhtml-trans" group="inet" description="xhtml transitional" targetNamespace="http://www.w3.org/1999/xhtml">
         <location link="inet/gen/xhtml-trans.hrc" />

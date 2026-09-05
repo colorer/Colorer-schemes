@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [blade] Laravel Blade (`.blade.php`) on top of PHP
 - [gdscript] GDScript (`.gd`)
 - [elixir] Elixir (`.ex`, `.exs`)
 - [zig] Zig language (`.zig`)

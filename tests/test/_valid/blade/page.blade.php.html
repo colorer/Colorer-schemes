@@ -1,0 +1,11 @@
+﻿ 0: <span class='blade-Directive def-Keyword'>@extends</span><span class='def-Symbol'>(</span><span class='def-String'>'layouts.app'</span><span class='def-Symbol'>)</span>
+ 1: 
+ 2: <span class='blade-Directive def-Keyword'>@section</span><span class='def-Symbol'>(</span><span class='def-String'>'content'</span><span class='def-Symbol'>)</span>
+ 3:   <span class='def-Comment def-Syntax'>{{-- greeting --}}</span>
+ 4:   <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>h1</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span><span class='def-SymbolStrong def-Symbol'>{{</span><span class='blade-Echo def-Insertion'> </span><span class='def-Var'>$title</span><span class='blade-Echo def-Insertion'> </span><span class='def-SymbolStrong def-Symbol'>}}</span><span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>h1</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+ 5:   <span class='def-SymbolStrong def-Symbol'>{!!</span><span class='blade-Echo def-Insertion'> </span><span class='def-Var'>$html</span><span class='blade-Echo def-Insertion'> </span><span class='def-SymbolStrong def-Symbol'>!!}</span>
+ 6:   <span class='blade-Directive def-Keyword'>@if</span> <span class='def-Symbol'>(</span><span class='def-Var'>$ok</span><span class='def-Symbol'>)</span>
+ 7:     <span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;</span><span class='html-htmlOpenTag def-Keyword'>p</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>ok<span class='html-htmlTagBr def-OpenTag def-Tag'>&lt;/</span><span class='html-htmlCloseTag html-htmlOpenTag def-Keyword'>p</span><span class='html-htmlTagBr def-OpenTag def-Tag'>></span>
+ 8:   <span class='blade-Directive def-Keyword'>@endif</span>
+ 9: <span class='blade-Directive def-Keyword'>@endsection</span>
+10: 
