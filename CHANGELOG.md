@@ -27,6 +27,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [php] PHP 8 `match`/`enum`/`readonly`/`fn`/`never`, `=>`, and `#[...]` attributes before `#` comments
 - [jScript] ES2015–2024 operators (`?.`, `??`, `=>`, `...`, `**`, logical assignment), regexp flags `s/u/y/d/v`, `#private`, and `using`
 - [json] recognise `.jsonc`; list JSON, YAML, TOML and Jupyter under scripts instead of rare
 - [gitignore] recognise `.dockerignore`, `.prettierignore`, `.eslintignore`, `.npmignore`
