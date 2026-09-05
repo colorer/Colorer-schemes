@@ -32,6 +32,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [go] `//go:` compiler directives before line comments
 - [python] PEP 695 `type` alias as a keyword
 - [yaml] GitHub Actions `${{ }}` expressions
 - [css] `@layer`/`@container`/`@scope`, `:has()`/`:is()`/`:where()`, `&` nesting, and nested rules inside declarations
