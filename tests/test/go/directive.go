@@ -6,3 +6,7 @@ package main
 // ordinary comment
 
 func main() {}
+
+type Num interface {
+	~int
+}
