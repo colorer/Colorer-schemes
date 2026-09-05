@@ -19,7 +19,8 @@
 }
 
 .button {
-  color: white;
+  color: oklch(0.7 0.15 250);
+  background: color-mix(in oklch, white 40%, blue);
   &:hover {
     color: blue;
   }

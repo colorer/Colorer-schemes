@@ -853,12 +853,15 @@
 		    </keywords>
 			<keywords region="PropertyFunc" ignorecase="yes" worddiv='%worddiv-class;'>
 				<word name="attr"/>
+				<word name="color-mix"/>
 				<word name="color-stop"/>
 				<word name="cubic-bezier"/>
 				<word name="from"/>
 				<word name="hsl"/>
 				<word name="hsla"/>
 				<word name="linear-gradient"/>
+				<word name="oklab"/>
+				<word name="oklch"/>
 				<word name="radial-gradient"/>
 				<word name="rect"/>
 				<word name="repeating-linear-gradient"/>
