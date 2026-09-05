@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [dotenv] dotenv / env files (`.env`, `.env.*`)
 - [jsx] JSX/TSX highlighting (`.jsx`, `.tsx`) on top of JavaScript
 - [scss] SCSS highlighting (`.scss`); indented Sass stays on `.sass`
 - [ipynb] Jupyter Notebook (`.ipynb`) as JSON, so Pascal firstline does not steal it

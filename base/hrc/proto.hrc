@@ -708,6 +708,10 @@
         <location link="scripts/gitignore.hrc" />
         <filename>/^\.(git|docker|prettier|eslint|npm)ignore$/i</filename>
     </prototype>
+    <prototype name="dotenv" group="scripts" description="dotenv">
+        <location link="scripts/dotenv.hrc" />
+        <filename>/\.env(\.[^/]+)?$/i</filename>
+    </prototype>
     <prototype name="awk" group="scripts" description="AWK">
         <location link="scripts/awk.hrc" />
         <filename weight='5'>/\.awk$/i</filename>
