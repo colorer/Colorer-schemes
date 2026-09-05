@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [csharp] collection-expression spread `..` before member `.`
 - [java] unnamed `_` and `module-info` keywords (`module`/`requires`/`exports`/…)
 - [markdown] GFM tables (`|`) and task lists (`[ ]` / `[x]`)
 - [dockerfile] parser directives (`# syntax=`, `# escape=`) before comments

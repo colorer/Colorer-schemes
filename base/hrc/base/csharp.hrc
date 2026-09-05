@@ -156,6 +156,7 @@
         <symb name="/"/>
         <symb name="%"/>
         <symb name="="/>
+        <symb name=".."/>
         <symb name="."/>
         <symb name=","/>
         <symb name="&lt;"/>
