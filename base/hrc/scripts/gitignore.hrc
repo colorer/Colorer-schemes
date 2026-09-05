@@ -8,7 +8,8 @@
   <type name="gitignore">
     <annotation>
       <documentation>
-        Git ignore file syntax (.gitignore)
+        Ignore-list syntax (.gitignore, .dockerignore, .prettierignore,
+        .eslintignore, .npmignore)
         https://git-scm.com/docs/gitignore
       </documentation>
       <contributors><![CDATA[

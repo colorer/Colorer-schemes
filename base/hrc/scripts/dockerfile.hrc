@@ -40,6 +40,9 @@
             <location link="scripts/dockerfile.hrc"/>
             <filename>/^[Dd]ockerfile\..+$/</filename>
             <filename>/^[Dd]ockerfile$/</filename>
+            <filename>/^[Cc]ontainerfile\..+$/</filename>
+            <filename>/^[Cc]ontainerfile$/</filename>
+            <filename>/\.dockerfile$/i</filename>
             <firstline>/^\s*FROM\b/</firstline>
         </prototype>
     </appinfo>

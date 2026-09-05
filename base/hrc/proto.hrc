@@ -704,9 +704,9 @@
         <filename>/\.(ctl|tpl|ini|cfg|inf|srg|conf|types|tab|dof|dsk|lng|editorconfig)$/i</filename>
         <firstline>/^[;\[\#]/</firstline>
     </prototype>
-    <prototype name="gitignore" group="scripts" description="Git ignore">
+    <prototype name="gitignore" group="scripts" description="Ignore list">
         <location link="scripts/gitignore.hrc" />
-        <filename>/^\.gitignore$/i</filename>
+        <filename>/^\.(git|docker|prettier|eslint|npm)ignore$/i</filename>
     </prototype>
     <prototype name="awk" group="scripts" description="AWK">
         <location link="scripts/awk.hrc" />
@@ -903,6 +903,9 @@
         <location link="scripts/dockerfile.hrc"/>
         <filename>/^[Dd]ockerfile\..+$/</filename>
         <filename>/^[Dd]ockerfile$/</filename>
+        <filename>/^[Cc]ontainerfile\..+$/</filename>
+        <filename>/^[Cc]ontainerfile$/</filename>
+        <filename>/\.dockerfile$/i</filename>
         <firstline>/^\s*FROM\b/</firstline>
     </prototype>
 

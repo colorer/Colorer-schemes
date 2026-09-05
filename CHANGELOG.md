@@ -27,6 +27,8 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [gitignore] recognise `.dockerignore`, `.prettierignore`, `.eslintignore`, `.npmignore`
+- [dockerfile] recognise `Containerfile` and `.dockerfile`
 - [python] add `match`/`case`; treat `print`/`exec` as builtins, not keywords
 - [rust] add `async`/`await`/`dyn`; drop obsolete reserved words (`alignof`, `proc`, …)
 - [java] add `record`/`sealed`/`permits`/`var`/`yield`/`when` and text blocks
