@@ -772,6 +772,10 @@
         <location link="misc/markdown.hrc" />
         <filename>/\.(text|md|markdown)$/i</filename>
     </prototype>
+    <prototype name="typst" group="scripts" description="Typst">
+        <location link="misc/typst.hrc" />
+        <filename>/\.typ$/i</filename>
+    </prototype>
     <prototype name="mdx" group="scripts" description="MDX">
         <location link="inet/mdx.hrc" />
         <filename>/\.mdx$/i</filename>

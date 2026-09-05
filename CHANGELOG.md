@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [typst] Typst (`.typ`)
 - [gleam] Gleam (`.gleam`)
 - [solidity] Solidity (`.sol`)
 - [luau] Luau (`.luau`) on top of Lua
