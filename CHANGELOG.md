@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-05
+
 ### Added
 - [julia] Julia (`.jl`)
 - [gitattributes] Git attributes (`.gitattributes`)
