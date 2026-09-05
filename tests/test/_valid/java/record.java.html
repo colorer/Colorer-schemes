@@ -5,16 +5,17 @@
  4: <span class='java-KeywordModifier def-Keyword'>public</span> <span class='java-KeywordModifier def-Keyword'>non-sealed</span> <span class='def-Keyword'>class</span> Circle <span class='java-KeywordModifier def-Keyword'>implements</span> Shape <span class='def-SymbolStrong def-Symbol'>{</span>
  5:     <span class='def-ClassKeyword def-Keyword'>String</span> kind<span class='def-Symbol'>(</span><span class='def-ClassKeyword def-Keyword'>Object</span> o<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
  6:         <span class='def-Keyword'>return</span> <span class='def-Keyword'>switch</span> <span class='def-Symbol'>(</span>o<span class='def-Symbol'>)</span> <span class='def-SymbolStrong def-Symbol'>{</span>
- 7:             <span class='def-Keyword'>case</span> Point p <span class='def-Keyword'>when</span> p<span class='def-Symbol'>.</span>x<span class='def-Symbol'>(</span><span class='def-Symbol'>)</span> <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span> <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-String'>"pos"</span><span class='def-SymbolStrong def-Symbol'>;</span>
- 8:             <span class='def-Keyword'>default</span> <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-SymbolStrong def-Symbol'>{</span>
- 9:                 <span class='def-TypeKeyword def-Keyword'>var</span> s <span class='def-Symbol'>=</span> <span class='def-String'>"other"</span><span class='def-SymbolStrong def-Symbol'>;</span>
-10:                 <span class='def-Keyword'>yield</span> s<span class='def-SymbolStrong def-Symbol'>;</span>
-11:             <span class='def-SymbolStrong def-Symbol'>}</span>
-12:         <span class='def-SymbolStrong def-Symbol'>}</span><span class='def-SymbolStrong def-Symbol'>;</span>
-13:     <span class='def-SymbolStrong def-Symbol'>}</span>
-14: 
-15:     <span class='def-ClassKeyword def-Keyword'>String</span> text <span class='def-Symbol'>=</span> <span class='def-String'>"""</span>
-16: <span class='def-String'>        block</span>
-17: <span class='def-String'>        """</span><span class='def-SymbolStrong def-Symbol'>;</span>
-18: <span class='def-SymbolStrong def-Symbol'>}</span>
-19: 
+ 7:             <span class='def-Keyword'>case</span> Point<span class='def-Symbol'>(</span><span class='def-TypeKeyword def-Keyword'>int</span> x<span class='def-Symbol'>,</span> <span class='def-TypeKeyword def-Keyword'>int</span> y<span class='def-Symbol'>)</span> <span class='def-Keyword'>when</span> x <span class='def-Symbol'>></span> <span class='def-NumberDec def-Number'>0</span> <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-String'>"pos"</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 8:             <span class='def-Keyword'>case</span> Point <span class='def-Keyword'>_</span> <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-String'>"pt"</span><span class='def-SymbolStrong def-Symbol'>;</span>
+ 9:             <span class='def-Keyword'>default</span> <span class='def-Symbol'>-</span><span class='def-Symbol'>></span> <span class='def-SymbolStrong def-Symbol'>{</span>
+10:                 <span class='def-TypeKeyword def-Keyword'>var</span> s <span class='def-Symbol'>=</span> <span class='def-String'>"other"</span><span class='def-SymbolStrong def-Symbol'>;</span>
+11:                 <span class='def-Keyword'>yield</span> s<span class='def-SymbolStrong def-Symbol'>;</span>
+12:             <span class='def-SymbolStrong def-Symbol'>}</span>
+13:         <span class='def-SymbolStrong def-Symbol'>}</span><span class='def-SymbolStrong def-Symbol'>;</span>
+14:     <span class='def-SymbolStrong def-Symbol'>}</span>
+15: 
+16:     <span class='def-ClassKeyword def-Keyword'>String</span> text <span class='def-Symbol'>=</span> <span class='def-String'>"""</span>
+17: <span class='def-String'>        block</span>
+18: <span class='def-String'>        """</span><span class='def-SymbolStrong def-Symbol'>;</span>
+19: <span class='def-SymbolStrong def-Symbol'>}</span>
+20: 

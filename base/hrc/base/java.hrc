@@ -187,6 +187,8 @@
           <word name="extends"/>
           <word name='final'/>
           <word name="implements"/>
+          <word name='module'/>
+          <word name='open'/>
           <word name='permits'/>
           <word name='private'/>
           <word name='protected'/>
@@ -297,6 +299,7 @@
           <word name="when"/>
           <word name="while"/>
           <word name="yield"/>
+          <word name="_"/>
        </keywords>
        <keywords region="KeywordModifier">
           <word name='abstract'/>
@@ -311,6 +314,16 @@
           <word name='static'/>
           <word name='strictfp'/>
           <word name="throws"/>
+          <word name="module"/>
+          <word name="open"/>
+          <word name="requires"/>
+          <word name="exports"/>
+          <word name="opens"/>
+          <word name="provides"/>
+          <word name="transitive"/>
+          <word name="uses"/>
+          <word name="to"/>
+          <word name="with"/>
        </keywords>
        <keywords region="KeywordModifier">
           <word name='native'/>
