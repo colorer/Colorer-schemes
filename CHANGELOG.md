@@ -42,6 +42,7 @@
 - [moonscript] Add moonscript file syntax highlighting support
 
 ### Changed
+- [config] pair `[]` around INI/EditorConfig section names
 - [json] recognise `jsconfig.json` / `tsconfig*.json`
 - [gitignore] recognise `.gitignore_global`
 - [sql] PostgreSQL dollar-quotes (`$$` / `$tag$`), `$1` parameters, and `COPY FROM stdin` dumps
