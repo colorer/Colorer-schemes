@@ -536,7 +536,7 @@
     </prototype>
     <prototype name="graphql" group="inet" description="GraphQL">
         <location link="inet/graphql.hrc" />
-        <filename>/\.(graphql|gql)$/i</filename>
+        <filename>/\.(graphql|gql|graphqls)$/i</filename>
     </prototype>
 
 
