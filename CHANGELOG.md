@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- [hrd] popular RGB editor palettes: Monokai, Solarized Dark/Light, Dracula, One Dark/Light, Nord, Gruvbox Dark/Light, GitHub Dark/Light, Tokyo Night, VS Code Dark+, Catppuccin Mocha
 
 ### Changed
 
