@@ -3,7 +3,8 @@
 ## [Unreleased]
 
 ### Added
-- [hrd] popular RGB editor palettes: Monokai, Solarized Dark/Light, Dracula, One Dark/Light, Nord, Gruvbox Dark/Light, GitHub Dark/Light, Tokyo Night, VS Code Dark+, Catppuccin Mocha
+- [hrd] popular RGB editor palettes: Monokai, Solarized Dark/Light, Dracula, One Dark/Light, Nord, Gruvbox Dark/Light, GitHub Dark/Light, Tokyo Night, VS Code Dark+, Catppuccin Mocha/Latte, Night Owl, Palenight, Ayu Dark/Mirage/Light, Tomorrow Night
+- [hrd] RGB and console Dos Navigator (gray editor, cyan selection)
 
 ### Changed
 
