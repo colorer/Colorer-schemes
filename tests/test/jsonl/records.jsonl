@@ -1,0 +1,7 @@
+{"id": 1, "name": "alice", "active": true}
+{"id": 2, "tags": ["ml", "nlp"], "score": 2.5, "meta": {"ok": false}}
+[1, 2, null]
+"plain string"
+true
+
+{"msg": "say \"hello\"", "path": "C:\\tmp", "u": "A\u0041"}

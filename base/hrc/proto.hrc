@@ -1198,6 +1198,10 @@
         <filename>/^jsconfig\.json$/i</filename>
         <filename>/^tsconfig(\.[^/]+)?\.json$/i</filename>
     </prototype>
+    <prototype name="jsonl" group="scripts" description="JSON Lines / NDJSON">
+        <location link="rare/jsonl.hrc" />
+        <filename>/\.(jsonl|ndjson|jsonlines|ldjson)$/i</filename>
+    </prototype>
     <prototype name="ipynb" group="scripts" description="Jupyter Notebook">
         <location link="rare/ipynb.hrc" />
         <filename>/\.ipynb$/i</filename>
