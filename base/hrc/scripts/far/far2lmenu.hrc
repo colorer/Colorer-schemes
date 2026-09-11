@@ -38,7 +38,7 @@
     !/     current path
     !=/    current path, resolve symlinks
     !?t?i! user input (optional ?$hist$title?init!)
-    !##    toggle passive panel
+    !#     toggle passive panel
     !^     toggle active panel
 -->
 
@@ -84,13 +84,14 @@
  <regexp match="/\!\$[QSFAUW]*\!/" region="symb"/>
  <keywords region="symb">
   <symb name="!=/"/>
-  <symb name="!##"/>
+  <symb name="!#"/>
   <symb name="!.!"/>
   <symb name="!!"/>
   <symb name="!&#96;"/>
   <symb name="!&amp;"/>
   <symb name="!/"/>
-  <symb name="!\"/>
+  <symb name="!=&#92;"/>
+  <symb name="!&#92;"/>
   <symb name="!^"/>
   <symb name="!"/>
  </keywords>
@@ -103,7 +104,9 @@
 
 <scheme name="double_quoted_string">
  <inherit scheme="far2lsymb"/>
- <inherit scheme="shell-bash:double_quoted_string"/>
+ <inherit scheme="shell-bash:double_quoted_string">
+  <virtual scheme="shell-posix:variables" subst-scheme="shell-bash:variables"/>
+ </inherit>
 </scheme>
 
 <scheme name="strings">
@@ -118,7 +121,7 @@
 
 <!--
   Word-level bash + macros. Do not inherit shell-bash:shell-bash: its command
-  blocks end at cmdbreak ([|#;)&amp;`]) so !## / !&amp; / !` would be split.
+  blocks end at cmdbreak ([|#;)&amp;`]) so !# / !&amp; / !` would be split.
 -->
 <scheme name="script_words">
  <inherit scheme="far2lsymb"/>
@@ -132,18 +135,80 @@
   <virtual scheme="shell-posix:script" subst-scheme="far2lmenu"/>
   <virtual scheme="shell-posix:strings" subst-scheme="strings"/>
  </inherit>
+ <regexp match="/\b(
+  %shell-posix:utility_no-param;|
+  %shell-posix:utility_one-param;|
+  %shell-posix:utility_one-param-number;|
+  %shell-posix:utility_common;|
+  %shell-bash:utility_one-param;|
+  %shell-bash:utility_one-param-number;|
+  %shell-bash:utility_common;
+ )\b/x" region="shell-posix:CommandBuiltin"/>
  <inherit scheme="shell-posix:numbers"/>
  <keywords region="shell-posix:Error">
   <symb name="$"/>
  </keywords>
 </scheme>
 
+<scheme name="script_words.maybe-variable">
+ <inherit scheme="far2lsymb"/>
+ <inherit scheme="shell-bash:script_words.maybe-variable">
+  <virtual scheme="shell-posix:strings" subst-scheme="strings"/>
+  <virtual scheme="shell-posix:variables" subst-scheme="shell-bash:variables"/>
+  <virtual scheme="shell-posix:evaluations" subst-scheme="shell-bash:evaluations"/>
+ </inherit>
+</scheme>
+
 <scheme name="test">
  <inherit scheme="far2lsymb"/>
- <inherit scheme="shell-posix:test">
+ <inherit scheme="shell-bash:test-bash">
   <virtual scheme="shell-posix:script_words" subst-scheme="script_words"/>
-  <virtual scheme="shell-posix:strings" subst-scheme="strings"/>
   <virtual scheme="shell-posix:script_parameters" subst-scheme="script_words"/>
+  <virtual scheme="shell-bash:strings" subst-scheme="strings"/>
+ </inherit>
+</scheme>
+
+<!-- Bash control flow with far2l-aware command bodies. -->
+<scheme name="if">
+ <inherit scheme="shell-posix:if">
+  <virtual scheme="shell-posix:script" subst-scheme="far2lmenu"/>
+ </inherit>
+</scheme>
+
+<scheme name="while">
+ <inherit scheme="shell-posix:while">
+  <virtual scheme="shell-posix:script" subst-scheme="far2lmenu"/>
+ </inherit>
+</scheme>
+
+<scheme name="for">
+ <inherit scheme="shell-bash:for">
+  <virtual scheme="shell-posix:script" subst-scheme="far2lmenu"/>
+  <virtual scheme="shell-posix:script_words.maybe-variable" subst-scheme="script_words.maybe-variable"/>
+  <virtual scheme="shell-bash:script" subst-scheme="far2lmenu"/>
+  <virtual scheme="shell-bash:script_words" subst-scheme="script_words"/>
+  <virtual scheme="shell-bash:script_words.maybe-variable" subst-scheme="script_words.maybe-variable"/>
+ </inherit>
+</scheme>
+
+<scheme name="select">
+ <inherit scheme="shell-bash:select">
+  <virtual scheme="shell-bash:script" subst-scheme="far2lmenu"/>
+  <virtual scheme="shell-bash:script_words" subst-scheme="script_words"/>
+  <virtual scheme="shell-bash:script_words.maybe-variable" subst-scheme="script_words.maybe-variable"/>
+ </inherit>
+</scheme>
+
+<scheme name="case_pattern">
+ <inherit scheme="far2lsymb"/>
+ <inherit scheme="shell-posix:case_pattern"/>
+</scheme>
+
+<scheme name="case">
+ <inherit scheme="shell-posix:case">
+  <virtual scheme="shell-posix:script" subst-scheme="far2lmenu"/>
+  <virtual scheme="shell-posix:script_words" subst-scheme="script_words"/>
+  <virtual scheme="shell-posix:case_pattern" subst-scheme="case_pattern"/>
  </inherit>
 </scheme>
 
@@ -153,6 +218,35 @@
  <inherit scheme="far2lsymb"/>
  <inherit scheme="shell-posix:comments"/>
  <inherit scheme="shell-posix:operators"/>
+ <block start="/(\(\()/" end="/(\)\))/" scheme="shell-bash:shell-arithmetic"
+  region00="shell-bash:Symbol" region10="shell-bash:Symbol"
+  region01="shell-bash:PairStart" region11="shell-bash:PairEnd"/>
+ <block start="/(\()/" end="/(\))/" scheme="far2lmenu"
+  region00="shell-posix:Symbol" region10="shell-posix:Symbol"
+  region01="shell-posix:PairStart" region11="shell-posix:PairEnd"/>
+ <block start="/(\{)/" end="/(\})/" scheme="far2lmenu"
+  region00="shell-posix:SymbolStrong" region10="shell-posix:SymbolStrong"
+  region01="shell-posix:PairStart" region11="shell-posix:PairEnd"/>
+ <block start="/\M\b(if)\b/" end="/\b(fi)\b/" scheme="if"
+  region01="shell-posix:PairStart" region10="shell-posix:PairEnd"
+  region00="shell-posix:CommandReserved" region11="shell-posix:CommandReserved"/>
+ <block start="/\M\b(for)\b/" end="/\b(done)\b/" scheme="for"
+  region01="shell-posix:PairStart" region10="shell-posix:PairEnd"
+  region00="shell-posix:CommandReserved" region11="shell-posix:CommandReserved"/>
+ <block start="/\M\b(select)\b/" end="/\b(done)\b/" scheme="select"
+  region01="shell-posix:PairStart" region10="shell-posix:PairEnd"
+  region00="shell-posix:CommandReserved" region11="shell-posix:CommandReserved"/>
+ <block start="/\M\b(while|until)\b/" end="/\b(done)\b/" scheme="while"
+  region01="shell-posix:PairStart" region10="shell-posix:PairEnd"
+  region00="shell-posix:CommandReserved" region11="shell-posix:CommandReserved"/>
+ <block start="/\M\b(case)\b/" end="/\b(esac)\b/" scheme="case"
+  region01="shell-posix:PairStart" region10="shell-posix:PairEnd"
+  region00="shell-posix:CommandReserved" region11="shell-posix:CommandReserved"/>
+ <regexp match="/\b(function)\s+(%shell-bash:funcname;)/"
+  region1="shell-bash:CommandReserved" region2="shell-bash:FunctionName"/>
+ <regexp match="/\b(coproc)\b/" region1="shell-bash:CommandReserved"/>
+ <regexp match="/\b(%shell-bash:funcname;)\s*(\(\s*\))/"
+  region1="shell-bash:FunctionName" region2="shell-bash:Symbol"/>
  <block start="/(\[)(\s|$)?=/" end="/((\M(^|\s?#1|[^\\]?#1[;])(?{shell-posix:Symbol}\])))/"
   scheme="test"
   region01="shell-posix:PairStart" region11="shell-posix:PairEnd"
