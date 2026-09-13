@@ -12,6 +12,7 @@
 ### Changed
 
 ### Fixed
+- [hrd] returned hrd `Black from Alex Yaroslavsky`
 
 ## [1.3.0] - 2026-09-05
 

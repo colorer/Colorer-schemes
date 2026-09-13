@@ -1,6 +1,9 @@
         <hrd class="console" name="default" description="Aqua on blue">
             <location link="&hrd;/console/default.hrd"/>
         </hrd>
+        <hrd class="console" name="black_ay" description="Black by Alex Yaroslavsky">
+            <location link="&hrd;/console/contrib/black_ay.hrd"/>
+        </hrd>
         <hrd class="console" name="black" description="Black colors">
             <location link="&hrd;/console/black.hrd"/>
         </hrd>
@@ -37,9 +40,6 @@
         <hrd class="console" name="gray" description="Light gray">
             <location link="&hrd;/console/white.hrd"/>
             <location link="&hrd;/console/gray.hrd"/>
-        </hrd>
-        <hrd class="console" name="palenight" description="Material Palenight">
-            <location link="&hrd;/console/palenight.hrd"/>
         </hrd>
         <hrd class="console" name="hack" description="Matrix/Hack">
             <location link="&hrd;/console/hack.hrd"/>
