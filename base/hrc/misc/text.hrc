@@ -105,7 +105,7 @@
          <inherit scheme="Date"/>
          <inherit scheme="Time"/>
 <!-- Numbers -->
-         <regexp match="/\b(\d{0,10}[\,\.]?\d{0,10}([eE][\-\+]?\d+)?)\b/" region0="Number"/>
+         <regexp match="/\b(\d{0,10}[\,\.\:]?\d{0,10}([eE][\-\+]?\d+)?)\b/" region0="Number"/>
          <regexp match="/``.*?''/" region0="String"/>
          <inherit scheme="StandardString"/>
          <inherit scheme="LabelScheme"/>
